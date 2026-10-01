@@ -22,7 +22,7 @@ export const publications: Publication[] = [
   {
     year: 2026,
     title: 'URSlab Website and Interactive Coordinated-Turn Model: Source Code (v1.0.0)',
-    authors: ['A. Madzharov', 'S. Hristozov', 'I. Gaidarski', 'N. Chehlarova'],
+    authors: ['A. Madzharov'],
     venue: 'Zenodo — Software (files with restricted access)',
     status: 'published',
     doi: '10.5281/zenodo.23086274',
