@@ -22,6 +22,7 @@ const L = lang === 'bg'
   <canvas data-map height="380"></canvas>
   <p class="cap">{L.curv}</p>
   <canvas data-curv height="110"></canvas>
+  <p class="src">{lang === 'bg' ? 'Изходен код:' : 'Source code:'} <a href="https://doi.org/10.5281/zenodo.23086274">DOI 10.5281/zenodo.23086274</a></p>
 </div>
 
 <style>
@@ -36,6 +37,8 @@ const L = lang === 'bg'
   }
   .controls button[aria-pressed='true'] { background: var(--accent); color: #1a0f02; border-color: var(--accent); }
   canvas { width: 100%; display: block; border-radius: 8px; background: #0f1e2e; touch-action: none; }
+  .src { font: .75rem var(--mono); color: #8ea3b6; margin: 12px 0 0; }
+  .src a { color: var(--accent); }
   .cap { font: .75rem var(--mono); color: #8ea3b6; margin: 14px 0 6px; letter-spacing: .05em; text-transform: uppercase; }
 </style>
 
