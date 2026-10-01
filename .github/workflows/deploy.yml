@@ -1,0 +1,57 @@
+# Автоматично публикуване на urs.ir.bas.bg след всяко одобрение (Merge) в main.
+# Данните за достъп се пазят в Settings → Secrets and variables → Actions:
+#   DEPLOY_PROTOCOL  sftp  (или ftp — както е в WinSCP → "File protocol")
+#   DEPLOY_HOST      адресът на сървъра (като в WinSCP → "Host name")
+#   DEPLOY_PORT      22 за SFTP, 21 за FTP
+#   DEPLOY_USER      потребител (като в WinSCP)
+#   DEPLOY_PASSWORD  парола (като в WinSCP)
+#   DEPLOY_PATH      /public_html
+# Докато тайните не са въведени, стъпката за качване се пропуска (без грешка).
+name: Deploy to urs.ir.bas.bg
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # ръчно пускане: Actions → Deploy → Run workflow
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Skip notice (secrets not set yet)
+        if: env.DEPLOY_HOST == ''
+        run: echo "::notice::DEPLOY_* secrets are not set — site built but NOT uploaded."
+      - name: Upload dist/ to the server
+        if: env.DEPLOY_HOST != ''
+        env:
+          PROTO: ${{ secrets.DEPLOY_PROTOCOL }}
+          PORT: ${{ secrets.DEPLOY_PORT }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          PASS: ${{ secrets.DEPLOY_PASSWORD }}
+          DEST: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          sudo apt-get -qq update && sudo apt-get -qq install -y lftp
+          PROTO="${PROTO:-sftp}"
+          DEST="${DEST:-/public_html}"
+          if [ "$PROTO" = "sftp" ]; then PORT="${PORT:-22}"; else PORT="${PORT:-21}"; fi
+          # Качва само новото/промененото. Не трие нищо на сървъра (.well-known, архиви и др. остават).
+          lftp -u "$USER","$PASS" -p "$PORT" "$PROTO://$DEPLOY_HOST" -e "
+            set sftp:auto-confirm yes;
+            set ftp:ssl-allow yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            mirror --reverse --verbose --overwrite --parallel=4 dist/ $DEST/;
+            bye"
+      - name: Check the live site
+        if: env.DEPLOY_HOST != ''
+        run: curl -fsS -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/

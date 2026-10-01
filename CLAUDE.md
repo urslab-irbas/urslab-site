@@ -26,3 +26,4 @@ Target domain: https://urs.ir.bas.bg
 - Changes reach `main` only via Pull Request approved by the lab head. CODEOWNERS maps each profile file to its owner.
 - Every PR runs `.github/workflows/build.yml` (npm ci + build); the built `dist/` is attached as an artifact `urslab-dist`.
 - Colleague instructions (Bulgarian): `CONTRIBUTING.md`.
+- `.github/workflows/deploy.yml` uploads `dist/` to the server (lftp mirror, no deletions) on every push to `main`, using `DEPLOY_*` repository secrets. Merge = live.
