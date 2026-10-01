@@ -8,4 +8,4 @@ import hristozov from './hristozov';
 import chehlarova from './chehlarova';
 
 export type { Member };
-export const team: Member[] = [madzharov, aleksandrov, georgiev, gaidarski, hristozov, chehlarova];
+export const team: Member[] = [madzharov, aleksandrov, chehlarova, gaidarski, hristozov, georgiev];
