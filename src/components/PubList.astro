@@ -1,0 +1,44 @@
+---
+import { t, type Lang } from '../data/content';
+import { tagLabels, type Publication } from '../data/publications';
+interface Props { lang: Lang; items: Publication[]; compact?: boolean }
+const { lang, items, compact } = Astro.props;
+---
+<ol class="pubs">
+  {items.map((p) => (
+    <li data-tags={p.tags.join(' ')} data-year={p.year}>
+      <div class="meta">
+        <span class="yr">{p.year}</span>
+        <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>
+      </div>
+      <div>
+        <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
+        <p class="au">{p.authors.join(', ')}</p>
+        <p class="ve">{p.venue}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}</p>
+        {!compact && p.abstract && <p class="ab">{p.abstract}</p>}
+        {!compact && (
+          <p class="tags">
+            {p.tags.map((g) => <span class="tag">{tagLabels[g]?.[lang] ?? g}</span>)}
+            {p.funding && <span class="fund">{t.funding[lang]}: {p.funding}</span>}
+          </p>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>
+<style>
+  .pubs { list-style: none; padding: 0; margin: 0; }
+  .pubs li { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .meta { display: flex; flex-direction: column; gap: 6px; }
+  .yr { font: 600 1.1rem var(--mono); }
+  .st { font: .7rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .st.published { color: #3f8f5a; }
+  h3 { font-size: 1.05rem; margin: 0 0 4px; }
+  h3 a { color: inherit; }
+  .au { margin: 0; font-weight: 500; }
+  .ve { margin: 0; color: var(--muted); font-style: italic; }
+  .ab { margin: 10px 0 0; font-size: .95rem; color: var(--muted); max-width: 80ch; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 0; }
+  .fund { font-size: .8rem; color: var(--muted); }
+  @media (max-width: 600px) { .pubs li { grid-template-columns: 1fr; gap: 6px; } .meta { flex-direction: row; gap: 12px; align-items: baseline; } }
+</style>

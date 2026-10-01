@@ -1,0 +1,28 @@
+---
+// Галерия: сложете снимки (.jpg/.png/.webp) в public/images/gallery/ — показват се автоматично.
+import fs from 'node:fs';
+import path from 'node:path';
+import { t, type Lang } from '../data/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const dir = path.join(process.cwd(), 'public/images/gallery');
+const files = fs.existsSync(dir)
+  ? fs.readdirSync(dir).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+  : [];
+---
+{files.length > 0 && (
+  <section class="block">
+    <div class="wrap">
+      <h2>{t.gallery[lang]}</h2>
+      <div class="gal">
+        {files.map((f) => (
+          <a href={`/images/gallery/${f}`}><img src={`/images/gallery/${f}`} alt="" loading="lazy" /></a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+<style>
+  .gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .gal img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
+</style>

@@ -1,0 +1,71 @@
+---
+// Research, Projects, Services, Contact
+import Layout from '../layouts/Layout.astro';
+import ClothoidDemo from '../components/ClothoidDemo.astro';
+import { nav, site, areas, projects, services, t, type Lang } from '../data/content';
+interface Props { lang: Lang; slug: 'research' | 'projects' | 'services' | 'contact' }
+const { lang, slug } = Astro.props;
+const title = nav.find((n) => n.slug === slug)!.label[lang];
+const bg = lang === 'bg';
+---
+<Layout lang={lang} slug={slug} title={title}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow">URSlab</p>
+    <h1>{title}</h1>
+    {slug === 'services' && <p>{bg ? 'Услугите се предлагат и чрез платформата Science-to-Business на НАЦИД.' : 'Services are also offered through the NACID Science-to-Business platform.'}</p>}
+  </div></header>
+
+  {slug === 'research' && (
+    <section class="block"><div class="wrap">
+      <div class="grid cols-2">
+        {areas.map((a) => <article class="card"><h3>{a.title[lang]}</h3><p class="muted">{a.text[lang]}</p></article>)}
+      </div>
+      <div style="margin-top:48px"><ClothoidDemo lang={lang} /></div>
+    </div></section>
+  )}
+
+  {slug === 'projects' && (
+    <section class="block"><div class="wrap grid">
+      {projects.map((p) => (
+        <article class="card">
+          <p class="eyebrow">{p.period}</p>
+          <h3>{p.title[lang]}</h3>
+          <p class="muted">{p.funder[lang]}</p>
+          <p style="margin-top:.75rem">{p.text[lang]}</p>
+          {p.link && <p style="margin-top:.75rem"><a href={p.link[lang]}>{t.learnMore[lang]} (PDF) →</a></p>}
+        </article>
+      ))}
+    </div></section>
+  )}
+
+  {slug === 'services' && (
+    <section class="block"><div class="wrap grid cols-2">
+      {services.map((s) => (
+        <article class="card">
+          <h3>{s.title[lang]}</h3>
+          <p class="muted">{s.text[lang]}</p>
+          <p style="margin-top:1rem"><a class="btn" href={s.link}>{t.learnMore[lang]} →</a></p>
+        </article>
+      ))}
+    </div></section>
+  )}
+
+  {slug === 'contact' && (
+    <section class="block"><div class="wrap contact">
+      <div class="card">
+        <h3>{site.institute[lang]}</h3>
+        <p>{site.address[lang]}</p>
+        <p style="margin-top:.75rem"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p>{site.phones.map((p) => <><a href={`tel:${p.replace(/\s/g, '')}`}>{p}</a><br /></>)}</p>
+        <p style="margin-top:.75rem"><a href="https://www.openstreetmap.org/search?query=Institute%20of%20Robotics%20Sofia%20Bonchev">OpenStreetMap →</a></p>
+      </div>
+      <iframe title="map" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=23.360%2C42.668%2C23.378%2C42.678&layer=mapnik&marker=42.6735%2C23.3690"></iframe>
+    </div></section>
+  )}
+</Layout>
+<style>
+  .contact { display: grid; grid-template-columns: minmax(260px, 1fr) 2fr; gap: 20px; }
+  .contact iframe { width: 100%; min-height: 360px; border: 1px solid var(--line); border-radius: var(--radius); }
+  @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PubList from '../components/PubList.astro';
+import { publications, tagLabels, archives } from '../data/publications';
+import { nav, t, type Lang } from '../data/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const title = nav.find((n) => n.slug === 'publications')!.label[lang];
+const tags = Object.keys(tagLabels);
+---
+<Layout lang={lang} slug="publications" title={title}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow">URSlab</p>
+    <h1>{title}</h1>
+  </div></header>
+  <section class="block"><div class="wrap">
+    <div class="filters" role="group">
+      <button type="button" data-f="" aria-pressed="true">{t.all[lang]}</button>
+      {tags.map((g) => <button type="button" data-f={g} aria-pressed="false">{tagLabels[g][lang]}</button>)}
+    </div>
+    <PubList lang={lang} items={publications} />
+    <h2 class="arch">{t.archive[lang]}</h2>
+    <ul>{archives.map((a) => <li><a href={a.href[lang]}>{a.label[lang]}</a></li>)}</ul>
+  </div></section>
+</Layout>
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .filters button { font: .82rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
+  .filters button[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .arch { margin-top: 48px; font-size: 1.3rem; }
+</style>
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('[data-f]');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.f;
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll<HTMLElement>('.pubs li').forEach((li) => {
+      li.hidden = !!f && !(li.dataset.tags ?? '').split(' ').includes(f!);
+    });
+  }));
+</script>

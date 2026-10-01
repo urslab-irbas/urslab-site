@@ -1,0 +1,27 @@
+# ---- URSlab static site (Astro) — replaces the old WordPress rules ----
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+Options -Indexes
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Old WordPress addresses -> new pages (301 permanent)
+RewriteRule ^състав/?$ /team/ [R=301,L]
+RewriteRule ^проекти/?$ /projects/ [R=301,L]
+RewriteRule ^участия/?$ /projects/ [R=301,L]
+RewriteRule ^публикации/?$ /publications/ [R=301,L]
+RewriteRule ^политика-за-бисквитки-ес/?$ / [R=301,L]
+RewriteRule ^en_gb/?(.*)$ /en/ [R=301,L]
+
+# WordPress no longer exists here: answer "410 Gone" to bots probing it
+RewriteRule ^(wp-admin|wp-includes|wp-content|wp-login\.php|xmlrpc\.php|wp-json) - [G,L]
+</IfModule>
+
+# Long cache for hashed build assets
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|svg|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

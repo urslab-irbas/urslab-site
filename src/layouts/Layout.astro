@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import { nav, site, t, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
+
+interface Props { lang: Lang; slug: string; title?: string; description?: string }
+const { lang, slug, title, description } = Astro.props;
+const other: Lang = lang === 'bg' ? 'en' : 'bg';
+const fullTitle = title ? `${title} — ${site.short[lang]}` : `${site.name[lang]} — ${site.institute[lang]}`;
+const desc = description ?? site.tagline[lang];
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={desc} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={desc} />
+  <link rel="alternate" hreflang={other} href={href(other, slug)} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="brand" href={href(lang, '')}>
+        <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+          <path d="M4 20 C 11 20, 13 10, 20 10 S 26 14, 28 12" fill="none" stroke="#e0892b" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="20" cy="10" r="2.4" fill="#e0892b"/>
+        </svg>
+        <span><strong>{site.short[lang]}</strong><small>{lang === 'bg' ? 'ИР — БАН' : 'IR — BAS'}</small></span>
+      </a>
+      <input type="checkbox" id="navtoggle" aria-label="Menu" />
+      <label for="navtoggle" class="burger" aria-hidden="true"><span></span></label>
+      <nav>
+        {nav.map((n) => (
+          <a href={href(lang, n.slug)} aria-current={n.slug === slug ? 'page' : undefined}>{n.label[lang]}</a>
+        ))}
+        <a class="lang" href={href(other, slug)} hreflang={other} lang={other}>{t.switchTo[lang]}</a>
+      </nav>
+    </div>
+  </header>
+  <main><slot /></main>
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <strong>{site.name[lang]}</strong>
+        <p>{site.institute[lang]}<br />{site.address[lang]}</p>
+      </div>
+      <div>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a><br />{site.phones.join(' · ')}</p>
+        <p><a href="https://ir.bas.bg/">ir.bas.bg</a> · <a href="https://www.bas.bg/">bas.bg</a></p>
+      </div>
+    </div>
+    <div class="wrap copy">© {year} {site.institute[lang]}. {t.rights[lang]}</div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .top { background: var(--ink); color: #e9eef2; position: sticky; top: 0; z-index: 20; border-bottom: 1px solid #1e3348; }
+  .bar { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+  .brand span { display: flex; flex-direction: column; line-height: 1.1; }
+  .brand small { font-family: var(--mono); font-size: .7rem; color: #8ea3b6; letter-spacing: .08em; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+  nav a { color: #c9d5df; text-decoration: none; padding: 8px 10px; border-radius: 6px; font-size: .95rem; }
+  nav a:hover { background: #1b2f45; color: #fff; }
+  nav a[aria-current='page'] { color: #fff; box-shadow: inset 0 -2px 0 var(--accent); border-radius: 0; }
+  nav a.lang { border: 1px solid #36506a; margin-left: 8px; font-family: var(--mono); font-size: .8rem; }
+  #navtoggle, .burger { display: none; }
+  @media (max-width: 900px) {
+    .burger { display: block; width: 40px; height: 40px; cursor: pointer; position: relative; }
+    .burger span, .burger span::before, .burger span::after {
+      position: absolute; left: 9px; width: 22px; height: 2px; background: #e9eef2; content: '';
+    }
+    .burger span { top: 19px; } .burger span::before { top: -7px; left: 0; } .burger span::after { top: 7px; left: 0; }
+    nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--ink); flex-direction: column; align-items: stretch; padding: 8px 16px 16px; border-bottom: 1px solid #1e3348; }
+    #navtoggle:checked ~ nav { display: flex; }
+    nav a.lang { margin: 8px 0 0; text-align: center; }
+  }
+  footer { background: var(--ink); color: #a9b8c6; margin-top: 40px; font-size: .92rem; }
+  footer a { color: #e9eef2; }
+  footer strong { color: #e9eef2; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding-top: 40px; padding-bottom: 16px; }
+  .copy { border-top: 1px solid #1e3348; padding-top: 16px; padding-bottom: 28px; font-size: .8rem; }
+</style>

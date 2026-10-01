@@ -1,0 +1,212 @@
+---
+import { t, type Lang } from '../data/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = lang === 'bg'
+  ? { clo: 'Клотоида', arc: 'Кръгова дъга', curv: 'Кривина κ(s) ~ странично ускорение', reset: 'Нулиране' }
+  : { clo: 'Clothoid', arc: 'Circular arc', curv: 'Curvature κ(s) ~ lateral acceleration', reset: 'Reset' };
+---
+<div class="demo" data-demo>
+  <div class="demo-head">
+    <div>
+      <p class="eyebrow">Live model</p>
+      <h3>{t.demoTitle[lang]}</h3>
+      <p class="muted">{t.demoText[lang]}</p>
+    </div>
+    <div class="controls" role="group">
+      <button type="button" data-mode="clothoid" aria-pressed="true">{L.clo}</button>
+      <button type="button" data-mode="arc" aria-pressed="false">{L.arc}</button>
+      <button type="button" data-reset>{L.reset}</button>
+    </div>
+  </div>
+  <canvas data-map height="380"></canvas>
+  <p class="cap">{L.curv}</p>
+  <canvas data-curv height="110"></canvas>
+</div>
+
+<style>
+  .demo { background: var(--ink); color: #e9eef2; border-radius: 14px; padding: 24px; border: 1px solid #1e3348; }
+  .demo .muted { color: #a9b8c6; max-width: 62ch; margin: 0; font-size: .95rem; }
+  .demo .eyebrow { color: var(--accent); }
+  .demo-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+  .controls { display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap; }
+  .controls button {
+    font: 500 .85rem var(--mono); background: transparent; color: #c9d5df; border: 1px solid #36506a;
+    padding: 6px 12px; border-radius: 6px; cursor: pointer;
+  }
+  .controls button[aria-pressed='true'] { background: var(--accent); color: #1a0f02; border-color: var(--accent); }
+  canvas { width: 100%; display: block; border-radius: 8px; background: #0f1e2e; touch-action: none; }
+  .cap { font: .75rem var(--mono); color: #8ea3b6; margin: 14px 0 6px; letter-spacing: .05em; text-transform: uppercase; }
+</style>
+
+<script>
+  type P = { x: number; y: number };
+  const INIT: P[] = [
+    { x: 0.06, y: 0.78 }, { x: 0.26, y: 0.28 }, { x: 0.48, y: 0.70 },
+    { x: 0.70, y: 0.22 }, { x: 0.94, y: 0.52 },
+  ];
+
+  function setup(root: HTMLElement) {
+    const map = root.querySelector<HTMLCanvasElement>('[data-map]')!;
+    const curv = root.querySelector<HTMLCanvasElement>('[data-curv]')!;
+    let wps: P[] = INIT.map((p) => ({ ...p }));
+    let mode: 'clothoid' | 'arc' = 'clothoid';
+    let drag = -1;
+    let path: { x: number; y: number; k: number; s: number }[] = [];
+    let t0 = performance.now();
+    let visible = false, running = false;
+
+    // Base CSS height is read ONCE (the height attribute is later overwritten
+    // with device pixels); the backing store is resized only when size changes.
+    const baseH = new Map<HTMLCanvasElement, number>();
+    [map, curv].forEach((c) => { const h = Number(c.getAttribute('height')); baseH.set(c, h); c.style.height = h + 'px'; });
+    function fit(c: HTMLCanvasElement) {
+      const dpr = window.devicePixelRatio || 1;
+      const h = baseH.get(c)!;
+      const w = c.clientWidth;
+      const W = Math.round(w * dpr), H = Math.round(h * dpr);
+      if (c.width !== W || c.height !== H) { c.width = W; c.height = H; }
+      const ctx = c.getContext('2d')!;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx, w, h };
+    }
+
+    // Build path: straight legs + turns. Clothoid turn = two Euler spirals
+    // (curvature ramps 0 → κmax → 0 linearly in s). Arc turn = constant κ.
+    function build(w: number, h: number) {
+      const pts = wps.map((p) => ({ x: p.x * w, y: p.y * h }));
+      const out: { x: number; y: number; k: number; s: number }[] = [];
+      let s = 0;
+      let cur = { ...pts[0] };
+      const push = (x: number, y: number, k: number) => {
+        const last = out[out.length - 1];
+        if (last) s += Math.hypot(x - last.x, y - last.y);
+        out.push({ x, y, k, s });
+      };
+      push(cur.x, cur.y, 0);
+      for (let i = 1; i < pts.length - 1; i++) {
+        const A = pts[i - 1], V = pts[i], B = pts[i + 1];
+        const h1 = Math.atan2(V.y - A.y, V.x - A.x);
+        const h2 = Math.atan2(B.y - V.y, B.x - V.x);
+        let d = h2 - h1;
+        while (d > Math.PI) d -= 2 * Math.PI;
+        while (d < -Math.PI) d += 2 * Math.PI;
+        const ad = Math.abs(d), sg = Math.sign(d) || 1;
+        const lim = 0.45 * Math.min(Math.hypot(V.x - A.x, V.y - A.y), Math.hypot(B.x - V.x, B.y - V.y));
+        if (ad < 1e-3) { push(V.x, V.y, 0); continue; }
+        const N = 80;
+        if (mode === 'clothoid') {
+          // unit spiral length Ls=1, κmax = ad/Ls; tangent length T = X + Y·tan(δ/2)
+          let X = 0, Y = 0, th = 0; const ds = 1 / N;
+          for (let j = 0; j < N; j++) { const sm = (j + 0.5) * ds; th = ad * sm * sm / 2; X += Math.cos(th) * ds; Y += Math.sin(th) * ds; }
+          const T1 = X + Y * Math.tan(ad / 2);
+          const Ls = lim / T1;
+          const km = ad / Ls;
+          let px = V.x - Math.cos(h1) * lim, py = V.y - Math.sin(h1) * lim;
+          push(px, py, 0);
+          let hd = h1; const dss = (2 * Ls) / (2 * N);
+          for (let j = 0; j < 2 * N; j++) {
+            const sm = (j + 0.5) * dss;
+            const k = sm < Ls ? km * sm / Ls : km * (2 * Ls - sm) / Ls;
+            hd += sg * k * dss;
+            px += Math.cos(hd) * dss; py += Math.sin(hd) * dss;
+            push(px, py, sg * k);
+          }
+        } else {
+          const R = lim / Math.tan(ad / 2);
+          let px = V.x - Math.cos(h1) * lim, py = V.y - Math.sin(h1) * lim;
+          push(px, py, 0);
+          out[out.length - 1].k = sg / R;
+          let hd = h1; const Ltot = R * ad, dss = Ltot / (2 * N);
+          for (let j = 0; j < 2 * N; j++) {
+            hd += sg * dss / R; px += Math.cos(hd) * dss; py += Math.sin(hd) * dss;
+            push(px, py, sg / R);
+          }
+          push(px, py, 0);
+        }
+      }
+      const E = pts[pts.length - 1];
+      push(E.x, E.y, 0);
+      return out;
+    }
+
+    function draw(now: number) {
+      const { ctx, w, h } = fit(map);
+      path = build(w, h);
+      ctx.clearRect(0, 0, w, h);
+      // graticule
+      ctx.strokeStyle = 'rgba(95,179,217,0.10)'; ctx.lineWidth = 1;
+      for (let i = 1; i < 12; i++) { ctx.beginPath(); const x = (i / 12) * w; ctx.moveTo(x, 0); ctx.bezierCurveTo(x - 20, h / 3, x - 20, 2 * h / 3, x, h); ctx.stroke(); }
+      for (let i = 1; i < 6; i++) { ctx.beginPath(); const y = (i / 6) * h; ctx.moveTo(0, y); ctx.quadraticCurveTo(w / 2, y - 18, w, y); ctx.stroke(); }
+      // legs (orthodromes)
+      ctx.setLineDash([4, 6]); ctx.strokeStyle = 'rgba(201,213,223,0.35)';
+      ctx.beginPath(); wps.forEach((p, i) => (i ? ctx.lineTo(p.x * w, p.y * h) : ctx.moveTo(p.x * w, p.y * h))); ctx.stroke();
+      ctx.setLineDash([]);
+      // flight path
+      ctx.strokeStyle = mode === 'clothoid' ? '#e0892b' : '#5fb3d9'; ctx.lineWidth = 2.6;
+      ctx.beginPath(); path.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.stroke();
+      // waypoints
+      wps.forEach((p, i) => {
+        ctx.fillStyle = '#0f1e2e'; ctx.strokeStyle = '#e9eef2'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(p.x * w, p.y * h, 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#8ea3b6'; ctx.font = '11px "IBM Plex Mono", monospace';
+        ctx.fillText('WP' + (i + 1), p.x * w + 10, p.y * h - 10);
+      });
+      // aircraft
+      const total = path[path.length - 1].s;
+      const target = (((now - t0) / 9000) % 1) * total;
+      let j = path.findIndex((p) => p.s >= target); if (j < 1) j = 1;
+      const a = path[j - 1], b = path[j];
+      const ang = Math.atan2(b.y - a.y, b.x - a.x);
+      ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(ang);
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.moveTo(10, 0); ctx.lineTo(-6, -7); ctx.lineTo(-3, 0); ctx.lineTo(-6, 7); ctx.closePath(); ctx.fill();
+      ctx.restore();
+      drawCurv(target);
+      if (visible) requestAnimationFrame(draw); else running = false;
+    }
+
+    function drawCurv(cursor: number) {
+      const { ctx, w, h } = fit(curv);
+      ctx.clearRect(0, 0, w, h);
+      const total = path[path.length - 1].s;
+      const kmax = Math.max(...path.map((p) => Math.abs(p.k))) || 1;
+      const y0 = h / 2;
+      ctx.strokeStyle = 'rgba(201,213,223,0.2)'; ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(w, y0); ctx.stroke();
+      ctx.strokeStyle = mode === 'clothoid' ? '#e0892b' : '#5fb3d9'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      path.forEach((p, i) => { const x = (p.s / total) * w, y = y0 - (p.k / kmax) * (h / 2 - 10); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.beginPath();
+      const cx = (cursor / total) * w; ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
+    }
+
+    function pos(e: PointerEvent) {
+      const r = map.getBoundingClientRect();
+      return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, w: r.width, h: r.height };
+    }
+    map.addEventListener('pointerdown', (e) => {
+      const p = pos(e);
+      drag = wps.findIndex((q) => Math.hypot((q.x - p.x) * p.w, (q.y - p.y) * p.h) < 16);
+      if (drag >= 0) map.setPointerCapture(e.pointerId);
+    });
+    map.addEventListener('pointermove', (e) => {
+      const p = pos(e);
+      if (drag >= 0) { wps[drag] = { x: Math.min(0.98, Math.max(0.02, p.x)), y: Math.min(0.96, Math.max(0.04, p.y)) }; }
+      else map.style.cursor = wps.some((q) => Math.hypot((q.x - p.x) * p.w, (q.y - p.y) * p.h) < 16) ? 'grab' : 'default';
+    });
+    map.addEventListener('pointerup', () => (drag = -1));
+    root.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) =>
+      b.addEventListener('click', () => {
+        mode = b.dataset.mode as 'clothoid' | 'arc';
+        root.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      }),
+    );
+    root.querySelector('[data-reset]')!.addEventListener('click', () => { wps = INIT.map((p) => ({ ...p })); t0 = performance.now(); });
+    new IntersectionObserver((e) => {
+      visible = e[0].isIntersecting;
+      if (visible && !running) { running = true; requestAnimationFrame(draw); }
+    }).observe(root);
+  }
+  document.querySelectorAll<HTMLElement>('[data-demo]').forEach(setup);
+</script>
