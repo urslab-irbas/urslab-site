@@ -1,0 +1,14 @@
+# Кой одобрява промени в кой файл.
+# ЗАМЕНЕТЕ @GITHUB-ИМЕ с реалните GitHub имена на колегите и махнете "#" пред реда.
+# Последното съвпадение има предимство.
+
+# Всичко останало — ръководителят на лабораторията
+# *                                   @GITHUB-ИМЕ-МАДЖАРОВ
+
+# Личните профили — самият човек ИЛИ ръководителят
+# /src/data/team/aleksandrov.ts       @GITHUB-ИМЕ-АЛЕКСАНДРОВ @GITHUB-ИМЕ-МАДЖАРОВ
+# /src/data/team/georgiev.ts          @GITHUB-ИМЕ-ГЕОРГИЕВ @GITHUB-ИМЕ-МАДЖАРОВ
+# /src/data/team/gaidarski.ts         @GITHUB-ИМЕ-ГАЙДАРСКИ @GITHUB-ИМЕ-МАДЖАРОВ
+# /src/data/team/hristozov.ts         @GITHUB-ИМЕ-ХРИСТОЗОВ @GITHUB-ИМЕ-МАДЖАРОВ
+# /src/data/team/chehlarova.ts        @GITHUB-ИМЕ-ЧЕХЛАРОВА @GITHUB-ИМЕ-МАДЖАРОВ
+# /public/images/team/                @GITHUB-ИМЕ-МАДЖАРОВ
