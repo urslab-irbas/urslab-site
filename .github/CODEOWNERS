@@ -7,5 +7,5 @@
 # Личните профили — самият човек ИЛИ ръководителят
 # (Александров и Георгиев нямат достъп до GitHub — профилите им поддържа ръководителят)
 /src/data/team/hristozov.ts         @sthrist @urslab-irbas
-# /src/data/team/gaidarski.ts       @GITHUB-ИМЕ-ГАЙДАРСКИ @urslab-irbas
+/src/data/team/gaidarski.ts         @ivangaidarski @urslab-irbas
 # /src/data/team/chehlarova.ts      @GITHUB-ИМЕ-ЧЕХЛАРОВА @urslab-irbas
