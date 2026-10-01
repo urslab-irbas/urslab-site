@@ -21,6 +21,17 @@ const NSPDS = 'NSP DS, MES grant D01-74/19.05.2022';
 export const publications: Publication[] = [
   {
     year: 2026,
+    title: 'URSlab Website and Interactive Coordinated-Turn Model: Source Code (v1.0.0)',
+    authors: ['A. Madzharov', 'S. Hristozov', 'I. Gaidarski', 'N. Chehlarova'],
+    venue: 'Zenodo — Software (files with restricted access)',
+    status: 'published',
+    doi: '10.5281/zenodo.23086274',
+    tags: ['software', 'navigation'],
+    abstract:
+      'Source code of the URSlab website, including the interactive browser model of a clothoid coordinated turn between two adjacent orthodromes, with comparison to a constant-radius arc and the curvature profile along the route.',
+  },
+  {
+    year: 2026,
     title: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes in a Coordinated Turn",
     authors: ['A. Madzharov'],
     venue: 'AMiTaNS 2026 — AIP Conference Proceedings',
@@ -90,6 +101,7 @@ export const tagLabels: Record<string, { bg: string; en: string }> = {
   gravity: { bg: 'Гравитация', en: 'Gravity' },
   ins: { bg: 'INS/GNSS', en: 'INS/GNSS' },
   security: { bg: 'Сигурност', en: 'Security' },
+  software: { bg: 'Софтуер', en: 'Software' },
 };
 
 // Архивни списъци от стария сайт
