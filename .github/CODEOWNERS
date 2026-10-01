@@ -1,14 +1,12 @@
-# Кой одобрява промени в кой файл.
-# ЗАМЕНЕТЕ @GITHUB-ИМЕ с реалните GitHub имена на колегите и махнете "#" пред реда.
-# Последното съвпадение има предимство.
+# Кой одобрява промени в кой файл (последното съвпадение има предимство).
+# Когато колега приеме поканата, заменете @GITHUB-ИМЕ с името му и махнете "#".
 
-# Всичко останало — ръководителят на лабораторията
-# *                                   @GITHUB-ИМЕ-МАДЖАРОВ
+# Всичко — ръководителят на лабораторията
+*                                   @urslab-irbas
 
 # Личните профили — самият човек ИЛИ ръководителят
-# /src/data/team/aleksandrov.ts       @GITHUB-ИМЕ-АЛЕКСАНДРОВ @GITHUB-ИМЕ-МАДЖАРОВ
-# /src/data/team/georgiev.ts          @GITHUB-ИМЕ-ГЕОРГИЕВ @GITHUB-ИМЕ-МАДЖАРОВ
-# /src/data/team/gaidarski.ts         @GITHUB-ИМЕ-ГАЙДАРСКИ @GITHUB-ИМЕ-МАДЖАРОВ
-# /src/data/team/hristozov.ts         @GITHUB-ИМЕ-ХРИСТОЗОВ @GITHUB-ИМЕ-МАДЖАРОВ
-# /src/data/team/chehlarova.ts        @GITHUB-ИМЕ-ЧЕХЛАРОВА @GITHUB-ИМЕ-МАДЖАРОВ
-# /public/images/team/                @GITHUB-ИМЕ-МАДЖАРОВ
+/src/data/team/hristozov.ts         @sthrist @urslab-irbas
+# /src/data/team/gaidarski.ts       @GITHUB-ИМЕ-ГАЙДАРСКИ @urslab-irbas
+# /src/data/team/chehlarova.ts      @GITHUB-ИМЕ-ЧЕХЛАРОВА @urslab-irbas
+# /src/data/team/aleksandrov.ts     @GITHUB-ИМЕ-АЛЕКСАНДРОВ @urslab-irbas
+# /src/data/team/georgiev.ts        @GITHUB-ИМЕ-ГЕОРГИЕВ @urslab-irbas
