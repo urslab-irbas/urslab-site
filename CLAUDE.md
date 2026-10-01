@@ -6,7 +6,7 @@ Target domain: https://urs.ir.bas.bg
 ## Structure
 - Bulgarian is the default language at `/`, English at `/en/`. Every page exists in both; the menu switch links to the same slug in the other language (`src/lib/i18n.ts`).
 - Content lives in `src/data/` — edit data, not markup:
-  - `team.ts` — staff (BG/EN names and titles, ORCID, links, interests)
+  - `team/<id>.ts` — one file per staff member (BG/EN names and titles, ORCID, links, interests); order in `team/index.ts`
   - `publications.ts` — publications, newest first; tags drive the filters
   - `content.ts` — menu, intro text, research areas, projects, services, contacts, UI strings
 - Page views: `src/views/` (Home, Team, Publications, Simple = research/projects/services/contact). Route files in `src/pages/` and `src/pages/en/` are thin wrappers.
@@ -21,3 +21,8 @@ Target domain: https://urs.ir.bas.bg
 
 ## Commands
 - `npm install` · `npm run dev` (http://localhost:4321) · `npm run build` (output in `dist/`)
+
+## Workflow
+- Changes reach `main` only via Pull Request approved by the lab head. CODEOWNERS maps each profile file to its owner.
+- Every PR runs `.github/workflows/build.yml` (npm ci + build); the built `dist/` is attached as an artifact `urslab-dist`.
+- Colleague instructions (Bulgarian): `CONTRIBUTING.md`.

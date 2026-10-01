@@ -6,11 +6,11 @@
 Целият текст е в `src/data/`:
 | Файл | Какво съдържа |
 |---|---|
-| `team.ts` | Състав: име BG/EN, длъжност, ORCID, e-mail, интереси, снимка |
+| `team/*.ts` | Състав: по един файл на човек (име BG/EN, длъжност, ORCID, интереси, снимка); редът е в `team/index.ts` |
 | `publications.ts` | Публикации (нова = нов запис най-отгоре), DOI, филтри |
 | `content.ts` | Текст „За нас“, направления, проекти, услуги, контакти, менюта |
 
-Снимки: `public/images/team/` (и `photo: "ime.jpg"` в team.ts) и `public/images/gallery/` (показват се автоматично на началната страница).
+Снимки: `public/images/team/` (и `photo: "ime.jpg"` в профила на човека) и `public/images/gallery/` (показват се автоматично на началната страница).
 
 ## Работа на компютъра (Windows)
 1. Инсталирайте Node.js LTS (https://nodejs.org) и VS Code (по-удобен от Visual Studio за уеб).
