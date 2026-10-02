@@ -12,7 +12,7 @@
 // tags — етикети по тема (archiveTagLabels по-долу); те свързват и с „Научни направления“.
 // title — на езика на публикацията; tr — превод на заглавието (показва се на английската страница).
 
-export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'erih' | 'intl' | 'nat' | 'other';
+export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'erih' | 'intl' | 'nat' | 'other' | 'soft' | 'sub';
 
 export interface ArchivePub {
   year: number;
@@ -45,10 +45,17 @@ export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] 
   { key: 'other', label: { bg: 'Други бази данни', en: 'Other databases' } },
   { key: 'mono', label: { bg: 'Монографии', en: 'Monographs' } },
   { key: 'book', label: { bg: 'Учебници', en: 'Textbooks' } },
+  { key: 'soft', label: { bg: 'Софтуер (Zenodo)', en: 'Software (Zenodo)' } },
+  { key: 'sub', label: { bg: 'Подадени / под печат', en: 'Submitted / in press' } },
 ];
 
 export const archiveTagLabels: Record<string, { bg: string; en: string }> = {
   navigation: { bg: 'Навигация', en: 'Navigation' },
+  ins: { bg: 'INS/GNSS', en: 'INS/GNSS' },
+  geodesy: { bg: 'Геодезия', en: 'Geodesy' },
+  gravity: { bg: 'Гравитация', en: 'Gravity' },
+  avionics: { bg: 'Авионика', en: 'Avionics' },
+  software: { bg: 'Софтуер', en: 'Software' },
   uas: { bg: 'БЛС', en: 'UAS' },
   sora: { bg: 'Безопасност на полетите (SORA)', en: 'Flight safety (SORA)' },
   wsn: { bg: 'Безжични мрежи и комуникации', en: 'Wireless networks & communications' },

@@ -1,0 +1,8 @@
+---
+// Обобщен отчет за член от колектива (бутонът е на картата в „Състав“)
+import V from '../../../../views/Archive.astro';
+import { team } from '../../../../data/team';
+export function getStaticPaths() { return team.map((m) => ({ params: { id: m.id } })); }
+const { id } = Astro.params;
+---
+<V lang="en" member={id} />
