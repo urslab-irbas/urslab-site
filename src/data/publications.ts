@@ -104,7 +104,6 @@ export const tagLabels: Record<string, { bg: string; en: string }> = {
   software: { bg: 'Софтуер', en: 'Software' },
 };
 
-// Архив: страници на сайта (slug), заменили PDF файловете от стария сайт
-export const archives = [
-  { label: { bg: 'Публикации 2022 – 2024 г.', en: 'Publications 2022 – 2024' }, slug: 'publications/2022-2024' },
-];
+// Архив: годишни страници на сайта (заменят PDF файловете от стария сайт) — виж archivePages.ts
+import { archivePages } from './archivePages';
+export const archives = archivePages.map((p) => ({ label: p.title, slug: p.slug }));

@@ -1,4 +1,5 @@
 // Публикации 2022 – 2024 г. (заменя стария PDF https://ir.bas.bg/labs/brs/publ1.pdf).
+// Тук са и общите типове, категории и етикети за всички годишни страници (archive2025.ts, archive2026.ts…).
 // Пренесени са от PDF-а; при съмнение — сверете с оригиналната публикация.
 //
 // cat:  mono  — монография            book — учебник / учебно помагало
@@ -10,7 +11,7 @@
 // tags — етикети по тема (archiveTagLabels по-долу); те свързват и с „Научни направления“.
 // title — на езика на публикацията; tr — превод на заглавието (показва се на английската страница).
 
-export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'other';
+export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'erih' | 'intl' | 'nat' | 'other';
 
 export interface ArchivePub {
   year: number;
@@ -25,6 +26,9 @@ export interface ArchivePub {
   jif?: number;
   team: string[];
   tags: string[];
+  ix?: boolean;    // индексирана в WoS/Scopus, макар че категорията ѝ в отчета е друга
+  share?: number;  // „Процент автори от звеното“ (ИР) от отчета на БАН
+  note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
 }
 
 export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] = [
@@ -34,6 +38,9 @@ export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] 
   { key: 'q4', label: { bg: 'Q4', en: 'Q4' } },
   { key: 'sjr', label: { bg: 'SJR без квартил', en: 'SJR, no quartile' } },
   { key: 'idx', label: { bg: 'WoS/Scopus без JCR/SJR', en: 'WoS/Scopus, no JCR/SJR' } },
+  { key: 'erih', label: { bg: 'ERIH+', en: 'ERIH+' } },
+  { key: 'intl', label: { bg: 'Международно академично издателство', en: 'International academic publisher' } },
+  { key: 'nat', label: { bg: 'Национално академично издателство', en: 'National academic publisher' } },
   { key: 'other', label: { bg: 'Други бази данни', en: 'Other databases' } },
   { key: 'mono', label: { bg: 'Монографии', en: 'Monographs' } },
   { key: 'book', label: { bg: 'Учебници', en: 'Textbooks' } },
@@ -44,12 +51,14 @@ export const archiveTagLabels: Record<string, { bg: string; en: string }> = {
   uas: { bg: 'БЛС', en: 'UAS' },
   sora: { bg: 'Безопасност на полетите (SORA)', en: 'Flight safety (SORA)' },
   wsn: { bg: 'Безжични мрежи и комуникации', en: 'Wireless networks & communications' },
+  radar: { bg: 'Радари', en: 'Radar' },
   security: { bg: 'Сигурност', en: 'Security' },
   ai: { bg: 'Изкуствен интелект', en: 'Artificial intelligence' },
   robotics: { bg: 'Роботика', en: 'Robotics' },
   hri: { bg: 'Взаимодействие човек–робот', en: 'Human–robot interaction' },
   education: { bg: 'Образование', en: 'Education' },
   accessibility: { bg: 'Достъпност', en: 'Accessibility' },
+  additive: { bg: '3D печат', en: '3D printing' },
 };
 
 export const archive: ArchivePub[] = [
