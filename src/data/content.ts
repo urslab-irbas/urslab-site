@@ -61,7 +61,7 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
   },
   {
     key: 'avionics',
-    tags: ['ins', 'avionics'],
+    tags: ['ins', 'avionics', 'uas'],
     title: { bg: 'Авионика и платформи', en: 'Avionics & platforms' },
     text: {
       bg: 'Прототипи на БЛА с повишена продължителност на полета и товароносимост; бордови системи за управление (C2) на SoC.',
@@ -70,7 +70,7 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
   },
   {
     key: 'comm',
-    tags: [],
+    tags: ['wsn'],
     title: { bg: 'Комуникации и радари', en: 'Communications & radar' },
     text: {
       bg: 'Комуникационни и радарни технологии за роботизирани системи в интерес на сигурността и отбраната.',
@@ -88,7 +88,7 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
   },
   {
     key: 'safety',
-    tags: [],
+    tags: ['sora'],
     title: { bg: 'Безопасност на полетите', en: 'Flight safety & regulation' },
     text: {
       bg: 'Оценка на риска за операции в специфична категория (SORA) и обучение на пилоти на БЛС по Регламент (ЕС) 2019/947.',

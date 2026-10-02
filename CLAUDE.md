@@ -8,6 +8,7 @@ Target domain: https://urs.ir.bas.bg
 - Content lives in `src/data/` — edit data, not markup:
   - `team/<id>.ts` — one file per staff member (BG/EN names and titles, ORCID, links, interests); order in `team/index.ts`
   - `publications.ts` — publications, newest first; tags drive the filters
+  - `archive2022.ts` — page „Публикации 2022 – 2024 г.“ (replaces the old publ1.pdf): category (Q1–Q4, SJR, other), SJR/IF, team keys and topic tags drive filters and the report summary
   - `content.ts` — menu, intro text, research areas, projects, services, contacts, UI strings
 - Page views: `src/views/` (Home, Team, Publications, Simple = research/projects/services/contact). Route files in `src/pages/` and `src/pages/en/` are thin wrappers.
 - Interactive clothoid coordinated-turn demo: `src/components/ClothoidDemo.astro`.

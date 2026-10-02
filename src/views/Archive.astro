@@ -1,0 +1,255 @@
+---
+// Публикации 2022 – 2024 г.: списък с филтри и обобщение за отчет (заменя стария PDF)
+import Layout from '../layouts/Layout.astro';
+import { archive, archiveCats, archiveTagLabels } from '../data/archive2022';
+import { areas, t, type Lang } from '../data/content';
+import { team } from '../data/team';
+import { href } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const bg = lang === 'bg';
+const T = (b: string, e: string) => (bg ? b : e);
+const title = T('Публикации 2022 – 2024 г.', 'Publications 2022 – 2024');
+
+const short = (n: string) => { const w = n.split(' '); return `${w[0][0]}. ${w[w.length - 1]}`; };
+const authors = [
+  ...team.map((m) => ({ key: m.id, label: short(m.name[lang]) })),
+  { key: 'yovchev', label: T('К. Йовчев', 'K. Yovchev') },
+].filter((a) => archive.some((p) => p.team.includes(a.key)));
+const years = [...new Set(archive.map((p) => p.year))].sort((a, b) => b - a);
+const usedTags = Object.keys(archiveTagLabels).filter((g) => archive.some((p) => p.tags.includes(g)));
+const areaBtns = areas.map((a) => ({ ...a, n: archive.filter((p) => p.tags.some((g) => a.tags.includes(g))).length }));
+const catLabel = Object.fromEntries(archiveCats.map((c) => [c.key, c.label[lang]]));
+const groups = archiveCats.map((c) => ({ ...c, items: archive.filter((p) => p.cat === c.key).sort((a, b) => b.year - a.year) })).filter((g) => g.items.length);
+const authorLabel = Object.fromEntries(authors.map((a) => [a.key, a.label]));
+const L = {
+  total: T('Публикации', 'Publications'),
+  indexed: T('в WoS/Scopus', 'in WoS/Scopus'),
+  withQ: T('с квартил (Q1–Q4)', 'with quartile (Q1–Q4)'),
+  sjr: T('Σ SJR', 'Σ SJR'),
+  jif: T('Σ IF (JCR)', 'Σ IF (JCR)'),
+  doi: T('с DOI', 'with DOI'),
+};
+---
+<Layout lang={lang} slug="publications/2022-2024" title={title}
+  description={T('Публикации на лаборатория „Безпилотни роботизирани системи“ за 2022 – 2024 г. с филтри и обобщение по квартили и SJR.', 'Publications of the Unmanned Robotic Systems Laboratory for 2022 – 2024, with filters and a summary by quartile and SJR.')}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>
+    <h1>{title}</h1>
+    <p>{T('Пълен списък на публикациите на колектива, групирани по вид и индексиране. Комбинирайте филтрите — обобщението отдолу се преизчислява за избраното.', 'Full list of the team’s publications, grouped by type and indexing. Combine the filters — the summary below is recomputed for the selection.')}</p>
+  </div></header>
+
+  <section class="block"><div class="wrap" data-arch>
+    <div class="frow">
+      <span class="lbl">{t.byArea[lang]}</span>
+      <div class="filters" data-g="area">
+        <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
+        {areaBtns.map((a) => <button type="button" data-v={a.tags.join(' ') || '__none__'} aria-pressed="false" disabled={a.n === 0}>{a.title[lang]} <span class="n">{a.n}</span></button>)}
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lbl">{t.byTopic[lang]}</span>
+      <div class="filters" data-g="tag">
+        <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
+        {usedTags.map((g) => <button type="button" data-v={g} aria-pressed="false">{archiveTagLabels[g][lang]}</button>)}
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lbl">{T('Индексиране', 'Indexing')}</span>
+      <div class="filters" data-g="cat">
+        <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
+        <button type="button" data-v="q1 q2 q3 q4 sjr idx" aria-pressed="false">WoS/Scopus</button>
+        <button type="button" data-v="q1 q2 q3 q4" aria-pressed="false">Q1–Q4</button>
+        {archiveCats.map((c) => <button type="button" data-v={c.key} aria-pressed="false">{c.label[lang]}</button>)}
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lbl">{T('Година', 'Year')}</span>
+      <div class="filters" data-g="year">
+        <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
+        {years.map((y) => <button type="button" data-v={String(y)} aria-pressed="false">{y}</button>)}
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lbl">{T('Автор', 'Author')}</span>
+      <div class="filters" data-g="team">
+        <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
+        {authors.map((a) => <button type="button" data-v={a.key} aria-pressed="false">{a.label}</button>)}
+      </div>
+    </div>
+
+    <div class="sum" aria-live="polite">
+      <div class="sum-head">
+        <h2>{T('Обобщение за отчет', 'Summary for reporting')}</h2>
+        <div class="acts">
+          <button type="button" class="btn-s" data-csv>{T('Изтегли CSV', 'Download CSV')}</button>
+          <button type="button" class="btn-s" data-print>{T('Печат', 'Print')}</button>
+          <button type="button" class="btn-s" data-reset>{T('Изчисти филтрите', 'Clear filters')}</button>
+        </div>
+      </div>
+      <div class="tiles">
+        <div><b data-s="total"></b><span>{L.total}</span></div>
+        <div><b data-s="indexed"></b><span>{L.indexed}</span></div>
+        <div><b data-s="withQ"></b><span>{L.withQ}</span></div>
+        <div><b data-s="sjr"></b><span>{L.sjr}</span></div>
+        <div><b data-s="jif"></b><span>{L.jif}</span></div>
+        <div><b data-s="doi"></b><span>{L.doi}</span></div>
+      </div>
+      <div class="breakdown">
+        <div><h3>{T('По вид / квартил', 'By type / quartile')}</h3><table data-t="cat"></table></div>
+        <div><h3>{T('По година', 'By year')}</h3><table data-t="year"></table></div>
+        <div><h3>{T('Участие на колектива', 'Team participation')}</h3><table data-t="team"></table></div>
+      </div>
+    </div>
+
+    {groups.map((g) => (
+      <section class="grp" data-grp={g.key}>
+        <h2>{/^q\d$/.test(g.key) ? `WoS/Scopus — ${g.label[lang]}` : g.label[lang]} <span class="gc" data-gc></span></h2>
+        <ol class="alist">
+          {g.items.map((p) => (
+            <li data-year={p.year} data-cat={p.cat} data-tags={p.tags.join(' ')} data-team={p.team.join(' ')}
+                data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? ''}
+                data-authors={p.authors} data-title={p.title} data-venue={p.venue}>
+              <span class="yr">{p.year}</span>
+              <div>
+                <p class="au">{p.authors}</p>
+                <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.title}</h3>
+                {!bg && p.tr && <p class="tr">[{p.tr}]</p>}
+                <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}</p>
+                <p class="badges">
+                  <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
+                  {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
+                  {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
+                  {p.tags.map((x) => <span class="tag">{archiveTagLabels[x]?.[lang] ?? x}</span>)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+    <p class="none" hidden>{t.noneFound[lang]}</p>
+    <script type="application/json" data-labels set:html={JSON.stringify({ cats: catLabel, team: authorLabel, csvName: T('publikacii-2022-2024', 'publications-2022-2024') })} />
+  </div></section>
+</Layout>
+
+<style>
+  .eyebrow a { color: inherit; }
+  .frow { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
+  .lbl { font: .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 8px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button { font: .82rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
+  .filters button[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .filters button:disabled { opacity: .4; cursor: default; }
+  .filters .n { opacity: .6; margin-left: 4px; }
+
+  .sum { margin: 28px 0 8px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .sum-head { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .sum-head h2 { margin: 0; font-size: 1.2rem; }
+  .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-s { font: .8rem var(--mono); padding: 7px 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent-ink); cursor: pointer; }
+  .btn-s:hover { background: var(--accent); color: #fff; }
+  .tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 18px; }
+  .tiles div { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .tiles b { display: block; font: 600 1.5rem var(--mono); font-variant-numeric: tabular-nums; }
+  .tiles span { font-size: .78rem; color: var(--muted); }
+  .breakdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .breakdown h3 { font-size: .8rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 6px; }
+  .breakdown :global(table) { width: 100%; border-collapse: collapse; font: .82rem var(--mono); font-variant-numeric: tabular-nums; }
+  .breakdown :global(td) { padding: 4px 0; border-bottom: 1px solid var(--line); }
+  .breakdown :global(td:last-child) { text-align: right; font-weight: 600; }
+  .breakdown :global(tr.z) { opacity: .45; }
+
+  .grp { margin-top: 36px; }
+  .grp[hidden] { display: none; }
+  .grp h2 { font-size: 1.15rem; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  .gc { font: .85rem var(--mono); color: var(--muted); font-weight: 400; }
+  .alist { list-style: none; padding: 0; margin: 0; }
+  .alist li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .alist li:first-child { border-top: 0; }
+  .alist li[hidden] { display: none; }
+  .yr { font: 600 1rem var(--mono); }
+  .au { margin: 0; font-size: .9rem; color: var(--muted); }
+  .alist h3 { font-size: 1rem; margin: 2px 0; line-height: 1.4; }
+  .alist h3 a { color: inherit; }
+  .tr { margin: 0; font-size: .9rem; color: var(--muted); }
+  .ve { margin: 0; font-size: .88rem; font-style: italic; color: var(--muted); }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; align-items: center; }
+  .q { font: 600 .72rem var(--mono); padding: 2px 8px; border-radius: 4px; background: var(--line); color: var(--text); }
+  .q.q1 { background: #2e7d4f; color: #fff; } .q.q2 { background: #4f9a5f; color: #fff; }
+  .q.q3 { background: #c79a2a; color: #fff; } .q.q4 { background: #d27a2c; color: #fff; }
+  .m { font: .72rem var(--mono); color: var(--muted); }
+  .none { color: var(--muted); padding: 20px 0; }
+  .none[hidden] { display: none; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(3, 1fr); } .breakdown { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } .alist li { grid-template-columns: 1fr; gap: 4px; } }
+  @media print {
+    :global(header.top), :global(footer), .frow, .acts, :global(.page-head p) { display: none !important; }
+    .sum { break-inside: avoid; }
+    .alist li { break-inside: avoid; }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-arch]')!;
+  const labels = JSON.parse(root.querySelector('[data-labels]')!.textContent!);
+  const items = [...root.querySelectorAll<HTMLLIElement>('.alist li')];
+  const sel: Record<string, string> = { area: '', tag: '', cat: '', year: '', team: '' };
+  const fmt = (x: number) => (Math.round(x * 1000) / 1000).toLocaleString(document.documentElement.lang === 'bg' ? 'bg-BG' : 'en-GB');
+
+  function match(li: HTMLLIElement) {
+    const d = li.dataset, tags = (d.tags ?? '').split(' '), team = (d.team ?? '').split(' ');
+    const any = (v: string, arr: string[]) => !v || v.split(' ').some((x) => arr.includes(x));
+    return any(sel.area, tags) && any(sel.tag, tags) && any(sel.cat, [d.cat!]) && any(sel.year, [d.year!]) && any(sel.team, team);
+  }
+  function table(name: string, rows: [string, number][]) {
+    root.querySelector(`[data-t="${name}"]`)!.innerHTML = rows.map(([k, n]) => `<tr class="${n ? '' : 'z'}"><td>${k}</td><td>${n}</td></tr>`).join('');
+  }
+  function update() {
+    let shown: HTMLLIElement[] = [];
+    items.forEach((li) => { li.hidden = !match(li); if (!li.hidden) shown.push(li); });
+    root.querySelectorAll<HTMLElement>('[data-grp]').forEach((g) => {
+      const n = g.querySelectorAll('li:not([hidden])').length;
+      g.hidden = n === 0; g.querySelector('[data-gc]')!.textContent = `(${n})`;
+    });
+    root.querySelector<HTMLElement>('.none')!.hidden = shown.length > 0;
+    const c = (f: (d: DOMStringMap) => boolean) => shown.filter((li) => f(li.dataset)).length;
+    const sum = (k: 'sjr' | 'jif') => shown.reduce((s, li) => s + (Number(li.dataset[k]) || 0), 0);
+    const set = (k: string, v: string | number) => (root.querySelector(`[data-s="${k}"]`)!.textContent = String(v));
+    set('total', shown.length);
+    set('indexed', c((d) => ['q1', 'q2', 'q3', 'q4', 'sjr', 'idx'].includes(d.cat!)));
+    set('withQ', c((d) => /^q[1-4]$/.test(d.cat!)));
+    set('sjr', fmt(sum('sjr'))); set('jif', fmt(sum('jif')));
+    set('doi', c((d) => !!d.doi));
+    table('cat', Object.entries(labels.cats as Record<string, string>).map(([k, l]) => [l, c((d) => d.cat === k)]));
+    const years = [...new Set(items.map((li) => li.dataset.year!))].sort().reverse();
+    table('year', years.map((y) => [y, c((d) => d.year === y)]));
+    table('team', Object.entries(labels.team as Record<string, string>).map(([k, l]) => [l, c((d) => (d.team ?? '').split(' ').includes(k))]));
+  }
+  root.querySelectorAll<HTMLElement>('[data-g]').forEach((grp) => {
+    grp.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button'); if (!b || b.disabled) return;
+      sel[grp.dataset.g!] = b.dataset.v ?? '';
+      grp.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      update();
+    });
+  });
+  root.querySelector('[data-reset]')!.addEventListener('click', () => {
+    Object.keys(sel).forEach((k) => (sel[k] = ''));
+    root.querySelectorAll<HTMLElement>('[data-g]').forEach((g) => g.querySelectorAll('button').forEach((x, i) => x.setAttribute('aria-pressed', String(i === 0))));
+    update();
+  });
+  root.querySelector('[data-print]')!.addEventListener('click', () => window.print());
+  root.querySelector('[data-csv]')!.addEventListener('click', () => {
+    const q = (s: string) => `"${s.replace(/"/g, '""')}"`;
+    const head = ['Year', 'Category', 'Authors', 'Title', 'Venue', 'DOI', 'ISBN', 'SJR', 'IF (JCR)'];
+    const rows = items.filter((li) => !li.hidden).map((li) => {
+      const d = li.dataset;
+      return [d.year!, labels.cats[d.cat!], d.authors!, d.title!, d.venue!, d.doi!, d.isbn!, d.sjr!, d.jif!].map(q).join(',');
+    });
+    const blob = new Blob(['﻿' + [head.map(q).join(','), ...rows].join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = labels.csvName + '.csv'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  update();
+</script>
