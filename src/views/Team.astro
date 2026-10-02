@@ -27,7 +27,10 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
         </div>
         {m.thesis && <p class="thesis"><span>{lang === 'bg' ? 'Дисертация:' : 'PhD thesis:'}</span> {lang === 'bg' ? `„${m.thesis[lang]}“` : `“${m.thesis[lang]}”`}</p>}
         {m.interests && <ul class="int">{m.interests[lang].map((i) => <li>{i}</li>)}</ul>}
-        <p class="rep"><a class="btn-rep" href={href(lang, `team/${m.id}/report`)}>{lang === 'bg' ? 'Обобщен отчет' : 'Summary report'} →</a></p>
+        <p class="rep">
+          <a class="btn-rep" href={href(lang, `team/${m.id}/report`)}>{lang === 'bg' ? 'Обобщен отчет' : 'Summary report'} →</a>
+          {m.github && <a class="btn-rep gh" href={`${href(lang, 'publications/new')}?m=${m.id}`} title={`GitHub: ${m.github}`}>+ {lang === 'bg' ? 'Нова публикация' : 'New publication'}</a>}
+        </p>
         <p class="links">
           {m.orcid && (
             <a href={`https://orcid.org/${m.orcid}`} class="orcid" title="ORCID">
@@ -55,7 +58,9 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
   .thesis { margin: 0; font-size: .88rem; font-style: italic; color: var(--muted); }
   .thesis span { font-style: normal; font-weight: 600; }
   .int { margin: 0; padding-left: 18px; font-size: .92rem; color: var(--muted); }
-  .rep { margin-top: auto !important; }
+  .rep { margin-top: auto !important; display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn-rep.gh { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .btn-rep.gh:hover { background: var(--accent); border-color: var(--accent); }
   .btn-rep { display: inline-block; font: 500 .82rem var(--mono); padding: 7px 14px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent-ink); text-decoration: none; }
   .btn-rep:hover { background: var(--accent); color: #fff; }
   .links { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; }

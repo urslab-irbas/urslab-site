@@ -1,0 +1,284 @@
+---
+// Въвеждане на нова публикация от член на колектива с GitHub акаунт.
+// Формата проверява записа (src/lib/pubSchema.js) и го изпраща като заявка (Issue) в GitHub.
+// Там човекът влиза със своя GitHub акаунт; GitHub Action проверява записа повторно,
+// добавя го в src/data/contrib.json и отваря Pull Request за одобрение от ръководителя.
+import Layout from '../layouts/Layout.astro';
+import { archiveCats, archiveTagLabels } from '../data/archive2022';
+import { allPubs } from '../data/allPubs';
+import { team } from '../data/team';
+import { t, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const bg = lang === 'bg';
+const T = (b: string, e: string) => (bg ? b : e);
+const title = T('Нова публикация', 'New publication');
+const members = team.filter((m) => m.github);
+const REPO = 'urslab-irbas/urslab-site';
+const ctx = {
+  lang, repo: REPO,
+  catKeys: archiveCats.map((c) => c.key),
+  tagKeys: Object.keys(archiveTagLabels),
+  existing: allPubs.map((p) => ({ doi: p.doi ?? '', title: p.title })),
+  members: Object.fromEntries(members.map((m) => [m.id, { name: m.name[lang], github: m.github }])),
+};
+const year = new Date().getFullYear();
+// Етикет, подсказка и пример за всяко поле
+const F = {
+  member: [T('Въвежда', 'Submitted by'), T('Вашето име. Записът се приема само от GitHub акаунта на този човек (или на ръководителя).', 'Your name. The entry is accepted only from this person’s GitHub account (or the head of the lab).')],
+  authors: [T('Автори (APA)', 'Authors (APA)'), T('Всички автори в реда от статията: „Фамилия, И.“, разделени със запетая; преди последния — „&“. Латиница за статии на английски, кирилица за статии на български.', 'All authors in the paper’s order: “Surname, I.”, separated by commas; “&” before the last one.'), 'Madzharov, A., Hristozov, S., & Gaidarski, I.'],
+  year: [T('Година на публикуване', 'Year of publication'), T('Годината, в която статията е публикувана (за подадени — очакваната). Определя на коя годишна страница ще се появи.', 'The year the paper was published (expected year if submitted). It decides the yearly page.'), String(year)],
+  title: [T('Заглавие', 'Title'), T('Точно както е в изданието, без кавички и без точка накрая. Не само с главни букви.', 'Exactly as published, no quotes, no full stop at the end. Not in capitals only.'), 'Compensations for horizontal inertial components of INS/GNSS with flight altitude'],
+  cat: [T('Категория (индексиране)', 'Category (indexing)'), T('Както в отчета на БАН: квартил по WoS/Scopus, SJR без квартил, ERIH+, издателство и т.н. За монография и учебник — издател вместо списание.', 'As in the BAS report: WoS/Scopus quartile, SJR without quartile, ERIH+, publisher type, etc. For a monograph or textbook — publisher instead of journal.')],
+  venue: [T('Списание / сборник', 'Journal / proceedings'), T('Пълното име на списанието или сборника на конференцията, в курсив по APA (тук — обикновен текст).', 'Full name of the journal or conference proceedings.'), 'Engineering Proceedings'],
+  volume: [T('Том', 'Volume'), T('Само числото.', 'Number only.'), '150'],
+  issue: [T('Брой', 'Issue'), T('Само числото; оставете празно, ако няма.', 'Number only; leave empty if none.'), '1'],
+  pages: [T('Страници / № на статия', 'Pages / article no.'), T('„45–67“ или номер на статията, напр. „70“.', '“45–67” or article number, e.g. “70”.'), '45–67'],
+  publisher: [T('Издател', 'Publisher'), T('Задължително за монография и учебник; по желание за сборници.', 'Required for monographs and textbooks; optional otherwise.'), 'MDPI'],
+  doi: [T('DOI', 'DOI'), T('Само идентификаторът, напр. 10.3390/… (може и с https://doi.org/ — ще се изчисти).', 'Identifier only, e.g. 10.3390/… (a https://doi.org/ prefix is removed).'), '10.3390/engproc2026150070'],
+  isbn: [T('ISBN', 'ISBN'), T('За книги и сборници с ISBN.', 'For books and proceedings with an ISBN.'), '978-954-753-168-0'],
+  url: [T('Линк (ако няма DOI)', 'Link (if no DOI)'), T('Адрес на публикацията, започващ с https://', 'Address starting with https://'), 'https://…'],
+  sjr: [T('SJR (Scopus)', 'SJR (Scopus)'), T('Задължително за Q1–Q4 и „SJR без квартил“ (или IF). Десетична точка или запетая.', 'Required for Q1–Q4 and “SJR, no quartile” (or IF).'), '0.254'],
+  jif: [T('IF (JCR, Web of Science)', 'IF (JCR, Web of Science)'), T('Импакт фактор, ако има.', 'Impact factor, if any.'), '3.5'],
+  share: [T('Дял ИР, %', 'IR share, %'), T('„Процент автори от звеното“ от отчета на БАН, ако го знаете.', '“Percentage of authors from the unit” from the BAS report, if known.'), '100'],
+  tags: [T('Теми', 'Topics'), T('Поне една. По темите публикацията се свързва с научните направления.', 'At least one. Topics link the publication to the research areas.')],
+  abstract: [T('Резюме (по желание)', 'Abstract (optional)'), T('До 1500 знака. За статии под рецензия — само резюме, без пълен текст.', 'Up to 1500 characters. For papers under review — abstract only.')],
+};
+const input = (k: keyof typeof F, attrs: Record<string, unknown> = {}) => ({ k, label: F[k][0], help: F[k][1], ex: F[k][2], attrs });
+const rows = [
+  [input('authors', { required: true })],
+  [input('year', { type: 'number', min: 1980, max: year + 1, required: true }), input('cat')],
+  [input('title', { required: true })],
+  [input('venue'), input('volume'), input('issue'), input('pages')],
+  [input('publisher'), input('doi'), input('isbn')],
+  [input('url'), input('sjr', { inputmode: 'decimal' }), input('jif', { inputmode: 'decimal' }), input('share', { inputmode: 'decimal' })],
+];
+---
+<Layout lang={lang} slug="publications/new" title={title}
+  description={T('Въвеждане на нова публикация от член на колектива (вход с GitHub).', 'Entering a new publication by a team member (sign in with GitHub).')}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow"><a href={href(lang, 'team')}>{t.team[lang]}</a> / URSlab</p>
+    <h1>{title}</h1>
+    <p>{T('Попълнете полетата и натиснете „Запиши“. Записът се проверява тук и после в GitHub, където влизате със своя акаунт. След одобрение от ръководителя публикацията се появява на сайта.', 'Fill in the fields and press “Save”. The entry is checked here and again on GitHub, where you sign in with your own account. Once approved by the head of the lab, it appears on the site.')}</p>
+  </div></header>
+
+  <section class="block"><div class="wrap np" data-np>
+    <script type="application/json" data-ctx set:html={JSON.stringify(ctx)} />
+
+    <ol class="steps">
+      <li class="on">{T('Попълване', 'Fill in')}</li>
+      <li>{T('Проверка и „Запиши“', 'Check & “Save”')}</li>
+      <li>{T('Вход в GitHub и „Create“', 'Sign in to GitHub & “Create”')}</li>
+      <li>{T('Автоматична проверка', 'Automatic check')}</li>
+      <li>{T('Одобрение → на сайта', 'Approval → on the site')}</li>
+    </ol>
+
+    <form novalidate data-form>
+      <div class="frow1">
+        <label class="f">
+          <span class="l">{F.member[0]} *</span>
+          <select name="member" required>
+            {members.map((m) => <option value={m.id}>{m.name[lang]} (GitHub: {m.github})</option>)}
+          </select>
+          <small>{F.member[1]}</small>
+        </label>
+      </div>
+      {rows.map((row) => (
+        <div class={`frow1 c${row.length}`}>
+          {row.map((f) => (
+            <label class="f" data-field={f.k}>
+              <span class="l">{f.label}{(f.attrs as { required?: boolean }).required || ['cat'].includes(f.k) ? ' *' : ''}</span>
+              {f.k === 'cat'
+                ? <select name="cat"><option value="">— {T('изберете', 'choose')} —</option>{archiveCats.map((c) => <option value={c.key}>{c.label[lang]}</option>)}</select>
+                : f.k === 'title'
+                  ? <textarea name="title" rows="2" placeholder={`${T('напр.', 'e.g.')} ${f.ex}`}></textarea>
+                  : <input name={f.k} placeholder={f.ex ? `${T('напр.', 'e.g.')} ${f.ex}` : undefined} autocomplete="off" {...f.attrs} />}
+              <small>{f.help}</small>
+              <em class="err" hidden></em>
+            </label>
+          ))}
+        </div>
+      ))}
+      <fieldset class="f" data-field="tags">
+        <legend class="l">{F.tags[0]} *</legend>
+        <div class="chips">
+          {Object.entries(archiveTagLabels).map(([k, v]) => <label class="chip"><input type="checkbox" name="tags" value={k} /> {v[lang]}</label>)}
+        </div>
+        <small>{F.tags[1]}</small>
+        <em class="err" hidden></em>
+      </fieldset>
+      <label class="f" data-field="abstract">
+        <span class="l">{F.abstract[0]}</span>
+        <textarea name="abstract" rows="4" maxlength="1500"></textarea>
+        <small>{F.abstract[1]}</small>
+      </label>
+
+      <div class="preview">
+        <span class="l">{T('Преглед в APA стил', 'APA preview')}</span>
+        <p data-apa>—</p>
+      </div>
+
+      <div class="acts">
+        <button type="submit" class="btn">{T('Запиши', 'Save')}</button>
+        <button type="button" class="btn ghost" data-clear>{T('Изчисти', 'Clear')}</button>
+        <a class="btn ghost" href="#help">{T('Помощ', 'Help')}</a>
+      </div>
+      <div class="msg bad" data-bad hidden>{T('Има грешки — поправете отбелязаните полета и натиснете „Запиши“ отново.', 'There are errors — fix the marked fields and press “Save” again.')}</div>
+      <div class="msg ok" data-ok hidden>
+        <p><b>{T('Записът е проверен.', 'The entry is valid.')}</b> {T('В нов прозорец се отвори GitHub с готова заявка. Влезте със своя акаунт (ако не сте) и натиснете зеления бутон „Create“. Ако прозорецът не се отвори:', 'GitHub has opened in a new window with a ready request. Sign in (if needed) and press the green “Create” button. If the window did not open:')} <a data-gh target="_blank" rel="noopener">{T('отворете заявката в GitHub', 'open the request on GitHub')} →</a></p>
+        <p>{T('След около минута GitHub ще отговори в заявката: „✅ приета“ с връзка към Pull Request, или „❌“ със списък на грешките и връзка за поправка тук.', 'In about a minute GitHub replies in the request: “✅ accepted” with a Pull Request link, or “❌” with the errors and a link to fix them here.')}</p>
+      </div>
+    </form>
+
+    <section class="help" id="help">
+      <h2>{T('Помощ', 'Help')}</h2>
+      <details open>
+        <summary>{T('Как да запиша авторите в APA стил', 'How to write the authors in APA style')}</summary>
+        <ul>
+          <li>{T('Всеки автор: фамилия, запетая, инициали с точка — „Madzharov, A.“. Две инициали: „González-deSantos, L. M.“', 'Each author: surname, comma, initials with full stops — “Madzharov, A.”. Two initials: “González-deSantos, L. M.”')}</li>
+          <li>{T('Авторите се разделят със запетая; преди последния се пише „&“ (със запетая пред него при 3+ автори).', 'Separate authors with commas; put “&” before the last one (with a comma before it for 3+ authors).')}</li>
+          <li>{T('Редът е точно като в статията. Не съкращавайте с „et al.“.', 'Keep the order of the paper. Do not shorten with “et al.”.')}</li>
+          <li>{T('Частиците остават малки: „del Estad Herrero, A.“, „van der Berg, J.“', 'Particles stay lowercase: “del Estad Herrero, A.”, “van der Berg, J.”')}</li>
+        </ul>
+        <p class="ex">{T('Примери:', 'Examples:')}<br /><code>Madzharov, A.</code><br /><code>Gaidarski, I., & Madzharov, A.</code><br /><code>Madzharov, A., Hristozov, S., & Gaidarski, I.</code><br /><code>Чехларова, Н., & Чехларова, К.</code></p>
+      </details>
+      <details>
+        <summary>{T('Как изглежда пълният APA запис', 'What the full APA reference looks like')}</summary>
+        <p><b>{T('Статия в списание', 'Journal article')}:</b> {T('Автори (Година). Заглавие. Списание, Том(Брой), страници. https://doi.org/…', 'Authors (Year). Title. Journal, Volume(Issue), pages. https://doi.org/…')}</p>
+        <p class="ex"><code>Madzharov, A., Hristozov, S., & Gaidarski, I. (2026). Compensations for horizontal inertial components of INS/GNSS with flight altitude. Engineering Proceedings, 150(1), 70. https://doi.org/10.3390/engproc2026150070</code></p>
+        <p><b>{T('Доклад в сборник', 'Conference paper')}:</b> {T('Автори (Година). Заглавие. Име на сборника, страници. Издател. DOI', 'Authors (Year). Title. Proceedings name, pages. Publisher. DOI')}</p>
+        <p><b>{T('Книга', 'Book')}:</b> {T('Автор (Година). Заглавие. Издател.', 'Author (Year). Title. Publisher.')}</p>
+        <p>{T('Не е нужно да пишете целия запис — сайтът го сглобява от полетата. Прегледът „в APA стил“ под формата показва резултата.', 'You do not type the whole reference — the site assembles it from the fields. The “APA preview” below the form shows the result.')}</p>
+      </details>
+      <details>
+        <summary>{T('Какво се проверява', 'What is checked')}</summary>
+        <ul>
+          <li>{T('Задължителни: автори, година, заглавие, категория, списание (или издател за книги), поне една тема.', 'Required: authors, year, title, category, journal (or publisher for books), at least one topic.')}</li>
+          <li>{T('Сред авторите трябва да има член на колектива.', 'A team member must be among the authors.')}</li>
+          <li>{T('DOI — във вид 10.xxxx/…; ISBN — 10 или 13 цифри; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; ISBN with 10 or 13 digits; pages as “45–67” or a number.')}</li>
+          <li>{T('За Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'For Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
+          <li>{T('Публикацията да не е вече на сайта (същото DOI или заглавие).', 'The publication must not already be on the site (same DOI or title).')}</li>
+          <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
+        </ul>
+      </details>
+      <details>
+        <summary>{T('Как се обновява сайтът след „Запиши“', 'How the site is updated after “Save”')}</summary>
+        <ol>
+          <li>{T('„Запиши“ отваря GitHub с готова заявка (Issue). Ако не сте влезли — GitHub ще поиска вход с вашия акаунт.', '“Save” opens GitHub with a ready request (Issue). If you are not signed in, GitHub asks you to sign in.')}</li>
+          <li>{T('Натиснете зеления бутон „Create“. Не променяйте текста на заявката.', 'Press the green “Create” button. Do not change the request text.')}</li>
+          <li>{T('До около минута автоматичната проверка отговаря в заявката. При грешка: отворете връзката „Поправете във формата“, коригирайте и натиснете „Запиши“ отново (старата заявка се затваря сама).', 'Within about a minute the automatic check replies. On error: open the “Fix in the form” link, correct and press “Save” again (the old request closes itself).')}</li>
+          <li>{T('При успех се създава Pull Request „Нова публикация: …“. Ръководителят го преглежда и натиска „Merge“ (с отметка „bypass rules“).', 'On success a Pull Request “New publication: …” is created. The head of the lab reviews it and presses “Merge” (with “bypass rules”).')}</li>
+          <li>{T('След „Merge“ сайтът се обновява сам за около минута. Публикацията е на годишната страница под „Публикации → Архив“ и в „Обобщен отчет“ на всеки съавтор от колектива. Обновете страницата с Ctrl+F5.', 'After “Merge” the site updates itself in about a minute. The publication is on the yearly page under “Publications → Archive” and in the “Summary report” of every co-author from the team. Refresh with Ctrl+F5.')}</li>
+        </ol>
+      </details>
+    </section>
+  </div></section>
+</Layout>
+
+<style>
+  .np { max-width: 980px; }
+  .steps { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 28px; counter-reset: s; }
+  .steps li { counter-increment: s; font: .78rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+  .steps li::before { content: counter(s) '. '; }
+  .steps li.on { border-color: var(--accent); color: var(--accent-ink); }
+  form { display: grid; gap: 14px; }
+  .frow1 { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  .frow1.c2 { grid-template-columns: 1fr 2fr; }
+  .frow1.c3 { grid-template-columns: repeat(3, 1fr); }
+  .frow1.c4 { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .f { display: flex; flex-direction: column; gap: 4px; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .l { font: 600 .82rem var(--font); }
+  .f small { color: var(--muted); font-size: .76rem; line-height: 1.35; }
+  input, select, textarea { font: .95rem var(--font); padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); width: 100%; }
+  textarea { resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+  .f.bad input, .f.bad select, .f.bad textarea { border-color: #c0392b; background: color-mix(in srgb, #c0392b 6%, var(--surface)); }
+  .err { color: #c0392b; font-size: .8rem; font-style: normal; }
+  .err[hidden] { display: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { display: inline-flex; gap: 6px; align-items: center; font-size: .85rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; cursor: pointer; }
+  .chip input { width: auto; }
+  .chip:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .preview { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; background: var(--surface); }
+  .preview p { margin: 6px 0 0; font-size: .92rem; overflow-wrap: anywhere; }
+  .acts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { font: 600 .9rem var(--font); padding: 10px 20px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--accent-ink); }
+  .msg { padding: 12px 14px; border-radius: 8px; font-size: .92rem; }
+  .msg[hidden] { display: none; }
+  .msg.bad { background: color-mix(in srgb, #c0392b 10%, var(--surface)); border: 1px solid #c0392b; }
+  .msg.ok { background: color-mix(in srgb, #2e7d4f 10%, var(--surface)); border: 1px solid #2e7d4f; }
+  .msg p { margin: 0 0 6px; }
+  .help { margin-top: 48px; }
+  .help details { border-top: 1px solid var(--line); padding: 12px 0; }
+  .help summary { cursor: pointer; font-weight: 600; }
+  .help li { margin-bottom: 6px; }
+  .ex code { font-size: .85rem; }
+  @media (max-width: 760px) { .frow1.c2, .frow1.c3, .frow1.c4 { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import { validate, apa, normalize, MESSAGES } from '../lib/pubSchema.js';
+  const root = document.querySelector<HTMLElement>('[data-np]')!;
+  const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
+  const M = MESSAGES[ctx.lang as 'bg' | 'en'];
+  const form = root.querySelector<HTMLFormElement>('[data-form]')!;
+  const fields = ['authors', 'year', 'title', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'isbn', 'url', 'sjr', 'jif', 'share', 'abstract'];
+
+  const read = () => {
+    const fd = new FormData(form);
+    const e: Record<string, unknown> = {};
+    fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
+    e.tags = fd.getAll('tags');
+    e.member = fd.get('member');
+    return e;
+  };
+  const write = (e: Record<string, unknown>) => {
+    fields.forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement | null; if (el && e[k] !== undefined) el.value = String(e[k]); });
+    form.querySelectorAll<HTMLInputElement>('input[name="tags"]').forEach((c) => (c.checked = ((e.tags as string[]) || []).includes(c.value)));
+    const m = form.elements.namedItem('member') as HTMLSelectElement; if (e.member && ctx.members[e.member as string]) m.value = String(e.member);
+  };
+  const b64 = { enc: (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
+                dec: (s: string) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))) };
+
+  function preview() { const e = read(); root.querySelector('[data-apa]')!.textContent = e.authors || e.title ? apa(e) : '—'; }
+  function show(errors: { field: string; code: string }[]) {
+    form.querySelectorAll<HTMLElement>('[data-field]').forEach((f) => { f.classList.remove('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = true; em.textContent = ''; } });
+    for (const { field, code } of errors) {
+      const f = form.querySelector<HTMLElement>(`[data-field="${field}"]`); if (!f) continue;
+      f.classList.add('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = false; em.textContent = (em.textContent ? em.textContent + ' ' : '') + (M[code] ?? code); }
+    }
+  }
+
+  form.addEventListener('input', preview);
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const e = read();
+    const errors = validate(e, { catKeys: ctx.catKeys, tagKeys: ctx.tagKeys, existing: ctx.existing });
+    show(errors);
+    root.querySelector<HTMLElement>('[data-bad]')!.hidden = errors.length === 0;
+    root.querySelector<HTMLElement>('[data-ok]')!.hidden = errors.length > 0;
+    if (errors.length) { form.querySelector<HTMLElement>('.bad')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    const data = { ...normalize(e), member: e.member };
+    const who = ctx.members[e.member as string];
+    const body = [
+      (ctx.lang === 'bg' ? 'Нова публикация, въведена през формата на сайта от' : 'New publication entered through the site form by') + ` **${who.name}** (@${who.github}).`,
+      '', '**APA:** ' + apa(data), '',
+      '<!-- ' + (ctx.lang === 'bg' ? 'Не променяйте блока по-долу. За поправка използвайте формата на сайта.' : 'Do not change the block below. Use the site form for corrections.') + ' -->',
+      '```json', JSON.stringify(data, null, 2), '```',
+    ].join('\n');
+    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: `[Публикация] ${String(data.title).slice(0, 90)}`, body }).toString();
+    root.querySelector<HTMLAnchorElement>('[data-gh]')!.href = url;
+    history.replaceState(null, '', '#d=' + b64.enc(JSON.stringify(data)));
+    window.open(url, '_blank', 'noopener');
+  });
+  root.querySelector('[data-clear]')!.addEventListener('click', () => { form.reset(); show([]); preview(); history.replaceState(null, '', location.pathname + location.search); });
+
+  // Предварително попълване: ?m=<член> (бутонът в „Състав“) и #d=<данни> (връзката „Поправете“ от GitHub)
+  const q = new URLSearchParams(location.search);
+  if (q.get('m') && ctx.members[q.get('m')!]) (form.elements.namedItem('member') as HTMLSelectElement).value = q.get('m')!;
+  const h = location.hash.match(/^#d=([\w-]+)/);
+  if (h) { try { write(JSON.parse(b64.dec(h[1]))); } catch { /* повредена връзка — празна форма */ } }
+  preview();
+</script>

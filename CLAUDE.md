@@ -10,6 +10,7 @@ Target domain: https://urs.ir.bas.bg
   - `publications.ts` — publications, newest first; tags drive the filters
   - `archive2022.ts`, `archive2025.ts`, `archive2026.ts`, `archiveEarlier.ts` — yearly publication pages (/publications/2022-2024/, /2025/, /2026/, /earlier/); each entry goes on the page of its publication year; shared types, categories and topic tags are in archive2022.ts; the list of pages (order in „Архив“) is `archivePages.ts`. 2025/2026 come from the BAS report „XX а: Всички публикации – публикувани“ (share = % authors from IR)
   - `allPubs.ts` — all publications on the site (archive pages + publications.ts, de-duplicated by DOI/title) → per-member „Обобщен отчет“ at /team/<id>/report/ (button on each Team card)
+  - `contrib.json` — publications entered via the site form /publications/new/ (GitHub issue → `.github/workflows/publication.yml` + `scripts/add-publication.mjs` validate with `src/lib/pubSchema.js`, append here, open a PR); distributed to yearly pages by `archivePages.ts` (a page for a new year is created automatically). Team members with `github` in their profile get the „+ Нова публикация“ button.
   - `content.ts` — menu, intro text, research areas, projects, services, contacts, UI strings
 - Page views: `src/views/` (Home, Team, Publications, Simple = research/projects/services/contact). Route files in `src/pages/` and `src/pages/en/` are thin wrappers.
 - Interactive clothoid coordinated-turn demo: `src/components/ClothoidDemo.astro`.

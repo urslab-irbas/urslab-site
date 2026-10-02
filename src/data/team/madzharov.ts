@@ -5,6 +5,7 @@ import type { Member } from './types';
 
 const member: Member = {
   id: 'madzharov',
+  github: 'urslab-irbas',
   name: { bg: 'Анастас Н. Маджаров', en: 'Anastas N. Madzharov' },
   title: { bg: 'доц. д-р инж.', en: 'Assoc. Prof. Dr. Eng.' },
   role: { bg: 'Ръководител на лабораторията', en: 'Head of Laboratory' },

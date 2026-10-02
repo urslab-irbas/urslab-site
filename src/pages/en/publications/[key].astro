@@ -1,0 +1,8 @@
+---
+// Годишните страници с публикации (списъкът е в src/data/archivePages.ts)
+import V from '../../../views/Archive.astro';
+import { archivePages } from '../../../data/archivePages';
+export function getStaticPaths() { return archivePages.map((p) => ({ params: { key: p.key } })); }
+const { key } = Astro.params;
+---
+<V lang="en" page={key} />

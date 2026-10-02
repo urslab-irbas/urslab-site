@@ -5,6 +5,7 @@ export interface Member {
   title: { bg: string; en: string };
   role?: { bg: string; en: string };
   orcid?: string;
+  github?: string;   // GitHub акаунт → бутон „Нова публикация“ в „Състав“ и право да въвежда публикации
   email?: string;
   scholar?: string;
   researchgate?: string;

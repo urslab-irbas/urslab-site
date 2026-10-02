@@ -5,6 +5,7 @@ import type { Member } from './types';
 
 const member: Member = {
   id: 'hristozov',
+  github: 'sthrist',
   name: { bg: 'Стефан И. Христозов', en: 'Stefan I. Hristozov' },
   title: { bg: 'гл. ас. д-р инж.', en: 'Chief Assist. Prof. Dr. Eng.' },
   orcid: '0000-0001-9845-1202',
