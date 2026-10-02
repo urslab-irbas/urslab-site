@@ -59,12 +59,16 @@ section.block { padding: 72px 0; }
   display: inline-block; font-family: var(--mono); font-size: .72rem; padding: 2px 8px;
   border: 1px solid var(--line); border-radius: 99px; color: var(--muted);
 }
-.page-head { background: var(--ink); color: #e9eef2; padding: 64px 0 48px; }
+.page-head { background: var(--ink); color: #e9eef2; padding: 44px 0 30px; }
+/* по-малко разстояние между заглавието на страницата и съдържанието под него */
+.page-head + section.block { padding-top: 36px; }
 .page-head h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); }
 .page-head p { color: #a9b8c6; max-width: 60ch; margin: .75rem 0 0; }
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .wrap { padding: 0 16px; }
   section.block { padding: 48px 0; }
+  .page-head { padding: 32px 0 24px; }
+  .page-head + section.block { padding-top: 28px; }
   .grid.cols-2 { grid-template-columns: 1fr; }
 }
