@@ -1,0 +1,31 @@
+---
+import { t, areaPubCount, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
+interface Props { lang: Lang; area: { key: string; title: { bg: string; en: string }; text: { bg: string; en: string }; tags: string[]; page?: string }; num?: number }
+const { lang, area, num } = Astro.props;
+const n = areaPubCount(area.tags);
+const pubLink = `${href(lang, 'publications')}?area=${area.key}`;
+// Ако направлението има собствена страница, цялата карта води към нея; иначе — към филтрираните публикации.
+const main = area.page ? href(lang, area.page) : n > 0 ? pubLink : '';
+---
+<article class={`card area${area.page ? ' has-page' : ''}`}>
+  {num !== undefined && <span class="num">{String(num).padStart(2, '0')}</span>}
+  <h3>{main ? <a href={main} class="stretch">{area.title[lang]}</a> : area.title[lang]}</h3>
+  <p class="muted">{area.text[lang]}</p>
+  {area.page && <p class="model">★ {t.areaModel[lang]} →</p>}
+  <p class="cnt">{n > 0
+    ? (area.page ? <a class="over" href={pubLink}>{n} {n === 1 ? t.pubsCount1[lang] : t.pubsCount[lang]} →</a> : <>{n} {n === 1 ? t.pubsCount1[lang] : t.pubsCount[lang]} →</>)
+    : <span class="soon">{t.noPubsYet[lang]}</span>}</p>
+</article>
+<style>
+  .area { position: relative; display: flex; flex-direction: column; transition: border-color .15s, transform .15s; }
+  .area:has(a.stretch):hover { border-color: var(--accent); transform: translateY(-2px); }
+  .has-page { border-color: var(--accent); }
+  .num { font: 500 .8rem var(--mono); color: var(--accent-ink); display: block; margin-bottom: 10px; }
+  h3 a { color: inherit; text-decoration: none; }
+  a.stretch::after { content: ''; position: absolute; inset: 0; }
+  .model { margin-top: 12px !important; font: 600 .85rem var(--mono); color: var(--accent-ink); }
+  .cnt { margin-top: auto !important; padding-top: 14px; font: 500 .82rem var(--mono); color: var(--accent-ink); }
+  .cnt a.over { position: relative; z-index: 1; color: inherit; }
+  .soon { color: var(--muted); font-weight: 400; }
+</style>

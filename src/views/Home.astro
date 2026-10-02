@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ClothoidDemo from '../components/ClothoidDemo.astro';
 import PubList from '../components/PubList.astro';
 import Gallery from '../components/Gallery.astro';
+import AreaCard from '../components/AreaCard.astro';
 import { site, areas, t, nav, type Lang } from '../data/content';
 import { publications } from '../data/publications';
 import { team } from '../data/team/index';
@@ -14,7 +15,7 @@ const latest = publications.slice(0, 3);
 <Layout lang={lang} slug="">
   <section class="hero">
     <svg class="orbit" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <g fill="none" stroke="#5fb3d9" stroke-opacity=".13">
+      <g fill="none" stroke="#5fb3d9" stroke-opacity=".24">
         <ellipse cx="560" cy="260" rx="330" ry="330" />
         <ellipse cx="560" cy="260" rx="250" ry="330" />
         <ellipse cx="560" cy="260" rx="150" ry="330" />
@@ -60,13 +61,7 @@ const latest = publications.slice(0, 3);
     <div class="wrap">
       <p class="eyebrow">{t.areasTitle[lang]}</p>
       <div class="grid cols-3">
-        {areas.map((a, i) => (
-          <article class="card area">
-            <span class="num">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{a.title[lang]}</h3>
-            <p class="muted">{a.text[lang]}</p>
-          </article>
-        ))}
+        {areas.map((a, i) => <AreaCard lang={lang} area={a} num={i + 1} />)}
       </div>
     </div>
   </section>

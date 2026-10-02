@@ -1,0 +1,312 @@
+---
+// Аналитичен модел на координиран завой между две геодезични ортодромии
+// по уравнението на Кумер (A. Madzharov, AMiTaNS 2026). Уравненията следват статията:
+//   q = W²/(G0·Q0·cos²B0),  a = 1/4 − W·tanB0/(4·√(G0Q0)·cosB0),  b = 1/2          (20), (24)
+//   k = sign(Δα)·2·tan(γmax)/T,  ψpart = (g·k/W + Ω·cosB0)/q                         (25), (30), (32)
+//   f(T) = (α1 − ψpart)·M(a, 1/2, −qT²/2) − (α1 − ψpart) − Δα = 0                    (31)
+//   ψT(t) = ψpart + (α1 − ψpart)·M(a, 1/2, −qt²/2),  0 ≤ t ≤ T*                      (33)
+// Маршрутът е от Таблица 1 на статията (WP2–WP9).
+import type { Lang } from '../data/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const bg = lang === 'bg';
+---
+<div class="km" data-km data-lang={lang}>
+  <div class="ctrl">
+    <label><span>{bg ? 'Земна скорост' : 'Ground speed'} W</span>
+      <input type="range" min="100" max="250" step="5" value="150" data-w /><output data-wv>150 m/s</output></label>
+    <label><span>{bg ? 'Максимален крен' : 'Maximum bank'} γ<sub>max</sub></span>
+      <input type="range" min="15" max="45" step="1" value="30" data-g /><output data-gv>30°</output></label>
+    <p class="hint">{bg ? 'Изберете завой от картата или от таблицата.' : 'Select a turn on the map or in the table.'}</p>
+  </div>
+
+  <div class="two">
+    <figure>
+      <canvas data-route height="340"></canvas>
+      <figcaption>{bg ? 'Маршрут WP2–WP9 (Таблица 1 от статията), ортодромни участъци и завои' : 'Route WP2–WP9 (Table 1 of the paper): orthodromic legs and turns'}</figcaption>
+    </figure>
+    <figure>
+      <canvas data-zoom height="340"></canvas>
+      <figcaption data-zcap></figcaption>
+    </figure>
+  </div>
+
+  <div class="two">
+    <figure>
+      <canvas data-psi height="190"></canvas>
+      <figcaption>{bg ? 'Промяна на пътния ъгъл Δψ(t), °' : 'Track-angle change Δψ(t), °'}</figcaption>
+    </figure>
+    <figure>
+      <canvas data-acc height="190"></canvas>
+      <figcaption>{bg ? 'Странично ускорение a(t)/g = tan γ(t)' : 'Lateral acceleration a(t)/g = tan γ(t)'}</figcaption>
+    </figure>
+  </div>
+
+  <p class="legend">
+    <span class="sw k"></span>{bg ? 'Клотоида по уравнението на Кумер (31), (33)' : 'Clothoid from Kummer equation (31), (33)'}
+    <span class="sw c"></span>{bg ? 'Класически завой с постоянен радиус (1), (2)' : 'Classical constant-radius turn (1), (2)'}
+  </p>
+
+  <div class="tw">
+    <table data-tab>
+      <thead><tr>
+        <th>WP</th><th>B, L [°]</th><th>Δα [°]</th>
+        <th>T<sub>K</sub> [s]</th><th>k<sub>K</sub> [1/s]</th><th>d<sub>K</sub> [km]</th>
+        <th>T<sub>cl</sub> [s]</th><th>TAD<sub>cl</sub> [km]</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    {bg
+      ? 'Tₖ и kₖ — корен на трансцендентното уравнение (31) с функцията на Кумер M(a, ½, z), изчислен в браузъра; dₖ — разстояние от точката на откъсване b₁ до WP. Радиусите на кривина G₀, Q₀ са на WGS 84 в точката на завоя. Картата е само за изобразяване (локална проекция); изчисленията не зависят от нея.'
+      : 'Tₖ and kₖ are the root of the transcendental equation (31) with the Kummer function M(a, ½, z), computed in the browser; dₖ is the distance from the detachment point b₁ to the WP. Radii of curvature G₀, Q₀ are WGS 84 values at the turn point. The map is for display only (local projection); the computation does not depend on it.'}
+  </p>
+</div>
+
+<style>
+  .km { background: var(--ink); color: #e9eef2; border-radius: 14px; padding: 22px; border: 1px solid #1e3348; }
+  .ctrl { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; margin-bottom: 14px; }
+  .ctrl label { display: flex; align-items: center; gap: 10px; font: .85rem var(--mono); color: #c9d5df; }
+  .ctrl input { accent-color: #e0892b; width: 140px; }
+  .ctrl output { min-width: 64px; color: #fff; }
+  .hint { margin: 0; font-size: .85rem; color: #8ea3b6; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  figure { margin: 0; }
+  canvas { width: 100%; display: block; background: #0f1e2e; border-radius: 8px; }
+  figcaption { font: .72rem var(--mono); color: #8ea3b6; margin-top: 6px; letter-spacing: .03em; }
+  .legend { font: .78rem var(--mono); color: #c9d5df; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; margin: 4px 0 14px; }
+  .sw { display: inline-block; width: 26px; height: 0; border-top: 3px solid #e0892b; margin-right: 6px; vertical-align: middle; }
+  .sw.c { border-top: 2px dashed #5fb3d9; }
+  .tw { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font: .8rem var(--mono); }
+  th, td { padding: 7px 8px; text-align: right; border-bottom: 1px solid #1e3348; white-space: nowrap; }
+  th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+  th { color: #8ea3b6; font-weight: 500; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: #13243a; }
+  tbody tr.sel { background: #1b2f45; }
+  td.k { color: #f0a656; }
+  td.c { color: #8fcaea; }
+  .note { font-size: .8rem; color: #8ea3b6; margin: 12px 0 0; }
+  @media (max-width: 820px) { .two { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const A = 6378137, E2 = 6.69437999014e-3, g = 9.81, OM = 7.292115e-5, D = Math.PI / 180;
+  // Таблица 1: B [°], L [°], h [m] за WP2…WP9 (WP9 = WP2)
+  const WPS: [number, number, number][] = [
+    [43.631, 24.752, 500], [43.917, 24.752, 1000], [43.917, 26.356, 4000], [43.402, 26.356, 3000],
+    [43.402, 24.580, 2000], [42.972, 24.580, 1000], [43.086, 24.752, 500], [43.631, 24.752, 500],
+  ];
+  const wpName = (i: number) => 'WP' + (i + 2);
+
+  const radii = (B: number, h: number) => {
+    const s = Math.sin(B), w = Math.sqrt(1 - E2 * s * s);
+    return [A / w + h, (A * (1 - E2)) / (w * w * w) + h];
+  };
+  const bearing = (B1: number, L1: number, B2: number, L2: number) => {
+    const dL = L2 - L1;
+    return Math.atan2(Math.sin(dL) * Math.cos(B2), Math.cos(B1) * Math.sin(B2) - Math.sin(B1) * Math.cos(B2) * Math.cos(dL));
+  };
+  const wrap = (x: number) => { while (x > Math.PI) x -= 2 * Math.PI; while (x < -Math.PI) x += 2 * Math.PI; return x; };
+  // M(a,b,z) − 1 (серия; без водещата единица, за да няма загуба на точност)
+  const Mm1 = (a: number, b: number, z: number) => {
+    let term = 1, sum = 0;
+    for (let n = 0; n < 500; n++) {
+      term *= ((a + n) / (b + n)) * (z / (n + 1)); sum += term;
+      if (Math.abs(term) < 1e-18 * Math.max(1, Math.abs(sum))) break;
+    }
+    return sum;
+  };
+
+  type Turn = {
+    i: number; d: number; a1: number; a2: number; T: number; k: number; dK: number;
+    Tcl: number; TAD: number; r: number; head: (t: number) => number; kum: [number, number][];
+  };
+
+  function solveTurn(i: number, W: number, gm: number): Turn {
+    const [Bd, Ld, h] = WPS[i]; const B0 = Bd * D, L0 = Ld * D;
+    const P = WPS[i - 1], N = WPS[i + 1];
+    const a1 = wrap(bearing(B0, L0, P[0] * D, P[1] * D) + Math.PI); // краен азимут на входящата ортодромия
+    const a2 = bearing(B0, L0, N[0] * D, N[1] * D);                  // начален азимут на следващата
+    const d = wrap(a2 - a1);
+    const [G0, Q0] = radii(B0, h);
+    const q = (W * W) / (G0 * Q0 * Math.cos(B0) ** 2);
+    const aK = 0.25 - (W * Math.tan(B0)) / (4 * Math.sqrt(G0 * Q0) * Math.cos(B0));
+    const sg = Math.sign(d) || 1;
+    const psiP = (T: number) => ((g * ((sg * 2 * Math.tan(gm)) / T)) / W + OM * Math.cos(B0)) / q;
+    const f = (T: number) => (a1 - psiP(T)) * Mm1(aK, 0.5, (-q * T * T) / 2) - d;
+    let lo = 0.5, flo = f(lo), hi = lo, fhi = flo;
+    while (hi < 1e5) { hi *= 1.2; fhi = f(hi); if (Math.sign(fhi) !== Math.sign(flo)) break; lo = hi; flo = fhi; }
+    for (let it = 0; it < 120; it++) { const m = (lo + hi) / 2, fm = f(m); if (Math.sign(fm) === Math.sign(flo)) { lo = m; flo = fm; } else hi = m; }
+    const T = (lo + hi) / 2, k = (sg * 2 * Math.tan(gm)) / T, pp = psiP(T), C1 = a1 - pp;
+    const head = (t: number) => a1 + C1 * Mm1(aK, 0.5, (-q * t * t) / 2); // = ψpart + C1·M  (33)
+    // траектория в локална ENU система (m), начало в WP
+    const n = 600, dt = T / n; let x = 0, y = 0; const pts: [number, number][] = [[0, 0]];
+    for (let j = 0; j < n; j++) { const ps = head((j + 0.5) * dt); x += W * Math.sin(ps) * dt; y += W * Math.cos(ps) * dt; pts.push([x, y]); }
+    const u1 = [Math.sin(a1), Math.cos(a1)], u2 = [Math.sin(a2), Math.cos(a2)];
+    const cr = (p: number[], r: number[]) => p[0] * r[1] - p[1] * r[0];
+    const dK = cr(u2, [x, y]) / cr(u2, u1);
+    const kum = pts.map(([px, py]) => [px - dK * u1[0], py - dK * u1[1]] as [number, number]);
+    const r = (W * W) / (g * Math.tan(gm));
+    return { i, d, a1, a2, T, k, dK, Tcl: (r * Math.abs(d)) / W, TAD: r * Math.tan(Math.abs(d) / 2), r, head, kum };
+  }
+
+  function setup(root: HTMLElement) {
+    const bgL = root.dataset.lang === 'bg';
+    const $ = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const wIn = $<HTMLInputElement>('[data-w]'), gIn = $<HTMLInputElement>('[data-g]');
+    const cRoute = $<HTMLCanvasElement>('[data-route]'), cZoom = $<HTMLCanvasElement>('[data-zoom]');
+    const cPsi = $<HTMLCanvasElement>('[data-psi]'), cAcc = $<HTMLCanvasElement>('[data-acc]');
+    const tbody = $<HTMLTableSectionElement>('[data-tab] tbody');
+    const baseH = new Map<HTMLCanvasElement, number>();
+    [cRoute, cZoom, cPsi, cAcc].forEach((c) => { const h = Number(c.getAttribute('height')); baseH.set(c, h); c.style.height = h + 'px'; });
+    let sel = 1, turns: Turn[] = [], W = 150, gm = 30 * D;
+
+    const fit = (c: HTMLCanvasElement) => {
+      const dpr = window.devicePixelRatio || 1, h = baseH.get(c)!, w = c.clientWidth;
+      const Wp = Math.round(w * dpr), Hp = Math.round(h * dpr);
+      if (c.width !== Wp || c.height !== Hp) { c.width = Wp; c.height = Hp; }
+      const ctx = c.getContext('2d')!; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+      return { ctx, w, h };
+    };
+    const ORANGE = '#e0892b', BLUE = '#5fb3d9', GRID = 'rgba(95,179,217,0.24)', TXT = '#8ea3b6';
+
+    // ---------- карта на маршрута ----------
+    const B0m = WPS.reduce((s, p) => s + p[0], 0) / WPS.length * D;
+    const toXY = (B: number, L: number) => [L * D * Math.cos(B0m) * A, B * D * A];
+    let routeXY: { sx: number; sy: number; s: number; ox: number; oy: number } | null = null;
+    function drawRoute() {
+      const { ctx, w, h } = fit(cRoute);
+      const P = WPS.map((p) => toXY(p[0], p[1]));
+      const xs = P.map((p) => p[0]), ys = P.map((p) => p[1]);
+      const minx = Math.min(...xs), maxx = Math.max(...xs), miny = Math.min(...ys), maxy = Math.max(...ys);
+      const pad = 34, s = Math.min((w - 2 * pad) / (maxx - minx), (h - 2 * pad) / (maxy - miny));
+      const ox = (w - s * (maxx - minx)) / 2, oy = (h - s * (maxy - miny)) / 2;
+      const X = (x: number) => ox + (x - minx) * s, Y = (y: number) => h - (oy + (y - miny) * s);
+      routeXY = { sx: minx, sy: miny, s, ox, oy };
+      // паралели и меридиани през 0.25°
+      ctx.strokeStyle = GRID; ctx.lineWidth = 1; ctx.font = '10px "IBM Plex Mono", monospace'; ctx.fillStyle = TXT;
+      for (let B = 42.75; B <= 44.25; B += 0.25) { const y = Y(toXY(B, 0)[1]); if (y < 0 || y > h) continue; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); ctx.fillText(B.toFixed(2) + '°', 4, y - 3); }
+      for (let L = 24.25; L <= 26.75; L += 0.25) { const x = X(toXY(0, L)[0]); if (x < 0 || x > w) continue; ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); ctx.fillText(L.toFixed(2) + '°', x + 3, h - 4); }
+      // ортодромии
+      ctx.setLineDash([5, 5]); ctx.strokeStyle = 'rgba(201,213,223,0.45)'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); P.forEach((p, j) => (j ? ctx.lineTo(X(p[0]), Y(p[1])) : ctx.moveTo(X(p[0]), Y(p[1])))); ctx.stroke(); ctx.setLineDash([]);
+      // траектория: участъци + завои по Кумер (в локални метри → карта)
+      ctx.strokeStyle = ORANGE; ctx.lineWidth = 2.2; ctx.beginPath();
+      const cosB = Math.cos(B0m);
+      const geo = (i: number, e: number, nn: number) => { const [Bd, Ld] = WPS[i]; return toXY(Bd + nn / A / D, Ld + e / (A * cosB) / D); };
+      let started = false;
+      const lineTo = (p: number[]) => { if (!started) { ctx.moveTo(X(p[0]), Y(p[1])); started = true; } else ctx.lineTo(X(p[0]), Y(p[1])); };
+      lineTo(P[0]);
+      turns.forEach((t) => t.kum.forEach(([e, nn]) => lineTo(geo(t.i, e, nn))));
+      lineTo(P[P.length - 1]); ctx.stroke();
+      // точки
+      WPS.forEach((p, j) => {
+        if (j === WPS.length - 1) return;
+        const [x, y] = toXY(p[0], p[1]); const isSel = turns[sel - 1]?.i === j;
+        ctx.beginPath(); ctx.arc(X(x), Y(y), isSel ? 8 : 6, 0, 2 * Math.PI);
+        ctx.fillStyle = isSel ? ORANGE : '#0f1e2e'; ctx.fill(); ctx.strokeStyle = '#e9eef2'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.fillStyle = '#e9eef2'; ctx.font = '11px "IBM Plex Mono", monospace';
+        ctx.fillText(wpName(j) + (j === 0 ? ' / WP9' : ''), X(x) + 10, Y(y) - 8);
+      });
+    }
+
+    // ---------- увеличение на избрания завой ----------
+    function drawZoom() {
+      const { ctx, w, h } = fit(cZoom); const t = turns[sel - 1]; if (!t) return;
+      const span = Math.max(t.dK, t.TAD) * 1.35 + 500;
+      const s = Math.min(w, h) / (2 * span);
+      const X = (e: number) => w / 2 + e * s, Y = (n: number) => h / 2 - n * s;
+      // мрежа през 1 km
+      ctx.strokeStyle = GRID; ctx.lineWidth = 1;
+      const step = 1000; const nmax = Math.ceil(span / step) + 2;
+      for (let k = -nmax; k <= nmax; k++) { ctx.beginPath(); ctx.moveTo(X(k * step), 0); ctx.lineTo(X(k * step), h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0, Y(k * step)); ctx.lineTo(w, Y(k * step)); ctx.stroke(); }
+      // ортодромии
+      const L = span * 1.6;
+      ctx.setLineDash([5, 5]); ctx.strokeStyle = 'rgba(201,213,223,0.5)'; ctx.lineWidth = 1.2; ctx.beginPath();
+      ctx.moveTo(X(-Math.sin(t.a1) * L), Y(-Math.cos(t.a1) * L)); ctx.lineTo(X(0), Y(0)); ctx.lineTo(X(Math.sin(t.a2) * L), Y(Math.cos(t.a2) * L)); ctx.stroke();
+      // класически завой: дъга с радиус r, допирна в TAD
+      const sg = Math.sign(t.d) || 1;
+      const sx = -Math.sin(t.a1) * t.TAD, sy = -Math.cos(t.a1) * t.TAD;
+      const cx = sx + sg * Math.cos(t.a1) * t.r, cy = sy - sg * Math.sin(t.a1) * t.r;
+      ctx.setLineDash([6, 5]); ctx.strokeStyle = BLUE; ctx.lineWidth = 2; ctx.beginPath();
+      for (let j = 0; j <= 120; j++) { const ang = t.a1 + (t.d * j) / 120; const px = cx - sg * Math.cos(ang) * t.r, py = cy + sg * Math.sin(ang) * t.r; j ? ctx.lineTo(X(px), Y(py)) : ctx.moveTo(X(px), Y(py)); }
+      ctx.stroke(); ctx.setLineDash([]);
+      // Кумер
+      ctx.strokeStyle = ORANGE; ctx.lineWidth = 2.6; ctx.beginPath();
+      t.kum.forEach(([e, n], j) => (j ? ctx.lineTo(X(e), Y(n)) : ctx.moveTo(X(e), Y(n)))); ctx.stroke();
+      const b1 = t.kum[0], b2 = t.kum[t.kum.length - 1];
+      ctx.fillStyle = ORANGE; [b1, b2].forEach(([e, n]) => { ctx.beginPath(); ctx.arc(X(e), Y(n), 4, 0, 2 * Math.PI); ctx.fill(); });
+      ctx.fillStyle = '#e9eef2'; ctx.font = '11px "IBM Plex Mono", monospace';
+      ctx.fillText('b₁', X(b1[0]) + 7, Y(b1[1]) + 4); ctx.fillText('b₂', X(b2[0]) + 7, Y(b2[1]) + 4);
+      ctx.beginPath(); ctx.arc(X(0), Y(0), 5, 0, 2 * Math.PI); ctx.strokeStyle = '#e9eef2'; ctx.stroke();
+      ctx.fillText(wpName(t.i), X(0) + 8, Y(0) - 8);
+      // мащаб и север
+      ctx.fillStyle = TXT; ctx.fillRect(12, h - 18, step * s, 2); ctx.fillText('1 km', 12, h - 24);
+      ctx.fillText('N ↑', w - 34, 18);
+      $<HTMLElement>('[data-zcap]').textContent = (bgL ? 'Завой при ' : 'Turn at ') + wpName(t.i) +
+        (bgL ? ' — точка на откъсване b₁ и прихващане b₂, мрежа 1 km' : ' — detachment b₁ and interception b₂, 1 km grid');
+    }
+
+    // ---------- графики по време ----------
+    function plot(c: HTMLCanvasElement, fK: (t: number) => number, fC: (t: number) => number, tMax: number, unit: string) {
+      const { ctx, w, h } = fit(c); const pl = 44, pr = 10, pt = 10, pb = 22;
+      const N = 400, ts = Array.from({ length: N + 1 }, (_, j) => -0.06 * tMax + (1.12 * tMax * j) / N);
+      const vk = ts.map(fK), vc = ts.map(fC);
+      let lo = Math.min(0, ...vk, ...vc), hi = Math.max(0, ...vk, ...vc); if (hi - lo < 1e-9) hi = lo + 1;
+      const m = (hi - lo) * 0.08; lo -= m; hi += m;
+      const X = (t: number) => pl + ((t - ts[0]) / (ts[N] - ts[0])) * (w - pl - pr), Y = (v: number) => pt + (1 - (v - lo) / (hi - lo)) * (h - pt - pb);
+      ctx.strokeStyle = GRID; ctx.fillStyle = TXT; ctx.font = '10px "IBM Plex Mono", monospace'; ctx.lineWidth = 1;
+      for (let j = 0; j <= 4; j++) { const v = lo + ((hi - lo) * j) / 4; ctx.beginPath(); ctx.moveTo(pl, Y(v)); ctx.lineTo(w - pr, Y(v)); ctx.stroke(); ctx.fillText(v.toFixed(Math.abs(hi - lo) < 3 ? 2 : 0), 2, Y(v) + 3); }
+      const tick = tMax > 100 ? 20 : 10;
+      for (let tt = 0; tt <= ts[N]; tt += tick) { ctx.fillText(String(tt), X(tt) - 6, h - 6); }
+      ctx.fillText('t, s', w - pr - 24, h - 6); ctx.fillText(unit, pl + 4, pt + 10);
+      const line = (v: number[], col: string, dash: number[], lw: number) => { ctx.setLineDash(dash); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath(); v.forEach((y, j) => (j ? ctx.lineTo(X(ts[j]), Y(y)) : ctx.moveTo(X(ts[j]), Y(y)))); ctx.stroke(); ctx.setLineDash([]); };
+      line(vc, BLUE, [6, 5], 2); line(vk, ORANGE, [], 2.4);
+    }
+    function drawCharts() {
+      const t = turns[sel - 1]; if (!t) return;
+      const tMax = Math.max(t.T, t.Tcl);
+      const sg = Math.sign(t.d) || 1, wcl = W / t.r;
+      const dK = (x: number) => (x <= 0 ? 0 : x >= t.T ? t.d : t.head(x) - t.a1) / D;
+      const dC = (x: number) => (x <= 0 ? 0 : x >= t.Tcl ? t.d : sg * wcl * x) / D;
+      plot(cPsi, dK, dC, tMax, '°');
+      const eps = 0.05;
+      const aK = (x: number) => (x <= 0 || x >= t.T ? 0 : (W * (t.head(x + eps) - t.head(x - eps))) / (2 * eps) / g);
+      const aC = (x: number) => (x <= 0 || x >= t.Tcl ? 0 : sg * Math.tan(gm));
+      plot(cAcc, aK, aC, tMax, 'tan γ');
+    }
+
+    function drawTable() {
+      tbody.innerHTML = turns.map((t, j) => {
+        const [B, L] = WPS[t.i];
+        return `<tr data-j="${j + 1}" class="${j + 1 === sel ? 'sel' : ''}"><td>${wpName(t.i)}</td><td>${B.toFixed(3)}, ${L.toFixed(3)}</td>` +
+          `<td>${(t.d / D).toFixed(2)}</td><td class="k">${t.T.toFixed(2)}</td><td class="k">${t.k.toFixed(4)}</td><td class="k">${(t.dK / 1000).toFixed(3)}</td>` +
+          `<td class="c">${t.Tcl.toFixed(2)}</td><td class="c">${(t.TAD / 1000).toFixed(3)}</td></tr>`;
+      }).join('');
+    }
+
+    function recompute() {
+      W = Number(wIn.value); gm = Number(gIn.value) * D;
+      $<HTMLOutputElement>('[data-wv]').textContent = W + ' m/s';
+      $<HTMLOutputElement>('[data-gv]').textContent = gIn.value + '°';
+      turns = []; for (let i = 1; i < WPS.length - 1; i++) turns.push(solveTurn(i, W, gm));
+      redraw();
+    }
+    function redraw() { drawRoute(); drawZoom(); drawCharts(); drawTable(); }
+
+    wIn.addEventListener('input', recompute); gIn.addEventListener('input', recompute);
+    tbody.addEventListener('click', (e) => { const tr = (e.target as HTMLElement).closest('tr'); if (tr) { sel = Number(tr.dataset.j); redraw(); } });
+    cRoute.addEventListener('click', (e) => {
+      if (!routeXY) return; const r = cRoute.getBoundingClientRect(); const mx = e.clientX - r.left, my = e.clientY - r.top;
+      let best = -1, bd = 1e9;
+      turns.forEach((t, j) => { const [x, y] = toXY(WPS[t.i][0], WPS[t.i][1]); const px = routeXY!.ox + (x - routeXY!.sx) * routeXY!.s, py = baseH.get(cRoute)! - (routeXY!.oy + (y - routeXY!.sy) * routeXY!.s); const dd = Math.hypot(px - mx, py - my); if (dd < bd) { bd = dd; best = j; } });
+      if (bd < 30) { sel = best + 1; redraw(); }
+    });
+    let rt = 0; window.addEventListener('resize', () => { cancelAnimationFrame(rt); rt = requestAnimationFrame(redraw); });
+    recompute();
+  }
+  document.querySelectorAll<HTMLElement>('[data-km]').forEach(setup);
+</script>

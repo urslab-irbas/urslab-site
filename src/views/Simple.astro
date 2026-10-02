@@ -2,6 +2,7 @@
 // Research, Projects, Services, Contact
 import Layout from '../layouts/Layout.astro';
 import ClothoidDemo from '../components/ClothoidDemo.astro';
+import AreaCard from '../components/AreaCard.astro';
 import { nav, site, areas, projects, services, t, type Lang } from '../data/content';
 interface Props { lang: Lang; slug: 'research' | 'projects' | 'services' | 'contact' }
 const { lang, slug } = Astro.props;
@@ -18,7 +19,7 @@ const bg = lang === 'bg';
   {slug === 'research' && (
     <section class="block"><div class="wrap">
       <div class="grid cols-2">
-        {areas.map((a) => <article class="card"><h3>{a.title[lang]}</h3><p class="muted">{a.text[lang]}</p></article>)}
+        {areas.map((a) => <AreaCard lang={lang} area={a} />)}
       </div>
       <div style="margin-top:48px"><ClothoidDemo lang={lang} /></div>
     </div></section>

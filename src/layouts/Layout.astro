@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
       <label for="navtoggle" class="burger" aria-hidden="true"><span></span></label>
       <nav>
         {nav.map((n) => (
-          <a href={href(lang, n.slug)} aria-current={n.slug === slug ? 'page' : undefined}>{n.label[lang]}</a>
+          <a href={href(lang, n.slug)} aria-current={n.slug === slug || (n.slug && slug.startsWith(n.slug + '/')) ? 'page' : undefined}>{n.label[lang]}</a>
         ))}
         <a class="lang" href={href(other, slug)} hreflang={other} lang={other}>{t.switchTo[lang]}</a>
       </nav>

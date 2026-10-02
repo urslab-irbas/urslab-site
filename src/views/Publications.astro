@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PubList from '../components/PubList.astro';
 import { publications, tagLabels, archives } from '../data/publications';
-import { nav, t, type Lang } from '../data/content';
+import { nav, t, areas, areaPubCount, type Lang } from '../data/content';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const title = nav.find((n) => n.slug === 'publications')!.label[lang];
@@ -14,28 +14,61 @@ const tags = Object.keys(tagLabels);
     <h1>{title}</h1>
   </div></header>
   <section class="block"><div class="wrap">
-    <div class="filters" role="group">
-      <button type="button" data-f="" aria-pressed="true">{t.all[lang]}</button>
-      {tags.map((g) => <button type="button" data-f={g} aria-pressed="false">{tagLabels[g][lang]}</button>)}
+    <div class="frow">
+      <span class="lbl">{t.byArea[lang]}</span>
+      <div class="filters" role="group">
+        <button type="button" data-f="" aria-pressed="true">{t.all[lang]}</button>
+        {areas.map((a) => {
+          const n = areaPubCount(a.tags);
+          return <button type="button" data-area={a.key} data-f={a.tags.length ? a.tags.join(' ') : '__none__'} aria-pressed="false" disabled={n === 0}>{a.title[lang]} <span class="n">{n}</span></button>;
+        })}
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lbl">{t.byTopic[lang]}</span>
+      <div class="filters" role="group">
+        {tags.map((g) => <button type="button" data-f={g} aria-pressed="false">{tagLabels[g][lang]}</button>)}
+      </div>
     </div>
     <PubList lang={lang} items={publications} />
+    <p class="none" hidden>{t.noneFound[lang]}</p>
     <h2 class="arch">{t.archive[lang]}</h2>
     <ul>{archives.map((a) => <li><a href={a.href[lang]}>{a.label[lang]}</a></li>)}</ul>
   </div></section>
 </Layout>
 <style>
-  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .frow { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; margin-bottom: 12px; }
+  .lbl { font: .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 8px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button .n { opacity: .6; margin-left: 4px; }
+  .filters button:disabled { opacity: .4; cursor: default; }
+  .none { color: var(--muted); padding: 20px 0; }
+  .none[hidden] { display: none; }
+  @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } }
   .filters button { font: .82rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
   .filters button[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
   .arch { margin-top: 48px; font-size: 1.3rem; }
 </style>
 <script>
+  // Филтър: етикетите на бутона (data-f, разделени с интервал) — показва статия, ако има поне един от тях.
   const btns = document.querySelectorAll<HTMLButtonElement>('[data-f]');
-  btns.forEach((b) => b.addEventListener('click', () => {
-    const f = b.dataset.f;
+  const none = document.querySelector<HTMLElement>('.none');
+  function apply(b: HTMLButtonElement) {
+    const f = (b.dataset.f ?? '').split(' ').filter(Boolean);
     btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    let shown = 0;
     document.querySelectorAll<HTMLElement>('.pubs li').forEach((li) => {
-      li.hidden = !!f && !(li.dataset.tags ?? '').split(' ').includes(f!);
+      const tags = (li.dataset.tags ?? '').split(' ');
+      li.hidden = f.length > 0 && !f.some((g) => tags.includes(g));
+      if (!li.hidden) shown++;
     });
-  }));
+    if (none) none.hidden = shown > 0;
+    const url = new URL(location.href);
+    if (b.dataset.area) url.searchParams.set('area', b.dataset.area); else url.searchParams.delete('area');
+    history.replaceState(null, '', url);
+  }
+  btns.forEach((b) => b.addEventListener('click', () => apply(b)));
+  const area = new URLSearchParams(location.search).get('area');
+  const start = area ? document.querySelector<HTMLButtonElement>(`[data-area="${CSS.escape(area)}"]`) : null;
+  if (start && !start.disabled) apply(start);
 </script>
