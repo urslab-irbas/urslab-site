@@ -62,6 +62,7 @@ jobs:
           DEST="${DEST:-/public_html}"
           if [ "$PROTO" = "sftp" ]; then PORT="${PORT:-22}"; else PORT="${PORT:-21}"; fi
           # Качва само новото/промененото. Не трие нищо на сървъра (.well-known, архиви и др. остават).
+          set +e
           lftp -u "$USER","$PASS" -p "$PORT" "$PROTO://$DEPLOY_HOST" -e "
             set sftp:auto-confirm yes;
             set ftp:ssl-allow yes;
@@ -72,7 +73,15 @@ jobs:
             set net:reconnect-interval-max 5;
             cd $DEST || exit 1;
             mirror --reverse --verbose --overwrite --parallel=4 dist/ ./;
-            bye"
+            bye" > lftp.log 2>&1
+          rc=$?
+          set -e
+          tail -n 25 lftp.log
+          if [ $rc -ne 0 ]; then
+            # Последните редове като анотации, за да се виждат и без да се отваря логът (паролите GitHub ги скрива)
+            grep -v '^Transferring\|^Making directory' lftp.log | tail -n 6 | while IFS= read -r line; do echo "::error title=lftp::$line"; done
+            exit $rc
+          fi
       - name: Check the live site
         if: env.DEPLOY_HOST != ''
         run: curl -fsS -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/
