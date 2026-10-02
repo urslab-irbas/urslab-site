@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import PubList from '../components/PubList.astro';
 import { publications, tagLabels, archives } from '../data/publications';
 import { nav, t, areas, areaPubCount, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const title = nav.find((n) => n.slug === 'publications')!.label[lang];
@@ -33,7 +34,7 @@ const tags = Object.keys(tagLabels);
     <PubList lang={lang} items={publications} />
     <p class="none" hidden>{t.noneFound[lang]}</p>
     <h2 class="arch">{t.archive[lang]}</h2>
-    <ul>{archives.map((a) => <li><a href={a.href[lang]}>{a.label[lang]}</a></li>)}</ul>
+    <ul>{archives.map((a) => <li><a href={href(lang, a.slug)}>{a.label[lang]} →</a></li>)}</ul>
   </div></section>
 </Layout>
 <style>

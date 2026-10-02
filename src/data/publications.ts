@@ -104,10 +104,7 @@ export const tagLabels: Record<string, { bg: string; en: string }> = {
   software: { bg: 'Софтуер', en: 'Software' },
 };
 
-// Архивни списъци от стария сайт
+// Архив: страници на сайта (slug), заменили PDF файловете от стария сайт
 export const archives = [
-  {
-    label: { bg: 'Публикации 2022 – 2024 г. (PDF)', en: 'Publications 2022 – 2024 (PDF)' },
-    href: { bg: 'https://ir.bas.bg/labs/brs/publ1.pdf', en: 'https://ir.bas.bg/labs/brs/publ1_en.pdf' },
-  },
+  { label: { bg: 'Публикации 2022 – 2024 г.', en: 'Publications 2022 – 2024' }, slug: 'publications/2022-2024' },
 ];
