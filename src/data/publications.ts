@@ -81,8 +81,7 @@ export const publications: Publication[] = [
     venue: 'Engineering Proceedings (MDPI), vol. 150, no. 1, art. 70',
     status: 'published',
     tags: ['navigation', 'ins'],
-    // ПРОВЕРЕТЕ и добавете DOI от страницата на статията в MDPI
-    doi: '',
+    doi: '10.3390/engproc2026150070',
   },
   {
     year: 2026,
@@ -91,7 +90,7 @@ export const publications: Publication[] = [
     venue: 'Engineering Proceedings (MDPI), vol. 150, no. 1, art. 53',
     status: 'published',
     tags: ['security'],
-    doi: '',
+    doi: '10.3390/engproc2026150053',
   },
 ];
 
