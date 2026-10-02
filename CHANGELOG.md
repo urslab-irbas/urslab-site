@@ -1,6 +1,6 @@
 # Промени / Changelog
 
-## v1.1.0 — 03.10.2026
+## v1.1.0 — 03.10.2026 · DOI 10.5281/zenodo.23111566
 **URSlab Website and Information System for Reporting the Publication Activity of a Scientific Department of BAS**
 
 - Информационна система за публикационната дейност: годишни страници „Публикации 2026 / 2025 / 2022 – 2024 / до 2021 г.“
