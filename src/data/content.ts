@@ -59,7 +59,7 @@ export const areas: { key: string; title: L; text: L; tags: string[] }[] = [
   },
   {
     key: 'avionics',
-    tags: ['ins'],
+    tags: ['ins', 'avionics'],
     title: { bg: 'Авионика и платформи', en: 'Avionics & platforms' },
     text: {
       bg: 'Прототипи на БЛА с повишена продължителност на полета и товароносимост; бордови системи за управление (C2) на SoC.',

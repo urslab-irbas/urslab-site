@@ -36,7 +36,7 @@ export const publications: Publication[] = [
     authors: ['A. Madzharov'],
     venue: 'AMiTaNS 2026 — AIP Conference Proceedings',
     status: 'submitted',
-    tags: ['navigation', 'geodesy'],
+    tags: ['navigation', 'geodesy', 'avionics'],
     funding: NSPDS,
     abstract:
       'A coordinated turn between two adjacent orthodromes is described by a clothoid on the WGS 84 ellipsoid. The heading equations reduce to a special case of Kummer\'s confluent hypergeometric equation, giving a closed-form heading law that lets the FMS compute turn duration and roll rate in advance.',
@@ -99,6 +99,7 @@ export const tagLabels: Record<string, { bg: string; en: string }> = {
   geodesy: { bg: 'Геодезия', en: 'Geodesy' },
   gravity: { bg: 'Гравитация', en: 'Gravity' },
   ins: { bg: 'INS/GNSS', en: 'INS/GNSS' },
+  avionics: { bg: 'Авионика', en: 'Avionics' },
   security: { bg: 'Сигурност', en: 'Security' },
   software: { bg: 'Софтуер', en: 'Software' },
 };
