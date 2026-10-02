@@ -70,7 +70,7 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
   },
   {
     key: 'comm',
-    tags: ['wsn'],
+    tags: ['wsn', 'radar'],
     title: { bg: 'Комуникации и радари', en: 'Communications & radar' },
     text: {
       bg: 'Комуникационни и радарни технологии за роботизирани системи в интерес на сигурността и отбраната.',

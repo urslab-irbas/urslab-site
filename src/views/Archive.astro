@@ -1,15 +1,21 @@
 ---
-// Публикации 2022 – 2024 г.: списък с филтри и обобщение за отчет (заменя стария PDF)
+// Годишна страница с публикации: списък с филтри и обобщение за отчет (данни: src/data/archivePages.ts)
 import Layout from '../layouts/Layout.astro';
-import { archive, archiveCats, archiveTagLabels } from '../data/archive2022';
+import { archiveCats, archiveTagLabels } from '../data/archive2022';
+import { archivePages } from '../data/archivePages';
 import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; page: string }
+const { lang, page } = Astro.props;
+const P = archivePages.find((x) => x.key === page)!;
+const archive = P.items;
 const bg = lang === 'bg';
 const T = (b: string, e: string) => (bg ? b : e);
-const title = T('Публикации 2022 – 2024 г.', 'Publications 2022 – 2024');
+const title = P.title[lang];
+const hasShare = archive.some((p) => p.share !== undefined);
+const isIx = (p: { cat: string; ix?: boolean }) => !!p.ix || ['q1', 'q2', 'q3', 'q4', 'sjr', 'idx'].includes(p.cat);
+const usedCats = archiveCats.filter((c) => archive.some((p) => p.cat === c.key));
 
 const short = (n: string) => { const w = n.split(' '); return `${w[0][0]}. ${w[w.length - 1]}`; };
 const authors = [
@@ -31,8 +37,8 @@ const L = {
   doi: T('с DOI', 'with DOI'),
 };
 ---
-<Layout lang={lang} slug="publications/2022-2024" title={title}
-  description={T('Публикации на лаборатория „Безпилотни роботизирани системи“ за 2022 – 2024 г. с филтри и обобщение по квартили и SJR.', 'Publications of the Unmanned Robotic Systems Laboratory for 2022 – 2024, with filters and a summary by quartile and SJR.')}>
+<Layout lang={lang} slug={P.slug} title={title}
+  description={T(`${title} — лаборатория „Безпилотни роботизирани системи“: филтри и обобщение по квартили и SJR.`, `${title} — Unmanned Robotic Systems Laboratory: filters and a summary by quartile and SJR.`)}>
   <header class="page-head"><div class="wrap">
     <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>
     <h1>{title}</h1>
@@ -58,12 +64,12 @@ const L = {
       <span class="lbl">{T('Индексиране', 'Indexing')}</span>
       <div class="filters" data-g="cat">
         <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
-        <button type="button" data-v="q1 q2 q3 q4 sjr idx" aria-pressed="false">WoS/Scopus</button>
+        <button type="button" data-v="__ix__" aria-pressed="false">WoS/Scopus</button>
         <button type="button" data-v="q1 q2 q3 q4" aria-pressed="false">Q1–Q4</button>
-        {archiveCats.map((c) => <button type="button" data-v={c.key} aria-pressed="false">{c.label[lang]}</button>)}
+        {usedCats.map((c) => <button type="button" data-v={c.key} aria-pressed="false">{c.label[lang]}</button>)}
       </div>
     </div>
-    <div class="frow">
+    <div class="frow" hidden={years.length < 2}>
       <span class="lbl">{T('Година', 'Year')}</span>
       <div class="filters" data-g="year">
         <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
@@ -94,6 +100,7 @@ const L = {
         <div><b data-s="sjr"></b><span>{L.sjr}</span></div>
         <div><b data-s="jif"></b><span>{L.jif}</span></div>
         <div><b data-s="doi"></b><span>{L.doi}</span></div>
+        {hasShare && <div><b data-s="share"></b><span>{T('Σ дял ИР', 'Σ IR share')}</span></div>}
       </div>
       <div class="breakdown">
         <div><h3>{T('По вид / квартил', 'By type / quartile')}</h3><table data-t="cat"></table></div>
@@ -108,7 +115,7 @@ const L = {
         <ol class="alist">
           {g.items.map((p) => (
             <li data-year={p.year} data-cat={p.cat} data-tags={p.tags.join(' ')} data-team={p.team.join(' ')}
-                data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? ''}
+                data-ix={isIx(p) ? '1' : ''} data-share={p.share ?? ''} data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? ''}
                 data-authors={p.authors} data-title={p.title} data-venue={p.venue}>
               <span class="yr">{p.year}</span>
               <div>
@@ -120,6 +127,9 @@ const L = {
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
                   {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
+                  {p.ix && <span class="m">WoS/Scopus</span>}
+                  {p.share !== undefined && <span class="m">{T('дял ИР', 'IR share')} {p.share}%</span>}
+                  {p.note && <span class="m">({p.note})</span>}
                   {p.tags.map((x) => <span class="tag">{archiveTagLabels[x]?.[lang] ?? x}</span>)}
                 </p>
               </div>
@@ -129,12 +139,14 @@ const L = {
       </section>
     ))}
     <p class="none" hidden>{t.noneFound[lang]}</p>
-    <script type="application/json" data-labels set:html={JSON.stringify({ cats: catLabel, team: authorLabel, csvName: T('publikacii-2022-2024', 'publications-2022-2024') })} />
+    {P.source && <p class="src">{P.source[lang]}</p>}
+    <script type="application/json" data-labels set:html={JSON.stringify({ cats: catLabel, team: authorLabel, csvName: T(`publikacii-${P.key}`, `publications-${P.key}`) })} />
   </div></section>
 </Layout>
 
 <style>
   .eyebrow a { color: inherit; }
+  .frow[hidden] { display: none; }
   .frow { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
   .lbl { font: .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 8px; }
   .filters { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -149,7 +161,7 @@ const L = {
   .acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn-s { font: .8rem var(--mono); padding: 7px 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent-ink); cursor: pointer; }
   .btn-s:hover { background: var(--accent); color: #fff; }
-  .tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 18px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px; }
   .tiles div { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
   .tiles b { display: block; font: 600 1.5rem var(--mono); font-variant-numeric: tabular-nums; }
   .tiles span { font-size: .78rem; color: var(--muted); }
@@ -181,7 +193,8 @@ const L = {
   .m { font: .72rem var(--mono); color: var(--muted); }
   .none { color: var(--muted); padding: 20px 0; }
   .none[hidden] { display: none; }
-  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(3, 1fr); } .breakdown { grid-template-columns: 1fr; } }
+  .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }
+  @media (max-width: 900px) { .breakdown { grid-template-columns: 1fr; } }
   @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } .alist li { grid-template-columns: 1fr; gap: 4px; } }
   @media print {
     :global(header.top), :global(footer), .frow, .acts, :global(.page-head p) { display: none !important; }
@@ -200,7 +213,8 @@ const L = {
   function match(li: HTMLLIElement) {
     const d = li.dataset, tags = (d.tags ?? '').split(' '), team = (d.team ?? '').split(' ');
     const any = (v: string, arr: string[]) => !v || v.split(' ').some((x) => arr.includes(x));
-    return any(sel.area, tags) && any(sel.tag, tags) && any(sel.cat, [d.cat!]) && any(sel.year, [d.year!]) && any(sel.team, team);
+    const catOk = sel.cat === '__ix__' ? d.ix === '1' : any(sel.cat, [d.cat!]);
+    return any(sel.area, tags) && any(sel.tag, tags) && catOk && any(sel.year, [d.year!]) && any(sel.team, team);
   }
   function table(name: string, rows: [string, number][]) {
     root.querySelector(`[data-t="${name}"]`)!.innerHTML = rows.map(([k, n]) => `<tr class="${n ? '' : 'z'}"><td>${k}</td><td>${n}</td></tr>`).join('');
@@ -217,11 +231,12 @@ const L = {
     const sum = (k: 'sjr' | 'jif') => shown.reduce((s, li) => s + (Number(li.dataset[k]) || 0), 0);
     const set = (k: string, v: string | number) => (root.querySelector(`[data-s="${k}"]`)!.textContent = String(v));
     set('total', shown.length);
-    set('indexed', c((d) => ['q1', 'q2', 'q3', 'q4', 'sjr', 'idx'].includes(d.cat!)));
+    set('indexed', c((d) => d.ix === '1'));
     set('withQ', c((d) => /^q[1-4]$/.test(d.cat!)));
     set('sjr', fmt(sum('sjr'))); set('jif', fmt(sum('jif')));
     set('doi', c((d) => !!d.doi));
-    table('cat', Object.entries(labels.cats as Record<string, string>).map(([k, l]) => [l, c((d) => d.cat === k)]));
+    if (root.querySelector('[data-s="share"]')) set('share', fmt(shown.reduce((s, li) => s + (Number(li.dataset.share) || 0), 0) / 100));
+    table('cat', Object.entries(labels.cats as Record<string, string>).filter(([k]) => items.some((li) => li.dataset.cat === k)).map(([k, l]) => [l, c((d) => d.cat === k)]));
     const years = [...new Set(items.map((li) => li.dataset.year!))].sort().reverse();
     table('year', years.map((y) => [y, c((d) => d.year === y)]));
     table('team', Object.entries(labels.team as Record<string, string>).map(([k, l]) => [l, c((d) => (d.team ?? '').split(' ').includes(k))]));
@@ -242,10 +257,10 @@ const L = {
   root.querySelector('[data-print]')!.addEventListener('click', () => window.print());
   root.querySelector('[data-csv]')!.addEventListener('click', () => {
     const q = (s: string) => `"${s.replace(/"/g, '""')}"`;
-    const head = ['Year', 'Category', 'Authors', 'Title', 'Venue', 'DOI', 'ISBN', 'SJR', 'IF (JCR)'];
+    const head = ['Year', 'Category', 'Authors', 'Title', 'Venue', 'DOI', 'ISBN', 'SJR', 'IF (JCR)', 'WoS/Scopus', 'IR share %'];
     const rows = items.filter((li) => !li.hidden).map((li) => {
       const d = li.dataset;
-      return [d.year!, labels.cats[d.cat!], d.authors!, d.title!, d.venue!, d.doi!, d.isbn!, d.sjr!, d.jif!].map(q).join(',');
+      return [d.year!, labels.cats[d.cat!], d.authors!, d.title!, d.venue!, d.doi!, d.isbn!, d.sjr!, d.jif!, d.ix ? 'yes' : '', d.share!].map(q).join(',');
     });
     const blob = new Blob(['﻿' + [head.map(q).join(','), ...rows].join('\r\n')], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = labels.csvName + '.csv'; a.click();
