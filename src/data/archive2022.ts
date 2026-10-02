@@ -1,4 +1,5 @@
-// Публикации 2022 – 2024 г. (заменя стария PDF https://ir.bas.bg/labs/brs/publ1.pdf).
+// Публикации 2022 – 2024 г. (от стария PDF https://ir.bas.bg/labs/brs/publ1.pdf).
+// Всяка публикация е на страницата за годината си: 2025 → archive2025.ts, преди 2022 → archiveEarlier.ts.
 // Тук са и общите типове, категории и етикети за всички годишни страници (archive2025.ts, archive2026.ts…).
 // Пренесени са от PDF-а; при съмнение — сверете с оригиналната публикация.
 //
@@ -62,7 +63,6 @@ export const archiveTagLabels: Record<string, { bg: string; en: string }> = {
 };
 
 export const archive: ArchivePub[] = [
-  // ---------- Монографии ----------
   {
     year: 2023, cat: 'mono', team: ['aleksandrov'], tags: ['wsn'],
     authors: 'Aleksandrov, A.',
@@ -80,30 +80,11 @@ export const archive: ArchivePub[] = [
     isbn: '978-619-91492-8-7',
   },
   {
-    year: 2000, cat: 'mono', team: ['madzharov'], tags: ['navigation'],
-    authors: 'Маджаров, А.',
-    title: 'Жироскопи и инерциални навигационни системи',
-    tr: 'Gyroscopes and Inertial Navigation Systems',
-    venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“, 422 с.',
-    isbn: '954-713-046-3',
-  },
-  // ---------- Учебници ----------
-  {
-    year: 2013, cat: 'book', team: ['madzharov'], tags: ['navigation'],
-    authors: 'Маджаров, А.',
-    title: 'Структура и приложение на спътниковите навигационни системи',
-    tr: 'Structure and Application of Satellite Navigation Systems',
-    venue: 'В. Търново: НВУ „Васил Левски“, 177 с.',
-    isbn: '978-954-753-168-0',
-  },
-  // ---------- Q1 ----------
-  {
     year: 2023, cat: 'q1', sjr: 0.8, jif: 3.847, team: ['yovchev'], tags: ['robotics'],
     authors: 'Chavdarov, I., Yovchev, K., Miteva, L., Stefanov, A., Nedanovski, D.',
     title: 'A strategy for controlling motions related to sensory information in a walking robot Big Foot',
     venue: 'Sensors 23(3), MDPI', doi: '10.3390/s23031506',
   },
-  // ---------- Q2 ----------
   {
     year: 2024, cat: 'q2', sjr: 0.703, jif: 2.4, team: ['chehlarova'], tags: ['accessibility', 'education'],
     authors: 'Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A.',
@@ -127,20 +108,6 @@ export const archive: ArchivePub[] = [
     authors: 'Chehlarova, N., Gachev, G.',
     title: 'Figures with an axis of symmetry with Photon Robot',
     venue: 'Symmetry: Culture and Science 34(3), Symmetrion, pp. 333–346', doi: '10.26830/symmetry_2023_3_333',
-  },
-  // ---------- Q3 ----------
-  {
-    year: 2025, cat: 'q3', sjr: 0.205, team: ['hristozov'], tags: ['sora', 'uas'],
-    authors: 'del Estad Herrero, A., Apter, N., Hristozov, S.',
-    title: 'A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models',
-    venue: 'Engineering Proceedings 90(1) — 14th EASN International Conference', doi: '10.3390/engproc2025090047',
-  },
-  // ---------- Q4 ----------
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, team: ['chehlarova'], tags: ['accessibility', 'education'],
-    authors: 'Dimitrova, M., Chehlarova, N., Bogdanova, G., Krastev, A., Sabev, N., Noev, N.',
-    title: 'Math Lesson on Counting 3D Printed Geometric Shapes in an Inclusive Class',
-    venue: 'ICL 2024, Lecture Notes in Networks and Systems 1281, Springer, pp. 335–344', doi: '10.1007/978-3-031-83520-9_32',
   },
   {
     year: 2024, cat: 'q4', sjr: 0.253, team: ['chehlarova', 'madzharov'], tags: ['hri', 'education', 'robotics'],
@@ -167,22 +134,10 @@ export const archive: ArchivePub[] = [
     venue: 'Lecture Notes in Networks and Systems 418, Springer, pp. 518–526', doi: '10.1007/978-3-030-96308-8',
   },
   {
-    year: 2025, cat: 'q4', sjr: 0.166, team: ['aleksandrov'], tags: ['ai', 'security'],
-    authors: 'Alexandrov, A.',
-    title: 'Implementation of Fuzzy Logic Neural Networks in QBER Optimization Process',
-    venue: 'Lecture Notes in Networks and Systems 1529, Springer, pp. 279–287', doi: '10.1007/978-3-031-97992-7',
-  },
-  {
     year: 2022, cat: 'q4', sjr: 0.232, team: ['yovchev'], tags: ['robotics'],
     authors: 'Miteva, L., Yovchev, K., Chavdarov, I.',
     title: 'Planning Orientation Change of the End-effector of State Space Constrained Redundant Robotic Manipulators',
     venue: 'CompSysTech 2022, ACM International Conference Proceeding Series, pp. 51–56', doi: '10.1145/3546118.3546136',
-  },
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, team: ['aleksandrov'], tags: ['ai'],
-    authors: 'Alexandrov, A.',
-    title: 'Multicriteria Optimization Based on the Fuzzy Sugeno Logic Method',
-    venue: 'Lecture Notes in Networks and Systems 1528, Springer, pp. 707–714', doi: '10.1007/978-3-031-97985-9',
   },
   {
     year: 2024, cat: 'q4', sjr: 0.167, team: ['hristozov'], tags: ['sora', 'uas'],
@@ -221,31 +176,17 @@ export const archive: ArchivePub[] = [
     venue: 'BISEC 2023, CEUR-WS Vol-3676, pp. 44–49', doi: '10.5281/zenodo.11396636',
   },
   {
-    year: 2025, cat: 'q4', sjr: 0.166, team: ['aleksandrov'], tags: ['security', 'wsn', 'robotics'],
-    authors: 'Alexandrov, A.',
-    title: 'Development of Blockchain-Based Framework for Securing Communication in Wireless Robotic Platforms',
-    venue: 'CEUR-WS Vol-3971, pp. 42–52',
-  },
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, team: ['aleksandrov'], tags: ['ai', 'security'],
-    authors: 'Alexandrov, A.',
-    title: 'LSTM-RNN method for Anomaly-Based Intrusion Detection Systems',
-    venue: 'CEUR-WS Vol-3971, pp. 17–33',
-  },
-  {
     year: 2024, cat: 'q4', sjr: 0.153, team: ['yovchev'], tags: ['robotics'],
     authors: 'Yovchev, K., Miteva, L., Chikurtev, D.',
     title: 'Algorithm for Assigning a Robot to Capture an Object From a Production Pipeline',
     venue: 'AIP Conference Proceedings 2980(1), 020006', doi: '10.1063/5.0184210',
   },
-  // ---------- SJR без квартил ----------
   {
     year: 2024, cat: 'sjr', sjr: 0.25, team: ['yovchev'], tags: ['ai', 'robotics'],
     authors: 'Yovchev, K., Miteva, L.',
     title: 'Approaches for Object Detection and Depth Estimation in Digital Images',
     venue: 'CompSysTech 2024, ACM International Conference Proceeding Series', doi: '10.1145/3674912.3674932',
   },
-  // ---------- WoS/Scopus/IEEE Xplore без JCR/SJR ----------
   {
     year: 2024, cat: 'idx', team: ['chehlarova'], tags: ['accessibility', 'education'],
     authors: 'Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N.',
@@ -288,18 +229,11 @@ export const archive: ArchivePub[] = [
     title: 'Software and Hardware Infrastructure for Research and Development of Intelligent Control for Robotic Manipulators',
     venue: '2022 XXXI International Scientific Conference Electronics (ET), IEEE', doi: '10.1109/ET55967.2022.9920270',
   },
-  // ---------- Други бази данни ----------
   {
     year: 2024, cat: 'other', team: ['aleksandrov'], tags: ['wsn'],
     authors: 'Alexandrov, A.',
     title: 'Design and Architecture of wireless ECG monitoring system',
     venue: 'Int. Conf. “Robotics & Mechatronics 2024”, Sofia', doi: '10.5281/zenodo.14074924',
-  },
-  {
-    year: 2025, cat: 'other', team: ['aleksandrov'], tags: ['robotics'],
-    authors: 'Alexandrov, A.',
-    title: 'Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications',
-    venue: 'Complex Control Systems 9, IR-BAS, pp. 1–6', doi: '10.5281/zenodo.15090498',
   },
   {
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education', 'accessibility'],

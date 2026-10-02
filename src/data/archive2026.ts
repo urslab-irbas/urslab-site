@@ -34,12 +34,6 @@ export const archive2026: ArchivePub[] = [
     venue: 'BISEC 2025, pp. 76–85 (Scopus)', doi: '10.46793/BISEC25.076A',
   },
   {
-    year: 2026, cat: 'other', ix: true, sjr: 0.76, jif: 3.5, share: 20, team: [], tags: ['radar'],
-    authors: 'Georgiev, N., Nachev, A., Todorov, O., Trencheva, T., Chalakova, G.',
-    title: 'Bistatic Radar with Quantum-Generated Noise Phase Manipulation and Non-Directional Antennas',
-    venue: 'Sensors 26(5), MDPI', doi: '10.3390/s26051717',
-  },
-  {
     year: 2026, cat: 'nat', share: 33.33, team: ['chehlarova'], tags: ['security', 'education'],
     authors: 'Yoshinov, R., Chehlarova, N., Dishkova, G.',
     title: 'Assessment of teachers’ preparedness in cybersecurity',

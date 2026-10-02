@@ -1,7 +1,8 @@
-// Годишни страници с публикации (раздел „Архив“ в „Публикации“). Нова година: data-файл + ред тук + 2 файла в src/pages.
+// Годишни страници с публикации; всяка публикация е на страницата за годината си (раздел „Архив“ в „Публикации“). Нова година: data-файл + ред тук + 2 файла в src/pages.
 import { archive as archive2022, type ArchivePub } from './archive2022';
 import { archive2025 } from './archive2025';
 import { archive2026 } from './archive2026';
+import { archiveEarlier } from './archiveEarlier';
 
 type L = { bg: string; en: string };
 export interface ArchivePage { key: string; slug: string; title: L; source?: L; items: ArchivePub[] }
@@ -15,4 +16,5 @@ export const archivePages: ArchivePage[] = [
   { key: '2026', slug: 'publications/2026', title: { bg: 'Публикации 2026 г.', en: 'Publications 2026' }, source: BAS, items: archive2026 },
   { key: '2025', slug: 'publications/2025', title: { bg: 'Публикации 2025 г.', en: 'Publications 2025' }, source: BAS, items: archive2025 },
   { key: '2022-2024', slug: 'publications/2022-2024', title: { bg: 'Публикации 2022 – 2024 г.', en: 'Publications 2022 – 2024' }, items: archive2022 },
+  { key: 'earlier', slug: 'publications/earlier', title: { bg: 'Публикации до 2021 г.', en: 'Publications up to 2021' }, items: archiveEarlier },
 ];
