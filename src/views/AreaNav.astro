@@ -1,0 +1,90 @@
+---
+// Направление „Автономна навигация“: уникален аналитичен модел (уравнение на Кумер) + приноси + публикации
+import Layout from '../layouts/Layout.astro';
+import KummerModel from '../components/KummerModel.astro';
+import PubList from '../components/PubList.astro';
+import { areas, t, type Lang } from '../data/content';
+import { publications } from '../data/publications';
+import { href } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const bg = lang === 'bg';
+const area = areas.find((a) => a.key === 'nav')!;
+const pubs = publications.filter((p) => p.tags.some((g) => area.tags.includes(g)));
+const T = (b: string, e: string) => (bg ? b : e);
+
+const sci = [
+  T('Координираният завой между две съседни геодезични ортодромии е формулиран като клотоида върху елипсоида WGS 84 — с отчитане на главните радиуси на кривина G и Q, ъгловата скорост на Земята Ω и линеен закон на тангенса на крена tan γ = k·t.',
+    'The coordinated turn between two adjacent geodesic orthodromes is formulated as a clothoid on the WGS 84 ellipsoid, taking into account the principal radii of curvature G and Q, the Earth rotation rate Ω, and a linear roll-tangent law tan γ = k·t.'),
+  T('Доказано е, че уравнението на пътния ъгъл се свежда до частен случай на конфлуентното хипергеометрично уравнение на Кумер (b = ½). Получен е закон на пътния ъгъл ψ(t) в затворен вид чрез функцията на Кумер M(a, ½, z) — аналитично решение там, където досега се използват числено интегриране или приближения със сфера и постоянен радиус.',
+    'The heading equation is shown to reduce to a special case of Kummer\'s confluent hypergeometric equation (b = ½). A closed-form heading law ψ(t) is obtained through the Kummer function M(a, ½, z) — an analytical solution where numerical integration or spherical, constant-radius approximations have been used so far.'),
+  T('От граничните условия в точката на откъсване b₁ и точката на прихващане b₂ е изведено трансцендентно уравнение (31) за продължителността на завоя T; неговият корен определя еднозначно скоростта на изменение на крена k (32) и цялата траектория (33).',
+    'Boundary conditions at the detachment point b₁ and the interception point b₂ yield a transcendental equation (31) for the turn duration T; its root uniquely determines the roll-rate parameter k (32) and the whole trajectory (33).'),
+];
+const app = [
+  T('Алгоритъм за системата за управление на полета (FMS): T, k и разстоянието до точката на откъсване се изчисляват предварително, преди достигане на WP — без числено интегриране по време на полета.',
+    'An algorithm for the Flight Management System (FMS): T, k and the distance to the detachment point are computed in advance, before the WP is reached — with no numerical integration in flight.'),
+  T('Плавно влизане в завоя: страничното ускорение нараства от нула, без скока, присъщ на класическия завой с постоянен радиус. Това намалява динамичните натоварвания, улеснява следенето от автопилота и стабилизира бордовите сензори.',
+    'Smooth turn entry: lateral acceleration builds up from zero, without the step inherent in the classical constant-radius turn. This reduces dynamic loads, eases autopilot tracking and stabilises on-board sensors.'),
+  T('Приложимо при автономни безпилотни летателни системи и при пилотирани въздухоплавателни средства; демонстрирано по маршрут от 7 точки над Северна България (W = 150 m/s, γmax = 30°).',
+    'Applicable to autonomous unmanned aircraft systems and to piloted aircraft; demonstrated on a 7-waypoint route over Northern Bulgaria (W = 150 m/s, γmax = 30°).'),
+];
+---
+<Layout lang={lang} slug="research/navigation" title={area.title[lang]}
+  description={T('Аналитичен модел на координиран завой между геодезични ортодромии върху WGS 84 чрез уравнението на Кумер.', 'Analytical model of a coordinated turn between geodesic orthodromes on WGS 84 via Kummer\'s equation.')}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow"><a href={href(lang, 'research')}>{T('Изследвания', 'Research')}</a> / URSlab</p>
+    <h1>{area.title[lang]}</h1>
+    <p>{area.text[lang]}</p>
+  </div></header>
+
+  <section class="block"><div class="wrap">
+    <div class="uniq">
+      <p class="eyebrow">{T('Уникален модел', 'A unique model')}</p>
+      <h2>{T('Завой между две ортодромии в затворен вид — чрез уравнението на Кумер', 'A turn between two orthodromes in closed form — via Kummer\'s equation')}</h2>
+      <p>{T(
+        'Класическите алгоритми за завой приемат Земята за плоска или сферична и водят самолета по дъга с постоянен радиус. Тук завоят е клотоида върху реалния елипсоид WGS 84, а законът на пътния ъгъл е изразен аналитично чрез функцията на Кумер. Доколкото ни е известно, това е първото решение в затворен вид на координиран завой между геодезични ортодромии, което отчита едновременно формата и въртенето на Земята.',
+        'Classical turn algorithms treat the Earth as flat or spherical and fly the aircraft along a constant-radius arc. Here the turn is a clothoid on the actual WGS 84 ellipsoid, and the heading law is expressed analytically through the Kummer function. To our knowledge, this is the first closed-form solution of a coordinated turn between geodesic orthodromes that accounts for both the shape and the rotation of the Earth.')}</p>
+      <p class="formula">ψ<sub>T</sub>(t) = ψ<sub>part</sub> + (α<sub>1</sub> − ψ<sub>part</sub>) · M(a, ½, −q t²/2),&nbsp;&nbsp; 0 ≤ t ≤ T*</p>
+    </div>
+
+    <div class="contrib">
+      <div class="card">
+        <h3>{T('Научни приноси', 'Scientific contributions')}</h3>
+        <ol>{sci.map((s) => <li>{s}</li>)}</ol>
+      </div>
+      <div class="card">
+        <h3>{T('Научно-приложни приноси', 'Scientific-applied contributions')}</h3>
+        <ol>{app.map((s) => <li>{s}</li>)}</ol>
+      </div>
+    </div>
+    <p class="src muted">{T('Източник', 'Source')}: A. Madzharov, „Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes in a Coordinated Turn“, AMiTaNS 2026 — AIP Conference Proceedings ({t.status.submitted[lang]}).</p>
+  </div></section>
+
+  <section class="block alt"><div class="wrap">
+    <h2>{T('Изчислителен модел', 'Computational model')}</h2>
+    <p class="muted lead">{T(
+      'Всички стойности по-долу се изчисляват на живо в браузъра по уравненията от статията. Променете скоростта или максималния крен — продължителността на завоя, скоростта на крена и точката на откъсване се преизчисляват за всеки WP. Сравнението е с класическия завой с постоянен радиус.',
+      'All values below are computed live in the browser from the equations of the paper. Change the speed or maximum bank — turn duration, roll rate and detachment point are recomputed for every WP. The comparison is with the classical constant-radius turn.')}</p>
+    <KummerModel lang={lang} />
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2>{T('Публикации по направлението', 'Publications in this area')}</h2>
+    <PubList lang={lang} items={pubs} />
+    <p style="margin-top:1rem"><a href={`${href(lang, 'publications')}?area=nav`}>{t.allPubs[lang]} →</a></p>
+  </div></section>
+</Layout>
+<style>
+  .eyebrow a { color: inherit; }
+  .uniq { border-left: 4px solid var(--accent); padding: 4px 0 4px 22px; margin-bottom: 32px; max-width: 900px; }
+  .uniq h2 { margin-top: .2rem; }
+  .formula { font: 500 1rem var(--mono); background: var(--ink); color: #f0a656; padding: 12px 16px; border-radius: 10px; display: inline-block; margin-top: .5rem; overflow-x: auto; max-width: 100%; }
+  .contrib { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .contrib ol { padding-left: 1.2rem; margin: .6rem 0 0; }
+  .contrib li { margin-bottom: .7rem; line-height: 1.55; }
+  .src { font-size: .85rem; margin-top: 18px; }
+  .alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .lead { max-width: 900px; margin-bottom: 20px; }
+  @media (max-width: 820px) { .contrib { grid-template-columns: 1fr; } }
+</style>

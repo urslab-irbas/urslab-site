@@ -38,10 +38,12 @@ export const site = {
 };
 
 // tags: кои етикети от publications.ts спадат към направлението (за връзката „Направление → Публикации“).
-export const areas: { key: string; title: L; text: L; tags: string[] }[] = [
+// page: (по желание) собствена страница на направлението, напр. 'research/navigation'.
+export const areas: { key: string; title: L; text: L; tags: string[]; page?: string }[] = [
   {
     key: 'nav',
     tags: ['navigation'],
+    page: 'research/navigation',
     title: { bg: 'Автономна навигация', en: 'Autonomous navigation' },
     text: {
       bg: 'Алгоритми за INS/GNSS, полет по ортодромии и координирани завои върху елипсоида WGS 84, планиране на маршрути в реално време.',
@@ -147,6 +149,7 @@ export const t = {
   pubsCount: { bg: 'публикации', en: 'publications' },
   pubsCount1: { bg: 'публикация', en: 'publication' },
   noPubsYet: { bg: 'Публикации предстоят', en: 'Publications forthcoming' },
+  areaModel: { bg: 'Уникален модел и приноси', en: 'Unique model & contributions' },
   noneFound: { bg: 'Няма публикации по този филтър.', en: 'No publications match this filter.' },
   status: {
     published: { bg: 'публикувана', en: 'published' },
