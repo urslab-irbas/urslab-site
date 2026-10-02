@@ -11,6 +11,12 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
   <header class="page-head"><div class="wrap">
     <p class="eyebrow">URSlab</p>
     <h1>{t.team[lang]}</h1>
+    <div class="help-new">
+      <a class="hbtn" href="/docs/URSlab-rakovodstvo.pdf" target="_blank" rel="noopener">? {lang === 'bg' ? 'Помощ за нов член на екипа' : 'Help for new team members'}</a>
+      <span>{lang === 'bg'
+        ? <>Ръководство: сайтът, нова публикация, обновяване (PDF) · <a href="/docs/URSlab-rakovodstvo.pptx" download>изтегли PowerPoint</a></>
+        : <>Guide in Bulgarian: the site, new publication, updating (PDF) · <a href="/docs/URSlab-rakovodstvo.pptx" download>download PowerPoint</a></>}</span>
+    </div>
   </div></header>
   <section class="block"><div class="wrap grid cols-3">
     {team.map((m) => (
@@ -48,6 +54,11 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
   </div></section>
 </Layout>
 <style>
+  .help-new { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 18px; }
+  .hbtn { font: 600 .9rem var(--font); padding: 9px 16px; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; }
+  .hbtn:hover { filter: brightness(1.08); }
+  .help-new span { font-size: .85rem; color: #a9b8c6; }
+  .help-new span a { color: #f0a656; }
   .person { display: flex; flex-direction: column; gap: 14px; }
   .top { display: flex; gap: 14px; align-items: center; }
   .ph { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
