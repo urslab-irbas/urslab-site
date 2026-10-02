@@ -21,6 +21,17 @@ const NSPDS = 'NSP DS, MES grant D01-74/19.05.2022';
 export const publications: Publication[] = [
   {
     year: 2026,
+    title: 'URSlab Website and Information System for Reporting the Publication Activity of a Scientific Department of BAS: Source Code (v1.1.0)',
+    authors: ['A. Madzharov'],
+    venue: 'Zenodo — Software (files with restricted access)',
+    status: 'published',
+    doi: '10.5281/zenodo.23111566',
+    tags: ['software', 'navigation'],
+    abstract:
+      'Version 1.1.0 extends the URSlab website into an information system for recording, validating and reporting the publication activity of a scientific department of BAS: yearly publication pages categorised as in the BAS reporting system, combinable filters with a live reporting summary and CSV export, per-member summary reports, and entry of new publications by team members with APA validation, GitHub-based identity and automatic re-validation.',
+  },
+  {
+    year: 2026,
     title: 'URSlab Website and Interactive Coordinated-Turn Model: Source Code (v1.0.0)',
     authors: ['A. Madzharov'],
     venue: 'Zenodo — Software (files with restricted access)',
