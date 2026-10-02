@@ -1,4 +1,5 @@
 // Публикации 2025 г. — по отчета на БАН „XX а: Всички публикации – публикувани“ (звено ИР), изготвен на 02.10.2026.
+// Публикациите от 2025 г., които вече са в „Публикации 2022 – 2024 г.“ (стария PDF), не се повтарят тук.
 // Форматът е описан в archive2022.ts. share — „Процент автори от звеното“ от отчета.
 import type { ArchivePub } from './archive2022';
 
@@ -16,46 +17,10 @@ export const archive2025: ArchivePub[] = [
     venue: 'Engineering Proceedings 100, 62 (TechSys 2025), MDPI', doi: '10.3390/engproc2025100062',
   },
   {
-    year: 2025, cat: 'q3', sjr: 0.205, share: 33.33, team: ['hristozov'], tags: ['sora', 'uas'],
-    authors: 'del Estad Herrero, A., Apter, N., Hristozov, S.',
-    title: 'A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models',
-    venue: 'Engineering Proceedings 90(1) — 14th EASN International Conference', doi: '10.3390/engproc2025090047',
-  },
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, share: 100, team: ['aleksandrov'], tags: ['ai', 'security'],
-    authors: 'Alexandrov, A.',
-    title: 'Implementation of Fuzzy Logic Neural Networks in QBER Optimization Process',
-    venue: 'Lecture Notes in Networks and Systems 1529, Springer, pp. 279–287', doi: '10.1007/978-3-031-97992-7_32',
-  },
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, share: 100, team: ['aleksandrov'], tags: ['ai'],
-    authors: 'Alexandrov, A.',
-    title: 'Multicriteria Optimization Based on the Fuzzy Sugeno Logic Method',
-    venue: 'Lecture Notes in Networks and Systems 1528, Springer, pp. 707–714', doi: '10.1007/978-3-031-97985-9_78',
-  },
-  {
-    year: 2025, cat: 'q4', sjr: 0.166, share: 50, team: ['chehlarova'], tags: ['accessibility', 'education', 'additive'],
-    authors: 'Dimitrova, M., Chehlarova, N., Bogdanova, G., Krastev, A., Sabev, N., Noev, N.',
-    title: 'Math Lesson on Counting 3D Printed Geometric Shapes in an Inclusive Class',
-    venue: 'ICL 2024, Lecture Notes in Networks and Systems 1281, Springer, pp. 335–344', doi: '10.1007/978-3-031-83520-9_32',
-  },
-  {
     year: 2025, cat: 'q4', jif: 0.2, share: 33.33, team: ['chehlarova'], tags: ['education'],
     authors: 'Chehlarova, T., Chehlarova, N., Gachev, G.',
     title: 'Educational resources for studying midsegment of triangle and trapezoid',
     venue: 'Mathematics and Informatics 1, Az-buki, pp. 51–62 (Q4, Web of Science)', doi: '10.53656/math2025-1-4-edu',
-  },
-  {
-    year: 2025, cat: 'sjr', sjr: 0.21, share: 100, team: ['aleksandrov'], tags: ['security', 'wsn', 'robotics'],
-    authors: 'Alexandrov, A.',
-    title: 'Development of Blockchain-Based Framework for Securing Communication in Wireless Robotic Platforms',
-    venue: 'CEUR-WS Vol-3971, pp. 42–52', doi: '10.5281/zenodo.17682573',
-  },
-  {
-    year: 2025, cat: 'sjr', sjr: 0.21, share: 100, team: ['aleksandrov'], tags: ['ai', 'security'],
-    authors: 'Alexandrov, A.',
-    title: 'LSTM-RNN method for Anomaly-Based Intrusion Detection Systems',
-    venue: 'CEUR-WS Vol-3971, pp. 17–33',
   },
   {
     year: 2025, cat: 'erih', share: 33.33, team: ['chehlarova'], tags: ['education'],
@@ -147,12 +112,6 @@ export const archive2025: ArchivePub[] = [
     title: 'Кратки видеоматериали във Виртуалния училищен кабинет по математика',
     tr: 'Short video materials in the Virtual School Mathematics Cabinet',
     venue: '10 години Виртуален училищен кабинет по математика, Макрос, ред. Т. Чехларова, Е. Сендова, с. 33–39', isbn: '978-954-561-636-5',
-  },
-  {
-    year: 2025, cat: 'other', share: 100, team: ['aleksandrov'], tags: ['robotics'],
-    authors: 'Alexandrov, A.',
-    title: 'Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications',
-    venue: 'Complex Control Systems 9, IR-BAS, pp. 1–6', doi: '10.5281/zenodo.15090498',
   },
   {
     year: 2025, cat: 'other', share: 100, team: ['chehlarova'], tags: ['education', 'additive'],
