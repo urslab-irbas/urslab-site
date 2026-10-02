@@ -79,15 +79,16 @@ const bg = lang === 'bg';
   .sw { display: inline-block; width: 26px; height: 0; border-top: 3px solid #e0892b; margin-right: 6px; vertical-align: middle; }
   .sw.c { border-top: 2px dashed #5fb3d9; }
   .tw { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font: .8rem var(--mono); }
-  th, td { padding: 7px 8px; text-align: right; border-bottom: 1px solid #1e3348; white-space: nowrap; }
-  th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
-  th { color: #8ea3b6; font-weight: 500; }
-  tbody tr { cursor: pointer; }
-  tbody tr:hover { background: #13243a; }
-  tbody tr.sel { background: #1b2f45; }
-  td.k { color: #f0a656; }
-  td.c { color: #8fcaea; }
+  /* редовете се генерират от скрипта, затова стиловете на таблицата са :global (в рамките на .km) */
+  .km :global(table) { width: 100%; border-collapse: collapse; font: .8rem var(--mono); font-variant-numeric: tabular-nums; }
+  .km :global(th), .km :global(td) { padding: 7px 10px; text-align: right; border-bottom: 1px solid #1e3348; white-space: nowrap; }
+  .km :global(th:first-child), .km :global(td:first-child), .km :global(th:nth-child(2)), .km :global(td:nth-child(2)) { text-align: left; }
+  .km :global(th) { color: #8ea3b6; font-weight: 500; }
+  .km :global(tbody tr) { cursor: pointer; }
+  .km :global(tbody tr:hover) { background: #13243a; }
+  .km :global(tbody tr.sel) { background: #1b2f45; }
+  .km :global(td.k) { color: #f0a656; }
+  .km :global(td.c) { color: #8fcaea; }
   .note { font-size: .8rem; color: #8ea3b6; margin: 12px 0 0; }
   @media (max-width: 820px) { .two { grid-template-columns: 1fr; } }
 </style>
