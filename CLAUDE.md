@@ -17,6 +17,8 @@ Target domain: https://urs.ir.bas.bg
 - Interactive clothoid coordinated-turn demo: `src/components/ClothoidDemo.astro`.
 - Images: `public/images/team/`, `public/images/gallery/` (gallery auto-lists files).
 
+- Training deck for new team members: `public/docs/URSlab-rakovodstvo.pptx` + `.pdf` (button „Помощ за нов член на екипа“ on the Team page). Generator: `scripts/help-deck/build.js` (pptxgenjs; screenshots of the site) — rebuild the deck when site features change.
+
 ## Rules
 - Always update BOTH languages when adding or changing text.
 - Academic titles: BG "доц. д-р инж.", "доц. д.н. инж.", "гл. ас. д-р инж."; EN "Assoc. Prof. Dr. Eng.", "Assoc. Prof. DSc Eng.", "Chief Assist. Prof. Dr. Eng.".
