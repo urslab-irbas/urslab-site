@@ -1,0 +1,23 @@
+---
+import { t, areaPubCount, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
+interface Props { lang: Lang; area: { key: string; title: { bg: string; en: string }; text: { bg: string; en: string }; tags: string[] }; num?: number }
+const { lang, area, num } = Astro.props;
+const n = areaPubCount(area.tags);
+const link = `${href(lang, 'publications')}?area=${area.key}`;
+---
+<article class="card area">
+  {num !== undefined && <span class="num">{String(num).padStart(2, '0')}</span>}
+  <h3>{n > 0 ? <a href={link} class="stretch">{area.title[lang]}</a> : area.title[lang]}</h3>
+  <p class="muted">{area.text[lang]}</p>
+  <p class="cnt">{n > 0 ? <>{n} {n === 1 ? t.pubsCount1[lang] : t.pubsCount[lang]} →</> : <span class="soon">{t.noPubsYet[lang]}</span>}</p>
+</article>
+<style>
+  .area { position: relative; display: flex; flex-direction: column; transition: border-color .15s, transform .15s; }
+  .area:has(a.stretch):hover { border-color: var(--accent); transform: translateY(-2px); }
+  .num { font: 500 .8rem var(--mono); color: var(--accent-ink); display: block; margin-bottom: 10px; }
+  h3 a { color: inherit; text-decoration: none; }
+  a.stretch::after { content: ''; position: absolute; inset: 0; }
+  .cnt { margin-top: auto !important; padding-top: 14px; font: 500 .82rem var(--mono); color: var(--accent-ink); }
+  .soon { color: var(--muted); font-weight: 400; }
+</style>

@@ -37,9 +37,11 @@ export const site = {
   phones: ['+359 2 870 3361', '+359 2 979 3230'],
 };
 
-export const areas: { key: string; title: L; text: L }[] = [
+// tags: кои етикети от publications.ts спадат към направлението (за връзката „Направление → Публикации“).
+export const areas: { key: string; title: L; text: L; tags: string[] }[] = [
   {
     key: 'nav',
+    tags: ['navigation'],
     title: { bg: 'Автономна навигация', en: 'Autonomous navigation' },
     text: {
       bg: 'Алгоритми за INS/GNSS, полет по ортодромии и координирани завои върху елипсоида WGS 84, планиране на маршрути в реално време.',
@@ -48,6 +50,7 @@ export const areas: { key: string; title: L; text: L }[] = [
   },
   {
     key: 'geo',
+    tags: ['geodesy', 'gravity'],
     title: { bg: 'Геодезия и гравитация', en: 'Geodesy & gravity' },
     text: {
       bg: 'Точни аналитични модели на гравитационното поле и на разликата между геоцентрична и геодезическа ширина за бордови изчисления.',
@@ -56,6 +59,7 @@ export const areas: { key: string; title: L; text: L }[] = [
   },
   {
     key: 'avionics',
+    tags: ['ins'],
     title: { bg: 'Авионика и платформи', en: 'Avionics & platforms' },
     text: {
       bg: 'Прототипи на БЛА с повишена продължителност на полета и товароносимост; бордови системи за управление (C2) на SoC.',
@@ -64,6 +68,7 @@ export const areas: { key: string; title: L; text: L }[] = [
   },
   {
     key: 'comm',
+    tags: [],
     title: { bg: 'Комуникации и радари', en: 'Communications & radar' },
     text: {
       bg: 'Комуникационни и радарни технологии за роботизирани системи в интерес на сигурността и отбраната.',
@@ -72,6 +77,7 @@ export const areas: { key: string; title: L; text: L }[] = [
   },
   {
     key: 'sec',
+    tags: ['security'],
     title: { bg: 'Сигурност на данните', en: 'Data security' },
     text: {
       bg: 'Конструктивни модели за проектиране на системи за защита на данни в безпилотни и киберфизични системи.',
@@ -80,6 +86,7 @@ export const areas: { key: string; title: L; text: L }[] = [
   },
   {
     key: 'safety',
+    tags: [],
     title: { bg: 'Безопасност на полетите', en: 'Flight safety & regulation' },
     text: {
       bg: 'Оценка на риска за операции в специфична категория (SORA) и обучение на пилоти на БЛС по Регламент (ЕС) 2019/947.',
@@ -135,6 +142,12 @@ export const t = {
   team: { bg: 'Състав', en: 'Team' },
   gallery: { bg: 'Галерия', en: 'Gallery' },
   all: { bg: 'Всички', en: 'All' },
+  byArea: { bg: 'По направление', en: 'By research area' },
+  byTopic: { bg: 'По тема', en: 'By topic' },
+  pubsCount: { bg: 'публикации', en: 'publications' },
+  pubsCount1: { bg: 'публикация', en: 'publication' },
+  noPubsYet: { bg: 'Публикации предстоят', en: 'Publications forthcoming' },
+  noneFound: { bg: 'Няма публикации по този филтър.', en: 'No publications match this filter.' },
   status: {
     published: { bg: 'публикувана', en: 'published' },
     'in-press': { bg: 'под печат', en: 'in press' },
@@ -150,3 +163,9 @@ export const t = {
   },
   rights: { bg: 'Всички права запазени.', en: 'All rights reserved.' },
 };
+
+// Брой публикации в направление (по етикетите му)
+import { publications as _pubs } from './publications';
+export function areaPubCount(tags: string[]): number {
+  return _pubs.filter((p) => p.tags.some((g) => tags.includes(g))).length;
+}
