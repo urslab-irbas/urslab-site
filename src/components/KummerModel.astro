@@ -14,9 +14,9 @@ const bg = lang === 'bg';
 <div class="km" data-km data-lang={lang}>
   <div class="ctrl">
     <label><span>{bg ? 'Земна скорост' : 'Ground speed'} W</span>
-      <input type="range" min="100" max="250" step="5" value="150" data-w /><output data-wv>150 m/s</output></label>
+      <input type="range" min="80" max="150" step="5" value="150" data-w /><output data-wv>150 m/s</output></label>
     <label><span>{bg ? 'Максимален крен' : 'Maximum bank'} γ<sub>max</sub></span>
-      <input type="range" min="15" max="45" step="1" value="30" data-g /><output data-gv>30°</output></label>
+      <input type="range" min="28" max="45" step="1" value="30" data-g /><output data-gv>30°</output></label>
     <p class="hint">{bg ? 'Изберете завой от картата или от таблицата.' : 'Select a turn on the map or in the table.'}</p>
   </div>
 

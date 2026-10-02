@@ -14,8 +14,10 @@ const pubs = publications.filter((p) => p.tags.some((g) => area.tags.includes(g)
 const T = (b: string, e: string) => (bg ? b : e);
 
 const sci = [
-  T('Координираният завой между две съседни геодезични ортодромии е формулиран като клотоида върху елипсоида WGS 84 — с отчитане на главните радиуси на кривина G и Q, ъгловата скорост на Земята Ω и линеен закон на тангенса на крена tan γ = k·t.',
-    'The coordinated turn between two adjacent geodesic orthodromes is formulated as a clothoid on the WGS 84 ellipsoid, taking into account the principal radii of curvature G and Q, the Earth rotation rate Ω, and a linear roll-tangent law tan γ = k·t.'),
+  T('Условието за координиран завой без хлъзгане (баланс на центробежната сила и теглото по напречната ос) е внесено в диференциалните уравнения на геодезичната линия върху WGS 84 чрез геодезичната кривина k<sub>g</sub> = g·tan γ / W² (14). Така е получена система (15) за полет по клотоида във функция на времето, която отчита едновременно крена, главните радиуси на кривина G и Q, въртенето на Земята Ω и сближаването на меридианите.',
+    'The condition for a coordinated, slip-free turn (centrifugal force balanced by weight along the lateral axis) is introduced into the differential equations of the geodesic line on WGS 84 through the geodesic curvature k<sub>g</sub> = g·tan γ / W² (14). This yields system (15) for flight along a clothoid as a function of time, accounting simultaneously for bank, the principal radii of curvature G and Q, the Earth rotation Ω and the convergence of meridians.'),
+  T('Вертикалният канал е разширен с диференциално уравнение за тангажа (в (15)), което съгласува тангажа с кривината на елипсоида по текущия пътен ъгъл. Така завоят се изпълнява на постоянна височина над WGS 84, без „снижаване“ под хоризонта при дълги траектории.',
+    'The vertical channel is extended with a differential equation for pitch (in (15)) that matches pitch to the ellipsoid curvature along the current track angle. The turn is thus flown at constant height above WGS 84, with no "dip" below the horizon on long trajectories.'),
   T('Доказано е, че уравнението на пътния ъгъл се свежда до частен случай на конфлуентното хипергеометрично уравнение на Кумер (b = ½). Получен е закон на пътния ъгъл ψ(t) в затворен вид чрез функцията на Кумер M(a, ½, z) — аналитично решение там, където досега се използват числено интегриране или приближения със сфера и постоянен радиус.',
     'The heading equation is shown to reduce to a special case of Kummer\'s confluent hypergeometric equation (b = ½). A closed-form heading law ψ(t) is obtained through the Kummer function M(a, ½, z) — an analytical solution where numerical integration or spherical, constant-radius approximations have been used so far.'),
   T('От граничните условия в точката на откъсване b₁ и точката на прихващане b₂ е изведено трансцендентно уравнение (31) за продължителността на завоя T; неговият корен определя еднозначно скоростта на изменение на крена k (32) и цялата траектория (33).',
@@ -51,7 +53,7 @@ const app = [
     <div class="contrib">
       <div class="card">
         <h3>{T('Научни приноси', 'Scientific contributions')}</h3>
-        <ol>{sci.map((s) => <li>{s}</li>)}</ol>
+        <ol>{sci.map((s) => <li set:html={s} />)}</ol>
       </div>
       <div class="card">
         <h3>{T('Научно-приложни приноси', 'Scientific-applied contributions')}</h3>
