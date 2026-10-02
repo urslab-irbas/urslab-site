@@ -7,13 +7,17 @@ import { allPubs } from '../data/allPubs';
 import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
-// page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива (всички публикации от сайта)
-interface Props { lang: Lang; page?: string; member?: string }
-const { lang, page, member } = Astro.props;
+// page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива;
+// area — всички публикации от сайта в едно научно направление (картите в „Изследвания“)
+interface Props { lang: Lang; page?: string; member?: string; area?: string }
+const { lang, page, member, area } = Astro.props;
 const M = member ? team.find((m) => m.id === member)! : undefined;
+const A = area ? areas.find((a) => a.key === area)! : undefined;
 const P: ArchivePage = M
   ? { key: M.id, slug: `team/${M.id}/report`, title: { bg: `Обобщен отчет — ${M.name.bg}`, en: `Summary report — ${M.name.en}` }, items: allPubs.filter((p) => p.team.includes(M.id)) }
-  : archivePages.find((x) => x.key === page)!;
+  : A
+    ? { key: A.key, slug: `publications/area/${A.key}`, title: { bg: `Публикации — ${A.title.bg}`, en: `Publications — ${A.title.en}` }, items: allPubs.filter((p) => p.tags.some((g) => A.tags.includes(g))) }
+    : archivePages.find((x) => x.key === page)!;
 const archive = P.items;
 const bg = lang === 'bg';
 const T = (b: string, e: string) => (bg ? b : e);
@@ -47,15 +51,18 @@ const L = {
   <header class="page-head"><div class="wrap">
     {M
       ? <p class="eyebrow"><a href={`${href(lang, 'team')}#${M.id}`}>{t.team[lang]}</a> / {M.title[lang]}</p>
+      : A ? <p class="eyebrow"><a href={href(lang, 'research')}>{T('Изследвания', 'Research')}</a> / {t.areasTitle[lang]}</p>
       : <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>}
     <h1>{title}</h1>
-    <p>{M
+    <p>{A
+      ? T('Всички публикации от сайта в това научно направление — годишните страници от „Архив“, текущият списък и въведените от колектива, без повторения. Броят се обновява автоматично с всяка нова публикация.', 'All publications on this site in this research area — the yearly archive pages, the current list and those entered by the team, without duplicates. The count updates automatically with every new publication.')
+      : M
       ? T('Всички публикации от сайта с участието на този член на колектива — годишните страници от „Архив“ и текущият списък, без повторения. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'All publications on this site co-authored by this team member — the yearly archive pages and the current list, without duplicates. Combine the filters — the summary is recomputed for the selection.')
       : T('Пълен списък на публикациите на колектива, групирани по вид и индексиране. Комбинирайте филтрите — обобщението отдолу се преизчислява за избраното.', 'Full list of the team’s publications, grouped by type and indexing. Combine the filters — the summary below is recomputed for the selection.')}</p>
   </div></header>
 
   <section class="block"><div class="wrap" data-arch>
-    <div class="frow">
+    <div class="frow" hidden={!!A}>
       <span class="lbl">{t.byArea[lang]}</span>
       <div class="filters" data-g="area">
         <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
