@@ -2,13 +2,18 @@
 // Годишна страница с публикации: списък с филтри и обобщение за отчет (данни: src/data/archivePages.ts)
 import Layout from '../layouts/Layout.astro';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
-import { archivePages } from '../data/archivePages';
+import { archivePages, type ArchivePage } from '../data/archivePages';
+import { allPubs } from '../data/allPubs';
 import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
-interface Props { lang: Lang; page: string }
-const { lang, page } = Astro.props;
-const P = archivePages.find((x) => x.key === page)!;
+// page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива (всички публикации от сайта)
+interface Props { lang: Lang; page?: string; member?: string }
+const { lang, page, member } = Astro.props;
+const M = member ? team.find((m) => m.id === member)! : undefined;
+const P: ArchivePage = M
+  ? { key: M.id, slug: `team/${M.id}/report`, title: { bg: `Обобщен отчет — ${M.name.bg}`, en: `Summary report — ${M.name.en}` }, items: allPubs.filter((p) => p.team.includes(M.id)) }
+  : archivePages.find((x) => x.key === page)!;
 const archive = P.items;
 const bg = lang === 'bg';
 const T = (b: string, e: string) => (bg ? b : e);
@@ -21,7 +26,7 @@ const short = (n: string) => { const w = n.split(' '); return `${w[0][0]}. ${w[w
 const authors = [
   ...team.map((m) => ({ key: m.id, label: short(m.name[lang]) })),
   { key: 'yovchev', label: T('К. Йовчев', 'K. Yovchev') },
-].filter((a) => archive.some((p) => p.team.includes(a.key)));
+].filter((a) => a.key !== M?.id && archive.some((p) => p.team.includes(a.key)));
 const years = [...new Set(archive.map((p) => p.year))].sort((a, b) => b - a);
 const usedTags = Object.keys(archiveTagLabels).filter((g) => archive.some((p) => p.tags.includes(g)));
 const areaBtns = areas.map((a) => ({ ...a, n: archive.filter((p) => p.tags.some((g) => a.tags.includes(g))).length }));
@@ -40,9 +45,13 @@ const L = {
 <Layout lang={lang} slug={P.slug} title={title}
   description={T(`${title} — лаборатория „Безпилотни роботизирани системи“: филтри и обобщение по квартили и SJR.`, `${title} — Unmanned Robotic Systems Laboratory: filters and a summary by quartile and SJR.`)}>
   <header class="page-head"><div class="wrap">
-    <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>
+    {M
+      ? <p class="eyebrow"><a href={`${href(lang, 'team')}#${M.id}`}>{t.team[lang]}</a> / {M.title[lang]}</p>
+      : <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>}
     <h1>{title}</h1>
-    <p>{T('Пълен списък на публикациите на колектива, групирани по вид и индексиране. Комбинирайте филтрите — обобщението отдолу се преизчислява за избраното.', 'Full list of the team’s publications, grouped by type and indexing. Combine the filters — the summary below is recomputed for the selection.')}</p>
+    <p>{M
+      ? T('Всички публикации от сайта с участието на този член на колектива — годишните страници от „Архив“ и текущият списък, без повторения. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'All publications on this site co-authored by this team member — the yearly archive pages and the current list, without duplicates. Combine the filters — the summary is recomputed for the selection.')
+      : T('Пълен списък на публикациите на колектива, групирани по вид и индексиране. Комбинирайте филтрите — обобщението отдолу се преизчислява за избраното.', 'Full list of the team’s publications, grouped by type and indexing. Combine the filters — the summary below is recomputed for the selection.')}</p>
   </div></header>
 
   <section class="block"><div class="wrap" data-arch>
@@ -76,8 +85,8 @@ const L = {
         {years.map((y) => <button type="button" data-v={String(y)} aria-pressed="false">{y}</button>)}
       </div>
     </div>
-    <div class="frow">
-      <span class="lbl">{T('Автор', 'Author')}</span>
+    <div class="frow" hidden={authors.length === 0}>
+      <span class="lbl">{M ? T('Съавтор', 'Co-author') : T('Автор', 'Author')}</span>
       <div class="filters" data-g="team">
         <button type="button" data-v="" aria-pressed="true">{t.all[lang]}</button>
         {authors.map((a) => <button type="button" data-v={a.key} aria-pressed="false">{a.label}</button>)}
@@ -105,7 +114,7 @@ const L = {
       <div class="breakdown">
         <div><h3>{T('По вид / квартил', 'By type / quartile')}</h3><table data-t="cat"></table></div>
         <div><h3>{T('По година', 'By year')}</h3><table data-t="year"></table></div>
-        <div><h3>{T('Участие на колектива', 'Team participation')}</h3><table data-t="team"></table></div>
+        <div><h3>{M ? T('Съавтори от колектива', 'Co-authors from the team') : T('Участие на колектива', 'Team participation')}</h3><table data-t="team"></table></div>
       </div>
     </div>
 

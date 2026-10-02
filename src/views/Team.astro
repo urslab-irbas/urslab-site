@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { team } from '../data/team/index';
 import { t, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map((w) => w[0]).slice(0, 2).join('');
@@ -26,6 +27,7 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
         </div>
         {m.thesis && <p class="thesis"><span>{lang === 'bg' ? 'Дисертация:' : 'PhD thesis:'}</span> {lang === 'bg' ? `„${m.thesis[lang]}“` : `“${m.thesis[lang]}”`}</p>}
         {m.interests && <ul class="int">{m.interests[lang].map((i) => <li>{i}</li>)}</ul>}
+        <p class="rep"><a class="btn-rep" href={href(lang, `team/${m.id}/report`)}>{lang === 'bg' ? 'Обобщен отчет' : 'Summary report'} →</a></p>
         <p class="links">
           {m.orcid && (
             <a href={`https://orcid.org/${m.orcid}`} class="orcid" title="ORCID">
@@ -53,6 +55,9 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
   .thesis { margin: 0; font-size: .88rem; font-style: italic; color: var(--muted); }
   .thesis span { font-style: normal; font-weight: 600; }
   .int { margin: 0; padding-left: 18px; font-size: .92rem; color: var(--muted); }
-  .links { display: flex; flex-direction: column; gap: 4px; margin-top: auto !important; font-size: .85rem; }
+  .rep { margin-top: auto !important; }
+  .btn-rep { display: inline-block; font: 500 .82rem var(--mono); padding: 7px 14px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent-ink); text-decoration: none; }
+  .btn-rep:hover { background: var(--accent); color: #fff; }
+  .links { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; }
   .orcid { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); }
 </style>
