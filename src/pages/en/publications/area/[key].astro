@@ -1,0 +1,9 @@
+---
+// Всички публикации от сайта в едно научно направление (картите в „Изследвания“ и „Начало“).
+// „Автономна навигация“ има собствена страница (research/navigation) и не се генерира тук.
+import V from '../../../../views/Archive.astro';
+import { areas } from '../../../../data/content';
+export function getStaticPaths() { return areas.filter((a) => !a.page && a.tags.length).map((a) => ({ params: { key: a.key } })); }
+const { key } = Astro.params;
+---
+<V lang="en" area={key} />
