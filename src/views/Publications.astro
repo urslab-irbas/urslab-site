@@ -1,13 +1,21 @@
 ---
+// „Публикации“: текущият списък (подадени / под печат) се вижда винаги;
+// филтрите „По направление“ и „По тема“ търсят във ВСИЧКИ публикации на сайта (текущ списък + архив).
 import Layout from '../layouts/Layout.astro';
 import PubList from '../components/PubList.astro';
-import { publications, tagLabels, archives } from '../data/publications';
+import { tagLabels as mainTags } from '../data/publications';
+import { archiveTagLabels } from '../data/archive2022';
+import { archives } from '../data/archivePages';
+import { currentList, archiveList, allPubs } from '../data/allPubs';
 import { nav, t, areas, areaPubCount, type Lang } from '../data/content';
 import { href } from '../lib/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const bg = lang === 'bg';
 const title = nav.find((n) => n.slug === 'publications')!.label[lang];
-const tags = Object.keys(tagLabels);
+const labels: Record<string, { bg: string; en: string }> = { ...archiveTagLabels, ...mainTags };
+const tags = Object.keys(labels).filter((g) => allPubs.some((p) => p.tags.includes(g)));
+const tagCount = (g: string) => allPubs.filter((p) => p.tags.includes(g)).length;
 ---
 <Layout lang={lang} slug="publications" title={title}>
   <header class="page-head"><div class="wrap">
@@ -28,11 +36,19 @@ const tags = Object.keys(tagLabels);
     <div class="frow">
       <span class="lbl">{t.byTopic[lang]}</span>
       <div class="filters" role="group">
-        {tags.map((g) => <button type="button" data-f={g} aria-pressed="false">{tagLabels[g][lang]}</button>)}
+        {tags.map((g) => <button type="button" data-f={g} aria-pressed="false">{labels[g][lang]} <span class="n">{tagCount(g)}</span></button>)}
       </div>
     </div>
-    <PubList lang={lang} items={publications} />
+    <p class="hint" data-hint>{bg
+      ? 'Отгоре са подадените и под печат публикации. Изберете направление или тема, за да търсите във всички публикации на сайта, включително архива.'
+      : 'Above are submitted and in-press publications. Choose an area or topic to search all publications on the site, including the archive.'}</p>
+
+    <h2 class="sub">{bg ? 'Подадени и под печат' : 'Submitted and in press'} <span class="cnt" data-cur-n>({currentList.length})</span></h2>
+    <PubList lang={lang} items={currentList} />
+    <h2 class="sub" data-arch-h hidden>{bg ? 'От архива' : 'From the archive'} <span class="cnt" data-arch-n></span></h2>
+    <PubList lang={lang} items={archiveList} arch />
     <p class="none" hidden>{t.noneFound[lang]}</p>
+
     <h2 class="arch">{t.archive[lang]}</h2>
     <ul>{archives.map((a) => <li><a href={href(lang, a.slug)}>{a.label[lang]} →</a></li>)}</ul>
   </div></section>
@@ -43,6 +59,11 @@ const tags = Object.keys(tagLabels);
   .filters { display: flex; flex-wrap: wrap; gap: 6px; }
   .filters button .n { opacity: .6; margin-left: 4px; }
   .filters button:disabled { opacity: .4; cursor: default; }
+  .hint { color: var(--muted); font-size: .9rem; margin: 6px 0 0; }
+  .hint[hidden] { display: none; }
+  .sub { font-size: 1.15rem; margin: 28px 0 0; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  .sub[hidden] { display: none; }
+  .sub .cnt { font: .85rem var(--mono); color: var(--muted); font-weight: 400; }
   .none { color: var(--muted); padding: 20px 0; }
   .none[hidden] { display: none; }
   @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } }
@@ -51,19 +72,25 @@ const tags = Object.keys(tagLabels);
   .arch { margin-top: 48px; font-size: 1.3rem; }
 </style>
 <script>
-  // Филтър: етикетите на бутона (data-f, разделени с интервал) — показва статия, ако има поне един от тях.
+  // Без филтър: само текущият списък. С филтър: текущ списък + архив, само съвпадащите (поне един етикет).
   const btns = document.querySelectorAll<HTMLButtonElement>('[data-f]');
-  const none = document.querySelector<HTMLElement>('.none');
+  const q = <T extends Element>(s: string) => document.querySelector<T>(s)!;
   function apply(b: HTMLButtonElement) {
     const f = (b.dataset.f ?? '').split(' ').filter(Boolean);
     btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    let shown = 0;
+    let cur = 0, arch = 0;
     document.querySelectorAll<HTMLElement>('.pubs li').forEach((li) => {
       const tags = (li.dataset.tags ?? '').split(' ');
-      li.hidden = f.length > 0 && !f.some((g) => tags.includes(g));
-      if (!li.hidden) shown++;
+      const isArch = li.dataset.arch === '1';
+      const show = f.length === 0 ? !isArch : f.some((g) => tags.includes(g));
+      li.hidden = !show;
+      if (show) { if (isArch) arch++; else cur++; }
     });
-    if (none) none.hidden = shown > 0;
+    q<HTMLElement>('[data-cur-n]').textContent = `(${cur})`;
+    q<HTMLElement>('[data-arch-n]').textContent = `(${arch})`;
+    q<HTMLElement>('[data-arch-h]').hidden = arch === 0;
+    q<HTMLElement>('[data-hint]').hidden = f.length > 0;
+    q<HTMLElement>('.none').hidden = cur + arch > 0;
     const url = new URL(location.href);
     if (b.dataset.area) url.searchParams.set('area', b.dataset.area); else url.searchParams.delete('area');
     history.replaceState(null, '', url);

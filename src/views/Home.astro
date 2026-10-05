@@ -5,12 +5,12 @@ import PubList from '../components/PubList.astro';
 import Gallery from '../components/Gallery.astro';
 import AreaCard from '../components/AreaCard.astro';
 import { site, areas, t, nav, type Lang } from '../data/content';
-import { publications } from '../data/publications';
+import { currentList, archiveList } from '../data/allPubs';
 import { team } from '../data/team/index';
 import { href } from '../lib/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const latest = publications.slice(0, 3);
+const latest = [...currentList, ...archiveList].slice(0, 3);
 ---
 <Layout lang={lang} slug="">
   <section class="hero">

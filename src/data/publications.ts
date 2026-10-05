@@ -1,4 +1,7 @@
 // Публикации / Publications
+// ТЕКУЩ списък: подадени / под печат (status 'submitted' | 'in-press') — показват се на страница „Публикации“.
+// Когато статия излезе: status: 'published' + doi → при следващото обновяване тя минава автоматично
+// в годишната страница под „Архив“ според year (виж archivePages.ts) и изчезва от текущия списък.
 // Нова публикация: добавете запис най-отгоре. authors — както са в статията (латиница).
 // status: 'published' | 'in-press' | 'submitted'
 // Ключовите думи (tags) се използват за филтрите на страницата.
@@ -96,7 +99,3 @@ export const tagLabels: Record<string, { bg: string; en: string }> = {
   security: { bg: 'Сигурност', en: 'Security' },
   software: { bg: 'Софтуер', en: 'Software' },
 };
-
-// Архив: годишни страници на сайта (заменят PDF файловете от стария сайт) — виж archivePages.ts
-import { archivePages } from './archivePages';
-export const archives = archivePages.map((p) => ({ label: p.title, slug: p.slug }));

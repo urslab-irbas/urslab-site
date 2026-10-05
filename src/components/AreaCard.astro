@@ -1,14 +1,13 @@
 ---
 // Карта на научно направление („Изследвания“ и „Начало“).
-// „Автономна навигация“ (има page) остава както е: страница с модела + брой от текущия списък публикации.
-// Останалите броят ВСИЧКИ публикации от сайта (архив, текущ списък и въведените през формата — allPubs),
-// затова броят се обновява сам при всяка нова публикация, и водят към /publications/area/<key>/.
+// Всички карти броят ВСИЧКИ публикации от сайта (allPubs) — броят се обновява сам.
+// „Автономна навигация“ (има page) води към страницата с модела, а броят ѝ — към „Публикации“ с филтър;
+// останалите водят към /publications/area/<key>/.
 import { t, areaPubCount, type Lang } from '../data/content';
-import { allPubs } from '../data/allPubs';
 import { href } from '../lib/i18n';
 interface Props { lang: Lang; area: { key: string; title: { bg: string; en: string }; text: { bg: string; en: string }; tags: string[]; page?: string }; num?: number }
 const { lang, area, num } = Astro.props;
-const n = area.page ? areaPubCount(area.tags) : allPubs.filter((p) => p.tags.some((g) => area.tags.includes(g))).length;
+const n = areaPubCount(area.tags); // всички публикации на сайта
 const pubLink = area.page ? `${href(lang, 'publications')}?area=${area.key}` : href(lang, `publications/area/${area.key}`);
 // Ако направлението има собствена страница, цялата карта води към нея; иначе — към публикациите му.
 const main = area.page ? href(lang, area.page) : n > 0 ? pubLink : '';
