@@ -20,5 +20,27 @@
     "verified": [
       "eISSN 2972-3841 — ISSN Portal (Confirmed record): „Journal of data science and intelligent systems“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Gaidarski, I. & Madzharov, A.",
+    "title": "Design of Information Security Systems for internal threat protection",
+    "status": "in-press",
+    "idType": "issn",
+    "issn": "1865-0937",
+    "venue": "Springer series “Communications in Computer and Information Science”",
+    "publisher": "Springer series “Communications in Computer and Information Science”",
+    "url": "https://link.springer.com/series/7899/books",
+    "abstract": "The article discusses a method for designing and creating an information security system (ISS) in organizations. The method considers different viewpoints on the system, presenting different requirements for it from dif-ferent specialties involved in the design of the system. The problem with the participation of different specialists comes from the fact that they are expressed through different means of expression (contracts, laws, descrip-tions, engineering drawings, program code, etc.). In addition, different terms are used, which may have different meanings in different specialties. There-fore, when designing an ISS, it is vital to use a method that translates all re-quirements into a single universal language understandable to all special-ties. Such a method for designing an ISS in organizations is presented be-low. We have called the method \"Reversed Tower of Babylon\", which does the opposite of the legend of the Tower of Babel - unifies the language so that it is understandable to all specialists involved in the design of the ISS. The method provides platform independence, through which systems are created that are independent of specific platforms and environments and fulfil the conditions set for them. The article discusses the design and im-plementation of ISS to protect against internal threats in a given organiza-tion with a focus on the human factor as a threat, or the so-called insiders. The system is based on a Data Leak Prevention (DLP) environment.",
+    "share": 100,
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 41,
+    "verified": [
+      "ISSN 1865-0937 — ISSN Portal (Confirmed record): „Communications in computer and information science (Internet)“"
+    ]
   }
 ]
