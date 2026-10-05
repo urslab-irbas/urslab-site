@@ -4,13 +4,13 @@ import Layout from '../layouts/Layout.astro';
 import KummerModel from '../components/KummerModel.astro';
 import PubList from '../components/PubList.astro';
 import { areas, t, type Lang } from '../data/content';
-import { publications } from '../data/publications';
+import { currentList, archiveList } from '../data/allPubs';
 import { href } from '../lib/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const bg = lang === 'bg';
 const area = areas.find((a) => a.key === 'nav')!;
-const pubs = publications.filter((p) => p.tags.some((g) => area.tags.includes(g)));
+const pubs = [...currentList, ...archiveList].filter((p) => p.tags.some((g) => area.tags.includes(g)));
 const T = (b: string, e: string) => (bg ? b : e);
 
 const sci = [

@@ -167,8 +167,8 @@ export const t = {
   rights: { bg: 'Всички права запазени.', en: 'All rights reserved.' },
 };
 
-// Брой публикации в направление (по етикетите му)
-import { publications as _pubs } from './publications';
+// Брой публикации в направление (по етикетите му) — от всички публикации на сайта
+import { allPubs as _pubs } from './allPubs';
 export function areaPubCount(tags: string[]): number {
   return _pubs.filter((p) => p.tags.some((g) => tags.includes(g))).length;
 }

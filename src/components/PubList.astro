@@ -1,12 +1,15 @@
 ---
 import { t, type Lang } from '../data/content';
-import { tagLabels, type Publication } from '../data/publications';
-interface Props { lang: Lang; items: Publication[]; compact?: boolean }
-const { lang, items, compact } = Astro.props;
+import { tagLabels as mainTags, type Publication } from '../data/publications';
+import { archiveTagLabels } from '../data/archive2022';
+const tagLabels = { ...archiveTagLabels, ...mainTags };
+// arch — публикации от архива: на „Публикации“ се показват само при избран филтър
+interface Props { lang: Lang; items: Publication[]; compact?: boolean; arch?: boolean }
+const { lang, items, compact, arch } = Astro.props;
 ---
 <ol class="pubs">
   {items.map((p) => (
-    <li data-tags={p.tags.join(' ')} data-year={p.year}>
+    <li data-tags={p.tags.join(' ')} data-year={p.year} data-arch={arch ? '1' : undefined} hidden={arch}>
       <div class="meta">
         <span class="yr">{p.year}</span>
         <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>

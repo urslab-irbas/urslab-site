@@ -7,7 +7,7 @@ Target domain: https://urs.ir.bas.bg
 - Bulgarian is the default language at `/`, English at `/en/`. Every page exists in both; the menu switch links to the same slug in the other language (`src/lib/i18n.ts`).
 - Content lives in `src/data/` — edit data, not markup:
   - `team/<id>.ts` — one file per staff member (BG/EN names and titles, ORCID, links, interests); order in `team/index.ts`
-  - `publications.ts` — publications, newest first; tags drive the filters
+  - `publications.ts` — CURRENT list (submitted / in press) shown on „Публикации“; items with status 'published' move automatically to the yearly archive page by year (archivePages.ts). Filters on „Публикации“ search all site publications (`allPubs.ts`: currentList + archiveList)
   - `archive2022.ts`, `archive2025.ts`, `archive2026.ts`, `archiveEarlier.ts` — yearly publication pages (/publications/2022-2024/, /2025/, /2026/, /earlier/); each entry goes on the page of its publication year; shared types, categories and topic tags are in archive2022.ts; the list of pages (order in „Архив“) is `archivePages.ts`. 2025/2026 come from the BAS report „XX а: Всички публикации – публикувани“ (share = % authors from IR)
   - `allPubs.ts` — all publications on the site (archive pages + publications.ts, de-duplicated by DOI/title) → per-member „Обобщен отчет“ at /team/<id>/report/ (button on each Team card)
   - `contrib.json` — publications entered via the site form /publications/new/ (GitHub issue → `.github/workflows/publication.yml` + `scripts/add-publication.mjs` validate with `src/lib/pubSchema.js`, append here, open a PR); distributed to yearly pages by `archivePages.ts` (a page for a new year is created automatically). Team members with `github` in their profile get the „+ Нова публикация“ button.
