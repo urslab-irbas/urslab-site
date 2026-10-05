@@ -1,5 +1,5 @@
 // Връщане (премахване от сайта) на публикация, въведена през формата — стартира се от .github/workflows/revert-publication.yml,
-// когато ръководителят отметне „Върни“ в коментара на заявката. Премахва записа от src/data/contrib.json и пише в publish-log.md.
+// когато ръководителят отметне „Върни“ в коментара на заявката. Премахва записа от src/data/contrib.json и пише в publish-log.md (файловете са от клона data).
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from 'node:fs';
 const issue = Number(process.env.ISSUE_NUMBER || 0);
 const who = process.env.SENDER || '';

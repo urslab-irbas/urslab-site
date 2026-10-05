@@ -1,5 +1,5 @@
 # Връщане на публикация с едно щракване: ръководителят (собственикът на хранилището) отметва „Върни“
-# в коментара „✅ Публикувано на сайта“ в заявката. Записът се премахва от src/data/contrib.json,
+# в коментара „✅ Публикувано на сайта“ в заявката. Записът се премахва от src/data/contrib.json (клон data),
 # редът „върната“ се добавя в publish-log.md и сайтът се качва отново.
 name: Връщане на публикация
 on:
@@ -30,13 +30,17 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Данните от клона data (публикациите от формата и дневникът)
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- src/data/contrib.json publish-log.md
       - name: Премахване на записа
         id: rm
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           SENDER: ${{ github.event.sender.login }}
         run: node scripts/revert-publication.mjs
-      - name: Изграждане, запис в main и качване
+      - name: Изграждане, запис в клона data и качване
         if: steps.rm.outputs.ok == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -44,15 +48,23 @@ jobs:
           TITLE: ${{ steps.rm.outputs.title }}
         run: |
           npm ci && npm run build
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp src/data/contrib.json publish-log.md "$RUNNER_TEMP/"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin data
+          git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
+          cd "$RUNNER_TEMP/data"
+          cp "$RUNNER_TEMP/contrib.json" src/data/contrib.json
+          cp "$RUNNER_TEMP/publish-log.md" publish-log.md
           git add src/data/contrib.json publish-log.md
           git commit -m "Върната публикация от заявка #$NUM: $TITLE"
           ok=0; for i in 1 2 3; do
-            if git push origin HEAD:main; then ok=1; break; fi
-            sleep 5; git pull --rebase origin main
+            if git push origin HEAD:data; then ok=1; break; fi
+            sleep 5; git pull --rebase origin data
           done
-          [ "$ok" = 1 ] || { echo "::error::Записът в main не успя (правилата на main?)"; exit 1; }
+          [ "$ok" = 1 ] || { echo "::error::Записът в клона data не успя"; exit 1; }
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          cd "$GITHUB_WORKSPACE"
           gh workflow run deploy.yml --ref main
       - name: Отговор в заявката
         if: always() && steps.rm.outcome == 'success'
