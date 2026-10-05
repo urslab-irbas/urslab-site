@@ -19,6 +19,8 @@ Target domain: https://urs.ir.bas.bg
 
 - Training deck for new team members: `public/docs/URSlab-rakovodstvo.pptx` + `.pdf` (button „Помощ за нов член на екипа“ on the Team page). Generator: `scripts/help-deck/build.js` (pptxgenjs; screenshots of the site) — rebuild the deck when site features change.
 
+- NACID National Reference List (НРС): `src/data/nrs.ts` — publications in listed venues automatically get the NRS note, the venue's ISSN and category 'nat' (if they were 'other').
+
 ## Rules
 - Always update BOTH languages when adding or changing text.
 - Academic titles: BG "доц. д-р инж.", "доц. д.н. инж.", "гл. ас. д-р инж."; EN "Assoc. Prof. Dr. Eng.", "Assoc. Prof. DSc Eng.", "Chief Assist. Prof. Dr. Eng.".

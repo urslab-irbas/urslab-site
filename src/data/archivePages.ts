@@ -7,6 +7,7 @@ import { archive2026 } from './archive2026';
 import { archiveEarlier } from './archiveEarlier';
 import contrib from './contrib.json';
 import { publications } from './publications';
+import { nrsFor } from './nrs';
 import { parseAuthors, teamFromAuthors, composeVenue } from '../lib/pubSchema.js';
 
 type L = { bg: string; en: string };
@@ -61,6 +62,15 @@ for (const p of [...fromForm, ...fromPublished]) {
   }
   page.items = [...page.items, p];
 }
+
+// НАЦИД, Национален референтен списък: бележка, ISSN и категория за всички публикации в такива издания (виж nrs.ts)
+const withNrs = (p: ArchivePub): ArchivePub => {
+  const n = nrsFor(p.venue); if (!n) return p;
+  const tag = `НАЦИД НРС, ID ${n.id}`;
+  return { ...p, cat: p.cat === 'other' ? 'nat' : p.cat, issn: p.issn ?? n.issn,
+    note: p.note?.includes('НАЦИД') ? p.note : p.note ? `${tag}; в отчета на БАН: ${p.note}` : tag };
+};
+for (const pg of fixed) pg.items = pg.items.map(withNrs);
 
 // Ред под „Архив“: най-новата година първа, „до 2021 г.“ последна
 const order = (k: string) => (k === 'earlier' ? 0 : Number(k.slice(0, 4)) + (k.length > 4 ? 0 : 0.5));
