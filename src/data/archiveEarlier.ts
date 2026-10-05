@@ -4,9 +4,10 @@ import type { ArchivePub } from './archive2022';
 export const archiveEarlier: ArchivePub[] = [
   {
     year: 2019, cat: 'other', team: ['madzharov'], tags: ['software'],
-    authors: 'Madzharov, A.',
+    authors: 'Madzharov, A. N.',
     title: 'Technical implementation of a reporting system and its workflows',
-    venue: 'Proceedings of the International Scientific Conference “Defense Technologies”, Faculty of Artillery, Air Defense and Communication and Information Systems, NMU “Vasil Levski”',
+    venue: 'Proceedings of the International Scientific Conference “Defense Technologies” DefTech 2019, Faculty of Artillery, Air Defense and Communication and Information Systems, “Vasil Levski” National Military University, Shumen, Bulgaria, pp. 316–322',
+    issn: '2367-7902',
     url: 'https://dtf.aadcf.nvu.bg/wp-content/uploads/2022/10/DTF_2019.pdf',
   },
   {
