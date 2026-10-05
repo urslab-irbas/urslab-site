@@ -30,13 +30,20 @@ export function similarity(a, b) {
 }
 
 // Общи думи, които не стигат за съвпадение на изданието
-const GENERIC = new Set(['journal', 'proceedings', 'international', 'conference', 'scientific', 'science', 'sciences', 'annual', 'bulletin', 'series', 'review', 'and', 'the', 'for', 'with', 'national', 'symposium', 'workshop', 'papers', 'collection', 'сборник', 'списание', 'научна', 'научни', 'конференция', 'международна', 'доклади', 'трудове', 'годишник', 'известия']);
-/** Съвпада ли изданието от регистъра с въведеното (поне една обща значима дума) */
-export function venueMatch(registry, entered) {
-  const R = words(registry), E = words(entered);
-  const sig = [...R].filter((w) => !GENERIC.has(w));
-  const pool = sig.length ? sig : [...R];
-  return pool.some((w) => E.has(w));
+const GENERIC = new Set(['of', 'on', 'in', 'journal', 'ltd', 'publishing', 'press', 'publisher', 'university', 'proceedings', 'international', 'conference', 'scientific', 'science', 'sciences', 'annual', 'bulletin', 'series', 'review', 'and', 'the', 'for', 'with', 'national', 'symposium', 'workshop', 'papers', 'collection', 'сборник', 'списание', 'научна', 'научни', 'конференция', 'международна', 'доклади', 'трудове', 'годишник', 'известия']);
+/**
+ * Съвпада ли изданието от регистъра с въведеното. Приема се, ако
+ *  а) поне половината от значимите думи в заглавието от регистъра са във въведеното, или
+ *  б) значимите думи от въведеното (поне 2, или всички, ако са по-малко) се срещат в данните от регистъра
+ *     (заглавие, бележки, издател, конференция, акроним).
+ */
+export function venueMatch(regTitle, regAll, entered) {
+  const sig = (s) => [...words(s)].filter((w) => !GENERIC.has(w));
+  const E = new Set(sig(entered)), T = sig(regTitle), A = words(`${regTitle} ${regAll}`);
+  if (!E.size) return false;
+  if (T.length && T.filter((w) => E.has(w)).length / T.length >= 0.5) return true;
+  const hit = [...E].filter((w) => A.has(w)).length;
+  return hit >= Math.min(2, E.size);
 }
 
 /** НАЦИД НРС: търсене по ISSN/ISBN → { id, title, numbers } или null */
@@ -131,7 +138,7 @@ export async function verifyEntry(e) {
       const isIssn = ISSN_TYPES.includes(e.idType);
       const entered = [e.venue, e.publisher, isIssn ? '' : e.title].filter(Boolean).join(' ');
       const check = (src, reg) => {
-        if (venueMatch(reg.match ?? reg.title, entered)) { out.verified.push(`${label} ${id} — ${src}: „${reg.title}“`); return true; }
+        if (venueMatch(reg.title, reg.match ?? '', entered)) { out.verified.push(`${label} ${id} — ${src}: „${reg.title}“`); return true; }
         fail('idValue', 'idmismatch', `${label} ${id} → ${src}: „${reg.title || '—'}“`); return false;
       };
       const n = await nrsByNumber(id);
