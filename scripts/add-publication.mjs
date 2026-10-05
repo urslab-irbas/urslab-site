@@ -2,7 +2,7 @@
 // 1) Проверява, че заявката е от GitHub акаунт на член на колектива (src/data/team/*.ts → github).
 // 2) Проверява записа със същите правила като формата на сайта (src/lib/pubSchema.js).
 // 3) Проверява DOI / ISSN / ISBN в публичните регистри (scripts/verify-ids.mjs) — при неуспех записът се отказва.
-// 4) При успех го добавя в src/data/contrib.json и в дневника publish-log.md. Резултатът е в pub-result.json.
+// 4) При успех го добавя в src/data/contrib.json и в дневника publish-log.md (workflow-ът ги взима от клона data и ги записва обратно там). Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-publication.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync } from 'node:fs';
 import { validate, normalize, apa, MESSAGES } from '../src/lib/pubSchema.js';

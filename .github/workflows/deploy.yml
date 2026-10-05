@@ -10,7 +10,7 @@
 name: Deploy to urs.ir.bas.bg
 on:
   push:
-    branches: [main]
+    branches: [main, data]   # data — публикациите от формата (ръчна поправка там също качва сайта)
   workflow_dispatch:      # ръчно пускане: Actions → Deploy → Run workflow
 concurrency:
   group: deploy
@@ -23,6 +23,11 @@ jobs:
       DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Данните от клона data (публикациите от формата)
+        run: |
+          if git fetch -q origin data; then git checkout FETCH_HEAD -- src/data/contrib.json; else echo "::warning::Няма клон data"; fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22

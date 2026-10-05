@@ -5,11 +5,11 @@
 #      (scripts/verify-ids.mjs: doi.org, Crossref, DataCite, НАЦИД НРС, ISSN Portal, Open Library);
 #      ако нещо не може да се провери — записът се отказва;
 #   2) сайтът се изгражда за проверка;
-#   3) записът (src/data/contrib.json) и редът в дневника (publish-log.md) се записват направо в main
-#      и се пуска качването на сайта (deploy.yml);
+#   3) записът (src/data/contrib.json) и редът в дневника (publish-log.md) се записват в клона `data`
+#      (не е защитен — личните хранилища не позволяват GitHub Actions да заобикаля правилата на main)
+#      и се пуска качването на сайта (deploy.yml изгражда main + данните от data);
 #   4) в заявката се пише резултатът. При успех ръководителят (@собственикът на хранилището) получава уведомление,
 #      а коментарът съдържа отметка „Върни“ — едно щракване премахва публикацията (revert-publication.yml).
-# Необходима настройка (веднъж): Settings → Rules → Rulesets → main-protection → Bypass list → „GitHub Actions“ (Always).
 name: Нова публикация (от формата на сайта)
 on:
   issues:
@@ -34,6 +34,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Данните от клона data (публикациите от формата и дневникът)
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- src/data/contrib.json publish-log.md
 
       - name: Проверка на заявката, записа и идентификаторите в регистрите
         id: check
@@ -49,7 +53,7 @@ jobs:
         if: steps.check.outputs.ok == 'true'
         run: npm ci && npm run build
 
-      - name: Запис в main и качване на сайта
+      - name: Запис в клона data и качване на сайта
         id: publish
         if: steps.build.outcome == 'success'
         env:
@@ -58,16 +62,23 @@ jobs:
           AUTHOR: ${{ github.event.issue.user.login }}
         run: |
           TITLE=$(node -p "require('./pub-result.json').title")
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp src/data/contrib.json publish-log.md "$RUNNER_TEMP/"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin data
+          git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
+          cd "$RUNNER_TEMP/data"
+          cp "$RUNNER_TEMP/contrib.json" src/data/contrib.json
+          cp "$RUNNER_TEMP/publish-log.md" publish-log.md
           git add src/data/contrib.json publish-log.md
           git commit -m "Публикувана от заявка #$NUM (@$AUTHOR): $TITLE"
           ok=0; for i in 1 2 3; do
-            if git push origin HEAD:main; then ok=1; break; fi
-            sleep 5; git pull --rebase origin main
+            if git push origin HEAD:data; then ok=1; break; fi
+            sleep 5; git pull --rebase origin data
           done
-          [ "$ok" = 1 ] || { echo "::error::Записът в main не успя (правилата на main?)"; exit 1; }
+          [ "$ok" = 1 ] || { echo "::error::Записът в клона data не успя"; exit 1; }
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          cd "$GITHUB_WORKSPACE"
           gh workflow run deploy.yml --ref main
 
       - name: Отговор в заявката
@@ -96,7 +107,7 @@ jobs:
             } else {
               text = `<!-- revert-pub -->\n✅ **Публикувано на сайта** (до около минута; обновете с Ctrl+F5).\n\n> ${r.apa}\n\n` +
                 `**Проверено в регистрите:**\n${r.verified.map((v) => '- ' + v).join('\n')}\n\n` +
-                `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/main/publish-log.md)\n\n` +
+                `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/data/publish-log.md)\n\n` +
                 `@${owner} — уведомление за нова публикация. Ако трябва да се премахне от сайта, отметнете:\n\n` +
                 `- [ ] **Върни** — премахни тази публикация от сайта`;
               close = true; label = 'публикувана'; reason = 'completed';
