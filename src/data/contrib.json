@@ -14,6 +14,11 @@
     ],
     "by": "ivangaidarski",
     "ghIssue": 34,
-    "status": "submitted"
+    "status": "submitted",
+    "idType": "eissn",
+    "issn": "2972-3841",
+    "verified": [
+      "eISSN 2972-3841 — ISSN Portal (Confirmed record): „Journal of data science and intelligent systems“"
+    ]
   }
 ]
