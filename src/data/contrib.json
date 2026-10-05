@@ -42,5 +42,33 @@
     "verified": [
       "ISSN 1865-0937 — ISSN Portal (Confirmed record): „Communications in computer and information science (Internet)“"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, N. & Gachev, G.",
+    "title": "Online contest “Mathematics and art” for the development of key competencies",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1314-8540",
+    "venue": "Педагогика",
+    "volume": "93",
+    "issue": "1",
+    "pages": "87-99",
+    "publisher": "Аз-буки",
+    "url": "https://azbuki.bg/wp-content/uploads/2021/02/Pedagogy_1_21_Neda-Chehlarova-Georgi-Ganchev.pdf",
+    "doi": "10.53656/ped2021-1.07",
+    "tags": [
+      "software",
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 44,
+    "nrsId": 2916,
+    "verified": [
+      "DOI 10.53656/ped2021-1.07 — Crossref: „Online Contest “Mathematics and Art” for the Development of Key Competencies“",
+      "ISSN 1314-8540 — НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“"
+    ]
   }
 ]
