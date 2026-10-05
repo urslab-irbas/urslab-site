@@ -2,7 +2,7 @@
 // Въвеждане на нова публикация от член на колектива с GitHub акаунт.
 // Формата проверява записа (src/lib/pubSchema.js) и го изпраща като заявка (Issue) в GitHub.
 // Там човекът влиза със своя GitHub акаунт; GitHub Action проверява записа повторно,
-// добавя го в src/data/contrib.json и отваря Pull Request за одобрение от ръководителя.
+// проверява DOI / ISSN / ISBN в публичните регистри и публикува записа автоматично (src/data/contrib.json).
 import Layout from '../layouts/Layout.astro';
 import { ID_TYPES, ID_LABEL } from '../lib/pubSchema.js';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
@@ -40,8 +40,7 @@ const F = {
   publisher: [T('Издател', 'Publisher'), T('Задължително за монография и учебник; по желание за сборници.', 'Required for monographs and textbooks; optional otherwise.'), 'MDPI'],
   doi: [T('DOI', 'DOI'), T('Само идентификаторът, напр. 10.3390/… (може и с https://doi.org/ — ще се изчисти).', 'Identifier only, e.g. 10.3390/… (a https://doi.org/ prefix is removed).'), '10.3390/engproc2026150070'],
   idType: [T('Вид идентификатор', 'Identifier type'), T('Задължително, ако няма DOI. Изберете ISSN / eISSN (списание) или ISBN / eISBN (книга, сборник).', 'Required if there is no DOI. Choose ISSN / eISSN (journal) or ISBN / eISBN (book, proceedings).')],
-  idValue: [T('ISSN / ISBN', 'ISSN / ISBN'), T('Само номерът: ISSN — 8 знака (1234-567X), ISBN — 10 или 13 цифри. Контролната цифра се проверява. Без Q, SJR и др. текст.', 'Number only: ISSN — 8 characters (1234-567X), ISBN — 10 or 13 digits. The check digit is verified. No Q, SJR or other text.'), '2367-7902'],
-  nrsId: [T('НАЦИД НРС, ID (ако е в списъка)', 'NACID NRS ID (if listed)'), T('Номерът на изданието в Националния референтен списък (nrs.nacid.bg). Проверете го там.', 'The ID of the venue in the National Reference List (nrs.nacid.bg). Check it there.'), '1708'],
+  idValue: [T('ISSN / ISBN', 'ISSN / ISBN'), T('Само номерът: ISSN 1234-567X; ISBN — 10 или 13 цифри. Без Q, SJR и др. Проверява се в регистрите.', 'Number only: ISSN 1234-567X; ISBN — 10 or 13 digits. No Q, SJR, etc. Checked in the registers.'), '2367-7902'],
   url: [T('Линк (ако няма DOI)', 'Link (if no DOI)'), T('Адрес на публикацията, започващ с https://', 'Address starting with https://'), 'https://…'],
   sjr: [T('SJR (Scopus)', 'SJR (Scopus)'), T('Задължително за Q1–Q4 и „SJR без квартил“ (или IF). Десетична точка или запетая.', 'Required for Q1–Q4 and “SJR, no quartile” (or IF).'), '0.254'],
   jif: [T('IF (JCR, Web of Science)', 'IF (JCR, Web of Science)'), T('Импакт фактор, ако има.', 'Impact factor, if any.'), '3.5'],
@@ -57,7 +56,6 @@ const rows = [
   [input('venue'), input('volume'), input('issue'), input('pages')],
   [input('publisher'), input('doi'), input('idType'), input('idValue')],
   [input('url'), input('sjr', { inputmode: 'decimal' }), input('jif', { inputmode: 'decimal' }), input('share', { inputmode: 'decimal' })],
-  [input('nrsId', { inputmode: 'numeric' })],
 ];
 ---
 <Layout lang={lang} slug="publications/new" title={title}
@@ -65,7 +63,7 @@ const rows = [
   <header class="page-head"><div class="wrap">
     <p class="eyebrow"><a href={href(lang, 'team')}>{t.team[lang]}</a> / URSlab</p>
     <h1>{title}</h1>
-    <p>{T('Попълнете полетата и натиснете „Запиши“. Записът се проверява тук и после в GitHub, където влизате със своя акаунт. След одобрение от ръководителя публикацията се появява на сайта.', 'Fill in the fields and press “Save”. The entry is checked here and again on GitHub, where you sign in with your own account. Once approved by the head of the lab, it appears on the site.')}</p>
+    <p>{T('Попълнете полетата и натиснете „Запиши“. Записът се проверява тук, а после в GitHub (където влизате със своя акаунт) DOI, ISSN или ISBN се проверяват в публичните регистри. Ако всичко е вярно, публикацията се появява на сайта автоматично.', 'Fill in the fields and press “Save”. The entry is checked here; then on GitHub (where you sign in with your own account) the DOI, ISSN or ISBN is checked in the public registers. If everything is correct, the publication appears on the site automatically.')}</p>
   </div></header>
 
   <section class="block"><div class="wrap np" data-np>
@@ -75,8 +73,8 @@ const rows = [
       <li class="on">{T('Попълване', 'Fill in')}</li>
       <li>{T('Проверка и „Запиши“', 'Check & “Save”')}</li>
       <li>{T('Вход в GitHub и „Create“', 'Sign in to GitHub & “Create”')}</li>
-      <li>{T('Автоматична проверка', 'Automatic check')}</li>
-      <li>{T('Одобрение → на сайта', 'Approval → on the site')}</li>
+      <li>{T('Проверка в регистрите', 'Register check')}</li>
+      <li>{T('Автоматично на сайта', 'Automatically on the site')}</li>
     </ol>
 
     <form novalidate data-form>
@@ -123,11 +121,6 @@ const rows = [
         <small>{F.abstract[1]}</small>
       </label>
 
-      <label class="f confirm" data-field="confirm">
-        <span class="chk"><input type="checkbox" name="confirm" value="1" />
-          <span>{T('Потвърждавам, че данните са верни и проверени от мен: DOI или ISSN / ISBN (portal.issn.org), състоянието и категорията, а при издание в Националния референтен списък — неговият ID в nrs.nacid.bg. Отговорността за верността им е моя.', 'I confirm that the data are correct and checked by me: DOI or ISSN / ISBN (portal.issn.org), status and category, and for a venue in the National Reference List — its ID at nrs.nacid.bg. I am responsible for their correctness.')} *</span></span>
-        <em class="err" hidden></em>
-      </label>
       <p class="req muted">{T('* задължително;  ** задължително, когато няма DOI', '* required;  ** required when there is no DOI')}</p>
 
       <div class="preview">
@@ -143,7 +136,7 @@ const rows = [
       <div class="msg bad" data-bad hidden>{T('Има грешки — поправете отбелязаните полета и натиснете „Запиши“ отново.', 'There are errors — fix the marked fields and press “Save” again.')}</div>
       <div class="msg ok" data-ok hidden>
         <p><b>{T('Записът е проверен.', 'The entry is valid.')}</b> {T('В нов прозорец се отвори GitHub с готова заявка. Влезте със своя акаунт (ако не сте) и натиснете зеления бутон „Create“. Ако прозорецът не се отвори:', 'GitHub has opened in a new window with a ready request. Sign in (if needed) and press the green “Create” button. If the window did not open:')} <a data-gh target="_blank" rel="noopener">{T('отворете заявката в GitHub', 'open the request on GitHub')} →</a></p>
-        <p>{T('След около минута GitHub ще отговори в заявката: „✅ приета“ с връзка към Pull Request, или „❌“ със списък на грешките и връзка за поправка тук.', 'In about a minute GitHub replies in the request: “✅ accepted” with a Pull Request link, or “❌” with the errors and a link to fix them here.')}</p>
+        <p>{T('След около минута GitHub ще отговори в заявката: „✅ Публикувано на сайта“ или „❌“ със списък на грешките и връзка за поправка тук.', 'In about a minute GitHub replies in the request: “✅ Published on the site” or “❌” with the errors and a link to fix them here.')}</p>
       </div>
     </form>
 
@@ -174,8 +167,10 @@ const rows = [
           <li>{T('Сред авторите трябва да има член на колектива.', 'A team member must be among the authors.')}</li>
           <li>{T('DOI — във вид 10.xxxx/…; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; pages as “45–67” or a number.')}</li>
           <li>{T('Без DOI записът не се приема, докато не изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и не въведете валиден номер — контролната цифра се проверява. В полето се пише само номерът, без Q, SJR и др.', 'Without a DOI the entry is not accepted until you choose an identifier type (ISSN, eISSN, ISBN or eISBN) and enter a valid number — the check digit is verified. Only the number goes in the field, no Q, SJR, etc.')}</li>
+          <li>{T('В GitHub сайтът проверява в публичните регистри: DOI — в doi.org и Crossref / DataCite (заглавието трябва да съвпада); ISSN — в НАЦИД НРС и ISSN Portal; ISBN — в НАЦИД НРС, Crossref и Open Library. Ако номерът не е намерен или регистърът не отговаря, записът се отказва. Книги и сборници, които ги няма в тези регистри, въвежда ръководителят.', 'On GitHub the site checks the public registers: DOI at doi.org and Crossref / DataCite (the title must match); ISSN at NACID NRS and ISSN Portal; ISBN at NACID NRS, Crossref and Open Library. If the number is not found or a register does not respond, the entry is refused. Books and proceedings missing from these registers are entered by the head of the lab.')}</li>
+          <li>{T('НАЦИД НРС, ID се определя автоматично от регистъра.', 'The NACID NRS ID is set automatically from the register.')}</li>
           <li>{T('Подадена или под печат публикация е винаги с категория „Подадени / под печат“ — квартил (Q1–Q4) и SJR се посочват едва след излизането ѝ. За публикувани Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'A submitted or in-press paper always has category “Submitted / in press” — quartile (Q1–Q4) and SJR are given only once it is out. For published Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
-          <li>{T('Отговорността за верните данни и за проверения в НАЦИД НРС ID е на автора (отметката „Потвърждавам“). Ръководителят ги проверява отново, преди да одобри (Merge).', 'The author is responsible for correct data and for the NRS ID checked at NACID (the “I confirm” box). The head of the lab checks them again before approving (Merge).')}</li>
+          <li>{T('Всяко публикуване се записва в дневник, а ръководителят получава уведомление и може да върне публикацията с едно щракване.', 'Every publication is logged; the head of the lab is notified and can withdraw it with one click.')}</li>
           <li>{T('Публикацията да не е вече на сайта (същото DOI или заглавие).', 'The publication must not already be on the site (same DOI or title).')}</li>
           <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
         </ul>
@@ -186,8 +181,8 @@ const rows = [
           <li>{T('„Запиши“ отваря GitHub с готова заявка (Issue). Ако не сте влезли — GitHub ще поиска вход с вашия акаунт.', '“Save” opens GitHub with a ready request (Issue). If you are not signed in, GitHub asks you to sign in.')}</li>
           <li>{T('Натиснете зеления бутон „Create“. Не променяйте текста на заявката.', 'Press the green “Create” button. Do not change the request text.')}</li>
           <li>{T('До около минута автоматичната проверка отговаря в заявката. При грешка: отворете връзката „Поправете във формата“, коригирайте и натиснете „Запиши“ отново (старата заявка се затваря сама).', 'Within about a minute the automatic check replies. On error: open the “Fix in the form” link, correct and press “Save” again (the old request closes itself).')}</li>
-          <li>{T('При успех се създава Pull Request „Нова публикация: …“. Ръководителят го преглежда и натиска „Merge“ (с отметка „bypass rules“).', 'On success a Pull Request “New publication: …” is created. The head of the lab reviews it and presses “Merge” (with “bypass rules”).')}</li>
-          <li>{T('След „Merge“ сайтът се обновява сам за около минута. Публикацията е на годишната страница под „Публикации → Архив“ и в „Обобщен отчет“ на всеки съавтор от колектива. Обновете страницата с Ctrl+F5.', 'After “Merge” the site updates itself in about a minute. The publication is on the yearly page under “Publications → Archive” and in the “Summary report” of every co-author from the team. Refresh with Ctrl+F5.')}</li>
+          <li>{T('При успех в заявката идва „✅ Публикувано на сайта“ със списък какво е проверено и къде. Ръководителят получава уведомление.', 'On success the request gets “✅ Published on the site” with what was checked and where. The head of the lab is notified.')}</li>
+          <li>{T('Сайтът се обновява сам за около минута. Публикацията е на годишната страница под „Публикации → Архив“ и в „Обобщен отчет“ на всеки съавтор от колектива. Обновете страницата с Ctrl+F5.', 'The site updates itself in about a minute. The publication is on the yearly page under “Publications → Archive” and in the “Summary report” of every co-author from the team. Refresh with Ctrl+F5.')}</li>
         </ol>
       </details>
     </section>
@@ -217,8 +212,6 @@ const rows = [
   .chip { display: inline-flex; gap: 6px; align-items: center; font-size: .85rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; cursor: pointer; }
   .chip input { width: auto; }
   .chip:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
-  .confirm .chk { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; line-height: 1.45; padding: 12px 14px; border: 1px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 6%, var(--surface)); cursor: pointer; }
-  .confirm .chk input { width: auto; margin-top: 3px; }
   .req { font-size: .78rem; margin: -6px 0 0; }
   select:disabled, input:disabled { opacity: .55; }
   .frow1.c3 { grid-template-columns: 1fr 1fr 2fr; }
@@ -242,12 +235,11 @@ const rows = [
 
 <script>
   import { validate, apa, normalize, MESSAGES } from '../lib/pubSchema.js';
-  // поле → елемент: idType/idValue/status/nrsId са нови; confirm е отметка
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
   const form = root.querySelector<HTMLFormElement>('[data-form]')!;
-  const fields = ['authors', 'year', 'title', 'status', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'idType', 'idValue', 'url', 'sjr', 'jif', 'share', 'nrsId', 'abstract'];
+  const fields = ['authors', 'year', 'title', 'status', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'idType', 'idValue', 'url', 'sjr', 'jif', 'share', 'abstract'];
 
   const read = () => {
     const fd = new FormData(form);
@@ -255,7 +247,6 @@ const rows = [
     fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
     e.tags = fd.getAll('tags');
     e.member = fd.get('member');
-    e.confirm = fd.get('confirm') === '1';
     e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
     return e;
   };

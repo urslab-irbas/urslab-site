@@ -1,10 +1,12 @@
 // Стартира се от .github/workflows/publication.yml при нова/редактирана заявка „[Публикация] …“.
 // 1) Проверява, че заявката е от GitHub акаунт на член на колектива (src/data/team/*.ts → github).
 // 2) Проверява записа със същите правила като формата на сайта (src/lib/pubSchema.js).
-// 3) При успех го добавя в src/data/contrib.json. Резултатът е в pub-result.json за следващите стъпки.
+// 3) Проверява DOI / ISSN / ISBN в публичните регистри (scripts/verify-ids.mjs) — при неуспех записът се отказва.
+// 4) При успех го добавя в src/data/contrib.json и в дневника publish-log.md. Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-publication.mjs
-import { readFileSync, writeFileSync, readdirSync, appendFileSync } from 'node:fs';
-import { validate, normalize, apa, MESSAGES, ID_LABEL } from '../src/lib/pubSchema.js';
+import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync } from 'node:fs';
+import { validate, normalize, apa, MESSAGES } from '../src/lib/pubSchema.js';
+import { verifyEntry } from './verify-ids.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const ADMIN = (process.env.ADMIN_LOGIN || 'urslab-irbas').toLowerCase();
@@ -13,7 +15,7 @@ const author = (process.env.ISSUE_AUTHOR || '').toLowerCase();
 const issue = Number(process.env.ISSUE_NUMBER || 0);
 const M = MESSAGES.bg;
 
-const result = { ok: false, authorized: false, errors: [], apa: '', fixUrl: `${SITE}/publications/new/`, title: '' };
+const result = { ok: false, authorized: false, errors: [], apa: '', fixUrl: `${SITE}/publications/new/`, title: '', verified: [] };
 const done = () => {
   writeFileSync('pub-result.json', JSON.stringify(result, null, 2));
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `ok=${result.ok}\nauthorized=${result.authorized}\n`);
@@ -64,35 +66,34 @@ for (const c of contrib) if (c.ghIssue !== issue) existing.push({ title: c.title
 
 // --- Проверка
 const errs = validate(data, { catKeys, tagKeys, existing });
-const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', nrsId: 'НАЦИД НРС, ID', confirm: 'Потвърждение', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
+const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
 result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}`);
 result.fixUrl = `${SITE}/publications/new/?m=${data.member}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
 result.title = String(data.title ?? '').slice(0, 90);
 if (errs.length) done();
 
-// --- Запис (при повторна редакция на същата заявка — замяна)
+// --- Проверка в публичните регистри (DOI, ISSN, ISBN; НАЦИД НРС ID)
 const entry = { ...normalize(data), by: author, ghIssue: issue };
+const v = await verifyEntry(entry);
+if (v.errors.length) {
+  result.errors = v.errors.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}`);
+  done();
+}
+if (v.nrsId) { entry.nrsId = v.nrsId; v.verified.push(`НАЦИД НРС, ID ${v.nrsId}: „${v.nrsTitle}“`); }
+entry.verified = [...new Set(v.verified)];
+result.verified = entry.verified;
 result.apa = apa(entry);
-// Напомняне за администратора: какво да провери, преди да натисне „Merge“
-const ST = { published: 'публикувана', 'in-press': 'под печат', submitted: 'подадена (под рецензия)' };
-const idLine = entry.doi
-  ? `DOI \`${entry.doi}\` — отваря ли https://doi.org/${entry.doi} точно тази публикация?`
-  : `${ID_LABEL[entry.idType]} \`${entry.issn ?? entry.isbn}\` (няма DOI) — ` + (entry.issn
-    ? `съвпада ли с изданието в https://portal.issn.org/resource/ISSN/${entry.issn}?`
-    : `съвпада ли с книгата/сборника (напр. в https://isbnsearch.org/isbn/${String(entry.isbn).replace(/[^0-9X]/gi, '')})?`);
-result.checklist = [
-  '### Проверка от администратора преди „Merge“',
-  'Авторът е потвърдил, че данните са верни и проверени, и носи отговорност за тях. Проверете отново:',
-  `- [ ] ${idLine}`,
-  `- [ ] Състояние: **${ST[entry.status] ?? entry.status}**, категория: **${entry.cat}**` + (entry.status === 'published' ? ' — отговаря ли на квартила/SJR в отчета на БАН (scimagojr.com)?' : ' — непубликувана, затова „Подадени / под печат“, без Q и SJR.'),
-  entry.nrsId
-    ? `- [ ] НАЦИД НРС, ID **${entry.nrsId}** — проверете в https://nrs.nacid.bg, че изданието е в списъка с този ID.`
-    : '- [ ] НАЦИД НРС: не е посочен ID. Ако изданието е в Националния референтен списък (https://nrs.nacid.bg), поискайте от автора да го добави.',
-  '- [ ] Авторите (APA), заглавието и годината отговарят на изданието; няма пълен текст на статия под рецензия.',
-  '',
-  'При грешка: не натискайте „Merge“ — напишете коментар в заявката, затворете този Pull Request и авторът въвежда записа отново през формата.',
-].join('\n');
+
+// --- Запис (при повторна редакция на същата заявка — замяна)
 const next = contrib.filter((c) => c.ghIssue !== issue).concat(entry);
 writeFileSync('src/data/contrib.json', JSON.stringify(next, null, 2) + '\n');
+
+// --- Дневник на публикуванията (всяко публикуване и връщане)
+const LOG = 'publish-log.md';
+const stamp = new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Sofia' }).slice(0, 16);
+const cell = (x) => String(x).replace(/\|/g, '/').replace(/\s+/g, ' ');
+const head = '# Дневник на публикуванията от формата на сайта\n\nВсеки ред е публикуване или връщане. Връщане: отметката „Върни“ в коментара на заявката (само ръководителят).\n\n| Дата (София) | Заявка | Въведена от | Публикация | Проверено в | Действие |\n|---|---|---|---|---|---|\n';
+const log = existsSync(LOG) ? readFileSync(LOG, 'utf8') : head;
+writeFileSync(LOG, log + `| ${stamp} | #${issue} | @${author} | ${cell(entry.title)} (${entry.year}) | ${cell(entry.verified.join('; '))} | публикувана |\n`);
 result.ok = true;
 done();
