@@ -5,7 +5,7 @@
 // 4) При успех го добавя в src/data/contrib.json и в дневника publish-log.md (workflow-ът ги взима от клона data и ги записва обратно там). Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-publication.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync } from 'node:fs';
-import { validate, normalize, apa, MESSAGES } from '../src/lib/pubSchema.js';
+import { validate, normalize, apa, MESSAGES, findDuplicate } from '../src/lib/pubSchema.js';
 import { verifyEntry } from './verify-ids.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
@@ -27,7 +27,7 @@ const HOW = {
   short: 'въведете пълното заглавие, както е в изданието.',
   caps: 'напишете заглавието с нормални малки и главни букви.',
   unknown: 'изберете тема от списъка във формата.',
-  duplicate: 'публикацията вече е на сайта — не я въвеждайте отново. За поправка пишете на ръководителя в тази заявка.',
+  duplicate: 'публикацията вече е на сайта (виж „Намерена“) — не я въвеждайте отново. Ако въвеждате друга публикация, поправете заглавието/DOI/авторите във формата и изпратете отново; за поправка на вече въведената пишете на ръководителя в тази заявка.',
   issn: 'въведете само номера на ISSN (8 знака, напр. 1314-8540), без Q, SJR и друг текст; проверете го в https://portal.issn.org',
   isbn: 'въведете само номера на ISBN (10 или 13 цифри), без друг текст.',
   idneeded: 'ако няма DOI, изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и въведете номера.',
@@ -85,12 +85,19 @@ for (const f of readdirSync('src/data').filter((f) => /\.(ts|json)$/.test(f) && 
   for (const m of s.matchAll(/doi:\s*'([^']+)'/g)) existing.push({ title: '', doi: m[1] });
 }
 const contrib = JSON.parse(readFileSync('src/data/contrib.json', 'utf8'));
-for (const c of contrib) if (c.ghIssue !== issue) existing.push({ title: c.title, doi: c.doi ?? '' });
+for (const c of contrib) if (c.ghIssue !== issue) existing.push({ title: c.title, authors: c.authors, doi: c.doi ?? '', year: c.year, where: c.cat === 'sub' ? 'publications' : `publications/${c.year <= 2021 ? 'earlier' : c.year <= 2024 ? '2022-2024' : c.year}` });
+// Пълният списък от сайта (с автори) — ако сайтът не отговаря, остават заглавията и DOI от файловете по-горе
+try {
+  const r = await fetch(`${SITE}/publications/all.json`, { signal: AbortSignal.timeout(20000) });
+  if (r.ok) { const all = await r.json(); if (Array.isArray(all) && all.length) { existing.length = 0; existing.push(...all, ...contrib.filter((c) => c.ghIssue !== issue).map((c) => ({ title: c.title, authors: c.authors, doi: c.doi ?? '', year: c.year, where: c.cat === 'sub' ? 'publications' : `publications/${c.year <= 2021 ? 'earlier' : c.year <= 2024 ? '2022-2024' : c.year}` }))); } }
+} catch { /* сайтът не отговаря — ползваме списъка от файловете */ }
 
 // --- Проверка
 const errs = validate(data, { catKeys, tagKeys, existing });
 const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
-result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}`);
+const dupOf = findDuplicate(data, existing);
+const dupText = dupOf ? ` Причина: ${dupOf.by === 'doi' ? 'същото DOI' : dupOf.by === 'title+authors' ? 'същото заглавие и общ автор' : 'същото заглавие'}. Намерена: ${dupOf.item.authors ?? ''}${dupOf.item.year ? ` (${dupOf.item.year})` : ''}. „${dupOf.item.title}“${dupOf.item.where ? ` — ${SITE}/${dupOf.item.where}/` : ''}` : '';
+result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.code === 'duplicate' ? dupText : ''}`);
 result.howto = errs.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
 result.fixUrl = `${SITE}/publications/new/?m=${data.member}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
 result.title = String(data.title ?? '').slice(0, 90);

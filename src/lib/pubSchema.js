@@ -90,6 +90,42 @@ export const cleanDoi = (d) => String(d || '').trim().replace(/^https?:\/\/(dx\.
 const num = (v) => (v === '' || v === undefined || v === null ? undefined : Number(String(v).replace(',', '.')));
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-zа-я0-9]/gi, '');
 
+// ---- Проверка за вече въведена публикация: същото DOI, или същото заглавие и същите автори
+const TRL = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sht', ъ: 'a', ь: 'y', ю: 'yu', я: 'ya' };
+const latin = (s) => String(s || '').toLowerCase().replace(/[а-я]/g, (c) => TRL[c] ?? c).normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+const tnorm = (s) => latin(s).replace(/[^a-z0-9]/g, '');
+const twords = (s) => new Set(latin(s).split(/[^a-z0-9]+/).filter((w) => w.length > 2));
+const STOP = new Set(['and', 'van', 'der', 'den', 'del', 'von', 'des', 'les']);
+/** Фамилиите на авторите (латиница, малки букви) — и от „Madzharov, A., …“, и от „A. Madzharov, …“ */
+export function surnamesOf(authors) {
+  const s = Array.isArray(authors) ? authors.join(', ') : String(authors || '');
+  return [...new Set(latin(s).split(/[^a-z-]+/).map((w) => w.replace(/^-+|-+$/g, '')).filter((w) => w.length >= 3 && !STOP.has(w)))];
+}
+/**
+ * Търси вече въведена публикация. existing: [{ title, authors?, doi?, year?, where? }].
+ * Връща { by: 'doi' | 'title+authors' | 'title', item } или null. „title+authors“ — същото заглавие и поне един общ автор.
+ * „title“ — само когато за намерената няма данни за авторите (тогава съвпадението на заглавието стига).
+ */
+export function findDuplicate(e, existing) {
+  const doi = cleanDoi(e.doi).toLowerCase();
+  const list = existing || [];
+  if (doi) for (const x of list) if (x.doi && cleanDoi(x.doi).toLowerCase() === doi) return { by: 'doi', item: x };
+  const t = tnorm(e.title), W = twords(e.title), A = surnamesOf(e.authors);
+  if (!t) return null;
+  for (const x of list) {
+    if (!x.title) continue;
+    const X = twords(x.title);
+    let common = 0; for (const w of W) if (X.has(w)) common++;
+    const same = tnorm(x.title) === t || (W.size >= 4 && common / Math.max(W.size, X.size) >= 0.9);
+    if (!same) continue;
+    const B = surnamesOf(x.authors);
+    if (!B.length || !A.length) return { by: 'title', item: x };
+    // поне един общ автор (грешка в името на съавтор не бива да пропусне дубликата)
+    if (A.some((w) => B.includes(w))) return { by: 'title+authors', item: x };
+  }
+  return null;
+}
+
 /** Изданието в един ред: „Списание, 12(3), 45–67“ или „Издател“ за книги */
 export function composeVenue(e) {
   if (BOOKS.includes(e.cat)) return [e.publisher, e.pages && `${e.pages} pp.`].filter(Boolean).join(', ');
@@ -160,12 +196,8 @@ export function validate(e, ctx) {
   if (!tags.length) add('tags', 'required');
   if (tags.some((g) => !ctx.tagKeys.includes(g))) add('tags', 'unknown');
 
-  for (const x of ctx.existing || []) {
-    if ((doi && x.doi && cleanDoi(x.doi).toLowerCase() === doi.toLowerCase()) || (norm(x.title) && norm(x.title) === norm(t))) {
-      add(doi && x.doi && cleanDoi(x.doi).toLowerCase() === doi.toLowerCase() ? 'doi' : 'title', 'duplicate');
-      break;
-    }
-  }
+  const dup = findDuplicate(e, ctx.existing);
+  if (dup) add(dup.by === 'doi' ? 'doi' : 'title', 'duplicate');
   return err;
 }
 
@@ -204,7 +236,7 @@ export const MESSAGES = {
     required: 'Задължително поле.',
     needed: 'За Q1–Q4 и „SJR без квартил“ въведете SJR и/или IF.',
     unknown: 'Непозната тема.',
-    duplicate: 'Тази публикация вече я има на сайта (същото DOI или заглавие).',
+    duplicate: 'Тази публикация вече я има на сайта (същото DOI или същото заглавие и автори).',
     fmt: 'Неправилен формат — вижте примера в полето.',
     idneeded: 'Без DOI изберете вида идентификатор (ISSN, eISSN, ISBN или eISBN) и въведете вярната стойност.',
     issn: 'Невалиден ISSN: 8 знака във вида 1234-567X; последният е контролна цифра (проверете в portal.issn.org).',
@@ -228,7 +260,7 @@ export const MESSAGES = {
     required: 'Required field.',
     needed: 'For Q1–Q4 and “SJR, no quartile”, enter SJR and/or IF.',
     unknown: 'Unknown topic.',
-    duplicate: 'This publication is already on the site (same DOI or title).',
+    duplicate: 'This publication is already on the site (same DOI, or same title and authors).',
     fmt: 'Wrong format — see the example in the field.',
     idneeded: 'Without a DOI, choose the identifier type (ISSN, eISSN, ISBN or eISBN) and enter the correct value.',
     issn: 'Invalid ISSN: 8 characters as 1234-567X; the last one is a check digit (check at portal.issn.org).',
