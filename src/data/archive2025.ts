@@ -97,7 +97,9 @@ export const archive2025: ArchivePub[] = [
     year: 2025, cat: 'intl', share: 66.67, team: ['hristozov', 'madzharov'], tags: ['uas', 'sora'],
     authors: 'Hristozov, S., Stanev, H., Madzharov, A.',
     title: 'Improvement in U-Space Development by Civil-Military Cooperation in a Multi-Domain Operations Environment',
-    venue: 'ICMCIS 2025, NATO STO, pp. 9495-1–8', isbn: '978-92-837-2605-0', doi: '10.14339/STO-MP-IST-209-9495-PDF',
+    venue: 'ICMCIS 2025 (IST-209-RSY), NATO STO Meeting Proceedings STO-MP-IST-209, Oeiras, Portugal, 13–14 May 2025, pp. 9495-1–8 (Open Access)', isbn: '978-92-837-2605-0',
+    doi: '10.14339/STO-MP-IST-209-9495-PDF', doiOff: true,
+    url: 'https://www.sto.nato.int/document/improvement-in-u-space-development-by-civil-military-cooperation-in-a-multi-domain-operations-environment/',
   },
   {
     year: 2025, cat: 'nat', share: 100, team: ['madzharov'], tags: ['navigation'],
