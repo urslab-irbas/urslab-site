@@ -15,7 +15,30 @@ const author = (process.env.ISSUE_AUTHOR || '').toLowerCase();
 const issue = Number(process.env.ISSUE_NUMBER || 0);
 const M = MESSAGES.bg;
 
-const result = { ok: false, authorized: false, errors: [], apa: '', fixUrl: `${SITE}/publications/new/`, title: '', verified: [] };
+const result = { ok: false, authorized: false, errors: [], howto: [], apa: '', fixUrl: `${SITE}/publications/new/`, title: '', verified: [] };
+// Какво точно да направи авторът за всяка грешка (отива в коментара в заявката → GitHub го изпраща и по имейл)
+const HOW = {
+  required: 'попълнете полето.',
+  fmt: 'поправете записа по примера под полето във формата.',
+  range: 'проверете стойността (година, проценти, числа).',
+  empty: 'въведете авторите.',
+  format: 'запишете авторите в APA: „Фамилия, И.“, разделени със запетая, „&“ преди последния.',
+  'no-team': 'сред авторите трябва да има член на колектива, записан с фамилия и инициал както в „Състав“.',
+  short: 'въведете пълното заглавие, както е в изданието.',
+  caps: 'напишете заглавието с нормални малки и главни букви.',
+  unknown: 'изберете тема от списъка във формата.',
+  duplicate: 'публикацията вече е на сайта — не я въвеждайте отново. За поправка пишете на ръководителя в тази заявка.',
+  issn: 'въведете само номера на ISSN (8 знака, напр. 1314-8540), без Q, SJR и друг текст; проверете го в https://portal.issn.org',
+  isbn: 'въведете само номера на ISBN (10 или 13 цифри), без друг текст.',
+  idneeded: 'ако няма DOI, изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и въведете номера.',
+  notfound: 'проверете номера (сайт на издателя, https://portal.issn.org, https://nrs.nacid.bg). Ако изданието го няма в регистрите, пишете на ръководителя в тази заявка — той ще го въведе.',
+  idmismatch: 'номерът е на изданието, посочено по-горе. Ако това е вашето издание, напишете в „Списание / сборник“ името му, както е в регистъра (може и с превода, напр. „Педагогика / Pedagogika“). Ако не е — въведете правилния ISSN/ISBN.',
+  doititle: 'DOI е на публикацията с посоченото заглавие. Проверете DOI (отворете https://doi.org/…) и заглавието във формата.',
+  unavailable: 'регистърът временно не отговаря — не е ваша грешка. Опитайте отново след около час със същата връзка.',
+  notsub: 'за непубликувана статия изберете „Подадени / под печат“ (квартилът се посочва след излизане).',
+  pubsub: 'за публикувана статия изберете реалната категория (Q1–Q4, SJR, ERIH+ …).',
+  needed: 'за Q1–Q4 и „SJR без квартил“ попълнете SJR и/или IF.',
+};
 const done = () => {
   writeFileSync('pub-result.json', JSON.stringify(result, null, 2));
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `ok=${result.ok}\nauthorized=${result.authorized}\n`);
@@ -68,6 +91,7 @@ for (const c of contrib) if (c.ghIssue !== issue) existing.push({ title: c.title
 const errs = validate(data, { catKeys, tagKeys, existing });
 const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
 result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}`);
+result.howto = errs.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
 result.fixUrl = `${SITE}/publications/new/?m=${data.member}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
 result.title = String(data.title ?? '').slice(0, 90);
 if (errs.length) done();
@@ -77,6 +101,7 @@ const entry = { ...normalize(data), by: author, ghIssue: issue };
 const v = await verifyEntry(entry);
 if (v.errors.length) {
   result.errors = v.errors.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}`);
+  result.howto = v.errors.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
   done();
 }
 if (v.nrsId) { entry.nrsId = v.nrsId; v.verified.push(`НАЦИД НРС, ID ${v.nrsId}: „${v.nrsTitle}“`); }

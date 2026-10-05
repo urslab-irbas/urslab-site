@@ -139,6 +139,7 @@ const rows = [
         <p>{T('След около минута GitHub ще отговори в заявката: „✅ Публикувано на сайта“ или „❌“ със списък на грешките и връзка за поправка тук.', 'In about a minute GitHub replies in the request: “✅ Published on the site” or “❌” with the errors and a link to fix them here.')}</p>
       </div>
     </form>
+    <div class="msg st" data-status hidden aria-live="polite"></div>
 
     <section class="help" id="help">
       <h2>{T('Помощ', 'Help')}</h2>
@@ -226,6 +227,12 @@ const rows = [
   .msg.ok { background: color-mix(in srgb, #2e7d4f 10%, var(--surface)); border: 1px solid #2e7d4f; }
   .msg p { margin: 0 0 6px; }
   .help { margin-top: 48px; }
+  form.locked { opacity: .55; }
+  .st { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .st[hidden] { display: none; }
+  .st.wait { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); border: 1px solid var(--accent); }
+  .st.warn { background: var(--surface); border: 1px solid var(--line); }
+  .st .btn { padding: 6px 12px; font-size: .85rem; }
   .help details { border-top: 1px solid var(--line); padding: 12px 0; }
   .help summary { cursor: pointer; font-weight: 600; }
   .help li { margin-bottom: 6px; }
@@ -279,7 +286,66 @@ const rows = [
     ['sjr', 'jif'].forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement; el.disabled = unpub; if (unpub) el.value = ''; });
   };
   st.addEventListener('change', syncStatus);
-  form.addEventListener('submit', (ev) => {
+  // ---- Защита от повторно изпращане и състояние на заявката в GitHub (публичният API, без вход)
+  const L = (bg: string, en: string) => (ctx.lang === 'bg' ? bg : en);
+  const API = `https://api.github.com/repos/${ctx.repo}/issues`;
+  const KEY = 'urslab-pub-sent';
+  type Sent = { title: string; gh: string; ts: number; url: string };
+  const store = {
+    get(): Sent | null { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } },
+    set(v: Sent | null) { try { v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); } catch { /* без localStorage — само за тази страница */ } },
+  };
+  const box = root.querySelector<HTMLElement>('[data-status]')!;
+  const issueTitle = (t: string) => `[Публикация] ${String(t).slice(0, 90)}`;
+  const esc = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  let timer = 0;
+  function lock(on: boolean) { (form as HTMLFormElement & { inert: boolean }).inert = on; form.classList.toggle('locked', on); }
+  function status(html: string, kind: string, actions: [string, () => void][] = []) {
+    box.hidden = false; box.className = `msg st ${kind}`; box.innerHTML = html;
+    for (const [label, fn] of actions) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ghost'; b.textContent = label; b.onclick = fn; box.append(b); }
+  }
+  const unlockNew = () => { store.set(null); clearTimeout(timer); lock(false); box.hidden = true; form.reset(); show([]); syncStatus(); preview(); history.replaceState(null, '', location.pathname + location.search); };
+  const unlockFix = () => { store.set(null); clearTimeout(timer); lock(false); syncStatus(); };
+  async function poll(s: Sent) {
+    clearTimeout(timer);
+    if (Date.now() - s.ts > 15 * 60 * 1000) {
+      unlockFix();
+      status(L('Не намерихме заявката в GitHub в рамките на 15 минути. Ако не сте натиснали „Create“, натиснете „Запиши“ отново.', 'No request found on GitHub within 15 minutes. If you did not press “Create”, press “Save” again.'), 'warn');
+      return;
+    }
+    let issue: { number: number; html_url: string; labels: { name: string }[] } | undefined;
+    try {
+      const r = await fetch(`${API}?creator=${encodeURIComponent(s.gh)}&state=all&per_page=10&sort=created&direction=desc`, { headers: { Accept: 'application/vnd.github+json' } });
+      if (r.ok) issue = (await r.json()).find((i: { title: string; created_at: string; pull_request?: unknown }) => !i.pull_request && i.title === issueTitle(s.title) && Date.parse(i.created_at) >= s.ts - 120000);
+    } catch { /* мрежа — ще опитаме пак */ }
+    const labels = (issue?.labels ?? []).map((l) => l.name);
+    const link = issue ? `<a href="${issue.html_url}" target="_blank" rel="noopener">#${issue.number}</a>` : '';
+    if (issue && labels.includes('публикувана')) {
+      store.set(null);
+      status(`✅ <b>${L('Публикувано на сайта', 'Published on the site')}</b> (${L('заявка', 'request')} ${link}). ${L('Повторно изпращане от тази страница е спряно.', 'Sending again from this page is blocked.')} `, 'ok', [[L('Въведи друга публикация', 'Enter another publication'), unlockNew]]);
+      return;
+    }
+    if (issue && labels.includes('отказана')) {
+      unlockFix();
+      status(`❌ <b>${L('Заявката е отказана', 'The request was refused')}</b> (${link}). ${L('Причините и какво да направите са в заявката — GitHub ви ги изпрати и по имейл. Поправете полетата тук и натиснете „Запиши“ отново.', 'The reasons and what to do are in the request — GitHub also e-mailed them to you. Fix the fields here and press “Save” again.')}`, 'bad');
+      return;
+    }
+    status(issue
+      ? `⏳ ${L('Заявка', 'Request')} ${link} ${L('се проверява в регистрите (обикновено до 1–2 минути). Не натискайте „Запиши“ отново.', 'is being checked in the registers (usually 1–2 minutes). Do not press “Save” again.')}`
+      : `⏳ ${L('Чака натискане на зеления бутон „Create“ в GitHub.', 'Waiting for the green “Create” button on GitHub.')} <a href="${esc(s.url)}" target="_blank" rel="noopener">${L('Отвори заявката отново', 'Open the request again')} →</a>`,
+      'wait', issue ? [] : [[L('Отказах се — отключи формата', 'I gave up — unlock the form'), unlockFix]]);
+    timer = window.setTimeout(() => poll(s), 15000);
+  }
+  /** Има ли вече публикувана заявка със същото заглавие (напр. от друга, по-стара страница)? */
+  async function alreadyPublished(title: string) {
+    try {
+      const r = await fetch(`${API}?state=all&labels=${encodeURIComponent('публикувана')}&per_page=100`, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!r.ok) return null;
+      return (await r.json()).find((i: { title: string }) => i.title === issueTitle(title)) ?? null;
+    } catch { return null; }
+  }
+
+  form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const e = read();
     const errors = validate(e, { catKeys: ctx.catKeys, tagKeys: ctx.tagKeys, existing: ctx.existing });
@@ -295,10 +361,22 @@ const rows = [
       '<!-- ' + (ctx.lang === 'bg' ? 'Не променяйте блока по-долу. За поправка използвайте формата на сайта.' : 'Do not change the block below. Use the site form for corrections.') + ' -->',
       '```json', JSON.stringify(data, null, 2), '```',
     ].join('\n');
-    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: `[Публикация] ${String(data.title).slice(0, 90)}`, body }).toString();
+    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: issueTitle(String(data.title)), body }).toString();
     root.querySelector<HTMLAnchorElement>('[data-gh]')!.href = url;
     history.replaceState(null, '', '#d=' + b64.enc(JSON.stringify(data)));
-    window.open(url, '_blank', 'noopener');
+    const w = window.open('', '_blank'); // отваря се веднага (иначе браузърът го блокира), адресът — след проверката
+    lock(true);
+    const dup = await alreadyPublished(String(data.title));
+    if (dup) {
+      w?.close();
+      root.querySelector<HTMLElement>('[data-ok]')!.hidden = true;
+      status(`✅ ${L('Тази публикация вече е публикувана на сайта', 'This publication is already published on the site')} (<a href="${dup.html_url}" target="_blank" rel="noopener">#${dup.number}</a>). ${L('Не я изпращайте отново.', 'Do not send it again.')}`, 'ok', [[L('Въведи друга публикация', 'Enter another publication'), unlockNew]]);
+      return;
+    }
+    if (w) { w.opener = null; w.location.href = url; }
+    const sent: Sent = { title: String(data.title), gh: who.github, ts: Date.now(), url };
+    store.set(sent);
+    poll(sent);
   });
   root.querySelector('[data-clear]')!.addEventListener('click', () => { form.reset(); show([]); preview(); history.replaceState(null, '', location.pathname + location.search); });
 
@@ -309,4 +387,7 @@ const rows = [
   if (h) { try { write(JSON.parse(b64.dec(h[1]))); } catch { /* повредена връзка — празна форма */ } }
   syncStatus();
   preview();
+  // Изпратено преди малко от този браузър и още без отговор → формата остава заключена
+  const pending = store.get();
+  if (pending && Date.now() - pending.ts < 15 * 60 * 1000) { lock(true); root.querySelector<HTMLElement>('[data-ok]')!.hidden = true; poll(pending); } else store.set(null);
 </script>
