@@ -39,6 +39,15 @@ export function checkIsbn(v) {
 export const checkId = (type, v) => (type === 'issn' || type === 'eissn' ? checkIssn(v) : type === 'isbn' || type === 'eisbn' ? checkIsbn(v) : false);
 export const isPublished = (e) => (e.status ?? 'published') === 'published';
 
+/** Номерът от формата (idValue) или от вече нормализиран запис (issn / isbn — така идва в GitHub) */
+export const idOf = (e) => String(e.idValue ?? e.issn ?? e.isbn ?? '').trim();
+/** Единен запис: ISSN → 1234-567X; ISBN → само цифри и тирета (всякакви тирета и интервали → „-“) */
+export function canonId(type, v) {
+  const s = String(v || '').trim();
+  if (type === 'issn' || type === 'eissn') { const d = s.toUpperCase().replace(/[^0-9X]/g, ''); return d.length === 8 ? `${d.slice(0, 4)}-${d.slice(4)}` : s; }
+  return s.replace(/[\s\u2010-\u2015\u2212]+/g, '-').replace(/-+/g, '-');
+}
+
 const PARTICLE = /^(?:(?:van|von|de|del|der|den|da|di|du|la|le|dos|das)\s+)*/;
 const AUTHOR = /^\s*([^,&]+?)\s*,\s*((?:\p{Lu}\p{Ll}?\.\s?-?\s?)+)\s*(?:,\s*|$)/u;
 
@@ -133,7 +142,7 @@ export function validate(e, ctx) {
   const doi = cleanDoi(e.doi);
   if (doi && !/^10\.\d{4,9}\/\S+$/.test(doi)) add('doi', 'fmt');
   // Без DOI записът се приема само с проверен идентификатор на изданието (ISSN / eISSN / ISBN / eISBN)
-  const idv = String(e.idValue || '').trim();
+  const idv = idOf(e);
   if (idv || e.idType) {
     if (!ID_TYPES.includes(e.idType)) add('idType', 'required');
     else if (!checkId(e.idType, idv)) add('idValue', e.idType.includes('issn') ? 'issn' : 'isbn');
@@ -168,8 +177,8 @@ export function normalize(e) {
     title: String(e.title).trim().replace(/\.\s*$/, ''),
   };
   out.status = e.status;
-  const idv = String(e.idValue || '').trim();
-  if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = idv; }
+  const idv = idOf(e);
+  if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = canonId(e.idType, idv); }
   for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'url', 'abstract']) {
     const v = String(e[k] ?? '').trim();
     if (v) out[k] = v;
