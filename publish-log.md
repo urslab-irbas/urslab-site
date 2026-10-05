@@ -4,4 +4,4 @@
 
 | Дата (София) | Заявка | Въведена от | Публикация | Проверено в | Действие |
 |---|---|---|---|---|---|
-| 2026-10-05 13:11 | #34 | @ivangaidarski | Method for design of information security system for sensitive data leak prevention (2026) | eISSN 2972-3841 — ISSN Portal (Confirmed record) — проверено по-късно; категорията е поправена на „Подадени / под печат“ | публикувана (преди автоматизацията) |
+| 2026-10-05 12:52 | #34 | @ivangaidarski | Method for design of information security system for sensitive data leak prevention (2026) | eISSN 2972-3841 — ISSN Portal (Confirmed record) (проверено по-късно) | публикувана с ръчно одобрение (PR #35); категорията е поправена на „Подадени / под печат“ (PR #36) |
