@@ -29,6 +29,16 @@ export function similarity(a, b) {
   return n / Math.min(A.size, B.size);
 }
 
+// Общи думи, които не стигат за съвпадение на изданието
+const GENERIC = new Set(['journal', 'proceedings', 'international', 'conference', 'scientific', 'science', 'sciences', 'annual', 'bulletin', 'series', 'review', 'and', 'the', 'for', 'with', 'national', 'symposium', 'workshop', 'papers', 'collection', 'сборник', 'списание', 'научна', 'научни', 'конференция', 'международна', 'доклади', 'трудове', 'годишник', 'известия']);
+/** Съвпада ли изданието от регистъра с въведеното (поне една обща значима дума) */
+export function venueMatch(registry, entered) {
+  const R = words(registry), E = words(entered);
+  const sig = [...R].filter((w) => !GENERIC.has(w));
+  const pool = sig.length ? sig : [...R];
+  return pool.some((w) => E.has(w));
+}
+
 /** НАЦИД НРС: търсене по ISSN/ISBN → { id, title, numbers } или null */
 export async function nrsByNumber(num) {
   const r = await get(`https://nrs.nacid.bg/api/Public/Nrs/GetInactiveAndActive?limit=10&intNumber=${encodeURIComponent(num)}`);
@@ -36,7 +46,11 @@ export async function nrsByNumber(num) {
   const want = digits(num);
   for (const x of d.result ?? []) {
     const nums = (x.registerEntryNumbers ?? []).map((n) => n.number);
-    if (nums.some((n) => digits(n) === want)) return { id: x.regNumber, title: [x.title, x.subTitle].filter(Boolean).join(': ').replace(/\s*\.\.\.\s*$/, '').trim(), numbers: nums, active: x.activeInNrs };
+    if (nums.some((n) => digits(n) === want)) {
+      const title = [x.title, x.subTitle].filter(Boolean).join(': ').replace(/[\s.'’…]+$/, '').trim();
+      const extra = [x.titleAlt, x.subTitleAlt, x.note, ...(x.registerEntryPublishers ?? []).map((p) => p.item?.name), ...(x.registerEntryOrganizations ?? []).map((o) => o.item?.name)].filter(Boolean).join(' ');
+      return { id: x.regNumber, title, match: `${title} ${extra}`, numbers: nums, active: x.activeInNrs };
+    }
   }
   return null;
 }
@@ -44,7 +58,7 @@ export async function nrsByNumber(num) {
 /** ISSN Portal: { found, title, status } — „Confirmed record“, „Provisional“ и др. */
 export async function issnPortal(issn) {
   const r = await get(`https://portal.issn.org/resource/ISSN/${issn}`, 'text/html');
-  if (r.status === 404) return { found: false };
+  if (r.status === 404 || r.status === 400) return { found: false };
   if (r.status !== 200) { const e = new Error(`portal.issn.org: HTTP ${r.status}`); e.code = 'unavailable'; throw e; }
   const text = r.text.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
   const rec = text.match(/ISSN Record\s+(\d{4}-\d{3}[\dX])/i);
@@ -59,13 +73,16 @@ export async function issnPortal(issn) {
 export async function crossrefIsbn(isbn) {
   const r = await get(`https://api.crossref.org/works?filter=isbn:${digits(isbn)}&rows=1`);
   const d = json(r.text); if (r.status !== 200 || !d) { const e = new Error(`api.crossref.org: HTTP ${r.status}`); e.code = 'unavailable'; throw e; }
-  const it = d.message?.items?.[0]; return it ? { title: (it.title || [])[0] ?? '', publisher: it.publisher ?? '' } : null;
+  const it = d.message?.items?.[0]; if (!it) return null;
+  const title = (it.title || [])[0] ?? '';
+  return { title, publisher: it.publisher ?? '', match: [title, it.publisher, it.event?.name, it.event?.acronym, ...(it['container-title'] || [])].filter(Boolean).join(' ') };
 }
 /** Open Library: книга по ISBN → заглавие или null */
 export async function openLibraryIsbn(isbn) {
   const r = await get(`https://openlibrary.org/search.json?isbn=${digits(isbn)}&fields=title,publisher&limit=1`);
   const d = json(r.text); if (r.status !== 200 || !d) { const e = new Error(`openlibrary.org: HTTP ${r.status}`); e.code = 'unavailable'; throw e; }
-  const it = d.docs?.[0]; return it ? { title: it.title ?? '', publisher: (it.publisher || [])[0] ?? '' } : null;
+  const it = d.docs?.[0]; if (!it) return null;
+  return { title: it.title ?? '', publisher: (it.publisher || [])[0] ?? '', match: [it.title, ...(it.publisher || [])].join(' ') };
 }
 
 /** DOI: съществува ли (doi.org) и какво е заглавието (Crossref или DataCite) */
@@ -107,19 +124,26 @@ export async function verifyEntry(e) {
         for (const n of [...d.issn, ...d.isbn]) { const x = await nrsByNumber(n); if (x) { setNrs(x); break; } }
       }
     }
-    // 2) ISSN / ISBN
+    // 2) ISSN / ISBN — номерът трябва да е в регистър И да е на същото издание (обща значима дума в името)
     const id = e.issn ?? e.isbn;
     if (id) {
       const label = { issn: 'ISSN', eissn: 'eISSN', isbn: 'ISBN', eisbn: 'eISBN' }[e.idType] ?? 'ID';
+      const isIssn = ISSN_TYPES.includes(e.idType);
+      const entered = [e.venue, e.publisher, isIssn ? '' : e.title].filter(Boolean).join(' ');
+      const check = (src, reg) => {
+        if (venueMatch(reg.match ?? reg.title, entered)) { out.verified.push(`${label} ${id} — ${src}: „${reg.title}“`); return true; }
+        fail('idValue', 'idmismatch', `${label} ${id} → ${src}: „${reg.title || '—'}“`); return false;
+      };
       const n = await nrsByNumber(id);
-      if (n) { setNrs(n); out.verified.push(`${label} ${id} — НАЦИД НРС, ID ${n.id}: „${n.title}“`); }
-      else if (ISSN_TYPES.includes(e.idType)) {
+      if (n) { if (check(`НАЦИД НРС, ID ${n.id}`, n)) setNrs(n); }
+      else if (isIssn) {
         const p = await issnPortal(id);
-        if (p.found) out.verified.push(`${label} ${id} — ISSN Portal (${p.status || 'запис'})${p.title ? `: „${p.title}“` : ''}`);
-        else fail('idValue', 'notfound', `${label} ${id}`);
+        if (!p.found) fail('idValue', 'notfound', `${label} ${id}`);
+        else if (!p.title || /not applicable/i.test(p.title)) fail('idValue', 'idmismatch', `${label} ${id} → ISSN Portal (${p.status}): без заглавие — не може да се провери`);
+        else check(`ISSN Portal (${p.status})`, p);
       } else {
         const c = (await crossrefIsbn(id)) ?? (await openLibraryIsbn(id));
-        if (c) out.verified.push(`${label} ${id} — ${c.publisher ? c.publisher + ', ' : ''}„${c.title}“`);
+        if (c) check(c.publisher ? `${c.publisher}` : 'Crossref / Open Library', c);
         else fail('idValue', 'notfound', `${label} ${id}`);
       }
     }

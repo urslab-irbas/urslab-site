@@ -204,6 +204,7 @@ export const MESSAGES = {
     pubsub: 'За публикувана статия изберете реалната категория (Q1–Q4, SJR, ERIH+ и т.н.), а не „Подадени / под печат“.',
     notfound: 'Не е намерен в публичните регистри (НАЦИД НРС, ISSN Portal, Crossref, Open Library, doi.org). Проверете номера. Книги и сборници, които ги няма там, се въвеждат от ръководителя.',
     doititle: 'Този DOI е на друга публикация. Заглавие по DOI:',
+    idmismatch: 'Номерът е в регистъра, но на издание с друго име (или регистърът не дава име за сравнение). Проверете номера и полето „Списание / сборник“. В регистъра:',
     unavailable: 'Регистърът не отговаря и записът не може да се провери. Опитайте отново по-късно (връзката „Поправете“ пази данните).',
   },
   en: {
@@ -227,6 +228,7 @@ export const MESSAGES = {
     pubsub: 'For a published paper choose the real category (Q1–Q4, SJR, ERIH+, etc.), not “Submitted / in press”.',
     notfound: 'Not found in the public registers (NACID NRS, ISSN Portal, Crossref, Open Library, doi.org). Check the number. Books and proceedings that are not there are entered by the head of the lab.',
     doititle: 'This DOI belongs to another publication. Title by DOI:',
+    idmismatch: 'The number is in the register, but for a venue with a different name (or the register gives no name to compare). Check the number and the “Journal / proceedings” field. In the register:',
     unavailable: 'The register does not respond and the entry cannot be checked. Try again later (the “Fix” link keeps the data).',
   },
 };
