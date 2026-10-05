@@ -128,7 +128,8 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'q4', sjr: 0.253, team: ['chehlarova', 'madzharov'], tags: ['hri', 'education', 'robotics'],
     authors: 'Dimitrova, M., Kostova, S., Chavdarov, I., Krastev, A., Chehlarova, N., Madzharov, A.',
     title: 'Psychosocial and Psychophysical Aspects of the Interaction with Humanoid Robots: Implications for Education',
-    venue: 'CompSysTech 2024, ACM International Conference Proceeding Series, pp. 1–9', doi: '10.1145/3674912.3674951',
+    venue: 'CompSysTech ’24: International Conference on Computer Systems and Technologies 2024, Ruse, Bulgaria, June 2024, ACM International Conference Proceeding Series, pp. 1–9', doi: '10.1145/3674912.3674951',
+    isbn: '979-8-4007-1684-3',
   },
   {
     year: 2024, cat: 'q4', sjr: 0.171, team: ['chehlarova'], tags: ['accessibility', 'education'],
@@ -224,7 +225,7 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'idx', team: ['chehlarova', 'madzharov'], tags: ['hri', 'robotics'],
     authors: 'Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A.',
     title: 'A Psychophysical View on User Acceptance of Robotic Systems for Social Applications',
-    venue: 'IEEE ITHET 2024 & IEETeL 2024, pp. 1–6', doi: '10.1109/ITHET61869.2024.10837594',
+    venue: '2024 21st International Conference on Information Technology Based Higher Education and Training (ITHET) with IEETeL 2024 Workshop, IEEE, November 2024, pp. 1–6', doi: '10.1109/ITHET61869.2024.10837594',
   },
   {
     year: 2023, cat: 'idx', team: ['gaidarski'], tags: ['security'],
