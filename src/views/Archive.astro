@@ -136,9 +136,9 @@ const L = {
               <span class="yr">{p.year}</span>
               <div>
                 <p class="au">{p.authors}</p>
-                <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
+                <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
                 {!bg && p.tr && <p class="tr">[{p.tr}]</p>}
-                <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}</p>
+                <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && (p.doiOff ? <> · DOI {p.doi} <span class="doi-off">({T('още не е активен', 'not yet active')})</span></> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}</p>
                 <p class="badges">
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
