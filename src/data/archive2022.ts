@@ -12,7 +12,7 @@
 // tags — етикети по тема (archiveTagLabels по-долу); те свързват и с „Научни направления“.
 // title — на езика на публикацията; tr — превод на заглавието (показва се на английската страница).
 
-export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'erih' | 'intl' | 'nat' | 'other' | 'soft' | 'sub';
+export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx' | 'erih' | 'intl' | 'nat' | 'nrs' | 'other' | 'soft' | 'sub';
 
 export interface ArchivePub {
   year: number;
@@ -22,6 +22,9 @@ export interface ArchivePub {
   venue: string;
   doi?: string;
   isbn?: string;
+  issn?: string;
+  url?: string;    // връзка към публикацията, ако няма DOI
+  eid?: string;    // Scopus EID
   cat: ArchCat;
   sjr?: number;
   jif?: number;
@@ -42,6 +45,7 @@ export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] 
   { key: 'erih', label: { bg: 'ERIH+', en: 'ERIH+' } },
   { key: 'intl', label: { bg: 'Международно академично издателство', en: 'International academic publisher' } },
   { key: 'nat', label: { bg: 'Национално академично издателство', en: 'National academic publisher' } },
+  { key: 'nrs', label: { bg: 'Национален референтен списък (НАЦИД)', en: 'National Reference List (NACID)' } },
   { key: 'other', label: { bg: 'Други бази данни', en: 'Other databases' } },
   { key: 'mono', label: { bg: 'Монографии', en: 'Monographs' } },
   { key: 'book', label: { bg: 'Учебници', en: 'Textbooks' } },

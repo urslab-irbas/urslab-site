@@ -131,14 +131,14 @@ const L = {
         <ol class="alist">
           {g.items.map((p) => (
             <li data-year={p.year} data-cat={p.cat} data-tags={p.tags.join(' ')} data-team={p.team.join(' ')}
-                data-ix={isIx(p) ? '1' : ''} data-share={p.share ?? ''} data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? ''}
+                data-ix={isIx(p) ? '1' : ''} data-share={p.share ?? ''} data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? (p.issn ? `ISSN ${p.issn}` : '')}
                 data-authors={p.authors} data-title={p.title} data-venue={p.venue}>
               <span class="yr">{p.year}</span>
               <div>
                 <p class="au">{p.authors}</p>
-                <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.title}</h3>
+                <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
                 {!bg && p.tr && <p class="tr">[{p.tr}]</p>}
-                <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}</p>
+                <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}</p>
                 <p class="badges">
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
