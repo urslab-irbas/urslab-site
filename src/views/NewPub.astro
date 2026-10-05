@@ -6,7 +6,7 @@
 import Layout from '../layouts/Layout.astro';
 import { ID_TYPES, ID_LABEL } from '../lib/pubSchema.js';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
-import { allPubs } from '../data/allPubs';
+import { dupList } from '../data/allPubs';
 import { team } from '../data/team';
 import { t, type Lang } from '../data/content';
 import { href } from '../lib/i18n';
@@ -21,7 +21,7 @@ const ctx = {
   lang, repo: REPO,
   catKeys: archiveCats.map((c) => c.key),
   tagKeys: Object.keys(archiveTagLabels),
-  existing: allPubs.map((p) => ({ doi: p.doi ?? '', title: p.title })),
+  existing: dupList,
   members: Object.fromEntries(members.map((m) => [m.id, { name: m.name[lang], github: m.github }])),
 };
 const year = new Date().getFullYear();
@@ -172,7 +172,7 @@ const rows = [
           <li>{T('НАЦИД НРС, ID се определя автоматично от регистъра.', 'The NACID NRS ID is set automatically from the register.')}</li>
           <li>{T('Подадена или под печат публикация е винаги с категория „Подадени / под печат“ — квартил (Q1–Q4) и SJR се посочват едва след излизането ѝ. За публикувани Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'A submitted or in-press paper always has category “Submitted / in press” — quartile (Q1–Q4) and SJR are given only once it is out. For published Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
           <li>{T('Всяко публикуване се записва в дневник, а ръководителят получава уведомление и може да върне публикацията с едно щракване.', 'Every publication is logged; the head of the lab is notified and can withdraw it with one click.')}</li>
-          <li>{T('Публикацията да не е вече на сайта (същото DOI или заглавие).', 'The publication must not already be on the site (same DOI or title).')}</li>
+          <li>{T('Публикацията да не е вече на сайта: същото DOI или същото заглавие с поне един общ автор. Проверката е във всички публикации на сайта, включително току-що въведените. При съвпадение на екрана излиза коя е намерената публикация и защо; данните остават във формата за поправка.', 'The publication must not already be on the site: the same DOI, or the same title with at least one common author. All site publications are checked, including those just entered. On a match the screen shows the publication found and why; the data stay in the form for correction.')}</li>
           <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
         </ul>
       </details>
@@ -233,6 +233,7 @@ const rows = [
   .st.wait { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); border: 1px solid var(--accent); }
   .st.warn { background: var(--surface); border: 1px solid var(--line); }
   .st .btn { padding: 6px 12px; font-size: .85rem; }
+  .st :global(.st-text) { flex: 1 1 100%; line-height: 1.55; }
   .help details { border-top: 1px solid var(--line); padding: 12px 0; }
   .help summary { cursor: pointer; font-weight: 600; }
   .help li { margin-bottom: 6px; }
@@ -241,7 +242,7 @@ const rows = [
 </style>
 
 <script>
-  import { validate, apa, normalize, MESSAGES } from '../lib/pubSchema.js';
+  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi } from '../lib/pubSchema.js';
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
@@ -301,7 +302,7 @@ const rows = [
   let timer = 0;
   function lock(on: boolean) { (form as HTMLFormElement & { inert: boolean }).inert = on; form.classList.toggle('locked', on); }
   function status(html: string, kind: string, actions: [string, () => void][] = []) {
-    box.hidden = false; box.className = `msg st ${kind}`; box.innerHTML = html;
+    box.hidden = false; box.className = `msg st ${kind}`; box.innerHTML = `<div class="st-text">${html}</div>`;
     for (const [label, fn] of actions) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ghost'; b.textContent = label; b.onclick = fn; box.append(b); }
   }
   const unlockNew = () => { store.set(null); clearTimeout(timer); lock(false); box.hidden = true; form.reset(); show([]); syncStatus(); preview(); history.replaceState(null, '', location.pathname + location.search); };
@@ -336,6 +337,34 @@ const rows = [
       'wait', issue ? [] : [[L('Отказах се — отключи формата', 'I gave up — unlock the form'), unlockFix]]);
     timer = window.setTimeout(() => poll(s), 15000);
   }
+  // ---- Вече въведена публикация (същото DOI или същото заглавие и общ автор): съобщение на екрана, данните остават за поправка
+  type Dup = { by: string; item: { title: string; authors?: string; doi?: string; year?: number; where?: string } };
+  function showDup(d: Dup, e: Record<string, unknown>) {
+    const it = d.item;
+    const why = d.by === 'doi'
+      ? L(`същото DOI (${esc(cleanDoi(e.doi as string))})`, `the same DOI (${esc(cleanDoi(e.doi as string))})`)
+      : d.by === 'title+authors' ? L('същото заглавие и общ автор', 'the same title and a common author') : L('същото заглавие', 'the same title');
+    const page = it.where ? `<a href="/${ctx.lang === 'bg' ? '' : 'en/'}${esc(it.where)}/" target="_blank" rel="noopener">${L('виж на сайта', 'see on the site')} →</a>` : '';
+    status(`⛔ <b>${L('Заявката не може да бъде изпълнена: тази публикация вече е въведена на сайта.', 'The request cannot be completed: this publication is already on the site.')}</b><br>` +
+      `${L('Причина', 'Reason')}: ${why}.<br>` +
+      `${L('Намерена', 'Found')}: ${esc(it.authors ?? '')}${it.year ? ` (${it.year})` : ''}. <i>${esc(it.title)}</i>${it.doi ? `. https://doi.org/${esc(it.doi)}` : ''} ${page}<br>` +
+      L('Ако въвеждате друга публикация, поправете данните (заглавие, DOI, автори) и натиснете „Запиши“ отново.', 'If you are entering a different publication, correct the data (title, DOI, authors) and press “Save” again.'),
+      'bad', [
+        [L('Поправи данните', 'Correct the data'), () => { box.hidden = true; (form.elements.namedItem('title') as HTMLElement).focus(); }],
+        [L('Въведи друга публикация', 'Enter another publication'), unlockNew],
+      ]);
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  /** Пресен списък на всички публикации: от сайта (/publications/all.json) + въведените през формата (клон data) */
+  async function freshExisting() {
+    const out = [...ctx.existing];
+    try { const r = await fetch('/publications/all.json', { cache: 'no-store' }); if (r.ok) out.push(...await r.json()); } catch { /* офлайн — остава списъкът от страницата */ }
+    try {
+      const r = await fetch(`https://raw.githubusercontent.com/${ctx.repo}/data/src/data/contrib.json`, { cache: 'no-store' });
+      if (r.ok) out.push(...(await r.json()).map((c: { title: string; authors: string; doi?: string; year: number; cat: string }) => ({ ...c, where: c.cat === 'sub' ? 'publications' : `publications/${c.year <= 2021 ? 'earlier' : c.year <= 2024 ? '2022-2024' : c.year}` })));
+    } catch { /* без връзка към GitHub */ }
+    return out;
+  }
   /** Има ли вече публикувана заявка със същото заглавие (напр. от друга, по-стара страница)? */
   async function alreadyPublished(title: string) {
     try {
@@ -352,7 +381,11 @@ const rows = [
     show(errors);
     root.querySelector<HTMLElement>('[data-bad]')!.hidden = errors.length === 0;
     root.querySelector<HTMLElement>('[data-ok]')!.hidden = errors.length > 0;
-    if (errors.length) { form.querySelector<HTMLElement>('.bad')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    if (errors.length) {
+      const d = errors.some((x) => x.code === 'duplicate') ? findDuplicate(e, ctx.existing) : null;
+      if (d) { root.querySelector<HTMLElement>('[data-bad]')!.hidden = true; showDup(d, e); return; }
+      form.querySelector<HTMLElement>('.bad')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return;
+    }
     const data = { ...normalize(e), member: e.member };
     const who = ctx.members[e.member as string];
     const body = [
@@ -366,6 +399,8 @@ const rows = [
     history.replaceState(null, '', '#d=' + b64.enc(JSON.stringify(data)));
     const w = window.open('', '_blank'); // отваря се веднага (иначе браузърът го блокира), адресът — след проверката
     lock(true);
+    const d = findDuplicate(e, await freshExisting());
+    if (d) { w?.close(); lock(false); syncStatus(); root.querySelector<HTMLElement>('[data-ok]')!.hidden = true; showDup(d, e); return; }
     const dup = await alreadyPublished(String(data.title));
     if (dup) {
       w?.close();

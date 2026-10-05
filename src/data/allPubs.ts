@@ -20,3 +20,11 @@ export const toPublication = (a: ArchivePub): Publication => ({
 export const currentList: Publication[] = [...currentMain, ...formSubmitted.map(toPublication)];
 /** Архивът като списък (най-новите първо) */
 export const archiveList: Publication[] = archivedPubs.map(toPublication);
+
+/** За проверката за дубликати (формата и GitHub): заглавие, автори, DOI, година и страницата, на която е публикацията */
+export type DupItem = { title: string; authors: string; doi?: string; year: number; where: string };
+const pageOf = new Map(archivePages.flatMap((pg) => pg.items.map((it) => [it, pg.slug] as const)));
+export const dupList: DupItem[] = [
+  ...currentPubs.map((p) => ({ title: p.title, authors: p.authors, doi: p.doi, year: p.year, where: 'publications' })),
+  ...archivedPubs.map((p) => ({ title: p.title, authors: p.authors, doi: p.doi, year: p.year, where: pageOf.get(p) ?? 'publications' })),
+];
