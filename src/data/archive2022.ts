@@ -16,6 +16,10 @@ export type ArchCat = 'mono' | 'book' | 'q1' | 'q2' | 'q3' | 'q4' | 'sjr' | 'idx
 
 export interface ArchivePub {
   year: number;
+  /** само за непубликувани (cat 'sub'): под печат или подадена */
+  st?: 'in-press' | 'submitted';
+  /** резюме (само за въведените през формата) */
+  abstract?: string;
   authors: string;
   title: string;
   tr?: string;

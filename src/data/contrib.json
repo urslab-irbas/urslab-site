@@ -1,19 +1,19 @@
 [
   {
     "year": 2026,
-    "cat": "q1",
+    "cat": "sub",
     "authors": "Gaidarski, I.",
     "title": "Method for design of information security system for sensitive data leak prevention",
     "venue": "Journal of Data Science and Intelligent Systems (JDSIS)",
     "publisher": "Bon View Publishing Pte Ltd.",
     "url": "https://ojs.bonviewpress.com/index.php/jdsis/article/view/4231",
     "abstract": "This article proposes a top-down method for designing an information security system (ISS) that prevents the leakage of sensitive information outside the organization. The method combines systems analysis with the IEEE 1471 and ISO/IEC/IEEE 42010 architecture description standards to construct stakeholder-specific conceptual models and a multi-layered conceptual ISS architecture. Two formal transformations are defined: T₁ converts the conceptual model into an object-oriented model represented via the Unified Modeling Language (UML), while T₂ converts this model into an agent-based simulation model. The method is compared against NIST Special Publication 800-37, the ISO/IEC 27005:2022 standard, the SABSA (Sherwood Applied Business Security Architecture) framework, and the TOGAF framework (Table 1). A one-year field study across seven organizations (five public and two private)—in which the ISS was implemented on a Data Leak Prevention (DLP) platform—demonstrated an average 42.1% reduction in policy violation incidents (Wilcoxon criterion W = 0, p = 0.016, effect size dz = 3.50 for paired samples), as well as an increase in the composite ISO/IEC 27004-based compliance score from 18.7% to 86.4%. An agent-based prototype (implemented in the NetLogo environment, using 50 Monte Carlo simulations) reproduces a reduction in the same direction and of comparable magnitude in a simulation environment (in silico). In compliance with the study's ethical approval requirements, all results",
-    "sjr": 1.04,
     "share": 100,
     "tags": [
       "security"
     ],
     "by": "ivangaidarski",
-    "ghIssue": 34
+    "ghIssue": 34,
+    "status": "submitted"
   }
 ]

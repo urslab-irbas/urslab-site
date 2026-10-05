@@ -28,7 +28,13 @@ const fixed: ArchivePage[] = [
 // Въведени през формата (contrib.json) → формат ArchivePub
 type Contrib = { year: number; cat: ArchivePub['cat']; authors: string; title: string; doi?: string; isbn?: string; sjr?: number; jif?: number; share?: number; tags: string[]; [k: string]: unknown };
 const mapForm = (e: Contrib): ArchivePub => ({
-  year: e.year, cat: e.cat, authors: e.authors, title: e.title, venue: composeVenue(e), doi: e.doi, isbn: e.isbn,
+  year: e.year, cat: e.cat, authors: e.authors, title: e.title, venue: composeVenue(e), doi: e.doi,
+  isbn: e.isbn && (e.idType === 'eisbn' ? `${e.isbn} (online)` : e.isbn),
+  issn: typeof e.issn === 'string' ? (e.idType === 'eissn' ? `${e.issn} (online)` : e.issn) : undefined,
+  url: typeof e.url === 'string' ? e.url : undefined,
+  abstract: typeof e.abstract === 'string' ? e.abstract : undefined,
+  st: e.cat === 'sub' ? (e.status === 'in-press' ? 'in-press' : 'submitted') : undefined,
+  note: e.nrsId ? `НАЦИД НРС, ID ${e.nrsId}` : undefined,
   sjr: e.sjr, jif: e.jif, share: e.share, tags: e.tags, team: teamFromAuthors(parseAuthors(e.authors).list),
 });
 // Подадените (cat 'sub') са в текущия списък на „Публикации“, а не в архива

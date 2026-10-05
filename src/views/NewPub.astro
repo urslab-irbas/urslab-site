@@ -4,6 +4,7 @@
 // Там човекът влиза със своя GitHub акаунт; GitHub Action проверява записа повторно,
 // добавя го в src/data/contrib.json и отваря Pull Request за одобрение от ръководителя.
 import Layout from '../layouts/Layout.astro';
+import { ID_TYPES, ID_LABEL } from '../lib/pubSchema.js';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
 import { allPubs } from '../data/allPubs';
 import { team } from '../data/team';
@@ -30,14 +31,17 @@ const F = {
   authors: [T('Автори (APA)', 'Authors (APA)'), T('Всички автори в реда от статията: „Фамилия, И.“, разделени със запетая; преди последния — „&“. Латиница за статии на английски, кирилица за статии на български.', 'All authors in the paper’s order: “Surname, I.”, separated by commas; “&” before the last one.'), 'Madzharov, A., Hristozov, S., & Gaidarski, I.'],
   year: [T('Година на публикуване', 'Year of publication'), T('Годината, в която статията е публикувана (за подадени — очакваната). Определя на коя годишна страница ще се появи.', 'The year the paper was published (expected year if submitted). It decides the yearly page.'), String(year)],
   title: [T('Заглавие', 'Title'), T('Точно както е в изданието, без кавички и без точка накрая. Не само с главни букви.', 'Exactly as published, no quotes, no full stop at the end. Not in capitals only.'), 'Compensations for horizontal inertial components of INS/GNSS with flight altitude'],
-  cat: [T('Категория (индексиране)', 'Category (indexing)'), T('Както в отчета на БАН: квартил по WoS/Scopus, SJR без квартил, ERIH+, издателство и т.н. За монография и учебник — издател вместо списание.', 'As in the BAS report: WoS/Scopus quartile, SJR without quartile, ERIH+, publisher type, etc. For a monograph or textbook — publisher instead of journal.')],
+  status: [T('Състояние', 'Status'), T('Публикувана — вече е излязла (има DOI или страници). Подадена / под печат — още не е излязла.', 'Published — already out (has a DOI or pages). Submitted / in press — not out yet.')],
+  cat: [T('Категория (индексиране)', 'Category (indexing)'), T('Само за публикувани: квартил по WoS/Scopus, SJR без квартил, ERIH+ и т.н., както в отчета на БАН. За подадена / под печат е винаги „Подадени / под печат“ — квартилът се посочва след излизане.', 'Published only: WoS/Scopus quartile, SJR without quartile, ERIH+, etc., as in the BAS report. Submitted / in press is always “Submitted / in press” — the quartile is given once it is out.')],
   venue: [T('Списание / сборник', 'Journal / proceedings'), T('Пълното име на списанието или сборника на конференцията, в курсив по APA (тук — обикновен текст).', 'Full name of the journal or conference proceedings.'), 'Engineering Proceedings'],
   volume: [T('Том', 'Volume'), T('Само числото.', 'Number only.'), '150'],
   issue: [T('Брой', 'Issue'), T('Само числото; оставете празно, ако няма.', 'Number only; leave empty if none.'), '1'],
   pages: [T('Страници / № на статия', 'Pages / article no.'), T('„45–67“ или номер на статията, напр. „70“.', '“45–67” or article number, e.g. “70”.'), '45–67'],
   publisher: [T('Издател', 'Publisher'), T('Задължително за монография и учебник; по желание за сборници.', 'Required for monographs and textbooks; optional otherwise.'), 'MDPI'],
   doi: [T('DOI', 'DOI'), T('Само идентификаторът, напр. 10.3390/… (може и с https://doi.org/ — ще се изчисти).', 'Identifier only, e.g. 10.3390/… (a https://doi.org/ prefix is removed).'), '10.3390/engproc2026150070'],
-  isbn: [T('ISBN', 'ISBN'), T('За книги и сборници с ISBN.', 'For books and proceedings with an ISBN.'), '978-954-753-168-0'],
+  idType: [T('Вид идентификатор', 'Identifier type'), T('Задължително, ако няма DOI. Изберете ISSN / eISSN (списание) или ISBN / eISBN (книга, сборник).', 'Required if there is no DOI. Choose ISSN / eISSN (journal) or ISBN / eISBN (book, proceedings).')],
+  idValue: [T('ISSN / ISBN', 'ISSN / ISBN'), T('Само номерът: ISSN — 8 знака (1234-567X), ISBN — 10 или 13 цифри. Контролната цифра се проверява. Без Q, SJR и др. текст.', 'Number only: ISSN — 8 characters (1234-567X), ISBN — 10 or 13 digits. The check digit is verified. No Q, SJR or other text.'), '2367-7902'],
+  nrsId: [T('НАЦИД НРС, ID (ако е в списъка)', 'NACID NRS ID (if listed)'), T('Номерът на изданието в Националния референтен списък (nrs.nacid.bg). Проверете го там.', 'The ID of the venue in the National Reference List (nrs.nacid.bg). Check it there.'), '1708'],
   url: [T('Линк (ако няма DOI)', 'Link (if no DOI)'), T('Адрес на публикацията, започващ с https://', 'Address starting with https://'), 'https://…'],
   sjr: [T('SJR (Scopus)', 'SJR (Scopus)'), T('Задължително за Q1–Q4 и „SJR без квартил“ (или IF). Десетична точка или запетая.', 'Required for Q1–Q4 and “SJR, no quartile” (or IF).'), '0.254'],
   jif: [T('IF (JCR, Web of Science)', 'IF (JCR, Web of Science)'), T('Импакт фактор, ако има.', 'Impact factor, if any.'), '3.5'],
@@ -48,11 +52,12 @@ const F = {
 const input = (k: keyof typeof F, attrs: Record<string, unknown> = {}) => ({ k, label: F[k][0], help: F[k][1], ex: F[k][2], attrs });
 const rows = [
   [input('authors', { required: true })],
-  [input('year', { type: 'number', min: 1980, max: year + 1, required: true }), input('cat')],
+  [input('year', { type: 'number', min: 1980, max: year + 1, required: true }), input('status'), input('cat')],
   [input('title', { required: true })],
   [input('venue'), input('volume'), input('issue'), input('pages')],
-  [input('publisher'), input('doi'), input('isbn')],
+  [input('publisher'), input('doi'), input('idType'), input('idValue')],
   [input('url'), input('sjr', { inputmode: 'decimal' }), input('jif', { inputmode: 'decimal' }), input('share', { inputmode: 'decimal' })],
+  [input('nrsId', { inputmode: 'numeric' })],
 ];
 ---
 <Layout lang={lang} slug="publications/new" title={title}
@@ -88,9 +93,13 @@ const rows = [
         <div class={`frow1 c${row.length}`}>
           {row.map((f) => (
             <label class="f" data-field={f.k}>
-              <span class="l">{f.label}{(f.attrs as { required?: boolean }).required || ['cat'].includes(f.k) ? ' *' : ''}</span>
+              <span class="l">{f.label}{(f.attrs as { required?: boolean }).required || ['cat', 'status'].includes(f.k) ? ' *' : f.k === 'idType' || f.k === 'idValue' ? ' **' : ''}</span>
               {f.k === 'cat'
                 ? <select name="cat"><option value="">— {T('изберете', 'choose')} —</option>{archiveCats.map((c) => <option value={c.key}>{c.label[lang]}</option>)}</select>
+                : f.k === 'status'
+                ? <select name="status"><option value="">— {T('изберете', 'choose')} —</option><option value="published">{T('Публикувана', 'Published')}</option><option value="in-press">{T('Под печат', 'In press')}</option><option value="submitted">{T('Подадена (под рецензия)', 'Submitted (under review)')}</option></select>
+                : f.k === 'idType'
+                ? <select name="idType"><option value="">— {T('няма / има DOI', 'none / has DOI')} —</option>{ID_TYPES.map((k) => <option value={k}>{ID_LABEL[k]}</option>)}</select>
                 : f.k === 'title'
                   ? <textarea name="title" rows="2" placeholder={`${T('напр.', 'e.g.')} ${f.ex}`}></textarea>
                   : <input name={f.k} placeholder={f.ex ? `${T('напр.', 'e.g.')} ${f.ex}` : undefined} autocomplete="off" {...f.attrs} />}
@@ -113,6 +122,13 @@ const rows = [
         <textarea name="abstract" rows="4" maxlength="1500"></textarea>
         <small>{F.abstract[1]}</small>
       </label>
+
+      <label class="f confirm" data-field="confirm">
+        <span class="chk"><input type="checkbox" name="confirm" value="1" />
+          <span>{T('Потвърждавам, че данните са верни и проверени от мен: DOI или ISSN / ISBN (portal.issn.org), състоянието и категорията, а при издание в Националния референтен списък — неговият ID в nrs.nacid.bg. Отговорността за верността им е моя.', 'I confirm that the data are correct and checked by me: DOI or ISSN / ISBN (portal.issn.org), status and category, and for a venue in the National Reference List — its ID at nrs.nacid.bg. I am responsible for their correctness.')} *</span></span>
+        <em class="err" hidden></em>
+      </label>
+      <p class="req muted">{T('* задължително;  ** задължително, когато няма DOI', '* required;  ** required when there is no DOI')}</p>
 
       <div class="preview">
         <span class="l">{T('Преглед в APA стил', 'APA preview')}</span>
@@ -156,8 +172,10 @@ const rows = [
         <ul>
           <li>{T('Задължителни: автори, година, заглавие, категория, списание (или издател за книги), поне една тема.', 'Required: authors, year, title, category, journal (or publisher for books), at least one topic.')}</li>
           <li>{T('Сред авторите трябва да има член на колектива.', 'A team member must be among the authors.')}</li>
-          <li>{T('DOI — във вид 10.xxxx/…; ISBN — 10 или 13 цифри; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; ISBN with 10 or 13 digits; pages as “45–67” or a number.')}</li>
-          <li>{T('За Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'For Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
+          <li>{T('DOI — във вид 10.xxxx/…; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; pages as “45–67” or a number.')}</li>
+          <li>{T('Без DOI записът не се приема, докато не изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и не въведете валиден номер — контролната цифра се проверява. В полето се пише само номерът, без Q, SJR и др.', 'Without a DOI the entry is not accepted until you choose an identifier type (ISSN, eISSN, ISBN or eISBN) and enter a valid number — the check digit is verified. Only the number goes in the field, no Q, SJR, etc.')}</li>
+          <li>{T('Подадена или под печат публикация е винаги с категория „Подадени / под печат“ — квартил (Q1–Q4) и SJR се посочват едва след излизането ѝ. За публикувани Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'A submitted or in-press paper always has category “Submitted / in press” — quartile (Q1–Q4) and SJR are given only once it is out. For published Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
+          <li>{T('Отговорността за верните данни и за проверения в НАЦИД НРС ID е на автора (отметката „Потвърждавам“). Ръководителят ги проверява отново, преди да одобри (Merge).', 'The author is responsible for correct data and for the NRS ID checked at NACID (the “I confirm” box). The head of the lab checks them again before approving (Merge).')}</li>
           <li>{T('Публикацията да не е вече на сайта (същото DOI или заглавие).', 'The publication must not already be on the site (same DOI or title).')}</li>
           <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
         </ul>
@@ -185,7 +203,6 @@ const rows = [
   form { display: grid; gap: 14px; }
   .frow1 { display: grid; gap: 14px; grid-template-columns: 1fr; }
   .frow1.c2 { grid-template-columns: 1fr 2fr; }
-  .frow1.c3 { grid-template-columns: repeat(3, 1fr); }
   .frow1.c4 { grid-template-columns: 2fr 1fr 1fr 1fr; }
   .f { display: flex; flex-direction: column; gap: 4px; border: 0; padding: 0; margin: 0; min-width: 0; }
   .l { font: 600 .82rem var(--font); }
@@ -200,6 +217,11 @@ const rows = [
   .chip { display: inline-flex; gap: 6px; align-items: center; font-size: .85rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; cursor: pointer; }
   .chip input { width: auto; }
   .chip:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .confirm .chk { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; line-height: 1.45; padding: 12px 14px; border: 1px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 6%, var(--surface)); cursor: pointer; }
+  .confirm .chk input { width: auto; margin-top: 3px; }
+  .req { font-size: .78rem; margin: -6px 0 0; }
+  select:disabled, input:disabled { opacity: .55; }
+  .frow1.c3 { grid-template-columns: 1fr 1fr 2fr; }
   .preview { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; background: var(--surface); }
   .preview p { margin: 6px 0 0; font-size: .92rem; overflow-wrap: anywhere; }
   .acts { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -220,11 +242,12 @@ const rows = [
 
 <script>
   import { validate, apa, normalize, MESSAGES } from '../lib/pubSchema.js';
+  // поле → елемент: idType/idValue/status/nrsId са нови; confirm е отметка
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
   const form = root.querySelector<HTMLFormElement>('[data-form]')!;
-  const fields = ['authors', 'year', 'title', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'isbn', 'url', 'sjr', 'jif', 'share', 'abstract'];
+  const fields = ['authors', 'year', 'title', 'status', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'idType', 'idValue', 'url', 'sjr', 'jif', 'share', 'nrsId', 'abstract'];
 
   const read = () => {
     const fd = new FormData(form);
@@ -232,9 +255,13 @@ const rows = [
     fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
     e.tags = fd.getAll('tags');
     e.member = fd.get('member');
+    e.confirm = fd.get('confirm') === '1';
+    e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
     return e;
   };
   const write = (e: Record<string, unknown>) => {
+    // данните от GitHub са нормализирани: issn/isbn + idType → idType + idValue
+    if (!e.idValue && (e.issn || e.isbn)) { e.idValue = e.issn ?? e.isbn; e.idType ??= e.issn ? 'issn' : 'isbn'; }
     fields.forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement | null; if (el && e[k] !== undefined) el.value = String(e[k]); });
     form.querySelectorAll<HTMLInputElement>('input[name="tags"]').forEach((c) => (c.checked = ((e.tags as string[]) || []).includes(c.value)));
     const m = form.elements.namedItem('member') as HTMLSelectElement; if (e.member && ctx.members[e.member as string]) m.value = String(e.member);
@@ -252,6 +279,15 @@ const rows = [
   }
 
   form.addEventListener('input', preview);
+  // Непубликувана → категорията е „Подадени / под печат“ и метриките не се попълват
+  const st = form.elements.namedItem('status') as HTMLSelectElement, cat = form.elements.namedItem('cat') as HTMLSelectElement;
+  const syncStatus = () => {
+    const unpub = st.value === 'in-press' || st.value === 'submitted';
+    if (unpub) cat.value = 'sub'; else if (st.value === 'published' && cat.value === 'sub') cat.value = '';
+    cat.disabled = unpub;
+    ['sjr', 'jif'].forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement; el.disabled = unpub; if (unpub) el.value = ''; });
+  };
+  st.addEventListener('change', syncStatus);
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
     const e = read();
@@ -280,5 +316,6 @@ const rows = [
   if (q.get('m') && ctx.members[q.get('m')!]) (form.elements.namedItem('member') as HTMLSelectElement).value = q.get('m')!;
   const h = location.hash.match(/^#d=([\w-]+)/);
   if (h) { try { write(JSON.parse(b64.dec(h[1]))); } catch { /* повредена връзка — празна форма */ } }
+  syncStatus();
   preview();
 </script>

@@ -4,7 +4,7 @@
 // 3) При успех го добавя в src/data/contrib.json. Резултатът е в pub-result.json за следващите стъпки.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-publication.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync } from 'node:fs';
-import { validate, normalize, apa, MESSAGES } from '../src/lib/pubSchema.js';
+import { validate, normalize, apa, MESSAGES, ID_LABEL } from '../src/lib/pubSchema.js';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const ADMIN = (process.env.ADMIN_LOGIN || 'urslab-irbas').toLowerCase();
@@ -64,7 +64,7 @@ for (const c of contrib) if (c.ghIssue !== issue) existing.push({ title: c.title
 
 // --- Проверка
 const errs = validate(data, { catKeys, tagKeys, existing });
-const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', cat: 'Категория', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
+const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', nrsId: 'НАЦИД НРС, ID', confirm: 'Потвърждение', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
 result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}`);
 result.fixUrl = `${SITE}/publications/new/?m=${data.member}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
 result.title = String(data.title ?? '').slice(0, 90);
@@ -73,6 +73,25 @@ if (errs.length) done();
 // --- Запис (при повторна редакция на същата заявка — замяна)
 const entry = { ...normalize(data), by: author, ghIssue: issue };
 result.apa = apa(entry);
+// Напомняне за администратора: какво да провери, преди да натисне „Merge“
+const ST = { published: 'публикувана', 'in-press': 'под печат', submitted: 'подадена (под рецензия)' };
+const idLine = entry.doi
+  ? `DOI \`${entry.doi}\` — отваря ли https://doi.org/${entry.doi} точно тази публикация?`
+  : `${ID_LABEL[entry.idType]} \`${entry.issn ?? entry.isbn}\` (няма DOI) — ` + (entry.issn
+    ? `съвпада ли с изданието в https://portal.issn.org/resource/ISSN/${entry.issn}?`
+    : `съвпада ли с книгата/сборника (напр. в https://isbnsearch.org/isbn/${String(entry.isbn).replace(/[^0-9X]/gi, '')})?`);
+result.checklist = [
+  '### Проверка от администратора преди „Merge“',
+  'Авторът е потвърдил, че данните са верни и проверени, и носи отговорност за тях. Проверете отново:',
+  `- [ ] ${idLine}`,
+  `- [ ] Състояние: **${ST[entry.status] ?? entry.status}**, категория: **${entry.cat}**` + (entry.status === 'published' ? ' — отговаря ли на квартила/SJR в отчета на БАН (scimagojr.com)?' : ' — непубликувана, затова „Подадени / под печат“, без Q и SJR.'),
+  entry.nrsId
+    ? `- [ ] НАЦИД НРС, ID **${entry.nrsId}** — проверете в https://nrs.nacid.bg, че изданието е в списъка с този ID.`
+    : '- [ ] НАЦИД НРС: не е посочен ID. Ако изданието е в Националния референтен списък (https://nrs.nacid.bg), поискайте от автора да го добави.',
+  '- [ ] Авторите (APA), заглавието и годината отговарят на изданието; няма пълен текст на статия под рецензия.',
+  '',
+  'При грешка: не натискайте „Merge“ — напишете коментар в заявката, затворете този Pull Request и авторът въвежда записа отново през формата.',
+].join('\n');
 const next = contrib.filter((c) => c.ghIssue !== issue).concat(entry);
 writeFileSync('src/data/contrib.json', JSON.stringify(next, null, 2) + '\n');
 result.ok = true;

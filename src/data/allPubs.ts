@@ -14,7 +14,7 @@ export const allPubs: ArchivePub[] = [...currentPubs, ...archivedPubs];
 /** ArchivePub → формата на списъка в „Публикации“ (PubList) */
 export const toPublication = (a: ArchivePub): Publication => ({
   year: a.year, title: a.tr ? `${a.title} [${a.tr}]` : a.title, authors: [a.authors], venue: a.venue,
-  status: a.cat === 'sub' ? 'submitted' : 'published', doi: a.doi, url: a.url, tags: a.tags,
+  status: a.cat === 'sub' ? (a.st ?? 'submitted') : 'published', doi: a.doi, url: a.url, tags: a.tags, abstract: a.abstract,
 });
 /** Текущият списък за „Публикации“ (с резюметата от publications.ts) */
 export const currentList: Publication[] = [...currentMain, ...formSubmitted.map(toPublication)];
