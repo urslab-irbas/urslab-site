@@ -138,8 +138,7 @@ export function validate(e, ctx) {
     if (!ID_TYPES.includes(e.idType)) add('idType', 'required');
     else if (!checkId(e.idType, idv)) add('idValue', e.idType.includes('issn') ? 'issn' : 'isbn');
   } else if (!doi) add('idValue', 'idneeded');
-  if (e.nrsId && !/^\d{1,6}$/.test(String(e.nrsId).trim())) add('nrsId', 'fmt');
-  if (e.confirm !== true) add('confirm', 'confirm');
+
   if (e.url && !/^https?:\/\/\S+$/.test(e.url)) add('url', 'fmt');
 
   const sjr = num(e.sjr), jif = num(e.jif), share = num(e.share);
@@ -171,7 +170,6 @@ export function normalize(e) {
   out.status = e.status;
   const idv = String(e.idValue || '').trim();
   if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = idv; }
-  if (String(e.nrsId || '').trim()) out.nrsId = Number(e.nrsId);
   for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'url', 'abstract']) {
     const v = String(e[k] ?? '').trim();
     if (v) out[k] = v;
@@ -180,7 +178,6 @@ export function normalize(e) {
   if (doi) out.doi = doi;
   for (const k of ['sjr', 'jif', 'share']) { const v = num(e[k]); if (v !== undefined) out[k] = v; }
   out.tags = [...new Set(e.tags)];
-  if (e.confirm === true) out.confirm = true;
   return out;
 }
 
@@ -205,7 +202,10 @@ export const MESSAGES = {
     isbn: 'Невалиден ISBN: 10 или 13 цифри с вярна контролна цифра.',
     notsub: 'Статията не е публикувана — категорията трябва да е „Подадени / под печат“. Квартил (Q) се посочва след публикуване.',
     pubsub: 'За публикувана статия изберете реалната категория (Q1–Q4, SJR, ERIH+ и т.н.), а не „Подадени / под печат“.',
-    confirm: 'Потвърдете, че сте проверили данните.',
+    notfound: 'Не е намерен в публичните регистри (НАЦИД НРС, ISSN Portal, Crossref, Open Library, doi.org). Проверете номера. Книги и сборници, които ги няма там, се въвеждат от ръководителя.',
+    doititle: 'Този DOI е на друга публикация. Заглавие по DOI:',
+    idmismatch: 'Номерът е в регистъра, но на издание с друго име (или регистърът не дава име за сравнение). Проверете номера и полето „Списание / сборник“. В регистъра:',
+    unavailable: 'Регистърът не отговаря и записът не може да се провери. Опитайте отново по-късно (връзката „Поправете“ пази данните).',
   },
   en: {
     empty: 'Enter the authors.',
@@ -226,6 +226,9 @@ export const MESSAGES = {
     isbn: 'Invalid ISBN: 10 or 13 digits with a correct check digit.',
     notsub: 'The paper is not published — the category must be “Submitted / in press”. The quartile (Q) is given after publication.',
     pubsub: 'For a published paper choose the real category (Q1–Q4, SJR, ERIH+, etc.), not “Submitted / in press”.',
-    confirm: 'Please confirm that you have checked the data.',
+    notfound: 'Not found in the public registers (NACID NRS, ISSN Portal, Crossref, Open Library, doi.org). Check the number. Books and proceedings that are not there are entered by the head of the lab.',
+    doititle: 'This DOI belongs to another publication. Title by DOI:',
+    idmismatch: 'The number is in the register, but for a venue with a different name (or the register gives no name to compare). Check the number and the “Journal / proceedings” field. In the register:',
+    unavailable: 'The register does not respond and the entry cannot be checked. Try again later (the “Fix” link keeps the data).',
   },
 };
