@@ -3,7 +3,7 @@ import type { ArchivePub } from './archive2022';
 
 export const archiveEarlier: ArchivePub[] = [
   {
-    year: 2019, cat: 'nrs', team: ['madzharov'], tags: ['software'], note: 'НАЦИД, Национален референтен списък, ID 1708 (2015–2021)',
+    year: 2019, cat: 'nat', team: ['madzharov'], tags: ['software', 'security'], note: 'НАЦИД, Национален референтен списък, ID 1708 (2015–2021)',
     authors: 'Madzharov, A. N.',
     title: 'Technical implementation of a reporting system and its workflows',
     venue: 'Proceedings of the International Scientific Conference “Defense Technologies” DefTech 2019, Faculty of Artillery, Air Defense and Communication and Information Systems, “Vasil Levski” National Military University, Shumen, Bulgaria, pp. 316–322',
