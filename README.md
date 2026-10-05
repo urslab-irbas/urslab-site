@@ -4,7 +4,7 @@
 Сайтът се изгражда от `main` + файловете от този клон (`.github/workflows/deploy.yml` ги наслагва).
 
 - `src/data/contrib.json` — публикациите от формата (`/publications/new/`). Ръчна поправка: редактирайте файла тук,
-  в клона `data` → „Commit changes“ направо в `data`. Сайтът се качва сам.
+  в клона `data` → „Commit changes“ направо в `data`. Сайтът се качва сам (`.github/workflows/redeploy.yml`).
 - `publish-log.md` — дневник на всяко публикуване и връщане.
 
 Копието на `src/data/contrib.json` в `main` е празно и не се използва при качване.

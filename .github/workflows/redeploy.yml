@@ -1,0 +1,16 @@
+# Ръчна промяна в клона data (напр. поправка в src/data/contrib.json през уеб редактора на GitHub)
+# → пуска качването на сайта (deploy.yml от main изгражда main + данните от data).
+# Записите на автоматизацията (github-actions[bot]) не стартират този файл — тя пуска качването сама.
+name: Качване след промяна в data
+on:
+  push:
+    branches: [data]
+permissions:
+  actions: write
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main -R "${{ github.repository }}"
