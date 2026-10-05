@@ -22,6 +22,8 @@ export interface ArchivePub {
   venue: string;
   doi?: string;
   isbn?: string;
+  url?: string;    // връзка към публикацията, ако няма DOI
+  eid?: string;    // Scopus EID
   cat: ArchCat;
   sjr?: number;
   jif?: number;

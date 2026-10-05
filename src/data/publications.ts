@@ -85,24 +85,6 @@ export const publications: Publication[] = [
     abstract:
       'Implementation of standardised geophysical models in autonomous air-navigation algorithms: geodetic projections of a central gravitational field from WGS84 data, applying Clairaut\'s method with the exact geocentric–geodetic vertical difference.',
   },
-  {
-    year: 2026,
-    title: 'Compensations for Horizontal Inertial Components of INS/GNSS with Flight Altitude',
-    authors: ['A. Madzharov', 'S. Hristozov', 'I. Gaidarski'],
-    venue: 'Engineering Proceedings (MDPI), vol. 150, no. 1, art. 70',
-    status: 'published',
-    tags: ['navigation', 'ins'],
-    doi: '10.3390/engproc2026150070',
-  },
-  {
-    year: 2026,
-    title: 'Constructive Approach to the Design of Data Protection Systems: Models and Transformation',
-    authors: ['I. Gaidarski', 'A. Madzharov'],
-    venue: 'Engineering Proceedings (MDPI), vol. 150, no. 1, art. 53',
-    status: 'published',
-    tags: ['security'],
-    doi: '10.3390/engproc2026150053',
-  },
 ];
 
 export const tagLabels: Record<string, { bg: string; en: string }> = {
