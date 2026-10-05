@@ -19,6 +19,26 @@ const NEEDS_METRIC = ['q1', 'q2', 'q3', 'q4', 'sjr'];
 // Категории без издание (списание/сборник) — вместо това се иска издател
 const BOOKS = ['mono', 'book'];
 
+// Идентификатор на изданието, когато няма DOI: ISSN / eISSN (8 знака, контролна цифра mod 11) или ISBN / eISBN (10 или 13 цифри)
+export const ID_TYPES = ['issn', 'eissn', 'isbn', 'eisbn'];
+export const ID_LABEL = { issn: 'ISSN (print)', eissn: 'eISSN (online)', isbn: 'ISBN (print)', eisbn: 'eISBN (online)' };
+export const STATUSES = ['published', 'in-press', 'submitted'];
+export function checkIssn(v) {
+  const d = String(v || '').toUpperCase().replace(/[^0-9X]/g, '');
+  if (!/^\d{7}[\dX]$/.test(d)) return false;
+  const sum = [...d.slice(0, 7)].reduce((a, c, i) => a + Number(c) * (8 - i), 0);
+  const chk = (11 - (sum % 11)) % 11;
+  return (chk === 10 ? 'X' : String(chk)) === d[7];
+}
+export function checkIsbn(v) {
+  const d = String(v || '').toUpperCase().replace(/[^0-9X]/g, '');
+  if (/^\d{9}[\dX]$/.test(d)) return [...d].reduce((a, c, i) => a + (c === 'X' ? 10 : Number(c)) * (10 - i), 0) % 11 === 0;
+  if (/^97[89]\d{10}$/.test(d)) return [...d].reduce((a, c, i) => a + Number(c) * (i % 2 ? 3 : 1), 0) % 10 === 0;
+  return false;
+}
+export const checkId = (type, v) => (type === 'issn' || type === 'eissn' ? checkIssn(v) : type === 'isbn' || type === 'eisbn' ? checkIsbn(v) : false);
+export const isPublished = (e) => (e.status ?? 'published') === 'published';
+
 const PARTICLE = /^(?:(?:van|von|de|del|der|den|da|di|du|la|le|dos|das)\s+)*/;
 const AUTHOR = /^\s*([^,&]+?)\s*,\s*((?:\p{Lu}\p{Ll}?\.\s?-?\s?)+)\s*(?:,\s*|$)/u;
 
@@ -100,7 +120,10 @@ export function validate(e, ctx) {
   if (t.length < 10) add('title', 'short');
   if (/^[\p{Lu}\s\d\W]{25,}$/u.test(t)) add('title', 'caps');
 
+  if (!STATUSES.includes(e.status)) add('status', 'required');
   if (!ctx.catKeys.includes(e.cat)) add('cat', 'required');
+  else if (STATUSES.includes(e.status) && e.status !== 'published' && e.cat !== 'sub') add('cat', 'notsub');
+  else if (e.status === 'published' && e.cat === 'sub') add('cat', 'pubsub');
   if (BOOKS.includes(e.cat)) { if (!String(e.publisher || '').trim()) add('publisher', 'required'); }
   else if (!String(e.venue || '').trim()) add('venue', 'required');
 
@@ -109,14 +132,21 @@ export function validate(e, ctx) {
 
   const doi = cleanDoi(e.doi);
   if (doi && !/^10\.\d{4,9}\/\S+$/.test(doi)) add('doi', 'fmt');
-  if (e.isbn && !/^(97[89][-\s]?)?(\d[-\s]?){9}[\dX]$/i.test(String(e.isbn).trim())) add('isbn', 'fmt');
+  // Без DOI записът се приема само с проверен идентификатор на изданието (ISSN / eISSN / ISBN / eISBN)
+  const idv = String(e.idValue || '').trim();
+  if (idv || e.idType) {
+    if (!ID_TYPES.includes(e.idType)) add('idType', 'required');
+    else if (!checkId(e.idType, idv)) add('idValue', e.idType.includes('issn') ? 'issn' : 'isbn');
+  } else if (!doi) add('idValue', 'idneeded');
+  if (e.nrsId && !/^\d{1,6}$/.test(String(e.nrsId).trim())) add('nrsId', 'fmt');
+  if (e.confirm !== true) add('confirm', 'confirm');
   if (e.url && !/^https?:\/\/\S+$/.test(e.url)) add('url', 'fmt');
 
   const sjr = num(e.sjr), jif = num(e.jif), share = num(e.share);
   if (sjr !== undefined && !(sjr >= 0 && sjr < 100)) add('sjr', 'range');
   if (jif !== undefined && !(jif >= 0 && jif < 500)) add('jif', 'range');
   if (share !== undefined && !(share > 0 && share <= 100)) add('share', 'range');
-  if (NEEDS_METRIC.includes(e.cat) && sjr === undefined && jif === undefined) add('sjr', 'needed');
+  if (isPublished(e) && NEEDS_METRIC.includes(e.cat) && sjr === undefined && jif === undefined) add('sjr', 'needed');
 
   const tags = Array.isArray(e.tags) ? e.tags : [];
   if (!tags.length) add('tags', 'required');
@@ -138,7 +168,11 @@ export function normalize(e) {
     authors: String(e.authors).trim().replace(/\s+/g, ' '),
     title: String(e.title).trim().replace(/\.\s*$/, ''),
   };
-  for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'isbn', 'url', 'abstract']) {
+  out.status = e.status;
+  const idv = String(e.idValue || '').trim();
+  if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = idv; }
+  if (String(e.nrsId || '').trim()) out.nrsId = Number(e.nrsId);
+  for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'url', 'abstract']) {
     const v = String(e[k] ?? '').trim();
     if (v) out[k] = v;
   }
@@ -146,6 +180,7 @@ export function normalize(e) {
   if (doi) out.doi = doi;
   for (const k of ['sjr', 'jif', 'share']) { const v = num(e[k]); if (v !== undefined) out[k] = v; }
   out.tags = [...new Set(e.tags)];
+  if (e.confirm === true) out.confirm = true;
   return out;
 }
 
@@ -165,6 +200,12 @@ export const MESSAGES = {
     unknown: 'Непозната тема.',
     duplicate: 'Тази публикация вече я има на сайта (същото DOI или заглавие).',
     fmt: 'Неправилен формат — вижте примера в полето.',
+    idneeded: 'Без DOI изберете вида идентификатор (ISSN, eISSN, ISBN или eISBN) и въведете вярната стойност.',
+    issn: 'Невалиден ISSN: 8 знака във вида 1234-567X; последният е контролна цифра (проверете в portal.issn.org).',
+    isbn: 'Невалиден ISBN: 10 или 13 цифри с вярна контролна цифра.',
+    notsub: 'Статията не е публикувана — категорията трябва да е „Подадени / под печат“. Квартил (Q) се посочва след публикуване.',
+    pubsub: 'За публикувана статия изберете реалната категория (Q1–Q4, SJR, ERIH+ и т.н.), а не „Подадени / под печат“.',
+    confirm: 'Потвърдете, че сте проверили данните.',
   },
   en: {
     empty: 'Enter the authors.',
@@ -180,5 +221,11 @@ export const MESSAGES = {
     unknown: 'Unknown topic.',
     duplicate: 'This publication is already on the site (same DOI or title).',
     fmt: 'Wrong format — see the example in the field.',
+    idneeded: 'Without a DOI, choose the identifier type (ISSN, eISSN, ISBN or eISBN) and enter the correct value.',
+    issn: 'Invalid ISSN: 8 characters as 1234-567X; the last one is a check digit (check at portal.issn.org).',
+    isbn: 'Invalid ISBN: 10 or 13 digits with a correct check digit.',
+    notsub: 'The paper is not published — the category must be “Submitted / in press”. The quartile (Q) is given after publication.',
+    pubsub: 'For a published paper choose the real category (Q1–Q4, SJR, ERIH+, etc.), not “Submitted / in press”.',
+    confirm: 'Please confirm that you have checked the data.',
   },
 };
