@@ -10,7 +10,7 @@
 name: Deploy to urs.ir.bas.bg
 on:
   push:
-    branches: [main, data]   # data — публикациите от формата (ръчна поправка там също качва сайта)
+    branches: [main]   # промени в клона data пускат качването чрез .github/workflows/redeploy.yml в самия клон data
   workflow_dispatch:      # ръчно пускане: Actions → Deploy → Run workflow
 concurrency:
   group: deploy

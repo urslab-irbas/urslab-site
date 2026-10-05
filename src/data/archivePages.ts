@@ -28,10 +28,10 @@ const fixed: ArchivePage[] = [
 // Въведени през формата (contrib.json) → формат ArchivePub
 type Contrib = { year: number; cat: ArchivePub['cat']; authors: string; title: string; doi?: string; isbn?: string; sjr?: number; jif?: number; share?: number; tags: string[]; [k: string]: unknown };
 const mapForm = (e: Contrib): ArchivePub => ({
-  year: e.year, cat: e.cat, authors: e.authors, title: e.title, venue: composeVenue(e), doi: e.doi,
+  year: e.year, cat: e.cat, authors: e.authors, title: e.title, venue: composeVenue(e), doi: typeof e.doi === 'string' && /^10\.\d{4,9}\/\S+$/.test(e.doi) ? e.doi : undefined,
   isbn: e.isbn && (e.idType === 'eisbn' ? `${e.isbn} (online)` : e.isbn),
   issn: typeof e.issn === 'string' ? (e.idType === 'eissn' ? `${e.issn} (online)` : e.issn) : undefined,
-  url: typeof e.url === 'string' ? e.url : undefined,
+  url: typeof e.url === 'string' && /^https?:\/\/[^\s"'<>]+$/i.test(e.url) ? e.url : undefined, // само http(s) — защита при ръчна редакция в клона data
   abstract: typeof e.abstract === 'string' ? e.abstract : undefined,
   st: e.cat === 'sub' ? (e.status === 'in-press' ? 'in-press' : 'submitted') : undefined,
   note: e.nrsId ? `НАЦИД НРС, ID ${e.nrsId}` : undefined,
