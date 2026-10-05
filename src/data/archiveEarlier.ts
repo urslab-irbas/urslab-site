@@ -14,7 +14,7 @@ export const archiveEarlier: ArchivePub[] = [
     year: 2004, cat: 'idx', team: ['madzharov'], tags: ['navigation', 'gravity', 'ins'],
     authors: 'Madzharov, A. N., Panova, P. V., & Getsov, P. S.',
     title: 'Theoretical research of possibilities for gravitation measurements in motion using the inertial navigation system',
-    venue: '55th International Astronautical Congress (IAC 2004), Vancouver, Canada, paper IAC-04-J.P.08',
+    venue: '55th International Astronautical Congress of the IAF, the IAA and the IISL (IAC 2004), Vancouver, Canada, 4–8 October 2004, paper IAC-04-J.P.08, AIAA, Reston, VA (published online 29 Nov 2012)',
     doi: '10.2514/6.IAC-04-J.P.08', eid: '2-s2.0-34249112190',
   },
   {
