@@ -21,7 +21,10 @@ async function get(url, accept = 'application/json') {
 }
 const json = (t) => { try { return JSON.parse(t); } catch { return null; } };
 const digits = (v) => String(v || '').toUpperCase().replace(/[^0-9X]/g, '');
-const words = (s) => new Set(String(s || '').toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 2));
+// Кирилица → латиница (официалната българска транслитерация), за да се сравняват „ПЕДАГОГИКА“ и „Pedagogika“
+const TR = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sht', ъ: 'a', ь: 'y', ю: 'yu', я: 'ya', ё: 'yo', э: 'e', ы: 'y' };
+const translit = (s) => String(s || '').toLowerCase().replace(/[а-яёэы]/g, (c) => TR[c] ?? c);
+const words = (s) => new Set(translit(s).normalize('NFKD').replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 2));
 /** Дял на общите думи в двете заглавия (0…1) */
 export function similarity(a, b) {
   const A = words(a), B = words(b); if (!A.size || !B.size) return 0;
@@ -30,7 +33,7 @@ export function similarity(a, b) {
 }
 
 // Общи думи, които не стигат за съвпадение на изданието
-const GENERIC = new Set(['of', 'on', 'in', 'journal', 'ltd', 'publishing', 'press', 'publisher', 'university', 'proceedings', 'international', 'conference', 'scientific', 'science', 'sciences', 'annual', 'bulletin', 'series', 'review', 'and', 'the', 'for', 'with', 'national', 'symposium', 'workshop', 'papers', 'collection', 'сборник', 'списание', 'научна', 'научни', 'конференция', 'международна', 'доклади', 'трудове', 'годишник', 'известия']);
+const GENERIC = new Set(['of', 'on', 'in', 'journal', 'ltd', 'publishing', 'press', 'publisher', 'university', 'proceedings', 'international', 'conference', 'scientific', 'science', 'sciences', 'annual', 'bulletin', 'series', 'review', 'and', 'the', 'for', 'with', 'national', 'symposium', 'workshop', 'papers', 'collection', 'сборник', 'списание', 'научна', 'научни', 'конференция', 'международна', 'доклади', 'трудове', 'годишник', 'известия', 'месечно', 'научнотеоретично', 'научно', 'списание'].map(translit));
 /**
  * Съвпада ли изданието от регистъра с въведеното. Приема се, ако
  *  а) поне половината от значимите думи в заглавието от регистъра са във въведеното, или
@@ -42,6 +45,9 @@ export function venueMatch(regTitle, regAll, entered) {
   const E = new Set(sig(entered)), T = sig(regTitle), A = words(`${regTitle} ${regAll}`);
   if (!E.size) return false;
   if (T.length && T.filter((w) => E.has(w)).length / T.length >= 0.5) return true;
+  // основното заглавие (преди „:“) — всичките му значими думи са във въведеното
+  const M = sig(String(regTitle).split(/[:;]/)[0]);
+  if (M.length && M.every((w) => E.has(w))) return true;
   const hit = [...E].filter((w) => A.has(w)).length;
   return hit >= Math.min(2, E.size);
 }
@@ -128,6 +134,7 @@ export async function verifyEntry(e) {
       else if (d.title && similarity(d.title, e.title) < 0.6) fail('doi', 'doititle', d.title);
       else {
         out.verified.push(`DOI ${e.doi} — ${d.source}${d.title ? `: „${d.title}“` : ''}`);
+        out.doiIds = new Set([...d.issn, ...d.isbn].map(digits));
         for (const n of [...d.issn, ...d.isbn]) { const x = await nrsByNumber(n); if (x) { setNrs(x); break; } }
       }
     }
@@ -138,6 +145,8 @@ export async function verifyEntry(e) {
       const isIssn = ISSN_TYPES.includes(e.idType);
       const entered = [e.venue, e.publisher, isIssn ? '' : e.title].filter(Boolean).join(' ');
       const check = (src, reg) => {
+        // същият ISSN/ISBN е записан и в метаданните на проверения DOI → изданието е потвърдено
+        if (out.doiIds?.has(digits(id))) { out.verified.push(`${label} ${id} — ${src}: „${reg.title}“ (съвпада с ISSN/ISBN по DOI)`); return true; }
         if (venueMatch(reg.title, reg.match ?? '', entered)) { out.verified.push(`${label} ${id} — ${src}: „${reg.title}“`); return true; }
         fail('idValue', 'idmismatch', `${label} ${id} → ${src}: „${reg.title || '—'}“`); return false;
       };
