@@ -79,7 +79,7 @@ export const archive2025: ArchivePub[] = [
     year: 2025, cat: 'erih', share: 100, team: ['chehlarova'], tags: ['additive'],
     authors: 'Chehlarova, N.',
     title: 'Bibliometric analysis of documents in SCOPUS, researching 3D printing, in the field of engineering',
-    venue: 'ARTTE 13(1), Trakia University, pp. 12–19', doi: '10.15547/artte.2025.01.002',
+    venue: 'ARTTE 13(1), Trakia University, pp. 12–19', doi: '10.15547/artte.2025.01.002', doiOff: true,
   },
   {
     year: 2025, cat: 'erih', share: 50, team: ['chehlarova'], tags: ['education'],

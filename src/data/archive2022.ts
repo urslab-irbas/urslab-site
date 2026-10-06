@@ -263,7 +263,7 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
     authors: 'Chehlarova, N., Gachev, G.',
     title: 'Application of 3D printed models for counting prisms in solids',
-    venue: 'ARTTE 12(3), Trakia University, pp. 169–175', doi: '10.15547/artte.2024.03.006',
+    venue: 'ARTTE 12(3), Trakia University, pp. 169–175', doi: '10.15547/artte.2024.03.006', doiOff: true,
   },
   {
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education', 'robotics'],
@@ -275,7 +275,7 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
     authors: 'Chehlarova, K., Chehlarova, N., Gachev, G.',
     title: '360-degree photos in the Virtual Mathematics Laboratoty',
-    venue: 'ARTTE 12(3), Trakia University, pp. 163–168', doi: '10.15547/artte.2024.03.005',
+    venue: 'ARTTE 12(3), Trakia University, pp. 163–168', doi: '10.15547/artte.2024.03.005', doiOff: true,
   },
   {
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
