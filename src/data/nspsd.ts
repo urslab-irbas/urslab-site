@@ -7,9 +7,10 @@ import { allPubs } from './allPubs';
 import { withNrs } from './archivePages';
 import { NSPDS_FUND, nspsdRefs, normTitle } from './nspsdRefs';
 
+// team: 'valchkova', 'zahariev' — колеги от ИР-БАН извън лабораторията; бутони във филтъра „Автор“ само на страницата на програмата
 const nspsdExtra: ArchivePub[] = [
   {
-    year: 2024, cat: 'other', team: [], tags: ['robotics', 'security'],
+    year: 2024, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics', 'security'],
     authors: 'Valchkova, N., Zahariev, R., Angelov, G., Paunski, Y., Varbanov, I.',
     title: 'Мобилен колаборативен робот с висока проходимост за антитерористични операции',
     tr: 'Mobile collaborative robot with high cross-country capability for anti-terrorist operations',
@@ -17,13 +18,13 @@ const nspsdExtra: ArchivePub[] = [
     doi: '10.63662/5stkwe27', url: 'https://journal.nvna.eu/index.php/msfj/article/view/194/54',
   },
   {
-    year: 2024, cat: 'other', team: [], tags: ['robotics'],
+    year: 2024, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
     authors: 'Tzvetkov, V., Valchkova, N., Zahariev, R.',
     title: 'Sensory System for Controlling Robot’s Motion',
     venue: 'Complex Control Systems 8, IR-BAS', url: 'http://ir.bas.bg/ccs/2024/08/15.pdf',
   },
   {
-    year: 2023, cat: 'other', team: [], tags: ['robotics'],
+    year: 2023, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
     authors: 'Райков, П., Вълчкова, Н., Захариев, Р.',
     authorsEn: 'Raykov, P., Valchkova, N., Zahariev, R.',
     title: 'Алгоритми за моделиране на движенията на роботи с неявно решима позиционна задача на кинематичния анализ за помощ в здравеопазването',
