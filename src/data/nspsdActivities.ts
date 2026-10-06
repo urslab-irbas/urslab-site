@@ -194,10 +194,7 @@ export const organized: NspEvent[] = [
       { src: '/images/nspsd/vvvu-2025/04-diskusia.jpg', alt: { bg: 'Дискусия', en: 'Discussion' } },
       { src: '/images/nspsd/vvvu-2025/05-uchastnici.jpg', alt: { bg: 'Участниците в семинара', en: 'Seminar participants' } },
     ],
-    docs: [
-      { href: '/docs/nspsd/VVVU-2025-programa.pdf', label: { bg: 'Програма на семинара (PDF)', en: 'Seminar programme (PDF, Bulgarian)' } },
-      { href: '/docs/nspsd/IR-BRS-Dolna-may2025.pdf', label: { bg: 'Презентация на Лаборатория БРС — доц. А. Маджаров (PDF)', en: 'URS Lab presentation — Assoc. Prof. A. Madzharov (PDF, Bulgarian)' } },
-    ],
+    docs: [{ href: '/docs/nspsd/VVVU-2025-programa.pdf', label: { bg: 'Програма на семинара (PDF)', en: 'Seminar programme (PDF, Bulgarian)' } }],
   },
   {
     title: { bg: 'Международна научна конференция „Роботика и мехатроника 2025“ (Robotics & Mechatronics 2025), Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2025”, Institute of Robotics — BAS' },
