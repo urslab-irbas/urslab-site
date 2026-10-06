@@ -120,6 +120,8 @@ const L = {
       <div class="sum-head">
         <h2>{T('Обобщение за отчет', 'Summary for reporting')}</h2>
         <div class="acts">
+          {NSP && <a class="btn-s btn-x" href="/docs/NNPSO_Publications_IR-BAS.xlsx" download title={T('Таблицата по образеца на ННП „Сигурност и отбрана“ (Excel)', 'The table in the NSP “Security and Defence” template (Excel)')}>{T('Експорт към ННП „СО“ (Excel)', 'Export for NSP DS (Excel)')}</a>}
+          {NSP && <a class="btn-s" href="https://nsp.secade.bg/bg/rezultati/publikacii" target="_blank" rel="noopener">{T('Публикации на ННП „СО“ ↗', 'NSP DS publications ↗')}</a>}
           <button type="button" class="btn-s" data-csv>{T('Изтегли CSV', 'Download CSV')}</button>
           <button type="button" class="btn-s" data-print>{T('Печат', 'Print')}</button>
           <button type="button" class="btn-s" data-reset>{T('Изчисти филтрите', 'Clear filters')}</button>
@@ -196,6 +198,8 @@ const L = {
   .acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn-s { font: .8rem var(--mono); padding: 7px 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent-ink); cursor: pointer; }
   .btn-s:hover { background: var(--accent); color: #fff; }
+  a.btn-s { text-decoration: none; display: inline-block; }
+  .btn-x { background: var(--accent); color: #fff; }
   .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px; }
   .tiles div { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
   .tiles b { display: block; font: 600 1.5rem var(--mono); font-variant-numeric: tabular-nums; }
