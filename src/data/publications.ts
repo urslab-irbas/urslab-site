@@ -32,6 +32,7 @@ export const publications: Publication[] = [
     venue: 'Zenodo — Software (files with restricted access)',
     status: 'published',
     doi: '10.5281/zenodo.23111566',
+    funding: NSPDS,
     tags: ['software', 'navigation'],
     abstract:
       'Version 1.1.0 extends the URSlab website into an information system for recording, validating and reporting the publication activity of a scientific department of BAS: yearly publication pages categorised as in the BAS reporting system, combinable filters with a live reporting summary and CSV export, per-member summary reports, and entry of new publications by team members with APA validation, GitHub-based identity and automatic re-validation.',
@@ -43,6 +44,7 @@ export const publications: Publication[] = [
     venue: 'Zenodo — Software (files with restricted access)',
     status: 'published',
     doi: '10.5281/zenodo.23086274',
+    funding: NSPDS,
     tags: ['software', 'navigation'],
     abstract:
       'Source code of the URSlab website, including the interactive browser model of a clothoid coordinated turn between two adjacent orthodromes, with comparison to a constant-radius arc and the curvature profile along the route.',
