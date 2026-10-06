@@ -86,7 +86,7 @@ export const GET: APIRoute = async () => {
       r.volume ?? m.volume ?? '', r.issue ?? m.issue ?? '', r.pages ?? m.page ?? '',
       p.doi ?? '', linkTo(p, r),
       r.ids ?? [p.isbn && `ISBN ${p.isbn}`, p.issn && `ISSN ${p.issn}`].filter(Boolean).join('; '),
-      m.abstract ?? '',
+      r.abstract ?? m.abstract ?? '',
       r.lang ?? (/[а-я]/i.test(p.title) ? 'Български' : 'Английски'),
       indexLabel(p), nspText(p, r),
     ];
@@ -117,7 +117,7 @@ export const GET: APIRoute = async () => {
   const notes = [
     `Редове ${first}–${last}: ${list.length} публикации по ННП „Сигурност и отбрана“ на работните екипи в Института по роботика към БАН — актуален списък с филтри: https://urs.ir.bas.bg/projects/nspsd/. Публикуваните са отгоре, по години; оцветените редове са под печат / подадени.`,
     'Имената на авторите, том, брой, страници и дата са по данните на издателя (Crossref), където има DOI; иначе — по записите на сайта.',
-    'Резюмета: оригиналните резюмета, налични в Crossref.',
+    'Резюмета: оригиналните резюмета (по Crossref или от авторите).',
     'Колона O: индексиране към момента; за статиите под печат очакваното индексиране е в колона P.',
     `Генерирано автоматично от сайта на Лаборатория „Безпилотни роботизирани системи“, ИР-БАН, на ${new Date().toLocaleDateString('bg-BG')}.`,
   ];

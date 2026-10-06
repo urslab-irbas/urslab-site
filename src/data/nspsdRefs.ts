@@ -54,6 +54,7 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Improvement in U-Space Development by Civil-Military Cooperation' },
   { t: 'Assessment of teachers’ preparedness in cybersecurity' },
   { t: 'Assessment of Parents’ Awareness in the Field of Cybersecurity' },
+  { t: 'Recognition and prevention of cyberbullying by students in secondary education' }, // добавена от Н. Чехларова, 06.10.2026
   // Статии (в печат) по отчета — част от тях вече са излезли и са в годишните страници
   { t: 'Design of Information Security Systems for internal threat protection' },
   { t: 'Method for design of information security system for sensitive data leak prevention' },
