@@ -14,7 +14,7 @@ export const allPubs: ArchivePub[] = [...currentPubs, ...archivedPubs];
 
 /** ArchivePub → формата на списъка в „Публикации“ (PubList) */
 export const toPublication = (a: ArchivePub): Publication => ({
-  year: a.year, title: a.tr ? `${a.title} [${a.tr}]` : a.title, authors: [a.authors], venue: a.venue,
+  year: a.year, title: a.tr ? `${a.title} [${a.tr}]` : a.title, authors: [a.authors], authorsEn: a.authorsEn ? [a.authorsEn] : undefined, venue: a.venue,
   status: a.cat === 'sub' ? (a.st ?? 'submitted') : 'published', doi: a.doi, doiOff: a.doiOff, url: a.url, tags: a.tags, abstract: a.abstract,
   funding: nspsdRefFor(a.title) ? NSPDS_FUND : undefined, fundVia: nspsdRefFor(a.title)?.via,
 });

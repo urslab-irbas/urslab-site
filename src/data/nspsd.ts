@@ -25,6 +25,7 @@ const nspsdExtra: ArchivePub[] = [
   {
     year: 2023, cat: 'other', team: [], tags: ['robotics'],
     authors: 'Райков, П., Вълчкова, Н., Захариев, Р.',
+    authorsEn: 'Raykov, P., Valchkova, N., Zahariev, R.',
     title: 'Алгоритми за моделиране на движенията на роботи с неявно решима позиционна задача на кинематичния анализ за помощ в здравеопазването',
     tr: 'Algorithms for modelling the motions of robots with an implicitly solvable position problem of kinematic analysis for assistance in healthcare',
     venue: 'Complex Control Systems, IR-BAS',

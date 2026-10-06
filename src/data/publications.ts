@@ -10,6 +10,7 @@ export interface Publication {
   year: number;
   title: string;
   authors: string[];
+  authorsEn?: string[]; // на латиница за английската версия (когато authors са на кирилица)
   venue: string;
   status: 'published' | 'in-press' | 'submitted';
   doi?: string;
