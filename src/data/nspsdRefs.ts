@@ -64,6 +64,9 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Small Voice Bulgarian Language Model Generation' },
   { t: 'Neural Network Approaches for Speech Recognition and Synthesis based on Whisper' },
   { t: 'Data-Driven Fuzzy Systems for Urban Microclimate Prediction' },
+  // Софтуер (Zenodo) — сайтът на лабораторията е изграден по програмата
+  { t: 'URSlab Website and Information System for Reporting the Publication Activity' },
+  { t: 'URSlab Website and Interactive Coordinated-Turn Model' },
   // Подадени статии на сайта, финансирани по програмата
   { t: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes" },
   { t: 'Precise Calculations of Gravity Anomalies from the Geometric Height' },
