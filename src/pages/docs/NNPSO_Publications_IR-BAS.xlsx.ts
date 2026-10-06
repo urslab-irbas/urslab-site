@@ -46,7 +46,7 @@ const isDate = (s?: string) => !!s && !/[a-zа-я]/i.test(s);
 const linkTo = (p: ArchivePub, r: ExcelRow) => r.link !== undefined ? r.link : p.doi && !p.doiOff ? `https://doi.org/${p.doi}` : p.url ?? '';
 
 const nspText = (p: ArchivePub, r: ExcelRow) => {
-  const t: string[] = [p.fundVia === 'conf' ? `Участието в конференцията е финансирано изцяло по ${NSP}.` : `Финансирано по ${NSP}.`];
+  const t: string[] = [p.fundVia === 'conf' ? `Участието в конференцията е финансирано изцяло по ${NSP}.` : p.fundVia === 'report' ? `Отчетено по ${NSP}, пред ЦИНСО-БАН.` : `Финансирано по ${NSP}.`];
   if (p.task) t.push(`Задача(и): ${p.task}.`);
   if (p.cat === 'sub') {
     const e = expectedFor(p.venue);
@@ -86,7 +86,7 @@ export const GET: APIRoute = async () => {
       r.volume ?? m.volume ?? '', r.issue ?? m.issue ?? '', r.pages ?? m.page ?? '',
       p.doi ?? '', linkTo(p, r),
       r.ids ?? [p.isbn && `ISBN ${p.isbn}`, p.issn && `ISSN ${p.issn}`].filter(Boolean).join('; '),
-      m.abstract ?? '',
+      r.abstract ?? m.abstract ?? p.abstract ?? '',
       r.lang ?? (/[а-я]/i.test(p.title) ? 'Български' : 'Английски'),
       indexLabel(p), nspText(p, r),
     ];
@@ -117,7 +117,7 @@ export const GET: APIRoute = async () => {
   const notes = [
     `Редове ${first}–${last}: ${list.length} публикации по ННП „Сигурност и отбрана“ на работните екипи в Института по роботика към БАН — актуален списък с филтри: https://urs.ir.bas.bg/projects/nspsd/. Публикуваните са отгоре, по години; оцветените редове са под печат / подадени.`,
     'Имената на авторите, том, брой, страници и дата са по данните на издателя (Crossref), където има DOI; иначе — по записите на сайта.',
-    'Резюмета: оригиналните резюмета, налични в Crossref.',
+    'Резюмета: оригиналните резюмета — от таблицата на авторите, по данните на издателя (Crossref, OpenAlex), от публикувания текст в сборника или от сайта на лабораторията; празна клетка — резюмето още не е публикувано.',
     'Колона O: индексиране към момента; за статиите под печат очакваното индексиране е в колона P.',
     `Генерирано автоматично от сайта на Лаборатория „Безпилотни роботизирани системи“, ИР-БАН, на ${new Date().toLocaleDateString('bg-BG')}.`,
   ];

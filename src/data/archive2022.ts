@@ -42,7 +42,7 @@ export interface ArchivePub {
   note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
   fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
   task?: string;   // задача по програмата
-  fundVia?: 'conf'; // финансирано е участието в конференцията (не самата статия)
+  fundVia?: 'conf' | 'report'; // 'conf' — финансирано е участието в конференцията; 'report' — отчетено по програмата пред ЦИНСО-БАН
 }
 
 export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] = [
@@ -309,7 +309,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2024, cat: 'other', team: ['madzharov', 'hristozov', 'chehlarova', 'georgiev', 'gaidarski', 'aleksandrov'], tags: ['uas', 'navigation'],
     authors: 'Madzharov, A., Hristozov, S., Chehlarova, N., Georgiev, R., Gaidarski, I., Alexandrov, A.',
-    title: 'Design of an Unmanned Helicopter System for Collecting and Processing of Geographical Information',
+    title: 'Design of an Unmanned Helicopter System for Collecting and Processing of Geophysical Information',
     venue: 'Complex Control Systems 7, IR-BAS',
   },
   {

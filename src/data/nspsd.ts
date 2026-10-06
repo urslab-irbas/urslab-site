@@ -9,6 +9,26 @@ import { NSPDS_FUND, nspsdRefs, normTitle } from './nspsdRefs';
 
 // team: 'valchkova', 'zahariev' — колеги от ИР-БАН извън лабораторията; бутони във филтъра „Автор“ само на страницата на програмата
 const nspsdExtra: ArchivePub[] = [
+  // по справката на И. Гайдарски (06.10.2026)
+  {
+    year: 2026, cat: 'sub', st: 'in-press', team: ['gaidarski'], tags: ['security', 'education'],
+    authors: 'Djambazova, E., Gaidarski, I., Ilchev, S., Terzieva, V.',
+    title: 'Information security and dependability in integrated intelligent educational environments',
+    venue: 'Advances and Problems in Intelligent Systems (V. Sgurev, V. Jotsov, V. Piuri, L. Doukovska, Eds.) — Springer Nature, Studies in Systems, Decision and Control 637, Chap. 15',
+    issn: '2198-4182 (print), 2198-4190 (online)',
+  },
+  {
+    year: 2025, cat: 'sub', st: 'in-press', team: ['gaidarski'], tags: ['security'],
+    authors: 'Gaidarski, I.',
+    title: 'Designing an information security system to prevent leakage of sensitive information',
+    venue: '2025 International Conference on Military Communication and Information Systems (ICMCIS 2025), NATO STO',
+  },
+  {
+    year: 2025, cat: 'sub', st: 'in-press', team: ['gaidarski'], tags: ['security'],
+    authors: 'Gaidarski, I.',
+    title: 'Multilayered conceptual modelling for the design, implementation and optimization of information security systems',
+    venue: 'ICDTDE 2025 — International Conferences on Digital Technology Driven Engineering, Springer, Lecture Notes in Civil Engineering',
+  },
   {
     year: 2024, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics', 'security'],
     authors: 'Valchkova, N., Zahariev, R., Angelov, G., Paunski, Y., Varbanov, I.',
