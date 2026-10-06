@@ -72,7 +72,7 @@ export interface NspEvent {
   text?: L;          // кратко описание
   papers?: string[]; // части от заглавия на публикации от сайта
   topics?: L[];      // напр. тематични направления на щанд
-  photos?: { src: string; alt: L }[];   // public/images/… (миниатюра: th-<име>)
+  photos?: { src: string; alt: L }[];   // public/images/… — само малки снимки (до 360 px), без увеличаване и без EXIF
   docs?: { href: string; label: L }[];
   program?: { time: string; item: L }[];
 }

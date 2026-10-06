@@ -93,7 +93,7 @@ const sections: { n: number; title: string; items: NspEvent[]; site: string }[] 
               {e.program && <><p class="lbl">{T('Програма', 'Programme')}</p>
                 <table class="prog">{e.program.map((x) => <tr><td>{x.time}</td><td>{x.item[lang]}</td></tr>)}</table></>}
               {e.photos && <><p class="lbl">{T('Фотогалерия', 'Photo gallery')}</p>
-                <div class="gallery">{e.photos.map((ph) => { const th = ph.src.replace(/\/([^/]+)$/, '/th-$1'); return <button type="button" data-lb={ph.src} data-cap={ph.alt[lang]} title={ph.alt[lang]}><img src={th} alt={ph.alt[lang]} loading="lazy" /></button>; })}</div></>}
+                <div class="gallery">{e.photos.map((ph) => <figure><img src={ph.src} alt={ph.alt[lang]} title={ph.alt[lang]} loading="lazy" /></figure>)}</div></>}
               {e.docs && <p class="docs">{e.docs.map((d) => <a class="btn ghost" href={d.href}>{d.label[lang]}</a>)}</p>}
               {e.topics && <><p class="lbl">{T('Тематични направления на щанда', 'Stand topics')}</p><ul class="topics">{e.topics.map((x) => <li>{x[lang]}</li>)}</ul></>}
               {e.papers && <><p class="lbl">{T('Доклади на екипите от ИР-БАН', 'Papers by the IR-BAS teams')}</p>
@@ -145,9 +145,8 @@ const sections: { n: number; title: string; items: NspEvent[]; site: string }[] 
   .prog td { padding: 4px 12px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
   .prog td:first-child { font: .8rem var(--mono); white-space: nowrap; color: var(--muted); }
   .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin-top: 6px; }
-  .gallery button { display: block; width: 100%; padding: 0; cursor: zoom-in; background: none; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 6px; border: 1px solid var(--line); }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s; }
-  .gallery button:hover img { transform: scale(1.04); }
+  .gallery figure { display: block; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 6px; border: 1px solid var(--line); }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .docs { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
   .more { margin-top: 10px; font-size: .88rem; }
   .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }

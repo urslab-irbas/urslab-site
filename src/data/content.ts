@@ -109,7 +109,6 @@ export const projects: { title: L; funder: L; period: string; end?: L; text: L; 
       bg: 'Изследвания в областта на автономната навигация, геодезическите модели за бордови изчисления и безпилотните системи.',
       en: 'Research on autonomous navigation, geodetic models for on-board computation and unmanned systems.',
     },
-    link: { bg: 'https://ir.bas.bg/projects/NSPSD/nspsd.pdf', en: 'https://ir.bas.bg/projects/NSPSD/nspsd_en.pdf' },
     pubs: 'projects/nspsd',
     more: [
       { label: { bg: 'Докторанти по ННП СиО', en: 'PhD students — NSP DS' }, slug: 'projects/nspsd/phd' },
