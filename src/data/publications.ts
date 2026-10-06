@@ -72,7 +72,7 @@ export const publications: Publication[] = [
       'An analytical gravity model on WGS84 constants with an exact geometric relation for the vertical line. It matches WGS84/Somigliana within ±1.5 mGal at sea level and removes a latitude-dependent bias of up to 260 mGal at altitudes up to 10 km.',
   },
   {
-    year: 2027,
+    year: 2026, // излиза на 17.10.2026 (изменен договор със Springer)
     title: 'A Highly Accurate Calculation of the Difference Between Geocentric and Geodetic Latitude in Flight',
     authors: ['A. Madzharov', 'S. Hristozov'],
     venue: 'EnviroRISKs 2026 (N. Dobrinkova, S. Fidanova, Eds.) — Springer, Lecture Notes in Networks and Systems 2240',
@@ -86,7 +86,7 @@ export const publications: Publication[] = [
       'Geocentric distance from the prime-vertical radius with a coefficient proportional to e⁴, including flight altitude — yielding high-accuracy analytical geocentric–geodetic latitude differences and a differential equation of the meridian ellipse for geodesic-line computation.',
   },
   {
-    year: 2027,
+    year: 2026, // излиза на 17.10.2026 (изменен договор със Springer)
     title: 'A Model of Gravity on the Surface of the Earth’s Ellipsoid Using an Accurate Analytical Relationship Between Geocentric and Geodetic Latitudes',
     authors: ['A. Madzharov', 'S. Hristozov', 'I. Gaidarski'],
     venue: 'EnviroRISKs 2026 (N. Dobrinkova, S. Fidanova, Eds.) — Springer, Lecture Notes in Networks and Systems 2240',
