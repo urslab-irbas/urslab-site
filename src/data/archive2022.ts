@@ -30,6 +30,7 @@ export interface ArchivePub {
   url?: string;    // връзка към публикацията, ако няма DOI (или ако DOI-то още не работи — виж doiOff)
   doiOff?: boolean; // DOI-то е присвоено, но още не е активно в doi.org: показва се като текст, заглавието води към url
   eid?: string;    // Scopus EID
+  scopusAuthor?: string; // Scopus Author ID — показва се вместо EID, ако линкът към документа не работи
   cat: ArchCat;
   sjr?: number;
   jif?: number;
