@@ -97,7 +97,7 @@ export const participations: NspEvent[] = [
   {
     title: { bg: 'The 16th International Conference on Business Information Security (BISEC 2025)', en: 'The 16th International Conference on Business Information Security (BISEC 2025)' },
     date: { bg: '28 ноември 2025 г.', en: '28 November 2025' }, place: { bg: 'Ниш, Сърбия (Университет „Метрополитан“)', en: 'Niš, Serbia (Metropolitan University)' }, form: PRES,
-    papers: ['Insider Threats in Critical Infrastructure Organizations', 'LSTM-RNN method for Anomaly-Based Intrusion Detection', 'Development of Blockchain-Based Framework for Securing Communication'],
+    papers: ['Insider Threats in Critical Infrastructure Organizations'],
   },
   {
     title: { bg: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)', en: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)' },
@@ -109,6 +109,13 @@ export const participations: NspEvent[] = [
     date: { bg: '13–14 май 2025 г.', en: '13–14 May 2025' }, place: { bg: 'Оейраш, Португалия', en: 'Oeiras, Portugal' },
     url: 'https://www.sto.nato.int/document/improvement-in-u-space-development-by-civil-military-cooperation-in-a-multi-domain-operations-environment/',
     papers: ['Improvement in U-Space Development by Civil-Military Cooperation', 'Designing an information security system to prevent leakage of sensitive information'],
+  },
+  {
+    title: { bg: 'The 15th International Conference on Business Information Security (BISEC 2024)', en: 'The 15th International Conference on Business Information Security (BISEC 2024)' },
+    date: { bg: '28–29 ноември 2024 г.', en: '28–29 November 2024' }, place: { bg: 'Ниш, Сърбия', en: 'Niš, Serbia' },
+    url: 'https://ceur-ws.org/Vol-3971/',
+    text: { bg: 'Сборник: CEUR Workshop Proceedings, Vol-3971.', en: 'Proceedings: CEUR Workshop Proceedings, Vol-3971.' },
+    papers: ['LSTM-RNN method for Anomaly-Based Intrusion Detection', 'Development of Blockchain-Based Framework for Securing Communication'],
   },
   {
     title: { bg: 'Black Sea Maritime Security Conference', en: 'Black Sea Maritime Security Conference' },
@@ -134,9 +141,9 @@ export const participations: NspEvent[] = [
     title: { bg: 'XVI Специализирано международно изложение за отбранителна техника и услуги „ХЕМУС 2024 — Отбрана, антитероризъм и сигурност“ — щанд на Института по роботика', en: '16th International Defence Exhibition “HEMUS 2024 — Defence, Counter-terrorism and Security” — Institute of Robotics stand' },
     date: { bg: '5–8 юни 2024 г.', en: '5–8 June 2024' }, place: { bg: 'Пловдив, Международен панаир, палата № 7', en: 'Plovdiv, International Fair, Hall 7' }, form: PRES,
     text: { bg: 'Щанд на ИР-БАН с площ 24 кв. м; участници от ИР-БАН, Центъра за компетентност „КВАЗАР“ и филиала на ИР-БАН във Велико Търново — 9 изложители на щанда, общо 15 регистрирани участници заедно с конференцията. Изработени рекламни материали по ННП-СО: 4 банера, 8 вида диплянки и брошури, 10 информационни табели. Цели: демонстрация на технологичните възможности на института и договаряне на бъдеща научноизследователска дейност чрез трансфер на технологии. Модератор: гл. ас. д-р М. Дечев.', en: 'IR-BAS stand of 24 m²; participants from IR-BAS, the QUASAR Centre of Competence and the IR-BAS branch in Veliko Tarnovo — 9 exhibitors at the stand, 15 registered participants in total including the conference. NSP DS promotional materials: 4 banners, 8 leaflets and brochures, 10 information boards. Aims: to demonstrate the Institute’s technological capabilities and to negotiate future research through technology transfer. Moderator: Chief Assist. Prof. Dr. M. Dechev.' },
-    people: { bg: 'доц. А. Маджаров, гл. ас. И. Гайдарски, доц. Н. Чехларова, гл. ас. С. Христозов, доц. М. Ралчев, доц. Р. Георгиев', en: 'Assoc. Prof. A. Madzharov, Chief Assist. Prof. I. Gaidarski, Assoc. Prof. N. Chehlarova, Chief Assist. Prof. S. Hristozov, Assoc. Prof. M. Ralchev, Assoc. Prof. R. Georgiev' },
+    people: { bg: 'доц. А. Маджаров, гл. ас. И. Гайдарски, доц. Н. Чехларова, гл. ас. С. Христозов, инж. М. Ралчев (ЦК „КВАЗАР“), доц. Р. Георгиев', en: 'Assoc. Prof. A. Madzharov, Chief Assist. Prof. I. Gaidarski, Assoc. Prof. N. Chehlarova, Chief Assist. Prof. S. Hristozov, Eng. M. Ralchev (QUASAR CoC), Assoc. Prof. R. Georgiev' },
     topics: [
-      { bg: 'Емисия на микрочастици в нехомогенни структури при едноосни деформации — доц. М. Ралчев', en: 'Microparticle emission in inhomogeneous structures under uniaxial deformation — Assoc. Prof. M. Ralchev' },
+      { bg: 'Емисия на микрочастици в нехомогенни структури при едноосни деформации — инж. М. Ралчев (ЦК „КВАЗАР“)', en: 'Microparticle emission in inhomogeneous structures under uniaxial deformation — Eng. M. Ralchev (QUASAR CoC)' },
       { bg: 'Сензорна система за регистриране и анализ на кардиологични сигнали — доц. д-р инж. Г. Георгиева-Цанева', en: 'Sensor system for recording and analysis of cardiological signals — Assoc. Prof. Dr. Eng. G. Georgieva-Tsaneva' },
       { bg: 'Радарни и антидрон системи (ReGuard 3D, RaMon, RP-2AA) — проф. дтн инж. Н. Личков', en: 'Radar and counter-drone systems (ReGuard 3D, RaMon, RP-2AA) — Prof. DSc Eng. N. Lichkov' },
       { bg: 'Квадрокоптери и радиоуправляеми летателни апарати — доц. А. Маджаров, доц. Р. Георгиев, гл. ас. С. Христозов', en: 'Quadcopters and radio-controlled aircraft — Assoc. Prof. A. Madzharov, Assoc. Prof. R. Georgiev, Chief Assist. Prof. S. Hristozov' },
