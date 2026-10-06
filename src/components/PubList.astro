@@ -15,9 +15,9 @@ const { lang, items, compact, arch } = Astro.props;
         <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>
       </div>
       <div>
-        <h3>{p.doi ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
+        <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
         <p class="au">{p.authors.join(', ')}</p>
-        <p class="ve">{p.venue}{p.doi && <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>}</p>
+        <p class="ve">{p.venue}{p.doi && (p.doiOff ? <> · DOI {p.doi} ({lang === 'bg' ? 'още не е активен' : 'not yet active'})</> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}</p>
         {!compact && p.abstract && <p class="ab">{p.abstract}</p>}
         {!compact && (
           <p class="tags">

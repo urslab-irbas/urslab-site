@@ -13,6 +13,7 @@ export interface Publication {
   venue: string;
   status: 'published' | 'in-press' | 'submitted';
   doi?: string;
+  doiOff?: boolean; // DOI-то не е активно в doi.org: показва се като текст
   url?: string;
   abstract?: string;
   tags: string[];
