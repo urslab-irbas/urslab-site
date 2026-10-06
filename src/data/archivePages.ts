@@ -49,7 +49,8 @@ const surname: [RegExp, string][] = [
 export const teamOf = (authors: string[]) => [...new Set(authors.flatMap((a) => surname.filter(([re]) => re.test(a)).map(([, k]) => k)))];
 export const fromPublication = (p: (typeof publications)[number]): ArchivePub => ({
   year: p.year, cat: p.status !== 'published' ? 'sub' : p.tags.includes('software') ? 'soft' : 'other',
-  authors: p.authors.join(', '), title: p.title, venue: p.venue, doi: p.doi, url: p.url, team: teamOf(p.authors), tags: p.tags,
+  st: p.status === 'in-press' ? 'in-press' : p.status === 'submitted' ? 'submitted' : undefined,
+  authors: p.authors.join(', '), title: p.title, venue: p.venue, doi: p.doi, doiOff: p.doiOff, url: p.url, team: teamOf(p.authors), tags: p.tags,
 });
 // Излезлите от печат (status 'published') от текущия списък отиват в архива по година
 const norm = (t: string) => t.toLowerCase().replace(/[^a-zа-я0-9]/gi, '');
