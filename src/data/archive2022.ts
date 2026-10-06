@@ -309,7 +309,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2024, cat: 'other', team: ['madzharov', 'hristozov', 'chehlarova', 'georgiev', 'gaidarski', 'aleksandrov'], tags: ['uas', 'navigation'],
     authors: 'Madzharov, A., Hristozov, S., Chehlarova, N., Georgiev, R., Gaidarski, I., Alexandrov, A.',
-    title: 'Design of an Unmanned Helicopter System for Collecting and Processing of Geographical Information',
+    title: 'Design of an Unmanned Helicopter System for Collecting and Processing of Geophysical Information',
     venue: 'Complex Control Systems 7, IR-BAS',
   },
   {

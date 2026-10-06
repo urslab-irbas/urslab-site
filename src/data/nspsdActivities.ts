@@ -28,7 +28,7 @@ export const phd = {
     { k: { bg: 'Задачи по ННП-СО', en: 'NSP DS tasks' }, v: { bg: '1.1.2 и 1.2.1', en: '1.1.2 and 1.2.1' } },
   ] as { k: L; v: L }[],
   nacid: 'https://ras.nacid.bg/api/reg/FilesStorage?key=38031e55-cfb2-4975-b618-a2692f567e77&mimeType=application/pdf&fileName=11%202023-03-31%20-%20%D0%94%D0%B8%D1%81%D0%B5%D1%80%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%84%D0%B8%D0%BD%D0%B0%D0%BB.pdf&dbId=1',
-  register: 'https://ras.nacid.bg/',
+  register: 'https://ras.nacid.bg/dissertation-preview/73057',
   // анотацията — дословно от дисертацията (Анотация / Annotation)
   annotation: {
     bg: [
@@ -72,9 +72,14 @@ export interface NspEvent {
   text?: L;          // кратко описание
   papers?: string[]; // части от заглавия на публикации от сайта
   topics?: L[];      // напр. тематични направления на щанд
+  photos?: { src: string; alt: L }[];   // public/images/… (миниатюра: th-<име>)
+  docs?: { href: string; label: L }[];
+  program?: { time: string; item: L }[];
 }
 
 const PRES: L = { bg: 'присъствена', en: 'in person' };
+const HYB: L = { bg: 'хибридна (присъствена + онлайн)', en: 'hybrid (in person + online)' };
+const RM_PLACE: L = { bg: 'София, Институт по роботика — БАН, зала „Макс Планк“', en: 'Sofia, Institute of Robotics — BAS, “Max Planck” hall' };
 
 /** 1. Участия в международни научни форуми прояви (конференции, симпозиуми, семинари и др.) — най-новите първи */
 export const participations: NspEvent[] = [
@@ -91,12 +96,12 @@ export const participations: NspEvent[] = [
   },
   {
     title: { bg: 'The 16th International Conference on Business Information Security (BISEC 2025)', en: 'The 16th International Conference on Business Information Security (BISEC 2025)' },
-    date: { bg: '2025 г.', en: '2025' }, place: { bg: 'Belgrade Metropolitan University, Сърбия', en: 'Belgrade Metropolitan University, Serbia' },
+    date: { bg: '28 ноември 2025 г.', en: '28 November 2025' }, place: { bg: 'Ниш, Сърбия (Университет „Метрополитан“)', en: 'Niš, Serbia (Metropolitan University)' }, form: PRES,
     papers: ['Insider Threats in Critical Infrastructure Organizations', 'LSTM-RNN method for Anomaly-Based Intrusion Detection', 'Development of Blockchain-Based Framework for Securing Communication'],
   },
   {
     title: { bg: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)', en: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)' },
-    date: { bg: '2025 г.', en: '2025' },
+    date: { bg: '18–20 декември 2025 г.', en: '18–20 December 2025' }, place: { bg: 'онлайн (MS Teams), домакин Jordan University of Science and Technology', en: 'online (MS Teams), hosted by Jordan University of Science and Technology' }, form: { bg: 'онлайн', en: 'online' },
     papers: ['Multilayered conceptual modelling for the design, implementation and optimization'],
   },
   {
@@ -117,7 +122,7 @@ export const participations: NspEvent[] = [
   },
   {
     title: { bg: '2024 IEEE 12th International Conference on Intelligent Systems (IS)', en: '2024 IEEE 12th International Conference on Intelligent Systems (IS)' },
-    date: { bg: '2024 г.', en: '2024' }, place: { bg: 'Варна', en: 'Varna' },
+    date: { bg: '29–31 август 2024 г.', en: '29–31 August 2024' }, place: { bg: 'к.к. Златни пясъци, Варна', en: 'Golden Sands, Varna' },
     papers: ['Aspects of Dependability and Security in Integrated Intelligent Educational Environments'],
   },
   {
@@ -149,12 +154,12 @@ export const participations: NspEvent[] = [
   },
   {
     title: { bg: 'The Fourteenth International Conference on Business Information Security (BISEC 2023)', en: 'The Fourteenth International Conference on Business Information Security (BISEC 2023)' },
-    date: { bg: '2023 г.', en: '2023' }, place: { bg: 'Сърбия', en: 'Serbia' },
+    date: { bg: '24 ноември 2023 г.', en: '24 November 2023' }, place: { bg: 'Ниш, Сърбия (Университет „Метрополитан“)', en: 'Niš, Serbia (Metropolitan University)' }, form: PRES,
     papers: ['Energy-efficient routing in UAVs supported perimeter security networks', 'Reducing the WSN'],
   },
   {
     title: { bg: 'XI Международна научна конференция „ХЕМУС 2022“', en: '11th International Scientific Conference “HEMUS 2022”' },
-    date: { bg: '2022 г.', en: '2022' }, place: { bg: 'Пловдив', en: 'Plovdiv' },
+    date: { bg: '1–4 юни 2022 г.', en: '1–4 June 2022' }, place: { bg: 'Пловдив, Международен панаир', en: 'Plovdiv, International Fair' },
   },
 ];
 
@@ -162,25 +167,42 @@ export const participations: NspEvent[] = [
 export const organized: NspEvent[] = [
   {
     title: { bg: 'Работна среща (тематичен семинар) „Приложение на съвременните технологии и системи с изкуствен интелект в авиационната среда и средата за сигурност“', en: 'Workshop (thematic seminar) “Application of modern technologies and artificial-intelligence systems in the aviation and security environment”' },
-    date: { bg: '16 май 2025 г.', en: '16 May 2025' }, place: { bg: 'Долна Митрополия, ВВВУ „Георги Бенковски“', en: 'Dolna Mitropolia, Georgi Benkovski Air Force Academy' },
-    people: { bg: 'лекции по ННП-СО: доц. А. Маджаров, доц. А. Александров, гл. ас. И. Гайдарски (Лаборатория „Безпилотни роботизирани системи“, ИР-БАН)', en: 'NSP DS lectures: Assoc. Prof. A. Madzharov, Assoc. Prof. A. Alexandrov, Chief Assist. Prof. I. Gaidarski (Unmanned Robotic Systems Laboratory, IR-BAS)' },
-    text: { bg: 'Цели: устойчиво сътрудничество между участващите институции, благоприятна среда за обучение и научни изследвания в технологиите, сигурността и отбраната и прилагане на успешни практики и научни разработки чрез трансформирането им в практически приложими продукти.', en: 'Aims: lasting cooperation between the participating institutions, a favourable environment for training and research in technology, security and defence, and the transfer of good practice and research results into practically applicable products.' },
+    date: { bg: '16 май 2025 г.', en: '16 May 2025' }, place: { bg: 'Долна Митрополия, ВВВУ „Георги Бенковски“', en: 'Dolna Mitropolia, Georgi Benkovski Air Force Academy' }, form: HYB,
+    people: { bg: 'презентации за постигнатите резултати по ННП-СО и по задача 1.2.3: доц. А. Маджаров, доц. А. Александров, гл. ас. И. Гайдарски и доц. Р. Георгиев (ИР-БАН); по покана на катедра „Електротехника, автоматика и информационни технологии“ на ВВВУ', en: 'presentations of the NSP DS results and of task 1.2.3: Assoc. Prof. A. Madzharov, Assoc. Prof. A. Alexandrov, Chief Assist. Prof. I. Gaidarski and Assoc. Prof. R. Georgiev (IR-BAS); at the invitation of the Department of Electrical Engineering, Automation and Information Technologies of the Academy' },
+    text: { bg: 'Семинарът е част от ННП „Сигурност и отбрана“, Компонент 1 „Сигурност“, работен пакет 1.2 „Технологично осигуряване“, задача 1.2.3 „Изследване на роботизирани системи, основани на машинно обучение за анализ на средствата и вземане на решения, както и разработване на прототипи, основани на приложение на изкуствения интелект и роботиката“. Цели: устойчиво сътрудничество между участващите институции, благоприятна среда за обучение и научни изследвания в технологиите, сигурността и отбраната и прилагане на успешни практики и научни разработки чрез трансформирането им в практически приложими продукти; отчет на резултатите по задача 1.2.3 и предизвикателствата от въвеждането на нова авиационна техника и технологии с изкуствен интелект. Участници: военнослужещи, експерти, докторанти и представители на фирми.', en: 'The seminar is part of the NSP “Security and Defence”, Component 1 “Security”, work package 1.2 “Technological support”, task 1.2.3 “Research on robotic systems based on machine learning for analysis and decision making, and development of prototypes based on artificial intelligence and robotics”. Aims: lasting cooperation between the participating institutions, a favourable environment for training and research in technology, security and defence, and the transfer of good practice and research results into practical products; a report on the results of task 1.2.3 and on the challenges of introducing new aviation equipment and AI technologies. Participants: military personnel, experts, PhD students and company representatives.' },
+    program: [
+      { time: '09:00 – 09:30', item: { bg: 'Регистрация на участниците', en: 'Registration' } },
+      { time: '09:30 – 10:00', item: { bg: 'Откриване: приветствие от ръководството на ВВВУ; план за изпълнение и отчет на задача 1.2.3', en: 'Opening: welcome by the Academy; implementation plan and report on task 1.2.3' } },
+      { time: '10:00 – 11:00', item: { bg: 'Представяне на фирми от региона; възможности за работа и кариерно развитие, свързани с новите технологии, изкуствения интелект и средата за сигурност', en: 'Regional companies; career opportunities in new technologies, AI and the security environment' } },
+      { time: '11:30 – 12:30', item: { bg: 'Взаимовръзката между научните изследвания, бизнеса и потребителите на кадри', en: 'Links between research, business and employers' } },
+      { time: '12:30 – 13:00', item: { bg: 'Представяне на дипломен проект', en: 'Presentation of a diploma project' } },
+      { time: '14:00 – 15:00', item: { bg: 'Кръгла маса: образованието, изкуственият интелект и подготовката на висококвалифицирани кадри', en: 'Round table: education, artificial intelligence and training of highly qualified personnel' } },
+      { time: '16:00', item: { bg: 'Закриване', en: 'Closing' } },
+    ],
+    photos: [
+      { src: '/images/nspsd/vvvu-2025/01-vhod.jpg', alt: { bg: 'Входът на ВВВУ „Георги Бенковски“, Долна Митрополия', en: 'Entrance of the Georgi Benkovski Air Force Academy, Dolna Mitropolia' } },
+      { src: '/images/nspsd/vvvu-2025/02-zala.jpg', alt: { bg: 'Залата по време на семинара', en: 'The hall during the seminar' } },
+      { src: '/images/nspsd/vvvu-2025/03-prezentacia.jpg', alt: { bg: 'Презентация по ННП-СО', en: 'NSP DS presentation' } },
+      { src: '/images/nspsd/vvvu-2025/04-diskusia.jpg', alt: { bg: 'Дискусия', en: 'Discussion' } },
+      { src: '/images/nspsd/vvvu-2025/05-uchastnici.jpg', alt: { bg: 'Участниците в семинара', en: 'Seminar participants' } },
+    ],
+    docs: [{ href: '/docs/nspsd/VVVU-2025-programa.pdf', label: { bg: 'Програма на семинара (PDF)', en: 'Seminar programme (PDF, Bulgarian)' } }],
   },
   {
-    title: { bg: 'Международна научна конференция „Robotics & Mechatronics 2025“, Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2025”, Institute of Robotics — BAS' },
-    date: { bg: '2025 г.', en: '2025' }, place: { bg: 'София', en: 'Sofia' }, url: 'https://ir.bas.bg/ccs/2025/09/index.html',
+    title: { bg: 'Международна научна конференция „Роботика и мехатроника 2025“ (Robotics & Mechatronics 2025), Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2025”, Institute of Robotics — BAS' },
+    date: { bg: '5–6 ноември 2025 г.', en: '5–6 November 2025' }, place: RM_PLACE, form: PRES, url: 'https://ir.bas.bg/ccs/2025/09/index.html',
     text: { bg: 'Докладите се публикуват в сп. Complex Control Systems (ISSN 1310-8255, 2603-4697 online), т. 9.', en: 'Papers are published in Complex Control Systems (ISSN 1310-8255, 2603-4697 online), vol. 9.' },
     papers: ['Using disruptive technologies as Blockchains and AI in IoT cybersecurity'],
   },
   {
-    title: { bg: 'Международна научна конференция „Robotics & Mechatronics 2024“, Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2024”, Institute of Robotics — BAS' },
-    date: { bg: '2024 г.', en: '2024' }, place: { bg: 'София', en: 'Sofia' }, url: 'https://ir.bas.bg/ccs/2024/07/index.html',
+    title: { bg: 'Международна научна конференция „Роботика и мехатроника 2024“ (Robotics & Mechatronics 2024), Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2024”, Institute of Robotics — BAS' },
+    date: { bg: '29–30 октомври 2024 г.', en: '29–30 October 2024' }, place: RM_PLACE, form: PRES, url: 'https://ir.bas.bg/ccs/2024/07/index.html',
     text: { bg: 'Сборник: Complex Control Systems, т. 7.', en: 'Proceedings: Complex Control Systems, vol. 7.' },
     papers: ['Design of a testing model for evaluation the levels of automation', 'Design of an Unmanned Helicopter System for Collecting and Processing', 'Some aspects of cybersecurity in Industry 4.0'],
   },
   {
-    title: { bg: 'Международна научна конференция „Robotics & Mechatronics 2023“, Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2023”, Institute of Robotics — BAS' },
-    date: { bg: '2023 г.', en: '2023' }, place: { bg: 'София', en: 'Sofia' }, url: 'https://ir.bas.bg/ccs/2023/06/index.html',
+    title: { bg: 'XXIV Международна научна конференция „Роботика и мехатроника 2023“ (Robotics & Mechatronics 2023), Институт по роботика — БАН', en: '24th International Scientific Conference “Robotics & Mechatronics 2023”, Institute of Robotics — BAS' },
+    date: { bg: '25–26 април 2023 г.', en: '25–26 April 2023' }, place: RM_PLACE, form: PRES, url: 'https://ir.bas.bg/ccs/2023/06/index.html',
     text: { bg: 'Сборник: Complex Control Systems, т. 6.', en: 'Proceedings: Complex Control Systems, vol. 6.' },
     papers: ['Trajectory optimization in large scale UAV-assisted WSNs', 'Modern Aspects in Information Security in the Field of Robotics'],
   },
