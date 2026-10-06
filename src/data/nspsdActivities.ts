@@ -132,7 +132,8 @@ export const participations: NspEvent[] = [
   },
   {
     title: { bg: 'XVI Специализирано международно изложение за отбранителна техника и услуги „ХЕМУС 2024 — Отбрана, антитероризъм и сигурност“ — щанд на Института по роботика', en: '16th International Defence Exhibition “HEMUS 2024 — Defence, Counter-terrorism and Security” — Institute of Robotics stand' },
-    date: { bg: '5–8 юни 2024 г.', en: '5–8 June 2024' }, place: { bg: 'Пловдив', en: 'Plovdiv' }, form: PRES,
+    date: { bg: '5–8 юни 2024 г.', en: '5–8 June 2024' }, place: { bg: 'Пловдив, Международен панаир, палата № 7', en: 'Plovdiv, International Fair, Hall 7' }, form: PRES,
+    text: { bg: 'Щанд на ИР-БАН с площ 24 кв. м; участници от ИР-БАН, Центъра за компетентност „КВАЗАР“ и филиала на ИР-БАН във Велико Търново — 9 изложители на щанда, общо 15 регистрирани участници заедно с конференцията. Изработени рекламни материали по ННП-СО: 4 банера, 8 вида диплянки и брошури, 10 информационни табели. Цели: демонстрация на технологичните възможности на института и договаряне на бъдеща научноизследователска дейност чрез трансфер на технологии. Модератор: гл. ас. д-р М. Дечев.', en: 'IR-BAS stand of 24 m²; participants from IR-BAS, the QUASAR Centre of Competence and the IR-BAS branch in Veliko Tarnovo — 9 exhibitors at the stand, 15 registered participants in total including the conference. NSP DS promotional materials: 4 banners, 8 leaflets and brochures, 10 information boards. Aims: to demonstrate the Institute’s technological capabilities and to negotiate future research through technology transfer. Moderator: Chief Assist. Prof. Dr. M. Dechev.' },
     people: { bg: 'доц. А. Маджаров, гл. ас. И. Гайдарски, доц. Н. Чехларова, гл. ас. С. Христозов, доц. М. Ралчев, доц. Р. Георгиев', en: 'Assoc. Prof. A. Madzharov, Chief Assist. Prof. I. Gaidarski, Assoc. Prof. N. Chehlarova, Chief Assist. Prof. S. Hristozov, Assoc. Prof. M. Ralchev, Assoc. Prof. R. Georgiev' },
     topics: [
       { bg: 'Емисия на микрочастици в нехомогенни структури при едноосни деформации — доц. М. Ралчев', en: 'Microparticle emission in inhomogeneous structures under uniaxial deformation — Assoc. Prof. M. Ralchev' },
@@ -186,7 +187,10 @@ export const organized: NspEvent[] = [
       { src: '/images/nspsd/vvvu-2025/04-diskusia.jpg', alt: { bg: 'Дискусия', en: 'Discussion' } },
       { src: '/images/nspsd/vvvu-2025/05-uchastnici.jpg', alt: { bg: 'Участниците в семинара', en: 'Seminar participants' } },
     ],
-    docs: [{ href: '/docs/nspsd/VVVU-2025-programa.pdf', label: { bg: 'Програма на семинара (PDF)', en: 'Seminar programme (PDF, Bulgarian)' } }],
+    docs: [
+      { href: '/docs/nspsd/VVVU-2025-programa.pdf', label: { bg: 'Програма на семинара (PDF)', en: 'Seminar programme (PDF, Bulgarian)' } },
+      { href: '/docs/nspsd/IR-BRS-Dolna-may2025.pdf', label: { bg: 'Презентация на Лаборатория БРС — доц. А. Маджаров (PDF)', en: 'URS Lab presentation — Assoc. Prof. A. Madzharov (PDF, Bulgarian)' } },
+    ],
   },
   {
     title: { bg: 'Международна научна конференция „Роботика и мехатроника 2025“ (Robotics & Mechatronics 2025), Институт по роботика — БАН', en: 'International Scientific Conference “Robotics & Mechatronics 2025”, Institute of Robotics — BAS' },
