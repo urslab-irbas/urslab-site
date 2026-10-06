@@ -5,6 +5,7 @@
 import type { ArchivePub } from './archive2022';
 import { archivePages, formSubmitted, fromPublication } from './archivePages';
 import { publications, type Publication } from './publications';
+import { NSPDS_FUND, nspsdRefFor } from './nspsdRefs';
 
 const currentMain = publications.filter((p) => p.status !== 'published');
 export const currentPubs: ArchivePub[] = [...currentMain.map(fromPublication), ...formSubmitted];
@@ -13,8 +14,9 @@ export const allPubs: ArchivePub[] = [...currentPubs, ...archivedPubs];
 
 /** ArchivePub → формата на списъка в „Публикации“ (PubList) */
 export const toPublication = (a: ArchivePub): Publication => ({
-  year: a.year, title: a.tr ? `${a.title} [${a.tr}]` : a.title, authors: [a.authors], venue: a.venue,
+  year: a.year, title: a.tr ? `${a.title} [${a.tr}]` : a.title, authors: [a.authors], authorsEn: a.authorsEn ? [a.authorsEn] : undefined, venue: a.venue,
   status: a.cat === 'sub' ? (a.st ?? 'submitted') : 'published', doi: a.doi, doiOff: a.doiOff, url: a.url, tags: a.tags, abstract: a.abstract,
+  funding: nspsdRefFor(a.title) ? NSPDS_FUND : undefined, fundVia: nspsdRefFor(a.title)?.via,
 });
 /** Текущият списък за „Публикации“ (с резюметата от publications.ts) */
 export const currentList: Publication[] = [...currentMain, ...formSubmitted.map(toPublication)];

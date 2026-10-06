@@ -97,16 +97,19 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
   },
 ];
 
-export const projects: { title: L; funder: L; period: string; text: L; link?: L }[] = [
+// end — край на проекта/програмата (показва се в картата); pubs — страница със списък публикации по проекта
+export const projects: { title: L; funder: L; period: string; end?: L; text: L; link?: L; pubs?: string }[] = [
   {
     title: { bg: 'Национална научна програма „Сигурност и отбрана“', en: 'National Scientific Program “Security and Defence”' },
     funder: { bg: 'МОН, споразумение Д01-74/19.05.2022', en: 'Ministry of Education and Science, grant D01-74/19.05.2022' },
-    period: '2022 – 2025',
+    period: '2022 – 2026',
+    end: { bg: 'Край на проекта/програмата: 31.12.2026 г. (срокът е удължен)', en: 'End of the project/programme: 31 December 2026 (extended)' },
     text: {
       bg: 'Изследвания в областта на автономната навигация, геодезическите модели за бордови изчисления и безпилотните системи.',
       en: 'Research on autonomous navigation, geodetic models for on-board computation and unmanned systems.',
     },
     link: { bg: 'https://ir.bas.bg/projects/NSPSD/nspsd.pdf', en: 'https://ir.bas.bg/projects/NSPSD/nspsd_en.pdf' },
+    pubs: 'projects/nspsd',
   },
 ];
 

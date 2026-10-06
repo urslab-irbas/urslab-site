@@ -16,13 +16,13 @@ const { lang, items, compact, arch } = Astro.props;
       </div>
       <div>
         <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
-        <p class="au">{p.authors.join(', ')}</p>
+        <p class="au">{(lang === 'en' && p.authorsEn ? p.authorsEn : p.authors).join(', ')}</p>
         <p class="ve">{p.venue}{p.doi && (p.doiOff ? <> · DOI {p.doi} ({lang === 'bg' ? 'още не е активен' : 'not yet active'})</> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}</p>
         {!compact && p.abstract && <p class="ab">{p.abstract}</p>}
         {!compact && (
           <p class="tags">
             {p.tags.map((g) => <span class="tag">{tagLabels[g]?.[lang] ?? g}</span>)}
-            {p.funding && <span class="fund">{t.funding[lang]}: {p.funding}</span>}
+            {p.funding && <span class="fund">{p.fundVia === 'conf' ? (lang === 'bg' ? 'Участие в конференцията, финансирано по' : 'Conference participation funded by') : t.funding[lang]}: {p.funding}</span>}
           </p>
         )}
       </div>

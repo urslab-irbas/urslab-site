@@ -21,6 +21,7 @@ export interface ArchivePub {
   /** резюме (само за въведените през формата) */
   abstract?: string;
   authors: string;
+  authorsEn?: string; // авторите на латиница за английската версия (когато authors са на кирилица)
   title: string;
   tr?: string;
   venue: string;
@@ -39,6 +40,9 @@ export interface ArchivePub {
   ix?: boolean;    // индексирана в WoS/Scopus, макар че категорията ѝ в отчета е друга
   share?: number;  // „Процент автори от звеното“ (ИР) от отчета на БАН
   note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
+  fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
+  task?: string;   // задача по програмата
+  fundVia?: 'conf'; // финансирано е участието в конференцията (не самата статия)
 }
 
 export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] = [
@@ -91,6 +95,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2023, cat: 'mono', team: ['chehlarova'], tags: ['education'],
     authors: 'Чехларова, Н.',
+    authorsEn: 'Chehlarova, N.',
     title: 'Изследване на системата за е-бизнес в контекста на повишаване на дигиталната компетентност на потребителите',
     tr: 'Investigation of the e-business system in the context of enhancing users’ digital competence',
     venue: 'Тонедико, 170 с.',
@@ -167,7 +172,7 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'q4', sjr: 0.167, team: ['gaidarski', 'chehlarova'], tags: ['security'],
     authors: 'Gaidarski, I., Chehlarova, N.',
     title: 'Management approaches and application areas of information security in organizations',
-    venue: 'Environment. Technology. Resources. Proc. 15th Int. Conf., vol. II, Rezekne Academy of Technologies, pp. 110–113',
+    venue: 'Environment. Technology. Resources. Proc. 15th Int. Conf., vol. II, Rezekne Academy of Technologies, pp. 110–113', doi: '10.17770/etr2024vol2.8062',
   },
   {
     year: 2024, cat: 'q4', sjr: 0.167, team: ['madzharov', 'chehlarova'], tags: ['security', 'education'],
@@ -316,6 +321,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
     authors: 'Чехларова, К., Чехларова, Н.',
+    authorsEn: 'Chehlarova, K., Chehlarova, N.',
     title: 'STEАM работилници по проект „Стъклен инициал“',
     tr: 'STEAM workshops under the project “Glass Initial”',
     venue: 'Педагогически форум 3, Тракийски университет, с. 31–41',
@@ -323,6 +329,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
     authors: 'Чехларова, Т., Чехларова, Н.',
+    authorsEn: 'Chehlarova, T., Chehlarova, N.',
     title: 'Изследване на пирамиди с равни ръбове, които имат равни радиуси на описаната около основата им окръжност',
     tr: 'Investigation of pyramids with equal edges having equal radii of the circle circumscribed about the base',
     venue: 'Педагогически форум 4, Тракийски университет, с. 101–108', doi: '10.15547/PF.2024.028',
@@ -366,6 +373,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2023, cat: 'other', team: ['gaidarski'], tags: ['security'],
     authors: 'Гайдарски, И., Кутинчев, П.',
+    authorsEn: 'Gaidarski, I., Kutinchev, P.',
     title: 'Съвременни подходи за опазване на чувствителна информация',
     tr: 'Modern approaches to protecting sensitive information',
     venue: 'Сборник „Съвременни изследвания и технологии за отбраната“ (ARTDef), Институт по отбрана „Проф. Цветан Лазаров“',
@@ -373,6 +381,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2023, cat: 'other', team: ['chehlarova'], tags: ['education'],
     authors: 'Чехларова, Н.',
+    authorsEn: 'Chehlarova, N.',
     title: 'Подкрепа при развитие на дигитална компетентност на потребителите',
     tr: 'Support in developing users’ digital competence',
     venue: 'Стопанско управление 1, с. 51–63',
@@ -392,6 +401,7 @@ export const archive: ArchivePub[] = [
   {
     year: 2022, cat: 'other', team: ['chehlarova'], tags: ['security', 'education'],
     authors: 'Чехларова, Н.',
+    authorsEn: 'Chehlarova, N.',
     title: 'Кратко обучение за работа с електронен подпис',
     tr: 'Brief training on working with an electronic signature',
     venue: 'Стопанско управление 1, с. 35–45',

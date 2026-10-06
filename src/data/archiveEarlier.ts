@@ -20,6 +20,7 @@ export const archiveEarlier: ArchivePub[] = [
   {
     year: 2000, cat: 'mono', team: ['madzharov'], tags: ['navigation'],
     authors: 'Маджаров, А.',
+    authorsEn: 'Madzharov, A.',
     title: 'Жироскопи и инерциални навигационни системи',
     tr: 'Gyroscopes and Inertial Navigation Systems',
     venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“, 422 с.',
@@ -28,6 +29,7 @@ export const archiveEarlier: ArchivePub[] = [
   {
     year: 2013, cat: 'book', team: ['madzharov'], tags: ['navigation'],
     authors: 'Маджаров, А.',
+    authorsEn: 'Madzharov, A.',
     title: 'Структура и приложение на спътниковите навигационни системи',
     tr: 'Structure and Application of Satellite Navigation Systems',
     venue: 'В. Търново: НВУ „Васил Левски“, 177 с.',
