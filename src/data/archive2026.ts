@@ -46,7 +46,7 @@ export const archive2026: ArchivePub[] = [
     venue: 'Problems of Engineering Cybernetics and Robotics 84, BAS, pp. 35–45', doi: '10.7546/PECR.84.26.03',
   },
   {
-    year: 2026, cat: 'nat', share: 50, team: ['chehlarova'], tags: ['security', 'education'], note: 'Друга база (не влиза в К2)',
+    year: 2026, cat: 'nat', share: 50, team: ['chehlarova'], tags: ['security', 'education'],
     authors: 'Dishkova, G., Chehlarova, N.',
     title: 'Recognition and prevention of cyberbullying by students in secondary education',
     venue: 'Complex Control Systems 10(2), IR-BAS, pp. 166–171',
