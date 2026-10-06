@@ -21,6 +21,9 @@ RewriteCond %{HTTP_REFERER} !^https?://(www\.)?urs\.ir\.bas\.bg/ [NC]
 RewriteCond %{HTTP_REFERER} !^https?://(localhost|127\.0\.0\.1)(:\d+)?/ [NC]
 RewriteRule ^images/.+\.(jpe?g|png|webp|gif|avif)$ - [F,L,NC]
 
+# Премахнати файлове (deploy-ът не трие на сървъра) — 410 Gone
+RewriteRule ^docs/nspsd/(VVVU-2025-programa|IR-BRS-Dolna-may2025)\.pdf$ - [G,L,NC]
+
 # WordPress no longer exists here: answer "410 Gone" to bots probing it
 RewriteRule ^(wp-admin|wp-includes|wp-content|wp-login\.php|xmlrpc\.php|wp-json) - [G,L]
 </IfModule>
