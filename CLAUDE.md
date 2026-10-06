@@ -20,6 +20,7 @@ Target domain: https://urs.ir.bas.bg
 - Page views: `src/views/` (Home, Team, Publications, Simple = research/projects/services/contact). Route files in `src/pages/` and `src/pages/en/` are thin wrappers.
 - Interactive clothoid coordinated-turn demo: `src/components/ClothoidDemo.astro`.
 - Images: `public/images/team/`, `public/images/gallery/` (gallery auto-lists files).
+- Image protection: no right-click / drag / long-press save on images (script + CSS in `Layout.astro`, `global.css`); galleries open the large photo in the in-page lightbox (`<button data-lb="/images/…" data-cap="…">`, shown as a CSS background) — never link directly to image files; `public/.htaccess` answers 403 for `/images/…` without a Referer from urs.ir.bas.bg (direct opening, hotlinking) and sends `X-Robots-Tag: noimageindex`. Strip EXIF/GPS from every uploaded photo.
 
 - Training deck for new team members: `public/docs/URSlab-rakovodstvo.pptx` + `.pdf` (button „Помощ за нов член на екипа“ on the Team page). Generator: `scripts/help-deck/build.js` (pptxgenjs; screenshots of the site) — rebuild the deck when site features change.
 

@@ -17,6 +17,7 @@ const year = new Date().getFullYear();
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={desc} />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={desc} />
   <link rel="alternate" hreflang={other} href={href(other, slug)} />
@@ -62,6 +63,39 @@ const year = new Date().getFullYear();
     </div>
     <div class="wrap copy">© {year} {site.institute[lang]}. {t.rights[lang]}</div>
   </footer>
+  <!-- Защита на снимките: без десен бутон / влачене / „Запази изображението“; голямата снимка се показва
+       в прозорец на страницата като фон (не като файл, който се отваря и сваля). Сървърът (.htaccess) връща
+       403 за /images/…, ако адресът се отвори директно, а не от страница на сайта. -->
+  <dialog id="lb" class="lb" aria-label={lang === 'bg' ? 'Снимка' : 'Photo'}>
+    <div class="lb-pic" role="img"></div>
+    <p class="lb-cap"></p>
+    <button type="button" class="lb-x" aria-label={lang === 'bg' ? 'Затвори' : 'Close'}>×</button>
+    <button type="button" class="lb-p" aria-label={lang === 'bg' ? 'Предишна' : 'Previous'}>‹</button>
+    <button type="button" class="lb-n" aria-label={lang === 'bg' ? 'Следваща' : 'Next'}>›</button>
+  </dialog>
+  <script is:inline>
+    (() => {
+      const pic = (t) => t instanceof Element && t.closest('img, picture, [data-lb], .lb-pic');
+      document.addEventListener('contextmenu', (e) => { if (pic(e.target)) e.preventDefault(); });
+      document.addEventListener('dragstart', (e) => { if (pic(e.target)) e.preventDefault(); });
+      const d = document.getElementById('lb'), box = d.querySelector('.lb-pic'), cap = d.querySelector('.lb-cap');
+      let set = [], i = 0;
+      const show = () => { const b = set[i]; box.style.backgroundImage = `url("${b.dataset.lb}")`; cap.textContent = b.dataset.cap || ''; d.classList.toggle('one', set.length < 2); };
+      document.addEventListener('click', (e) => {
+        const b = e.target instanceof Element && e.target.closest('[data-lb]');
+        if (!b) return;
+        set = [...(b.parentElement?.querySelectorAll('[data-lb]') ?? [b])]; i = set.indexOf(b);
+        show(); d.showModal();
+      });
+      const step = (k) => { i = (i + k + set.length) % set.length; show(); };
+      d.querySelector('.lb-x').onclick = () => d.close();
+      d.querySelector('.lb-p').onclick = () => step(-1);
+      d.querySelector('.lb-n').onclick = () => step(1);
+      d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+      d.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+      d.addEventListener('close', () => { box.style.backgroundImage = ''; });
+    })();
+  </script>
 </body>
 </html>
 
@@ -91,5 +125,16 @@ const year = new Date().getFullYear();
   footer a { color: #e9eef2; }
   footer strong { color: #e9eef2; }
   .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; padding-top: 40px; padding-bottom: 16px; }
+  .lb { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+  .lb::backdrop { background: rgba(8, 16, 26, .92); }
+  .lb-pic { position: absolute; inset: 48px 56px 56px; background: center / contain no-repeat; }
+  .lb-cap { position: absolute; left: 16px; right: 16px; bottom: 14px; margin: 0; text-align: center; color: #e9eef2; font-size: .9rem; }
+  .lb button { position: absolute; border: 0; background: rgba(255,255,255,.12); color: #fff; font-size: 1.8rem; line-height: 1; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
+  .lb button:hover { background: rgba(255,255,255,.25); }
+  .lb-x { top: 10px; right: 12px; }
+  .lb-p { left: 8px; top: calc(50% - 22px); }
+  .lb-n { right: 8px; top: calc(50% - 22px); }
+  .lb.one .lb-p, .lb.one .lb-n { display: none; }
+  @media (max-width: 600px) { .lb-pic { inset: 56px 8px 60px; } .lb-p, .lb-n { top: auto; bottom: 8px; } }
   .copy { border-top: 1px solid #1e3348; padding-top: 16px; padding-bottom: 28px; font-size: .8rem; }
 </style>
