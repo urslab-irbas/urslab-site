@@ -6,6 +6,7 @@ import type { APIRoute } from 'astro';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import ExcelJS from 'exceljs';
+import JSZip from 'jszip';
 import { nspsdPubs } from '../../data/nspsd';
 import { nspsdRefFor } from '../../data/nspsdRefs';
 import { excelRows, type ExcelRow } from '../../data/nspsdExcel';
@@ -58,7 +59,8 @@ const nspText = (p: ArchivePub, r: ExcelRow) => {
 
 export const GET: APIRoute = async () => {
   const wb = new ExcelJS.Workbook();
-  await wb.xlsx.load(await readFile(join(process.cwd(), 'scripts/nspsd/template.xlsx')));
+  const tpl = await readFile(join(process.cwd(), 'scripts/nspsd/template.xlsx'));
+  await wb.xlsx.load(tpl);
   const ws = wb.getWorksheet('Публикации')!;
   const first = 5;
   const proto = ws.getRow(first);
@@ -125,5 +127,14 @@ export const GET: APIRoute = async () => {
   ws.views = [{ state: 'frozen', xSplit: 2, ySplit: 4 }];
 
   const buf = await wb.xlsx.writeBuffer();
-  return new Response(buf as ArrayBuffer, { headers: { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' } });
+  // exceljs записва таблицата от шаблона повредена (добавя autoFilter, сменя заглавния ред) и Excel я „поправя“ —
+  // затова връщаме оригиналната дефиниция от шаблона и само разширяваме диапазона ѝ до последния ред
+  const out = await JSZip.loadAsync(buf as ArrayBuffer);
+  const src = await JSZip.loadAsync(tpl);
+  for (const name of Object.keys(src.files).filter((f) => /^xl\/tables\/table\d+\.xml$/.test(f))) {
+    const xml = (await src.file(name)!.async('string')).replace(/ref="A4:P\d+"/, `ref="A4:P${last}"`);
+    out.file(name, xml);
+  }
+  const fixed = await out.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
+  return new Response(fixed, { headers: { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' } });
 };
