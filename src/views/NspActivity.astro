@@ -1,0 +1,142 @@
+---
+// ННП „Сигурност и отбрана“: „Докторанти по ННП СиО“ (kind="phd") и „Конференции и семинари“ (kind="events").
+// Данни: src/data/nspsdActivities.ts. Същото оформление като страницата с публикациите по програмата.
+import Layout from '../layouts/Layout.astro';
+import { href } from '../lib/i18n';
+import type { Lang } from '../data/content';
+import { phd, participations, organized, NSP_SITE, type NspEvent } from '../data/nspsdActivities';
+import { nspsdPubs } from '../data/nspsd';
+import { allPubs } from '../data/allPubs';
+import { normTitle } from '../data/nspsdRefs';
+
+interface Props { lang: Lang; kind: 'phd' | 'events' }
+const { lang, kind } = Astro.props;
+const bg = lang === 'bg';
+const T = (b: string, e: string) => (bg ? b : e);
+
+// доклад по част от заглавието → запис от сайта (заглавие, автори, издание, линк)
+const pool = [...nspsdPubs, ...allPubs];
+const paper = (frag: string) => {
+  const p = pool.find((x) => normTitle(x.title).includes(normTitle(frag)));
+  if (!p) throw new Error(`nspsdActivities: няма публикация „${frag}“`);
+  const link = p.doi && !p.doiOff ? `https://doi.org/${p.doi}` : p.url;
+  return { title: !bg && p.tr ? p.tr : p.title, authors: !bg && p.authorsEn ? p.authorsEn : p.authors, venue: p.venue, link, sub: p.cat === 'sub' };
+};
+const TBD = T('предстои да се допълни', 'to be added');
+
+const page = kind === 'phd'
+  ? { slug: 'projects/nspsd/phd', title: T('Докторанти по ННП СиО', 'PhD students — NSP DS'), site: NSP_SITE.phd, siteLabel: T('Докторанти на сайта на ННП „СО“ ↗', 'PhD students on the NSP DS website ↗'),
+      lead: T('Защитени докторски дисертации на работните екипи в Института по роботика към БАН при изпълнение на задачите по Национална научна програма „Сигурност и отбрана“ (Договор № Д01-74/19.05.2022 г., МОН).', 'Doctoral theses defended by the Institute of Robotics (BAS) teams under the National Scientific Program “Security and Defence” (grant agreement No. D01-74/19.05.2022, Ministry of Education and Science).') }
+  : { slug: 'projects/nspsd/events', title: T('Конференции и семинари', 'Conferences and seminars'), site: NSP_SITE.events1, siteLabel: T('Конференции и семинари на сайта на ННП „СО“ ↗', 'Conferences and seminars on the NSP DS website ↗'),
+      lead: T('Участия на работните екипи в Института по роботика към БАН в научни форуми и организирани от тях тематични събития по Национална научна програма „Сигурност и отбрана“ — по разделите на сайта на програмата.', 'Participation of the Institute of Robotics (BAS) teams in scientific forums and the thematic events they organised under the National Scientific Program “Security and Defence” — following the sections of the programme website.') };
+
+const sections: { n: number; title: string; items: NspEvent[]; site: string }[] = kind === 'events' ? [
+  { n: 1, title: T('Участия в международни научни форуми прояви (конференции, симпозиуми, семинари и др.)', 'Participation in international scientific forums (conferences, symposia, seminars, etc.)'), items: participations, site: NSP_SITE.events1 },
+  { n: 2, title: T('Организирани тематични събития (семинари, конференции и др.)', 'Organised thematic events (seminars, conferences, etc.)'), items: organized, site: NSP_SITE.events2 },
+] : [];
+---
+<Layout lang={lang} slug={page.slug} title={page.title} description={page.lead}>
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow"><a href={href(lang, 'projects')}>{T('Проекти', 'Projects')}</a> / {T('ННП „Сигурност и отбрана“', 'NSP “Security and Defence”')}</p>
+    <h1>{page.title}</h1>
+    <p>{page.lead}</p>
+  </div></header>
+
+  <section class="block"><div class="wrap">
+    <div class="acts">
+      <a class="btn" href={page.site} target="_blank" rel="noopener">{page.siteLabel}</a>
+      <a class="btn ghost" href={href(lang, 'projects/nspsd')}>{T('Публикации по ННП „СО“', 'NSP DS publications')}</a>
+      <a class="btn ghost" href={href(lang, kind === 'phd' ? 'projects/nspsd/events' : 'projects/nspsd/phd')}>{kind === 'phd' ? T('Конференции и семинари', 'Conferences and seminars') : T('Докторанти по ННП СиО', 'PhD students — NSP DS')}</a>
+    </div>
+
+    {kind === 'phd' && (
+      <article class="card thesis">
+        <p class="eyebrow">{T('Защитена докторска дисертация', 'Defended doctoral thesis')} · 2023</p>
+        <h2>{phd.title[lang]}</h2>
+        {phd.titleNote[lang] && <p class="note">{phd.titleNote[lang]}</p>}
+        <p class="who">{phd.name[lang]}</p>
+        <dl class="facts">
+          {phd.facts.map((f) => <><dt>{f.k[lang]}</dt><dd>{f.v[lang]}</dd></>)}
+        </dl>
+        <p class="links">
+          <a class="btn" href={phd.nacid}>{T('Дисертационният труд (PDF, НАЦИД)', 'The thesis (PDF, NACID)')}</a>
+          <a href={phd.register}>{T('Регистър на академичния състав — НАЦИД ↗', 'Register of Academic Staff — NACID ↗')}</a>
+        </p>
+
+        <h3>{T('Анотация', 'Annotation')}</h3>
+        {phd.annotation[lang].map((t) => <p>{t}</p>)}
+
+        <h3>{T('Структура на дисертацията', 'Structure of the thesis')}</h3>
+        <ol class="ch">{phd.chapters.map((c, i) => <li><span>{T('Глава', 'Chapter')} {['I', 'II', 'III', 'IV'][i]}</span> {c[lang]}</li>)}</ol>
+
+        <h3>{T('Свързани публикации по програмата', 'Related publications under the programme')}</h3>
+        <ul class="papers">{phd.papers.map(paper).map((p) => <li><span class="au">{p.authors}</span> {p.link ? <a href={p.link}>{p.title}</a> : p.title}. <i>{p.venue}</i></li>)}</ul>
+
+        <p class="fund">{phd.ack[lang]}</p>
+      </article>
+    )}
+
+    {sections.map((s) => (
+      <section class="grp" id={`section-${s.n}`}>
+        <h2>{s.n}. {s.title} <span class="gc">({s.items.length})</span></h2>
+        <ol class="events">
+          {s.items.map((e) => (
+            <li class="card">
+              <h3>{e.url ? <a href={e.url}>{e.title[lang]}</a> : e.title[lang]}</h3>
+              <dl class="facts">
+                <dt>{T('Дата на събитието', 'Date')}</dt><dd>{e.date?.[lang] ?? <span class="tbd">{TBD}</span>}</dd>
+                <dt>{T('Град домакин', 'Host city')}</dt><dd>{e.place?.[lang] ?? <span class="tbd">{TBD}</span>}</dd>
+                {e.form && <><dt>{T('Форма на провеждане', 'Format')}</dt><dd>{e.form[lang]}</dd></>}
+                {e.people && <><dt>{s.n === 2 ? T('Участие на ИР-БАН', 'IR-BAS contribution') : T('Участници от ИР-БАН', 'IR-BAS participants')}</dt><dd>{e.people[lang]}</dd></>}
+              </dl>
+              {e.text && <p class="txt">{e.text[lang]}</p>}
+              {e.topics && <><p class="lbl">{T('Тематични направления на щанда', 'Stand topics')}</p><ul class="topics">{e.topics.map((x) => <li>{x[lang]}</li>)}</ul></>}
+              {e.papers && <><p class="lbl">{T('Доклади на екипите от ИР-БАН', 'Papers by the IR-BAS teams')}</p>
+                <ul class="papers">{e.papers.map(paper).map((p) => <li><span class="au">{p.authors}</span> {p.link ? <a href={p.link}>{p.title}</a> : p.title}{p.sub && <span class="sub"> ({T('под печат', 'in press')})</span>}</li>)}</ul></>}
+            </li>
+          ))}
+        </ol>
+        <p class="more"><a href={s.site} target="_blank" rel="noopener">{T('Този раздел на сайта на ННП „СО“ ↗', 'This section on the NSP DS website ↗')}</a></p>
+      </section>
+    ))}
+
+    <p class="src">{T('Източник: отчетите на работните екипи в Института по роботика към БАН по ННП „Сигурност и отбрана“ (технически доклад за периода 19.05.2022 – 31.12.2025 г.; отчет, ред. 17.04.2026 г.)', 'Source: reports of the Institute of Robotics (BAS) teams on the National Scientific Program “Security and Defence” (technical report for 19 May 2022 – 31 December 2025; report revised 17 April 2026)')}{kind === 'phd' && T(' и дисертационният труд в НАЦИД.', ' and the thesis in NACID.')}{kind === 'events' && '.'}</p>
+  </div></section>
+</Layout>
+
+<style>
+  .eyebrow a { color: inherit; }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .thesis h2 { margin: .25rem 0 .25rem; font-size: 1.35rem; line-height: 1.35; }
+  .thesis h3 { margin: 1.6rem 0 .5rem; font-size: 1rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .thesis p { margin: 0 0 .6rem; max-width: 80ch; }
+  .note { font-size: .85rem; color: var(--muted); font-style: italic; }
+  .who { font-weight: 600; margin-top: .5rem !important; }
+  .facts { display: grid; grid-template-columns: 220px 1fr; gap: 6px 16px; margin: 14px 0 0; font-size: .92rem; }
+  .facts dt { color: var(--muted); font: .78rem var(--mono); text-transform: uppercase; letter-spacing: .04em; padding-top: 3px; }
+  .facts dd { margin: 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 18px !important; }
+  .ch { padding-left: 0; list-style: none; margin: 0; }
+  .ch li { padding: 6px 0; border-top: 1px solid var(--line); }
+  .ch li:first-child { border-top: 0; }
+  .ch span { font: 600 .78rem var(--mono); color: var(--accent-ink); margin-right: 8px; }
+  .papers { margin: .25rem 0 0; padding-left: 1.1rem; font-size: .92rem; }
+  .papers li { margin: .3rem 0; }
+  .papers .au { color: var(--muted); }
+  .papers i { color: var(--muted); }
+  .sub { color: var(--muted); font-size: .85rem; }
+  .fund { margin-top: 1.4rem !important; font: .78rem var(--mono); padding: 8px 10px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent-ink); }
+  .grp { margin-top: 36px; }
+  .grp > h2 { font-size: 1.15rem; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  .gc { font: .85rem var(--mono); color: var(--muted); font-weight: 400; }
+  .events { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 14px; }
+  .events h3 { margin: 0 0 4px; font-size: 1.02rem; line-height: 1.4; }
+  .events h3 a { color: inherit; }
+  .txt { margin: 10px 0 0; font-size: .92rem; }
+  .lbl { margin: 12px 0 0; font: .74rem var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .topics { margin: .25rem 0 0; padding-left: 1.1rem; font-size: .9rem; }
+  .tbd { color: var(--muted); font-style: italic; }
+  .more { margin-top: 10px; font-size: .88rem; }
+  .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }
+  @media (max-width: 600px) { .facts { grid-template-columns: 1fr; gap: 2px; } .facts dd { margin-bottom: 6px; } }
+</style>

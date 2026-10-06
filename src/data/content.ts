@@ -98,7 +98,8 @@ export const areas: { key: string; title: L; text: L; tags: string[]; page?: str
 ];
 
 // end — край на проекта/програмата (показва се в картата); pubs — страница със списък публикации по проекта
-export const projects: { title: L; funder: L; period: string; end?: L; text: L; link?: L; pubs?: string }[] = [
+// more — още страници на проекта (бутони вдясно от „Публикации“)
+export const projects: { title: L; funder: L; period: string; end?: L; text: L; link?: L; pubs?: string; more?: { label: L; slug: string }[] }[] = [
   {
     title: { bg: 'Национална научна програма „Сигурност и отбрана“', en: 'National Scientific Program “Security and Defence”' },
     funder: { bg: 'МОН, споразумение Д01-74/19.05.2022', en: 'Ministry of Education and Science, grant D01-74/19.05.2022' },
@@ -110,6 +111,10 @@ export const projects: { title: L; funder: L; period: string; end?: L; text: L; 
     },
     link: { bg: 'https://ir.bas.bg/projects/NSPSD/nspsd.pdf', en: 'https://ir.bas.bg/projects/NSPSD/nspsd_en.pdf' },
     pubs: 'projects/nspsd',
+    more: [
+      { label: { bg: 'Докторанти по ННП СиО', en: 'PhD students — NSP DS' }, slug: 'projects/nspsd/phd' },
+      { label: { bg: 'Конференции и семинари', en: 'Conferences and seminars' }, slug: 'projects/nspsd/events' },
+    ],
   },
 ];
 

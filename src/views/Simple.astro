@@ -37,6 +37,7 @@ const bg = lang === 'bg';
           <p style="margin-top:.75rem">{p.text[lang]}</p>
           {(p.pubs || p.link) && <p class="proj-acts">
             {p.pubs && <a class="btn" href={href(lang, p.pubs)}>{lang === 'bg' ? 'Публикации' : 'Publications'} →</a>}
+            {p.more?.map((m) => <a class="btn" href={href(lang, m.slug)}>{m.label[lang]} →</a>)}
             {p.link && <a href={p.link[lang]}>{t.learnMore[lang]} (PDF) →</a>}
           </p>}
         </article>
