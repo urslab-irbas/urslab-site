@@ -1,0 +1,139 @@
+{
+ "10.3390/engproc2025090047": {
+  "authors": [
+   "Alejandro del Estal Herrero",
+   "Nathanel Apter",
+   "Stefan Hristozov"
+  ],
+  "date": "14.03.2025",
+  "page": "47"
+ },
+ "10.7546/engsci.lxii.25.01.04": {
+  "authors": [
+   "Alexander Alexandrov",
+   "Simeon Angelov"
+  ],
+  "date": "09.05.2025",
+  "volume": "LXII",
+  "issue": "1"
+ },
+ "10.17770/etr2024vol4.8195": {
+  "authors": [
+   "Hristo Stanev",
+   "Stefan Hristozov"
+  ],
+  "date": "22.06.2024",
+  "volume": "4",
+  "page": "244-250",
+  "abstract": "The use of modern unmanned aviation technologies when conducting search and rescue operations, respectively when overcoming the consequences of disasters is an economically justified approach to increase the effectiveness of operations, reducing the costs of their implementation. The nature of the operations implies working in an environment of high uncertainty with variety of stakeholders, which requires the implementation of additional measures to achieve the target levels of aviation safety. To tackle the risks associated with any Unmanned Aerial Systems (UAS) operations JARUS (Joint Authorities for Rulemaking in Unmanned Systems) has proposed a document called SORA (Specific Operations Risk Assessment) adopted as acceptable means of compliance by many civil aviation authorities. Admittedly, SORA was developed with civil use of UAS in mind. However, considering its comprehensiveness in risk assessment it is a good starting point to evaluate its applicability at disaster relief operations and adaptability to state aircraft operations. As a rule, activities to overcome the consequences of disasters are the responsibility of the state, therefore it is normal to expect that the capabilities to use UAS will be created and predetermines the relevance of the presented topic. In the current article the team analyses SORA applicability from the perspective of emergency services as state aircraft operations. Thus, the purpose of this article is to explore the possibilities and to justify the need of implementing a timely procedure and to show an example risk analysis performed for this type of operations, when operating with state unmanned aircraft. Of course, some of the conclusions drawn here for emergency services can be easily transposed to other state UAS operations."
+ },
+ "10.17770/etr2024vol2.8064": {
+  "authors": [
+   "Radoslav Yoshinov",
+   "Monka Kotseva",
+   "Anastas Madzharov",
+   "Neda Chehlarova"
+  ],
+  "date": "22.06.2024",
+  "volume": "2",
+  "page": "138-142",
+  "abstract": "The results of a survey conducted in 2023 on skills and attitudes towards the use of Artificial Intelligence are presented. The study included employees working in the public administration in the Republic of Bulgaria and students from the Cybersecurity specialty. The aim was to find out to what extent and area of interest the two target groups work with or are willing to start using ChatGPT or similar chatbots. The questions asked in chatbots, as well as the listed by both groups advantages and disadvantages can be used as one of the indicators when creating the teaching materials for school or university courses, as well as for the updating of already ongoing training programs."
+ },
+ "10.17770/etr2024vol4.8238": {
+  "authors": [
+   "Radoslav Yoshinov",
+   "Monka Kotseva",
+   "Anastas Madzharov",
+   "Neda Chehlarova"
+  ],
+  "date": "22.06.2024",
+  "volume": "4",
+  "page": "300-304",
+  "abstract": "The results of a conducted study on the knowledge and skills of representatives of the public and local administration regarding cyber security in modern digital work processes are presented. The survey was conducted in 2023 in the Republic of Bulgaria. The analysis includes a comparison of the data with those of a similar survey of employees in the public administration in 2020."
+ },
+ "10.17770/etr2024vol2.8062": {
+  "authors": [
+   "Ivan Gaidarski",
+   "Neda Chehlarova"
+  ],
+  "date": "22.06.2024",
+  "volume": "2",
+  "page": "110-113",
+  "abstract": "In organizations, two types of communication can be distinguished, predetermining approaches to Information Security (IS): communication based on equality - \"Network communication\" (Networks from/in organizations) and \"Hierarchical organizational communication\". A primary task of IS in an organization is to protect sensitive data in both types of communication. The IS approach must be tailored and cover all options – a holistic approach. Existing IS management approaches can be divided into two large groups: Information security approaches in Network Communications and data security approaches in Hierarchical Organizational Communication. Approaches to managing IS in network communications include Firewalls, Intrusion Detection Systems (IDS), Intrusion Prevention Systems (IPS), Anti-Virus, Anti Malware, Endpoint Protection, Perimeter Security and Cyber-threat intelligence systems. IS management approaches in Hierarchical Communication include Data Classification and Data Leakage Prevention (DLP) systems. In the article are examined the areas of application of the different approaches to information security in an organization - External network, Network Perimeter, Internal network, Computer equipment, Applications and Data."
+ },
+ "10.11610/isij.5546": {
+  "authors": [
+   "Ivan Gaidarski",
+   "Anastas Madzharov"
+  ],
+  "date": "2024",
+  "volume": "55",
+  "issue": "3",
+  "page": "261-272"
+ },
+ "10.7546/engsci.lxii.25.01.06": {
+  "authors": [
+   "Anastas Madzharov"
+  ],
+  "date": "09.05.2025",
+  "volume": "LXII",
+  "issue": "1"
+ },
+ "10.63662/5stkwe27": {
+  "authors": [
+   "Нина Вълчкова",
+   "Роман Захариев",
+   "Георги Ангелов",
+   "Ясен Паунски",
+   "Искрен Върбанов"
+  ],
+  "date": "16.06.2025",
+  "volume": "10",
+  "issue": "1",
+  "page": "129-137",
+  "abstract": "В работата е представен Мобилен колаборативен робот – Roby 1 с повишена проходимост, предназначен за охрана и поддържане на сигурността в работната зона. Показани са някои аспекти на интелигентния процес на вземане на решения като част от управлението на основата на информация от комплексна сензорна система. На базата на специфичния ходов механизъм на реализирания робот, представляващ верижни тракове с триъгълна форма, се постига висока проходимост с възможност за преодоляване на препятствия и преминаване на стълби. Възможно е изваждане на опасни предмети или багаж на безопасно място с последващо обезвреждане. С използването на специална термокамера също така е възможно да се гасят пожари. Управлението на робота е на основата на Операционна система „Robots Operational System“ (ROS) с използването на оригинален Графичен потребителски интерфейс. Роботът е пример за прилагане на принципите на модулност и управление в неподредена среда с използването на елементи на Изкуствен интелект."
+ },
+ "10.7546/pecr.79.23.03": {
+  "authors": [
+   "Ivan Gaidarski",
+   "Pavlin Kutinchev"
+  ],
+  "date": "07.07.2023",
+  "volume": "79"
+ },
+ "10.7546/pecr.84.26.02": {
+  "authors": [
+   "Radoslav Yoshinov",
+   "Neda Chehlarova",
+   "Galina Dishkova"
+  ],
+  "date": "23.03.2026",
+  "volume": "84"
+ },
+ "10.7546/pecr.84.26.03": {
+  "authors": [
+   "Radoslav Yoshinov",
+   "Galina Dishkova",
+   "Neda Chehlarova"
+  ],
+  "date": "23.03.2026",
+  "volume": "84"
+ },
+ "10.3390/engproc2026150070": {
+  "authors": [
+   "Anastas Madzharov",
+   "Stefan Hristozov",
+   "Ivan Gaidarski"
+  ],
+  "date": "24.07.2026",
+  "page": "70"
+ },
+ "10.3390/engproc2026150053": {
+  "authors": [
+   "Ivan Gaidarski",
+   "Anastas Madzharov"
+  ],
+  "date": "22.07.2026",
+  "page": "53"
+ }
+}
