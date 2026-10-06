@@ -12,6 +12,8 @@ export const seriesMetrics: SeriesMetrics[] = [
   { match: /journal of data science and intelligent systems|jdsis/i, name: 'Journal of Data Science and Intelligent Systems', cat: 'q1', sjr: 1.035, url: 'https://www.scimagojr.com/journalsearch.php?q=21101346359&tip=sid' },
   { match: /engineering proceedings/i, name: 'Engineering Proceedings (MDPI)', cat: 'q3', sjr: 0.254, url: 'https://www.scimagojr.com/journalsearch.php?q=21101128137&tip=sid' },
   { match: /communications in computer and information science/i, name: 'Communications in Computer and Information Science (Springer)', cat: 'q4', sjr: 0.181, url: 'https://www.scimagojr.com/journalsearch.php?q=17700155007&tip=sid' },
+  { match: /studies in systems, decision and control/i, name: 'Studies in Systems, Decision and Control (Springer)', cat: 'q4', sjr: 0.133, url: 'https://www.scimagojr.com/journalsearch.php?q=21100828949&tip=sid' },
+  { match: /lecture notes in civil engineering/i, name: 'Lecture Notes in Civil Engineering (Springer)', cat: 'q4', sjr: 0.15, url: 'https://www.scimagojr.com/journalsearch.php?q=21100889404&tip=sid' },
   { match: /lecture notes in networks and systems/i, name: 'Lecture Notes in Networks and Systems (Springer)', cat: 'q4', sjr: 0.165, url: 'https://www.scimagojr.com/journalsearch.php?q=21100901469&tip=sid' },
   { match: /journal of physics: conference series/i, name: 'Journal of Physics: Conference Series (IOP)', cat: 'sjr', sjr: 0.18, url: 'https://www.scimagojr.com/journalsearch.php?q=130053&tip=sid' },
   { match: /aip conference proceedings/i, name: 'AIP Conference Proceedings', cat: 'sjr', sjr: 0.146, url: 'https://www.scimagojr.com/journalsearch.php?q=26916&tip=sid' },

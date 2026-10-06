@@ -24,7 +24,7 @@ const { lang, items, compact, arch } = Astro.props;
         {!compact && (
           <p class="tags">
             {p.tags.map((g) => <span class="tag">{tagLabels[g]?.[lang] ?? g}</span>)}
-            {p.funding && <span class="fund">{p.fundVia === 'conf' ? (lang === 'bg' ? 'Участие в конференцията, финансирано по' : 'Conference participation funded by') : t.funding[lang]}: {p.funding}</span>}
+            {p.funding && <span class="fund">{p.fundVia === 'conf' ? (lang === 'bg' ? 'Участие в конференцията, финансирано по' : 'Conference participation funded by') : p.fundVia === 'report' ? (lang === 'bg' ? 'Отчетено по' : 'Reported under') : t.funding[lang]}: {p.funding}</span>}
           </p>
         )}
       </div>

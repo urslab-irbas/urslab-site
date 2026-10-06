@@ -46,7 +46,7 @@ const isDate = (s?: string) => !!s && !/[a-zа-я]/i.test(s);
 const linkTo = (p: ArchivePub, r: ExcelRow) => r.link !== undefined ? r.link : p.doi && !p.doiOff ? `https://doi.org/${p.doi}` : p.url ?? '';
 
 const nspText = (p: ArchivePub, r: ExcelRow) => {
-  const t: string[] = [p.fundVia === 'conf' ? `Участието в конференцията е финансирано изцяло по ${NSP}.` : `Финансирано по ${NSP}.`];
+  const t: string[] = [p.fundVia === 'conf' ? `Участието в конференцията е финансирано изцяло по ${NSP}.` : p.fundVia === 'report' ? `Отчетено по ${NSP}, пред ЦИНСО-БАН.` : `Финансирано по ${NSP}.`];
   if (p.task) t.push(`Задача(и): ${p.task}.`);
   if (p.cat === 'sub') {
     const e = expectedFor(p.venue);
