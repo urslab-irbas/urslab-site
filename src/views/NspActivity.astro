@@ -60,7 +60,7 @@ const sections: { n: number; title: string; items: NspEvent[]; site: string }[] 
         </dl>
         <p class="links">
           <a class="btn" href={phd.nacid}>{T('Дисертационният труд (PDF, НАЦИД)', 'The thesis (PDF, NACID)')}</a>
-          <a href={phd.register}>{T('Регистър на академичния състав — НАЦИД ↗', 'Register of Academic Staff — NACID ↗')}</a>
+          <a href={phd.register}>{T('Дисертацията в Регистъра на академичния състав — НАЦИД ↗', 'The thesis in the NACID Register of Academic Staff ↗')}</a>
         </p>
 
         <h3>{T('Анотация', 'Annotation')}</h3>
@@ -90,6 +90,11 @@ const sections: { n: number; title: string; items: NspEvent[]; site: string }[] 
                 {e.people && <><dt>{s.n === 2 ? T('Участие на ИР-БАН', 'IR-BAS contribution') : T('Участници от ИР-БАН', 'IR-BAS participants')}</dt><dd>{e.people[lang]}</dd></>}
               </dl>
               {e.text && <p class="txt">{e.text[lang]}</p>}
+              {e.program && <><p class="lbl">{T('Програма', 'Programme')}</p>
+                <table class="prog">{e.program.map((x) => <tr><td>{x.time}</td><td>{x.item[lang]}</td></tr>)}</table></>}
+              {e.photos && <><p class="lbl">{T('Фотогалерия', 'Photo gallery')}</p>
+                <div class="gallery">{e.photos.map((ph) => { const th = ph.src.replace(/\/([^/]+)$/, '/th-$1'); return <a href={ph.src} target="_blank" rel="noopener"><img src={th} alt={ph.alt[lang]} title={ph.alt[lang]} loading="lazy" /></a>; })}</div></>}
+              {e.docs && <p class="docs">{e.docs.map((d) => <a class="btn ghost" href={d.href}>{d.label[lang]}</a>)}</p>}
               {e.topics && <><p class="lbl">{T('Тематични направления на щанда', 'Stand topics')}</p><ul class="topics">{e.topics.map((x) => <li>{x[lang]}</li>)}</ul></>}
               {e.papers && <><p class="lbl">{T('Доклади на екипите от ИР-БАН', 'Papers by the IR-BAS teams')}</p>
                 <ul class="papers">{e.papers.map(paper).map((p) => <li><span class="au">{p.authors}</span> {p.link ? <a href={p.link}>{p.title}</a> : p.title}{p.sub && <span class="sub"> ({T('под печат', 'in press')})</span>}</li>)}</ul></>}
@@ -136,6 +141,14 @@ const sections: { n: number; title: string; items: NspEvent[]; site: string }[] 
   .lbl { margin: 12px 0 0; font: .74rem var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
   .topics { margin: .25rem 0 0; padding-left: 1.1rem; font-size: .9rem; }
   .tbd { color: var(--muted); font-style: italic; }
+  .prog { border-collapse: collapse; margin-top: 4px; font-size: .9rem; }
+  .prog td { padding: 4px 12px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .prog td:first-child { font: .8rem var(--mono); white-space: nowrap; color: var(--muted); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin-top: 6px; }
+  .gallery a { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 6px; border: 1px solid var(--line); }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s; }
+  .gallery a:hover img { transform: scale(1.04); }
+  .docs { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
   .more { margin-top: 10px; font-size: .88rem; }
   .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }
   @media (max-width: 600px) { .facts { grid-template-columns: 1fr; gap: 2px; } .facts dd { margin-bottom: 6px; } }
