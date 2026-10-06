@@ -165,7 +165,7 @@ const L = {
                   {p.ix && <span class="m">WoS/Scopus</span>}
                   {p.share !== undefined && <span class="m">{T('дял ИР', 'IR share')} {p.share}%</span>}
                   {p.note && <span class="m">({p.note})</span>}
-                  {p.fund && <span class="fund">{p.fundVia === 'conf' ? T('Участие в конференцията, финансирано по', 'Conference participation funded by') : T('Финансиране', 'Funding')}: {p.fund}</span>}
+                  {p.fund && <span class="fund">{p.fundVia === 'conf' ? T('Участие в конференцията, финансирано по', 'Conference participation funded by') : p.fundVia === 'report' ? T('Отчетено по', 'Reported under') : T('Финансиране', 'Funding')}: {p.fund}</span>}
                   {p.task && <span class="m">{T('Задача', 'Task')} {p.task}</span>}
                   {p.tags.map((x) => <span class="tag">{archiveTagLabels[x]?.[lang] ?? x}</span>)}
                 </p>

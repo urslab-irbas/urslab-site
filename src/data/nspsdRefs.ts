@@ -18,8 +18,8 @@ export interface NspsdRef {
   /** задача(и) по ННП-СО от техническия доклад, ако е посочена */
   task?: string;
   /** 'conf' — връзката с програмата е чрез участието в конференцията, финансирано изцяло по ННП-СО
-   *  (в самата статия няма благодарност към програмата) */
-  via?: 'conf';
+   *  (в самата статия няма благодарност към програмата); 'report' — отчетено по програмата пред ЦИНСО-БАН */
+  via?: 'conf' | 'report';
 }
 
 export const nspsdRefs: NspsdRef[] = [
@@ -68,6 +68,12 @@ export const nspsdRefs: NspsdRef[] = [
   // Софтуер (Zenodo) — сайтът на лабораторията е изграден по програмата
   { t: 'URSlab Website and Information System for Reporting the Publication Activity' },
   { t: 'URSlab Website and Interactive Coordinated-Turn Model' },
+  // Отчетени по програмата пред ЦИНСО-БАН — по справката на гл. ас. д-р инж. Иван Гайдарски (06.10.2026)
+  { t: 'Insider Threats in Critical Infrastructure Organizations', task: '2.1.1, 1.2.7', via: 'report' },
+  { t: 'Aspects of Dependability and Security in Integrated Intelligent Educational Environments', task: '2.1.1, 1.2.7', via: 'report' },
+  { t: 'Information security and dependability in integrated intelligent educational environments', task: '2.1.1, 1.2.7', via: 'report' },
+  { t: 'Designing an information security system to prevent leakage of sensitive information', task: '2.1.1, 1.2.7', via: 'report' },
+  { t: 'Multilayered conceptual modelling for the design, implementation and optimization', task: '2.1.1, 1.2.7', via: 'report' },
   // Подадени статии на сайта, финансирани по програмата
   { t: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes" },
   { t: 'Precise Calculations of Gravity Anomalies from the Geometric Height' },
