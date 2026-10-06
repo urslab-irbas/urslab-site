@@ -16,7 +16,7 @@ const files = fs.existsSync(dir)
       <h2>{t.gallery[lang]}</h2>
       <div class="gal">
         {files.map((f) => (
-          <a href={`/images/gallery/${f}`}><img src={`/images/gallery/${f}`} alt="" loading="lazy" /></a>
+          <button type="button" data-lb={`/images/gallery/${f}`}><img src={`/images/gallery/${f}`} alt="" loading="lazy" /></button>
         ))}
       </div>
     </div>
@@ -24,5 +24,6 @@ const files = fs.existsSync(dir)
 )}
 <style>
   .gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .gal button { padding: 0; border: 0; background: none; cursor: zoom-in; }
   .gal img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
 </style>
