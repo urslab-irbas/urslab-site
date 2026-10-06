@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import ClothoidDemo from '../components/ClothoidDemo.astro';
 import AreaCard from '../components/AreaCard.astro';
 import { nav, site, areas, projects, services, t, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
 interface Props { lang: Lang; slug: 'research' | 'projects' | 'services' | 'contact' }
 const { lang, slug } = Astro.props;
 const title = nav.find((n) => n.slug === slug)!.label[lang];
@@ -32,8 +33,12 @@ const bg = lang === 'bg';
           <p class="eyebrow">{p.period}</p>
           <h3>{p.title[lang]}</h3>
           <p class="muted">{p.funder[lang]}</p>
+          {p.end && <p class="muted"><strong>{p.end[lang]}</strong></p>}
           <p style="margin-top:.75rem">{p.text[lang]}</p>
-          {p.link && <p style="margin-top:.75rem"><a href={p.link[lang]}>{t.learnMore[lang]} (PDF) →</a></p>}
+          {(p.pubs || p.link) && <p class="proj-acts">
+            {p.pubs && <a class="btn" href={href(lang, p.pubs)}>{lang === 'bg' ? 'Публикации' : 'Publications'} →</a>}
+            {p.link && <a href={p.link[lang]}>{t.learnMore[lang]} (PDF) →</a>}
+          </p>}
         </article>
       ))}
     </div></section>
@@ -66,6 +71,7 @@ const bg = lang === 'bg';
   )}
 </Layout>
 <style>
+  .proj-acts { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
   .contact { display: grid; grid-template-columns: minmax(260px, 1fr) 2fr; gap: 20px; }
   .contact iframe { width: 100%; min-height: 360px; border: 1px solid var(--line); border-radius: var(--radius); }
   @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }

@@ -70,7 +70,7 @@ for (const p of [...fromForm, ...fromPublished]) {
 }
 
 // НАЦИД, Национален референтен списък: бележка, ISSN и категория за всички публикации в такива издания (виж nrs.ts)
-const withNrs = (p: ArchivePub): ArchivePub => {
+export const withNrs = (p: ArchivePub): ArchivePub => {
   const n = nrsFor(p.venue); if (!n) return p;
   const tag = `НАЦИД НРС, ID ${n.id}`;
   return { ...p, cat: p.cat === 'other' ? 'nat' : p.cat, issn: p.issn ?? n.issn,

@@ -4,16 +4,27 @@ import Layout from '../layouts/Layout.astro';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
 import { archivePages, type ArchivePage } from '../data/archivePages';
 import { allPubs } from '../data/allPubs';
+import { nspsdPubs } from '../data/nspsd';
 import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
 // page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива;
 // area — всички публикации от сайта в едно научно направление (картите в „Изследвания“)
-interface Props { lang: Lang; page?: string; member?: string; area?: string }
-const { lang, page, member, area } = Astro.props;
+// program — публикациите по проект (картата в „Проекти“): 'nspsd' = ННП „Сигурност и отбрана“ (src/data/nspsd.ts)
+interface Props { lang: Lang; page?: string; member?: string; area?: string; program?: 'nspsd' }
+const { lang, page, member, area, program } = Astro.props;
 const M = member ? team.find((m) => m.id === member)! : undefined;
 const A = area ? areas.find((a) => a.key === area)! : undefined;
-const P: ArchivePage = M
+const NSP: ArchivePage | undefined = program === 'nspsd' ? {
+  key: 'nnp-so', slug: 'projects/nspsd',
+  title: { bg: 'Публикации по ННП „Сигурност и отбрана“', en: 'Publications — NSP “Security and Defence”' },
+  source: {
+    bg: 'Източник: отчет на работните екипи в Института по роботика към БАН по ННП „Сигурност и отбрана“, Договор № Д01-74/19.05.2022 г. (редакция от 17.04.2026 г.), и технически доклад за периода 19.05.2022 – 31.12.2025 г. Изписването на публикациите е по записите на сайта.',
+    en: 'Source: report of the Institute of Robotics (BAS) teams on the National Scientific Program “Security and Defence”, grant agreement No. D01-74/19.05.2022 (revision of 17 April 2026), and the technical report for 19 May 2022 – 31 December 2025. Publication details follow the records on this site.',
+  },
+  items: nspsdPubs,
+} : undefined;
+const P: ArchivePage = NSP ? NSP : M
   ? { key: M.id, slug: `team/${M.id}/report`, title: { bg: `Обобщен отчет — ${M.name.bg}`, en: `Summary report — ${M.name.en}` }, items: allPubs.filter((p) => p.team.includes(M.id)) }
   : A
     ? { key: A.key, slug: `publications/area/${A.key}`, title: { bg: `Публикации — ${A.title.bg}`, en: `Publications — ${A.title.en}` }, items: allPubs.filter((p) => p.tags.some((g) => A.tags.includes(g))) }
@@ -52,9 +63,12 @@ const L = {
     {M
       ? <p class="eyebrow"><a href={`${href(lang, 'team')}#${M.id}`}>{t.team[lang]}</a> / {M.title[lang]}</p>
       : A ? <p class="eyebrow"><a href={href(lang, 'research')}>{T('Изследвания', 'Research')}</a> / {t.areasTitle[lang]}</p>
+      : NSP ? <p class="eyebrow"><a href={href(lang, 'projects')}>{T('Проекти', 'Projects')}</a> / {T('ННП „Сигурност и отбрана“', 'NSP “Security and Defence”')}</p>
       : <p class="eyebrow"><a href={href(lang, 'publications')}>{t.allPubs[lang]}</a> / URSlab</p>}
     <h1>{title}</h1>
-    <p>{A
+    <p>{NSP
+      ? T('Публикациите на работните екипи в Института по роботика към БАН при изпълнение на задачите по Национална научна програма „Сигурност и отбрана“ (Договор № Д01-74/19.05.2022 г., МОН), групирани по вид и индексиране. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'Publications of the Institute of Robotics (BAS) teams produced under the National Scientific Program “Security and Defence” (grant agreement No. D01-74/19.05.2022, Ministry of Education and Science), grouped by type and indexing. Combine the filters — the summary is recomputed for the selection.')
+      : A
       ? T('Всички публикации от сайта в това научно направление — годишните страници от „Архив“, текущият списък и въведените от колектива, без повторения. Броят се обновява автоматично с всяка нова публикация.', 'All publications on this site in this research area — the yearly archive pages, the current list and those entered by the team, without duplicates. The count updates automatically with every new publication.')
       : M
       ? T('Всички публикации от сайта с участието на този член на колектива — годишните страници от „Архив“ и текущият списък, без повторения. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'All publications on this site co-authored by this team member — the yearly archive pages and the current list, without duplicates. Combine the filters — the summary is recomputed for the selection.')
@@ -146,6 +160,8 @@ const L = {
                   {p.ix && <span class="m">WoS/Scopus</span>}
                   {p.share !== undefined && <span class="m">{T('дял ИР', 'IR share')} {p.share}%</span>}
                   {p.note && <span class="m">({p.note})</span>}
+                  {p.fund && <span class="fund">{T('Финансиране', 'Funding')}: {p.fund}</span>}
+                  {p.task && <span class="m">{T('Задача', 'Task')} {p.task}</span>}
                   {p.tags.map((x) => <span class="tag">{archiveTagLabels[x]?.[lang] ?? x}</span>)}
                 </p>
               </div>
@@ -207,6 +223,7 @@ const L = {
   .q.q1 { background: #2e7d4f; color: #fff; } .q.q2 { background: #4f9a5f; color: #fff; }
   .q.q3 { background: #c79a2a; color: #fff; } .q.q4 { background: #d27a2c; color: #fff; }
   .m { font: .72rem var(--mono); color: var(--muted); }
+  .fund { font: .72rem var(--mono); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent); color: var(--accent-ink); }
   .none { color: var(--muted); padding: 20px 0; }
   .none[hidden] { display: none; }
   .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }

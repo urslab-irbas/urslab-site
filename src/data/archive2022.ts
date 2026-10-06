@@ -39,6 +39,8 @@ export interface ArchivePub {
   ix?: boolean;    // индексирана в WoS/Scopus, макар че категорията ѝ в отчета е друга
   share?: number;  // „Процент автори от звеното“ (ИР) от отчета на БАН
   note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
+  fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
+  task?: string;   // задача по програмата
 }
 
 export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] = [
@@ -167,7 +169,7 @@ export const archive: ArchivePub[] = [
     year: 2024, cat: 'q4', sjr: 0.167, team: ['gaidarski', 'chehlarova'], tags: ['security'],
     authors: 'Gaidarski, I., Chehlarova, N.',
     title: 'Management approaches and application areas of information security in organizations',
-    venue: 'Environment. Technology. Resources. Proc. 15th Int. Conf., vol. II, Rezekne Academy of Technologies, pp. 110–113',
+    venue: 'Environment. Technology. Resources. Proc. 15th Int. Conf., vol. II, Rezekne Academy of Technologies, pp. 110–113', doi: '10.17770/etr2024vol2.8062',
   },
   {
     year: 2024, cat: 'q4', sjr: 0.167, team: ['madzharov', 'chehlarova'], tags: ['security', 'education'],
