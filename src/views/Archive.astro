@@ -5,6 +5,7 @@ import { archiveCats, archiveTagLabels } from '../data/archive2022';
 import { archivePages, type ArchivePage } from '../data/archivePages';
 import { allPubs } from '../data/allPubs';
 import { nspsdPubs } from '../data/nspsd';
+import { expectedFor, expectedLabel, SJR_YEAR } from '../data/series';
 import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
@@ -155,6 +156,7 @@ const L = {
                 <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && (p.doiOff ? <> · DOI {p.doi} <span class="doi-off">({T('още не е активен', 'not yet active')})</span></> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}{p.scopusAuthor && <> · Scopus Author ID <a href={`https://www.scopus.com/inward/authorDetails.url?authorID=${p.scopusAuthor}&partnerID=MN8TOARS`}>{p.scopusAuthor}</a></>}</p>
                 <p class="badges">
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
+                  {p.cat === 'sub' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{T('Очаквано', 'Expected')}: {expectedLabel(e)} <span>({SJR_YEAR})</span></a>; })()}
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
                   {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
                   {p.ix && <span class="m">WoS/Scopus</span>}
@@ -223,6 +225,9 @@ const L = {
   .q.q1 { background: #2e7d4f; color: #fff; } .q.q2 { background: #4f9a5f; color: #fff; }
   .q.q3 { background: #c79a2a; color: #fff; } .q.q4 { background: #d27a2c; color: #fff; }
   .m { font: .72rem var(--mono); color: var(--muted); }
+  .exp { font: 600 .72rem var(--mono); padding: 2px 8px; border-radius: 4px; border: 1px dashed currentColor; text-decoration: none; color: var(--accent-ink); }
+  .exp.q1 { color: #2e7d4f; } .exp.q2 { color: #4f9a5f; } .exp.q3 { color: #a77d1a; } .exp.q4 { color: #c0661c; }
+  .exp span { font-weight: 400; opacity: .7; }
   .fund { font: .72rem var(--mono); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent); color: var(--accent-ink); }
   .none { color: var(--muted); padding: 20px 0; }
   .none[hidden] { display: none; }
