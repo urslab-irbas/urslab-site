@@ -18,6 +18,7 @@ export interface Publication {
   abstract?: string;
   tags: string[];
   funding?: string;
+  fundVia?: 'conf'; // финансирано е участието в конференцията (виж nspsdRefs.ts)
 }
 
 const NSPDS = 'NSP DS, MES grant D01-74/19.05.2022';

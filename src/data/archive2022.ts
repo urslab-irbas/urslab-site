@@ -41,6 +41,7 @@ export interface ArchivePub {
   note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
   fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
   task?: string;   // задача по програмата
+  fundVia?: 'conf'; // финансирано е участието в конференцията (не самата статия)
 }
 
 export const archiveCats: { key: ArchCat; label: { bg: string; en: string } }[] = [

@@ -62,5 +62,5 @@ export const nspsdPubs: ArchivePub[] = nspsdRefs.map((r) => {
   const key = normTitle(r.t);
   const p = pool.find((x) => normTitle(x.title).includes(key));
   if (!p) throw new Error(`nspsd: няма публикация на сайта или в nspsdExtra за „${r.t}“`);
-  return { ...p, fund: NSPDS_FUND, task: r.task };
+  return { ...p, fund: NSPDS_FUND, task: r.task, fundVia: r.via };
 });

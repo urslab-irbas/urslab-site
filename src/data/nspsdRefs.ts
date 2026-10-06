@@ -17,16 +17,19 @@ export interface NspsdRef {
   t: string;
   /** задача(и) по ННП-СО от техническия доклад, ако е посочена */
   task?: string;
+  /** 'conf' — връзката с програмата е чрез участието в конференцията, финансирано изцяло по ННП-СО
+   *  (в самата статия няма благодарност към програмата) */
+  via?: 'conf';
 }
 
 export const nspsdRefs: NspsdRef[] = [
   // Статии (индексирани)
-  { t: 'A Parametric Comparison of JARUS SORA 2.0 and 2.5', task: '1.1.2, 1.2.1' },
-  { t: 'Energy-efficient routing in UAVs supported perimeter security networks', task: '1.2.6, 1.2.7, 1.2.8' },
-  { t: 'Reducing the WSN', task: '1.2.6, 1.2.7, 1.2.8' },
-  { t: 'LSTM-RNN method for Anomaly-Based Intrusion Detection Systems' },
-  { t: 'Development of Blockchain-Based Framework for Securing Communication' },
-  { t: 'Design and architecture of perimeter defence intrusion detection systems based on UGV' },
+  { t: 'A Parametric Comparison of JARUS SORA 2.0 and 2.5', task: '1.1.2, 1.2.1', via: 'conf' },
+  { t: 'Energy-efficient routing in UAVs supported perimeter security networks', task: '1.2.6, 1.2.7, 1.2.8', via: 'conf' },
+  { t: 'Reducing the WSN', task: '1.2.6, 1.2.7, 1.2.8', via: 'conf' },
+  { t: 'LSTM-RNN method for Anomaly-Based Intrusion Detection Systems', via: 'conf' },
+  { t: 'Development of Blockchain-Based Framework for Securing Communication', via: 'conf' },
+  { t: 'Design and architecture of perimeter defence intrusion detection systems based on UGV', via: 'conf' },
   { t: 'Applicability of JARUS SORA to State UAS Operations in Disaster Relief', task: '1.1.2, 1.2.1' },
   { t: 'Skills and attitudes towards using AI based chatbots', task: '2.1.1, 1.2.7' },
   { t: 'Implying cybersecurity skills for public administration employees', task: '2.1.1, 1.2.7' },
@@ -38,7 +41,7 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Trajectory optimization in large scale UAV-assisted WSNs', task: '1.2.6, 1.2.7, 1.2.8' },
   { t: 'Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension' },
   { t: 'Blockchain enhancing IoD network functionality', task: '1.2.6, 1.2.7, 1.2.8' },
-  { t: 'Design of a testing model for evaluation the levels of automation', task: '1.1.2, 1.2.1' },
+  { t: 'Design of a testing model for evaluation the levels of automation', task: '1.1.2, 1.2.1', via: 'conf' },
   { t: 'Design of an Unmanned Helicopter System for Collecting and Processing' },
   { t: 'Алгоритми за моделиране на движенията на роботи', task: '1.2.3' },
   { t: 'Мобилен колаборативен робот с висока проходимост', task: '1.2.3' },
