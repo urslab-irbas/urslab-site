@@ -2,6 +2,7 @@
 import { t, type Lang } from '../data/content';
 import { tagLabels as mainTags, type Publication } from '../data/publications';
 import { archiveTagLabels } from '../data/archive2022';
+import { expectedFor, expectedLabel, SJR_YEAR } from '../data/series';
 const tagLabels = { ...archiveTagLabels, ...mainTags };
 // arch — публикации от архива: на „Публикации“ се показват само при избран филтър
 interface Props { lang: Lang; items: Publication[]; compact?: boolean; arch?: boolean }
@@ -13,6 +14,7 @@ const { lang, items, compact, arch } = Astro.props;
       <div class="meta">
         <span class="yr">{p.year}</span>
         <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>
+        {p.status !== 'published' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e)} <span>({SJR_YEAR})</span></a>; })()}
       </div>
       <div>
         <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
@@ -35,6 +37,9 @@ const { lang, items, compact, arch } = Astro.props;
   .pubs li { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
   .meta { display: flex; flex-direction: column; gap: 6px; }
   .yr { font: 600 1.1rem var(--mono); }
+  .exp { display: inline-block; margin-top: 4px; font: 600 .68rem var(--mono); padding: 2px 6px; border-radius: 4px; border: 1px dashed currentColor; text-decoration: none; color: var(--accent-ink); }
+  .exp.q1 { color: #2e7d4f; } .exp.q2 { color: #4f9a5f; } .exp.q3 { color: #a77d1a; } .exp.q4 { color: #c0661c; }
+  .exp span { font-weight: 400; opacity: .7; }
   .st { font: .7rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
   .st.published { color: #3f8f5a; }
   h3 { font-size: 1.05rem; margin: 0 0 4px; }
