@@ -42,7 +42,7 @@ const short = (n: string) => { const w = n.split(' '); return `${w[0][0]}. ${w[w
 const authors = [
   ...team.map((m) => ({ key: m.id, label: short(m.name[lang]) })),
   { key: 'yovchev', label: T('К. Йовчев', 'K. Yovchev') },
-  ...(NSP ? [{ key: 'valchkova', label: T('Н. Вълчкова', 'N. Valchkova') }, { key: 'zahariev', label: T('Р. Захариев', 'R. Zahariev') }] : []),
+  ...(NSP ? [{ key: 'valchkova', label: 'N. Valchkova' }, { key: 'zahariev', label: T('Р. Захариев', 'R. Zahariev') }] : []),
 ].filter((a) => a.key !== M?.id && archive.some((p) => p.team.includes(a.key)));
 const years = [...new Set(archive.map((p) => p.year))].sort((a, b) => b - a);
 const usedTags = Object.keys(archiveTagLabels).filter((g) => archive.some((p) => p.tags.includes(g)));

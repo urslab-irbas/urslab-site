@@ -25,7 +25,7 @@ const FULL: [RegExp, string][] = [
   [/Stanev/, 'Hristo Stanev'], [/Yoshinov/, 'Radoslav Yoshinov'], [/Kotseva/, 'Monka Kotseva'],
   [/Dishkova/, 'Galina Dishkova'], [/Angelov, S/, 'Simeon Angelov'], [/Apter/, 'Nathanel Apter'],
   [/Herrero/, 'Alejandro del Estal Herrero'], [/Tzvetkov/, 'V. Tzvetkov'], [/Zlateva/, 'Plamena Zlateva'],
-  [/Райков/, 'Пламен Райков'], [/Вълчкова/, 'Нина Вълчкова'], [/Захариев/, 'Роман Захариев'],
+  [/Райков/, 'Пламен Райков'], [/Вълчкова/, 'Nina Valchkova'], [/Захариев/, 'Роман Захариев'],
   [/Гайдарски/, 'Иван Гайдарски'], [/Кутинчев/, 'Павлин Кутинчев'], [/Маджаров/, 'Анастас Маджаров'], [/Чехларова, Н/, 'Неда Чехларова'],
 ];
 const fullNames = (p: ArchivePub) => {
