@@ -55,7 +55,7 @@ export const archive2025: ArchivePub[] = [
     year: 2025, cat: 'sjr', sjr: 0.21, share: 100, team: ['aleksandrov'], tags: ['ai', 'security'],
     authors: 'Alexandrov, A.',
     title: 'LSTM-RNN method for Anomaly-Based Intrusion Detection Systems',
-    venue: 'CEUR-WS Vol-3971, pp. 17–33',
+    venue: 'CEUR-WS Vol-3971, pp. 17–33', doi: '10.5281/zenodo.17682404',
   },
   {
     year: 2025, cat: 'erih', share: 33.33, team: ['chehlarova'], tags: ['education'],

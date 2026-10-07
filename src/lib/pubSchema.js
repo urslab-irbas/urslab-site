@@ -18,7 +18,8 @@ export const TEAM = [
 // ПРАВИЛО (07.10.2026): при всяко въвеждане в системата съавторите се проверяват. Институцията се взема първо от самата
 // публикация (както авторът я е посочил), едва след това от други източници (отчет на БАН, OpenAlex/Crossref).
 // Ако съавторът го няма тук, формата иска институцията му (поле affil), а build-ът спира при ръчно въведен запис.
-// „ИР-БАН“ в института → авторът се брои като автор от ИР („Процент автори ИР“, src/data/irShare.ts).
+// „ИР-БАН“ в института → авторът се брои като автор от ИР („Процент автори ИР“, src/data/irShare.ts); вкл. докторантите на ИР.
+// Проверено на 07.10.2026 по институциите в самите публикации (OpenAlex/Crossref) за всички 107 публикации в системата.
 // Членовете на колектива (TEAM) са винаги от ИР — за всички свои публикации, вкл. при предишен работодател.
 const IR = 'ИР-БАН';
 const NOT_IR = 'извън ИР (по отчета на БАН)';
@@ -34,7 +35,7 @@ export const COAUTHORS = {
   'Todorov, T.': 'ВТУ „Св. св. Кирил и Методий“', 'Todorova-Ekmekci, M.': 'ИЕФЕМ-БАН', 'Tomov, Zh.': 'Университет „Проф. д-р Асен Златаров“, Бургас',
   'Chehlarova, K.': 'УниБИТ', 'Чехларова, К.': 'УниБИТ', 'Yoshinov, R.': 'Лаборатория по телематика – БАН', 'Kotseva, M.': 'Лаборатория по телематика – БАН',
   'Miteva, L.': SU, 'Hrosinkov, V.': SU, 'Stefanov, A.': SU, 'Nedanovski, D.': SU, 'Stanev, H.': 'УНСС',
-  'Angelov, S.': NOT_IR, 'Apter, N.': NOT_IR, 'del Estad Herrero, A.': NOT_IR, 'Gachev, G.': NOT_IR, 'Dishkova, G.': NOT_IR,
+  'Angelov, S.': 'ИР-БАН (задочен докторант)', 'Apter, N.': NOT_IR, 'del Estad Herrero, A.': NOT_IR, 'Gachev, G.': NOT_IR, 'Dishkova, G.': IMI,
   'Ivanov, V.': NOT_IR, 'Tsvetanov, S.': NOT_IR, 'Petkov, I.': NOT_IR,
   'González-deSantos, L.': NOT_IR, 'Bruzual, J.': NOT_IR, 'Socías, D.': NOT_IR, 'Lacarra Arcos, E.': NOT_IR, 'Santos, M.': NOT_IR,
   'González, R.': NOT_IR, 'Gil, E.': NOT_IR, 'Moreno López, G.': NOT_IR, 'Karas, J.': NOT_IR, 'Vyshnevskyy, M.': NOT_IR,
