@@ -25,7 +25,7 @@ export const archive2026: ArchivePub[] = [
     year: 2026, cat: 'idx', share: 100, team: ['chehlarova'], tags: ['hri', 'education', 'robotics'],
     authors: 'Dimitrova, M., Krastev, A., Chehlarova, N., Tanev, T.',
     title: 'Design of Educational Scenarios with Robots from a Neuro Aware Perspective',
-    venue: 'IEEE ITHET 2026 — 22nd Int. Conf. on Information Technology Based Higher Education and Training', isbn: '979-8-3315-1664-2',
+    venue: 'IEEE ITHET 2026 — 22nd Int. Conf. on Information Technology Based Higher Education and Training', isbn: '979-8-3315-1664-2', doi: '10.1109/ithet69978.2026.11585097',
   },
   {
     year: 2026, cat: 'intl', ix: true, share: 100, team: ['aleksandrov'], tags: ['security', 'wsn', 'ai'],
