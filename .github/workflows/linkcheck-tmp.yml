@@ -9,4 +9,4 @@ jobs:
       - run: cd tools && python3 aff.py
       - run: |
           git config user.name github-actions; git config user.email github-actions@users.noreply.github.com
-          cp tools/aff.json aff.json; git add aff.json; git commit -m "aff [skip ci]"; git push
+          cp tools/aff2.json aff2.json; git add aff2.json; git commit -m "aff2 [skip ci]"; git push
