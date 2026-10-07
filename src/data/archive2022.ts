@@ -366,12 +366,6 @@ export const archive: ArchivePub[] = [
     venue: 'Int. Conf. “Robotics & Mechatronics 2023”, Complex Control Systems',
   },
   {
-    year: 2023, cat: 'other', team: [], tags: ['robotics'],
-    authors: 'Ivanova, V., Boneva, A., Ivanov, S., Doshev, Y.',
-    title: 'An ECG monitoring device for a modular instrument to surgical robots',
-    venue: 'Automation of Discrete Production Engineering 5, TU-Sofia, pp. 44–50',
-  },
-  {
     year: 2023, cat: 'other', team: ['gaidarski'], tags: ['security'],
     authors: 'Гайдарски, И., Кутинчев, П.',
     authorsEn: 'Gaidarski, I., Kutinchev, P.',
