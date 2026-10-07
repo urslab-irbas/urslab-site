@@ -5,6 +5,7 @@
 import type { ArchivePub } from './archive2022';
 import { allPubs } from './allPubs';
 import { withNrs } from './archivePages';
+import { withShare } from './irShare';
 import { NSPDS_FUND, nspsdRefs, normTitle } from './nspsdRefs';
 
 // team: 'valchkova', 'zahariev' — колеги от ИР-БАН извън лабораторията; бутони във филтъра „Автор“ само на страницата на програмата
@@ -77,7 +78,7 @@ const nspsdExtra: ArchivePub[] = [
   },
 ];
 
-const pool: ArchivePub[] = [...allPubs, ...nspsdExtra.map(withNrs)];
+const pool: ArchivePub[] = [...allPubs, ...nspsdExtra.map(withNrs).map(withShare)];
 
 /** Всички публикации по ННП-СО, с маркировка за финансиране и задача по програмата */
 export const nspsdPubs: ArchivePub[] = nspsdRefs.map((r) => {

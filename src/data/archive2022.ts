@@ -39,6 +39,7 @@ export interface ArchivePub {
   tags: string[];
   ix?: boolean;    // индексирана в WoS/Scopus, макар че категорията ѝ в отчета е друга
   share?: number;  // „Процент автори от звеното“ (ИР) от отчета на БАН
+  shareCalc?: boolean; // share е изчислен от авторите (irShare.ts), а не взет от отчета на БАН
   note?: string;   // бележка от отчета, напр. „Друга база (не влиза в К2)“
   fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
   task?: string;   // задача по програмата
@@ -363,12 +364,6 @@ export const archive: ArchivePub[] = [
     authors: 'Gaidarski, I., Kutinchev, P.',
     title: 'Modern Aspects in Information Security in the Field of Robotics',
     venue: 'Int. Conf. “Robotics & Mechatronics 2023”, Complex Control Systems',
-  },
-  {
-    year: 2023, cat: 'other', team: [], tags: ['robotics'],
-    authors: 'Ivanova, V., Boneva, A., Ivanov, S., Doshev, Y.',
-    title: 'An ECG monitoring device for a modular instrument to surgical robots',
-    venue: 'Automation of Discrete Production Engineering 5, TU-Sofia, pp. 44–50',
   },
   {
     year: 2023, cat: 'other', team: ['gaidarski'], tags: ['security'],
