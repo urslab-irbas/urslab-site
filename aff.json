@@ -1,313 +1,2136 @@
+[
 {
-"Tanio Tanev": [
-{
-"n": "Tanio K. Tanev",
-"inst": [
-"Bulgarian Academy of Sciences",
-"Institute of Robotics"
-],
-"works": 30,
-"id": "https://openalex.org/A5065241391"
+"t": "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes in a Coordinated Turn",
+"y": 2026,
+"doi": null
 },
 {
-"n": "Tanio Tanev",
-"inst": [
-"Bulgarian Academy of Sciences",
-"Institute of Robotics"
-],
-"works": 8,
-"id": "https://openalex.org/A5139911641"
-}
-],
-"Maya Dimitrova": [
-{
-"n": "Maya Dimitrova",
-"inst": [
-"Bulgarian Academy of Sciences",
-"Institute of Robotics"
-],
-"works": 79,
-"id": "https://openalex.org/A5003122432"
+"t": "Precise Calculations of Gravity Anomalies from the Geometric Height for Autonomous Air Navigation",
+"y": 2026,
+"doi": null
 },
 {
-"n": "Maya Dimitrova",
-"inst": [
-"NYU Langone Health",
-"NYU Langone’s Laura and Isaac Perlmutter Cancer Center",
-"New York University"
-],
-"works": 21,
-"id": "https://openalex.org/A5029493350"
+"t": "A Highly Accurate Calculation of the Difference Between Geocentric and Geodetic Latitude in Flight",
+"y": 2026,
+"doi": "10.1007/978-3-032-39070-7_6"
 },
 {
-"n": "M. Dimitrova",
-"inst": [
-"Trakia University",
-"Agricultural University Plovdiv"
-],
-"works": 38,
-"id": "https://openalex.org/A5065136135"
+"t": "A Model of Gravity on the Surface of the Earth’s Ellipsoid Using an Accurate Analytical Relationship Between Geocentric and Geodetic Latitudes",
+"y": 2026,
+"doi": "10.1007/978-3-032-39070-7_4"
 },
 {
-"n": "Maya DImitrova",
-"inst": [],
-"works": 3,
-"id": "https://openalex.org/A5054908883"
+"t": "Method for design of information security system for sensitive data leak prevention",
+"y": 2026,
+"doi": null
 },
 {
-"n": "Maya Dimitrova",
-"inst": [
-"Agricultural University Plovdiv"
-],
-"works": 1,
-"id": "https://openalex.org/A5153572309"
-}
-],
-"Aleksandar Krastev": [
-{
-"n": "Aleksandar Krastev",
-"inst": [
-"Massachusetts Institute of Technology"
-],
-"works": 5,
-"id": "https://openalex.org/A5052230656"
+"t": "Design of Information Security Systems for internal threat protection",
+"y": 2026,
+"doi": null
 },
 {
-"n": "Aleksandar Krastev",
-"inst": [
-"Bulgarian Academy of Sciences",
-"Institute of Robotics"
-],
-"works": 38,
-"id": "https://openalex.org/A5009478274"
-},
-{
-"n": "Krastev Aleksandar",
-"inst": [],
-"works": 1,
-"id": "https://openalex.org/A5017615113"
-}
-],
-"Neda Chehlarova": [
-{
-"n": "Neda Chehlarova",
-"inst": [
-"Bulgarian Academy of Sciences",
-"Institute of Robotics"
-],
-"works": 39,
-"id": "https://openalex.org/A5060360600"
-}
-],
-"joint": [
-{
-"t": "Exploring Engineering Skills when Working with Lego Robots",
-"y": 2025,
+"t": "Compensations for Horizontal Inertial Components of INS/GNSS with Flight Altitude",
+"y": 2026,
+"doi": "10.3390/engproc2026150070",
+"oa_doi": "10.3390/engproc2026150070",
+"oa_title": "Compensations for Horizontal Inertial Components of INS/GNSS with Flight Altitude",
 "auth": [
 [
-"Neda Chehlarova",
+"Anastas Madzharov",
+"Unmanned Robotics Systems Laboratory, Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
 [
-"Institute of Robotics “St. Ap. and Gospeller Matthew” - Bulgarian Academy of Sciences, Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
-]
-]
-}
 ],
-"paper": [
+[
+"Stefan Hristozov",
+"Unmanned Robotics Systems Laboratory, Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Ivan Gaidarski",
+"Unmanned Robotics Systems Laboratory, Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Constructive Approach to the Design of Data Protection Systems: Models and Transformation",
+"y": 2026,
+"doi": "10.3390/engproc2026150053",
+"oa_doi": "10.3390/engproc2026150053",
+"oa_title": "Constructive Approach to the Design of Data Protection Systems: Models and Transformation",
+"auth": [
+[
+"Ivan Gaidarski",
+"Unmanned Robotics Systems Laboratory, Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Unmanned Robotics Systems Laboratory, Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Insider Threats in Critical Infrastructure Organizations — Discovery and Protection",
+"y": 2026,
+"doi": "10.46793/BISEC25.086G",
+"oa_doi": "10.46793/bisec25.086g",
+"oa_title": "Insider Threats in Critical Infrastructure Organizations – Discovery and Protection",
+"auth": [
+[
+"Ivan Gaidarski",
+"Institute of Robotics “St. Ap. and Gospeller Matthew”, Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
 {
 "t": "Design of Educational Scenarios with Robots from a Neuro Aware Perspective",
 "y": 2026,
-"doi": "https://doi.org/10.1109/ithet69978.2026.11585097",
+"doi": null,
+"oa_doi": "10.1109/ithet69978.2026.11585097",
+"oa_title": "Design of Educational Scenarios with Robots from a Neuro Aware Perspective",
 "auth": [
 [
 "Maya Dimitrova",
+"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria",
 [
-"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ],
 [
 "Aleksandar Krastev",
+"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria",
 [
-"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ],
 [
 "Neda Chehlarova",
+"Bulgarian Academy of Sciences,Institute of Robotics,Sofia,Bulgaria",
 [
-"Bulgarian Academy of Sciences,Institute of Robotics,Sofia,Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ],
 [
 "Tanio Tanev",
+"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria",
 [
-"Bulgarian Academy of Sciences Center of Competence \"Smart Mechatronic, Eco-And Energy-Saving Systems And Technologies\",Institute of Robotics,Sofia,Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ]
 ]
 },
 {
-"t": "Scenarios of robot-assisted play for children with cognitive and physical disabilities",
-"y": 2012,
-"doi": "https://doi.org/10.1075/is.13.2.03rob",
+"t": "Formal Modeling of Security Dynamics in Sensor Networks Using Fuzzy Inference Systems",
+"y": 2026,
+"doi": "10.46793/BISEC25.076A",
+"oa_doi": "10.46793/bisec25.076a",
+"oa_title": "Formal Modeling of Security Dynamics in Sensor Networks Using Fuzzy Inference Systems",
 "auth": [
 [
-"Ben Robins",
+"Alexander Alexandrov",
+"Institute of Robotics – Bulgarian Academy of Sciences, Acad. Georgi Bonchev Str., Bl. 2, Sofia, 1113, Bulgaria",
 [
-"University of Hertfordshire, U.K"
-]
-],
-[
-"Kerstin Dautenhahn",
-[
-"University of Hertfordshire, U.K"
-]
-],
-[
-"Ester Ferrari",
-[
-"University of Hertfordshire, U.K"
-]
-],
-[
-"Gernot Kronreif",
-[
-"Austrian Center for Medical Innovation and Technology, Austria"
-]
-],
-[
-"Barbara Prazak-Aram",
-[
-"AIT Austrian Institute of Technology GmbH, Austria"
-]
-],
-[
-"Patrizia Marti",
-[
-"University of Siena, Italy"
-]
-],
-[
-"Iolanda Iacono",
-[
-"University of Siena, Italy"
-]
-],
-[
-"Gert Jan Gelderblom",
-[
-"Zuyd University, The Netherlands"
-]
-],
-[
-"Tanja Bernd",
-[
-"Zuyd University, The Netherlands"
-]
-],
-[
-"Francesca Caprino",
-[
-"University of Valle d’Aosta, Italy"
-]
-],
-[
-"Elena Laudanna",
-[
-"University of Valle d’Aosta, Italy"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ]
 ]
 },
 {
-"t": "PEERs: Persuasive Educational and Entertainment Robotics",
-"y": 2016,
-"doi": "https://doi.org/10.5278/vbn.phd.hum.00039",
+"t": "Assessment of teachers’ preparedness in cybersecurity",
+"y": 2026,
+"doi": "10.7546/PECR.84.26.02",
+"oa_doi": "10.7546/pecr.84.26.02",
+"oa_title": "Assessment of Teachers’ Preparedness in Cybersecurity",
 "auth": [
 [
-"Lykke Brogaard Bertel",
+"Radoslav Yoshinov",
+"Laboratory of telematics at Institute of mathematics and informatics -Bulgarian Academy of Sciences ,",
 [
-"Aalborg University, Department of Communication and Psychology"
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of robotics \"St. Ap. and",
+[
+"Institute of Robotics"
+]
+],
+[
+"Galina Dishkova",
+"Gospeller Matthew\" - Bulgarian Academy of Sciences ,",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
 ]
 ]
 ]
 },
 {
-"t": "Reinforcement learning in educational robotics: a framework for Human-Robot interaction in 21st Century classrooms",
-"y": 2025,
-"doi": null,
+"t": "Assessment of Parents’ Awareness in the Field of Cybersecurity",
+"y": 2026,
+"doi": "10.7546/PECR.84.26.03",
+"oa_doi": "10.7546/pecr.84.26.03",
+"oa_title": "Assessment of Parents’ Awareness in the Field of Cybersecurity",
 "auth": [
 [
-"Mannayee, Giriraj",
-[
-"Department of Design and Automation ,"
-]
+"Radoslav Yoshinov",
+"",
+[]
 ],
 [
-"Kappagantula, Sivayazi",
+"Galina Dishkova",
+"",
+[]
+],
+[
+"Neda Chehlarova",
+"",
 []
 ]
 ]
 },
 {
-"t": "Exploring the Potential of Social Robots for Speech and Language Therapy: A Review and Analysis of Interactive Scenarios",
-"y": 2023,
-"doi": "https://doi.org/10.3390/machines11070693",
+"t": "Recognition and prevention of cyberbullying by students in secondary education",
+"y": 2026,
+"doi": null
+},
+{
+"t": "URSlab Website and Information System for Reporting the Publication Activity of a Scientific Department of BAS: Source Code (v1.1.0)",
+"y": 2026,
+"doi": "10.5281/zenodo.23111566",
+"oa_doi": "10.5281/zenodo.23111566",
+"oa_title": "URSlab Website and Information System for Reporting the Publication Activity of a Scientific Department of BAS: Source Code",
 "auth": [
 [
-"Galya Nikolova Georgieva-Tsaneva",
+"Anastas Madzharov",
+"Bulgarian Academy of Sciences",
 [
-"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+"Bulgarian Academy of Sciences"
+]
+]
+]
+},
+{
+"t": "URSlab Website and Interactive Coordinated-Turn Model: Source Code (v1.0.0)",
+"y": 2026,
+"doi": "10.5281/zenodo.23086274",
+"oa_doi": "10.5281/zenodo.23086274",
+"oa_title": "URSlab Website and Interactive Coordinated-Turn Model: Source Code",
+"auth": [
+[
+"Anastas Madzharov",
+"Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences"
+]
+]
+]
+},
+{
+"t": "Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations",
+"y": 2025,
+"doi": "10.3390/drones9110776",
+"oa_doi": "10.3390/drones9110776",
+"oa_title": "Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations",
+"auth": [
+[
+"Luis Miguel González-deSantos",
+"Telespazio Ibérica, Avenida de Manoteras n 18, Planta 5 Puerta 1 Oficina 3, 28050 Madrid, Spain",
+[]
+],
+[
+"J. Bruzual",
+"European Satellite Service Provider (ESSP SAS), Carretera de la Base s/n KM0.8, Torrejón de Ardoz, 28850 Madrid, Spain",
+[]
+],
+[
+"Damián Socías",
+"Telespazio Ibérica, Avenida de Manoteras n 18, Planta 5 Puerta 1 Oficina 3, 28050 Madrid, Spain",
+[]
+],
+[
+"Elisabet Lacarra",
+"European Satellite Service Provider (ESSP SAS), Carretera de la Base s/n KM0.8, Torrejón de Ardoz, 28850 Madrid, Spain",
+[]
+],
+[
+"Marcos dos Santos",
+"European Satellite Service Provider (ESSP SAS), Carretera de la Base s/n KM0.8, Torrejón de Ardoz, 28850 Madrid, Spain",
+[]
+],
+[
+"R. González",
+"European Satellite Service Provider (ESSP SAS), Carretera de la Base s/n KM0.8, Torrejón de Ardoz, 28850 Madrid, Spain",
+[]
+],
+[
+"E. Delso Gil",
+"European Satellite Service Provider (ESSP SAS), Carretera de la Base s/n KM0.8, Torrejón de Ardoz, 28850 Madrid, Spain",
+[]
+],
+[
+"G. Moreno López",
+"GMV Aerospace and Defence S.A.U, C. de Isaac Newton, 11, Tres Cantos, 28760 Madrid, Spain",
+[
+"GMV Innovating Solutions (Spain)"
 ]
 ],
 [
-"Анна Андреева",
+"Stefan Hristozov",
+"Institute of Robotics, BAS, 4000 Plovdiv, Bulgaria",
 [
-"Department of Logopedics, South-West University “Neofit Rilski”, 2700 Blagoevgrad, Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ],
 [
-"Paulina Tsvetkova",
+"Jakub Karas",
+"EU Agency for the Space Programme (EUSPA), Janovského 438/2, 170 00 Prague 7, Holesovice, Czech Republic",
+[]
+],
 [
-"Faculty of Information Sciences, University of Library Studies and Information Technologies, 1784 Sofia, Bulgaria"
+"Matthias Vyshnevskyy",
+"Skyeton Germany GmbH, 82205 Gilching, Germany",
+[]
+],
+[
+"Jan Gebhardt",
+"DLR Gesellschaft für Raumfahrtanwendungen mbH, 82234 Weßling, Germany",
+[
+"Deutsches Zentrum für Luft- und Raumfahrt e. V. (DLR)"
 ]
 ],
 [
-"Anna Kostadinova Lekova",
+"Pablo Haro",
+"EUROCONTROL Innovation Hub, 91222 Bretigny, France",
 [
-"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+"Eurocontrol"
 ]
 ],
 [
-"Миглена Симонска",
+"S. R. Bellingham",
+"NAV CANADA, 151 Slater Street, Suite 120, Ottawa, ON K1P 5H3, Canada",
 [
-"Department of Logopedics, South-West University “Neofit Rilski”, 2700 Blagoevgrad, Bulgaria"
+"Royal Canadian Navy"
+]
+]
+]
+},
+{
+"t": "Robot Modeling and Control in Digital Twin System",
+"y": 2025,
+"doi": "10.3390/engproc2025100062",
+"oa_doi": "10.3390/engproc2025100062",
+"oa_title": "Robot Modeling and Control in Digital Twin System",
+"auth": [
+[
+"Denis Chikurtev",
+"Center for Competence in Mechatronics and Clean Technologies–MIRACle, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
 ]
 ],
 [
-"Vaska Stancheva-Popkostadinova",
+"Vladimir Ivanov",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
 [
-"Department of Medical-Social Sciences, South-West University “Neofit Rilski”, 2700 Blagoevgrad, Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
 ]
 ],
 [
-"Georgi Petrov Dimitrov",
+"Simeon Tsvetanov",
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria",
 [
-"Faculty of Information Sciences, University of Library Studies and Information Technologies, 1784 Sofia, Bulgaria"
+"Sofia University \"St. Kliment Ohridski\""
 ]
 ],
 [
-"Katia Rasheva-Yordanova",
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria",
 [
-"Faculty of Information Sciences, University of Library Studies and Information Technologies, 1784 Sofia, Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models",
+"y": 2025,
+"doi": "10.3390/engproc2025090047",
+"oa_doi": "10.3390/engproc2025090047",
+"oa_title": "A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models",
+"auth": [
+[
+"Alejandro Del Estal Herrero",
+"RigiTech, 1008 Prilly, Switzerland",
+[]
+],
+[
+"Nathanel Apter",
+"UASolutions, 1530 Payerne, Switzerland",
+[]
+],
+[
+"Stefan Hristozov",
+"Institute of Robotics, Bulgarian Academy of Science (BAS), 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Implementation of Fuzzy Logic Neural Networks in QBER Optimization Process",
+"y": 2025,
+"doi": "10.1007/978-3-031-97992-7_32",
+"oa_doi": "10.1007/978-3-031-97992-7_32",
+"oa_title": "Implementation of Fuzzy Logic Neural Networks in QBER Optimization Process",
+"auth": [
+[
+"Alexander K. Alexandrov",
+"Bulgarian Academy of Sciences – Institute of Robotics, 1113, Sofia, Bulgaria",
+[
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Multicriteria Optimization Based on the Fuzzy Sugeno Logic Method",
+"y": 2025,
+"doi": "10.1007/978-3-031-97985-9_78",
+"oa_doi": "10.1007/978-3-031-97985-9_78",
+"oa_title": "Multicriteria Optimization Based on the Fuzzy Sugeno Logic Method",
+"auth": [
+[
+"Alexander K. Alexandrov",
+"Bulgarian Academy of Sciences – Institute of Robotics, 1113, Sofia, Bulgaria",
+[
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Math Lesson on Counting 3D Printed Geometric Shapes in an Inclusive Class",
+"y": 2025,
+"doi": "10.1007/978-3-031-83520-9_32",
+"oa_doi": "10.1007/978-3-031-83520-9_32",
+"oa_title": "Math Lesson on Counting 3D Printed Geometric Shapes in an Inclusive Class",
+"auth": [
+[
+"Maya Dimitrova",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
 ]
 ],
 [
-"Iva S. Kostadinova",
+"Neda Chehlarova",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113, Sofia, Bulgaria",
 [
-"Faculty of Information Sciences, University of Library Studies and Information Technologies, 1784 Sofia, Bulgaria"
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Galina T. Bogdanova",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Aleksandar Krastev",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Negoslav Sabev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Nikolay Noev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
 ]
 ]
 ]
+},
+{
+"t": "Educational resources for studying midsegment of triangle and trapezoid",
+"y": 2025,
+"doi": "10.53656/math2025-1-4-edu",
+"oa_doi": "10.53656/math2025-1-4-edu",
+"oa_title": "Educational Resources for Studying Midsegment of Triangle and Trapezoid",
+"auth": [
+[
+"Тoni Chehlarova",
+"",
+[]
+],
+[
+"Neda Chehlarova",
+"",
+[]
+],
+[
+"Георги Гачев",
+"",
+[]
+]
+]
+},
+{
+"t": "Development of Blockchain-Based Framework for Securing Communication in Wireless Robotic Platforms",
+"y": 2025,
+"doi": "10.5281/zenodo.17682573",
+"oa_doi": "10.5281/zenodo.17682573",
+"oa_title": "Development of Blockchain-Based Framework for Securing Communication in Wireless Robotic Platforms",
+"auth": [
+[
+"Alexandrov, Alexander",
+"",
+[]
+]
+]
+},
+{
+"t": "LSTM-RNN method for Anomaly-Based Intrusion Detection Systems",
+"y": 2025,
+"doi": null,
+"oa_doi": "10.5281/zenodo.17682404",
+"oa_title": "LSTM-RNN method for Anomaly-Based Intrusion Detection Systems",
+"auth": [
+[
+"Alexandrov, Alexander",
+"Bulgarian Academy of Sciences - Institute of Robotics",
+[
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Bibliometric analysis of Scopus publications related to STEM and STEAM research in the context of mathematics education",
+"y": 2025,
+"doi": "10.57125/FED.2025.06.25.04",
+"oa_doi": "10.57125/fed.2025.06.25.04",
+"oa_title": "Bibliometric Analysis of Scopus Publications Related to STEM and STEAM Research in the Context of Mathematics Education",
+"auth": [
+[
+"Neda Chehlarova",
+"Institute of Robotics “St. Ap. and Gospeller Matthew” - Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Koya Chehlarova",
+"University of Library Studies and Information Technologies, Sofia, Bulgaria",
+[
+"University of Library Studies and Information Technologies"
+]
+],
+[
+"Natalia Gecheva",
+"Institute of Mathematics and Informatics - Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+]
+]
+},
+{
+"t": "STEAM workshops with a 3D pen",
+"y": 2025,
+"doi": "10.15547/PF.2025.004",
+"oa_doi": "10.15547/pf.2025.004",
+"oa_title": "STEAM Workshops with a 3D Pen",
+"auth": [
+[
+"Neda Chehlarova",
+"Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences"
+]
+],
+[
+"Koya Chehlarova",
+"University of Library Studies and Information Technologies",
+[
+"University of Library Studies and Information Technologies"
+]
+],
+[
+"Natalia Gecheva",
+"Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences"
+]
+]
+]
+},
+{
+"t": "3D printed educational resources for studying percentages by people with visual impairments",
+"y": 2025,
+"doi": "10.15547/PF.2025.015",
+"oa_doi": "10.15547/pf.2025.015",
+"oa_title": "3D Printed Educational Resources for Studying Percentages by People with Visual Impairments",
+"auth": [
+[
+"Neda Chehlarova",
+"Bulgarian Academy of Sciences Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences"
+]
+]
+]
+},
+{
+"t": "Bibliometric analysis of documents in SCOPUS, researching 3D printing, in the field of engineering",
+"y": 2025,
+"doi": "10.15547/artte.2025.01.002"
+},
+{
+"t": "Mathematical Domino “Part of a Whole”",
+"y": 2025,
+"doi": "10.15547/PF.2025.031",
+"oa_doi": "10.15547/pf.2025.031",
+"oa_title": "Mathematical Domino \"Part of a Whole\"",
+"auth": [
+[
+"Тoni Chehlarova",
+"Institute of Mathematics and Informatics",
+[
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics",
+[]
+]
+]
+},
+{
+"t": "Research on the Development of the Percentage Visual Estimation with Computer Models",
+"y": 2025,
+"doi": "10.15547/PF.2025.025",
+"oa_doi": "10.15547/pf.2025.025",
+"oa_title": "Research on the Development of the Percentage Visual Estimation with Computer Models",
+"auth": [
+[
+"Тoni Chehlarova",
+"Institute of Mathematics and Informatics",
+[
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Ivan Petkov",
+"St. St. Cyril and Methodius, Secondary School, Plovdiv",
+[]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics",
+[]
+],
+[
+"Natalia Gecheva",
+"Institute of Mathematics and Informatics",
+[
+"Institute of Mathematics and Informatics"
+]
+]
+]
+},
+{
+"t": "Improvement in U-Space Development by Civil-Military Cooperation in a Multi-Domain Operations Environment",
+"y": 2025,
+"doi": "10.14339/STO-MP-IST-209-9495-PDF"
+},
+{
+"t": "The Applicability Of Quantum Gyroscopes For Navigation",
+"y": 2025,
+"doi": "10.7546/engsci.lxii.25.01.06",
+"oa_doi": "10.7546/engsci.lxii.25.01.06",
+"oa_title": "The Applicability Of Quantum Gyroscopes For Navigation",
+"auth": [
+[
+"Anastas Madzharov",
+"Institute of ROBOTICS \"St. Ap. and Gospeller Matthew\" , Bulgarian Academy of Sciences , Sofia ,",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Design and architecture of perimeter defence intrusion detection systems based on UGV",
+"y": 2025,
+"doi": "10.7546/EngSci.LXII.25.01.04",
+"oa_doi": "10.7546/engsci.lxii.25.01.04",
+"oa_title": "Design And Architecture Of Perimeter Defence Intrusion Detection Systems Based On UGV",
+"auth": [
+[
+"Alexander Alexandrov",
+"Institute of Robotics-Bulgarian Academy of Sciences , Acad. G. Bonchev , Str , Bl.2 , Sofia , 1113 , Bulgaria,",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Simeon Angelov",
+"Institute of Robotics-Bulgarian Academy of Sciences , Acad. G. Bonchev , Str , Bl.2 , Sofia , 1113 , Bulgaria,",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Application of 3D printing in the study of quadrilaterals in 5th grade",
+"y": 2025,
+"doi": "10.55630/STEM.2025.0713",
+"oa_doi": "10.55630/stem.2025.0713",
+"oa_title": "Application of 3D Printing in the Study of Quadrilaterals in 5th Grade",
+"auth": [
+[
+"Neda Chehlarova",
+"Institute of Robotics",
+[]
+],
+[
+"Koya Chehlarova",
+"University of Library Studies and Information Technologies, Bulgaria",
+[
+"University of Library Studies and Information Technologies"
+]
+],
+[
+"Natalia Gecheva",
+"Institute of Mathematics and Informatics - Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+]
+]
+},
+{
+"t": "STEAM scenarios for AR capturing using robotic systems",
+"y": 2025,
+"doi": "10.55630/STEM.2025.0704",
+"oa_doi": "10.55630/stem.2025.0704",
+"oa_title": "STEAM Scenarios for AR Capturing Using Robotic Systems",
+"auth": [
+[
+"Koya Chehlarova",
+"University of Library Studies and Information Technologies, Sofia, Bulgaria",
+[
+"University of Library Studies and Information Technologies"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics “St. Ap. and Gospeller Matthew” - Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Exploring engineering skills when working with Lego robots",
+"y": 2025,
+"doi": "10.55630/STEM.2025.0711",
+"oa_doi": "10.55630/stem.2025.0711",
+"oa_title": "Exploring Engineering Skills when Working with Lego Robots",
+"auth": [
+[
+"Neda Chehlarova",
+"Institute of Robotics “St. Ap. and Gospeller Matthew” - Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Bibliometric analysis of documents in Scopus, in the field of additive manufacturing",
+"y": 2025,
+"doi": null
+},
+{
+"t": "3D printed models of fractions for people with visual impairments",
+"y": 2025,
+"doi": null
+},
+{
+"t": "Кратки видеоматериали във Виртуалния училищен кабинет по математика",
+"y": 2025,
+"doi": null
+},
+{
+"t": "Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications",
+"y": 2025,
+"doi": "10.5281/zenodo.15090498",
+"oa_doi": "10.5281/zenodo.15090498",
+"oa_title": "Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications",
+"auth": [
+[
+"Alexandrov, Alexander",
+"Bulgarian Academy of Sciences  - Institute of Robotics",
+[
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Адитивни технологии в образованието",
+"y": 2025,
+"doi": null
+},
+{
+"t": "An ecosystem for the provision of digital accessibility for people with special needs",
+"y": 2024,
+"doi": "10.3390/info15060315",
+"oa_doi": "10.3390/info15060315",
+"oa_title": "An Ecosystem for the Provision of Digital Accessibility for People with Special Needs",
+"auth": [
+[
+"Galina T. Bogdanova",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Тодор Тодоров",
+"Faculty of Mathematics and Informatics, St. Cyril and St. Methodius University of Veliko Tarnovo, 5000 Veliko Tarnovo, Bulgaria",
+[
+"St. Cyril and St. Methodius University of Veliko Tarnovo",
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Nikolay Noev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Negoslav Sabev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Mirena Todorova–Ekmekci",
+"Institute of Ethnology and Folklore Studies with Ethnographic Museum, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Ethnology and Folklore Studies with Ethnographic Museum"
+]
+],
+[
+"Aleksandar Krastev",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Didactic materials for counting isosceles trapezoids by visually impaired people",
+"y": 2024,
+"doi": "10.26830/symmetry_2024_4_407",
+"oa_doi": "10.26830/symmetry_2024_4_407",
+"oa_title": "Didactic materials for counting isosceles trapezoids by visually impaired people",
+"auth": [
+[
+"Neda Chehlarova",
+"",
+[]
+]
+]
+},
+{
+"t": "Psychophysics of user acceptance of social cyber-physical systems",
+"y": 2024,
+"doi": "10.3389/frobt.2024.1414853",
+"oa_doi": "10.3389/frobt.2024.1414853",
+"oa_title": "Psychophysics of user acceptance of social cyber-physical systems",
+"auth": [
+[
+"Maya Dimitrova",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Aleksandar Krastev",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Ivan Chavdarov",
+"Department of Mathematics and Informatics, Sofia University, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "Psychosocial and Psychophysical Aspects of the Interaction with Humanoid Robots: Implications for Education",
+"y": 2024,
+"doi": "10.1145/3674912.3674951",
+"oa_doi": "10.1145/3674912.3674951",
+"oa_title": "Psychosocial and Psychophysical Aspects of the Interaction with Humanoid Robots: Implications for Education",
+"auth": [
+[
+"Maya Dimitrova",
+"Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Snezhana Kostova",
+"Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Ivan Chavdarov",
+"Department of Mathematics and Informatics, Sofia University, Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Aleksandar Krastev",
+"Institue of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Counting Triangles with 3D Printed Didactic Materials for People with Visual Impairment",
+"y": 2024,
+"doi": "10.1007/978-3-031-73538-7_20",
+"oa_doi": "10.1007/978-3-031-73538-7_20",
+"oa_title": "Counting Triangles with 3D Printed Didactic Materials for People with Visual Impairment",
+"auth": [
+[
+"Neda Chehlarova",
+"Institute of Robotics at the Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Galina T. Bogdanova",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Nikolay Noev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Maya Dimitrova",
+"Institute of Robotics at the Bulgarian Academy of Sciences, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Applicability of JARUS SORA to State UAS Operations in Disaster Relief",
+"y": 2024,
+"doi": "10.17770/etr2024vol4.8195",
+"oa_doi": "10.17770/etr2024vol4.8195",
+"oa_title": "APPLICABILITY OF JARUS SORA TO STATE UAS OPERATIONS IN DISASTER RELIEF",
+"auth": [
+[
+"Hristo Stanev",
+"Faculty “Economics of Infrastructure”, University of National and World Economy",
+[
+"University of National and World Economy"
+]
+],
+[
+"Stefan Hristozov",
+"Sensors and Measurement Technologies in Robotics & Mechatronics Dept. Institute of Robotics",
+[
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Management approaches and application areas of information security in organizations",
+"y": 2024,
+"doi": "10.17770/etr2024vol2.8062",
+"oa_doi": "10.17770/etr2024vol2.8062",
+"oa_title": "MANAGEMENT APPROACHES AND APPLICATION AREAS OF INFORMATION SECURITY IN ORGANIZATIONS",
+"auth": [
+[
+"Ivan Gaidarski",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\" Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Implying cybersecurity skills for public administration employees",
+"y": 2024,
+"doi": "10.17770/etr2024vol4.8238",
+"oa_doi": "10.17770/etr2024vol4.8238",
+"oa_title": "IMPLYING CYBERSECURITY SKILLS FOR PUBLIC ADMINISTRATION EMPLOYEES",
+"auth": [
+[
+"Radoslav Yoshinov",
+"Laboratory of telematics, Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Monka Kotseva",
+"Laboratory of telematics, Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Skills and attitudes towards using AI based chatbots",
+"y": 2024,
+"doi": "10.17770/etr2024vol2.8064",
+"oa_doi": "10.17770/etr2024vol2.8064",
+"oa_title": "SKILLS AND ATTITUDES TOWARDS USING AI BASED CHATBOTS",
+"auth": [
+[
+"Radoslav Yoshinov",
+"Laboratory of Telematics, Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Monka Kotseva",
+"Laboratory of Telematics, Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Reducing the WSN’s communication overhead by the SD-SPDZ encryption protocol",
+"y": 2024,
+"doi": "10.5281/zenodo.11196843",
+"oa_doi": "10.5281/zenodo.11196843",
+"oa_title": "Reducing the WSN's Communication Overhead by the SD-SPDZ Encryption Protocol",
+"auth": [
+[
+"Alexandrov, Alexander",
+"",
+[]
+],
+[
+"Alexandrov, Alexander",
+"Institute of Robotics - Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Energy-efficient routing in UAVs supported perimeter security networks",
+"y": 2024,
+"doi": "10.5281/zenodo.11396636",
+"oa_doi": "10.5281/zenodo.11396636",
+"oa_title": "Energy-Efficient Routing in UAVs Supported Perimeter Security Networks",
+"auth": [
+[
+"Alexander K. Alexandrov",
+"",
+[]
+]
+]
+},
+{
+"t": "Algorithm for Assigning a Robot to Capture an Object From a Production Pipeline",
+"y": 2024,
+"doi": "10.1063/5.0184210",
+"oa_doi": "10.1063/5.0184210",
+"oa_title": "Algorithm for assigning a robot to pick an object from a production pipeline",
+"auth": [
+[
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, Sofia University, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+"Faculty of Mathematics and Informatics, Sofia University, Sofia, Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Denis Chikurtev",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science, Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+]
+},
+{
+"t": "Approaches for Object Detection and Depth Estimation in Digital Images",
+"y": 2024,
+"doi": "10.1145/3674912.3674932",
+"oa_doi": "10.1145/3674912.3674932",
+"oa_title": "Approaches for Object Detection and Depth Estimation in Digital Images",
+"auth": [
+[
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "Model of computer game at education of visually impaired people",
+"y": 2024,
+"doi": "10.1109/ITHET61869.2024.10837626",
+"oa_doi": "10.1109/ithet61869.2024.10837626",
+"oa_title": "Model of Computer Game at Education of Visually Impaired People",
+"auth": [
+[
+"Galina T. Bogdanova",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Тодор Тодоров",
+"St. Cyril and St. Methodius University of Veliko Tarnovo Institute of Mathematics and Informatics, Bulgarian Academy of Sciences,Veliko Tarnovo,Bulgaria",
+[
+"St. Cyril and St. Methodius University of Veliko Tarnovo",
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Nikolay Noev",
+"Institute of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Zhivko Tomov",
+"Prof d-r Asen Zlatarov University of Burgas,Burgas,Bulgaria",
+[
+"Prof. Assen Zlatarov University"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics at the Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Aspects of Dependability and Security in Integrated Intelligent Educational Environments",
+"y": 2024,
+"doi": "10.1109/IS61756.2024.10705223",
+"oa_doi": "10.1109/is61756.2024.10705223",
+"oa_title": "Aspects of Dependability and Security in Integrated Intelligent Educational Environments",
+"auth": [
+[
+"Edita Djambazova",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+],
+[
+"Valentina T. Terzieva",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+],
+[
+"Svetozar Ilchev",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+],
+[
+"Ivan Gaidarski",
+"Institute of Robotics &#x201C;St. Ap. and Gospeller Matthew&#x201D; Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "3D Printed DELTA Robot for Educational Purposes",
+"y": 2024,
+"doi": "10.23919/SoftCOM62040.2024.10721779",
+"oa_doi": "10.23919/softcom62040.2024.10721779",
+"oa_title": "3D Printed DELTA Robot for Educational Purposes",
+"auth": [
+[
+"Ivan Chavdarov",
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Bozhidar Naydenov",
+"Institute of Robotics Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Vladislav Hrosinkov",
+"Sofia University,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "A Psychophysical View on User Acceptance of Robotic Systems for Social Applications",
+"y": 2024,
+"doi": "10.1109/ITHET61869.2024.10837594",
+"oa_doi": "10.1109/ithet61869.2024.10837594",
+"oa_title": "A Psychophysical View on User Acceptance of Robotic Systems for Social Applications",
+"auth": [
+[
+"Maya Dimitrova",
+"Institute of Robotics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of Robotics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Aleksandar Krastev",
+"Institute of Robotics, Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Design and Architecture of wireless ECG monitoring system",
+"y": 2024,
+"doi": "10.5281/zenodo.14074924",
+"oa_doi": "10.5281/zenodo.14074924",
+"oa_title": "Design and Architecture of wireless ECG monitoring system",
+"auth": [
+[
+"Alexander, Alexandrov",
+"Practical Robotics Institute Austria",
+[
+"Practical Robotics Institute Austria",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Didactic resources for counting rectangular trapezoids",
+"y": 2024,
+"doi": "10.15547/PF.2024.019",
+"oa_doi": "10.15547/pf.2024.019",
+"oa_title": "Didactic Resources for Counting Rectangular Trapezoids",
+"auth": [
+[
+"Neda Chehlarova",
+"Bulgarian Academy of Sciences, Institute of Robotics \"St. Ap. and Gospeller Matthew\"",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Application of 3D printed models for counting prisms in solids",
+"y": 2024,
+"doi": "10.15547/artte.2024.03.006"
+},
+{
+"t": "Construction of types of quadrilaterals with a six-legged educational robot",
+"y": 2024,
+"doi": "10.55630/STEM.2024.0607",
+"oa_doi": "10.55630/stem.2024.0607",
+"oa_title": "Construction of Types of Quadrilaterals with a Six-legged Educational Robot",
+"auth": [
+[
+"Neda Chehlarova",
+"Institute of Robotics “St. Ap. and Gospeller Matthew” - Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Natalia Gecheva",
+"Institute of Mathematics and Informatics - Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Koya Chehlarova",
+"University of Library Studies and Information Technologies, Bulgaria",
+[
+"University of Library Studies and Information Technologies"
+]
+]
+]
+},
+{
+"t": "360-degree photos in the Virtual Mathematics Laboratoty",
+"y": 2024,
+"doi": "10.15547/artte.2024.03.005"
+},
+{
+"t": "Snowflake in the context of STEAM education or overcoming a misconception",
+"y": 2024,
+"doi": "10.55630/STEM.2024.0606",
+"oa_doi": "10.55630/stem.2024.0606",
+"oa_title": "Snowflake in the Context of STEAM Education or Overcoming a Misconception",
+"auth": [
+[
+"Тoni Chehlarova",
+"Institute of Mathematics and informatics - Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Koya Chehlarova",
+"University Of Library Studies and Information Technologies, Bulgaria",
+[
+"University of Library Studies and Information Technologies"
+]
+],
+[
+"Neda Chehlarova",
+"Institute of robotics",
+[]
+]
+]
+},
+{
+"t": "Some aspects of cybersecurity in Industry 4.0",
+"y": 2024,
+"doi": null
+},
+{
+"t": "Applying a New Approach to Consider the Human Factor in the Design of Information Security Systems",
+"y": 2024,
+"doi": "10.11610/isij.5546",
+"oa_doi": "10.11610/isij.5546",
+"oa_title": "Applying a New Approach to Consider the Human Factor in the Design of Information Security Systems",
+"auth": [
+[
+"Ivan Gaidarski",
+".bas",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+"Institute of Robotics \"St. Ap. and Gospeller Matthew , \" Bulgarian Academy of Sciences , Sofia , Bulgaria,",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Blockchain enhancing IoD network functionality",
+"y": 2024,
+"doi": null
+},
+{
+"t": "Design of an Unmanned Helicopter System for Collecting and Processing of Geophysical Information",
+"y": 2024,
+"doi": null
+},
+{
+"t": "Design of a testing model for evaluation the levels of automation and autonomy of a helicopter autopilot",
+"y": 2024,
+"doi": null
+},
+{
+"t": "STEАM работилници по проект „Стъклен инициал“",
+"y": 2024,
+"doi": null
+},
+{
+"t": "Изследване на пирамиди с равни ръбове, които имат равни радиуси на описаната около основата им окръжност",
+"y": 2024,
+"doi": "10.15547/PF.2024.028",
+"oa_doi": "10.15547/pf.2024.028",
+"oa_title": "Study of Pyramids with Equal Edges, Which Have Equal Radius of the Circle Described Around Their Base",
+"auth": [
+[
+"Тoni Chehlarova",
+"Bulgarian Academy of Sciences, Institute of Mathematics and Informatics",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Neda Chehlarova",
+"Bulgarian Academy of Sciences, Institute of Robotics \"St. Ap. and Gospeller Matthew\"",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Безжични сензорни системи. Архитектура и комуникационни протоколи",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Изследване на системата за е-бизнес в контекста на повишаване на дигиталната компетентност на потребителите",
+"y": 2023,
+"doi": null
+},
+{
+"t": "A strategy for controlling motions related to sensory information in a walking robot Big Foot",
+"y": 2023,
+"doi": "10.3390/s23031506",
+"oa_doi": "10.3390/s23031506",
+"oa_title": "A Strategy for Controlling Motions Related to Sensory Information in a Walking Robot Big Foot",
+"auth": [
+[
+"Ivan Chavdarov",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Aleksander Aleksiev Stefanov",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Dimitar Nedanovski",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+[
+"Institute for Nuclear Research and Nuclear Energy",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "Figures with an axis of symmetry with Photon Robot",
+"y": 2023,
+"doi": "10.26830/symmetry_2023_3_333",
+"oa_doi": "10.26830/symmetry_2023_3_333",
+"oa_title": "Figures with an axis of symmetry with Photon Robot",
+"auth": [
+[
+"Neda Chehlarova",
+"",
+[]
+],
+[
+"Георги Гачев",
+"",
+[]
+]
+]
+},
+{
+"t": "Aplication of UML descriptive modeling techniques in Model Driven Engineering of Information Security System",
+"y": 2023,
+"doi": "10.1109/BdKCSE59280.2023.10339781",
+"oa_doi": "10.1109/bdkcse59280.2023.10339781",
+"oa_title": "Application of UML Descriptive Modeling Techniques in Model Driven Engineering of Information Security Systems",
+"auth": [
+[
+"Ivan Gaidarski",
+"Institute of Robotics Bulgarian Academy of Sciences,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Trajectory optimization in large scale UAV-assisted WSNs",
+"y": 2023,
+"doi": "10.5281/zenodo.10684996",
+"oa_doi": "10.5281/zenodo.10684996",
+"oa_title": "Trajectory optimization in large scale UAV assisted WSNs",
+"auth": [
+[
+"Alexander K. Alexandrov",
+"Institute of Robotics - Bulgarian Academy of Sciences",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+]
+},
+{
+"t": "Design of marine underwater perimeter security system",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Management of a dance with Photon Robot",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Some aspects of Information Security and Cybersecurity problem area",
+"y": 2023,
+"doi": "10.7546/PECR.79.23.03",
+"oa_doi": "10.7546/pecr.79.23.03",
+"oa_title": "Some Aspects of Information Security and Cybersecurity Problem Area",
+"auth": [
+[
+"Ivan Gaidarski",
+"Institute of Robotics ( Unmanned Robotic Systems Lab) , Bulgarian Academy of Science , Sofia , Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Павлин Кутинчев",
+"Institute of Information and Communication Technologies , Bulgarian Academy of Science , Sofia , Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+]
+},
+{
+"t": "Modern Aspects in Information Security in the Field of Robotics",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Съвременни подходи за опазване на чувствителна информация",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Подкрепа при развитие на дигитална компетентност на потребителите",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Real-time Trajectory Replanning for Dynamic Obstacles Avoidance for Robotics Manipulators",
+"y": 2022,
+"doi": "10.1145/3546118.3546135",
+"oa_doi": "10.1145/3546118.3546135",
+"oa_title": "Real-time Trajectory Replanning for Dynamic Obstacles Avoidance for Robotics Manipulators",
+"auth": [
+[
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "An approach for constructing a simulation model for dynamic analysis of Information Security System",
+"y": 2022,
+"doi": "10.1007/978-3-030-96308-8",
+"oa_doi": "10.1007/978-3-030-96308-8",
+"oa_title": "Intelligent Systems Design and Applications",
+"auth": []
+},
+{
+"t": "Planning Orientation Change of the End-effector of State Space Constrained Redundant Robotic Manipulators",
+"y": 2022,
+"doi": "10.1145/3546118.3546136",
+"oa_doi": "10.1145/3546118.3546136",
+"oa_title": "Planning Orientation Change of the End-effector of State Space Constrained Redundant Robotic Manipulators",
+"auth": [
+[
+"Lyubomira Miteva",
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Ivan Chavdarov",
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "Topology optimization of an assembled 3D printed robot",
+"y": 2022,
+"doi": "10.23919/SoftCOM55329.2022.9911410",
+"oa_doi": "10.23919/softcom55329.2022.9911410",
+"oa_title": "Topology Optimization of an Assembled 3D Printed Robot",
+"auth": [
+[
+"Ivan Chavdarov",
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Bozhidar Naydenov",
+"Institute of Robotics, Bulgarian Academy of Sciences,DASSAULT SYSTEMES Bulgaria, Blvd. General I. Totleben 53&#x2013;55, Sofia,Sofia,1,1113",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Kaloyan Yovchev",
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+"Sofia University,Faculty of Mathematics and Informatics,Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+]
+},
+{
+"t": "Software and Hardware Infrastructure for Research and Development of Intelligent Control for Robotic Manipulators",
+"y": 2022,
+"doi": "10.1109/ET55967.2022.9920270",
+"oa_doi": "10.1109/et55967.2022.9920270",
+"oa_title": "Software and Hardware Infrastructure for Research and Development of Intelligent Control for Robotic Manipulators",
+"auth": [
+[
+"Lyubomira Miteva",
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Denis Chikurtev",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science,Sofia,Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+]
+},
+{
+"t": "Model Driven Development of Information Security System",
+"y": 2022,
+"doi": "10.7546/PECR.76.21.04",
+"oa_doi": "10.7546/pecr.76.21.04",
+"oa_title": "Model Driven Development of Information Security System",
+"auth": [
+[
+"Ivan Gaidarski",
+"Institute of Information and Communication Technologies at Bulgarian Academy of Sciences Acad. Georgi Bonchev Str. , bl.2 , 1113 Sofia , Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+]
+},
+{
+"t": "Transformation of UML Design Models of Information Security System into Agent-based Simulation Models",
+"y": 2022,
+"doi": "10.11610/isij.5305",
+"oa_doi": "10.11610/isij.5305",
+"oa_title": "Transformation of UML Design Models of Information Security System into Agent-based Simulation Models",
+"auth": [
+[
+"Ivan Gaidarski",
+"",
+[]
+],
+[
+"Павлин Кутинчев",
+"",
+[]
+]
+]
+},
+{
+"t": "Кратко обучение за работа с електронен подпис",
+"y": 2022,
+"doi": null
+},
+{
+"t": "Online contest “Mathematics and art” for the development of key competencies",
+"y": 2021,
+"doi": "10.53656/ped2021-1.07",
+"oa_doi": "10.53656/ped2021-1.07",
+"oa_title": "Online Contest “Mathematics and Art” for the Development of Key Competencies",
+"auth": []
+},
+{
+"t": "Technical implementation of a reporting system and its workflows",
+"y": 2019,
+"doi": null
+},
+{
+"t": "Структура и приложение на спътниковите навигационни системи",
+"y": 2013,
+"doi": null
+},
+{
+"t": "Theoretical research of possibilities for gravitation measurements in motion using the inertial navigation system",
+"y": 2004,
+"doi": "10.2514/6.IAC-04-J.P.08",
+"oa_doi": "10.2514/6.iac-04-j.p.08",
+"oa_title": "Theoretical Research of Possibilities for Gravitation Measurements in Motion using the Inertial Navigation System",
+"auth": [
+[
+"A.N. Madjarov",
+"High Military Air School ‘G.Benkovski’, Bulgaria",
+[
+"Bulgarian Air Force Academy"
+]
+],
+[
+"P.V. Panova",
+"Aerospace Control Systems, Space Research Institute- BAS, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Space Research and Technology Institute"
+]
+],
+[
+"P.S. Getsov",
+"Aerospace Control Systems, Space Research Institute- BAS, Bulgaria",
+[
+"Bulgarian Academy of Sciences",
+"Space Research and Technology Institute"
+]
+]
+]
+},
+{
+"t": "Жироскопи и инерциални навигационни системи",
+"y": 2000,
+"doi": null
+},
+{
+"t": "Алгоритми за моделиране на движенията на роботи с неявно решима позиционна задача на кинематичния анализ за помощ в здравеопазването",
+"y": 2023,
+"doi": null
+},
+{
+"t": "Мобилен колаборативен робот с висока проходимост за антитерористични операции",
+"y": 2024,
+"doi": "10.63662/5stkwe27",
+"oa_doi": "10.63662/5stkwe27",
+"oa_title": "МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ",
+"auth": [
+[
+"Нина Вълчкова",
+"",
+[]
+],
+[
+"Роман Захариев",
+"",
+[]
+],
+[
+"Георги Ангелов",
+"",
+[]
+],
+[
+"Ясен Паунски",
+"",
+[]
+],
+[
+"Искрен Върбанов",
+"",
+[]
+]
+]
+},
+{
+"t": "Sensory System for Controlling Robot’s Motion",
+"y": 2024,
+"doi": null
+},
+{
+"t": "Using disruptive technologies as Blockchains and AI in IoT cybersecurity",
+"y": 2025,
+"doi": null
+},
+{
+"t": "Small Voice Bulgarian Language Model Generation Based on Vosk-Type Methods and Algorithms",
+"y": 2026,
+"doi": null
+},
+{
+"t": "Neural Network Approaches for Speech Recognition and Synthesis based on Whisper",
+"y": 2026,
+"doi": null
+},
+{
+"t": "Data-Driven Fuzzy Systems for Urban Microclimate Prediction",
+"y": 2026,
+"doi": null
+},
+{
+"t": "Information security and dependability in integrated intelligent educational environments",
+"y": 2026,
+"doi": null
+},
+{
+"t": "Designing an information security system to prevent leakage of sensitive information",
+"y": 2025,
+"doi": null
+},
+{
+"t": "Multilayered conceptual modelling for the design, implementation and optimization of information security systems",
+"y": 2025,
+"doi": null
 }
 ]
-}
