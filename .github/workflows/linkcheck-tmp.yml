@@ -1,0 +1,12 @@
+name: Temporary check (affiliations)
+on: { push: { branches: [linkcheck-tmp] } }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+      - run: cd tools && python3 aff.py
+      - run: |
+          git config user.name github-actions; git config user.email github-actions@users.noreply.github.com
+          cp tools/aff.json aff.json; git add aff.json; git commit -m "aff [skip ci]"; git push
