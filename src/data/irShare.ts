@@ -15,6 +15,8 @@ import { parseAuthors, teamFromAuthors } from '../lib/pubSchema.js';
 
 type A = { surname: string; initials: string };
 const OTHER_IR: [RegExp, RegExp?][] = [
+  // К. Йовчев — бивш член на лабораторията, отчитан към нея в предишните отчети (2022–2025); не е в „Състав“,
+  // публикациите му от тези периоди остават на сайта (решение от 07.10.2026)
   [/^(Yovchev|Йовчев)$/i],
   [/^(Dimitrova|Димитрова)$/i, /^(M|М)\./],
   [/^(Krastev|Кръстев)$/i, /^(A|А)\./],
