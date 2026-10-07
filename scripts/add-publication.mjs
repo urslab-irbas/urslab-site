@@ -38,6 +38,7 @@ const HOW = {
   notsub: 'за непубликувана статия изберете „Подадени / под печат“ (квартилът се посочва след излизане).',
   pubsub: 'за публикувана статия изберете реалната категория (Q1–Q4, SJR, ERIH+ …).',
   needed: 'за Q1–Q4 и „SJR без квартил“ попълнете SJR и/или IF.',
+  'affil-needed': 'отворете връзката „Поправете“ и в полето „Институции на съавторите“ напишете институцията на всеки посочен съавтор — така, както е в самата публикация (напр. „ИР-БАН“, „ИМИ-БАН“). Ако не е ясно — попитайте съавтора или ръководителя.',
 };
 const done = () => {
   writeFileSync('pub-result.json', JSON.stringify(result, null, 2));
@@ -94,10 +95,10 @@ try {
 
 // --- Проверка
 const errs = validate(data, { catKeys, tagKeys, existing });
-const fieldName = { authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
+const fieldName = { affil: 'Институции на съавторите', authors: 'Автори', year: 'Година', title: 'Заглавие', status: 'Състояние', cat: 'Категория', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', isbn: 'ISBN', url: 'Линк', sjr: 'SJR', jif: 'IF', share: 'Дял ИР', tags: 'Теми' };
 const dupOf = findDuplicate(data, existing);
 const dupText = dupOf ? ` Причина: ${dupOf.by === 'doi' ? 'същото DOI' : dupOf.by === 'title+authors' ? 'същото заглавие и общ автор' : 'същото заглавие'}. Намерена: ${dupOf.item.authors ?? ''}${dupOf.item.year ? ` (${dupOf.item.year})` : ''}. „${dupOf.item.title}“${dupOf.item.where ? ` — ${SITE}/${dupOf.item.where}/` : ''}` : '';
-result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.code === 'duplicate' ? dupText : ''}`);
+result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}${e.code === 'duplicate' ? dupText : ''}`);
 result.howto = errs.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
 result.fixUrl = `${SITE}/publications/new/?m=${data.member}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
 result.title = String(data.title ?? '').slice(0, 90);
