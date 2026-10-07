@@ -87,7 +87,26 @@ const rows = [
           <small>{F.member[1]}</small>
         </label>
       </div>
-      {rows.map((row) => (
+      {rows.slice(0, 1).map((row) => (
+        <div class="frow1 c1">
+          {row.map((f) => (
+            <label class="f" data-field={f.k}>
+              <span class="l">{f.label} *</span>
+              <input name={f.k} placeholder={f.ex ? `${T('напр.', 'e.g.')} ${f.ex}` : undefined} autocomplete="off" {...f.attrs} />
+              <small>{f.help}</small>
+              <em class="err" hidden></em>
+            </label>
+          ))}
+        </div>
+      ))}
+      <fieldset class="f affil" data-field="affil" hidden>
+        <legend class="l">{T('Институции на съавторите', 'Co-authors’ institutions')} *</legend>
+        <small>{T('За всеки съавтор извън колектива, когото системата не познава, напишете институцията му така, както е посочена в самата публикация (напр. „ИР-БАН“, „ИМИ-БАН“, „Софийски университет“). Само ако в публикацията я няма — от друг източник. Съавторите от ИР-БАН се броят в „Процент автори ИР“.', 'For each co-author outside the team whom the system does not know, enter the institution exactly as stated in the publication itself (e.g. “IR-BAS”, “IMI-BAS”, “Sofia University”). Only if the publication does not state it — from another source. Co-authors from IR-BAS count towards the “Percentage of IR authors”.')}</small>
+        <div class="affil-list" data-affil></div>
+        <datalist id="inst-list"><option value="ИР-БАН" /><option value="ИИКТ-БАН" /><option value="ИМИ-БАН" /><option value="Софийски университет „Св. Климент Охридски“" /><option value="Технически университет – София" /><option value="УНСС" /><option value="УниБИТ" /></datalist>
+        <em class="err" hidden></em>
+      </fieldset>
+      {rows.slice(1).map((row) => (
         <div class={`frow1 c${row.length}`}>
           {row.map((f) => (
             <label class="f" data-field={f.k}>
@@ -166,6 +185,7 @@ const rows = [
         <ul>
           <li>{T('Задължителни: автори, година, заглавие, категория, списание (или издател за книги), поне една тема.', 'Required: authors, year, title, category, journal (or publisher for books), at least one topic.')}</li>
           <li>{T('Сред авторите трябва да има член на колектива.', 'A team member must be among the authors.')}</li>
+          <li>{T('Всеки съавтор извън колектива трябва да има известна институция. Познатите съавтори се показват с институцията си; за новите се иска да я посочите — както е в самата публикация.', 'Every co-author outside the team must have a known institution. Known co-authors are shown with their institution; for new ones you are asked to give it — as stated in the publication itself.')}</li>
           <li>{T('DOI — във вид 10.xxxx/…; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; pages as “45–67” or a number.')}</li>
           <li>{T('Без DOI записът не се приема, докато не изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и не въведете валиден номер — контролната цифра се проверява. В полето се пише само номерът, без Q, SJR и др.', 'Without a DOI the entry is not accepted until you choose an identifier type (ISSN, eISSN, ISBN or eISBN) and enter a valid number — the check digit is verified. Only the number goes in the field, no Q, SJR, etc.')}</li>
           <li>{T('В GitHub сайтът проверява в публичните регистри: DOI — в doi.org и Crossref / DataCite (заглавието трябва да съвпада); ISSN — в НАЦИД НРС и ISSN Portal; ISBN — в НАЦИД НРС, Crossref и Open Library. Ако номерът не е намерен или регистърът не отговаря, записът се отказва. Книги и сборници, които ги няма в тези регистри, въвежда ръководителят.', 'On GitHub the site checks the public registers: DOI at doi.org and Crossref / DataCite (the title must match); ISSN at NACID NRS and ISSN Portal; ISBN at NACID NRS, Crossref and Open Library. If the number is not found or a register does not respond, the entry is refused. Books and proceedings missing from these registers are entered by the head of the lab.')}</li>
@@ -214,6 +234,14 @@ const rows = [
   .chip input { width: auto; }
   .chip:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
   .req { font-size: .78rem; margin: -6px 0 0; }
+  .affil { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; }
+  .affil[hidden] { display: none; }
+  .affil-list { display: grid; gap: 8px; margin-top: 8px; }
+  .affil-list :global(.ar) { display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 10px; align-items: center; }
+  .affil-list :global(.ar b) { font: 600 .88rem var(--font); }
+  .affil-list :global(.ar.known span) { font-size: .85rem; color: var(--muted); }
+  .f.bad .affil-list :global(input:placeholder-shown) { border-color: #c0392b; }
+  @media (max-width: 760px) { .affil-list :global(.ar) { grid-template-columns: 1fr; } }
   select:disabled, input:disabled { opacity: .55; }
   .frow1.c3 { grid-template-columns: 1fr 1fr 2fr; }
   .preview { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; background: var(--surface); }
@@ -242,7 +270,7 @@ const rows = [
 </style>
 
 <script>
-  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi } from '../lib/pubSchema.js';
+  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS } from '../lib/pubSchema.js';
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
@@ -256,14 +284,39 @@ const rows = [
     e.tags = fd.getAll('tags');
     e.member = fd.get('member');
     e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
+    const af: Record<string, string> = {};
+    form.querySelectorAll<HTMLInputElement>('[data-affil] input[data-key]').forEach((i) => { if (i.value.trim()) af[i.dataset.key!] = i.value.trim(); });
+    e.affil = af;
     return e;
   };
+  // ---- Институции на съавторите: познатите от регистъра (COAUTHORS) се показват, за непознатите се иска институция
+  const affilBox = form.querySelector<HTMLElement>('[data-field="affil"]')!;
+  const affilList = affilBox.querySelector<HTMLElement>('[data-affil]')!;
+  const escA = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  function renderAffil(keep: Record<string, string> = {}) {
+    const cur: Record<string, string> = { ...keep };
+    affilList.querySelectorAll<HTMLInputElement>('input[data-key]').forEach((i) => { if (i.value.trim() && !(i.dataset.key! in keep)) cur[i.dataset.key!] = i.value.trim(); });
+    const list = parseAuthors(String((form.elements.namedItem('authors') as HTMLInputElement).value)).list.filter((a: { surname: string; initials: string }) => !teamFromAuthors([a]).length);
+    affilList.innerHTML = '';
+    for (const a of list) {
+      const k = authorKey(a), known = (COAUTHORS as Record<string, string>)[k];
+      const row = document.createElement('div');
+      row.className = known ? 'ar known' : 'ar';
+      row.innerHTML = known
+        ? `<b>${escA(k)}</b><span>${escA(known)} — ${ctx.lang === 'bg' ? 'от регистъра на системата' : 'from the system register'}</span>`
+        : `<b>${escA(k)}</b><input data-key="${escA(k)}" list="inst-list" placeholder="${ctx.lang === 'bg' ? 'институция, както е в публикацията' : 'institution as stated in the publication'}" value="${escA(cur[k] ?? '')}" />`;
+      affilList.append(row);
+    }
+    affilBox.hidden = list.length === 0;
+  }
+  form.elements.namedItem('authors')!.addEventListener('input', () => renderAffil());
   const write = (e: Record<string, unknown>) => {
     // данните от GitHub са нормализирани: issn/isbn + idType → idType + idValue
     if (!e.idValue && (e.issn || e.isbn)) { e.idValue = e.issn ?? e.isbn; e.idType ??= e.issn ? 'issn' : 'isbn'; }
     fields.forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement | null; if (el && e[k] !== undefined) el.value = String(e[k]); });
     form.querySelectorAll<HTMLInputElement>('input[name="tags"]').forEach((c) => (c.checked = ((e.tags as string[]) || []).includes(c.value)));
     const m = form.elements.namedItem('member') as HTMLSelectElement; if (e.member && ctx.members[e.member as string]) m.value = String(e.member);
+    renderAffil((e.affil as Record<string, string>) ?? {});
   };
   const b64 = { enc: (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
                 dec: (s: string) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))) };
@@ -271,9 +324,9 @@ const rows = [
   function preview() { const e = read(); root.querySelector('[data-apa]')!.textContent = e.authors || e.title ? apa(e) : '—'; }
   function show(errors: { field: string; code: string }[]) {
     form.querySelectorAll<HTMLElement>('[data-field]').forEach((f) => { f.classList.remove('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = true; em.textContent = ''; } });
-    for (const { field, code } of errors) {
+    for (const { field, code, detail } of errors as { field: string; code: string; detail?: string }[]) {
       const f = form.querySelector<HTMLElement>(`[data-field="${field}"]`); if (!f) continue;
-      f.classList.add('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = false; em.textContent = (em.textContent ? em.textContent + ' ' : '') + (M[code] ?? code); }
+      f.classList.add('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = false; em.textContent = (em.textContent ? em.textContent + ' ' : '') + (M[code] ?? code) + (detail ? ` ${detail}` : ''); }
     }
   }
 
@@ -413,7 +466,7 @@ const rows = [
     store.set(sent);
     poll(sent);
   });
-  root.querySelector('[data-clear]')!.addEventListener('click', () => { form.reset(); show([]); preview(); history.replaceState(null, '', location.pathname + location.search); });
+  root.querySelector('[data-clear]')!.addEventListener('click', () => { form.reset(); renderAffil(); show([]); preview(); history.replaceState(null, '', location.pathname + location.search); });
 
   // Предварително попълване: ?m=<член> (бутонът в „Състав“) и #d=<данни> (връзката „Поправете“ от GitHub)
   const q = new URLSearchParams(location.search);
@@ -421,6 +474,7 @@ const rows = [
   const h = location.hash.match(/^#d=([\w-]+)/);
   if (h) { try { write(JSON.parse(b64.dec(h[1]))); } catch { /* повредена връзка — празна форма */ } }
   syncStatus();
+  renderAffil();
   preview();
   // Изпратено преди малко от този браузър и още без отговор → формата остава заключена
   const pending = store.get();

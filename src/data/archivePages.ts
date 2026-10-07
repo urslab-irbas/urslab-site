@@ -34,6 +34,7 @@ const mapForm = (e: Contrib): ArchivePub => ({
   issn: typeof e.issn === 'string' ? (e.idType === 'eissn' ? `${e.issn} (online)` : e.issn) : undefined,
   url: typeof e.url === 'string' && /^https?:\/\/[^\s"'<>]+$/i.test(e.url) ? e.url : undefined, // само http(s) — защита при ръчна редакция в клона data
   abstract: typeof e.abstract === 'string' ? e.abstract : undefined,
+  affil: e.affil && typeof e.affil === 'object' ? (e.affil as Record<string, string>) : undefined,
   st: e.cat === 'sub' ? (e.status === 'in-press' ? 'in-press' : 'submitted') : undefined,
   note: e.nrsId ? `НАЦИД НРС, ID ${e.nrsId}` : undefined,
   sjr: e.sjr, jif: e.jif, share: e.share, tags: e.tags, team: teamFromAuthors(parseAuthors(e.authors).list),
