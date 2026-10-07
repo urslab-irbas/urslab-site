@@ -1,25 +1,20 @@
 // „Дял ИР“ — процент автори от Института по роботика (ИР-БАН) в авторския колектив, както в отчета на БАН
 // („Процент автори от звеното“): брой автори от ИР ÷ общ брой автори × 100.
 // Когато в записа има процент от отчета на БАН (share), той е водещ; иначе процентът се изчислява тук при build
-// (shareCalc: true). Подадените / под печат (cat 'sub') нямат показатели. Ако сред авторите няма известен автор от ИР,
-// дял не се изчислява.
+// (shareCalc: true). Подадените / под печат (cat 'sub') нямат показатели.
 //
-// Автори от ИР (по отчетите на БАН и по институцията в публикациите; решения от 07.10.2026):
-//   колективът на лабораторията — винаги, вкл. статиите на И. Гайдарски от 2022 г. и публикациите преди 2022 г.;
-//   колеги от други звена на ИР — М. Димитрова, А. Кръстев, Т. Танев, С. Костова, И. Чавдаров, К. Йовчев,
-//   Б. Найденов, Н. Вълчкова, Р. Захариев, В. Цветков, Г. Ангелов.
-//   П. Кутинчев не се брои (ИИКТ-БАН). Неизвестни съавтори не се броят като автори от ИР.
+// Автори от ИР:
+//   • ПРАВИЛО (07.10.2026): нов потребител влиза в системата като служител на ИР — всичките му публикации, вкл.
+//     издадените при друг работодател, се броят за публикации на ИР. Важи за всички членове на колектива (TEAM в
+//     src/lib/pubSchema.js — при нов член на колектива добавете го там и той се брои автоматично).
+//   • колеги от други звена на ИР (по отчетите на БАН и институцията в публикациите): OTHER_IR по-долу.
+//   • не са от ИР: П. Кутинчев (ИИКТ-БАН); В. Иванова, А. Бонева, С. Иванов, Й. Дошев; всички неизброени съавтори.
+// Публикация без автор от ИР има дял 0 %.
 import type { ArchivePub } from './archive2022';
-import { parseAuthors } from '../lib/pubSchema.js';
+import { parseAuthors, teamFromAuthors } from '../lib/pubSchema.js';
 
 type A = { surname: string; initials: string };
-const IR: [RegExp, RegExp?][] = [
-  [/^(Madzharov|Madjarov|Маджаров)$/i],
-  [/^(Hristozov|Христозов)$/i],
-  [/^(Gaidarski|Gaydarski|Гайдарски)$/i],
-  [/^(Chehlarova|Чехларова)$/i, /^(N|Н)\./],
-  [/^(Alexandrov|Aleksandrov|Александров)$/i, /^(A|А)\./],
-  [/^(Georgiev|Георгиев)$/i, /^(R|Р)\./],
+const OTHER_IR: [RegExp, RegExp?][] = [
   [/^(Yovchev|Йовчев)$/i],
   [/^(Dimitrova|Димитрова)$/i, /^(M|М)\./],
   [/^(Krastev|Кръстев)$/i, /^(A|А)\./],
@@ -32,7 +27,7 @@ const IR: [RegExp, RegExp?][] = [
   [/^(Tzvetkov|Tsvetkov|Цветков)$/i, /^(V|В)\./],
   [/^(Angelov|Ангелов)$/i, /^(G|Г)\./],
 ];
-const isIR = (a: A) => IR.some(([s, i]) => s.test(a.surname.trim()) && (!i || i.test(a.initials.trim())));
+const isIR = (a: A) => teamFromAuthors([a]).length > 0 || OTHER_IR.some(([s, i]) => s.test(a.surname.trim()) && (!i || i.test(a.initials.trim())));
 
 /** Автори като {фамилия, инициали}: „Фамилия, И., …“ (APA) или „И. Фамилия, …“ */
 export const splitAuthors = (raw: string): A[] => {
@@ -48,7 +43,7 @@ export const splitAuthors = (raw: string): A[] => {
 export const irShare = (authors: string): number | undefined => {
   const list = splitAuthors(authors);
   const n = list.filter(isIR).length;
-  if (!list.length || !n) return undefined;
+  if (!list.length) return undefined;
   return Math.round((n / list.length) * 10000) / 100;
 };
 

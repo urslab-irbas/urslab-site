@@ -6,7 +6,7 @@
 // Членове на колектива: ключ, фамилия (латиница и кирилица) и, ако фамилията се среща
 // и при други хора, задължителен първи инициал.
 export const TEAM = [
-  { id: 'madzharov', names: ['Madzharov', 'Маджаров'] },
+  { id: 'madzharov', names: ['Madzharov', 'Madjarov', 'Маджаров'] },
   { id: 'aleksandrov', names: ['Alexandrov', 'Aleksandrov', 'Александров'] },
   { id: 'chehlarova', names: ['Chehlarova', 'Чехларова'], initial: ['N', 'Н'] },
   { id: 'gaidarski', names: ['Gaidarski', 'Гайдарски'] },
