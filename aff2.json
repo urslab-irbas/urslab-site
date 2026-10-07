@@ -1,0 +1,915 @@
+[
+{
+"t": "Assessment of teachers’ preparedness in cybersecurity",
+"auth": [
+[
+"Radoslav Yoshinov",
+[
+"Laboratory of telematics at Institute of mathematics and informatics -Bulgarian Academy of Sciences ,"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+],
+[
+"Neda Chehlarova",
+[
+"Institute of robotics \"St. Ap. and"
+],
+[
+"Institute of Robotics"
+]
+],
+[
+"Galina Dishkova",
+[
+"Gospeller Matthew\" - Bulgarian Academy of Sciences ,",
+"Institute of mathematics and informatics -Bulgarian Academy of Sciences"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics"
+]
+]
+],
+"crossref": [
+[
+"Radoslav Yoshinov",
+[]
+],
+[
+"Neda Chehlarova",
+[]
+],
+[
+"Galina Dishkova",
+[]
+]
+]
+},
+{
+"t": "Assessment of Parents’ Awareness in the Field of Cybersecurity",
+"auth": [
+[
+"Radoslav Yoshinov",
+[],
+[]
+],
+[
+"Galina Dishkova",
+[],
+[]
+],
+[
+"Neda Chehlarova",
+[],
+[]
+]
+],
+"crossref": [
+[
+"Radoslav Yoshinov",
+[]
+],
+[
+"Galina Dishkova",
+[]
+],
+[
+"Neda Chehlarova",
+[]
+]
+]
+},
+{
+"t": "Recognition and prevention of cyberbullying by students in secondary education"
+},
+{
+"t": "Robot Modeling and Control in Digital Twin System",
+"auth": [
+[
+"Denis Chikurtev",
+[
+"Center for Competence in Mechatronics and Clean Technologies–MIRACle, 1113 Sofia, Bulgaria",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+],
+[
+"Vladimir Ivanov",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+],
+[
+"Simeon Tsvetanov",
+[
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Denis Chikurtev",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria",
+"Center for Competence in Mechatronics and Clean Technologies–MIRACle, 1113 Sofia, Bulgaria"
+]
+],
+[
+"Vladimir Ivanov",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+]
+],
+[
+"Simeon Tsvetanov",
+[
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University “St. Kliment Ohridski”, 1164 Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, 1113 Sofia, Bulgaria"
+]
+]
+]
+},
+{
+"t": "Design and architecture of perimeter defence intrusion detection systems based on UGV",
+"auth": [
+[
+"Alexander Alexandrov",
+[
+"Institute of Robotics-Bulgarian Academy of Sciences , Acad. G. Bonchev , Str , Bl.2 , Sofia , 1113 , Bulgaria,"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Simeon Angelov",
+[
+"Institute of Robotics-Bulgarian Academy of Sciences , Acad. G. Bonchev , Str , Bl.2 , Sofia , 1113 , Bulgaria,"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+],
+"crossref": [
+[
+"Alexander Alexandrov",
+[]
+],
+[
+"Simeon Angelov",
+[]
+]
+]
+},
+{
+"t": "Psychophysics of user acceptance of social cyber-physical systems",
+"auth": [
+[
+"Maya Dimitrova",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Aleksandar Krastev",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Ivan Chavdarov",
+[
+"Department of Mathematics and Informatics, Sofia University, Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Maya Dimitrova",
+[]
+],
+[
+"Neda Chehlarova",
+[]
+],
+[
+"Anastas Madzharov",
+[]
+],
+[
+"Aleksandar Krastev",
+[]
+],
+[
+"Ivan Chavdarov",
+[]
+]
+]
+},
+{
+"t": "Implying cybersecurity skills for public administration employees",
+"auth": [
+[
+"Radoslav Yoshinov",
+[
+"Laboratory of telematics, Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Monka Kotseva",
+[
+"Laboratory of telematics, Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+[
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+[
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+],
+"crossref": [
+[
+"Radoslav Yoshinov",
+[]
+],
+[
+"Monka Kotseva",
+[]
+],
+[
+"Anastas Madzharov",
+[]
+],
+[
+"Neda Chehlarova",
+[]
+]
+]
+},
+{
+"t": "Skills and attitudes towards using AI based chatbots",
+"auth": [
+[
+"Radoslav Yoshinov",
+[
+"Laboratory of Telematics, Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of Telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Monka Kotseva",
+[
+"Laboratory of Telematics, Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of Telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Anastas Madzharov",
+[
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of Telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Neda Chehlarova",
+[
+"Institute of Robotics \"St. Ap. and Gospeller Matthew\", Bulgarian Academy of Sciences",
+"Gospeller Matthew\" Bulgarian Academy of Sciences Sofia, Bulgaria",
+"Institute of Robotics \"St. Ap. and",
+"Laboratory of Telematics Bulgarian Academy of Sciences Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+]
+],
+"crossref": [
+[
+"Radoslav Yoshinov",
+[]
+],
+[
+"Monka Kotseva",
+[]
+],
+[
+"Anastas Madzharov",
+[]
+],
+[
+"Neda Chehlarova",
+[]
+]
+]
+},
+{
+"t": "Algorithm for Assigning a Robot to Capture an Object From a Production Pipeline",
+"auth": [
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Sofia, Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Denis Chikurtev",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+],
+"crossref": [
+[
+"Kaloyan Yovchev",
+[]
+],
+[
+"Lyubomira Miteva",
+[]
+],
+[
+"Denis Chikurtev",
+[]
+]
+]
+},
+{
+"t": "Approaches for Object Detection and Depth Estimation in Digital Images",
+"auth": [
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria"
+]
+]
+]
+},
+{
+"t": "3D Printed DELTA Robot for Educational Purposes",
+"auth": [
+[
+"Ivan Chavdarov",
+[
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Bozhidar Naydenov",
+[
+"Institute of Robotics Bulgarian Academy of Sciences,Sofia,Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Vladislav Hrosinkov",
+[
+"Sofia University,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Ivan Chavdarov",
+[
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Sofia University, Institute of Robotics Bulgarian Academy of Sciences,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+]
+],
+[
+"Bozhidar Naydenov",
+[
+"Institute of Robotics Bulgarian Academy of Sciences,Sofia,Bulgaria"
+]
+],
+[
+"Vladislav Hrosinkov",
+[
+"Sofia University,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+]
+]
+]
+},
+{
+"t": "A strategy for controlling motions related to sensory information in a walking robot Big Foot",
+"auth": [
+[
+"Ivan Chavdarov",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, Acad. G. Bonchev St, Bl. 1, 1113 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia \"St. Kliment Ohridski\", 1504 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, Acad. G. Bonchev St, Bl. 1, 1113 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia \"St. Kliment Ohridski\", 1504 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia \"St. Kliment Ohridski\", 1504 Sofia, Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Aleksander Aleksiev Stefanov",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute of Mathematics, Bulgarian Academy of Sciences, Acad. G. Bonchev Str., Bl. 8, 1113 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia \"St. Kliment Ohridski\", 1504 Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Mathematics and Informatics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Dimitar Nedanovski",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute for Nuclear Research and Nuclear Energy, 72 Tsarigradsko Shosse Blvd., 1784 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia \"St. Kliment Ohridski\", 1504 Sofia, Bulgaria"
+],
+[
+"Institute for Nuclear Research and Nuclear Energy",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Ivan Chavdarov",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Acad. G. Bonchev St, Bl. 1, 1113 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences, Acad. G. Bonchev St, Bl. 1, 1113 Sofia, Bulgaria",
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria"
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria"
+]
+],
+[
+"Aleksander Stefanov",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute of Mathematics, Bulgarian Academy of Sciences, Acad. G. Bonchev Str., Bl. 8, 1113 Sofia, Bulgaria"
+]
+],
+[
+"Dimitar Nedanovski",
+[
+"Faculty of Mathematics and Informatics, University of Sofia “St. Kliment Ohridski”, 1504 Sofia, Bulgaria",
+"Institute for Nuclear Research and Nuclear Energy, 72 Tsarigradsko Shosse Blvd., 1784 Sofia, Bulgaria"
+]
+]
+]
+},
+{
+"t": "Real-time Trajectory Replanning for Dynamic Obstacles Avoidance for Robotics Manipulators",
+"auth": [
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and Institute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria"
+]
+]
+]
+},
+{
+"t": "Planning Orientation Change of the End-effector of State Space Constrained Redundant Robotic Manipulators",
+"auth": [
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Ivan Chavdarov",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Lyubomira Miteva",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+]
+],
+[
+"Ivan Chavdarov",
+[
+"Faculty of Mathematics and Informatics, Sofia University 'St. Kliment Ohridski', Bulgaria and \rInstitute of Robotics, Bulgarian Academy of Sciences, Bulgaria"
+]
+]
+]
+},
+{
+"t": "Topology optimization of an assembled 3D printed robot",
+"auth": [
+[
+"Ivan Chavdarov",
+[
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Bozhidar Naydenov",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences,DASSAULT SYSTEMES Bulgaria, Blvd. General I. Totleben 53&#x2013;55, Sofia,Sofia,1,1113"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Sofia University,Faculty of Mathematics and Informatics,Bulgaria",
+"Faculty of Mathematics and Informatics, Sofia University, Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+]
+],
+"crossref": [
+[
+"Ivan Chavdarov",
+[
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113"
+]
+],
+[
+"Bozhidar Naydenov",
+[
+"Institute of Robotics, Bulgarian Academy of Sciences,DASSAULT SYSTEMES Bulgaria, Blvd. General I. Totleben 53&#x2013;55, Sofia,Sofia,1,1113"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"University of Sofia &#x201C;St. Kliment Ohridski &#x201D;, Institute of Robotics,Faculty of Mathematics and Informatics, Bulgarian Academy of Sciences,Sofia,Bulgaria,1113"
+]
+],
+[
+"Lyubomira Miteva",
+[
+"Sofia University,Faculty of Mathematics and Informatics,Bulgaria"
+]
+]
+]
+},
+{
+"t": "Software and Hardware Infrastructure for Research and Development of Intelligent Control for Robotic Manipulators",
+"auth": [
+[
+"Lyubomira Miteva",
+[
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+],
+[
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria",
+"Institute of Robotics, Bulgarian Academy of Sciences, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Robotics",
+"Sofia University \"St. Kliment Ohridski\""
+]
+],
+[
+"Denis Chikurtev",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science,Sofia,Bulgaria",
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science, Sofia, Bulgaria"
+],
+[
+"Bulgarian Academy of Sciences",
+"Institute of Information and Communication Technologies"
+]
+]
+],
+"crossref": [
+[
+"Lyubomira Miteva",
+[
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+]
+],
+[
+"Kaloyan Yovchev",
+[
+"Sofia University &#x201C;St. Kliment Ohridski&#x201D;,Faculty of Mathematics and Informatics,Sofia,Bulgaria"
+]
+],
+[
+"Denis Chikurtev",
+[
+"Institute of Information and Communication Technologies, Bulgarian Academy of Science,Sofia,Bulgaria"
+]
+]
+]
+}
+]
