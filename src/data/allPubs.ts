@@ -6,9 +6,10 @@ import type { ArchivePub } from './archive2022';
 import { archivePages, formSubmitted, fromPublication } from './archivePages';
 import { publications, type Publication } from './publications';
 import { NSPDS_FUND, nspsdRefFor } from './nspsdRefs';
+import { withShare } from './irShare';
 
 const currentMain = publications.filter((p) => p.status !== 'published');
-export const currentPubs: ArchivePub[] = [...currentMain.map(fromPublication), ...formSubmitted];
+export const currentPubs: ArchivePub[] = [...currentMain.map(fromPublication), ...formSubmitted].map(withShare);
 export const archivedPubs: ArchivePub[] = archivePages.flatMap((p) => p.items).sort((a, b) => b.year - a.year);
 export const allPubs: ArchivePub[] = [...currentPubs, ...archivedPubs];
 

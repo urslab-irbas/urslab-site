@@ -9,6 +9,7 @@ import contrib from './contrib.json';
 import { publications } from './publications';
 import { nrsFor } from './nrs';
 import { parseAuthors, teamFromAuthors, composeVenue } from '../lib/pubSchema.js';
+import { withShare } from './irShare';
 
 type L = { bg: string; en: string };
 export interface ArchivePage { key: string; slug: string; title: L; source?: L; items: ArchivePub[] }
@@ -78,7 +79,7 @@ export const withNrs = (p: ArchivePub): ArchivePub => {
   return { ...p, cat: p.cat === 'other' ? 'nat' : p.cat, issn: p.issn ?? n.issn,
     note: p.note?.includes('НАЦИД') ? p.note : p.note ? `${tag}; в отчета на БАН: ${p.note}` : tag };
 };
-for (const pg of fixed) pg.items = pg.items.map(withNrs);
+for (const pg of fixed) pg.items = pg.items.map(withNrs).map(withShare);
 
 // Ред под „Архив“: най-новата година първа, „до 2021 г.“ последна
 const order = (k: string) => (k === 'earlier' ? 0 : Number(k.slice(0, 4)) + (k.length > 4 ? 0 : 0.5));

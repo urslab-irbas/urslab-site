@@ -134,7 +134,7 @@ const L = {
         <div><b data-s="sjr"></b><span>{L.sjr}</span></div>
         <div><b data-s="jif"></b><span>{L.jif}</span></div>
         <div><b data-s="doi"></b><span>{L.doi}</span></div>
-        {hasShare && <div><b data-s="share"></b><span>{T('Σ дял ИР', 'Σ IR share')}</span></div>}
+        {hasShare && <div title={T('Сбор от дела на авторите от ИР (по отчета на БАН; където го няма — изчислен: автори от ИР ÷ всички автори); дробно броене — равностойни публикации изцяло на автори от ИР', 'Sum of the IR authors’ shares (from the BAS report; where missing — computed: IR authors ÷ all authors); fractional counting — equivalent publications entirely by IR authors')}><b data-s="share"></b><span>{T('Σ дял ИР', 'Σ IR share')} <abbr class="hint" aria-hidden="true">ⓘ</abbr></span></div>}
       </div>
       <div class="breakdown">
         <div><h3>{T('По вид / квартил', 'By type / quartile')}</h3><table data-t="cat"></table></div>
@@ -163,7 +163,7 @@ const L = {
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
                   {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
                   {p.ix && <span class="m">WoS/Scopus</span>}
-                  {p.share !== undefined && <span class="m">{T('дял ИР', 'IR share')} {p.share}%</span>}
+                  {p.share !== undefined && <span class="m" title={p.shareCalc ? T('Изчислен: автори от ИР ÷ всички автори', 'Computed: IR authors ÷ all authors') : T('По отчета на БАН („Процент автори от звеното“)', 'From the BAS report (“percentage of authors from the unit”)')}>{T('дял ИР', 'IR share')} {p.share}%{p.shareCalc && '*'}</span>}
                   {p.note && <span class="m">({p.note})</span>}
                   {p.fund && <span class="fund">{p.fundVia === 'conf' ? T('Участие в конференцията, финансирано по', 'Conference participation funded by') : p.fundVia === 'report' ? T('Отчетено по', 'Reported under') : T('Финансиране', 'Funding')}: {p.fund}</span>}
                   {p.task && <span class="m">{T('Задача', 'Task')} {p.task}</span>}
