@@ -6,13 +6,51 @@
 // Членове на колектива: ключ, фамилия (латиница и кирилица) и, ако фамилията се среща
 // и при други хора, задължителен първи инициал.
 export const TEAM = [
-  { id: 'madzharov', names: ['Madzharov', 'Маджаров'] },
+  { id: 'madzharov', names: ['Madzharov', 'Madjarov', 'Маджаров'] },
   { id: 'aleksandrov', names: ['Alexandrov', 'Aleksandrov', 'Александров'] },
   { id: 'chehlarova', names: ['Chehlarova', 'Чехларова'], initial: ['N', 'Н'] },
   { id: 'gaidarski', names: ['Gaidarski', 'Гайдарски'] },
   { id: 'hristozov', names: ['Hristozov', 'Христозов'] },
   { id: 'georgiev', names: ['Georgiev', 'Георгиев'], initial: ['R', 'Р'] },
 ];
+
+// ---- Съавтори извън колектива: „Фамилия, И.“ → институция
+// ПРАВИЛО (07.10.2026): при всяко въвеждане в системата съавторите се проверяват. Институцията се взема първо от самата
+// публикация (както авторът я е посочил), едва след това от други източници (отчет на БАН, OpenAlex/Crossref).
+// Ако съавторът го няма тук, формата иска институцията му (поле affil), а build-ът спира при ръчно въведен запис.
+// „ИР-БАН“ в института → авторът се брои като автор от ИР („Процент автори ИР“, src/data/irShare.ts); вкл. докторантите на ИР.
+// Проверено на 07.10.2026 по институциите в самите публикации (OpenAlex/Crossref) за всички 107 публикации в системата.
+// Членовете на колектива (TEAM) са винаги от ИР — за всички свои публикации, вкл. при предишен работодател.
+const IR = 'ИР-БАН';
+const NOT_IR = 'извън ИР (по отчета на БАН)';
+const IMI = 'ИМИ-БАН', IICT = 'ИИКТ-БАН', SU = 'Софийски университет „Св. Климент Охридски“';
+export const COAUTHORS = {
+  // ИР-БАН (други звена; К. Йовчев — бивш член на лабораторията, отчитан към нея 2022–2025)
+  'Yovchev, K.': IR, 'Chavdarov, I.': IR, 'Naydenov, B.': IR, 'Dimitrova, M.': IR, 'Krastev, A.': IR, 'Tanev, T.': IR,
+  'Kostova, S.': IR, 'Valchkova, N.': IR, 'Вълчкова, Н.': IR, 'Zahariev, R.': IR, 'Захариев, Р.': IR, 'Tzvetkov, V.': IR,
+  'Tsvetkov, V.': IR, 'Angelov, G.': IR, 'Paunski, Y.': IR, 'Varbanov, I.': IR, 'Raykov, P.': IR, 'Райков, П.': IR,
+  // други институции
+  'Kutinchev, P.': IICT, 'Кутинчев, П.': IICT, 'Chikurtev, D.': IICT, 'Djambazova, E.': IICT, 'Terzieva, V.': IICT, 'Ilchev, S.': IICT,
+  'Bogdanova, G.': IMI, 'Noev, N.': IMI, 'Sabev, N.': IMI, 'Gecheva, N.': IMI, 'Chehlarova, T.': IMI, 'Чехларова, Т.': IMI,
+  'Todorov, T.': 'ВТУ „Св. св. Кирил и Методий“', 'Todorova-Ekmekci, M.': 'ИЕФЕМ-БАН', 'Tomov, Zh.': 'Университет „Проф. д-р Асен Златаров“, Бургас',
+  'Chehlarova, K.': 'УниБИТ', 'Чехларова, К.': 'УниБИТ', 'Yoshinov, R.': 'Лаборатория по телематика – БАН', 'Kotseva, M.': 'Лаборатория по телематика – БАН',
+  'Miteva, L.': SU, 'Hrosinkov, V.': SU, 'Stefanov, A.': SU, 'Nedanovski, D.': SU, 'Stanev, H.': 'УНСС',
+  'Angelov, S.': 'ИР-БАН (задочен докторант)', 'Apter, N.': NOT_IR, 'del Estad Herrero, A.': NOT_IR, 'Gachev, G.': NOT_IR, 'Dishkova, G.': IMI,
+  'Ivanov, V.': NOT_IR, 'Tsvetanov, S.': NOT_IR, 'Petkov, I.': NOT_IR,
+  'González-deSantos, L.': NOT_IR, 'Bruzual, J.': NOT_IR, 'Socías, D.': NOT_IR, 'Lacarra Arcos, E.': NOT_IR, 'Santos, M.': NOT_IR,
+  'González, R.': NOT_IR, 'Gil, E.': NOT_IR, 'Moreno López, G.': NOT_IR, 'Karas, J.': NOT_IR, 'Vyshnevskyy, M.': NOT_IR,
+  'Gebhardt, J.': NOT_IR, 'Haro, P.': NOT_IR, 'Bellingham, S.': NOT_IR,
+  'Getsov, P.': 'извън ИР (потвърдено от ръководителя)', 'Panova, P.': 'извън ИР (потвърдено от ръководителя)',
+};
+const IR_INST = /ИР[\s-]*БАН|IR[\s-]*BAS|Институт по роботика|Institute of Robotics/i;
+/** Ключ на автор: „Фамилия, И.“ (първият инициал) */
+export const authorKey = (a) => `${String(a.surname).trim()}, ${String(a.initials).trim().split(/\s+/)[0]}`;
+/** Институцията на съавтор: посочената при въвеждането (affil) или от регистъра; undefined — неизвестна */
+export const affiliationOf = (a, affil = {}) => (String(affil?.[authorKey(a)] ?? '').trim() || COAUTHORS[authorKey(a)]);
+/** Съавторите извън колектива без известна институция */
+export const unknownCoauthors = (list, affil = {}) => list.filter((a) => !teamFromAuthors([a]).length && !affiliationOf(a, affil)).map(authorKey);
+/** Автор от ИР: член на колектива или съавтор с институция ИР-БАН */
+export const isIRAuthor = (a, affil = {}) => teamFromAuthors([a]).length > 0 || IR_INST.test(affiliationOf(a, affil) ?? '');
 
 // Категории, при които SJR или IF е задължителен
 const NEEDS_METRIC = ['q1', 'q2', 'q3', 'q4', 'sjr'];
@@ -156,6 +194,7 @@ export function validate(e, ctx) {
   const a = parseAuthors(e.authors);
   if (a.errors.length) a.errors.forEach((c) => add('authors', c.split(':')[0]));
   else if (!teamFromAuthors(a.list).length) add('authors', 'no-team');
+  else { const unk = unknownCoauthors(a.list, e.affil); if (unk.length) err.push({ field: 'affil', code: 'affil-needed', detail: unk.join('; ') }); }
 
   const y = Number(e.year);
   if (String(e.year ?? '').trim() === '') add('year', 'required');
@@ -219,6 +258,10 @@ export function normalize(e) {
   if (doi) out.doi = doi;
   for (const k of ['sjr', 'jif', 'share']) { const v = num(e[k]); if (v !== undefined) out[k] = v; }
   out.tags = [...new Set(e.tags)];
+  // институции на съавторите, посочени при въвеждането (само за авторите на записа, без членовете на колектива)
+  const af = {};
+  for (const a of parseAuthors(out.authors).list) { const k = authorKey(a), v = String(e.affil?.[k] ?? '').trim(); if (v && !teamFromAuthors([a]).length) af[k] = v; }
+  if (Object.keys(af).length) out.affil = af;
   return out;
 }
 
@@ -247,6 +290,7 @@ export const MESSAGES = {
     doititle: 'Този DOI е на друга публикация. Заглавие по DOI:',
     idmismatch: 'Номерът е в регистъра, но на издание с друго име (или регистърът не дава име за сравнение). Проверете номера и полето „Списание / сборник“. В регистъра:',
     unavailable: 'Регистърът не отговаря и записът не може да се провери. Опитайте отново по-късно (връзката „Поправете“ пази данните).',
+    'affil-needed': 'Посочете институцията на тези съавтори — така, както е в публикацията:',
   },
   en: {
     empty: 'Enter the authors.',
@@ -271,5 +315,6 @@ export const MESSAGES = {
     doititle: 'This DOI belongs to another publication. Title by DOI:',
     idmismatch: 'The number is in the register, but for a venue with a different name (or the register gives no name to compare). Check the number and the “Journal / proceedings” field. In the register:',
     unavailable: 'The register does not respond and the entry cannot be checked. Try again later (the “Fix” link keeps the data).',
+    'affil-needed': 'Give the institution of these co-authors — as stated in the publication:',
   },
 };

@@ -1,4 +1,4 @@
-name: Temporary check (affiliations)
+name: Temporary check (zahariev)
 on: { push: { branches: [linkcheck-tmp] } }
 jobs:
   check:
@@ -6,7 +6,9 @@ jobs:
     permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
-      - run: cd tools && python3 aff.py
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: cd tools && node zah.mjs
       - run: |
           git config user.name github-actions; git config user.email github-actions@users.noreply.github.com
-          cp tools/aff2.json aff2.json; git add aff2.json; git commit -m "aff2 [skip ci]"; git push
+          cp tools/zah.json zah.json; git add zah.json; git commit -m "zah [skip ci]"; git push
