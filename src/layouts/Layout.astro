@@ -63,6 +63,42 @@ const year = new Date().getFullYear();
     </div>
     <div class="wrap copy">© {year} {site.institute[lang]}. {t.rights[lang]}</div>
   </footer>
+  <!-- Подсказки (data-tip): показват се веднага при посочване с мишката, при фокус от клавиатурата и при докосване
+       (на телефон/таблет), еднакво във всеки браузър — вместо вградената подсказка на браузъра (title), която
+       се появява със закъснение, не се показва след щракване или в неактивен прозорец и липсва при докосване. -->
+  <div id="tip" class="tipbox" role="tooltip" hidden></div>
+  <script is:inline>
+    (() => {
+      const box = document.getElementById('tip');
+      let cur = null;
+      const place = (el) => {
+        const r = el.getBoundingClientRect(), m = 8;
+        box.style.left = '0px'; box.style.top = '0px';
+        const b = box.getBoundingClientRect();
+        let x = r.left + r.width / 2 - b.width / 2;
+        x = Math.max(m, Math.min(x, window.innerWidth - b.width - m));
+        let y = r.bottom + m;
+        if (y + b.height > window.innerHeight - m) y = Math.max(m, r.top - b.height - m);
+        box.style.left = `${Math.round(x)}px`; box.style.top = `${Math.round(y)}px`;
+      };
+      const show = (el) => {
+        cur = el; box.textContent = el.dataset.tip || ''; box.hidden = false;
+        el.setAttribute('aria-describedby', 'tip'); place(el);
+      };
+      const hide = () => { if (cur) cur.removeAttribute('aria-describedby'); cur = null; box.hidden = true; };
+      const tipOf = (t) => t instanceof Element ? t.closest('[data-tip]') : null;
+      document.addEventListener('pointerover', (e) => { if (e.pointerType !== 'mouse') return; const el = tipOf(e.target); if (el && el !== cur) show(el); });
+      document.addEventListener('pointerout', (e) => { if (e.pointerType !== 'mouse' || !cur) return; if (!cur.contains(e.relatedTarget)) hide(); });
+      document.addEventListener('focusin', (e) => { const el = tipOf(e.target); if (el) show(el); });
+      document.addEventListener('focusout', (e) => { if (cur && !cur.contains(e.relatedTarget)) hide(); });
+      let wasOpen = false; // беше ли подсказката отворена преди докосването (второ докосване я затваря)
+      document.addEventListener('pointerdown', (e) => { const el = tipOf(e.target); wasOpen = !!el && el === cur; });
+      document.addEventListener('click', (e) => { const el = tipOf(e.target); if (el) { if (wasOpen && e.pointerType !== 'mouse') hide(); else show(el); } else hide(); wasOpen = false; });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+      window.addEventListener('scroll', () => { if (cur) place(cur); }, { passive: true });
+      window.addEventListener('resize', () => { if (cur) place(cur); });
+    })();
+  </script>
   <!-- Защита на снимките: без десен бутон / влачене / „Запази изображението“; голямата снимка се показва
        в прозорец на страницата като фон (не като файл, който се отваря и сваля). Сървърът (.htaccess) връща
        403 за /images/…, ако адресът се отвори директно, а не от страница на сайта. -->
