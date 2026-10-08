@@ -1,69 +1,81 @@
 {
- "epstem": {
-  "status": 200,
-  "url": "https://www.epstem.net/index.php/epstem/article/view/1461",
-  "len": 3111,
-  "head": " Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview | The Eurasia Proceedings of Science, Technology, Engineering and Mathematics Skip to main content Skip to main navigation menu Skip to site footer Open Menu Current Archives Search Announcements Template About About the Journal Submissions Editorial Board Peer Review Process Indexes Archiving Privacy Statement Aim and Scope Writing Rules Publication Ethics and Malpractice Statement Publication Policy and Ethical Principles Generative AI Policies Plagiarism Policy Conflict of Interest Publication Process Contact Ownership and Management Copyright Notice and Transfer Open Access Policy Price Policy Advertising Repository Policy Revenue Sources Publication Frequency Publisher Search Register Login Home / Archives / Vol. 40 (2026) / Articles Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview Authors Nina Valchkova Bulgarian Academy of Sciences image/svg+xml Author Roman Zahariev Bulgarian Academy of Sciences image/svg+xml Author Vasil Tsvetkov Bulgarian Academy of Sciences image/svg+xml Author Yasen Paunski Bulgarian Academy of Sciences image/svg+xml Author Georgi Angelov Bulgarian Academy of Sciences image/svg+xml Author DOI: https://doi.org/10.55549/epstem.1461 Keywords: Service robot, Cobot, Hydrogen-powered robot Abstract The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel cell, ",
-  "ack": [],
-  "pdf": "https://www.epstem.net/index.php/epstem/citationstylelanguage/download/ris?submissionId=1461&amp;publicationId=1461&amp;issueId=40"
- },
- "epstem_pdf": {
-  "status": 404,
-  "len": 15,
-  "head": " 404 Not Found ",
-  "ack": []
- },
- "lnns": {
-  "status": 200,
-  "url": "https://link.springer.com/10.1007/978-3-032-26214-1_12",
-  "len": 305,
-  "head": " Client Challenge JavaScript is disabled in your browser. Please enable JavaScript to proceed. A required part of this site couldn’t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable any ad blockers, or try using a different browser. ",
-  "ack": []
- },
- "morski_view": {
-  "status": 200,
-  "url": "https://journal.nvna.eu/index.php/msfj/article/view/194",
-  "len": 4599,
-  "head": " МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ | Морски научен форум Преминаване към основното съдържание Преминаване към главното меню за навигация Преминаване към долния колонтитул на сайта Open Menu Морски научен форум Текущ Архиви За изданието За списанието Редакционен екип Декларация за поверителност Контакт Изпращане на материали Търсене Регистрация Вход Начална / Архиви / Т. 10 Бр. 1 (2024): НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ / Articles МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ Автори Нина Вълчкова Автор Роман Захариев Автор Георги Ангелов Автор Ясен Паунски Автор Искрен Върбанов Автор DOI : https://doi.org/10.63662/5stkwe27 Ключови думи : Сервизни роботи, Мобилни роботи, Управление на роботи Абстракт В работата е представен Мобилен колаборативен робот – Roby 1 с повишена проходимост, предназначен за охрана и поддържане на сигурността в работната зона. Показани са някои аспекти на интелигентния процес на вземане на решения като част от управлението на основата на информация от комплексна сензорна система. На базата на специфичния ходов механизъм на реализирания робот, представляващ верижни тракове с триъгълна форма, се постига висока проходимост с възможност за преодоляване на препятствия и преминаване на стълби. Възможно е изваждане на опасни предмети или багаж на безопасно място с последващо обезвреждане. С използването на специална термокамера също та",
+ "links": [
+  "https://doi.org/10.55549/epstem.1461",
+  "https://www.epstem.net/index.php/epstem/article/view/1461/1415",
+  "https://doi.org/10.55549/epstem.1461",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/acm-sig-proceedings?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/acm-sig-proceedings?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/acs-nano?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/acs-nano?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/ama?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/ama?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/apa?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/apa?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/chicago-author-date?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/chicago-author-date?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/harvard-cite-them-right?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/harvard-cite-them-right?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/ieee?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/ieee?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/modern-language-association?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/modern-language-association?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/vancouver?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/get/vancouver?submissionId=1461&publicationId=1461&issueId=40&return=json",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/download/ris?submissionId=1461&publicationId=1461&issueId=40",
+  "https://www.epstem.net/index.php/epstem/citationstylelanguage/download/bibtex?submissionId=1461&publicationId=1461&issueId=40"
+ ],
+ "abstract": "Abstract The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel cell, intended for transporting seriously injured people and serving them in medical facilities. The qualities of this power supply are analyzed, highlighting its advantages in terms of environmental characteristics and its long \"life\" during the activities of serving patients in serious health conditions and transporting them to a hospital. Some main characteristics of this type of robot, powered by a hydrogen fuel cell, are analyzed, compared with robots powered by other types of power supplies, and its advantages when working in a hospital are shown.",
+ "meta": [
+  "citation_journal_title: The Eurasia Proceedings of Science, Technology, Engineering and Mathematics",
+  "citation_journal_abbrev: EPSTEM",
+  "citation_issn: 2602-3199",
+  "citation_author: Nina Valchkova",
+  "citation_author_institution: Bulgarian Academy of Sciences",
+  "citation_author: Roman Zahariev",
+  "citation_author_institution: Bulgarian Academy of Sciences",
+  "citation_author: Vasil Tsvetkov",
+  "citation_author_institution: Bulgarian Academy of Sciences",
+  "citation_author: Yasen Paunski",
+  "citation_author_institution: Bulgarian Academy of Sciences",
+  "citation_author: Georgi Angelov",
+  "citation_author_institution: Bulgarian Academy of Sciences",
+  "citation_title: Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+  "citation_language: en",
+  "citation_date: 2026/07/31",
+  "citation_volume: 40",
+  "citation_firstpage: 374",
+  "citation_lastpage: 390",
+  "citation_doi: 10.55549/epstem.1461",
+  "citation_abstract_html_url: https://www.epstem.net/index.php/epstem/article/view/1461",
+  "citation_pdf_url: https://www.epstem.net/index.php/epstem/article/download/1461/1415",
+  "DC.Creator.PersonalName: Nina Valchkova",
+  "DC.Creator.PersonalName: Roman Zahariev",
+  "DC.Creator.PersonalName: Vasil Tsvetkov",
+  "DC.Creator.PersonalName: Yasen Paunski",
+  "DC.Creator.PersonalName: Georgi Angelov",
+  "DC.Identifier: 1461",
+  "DC.Identifier.pageNumber: 374-390",
+  "DC.Identifier.DOI: 10.55549/epstem.1461",
+  "DC.Identifier.URI: https://www.epstem.net/index.php/epstem/article/view/1461",
+  "DC.Rights: Copyright (c) 2026 The Eurasia Proceedings of Science, Technology, Engineering and Mathematics",
+  "DC.Rights: https://creativecommons.org/licenses/by/4.0",
+  "DC.Source: The Eurasia Proceedings of Science, Technology, Engineering and Mathematics",
+  "DC.Source.ISSN: 2602-3199",
+  "DC.Source.Volume: 40",
+  "DC.Source.URI: https://www.epstem.net/index.php/epstem/epstem",
+  "DC.Title: Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+  "DC.Type: Text.Serial.Journal",
+  "DC.Type.articleType: Articles"
+ ],
+ "pdf": {
+  "url": "https://www.epstem.net/index.php/epstem/article/view/1461/1415",
+  "head": "                                                                       The Eurasia Proceedings of Science, Technology,\n                                                                             Engineering and Mathematics (EPSTEM)\n                                                                                                      ISSN: 2602-3199\n\n\n\n\n     The Eurasia Proceedings of Science, Technology, Engineering and Mathematics (EPSTEM), 2026\n\n                                                 Volume 40, Pages 374-390\n\n         ICBAST 2026: International Conference on Basic Sciences and Technology\n\n\n            Power Supply Technologies for Collaborative Service Robots:\n                    Characteristics and Comparative Overview\n                                                      Nina Valchkova\n                                               Bulgarian Academy of Sciences\n\n                                                     Roman Zahariev\n                                               Bulgarian Academy of Sciences\n\n                                                       Vasil Tsvetkov\n                                               Bulgarian Academy of Sciences\n\n                                                       Yasen Paunski\n                                               Bulgarian Academy of Sciences\n\n                                                      Georgi Angelov\n                                               Bulgarian Academy of Sciences\n\n\nAbstract: The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel\ncell, intended for transporting seriously injured people and serving them in medical facilities. The qualities of this\npower supply are analyzed, highlighting its advantages in terms of environmental characteristics and its long \"life\"\nduring the activities of serving patients in serious health conditions and transporting them to a hospital. Some\nmain characteristics of this type of robot, powered by a hydrogen fuel cell, are analyzed, compared with robots\npowered by other types of power supplies, and its advantages when working in a hospital are shown.\n\nKeywords: Service robot, Cobot, Hydrogen-powered robot.\n\n\nIntroduction\nPower supply is a key element in the architecture of any mobile or stationary Collaborative Service Robot (Cobot)\n(CSR) (Kelly et al., 2021; Lynch et al., 2017). The duration of autonomous operation, functional capabilities and\noperational safety when interacting with people depen",
   "ack": [
-   "НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ / Articles МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ Автори Нина Вълчкова Автор Роман Захариев Автор Георги Ангелов Автор Ясен Паунски Автор Искрен Върбанов Автор DOI : https://doi.org/10.63662/5stkwe27 Ключови думи : Сервизни роботи, Мобилни роботи, Управление на роботи Абстракт",
-   "НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Раздел (Секция) Articles Подобни статии Веселка Стоянова, ИЗСЛЕДВАНЕ СКРИВАНЕТО НА ДАННИ В ИЗОБРАЖЕНИЯ ЗА ПОВИШАВАНЕ НА СИГУРНОСТТА НА КОМУНИКАЦИИТЕ В ДЪРЖАВНОТО УПРАВЛЕНИЕ , Морски научен форум: Т. 10 Бр. 1 (2024): НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Николай Павловск",
-   "НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Нели Стойчева, ПОДХОД ЗА ПРОЕКТИРАНЕ НА СИСТЕМА ЗА ВИДЕОНАБЛЮДЕНИЕ ЗА МОРСКИ ГРАНИЧНИ И КРАЙБРЕЖНИ ЗОНИ , Морски научен форум: Т. 10 Бр. 2 (2024): Сигурност в Черноморския регион Теодоси Димитров, РИСКОВЕ СВЪРЗАНИ С ИЗПОЛЗВАНЕТО НА ИЗКУСТВЕН ИНТЕЛЕКТ В СИСТЕМИТЕ ЗА КОМАНДВАНЕ И УПРАВЛЕНИЕ , Морски научен форум: Т. ",
-   "СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Веселин Атанасов, МОРСКА СИГУРНОСТ И БЕЗОПАСНОСТ ЧРЕЗ ИНТЕГРИРАНЕ НА UAV И AI , Морски научен форум: Т. 10 Бр. 1 (2024): НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Теодоси Димитров, ИЗПОЛЗВАНЕ НА ИЗКУСТВЕН ИНТЕЛЕКТ ЗА УДОВЛЕТВОРЯВАНЕ НА ИЗИСКВАНИЯТА КЪМ СИСТЕМИТЕ ЗА КОМАНДВАНЕ И УПРАВЛЕНИЕ , Морски нау",
-   "НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Пламен Димитракиев, План за управление на енергийната ефективност на кораба , Морски научен форум: Т. 9 Бр. 2 (2016): 135 години Морско образование Груди Ангелов, ПРЕОДОЛЯВАНЕТО НА БЕДСТВИЯ И АВАРИИ, ПРЕДИЗВИКАТЕЛСТВО ПРЕД СИСТЕМАТА ЗА ЗАЩИТА НА НАЦИОНАЛНАТА СИГУРНОСТ , Морски научен форум: Т. 10 Бр. 1 (2024): НАЦИ",
-   "НАЦИОНАЛНА НАУЧНА ПРОГРАМА „СИГУРНОСТ И ОТБРАНА“ – СЪСТОЯНИЕ И ПОСТИГНАТИ РЕЗУЛТАТИ Емил Стоянов, Преглед на безопасността и риска при експлоатацията на офшорни вятърни паркове , Морски научен форум: Т. 10 Бр. 2 (2024): Сигурност в Черноморския регион 1-10 от 76 Напред Можете също да прегледате стартирайте разширено търсене за подобни статии във връзка с тази статия. Информация За читатели За авто"
-  ],
-  "pdf": "https://journal.nvna.eu/index.php/msfj/article/download/194/54"
- },
- "morski_view_pdf": {
-  "status": 200,
-  "len": 18988,
-  "head": "     МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА\n                 АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ\n\n\n                            Доц. д-р инж.Нина Вълчкова, проф. д-р инж. Роман Захариев,\n                            Гл.ас. д-р инж. Георги Ангелов, Гл.ас. д-р инж. Ясен Паунски,\n                                                               Ас. инж. Искрен Върбанов\n\n               Българска акдемия на науките, Институт по роботика, (София, България)\n                                             DOI : https://doi.org/10.63662/5stkwe27\n\n     Резюме. В работата е представен Мобилен колаборативен робот – Roby 1 с\n     повишена проходимост, предназначен за охрана и поддържане на сигурността в\n     работната зона. Показани са някои аспекти на интелигентния процес на вземане\n     на решения като част от управлението на основата на информация от комплексна\n     сензорна система. На базата на специфичния ходов механизъм на реализирания\n     робот, представляващ верижни тракове с триъгълна форма, се постига висока\n     проходимост с възможност за преодоляване на препятствия и преминаване на\n     стълби. Възможно е изваждане на опасни предмети или багаж на безопасно\n     място с последващо обезвреждане. С използването на специална термокамера\n     също така е възможно да се гасят пожари. Управлението на робота е на основата\n     на Операционна система „Robots Operational System“ (ROS) с използването на\n     оригинален Графичен потребителски интерфейс. Роботът е пример за прилагане\n     на принципите на модулност и управление в неподредена среда с използването\n     на елементи на Изкуствен интелект.\n     Ключови думи: Сервизни роботи, Мобилни роботи, Управление на роботи.\n\n     1. Въведение. Полето на приложение на Роботиката обхваща широк спектър от\nтехнологии, в които цифровата интелигентност е вградена във физическите модели на\nмашините, създавайки системи с възможности, далеч надхвърлящи основните им\nпредназначения. (Khatib O., Moore P., 1997, p. 255). Като пример Мобилните роботи решават\nмного често задачи, които изискват интерфейсна връзка с оператора, особено когато\nстепента на изкуствен интелект на роботите не е достатъчна за изпълнение на поставените\nзадачи. В такива случаи използването на интерфейса човек-машина е неизбежно.\nЕкспериментите от този вид се нуждаят от добре работещ интерфейс човек-машина. По-\nподходящ за тази цел е Графичният потребителски интерфейс (GUI). Съответните\nусъвършенствани роботи могат да се характеризират със следните условия, за да и",
-  "ack": [
-   "Благодарности.\n       Авторите изказват благодарност за финансовата подкрепа на проекта с\nАдминистративен договор № КП-06-Н57/8 от 16.11.2021 г. „Методология за определяне на\nфункционалните параметри на мобилен колаборативен сервизен робот-асистент в\nздравеопазването“, финансиран по „Конкурс за финансиране на фундаментални\nизследвания – 2021 г.“ от фонд \"Научни изследвания\", България.\n       Авторите изка",
-   "благодарност и за финансовата подкрепа на проекта Национална\nнаучна програма „Сигурност и отбрана“, приета с Решение № 731 на Министерския съвет\nот 21.10.2021 г., в изпълнение на Националната стратегия за развитие на научните\nизследвания 2017 – 2030 г. (НСИИ) с цел повишаване на националния научен капацитет в\nобластта на сигурността и отбраната.\nREFERENCES\n\nANGELOV, G. et al., 2011. Remote interface commu"
+   "grant from any funding agency in the public, commercial, or not-for-profit sectors. Acknowledgements or Notes * This article was presented as an oral presentation at the International Conference on Basic Sciences and Technology ( www.icbast.net ) held in Konya/Türkiye on April 02-05, 2026. * The authors acknowledge the financial support of the project with an Administrative Contract under project No. BG-RRP-2.017-0011 \"Ecological collaborative robots powered by green hydrogen\" under the Recovery"
   ]
- },
- "morski_pdf": {
-  "status": 200,
-  "url": "https://journal.nvna.eu/index.php/msfj/article/view/194/54",
-  "len": 229,
-  "head": " Преглед на МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ Връщане към подробностите за статията МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ Сваляне Сваляне на PDF ",
-  "ack": [],
-  "pdf": "https://journal.nvna.eu/index.php/msfj/article/download/194/54/65"
- },
- "arci_pub": {
-  "status": 200,
-  "url": "https://www.arci-conference.com/publications.html",
-  "len": 2202,
-  "head": " ARCI Publication Options | Scopus Indexed Journals &amp; Books Your Subtitle Here Home News Call for Papers Deadlines Author Guide Submit Papers Registration Program Publications Committee Sponsors Venue &amp; Hotels Touristic Information --> Publications One event - three different publications ! --> 1) All registered abstracts / papers will be published in the conference proceedings with the ISBN and DOI, distributed before the event. The ARCI Conference Proceedings are indexed in Compendex by Elsevier. 2) Authors will be invited to submit full-page extended papers to one of open access journals, indexed by SCOPUS: Sensors &amp; Transducers (ISSN 2306-8515, e-ISSN 1726-5479) MDPI Processes (e-ISSN 2227-9717): Special Issue MDPI Machines (e-ISSN: (ISSN 2075-1702): Special Issue on ' New Advances in Robotics, Factory Automation and Intelligent Networked Systems ' 3) Book chapters for the coming volumes of open access Book Series on ' Advances in Robotics and Automatic Control: Reviews ', Vol. 4, ' Advances in Networks, Security and Communications: Reviews ', Vol. 4 or 'Advances in Intelligent Systems: Reviews' , Vol. 4. All books will published in 2027 and submitted to the Book Citation Index by Clarivate Analytics . About the Publisher All of accepted and registered papers will be published by IFSA Publishing, S.L. (Barcelona, Spain), which is a publisher of scientific and technical books and journals reaching around the globe to collect essential reference material and the",
-  "ack": []
- },
- "arci_rg": {
-  "status": 403,
-  "url": "https://www.researchgate.net/doi/10.13140/RG.2.2.13085.63208",
-  "len": 364,
-  "head": " ResearchGate - Temporarily Unavailable Access restricted We&#x27;ve detected unusual activity from your network. Access to this page is temporarily restricted. Are you a researcher? Log in or sign up as a ResearchGate member to verify your access. Log in Create account Ray ID: a4721e86bf136c82 Client IP: 40.124.248.245 © ResearchGate GmbH. All rights reserved. ",
-  "ack": []
  }
 }
