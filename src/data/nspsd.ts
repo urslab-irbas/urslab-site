@@ -35,8 +35,9 @@ const nspsdExtra: ArchivePub[] = [
     authors: 'Valchkova, N., Zahariev, R., Angelov, G., Paunski, Y., Varbanov, I.',
     title: 'Мобилен колаборативен робот с висока проходимост за антитерористични операции',
     tr: 'Mobile collaborative robot with high cross-country capability for anti-terrorist operations',
-    venue: 'Black Sea Maritime Security Conference, Nikola Vaptsarov Naval Academy, Varna, 6–8 November 2024',
-    doi: '10.63662/5stkwe27', url: 'https://journal.nvna.eu/index.php/msfj/article/view/194/54',
+    venue: 'Морски научен форум, т. 10, бр. 1: Национална научна програма „Сигурност и отбрана“ – състояние и постигнати резултати (конференция 5–6 ноември 2024 г., ВВМУ „Н. Й. Вапцаров“), с. 129–137',
+    issn: '1310-9278 (print), 3033-1889 (online)',
+    doi: '10.63662/5stkwe27', url: 'https://journal.nvna.eu/index.php/msfj/article/view/194',
   },
   {
     year: 2024, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
@@ -78,7 +79,41 @@ const nspsdExtra: ArchivePub[] = [
   },
 ];
 
-const pool: ArchivePub[] = [...allPubs, ...nspsdExtra.map(withNrs).map(withShare)];
+// по отчета на проф. Р. Захариев и доц. Н. Вълчкова по задача 1.2.3 (08.10.2026) — само на страницата на програмата;
+// данните са по издателя (Crossref / сайта на изданието), не по отчета
+const zahariev2026: ArchivePub[] = [
+  {
+    year: 2026, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
+    authors: 'Valchkova, N., Zahariev, R., Tsvetkov, V., Paunski, Y., Angelov, G.',
+    title: 'Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview',
+    venue: 'The Eurasia Proceedings of Science, Technology, Engineering and Mathematics (EPSTEM) 40 — ICBAST 2026, Konya, Türkiye, pp. 374–390',
+    doi: '10.55549/epstem.1461', issn: '2602-3199',
+    abstract: 'The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel cell, intended for transporting seriously injured people and serving them in medical facilities. The qualities of this power supply are analyzed, highlighting its advantages in terms of environmental characteristics and its long "life" during the activities of serving patients in serious health conditions and transporting them to a hospital. Some main characteristics of this type of robot, powered by a hydrogen fuel cell, are analyzed, compared with robots powered by other types of power supplies, and its advantages when working in a hospital are shown.',
+  },
+  {
+    year: 2026, cat: 'q4', sjr: 0.165, team: ['valchkova', 'zahariev'], tags: ['robotics', 'ai'],
+    authors: 'Valchkova, N., Zahariev, R., Tsvetkov, V.',
+    title: 'Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments',
+    venue: 'Computer Vision and Computational Intelligence (CVC 2026), Amsterdam — Springer, Lecture Notes in Networks and Systems, pp. 189–203',
+    doi: '10.1007/978-3-032-26214-1_12', isbn: '978-3-032-26213-4 (print), 978-3-032-26214-1 (online)', issn: '2367-3370 (print), 2367-3389 (online)',
+  },
+  {
+    year: 2025, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
+    authors: 'Zahariev, R., Valchkova, N.',
+    title: 'Analysis of the Characteristics of the Power Types of Collaborative Service Robots',
+    venue: 'Complex Control Systems 9(2) — Int. Scientific Conference “Robotics & Mechatronics 2025”, 5–6 November 2025, IR-BAS, Sofia',
+    url: 'https://ir.bas.bg/ccs/2025/09.2/17.pdf',
+  },
+  {
+    year: 2025, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics', 'hri'],
+    authors: 'Valchkova, N., Zahariev, R.',
+    title: 'Off-Road Mobile Collaborative Robot for Healthcare',
+    venue: 'Proceedings of ARCI 2025 — Automation, Robotics & Communications for Industry 4.0/5.0, IFSA Publishing, pp. 167–171',
+    isbn: '978-84-09-69171-5', issn: '2938-4796',
+  },
+];
+
+const pool: ArchivePub[] = [...allPubs, ...[...nspsdExtra, ...zahariev2026].map(withNrs).map(withShare)];
 
 /** Всички публикации по ННП-СО, с маркировка за финансиране и задача по програмата */
 export const nspsdPubs: ArchivePub[] = nspsdRefs.map((r) => {

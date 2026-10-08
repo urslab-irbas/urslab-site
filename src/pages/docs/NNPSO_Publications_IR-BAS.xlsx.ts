@@ -24,7 +24,7 @@ const FULL: [RegExp, string][] = [
   [/Zahariev/, 'Roman Zahariev'], [/Valchkova/, 'Nina Valchkova'], [/Kutinchev/, 'Pavlin Kutinchev'],
   [/Stanev/, 'Hristo Stanev'], [/Yoshinov/, 'Radoslav Yoshinov'], [/Kotseva/, 'Monka Kotseva'],
   [/Dishkova/, 'Galina Dishkova'], [/Angelov, S/, 'Simeon Angelov'], [/Apter/, 'Nathanel Apter'],
-  [/Herrero/, 'Alejandro del Estal Herrero'], [/Tzvetkov/, 'V. Tzvetkov'], [/Zlateva/, 'Plamena Zlateva'],
+  [/Herrero/, 'Alejandro del Estal Herrero'], [/Tzvetkov|Tsvetkov/, 'Vasil Tsvetkov'], [/Paunski/, 'Yasen Paunski'], [/Angelov, G/, 'Georgi Angelov'], [/Varbanov/, 'Iskren Varbanov'], [/Zlateva/, 'Plamena Zlateva'],
   [/Райков/, 'Пламен Райков'], [/Вълчкова/, 'Нина Вълчкова'], [/Захариев/, 'Роман Захариев'],
   [/Гайдарски/, 'Иван Гайдарски'], [/Кутинчев/, 'Павлин Кутинчев'], [/Маджаров/, 'Анастас Маджаров'], [/Чехларова, Н/, 'Неда Чехларова'],
 ];
