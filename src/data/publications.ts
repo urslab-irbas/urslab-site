@@ -27,6 +27,18 @@ const NSPDS = 'NSP DS, MES grant D01-74/19.05.2022';
 export const publications: Publication[] = [
   {
     year: 2026,
+    title: 'Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification',
+    authors: ['A. Madzharov', 'N. Chehlarova', 'I. Gaidarski'],
+    venue: 'ICAICTSEE 2026 — 16th Int. Conf. on Application of Information and Communication Technology and Statistics in Economy and Education, UNWE, Sofia — Conference Proceedings',
+    url: 'https://icaictsee.unwe.bg/',
+    status: 'in-press',
+    tags: ['software', 'security'],
+    funding: NSPDS,
+    abstract:
+      'Research reporting relies on bibliographic descriptions and on the scientometric indicators computed from them, so an error in a record propagates directly into the indicators. The paper presents an information system for entering, verifying and reporting scientific publications and scientometric indicators, developed at the Institute of Robotics of the Bulgarian Academy of Sciences within the National Scientific Program “Security and Defence”. Its rules are divided into automatic (deterministic) and automated (proposed by the system and confirmed by a human) checks; records are verified against APA 7 and global metadata sources, and the system learns by accumulating rules and confirmed exceptions. The report computes BAS report categories, SJR and impact-factor totals and the share of institute authors, supported by an automated registry of co-author affiliations. A static-site technology with reviewed, automated deployment minimises the attack surface, and published images are processed and protected against downloading; the measures are mapped to the GDPR and ISO/IEC 27001/27701. The system is in operational use for the public report of 48 programme publications. A rule-based model for calculating indicators under the Bulgarian minimum national requirements for academic positions is proposed and illustrated with the requirements for Technical Sciences.',
+  },
+  {
+    year: 2026,
     title: 'URSlab Website and Information System for Reporting the Publication Activity of a Scientific Department of BAS: Source Code (v1.1.0)',
     authors: ['A. Madzharov'],
     venue: 'Zenodo — Software (files with restricted access)',

@@ -84,6 +84,13 @@ const RM_PLACE: L = { bg: 'София, Институт по роботика �
 /** 1. Участия в международни научни форуми прояви (конференции, симпозиуми, семинари и др.) — най-новите първи */
 export const participations: NspEvent[] = [
   {
+    title: { bg: '16th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE 2026)', en: '16th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE 2026)' },
+    date: { bg: '8–10 октомври 2026 г.', en: '8–10 October 2026' }, place: { bg: 'София, УНСС (онлайн, MS Teams)', en: 'Sofia, UNWE (online, MS Teams)' }, form: { bg: 'онлайн', en: 'online' },
+    url: 'https://icaictsee.unwe.bg/',
+    text: { bg: 'Организатор: Факултет „Приложна информатика и статистика“ на УНСС, под егидата на IFIP. Сборник: ISSN 2367-7635 (печатен), 2367-7643 (онлайн), индексиран в CEEOL; НАЦИД НРС, ID 4066.', en: 'Organised by the Faculty of Applied Informatics and Statistics, UNWE, under the auspices of IFIP. Proceedings: ISSN 2367-7635 (print), 2367-7643 (online), indexed in CEEOL; NACID NRS ID 4066.' },
+    papers: ['Information System for Reporting Scientific Publications and Scientometric Indicators', 'Expanding the Taxonomy of Insider Threats in Automated and Autonomous Systems'],
+  },
+  {
     title: { bg: '4th International Conference on Environmental Protection and Disaster Risks (EnviroRISKs 2026) и 14th Annual CMDR COE Conference on Crisis Management and Disaster Response', en: '4th International Conference on Environmental Protection and Disaster Risks (EnviroRISKs 2026) and 14th Annual CMDR COE Conference on Crisis Management and Disaster Response' },
     date: { bg: '1–3 юни 2026 г.', en: '1–3 June 2026' }, place: { bg: 'София', en: 'Sofia' },
     url: 'https://link.springer.com/book/9783032390707',
