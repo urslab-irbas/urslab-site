@@ -98,16 +98,19 @@ export const participations: NspEvent[] = [
   },
   {
     title: { bg: '15th International Scientific Conference on Engineering, Technology and Systems (TechSys 2026)', en: '15th International Scientific Conference on Engineering, Technology and Systems (TechSys 2026)' },
+    url: 'https://journals.tu-plovdiv.bg/index.php/prcdgs/TechSys2026',
     date: { bg: '14–16 май 2026 г.', en: '14–16 May 2026' }, place: { bg: 'Пловдив', en: 'Plovdiv' },
     papers: ['Compensations for Horizontal Inertial Components of INS/GNSS', 'Constructive Approach to the Design of Data Protection Systems', 'Small Voice Bulgarian Language Model Generation'],
   },
   {
     title: { bg: 'The 16th International Conference on Business Information Security (BISEC 2025)', en: 'The 16th International Conference on Business Information Security (BISEC 2025)' },
+    url: 'https://bisec.metropolitan.ac.rs/bisec-conference-2025/',
     date: { bg: '28 ноември 2025 г.', en: '28 November 2025' }, place: { bg: 'Ниш, Сърбия (Университет „Метрополитан“)', en: 'Niš, Serbia (Metropolitan University)' }, form: PRES,
     papers: ['Insider Threats in Critical Infrastructure Organizations'],
   },
   {
     title: { bg: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)', en: 'International Conferences on Digital Technology Driven Engineering (ICDTDE 2025)' },
+    url: 'https://veltion.ntua.gr/isdtde/publications.html',
     date: { bg: '18–20 декември 2025 г.', en: '18–20 December 2025' }, place: { bg: 'онлайн (MS Teams), домакин Jordan University of Science and Technology', en: 'online (MS Teams), hosted by Jordan University of Science and Technology' }, form: { bg: 'онлайн', en: 'online' },
     papers: ['Multilayered conceptual modelling for the design, implementation and optimization'],
   },
