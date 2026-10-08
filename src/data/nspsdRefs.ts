@@ -80,6 +80,7 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Analysis of the Characteristics of the Power Types of Collaborative Service Robots', task: '1.2.3', via: 'report' },
   { t: 'Off-Road Mobile Collaborative Robot for Healthcare', task: '1.2.3', via: 'report' },
   // Подадени статии на сайта, финансирани по програмата
+  { t: 'Information System for Reporting Scientific Publications and Scientometric Indicators' }, // ICAICTSEE 2026, под печат
   { t: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes" },
   { t: 'Precise Calculations of Gravity Anomalies from the Geometric Height' },
 ];
