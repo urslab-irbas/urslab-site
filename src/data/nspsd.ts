@@ -101,7 +101,8 @@ const zahariev2026: ArchivePub[] = [
     year: 2025, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics'],
     authors: 'Zahariev, R., Valchkova, N.',
     title: 'Analysis of the Characteristics of the Power Types of Collaborative Service Robots',
-    venue: 'Complex Control Systems 9(2), IR-BAS',
+    venue: 'Complex Control Systems 9(2) — Int. Scientific Conference “Robotics & Mechatronics 2025”, 5–6 November 2025, IR-BAS, Sofia',
+    url: 'https://ir.bas.bg/ccs/2025/09.2/17.pdf',
   },
   {
     year: 2025, cat: 'other', team: ['valchkova', 'zahariev'], tags: ['robotics', 'hri'],
