@@ -14,7 +14,7 @@ const { lang, items, compact, arch } = Astro.props;
       <div class="meta">
         <span class="yr">{p.year}</span>
         <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>
-        {p.status !== 'published' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e)} <span>({SJR_YEAR})</span></a>; })()}
+        {p.status !== 'published' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e, lang)}{!e.text && <span> ({SJR_YEAR})</span>}</a>; })()}
       </div>
       <div>
         <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>

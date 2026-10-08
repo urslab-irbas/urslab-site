@@ -6,7 +6,8 @@ import type { ArchCat } from './archive2022';
 
 export const SJR_YEAR = 2025;
 
-export interface SeriesMetrics { match: RegExp; name: string; cat: ArchCat; sjr: number; url: string }
+// text — вместо SJR/квартил: очакваното за изданието като текст (напр. срок и индексиране на сборник без SJR)
+export interface SeriesMetrics { match: RegExp; name: string; cat: ArchCat; sjr?: number; url: string; text?: { bg: string; en: string } }
 
 export const seriesMetrics: SeriesMetrics[] = [
   { match: /journal of data science and intelligent systems|jdsis/i, name: 'Journal of Data Science and Intelligent Systems', cat: 'q1', sjr: 1.035, url: 'https://www.scimagojr.com/journalsearch.php?q=21101346359&tip=sid' },
@@ -16,10 +17,12 @@ export const seriesMetrics: SeriesMetrics[] = [
   { match: /lecture notes in civil engineering/i, name: 'Lecture Notes in Civil Engineering (Springer)', cat: 'q4', sjr: 0.15, url: 'https://www.scimagojr.com/journalsearch.php?q=21100889404&tip=sid' },
   { match: /lecture notes in networks and systems/i, name: 'Lecture Notes in Networks and Systems (Springer)', cat: 'q4', sjr: 0.165, url: 'https://www.scimagojr.com/journalsearch.php?q=21100901469&tip=sid' },
   { match: /journal of physics: conference series/i, name: 'Journal of Physics: Conference Series (IOP)', cat: 'sjr', sjr: 0.18, url: 'https://www.scimagojr.com/journalsearch.php?q=130053&tip=sid' },
+  { match: /icaictsee/i, name: 'ICAICTSEE 2026 — Conference Proceedings (ISSN 2367-7635, 2367-7643)', cat: 'nat', url: 'https://icaictsee.unwe.bg/',
+    text: { bg: 'публикуване Март 2027 г., индексирана в CEEOL; НАЦИД НРС, ID 4066', en: 'publication March 2027, indexed in CEEOL; NACID NRS, ID 4066' } },
   { match: /aip conference proceedings/i, name: 'AIP Conference Proceedings', cat: 'sjr', sjr: 0.146, url: 'https://www.scimagojr.com/journalsearch.php?q=26916&tip=sid' },
 ];
 
 export const expectedFor = (venue: string) => seriesMetrics.find((s) => s.match.test(venue));
 
 /** Етикет „Q4 · SJR 0.165“ / „SJR 0.146“ (без квартил) */
-export const expectedLabel = (s: SeriesMetrics) => `${/^q\d$/.test(s.cat) ? `${s.cat.toUpperCase()} · ` : ''}SJR ${s.sjr.toFixed(3)}`;
+export const expectedLabel = (s: SeriesMetrics, lang: 'bg' | 'en' = 'bg') => s.text ? s.text[lang] : `${/^q\d$/.test(s.cat) ? `${s.cat.toUpperCase()} · ` : ''}SJR ${(s.sjr ?? 0).toFixed(3)}`;
