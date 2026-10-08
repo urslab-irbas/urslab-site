@@ -14,12 +14,11 @@ const { lang, items, compact, arch } = Astro.props;
       <div class="meta">
         <span class="yr">{p.year}</span>
         <span class={`st ${p.status}`}>{t.status[p.status][lang]}</span>
-        {p.status !== 'published' && expectedFor(p.venue) && !expectedFor(p.venue)!.text && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e, lang)} <span>({SJR_YEAR})</span></a>; })()}
+        {p.status !== 'published' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e, lang)}{!e.text && <span> ({SJR_YEAR})</span>}</a>; })()}
       </div>
       <div>
         <h3>{p.doi && !p.doiOff ? <a href={`https://doi.org/${p.doi}`}>{p.title}</a> : p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
         <p class="au">{(lang === 'en' && p.authorsEn ? p.authorsEn : p.authors).join(', ')}</p>
-        {p.status !== 'published' && expectedFor(p.venue)?.text && (() => { const e = expectedFor(p.venue)!; return <p class="exp-row"><a class={`exp ${e.cat}`} href={e.url} title={e.name}>{lang === 'bg' ? 'Очаквано' : 'Expected'}: {expectedLabel(e, lang)}</a></p>; })()}
         <p class="ve">{p.venue}{p.doi && (p.doiOff ? <> · DOI {p.doi} ({lang === 'bg' ? 'още не е активен' : 'not yet active'})</> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}</p>
         {!compact && p.abstract && <p class="ab">{p.abstract}</p>}
         {!compact && (
@@ -51,6 +50,4 @@ const { lang, items, compact, arch } = Astro.props;
   .tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 0; }
   .fund { font-size: .8rem; color: var(--muted); }
   @media (max-width: 600px) { .pubs li { grid-template-columns: 1fr; gap: 6px; } .meta { flex-direction: row; gap: 12px; align-items: baseline; } }
-  .exp-row { margin: 4px 0 6px; }
-  .exp-row .exp { display: inline-block; max-width: none; }
 </style>

@@ -18,7 +18,7 @@ export const seriesMetrics: SeriesMetrics[] = [
   { match: /lecture notes in networks and systems/i, name: 'Lecture Notes in Networks and Systems (Springer)', cat: 'q4', sjr: 0.165, url: 'https://www.scimagojr.com/journalsearch.php?q=21100901469&tip=sid' },
   { match: /journal of physics: conference series/i, name: 'Journal of Physics: Conference Series (IOP)', cat: 'sjr', sjr: 0.18, url: 'https://www.scimagojr.com/journalsearch.php?q=130053&tip=sid' },
   { match: /icaictsee/i, name: 'ICAICTSEE 2026 — Conference Proceedings (ISSN 2367-7635, 2367-7643)', cat: 'nat', url: 'https://icaictsee.unwe.bg/',
-    text: { bg: 'Март 2027 г.: официално публикуване и индексиране на сборника с доклади, индексиран в CEEOL; НАЦИД НРС, ID 4066', en: 'March 2027: official publication and indexing of the proceedings, indexed in CEEOL; NACID NRS, ID 4066' } },
+    text: { bg: 'публикуване Март 2027 г., индексирана в CEEOL; НАЦИД НРС, ID 4066', en: 'publication March 2027, indexed in CEEOL; NACID NRS, ID 4066' } },
   { match: /aip conference proceedings/i, name: 'AIP Conference Proceedings', cat: 'sjr', sjr: 0.146, url: 'https://www.scimagojr.com/journalsearch.php?q=26916&tip=sid' },
 ];
 
