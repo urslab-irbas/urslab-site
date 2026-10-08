@@ -20,6 +20,7 @@ Target domain: https://urs.ir.bas.bg
   - `content.ts` — menu, intro text, research areas, projects, services, contacts, UI strings
 - Page views: `src/views/` (Home, Team, Publications, Simple = research/projects/services/contact). Route files in `src/pages/` and `src/pages/en/` are thin wrappers.
 - Interactive clothoid coordinated-turn demo: `src/components/ClothoidDemo.astro`.
+- Tooltips: use `data-tip="…"` + `tabindex="0"` (site tooltip `#tip` in `Layout.astro`, style `.tipbox` in `global.css`; shows on mouse hover, keyboard focus and tap), NOT the native `title` attribute (delayed, missing on touch, suppressed after clicks).
 - Images: `public/images/team/`, `public/images/gallery/` (gallery auto-lists files).
 - Image protection: no right-click / drag / long-press save on images (script + CSS in `Layout.astro`, `global.css`); galleries open the large photo in the in-page lightbox (`<button data-lb="/images/…" data-cap="…">`, shown as a CSS background) — never link directly to image files; `public/.htaccess` answers 403 for `/images/…` without a Referer from urs.ir.bas.bg (direct opening, hotlinking) and sends `X-Robots-Tag: noimageindex`. Strip EXIF/GPS from every uploaded photo.
 
