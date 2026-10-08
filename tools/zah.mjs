@@ -1,32 +1,26 @@
-import { nrsByNumber, issnPortal, crossrefIsbn, openLibraryIsbn, doiInfo } from '../scripts/verify-ids.mjs';
 import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
 const out = {};
-const j = async (u) => { try { const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 urslab (mailto:noreply@anthropic.com)' }, signal: AbortSignal.timeout(40000) }); return r.ok ? await r.json() : { status: r.status }; } catch (e) { return { err: String(e) }; } };
-const t = async (u) => { try { const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) Chrome/126' }, signal: AbortSignal.timeout(40000) }); const b = Buffer.from(await r.arrayBuffer()); return { status: r.status, ct: r.headers.get('content-type'), b }; } catch (e) { return { err: String(e) }; } };
-for (const d of ['10.63662/5stkwe27', '10.13140/RG.2.2.13085.63208']) {
-  try { out['doi:' + d] = await doiInfo(d); } catch (e) { out['doi:' + d] = String(e); }
-  out['datacite:' + d] = await j('https://api.datacite.org/dois/' + d);
-}
-for (const n of ['1310-8255', '2603-4697', '1310-9278', '3033-1889', '2938-4796']) {
-  try { out['nrs:' + n] = await nrsByNumber(n); } catch (e) { out['nrs:' + n] = String(e); }
-  try { out['issn:' + n] = await issnPortal(n); } catch (e) { out['issn:' + n] = String(e); }
-}
-for (const i of ['978-84-09-69171-5']) {
-  try { out['nrs:' + i] = await nrsByNumber(i); } catch (e) { out['nrs:' + i] = String(e); }
-  try { out['cr:' + i] = await crossrefIsbn(i); } catch (e) { out['cr:' + i] = String(e); }
-  try { out['ol:' + i] = await openLibraryIsbn(i); } catch (e) { out['ol:' + i] = String(e); }
-}
-const titles = ['Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview', 'Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments', 'Analysis of the Characteristics of the Power Types of Collaborative Service Robots', 'Off-Road Mobile Collaborative Robot for Healthcare', 'Мобилен колаборативен робот с висока проходимост за антитерористични операции'];
-for (const q of titles) {
-  const c = await j('https://api.crossref.org/works?rows=3&query.bibliographic=' + encodeURIComponent(q));
-  out['cr:' + q] = (c.message?.items ?? []).map((w) => ({ t: w.title?.[0], doi: w.DOI, cont: w['container-title']?.[0], y: w.issued?.['date-parts']?.[0], a: (w.author ?? []).map((x) => x.family + ', ' + x.given + ' [' + (x.affiliation ?? []).map((z) => z.name).join('; ') + ']'), pages: w.page, vol: w.volume, issue: w.issue, isbn: w.ISBN, issn: w.ISSN, pub: w.publisher, abs: (w.abstract || '').slice(0, 1500) }));
-  const o = await j('https://api.openalex.org/works?per-page=3&mailto=noreply@anthropic.com&search=' + encodeURIComponent(q.slice(0, 150)));
-  out['oa:' + q] = (o.results ?? []).map((w) => ({ t: w.title, doi: w.doi, y: w.publication_year, src: w.primary_location?.source?.display_name, a: (w.authorships ?? []).map((x) => x.author.display_name + ' [' + (x.raw_affiliation_strings ?? []).join(' | ') + ']') }));
-  await new Promise((r) => setTimeout(r, 800));
-}
-// Complex Control Systems, т. 9, бр. 2 (2025) и страница на ARCI 2025, ICBAST 2026, CVC 2026
-for (const u of ['https://ir.bas.bg/ccs/2025/index.html', 'https://ir.bas.bg/ccs/2025/10/index.html', 'https://ir.bas.bg/ccs/2025/11/index.html', 'https://ir.bas.bg/ccs/2026/index.html', 'https://ir.bas.bg/ccs/index.html', 'https://ir.bas.bg/ccs/', 'https://www.arci-conference.com/', 'https://www.icbast.com/', 'https://cvc-conf.org/', 'https://www.cvc-conference.com/']) {
-  const r = await t(u);
-  out['page:' + u] = r.err ? r.err : { status: r.status, text: r.b.toString('utf8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 4000), links: [...r.b.toString('utf8').matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]).filter((h) => /ccs|pdf|20(25|26)|proceed|program/i.test(h)).slice(0, 80) };
+const get = async (u) => { try { const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36', Accept: 'text/html,application/pdf,*/*' }, redirect: 'follow', signal: AbortSignal.timeout(60000) }); return { status: r.status, url: r.url, b: Buffer.from(await r.arrayBuffer()) }; } catch (e) { return { err: String(e) }; } };
+const text = (b) => { if (b.slice(0, 4).toString() === '%PDF') { fs.writeFileSync('/tmp/x.pdf', b); return execFileSync('pdftotext', ['-layout', '/tmp/x.pdf', '-']).toString(); } return b.toString('utf8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' '); };
+const ACK = /(acknowledg|благодар|funded|financ|grant|D01-74|Security and Defen|Сигурност и отбрана|National Scientific Program|Национална научна програма)[\s\S]{0,400}/gi;
+const urls = {
+  epstem: 'https://doi.org/10.55549/epstem.1461',
+  lnns: 'https://doi.org/10.1007/978-3-032-26214-1_12',
+  morski_view: 'https://journal.nvna.eu/index.php/msfj/article/view/194',
+  morski_pdf: 'https://journal.nvna.eu/index.php/msfj/article/view/194/54',
+  arci_pub: 'https://www.arci-conference.com/publications.html',
+  arci_rg: 'https://doi.org/10.13140/RG.2.2.13085.63208',
+};
+for (const [k, u] of Object.entries(urls)) {
+  const r = await get(u); if (r.err) { out[k] = r.err; continue; }
+  let t = text(r.b);
+  // EPSTEM: страницата на статията → PDF
+  const pdf = r.b.toString('utf8').match(/href="([^"]+\.pdf[^"]*)"/i) || r.b.toString('utf8').match(/href="([^"]*\/download\/[^"]+)"/i) || r.b.toString('utf8').match(/citation_pdf_url" content="([^"]+)"/i);
+  out[k] = { status: r.status, url: r.url, len: t.length, head: t.slice(0, 1500), ack: [...t.matchAll(ACK)].map((m) => m[0].slice(0, 400)).slice(0, 8), pdf: pdf?.[1] };
+  if (pdf && k !== 'morski_pdf') {
+    const p = await get(new URL(pdf[1], r.url).href);
+    if (!p.err) { const pt = text(p.b); out[k + '_pdf'] = { status: p.status, len: pt.length, head: pt.slice(0, 2500), ack: [...pt.matchAll(ACK)].map((m) => m[0].slice(0, 500)).slice(0, 8) }; }
+  }
 }
 fs.writeFileSync('zah.json', JSON.stringify(out, null, 1));
