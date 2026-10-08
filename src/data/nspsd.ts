@@ -10,6 +10,14 @@ import { NSPDS_FUND, nspsdRefs, normTitle } from './nspsdRefs';
 
 // team: 'valchkova', 'zahariev' — колеги от ИР-БАН извън лабораторията; бутони във филтъра „Автор“ само на страницата на програмата
 const nspsdExtra: ArchivePub[] = [
+  // ICAICTSEE 2026 (8–10.10.2026, УНСС, онлайн) — по програмата на конференцията, панел 4, BA-05
+  {
+    year: 2026, cat: 'sub', st: 'in-press', team: ['gaidarski'], tags: ['security'],
+    authors: 'Gaidarski, I.',
+    title: 'Expanding the Taxonomy of Insider Threats in Automated and Autonomous Systems',
+    venue: 'ICAICTSEE 2026 — 16th Int. Conf. on Application of Information and Communication Technology and Statistics in Economy and Education, UNWE, Sofia — Conference Proceedings',
+    url: 'https://icaictsee.unwe.bg/',
+  },
   // по справката на И. Гайдарски (06.10.2026)
   {
     year: 2026, cat: 'sub', st: 'in-press', team: ['gaidarski'], tags: ['security', 'education'],
