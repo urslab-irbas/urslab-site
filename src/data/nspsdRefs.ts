@@ -74,6 +74,11 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Information security and dependability in integrated intelligent educational environments', task: '2.1.1, 1.2.7', via: 'report' },
   { t: 'Designing an information security system to prevent leakage of sensitive information', task: '2.1.1, 1.2.7', via: 'report' },
   { t: 'Multilayered conceptual modelling for the design, implementation and optimization', task: '2.1.1, 1.2.7', via: 'report' },
+  // По отчета на проф. Р. Захариев и доц. Н. Вълчкова по задача 1.2.3 (08.10.2026)
+  { t: 'Power Supply Technologies for Collaborative Service Robots', task: '1.2.3', via: 'report' },
+  { t: 'Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot', task: '1.2.3', via: 'report' },
+  { t: 'Analysis of the Characteristics of the Power Types of Collaborative Service Robots', task: '1.2.3', via: 'report' },
+  { t: 'Off-Road Mobile Collaborative Robot for Healthcare', task: '1.2.3', via: 'report' },
   // Подадени статии на сайта, финансирани по програмата
   { t: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes" },
   { t: 'Precise Calculations of Gravity Anomalies from the Geometric Height' },
