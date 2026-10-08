@@ -1,0 +1,734 @@
+{
+ "doi:10.63662/5stkwe27": {
+  "found": true,
+  "source": "Crossref",
+  "title": "МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ",
+  "issn": [
+   "3033-1889",
+   "1310-9278"
+  ],
+  "isbn": [],
+  "venue": "Морски научен форум"
+ },
+ "datacite:10.63662/5stkwe27": {
+  "status": 404
+ },
+ "doi:10.13140/RG.2.2.13085.63208": {
+  "found": true,
+  "source": "DataCite",
+  "title": "ARCI 2025 Conference Proceedings",
+  "issn": [],
+  "isbn": [],
+  "venue": "Unpublished"
+ },
+ "datacite:10.13140/RG.2.2.13085.63208": {
+  "data": {
+   "id": "10.13140/rg.2.2.13085.63208",
+   "type": "dois",
+   "attributes": {
+    "doi": "10.13140/rg.2.2.13085.63208",
+    "prefix": "10.13140",
+    "suffix": "rg.2.2.13085.63208",
+    "identifiers": [],
+    "alternateIdentifiers": [],
+    "creators": [
+     {
+      "name": "Yurish, Sergey Y.",
+      "nameType": "Personal",
+      "givenName": "Sergey Y.",
+      "familyName": "Yurish",
+      "affiliation": [],
+      "nameIdentifiers": []
+     }
+    ],
+    "titles": [
+     {
+      "title": "ARCI 2025 Conference Proceedings"
+     }
+    ],
+    "publisher": "Unpublished",
+    "container": {},
+    "publicationYear": 2025,
+    "subjects": [],
+    "contributors": [],
+    "dates": [
+     {
+      "date": "2025",
+      "dateType": "Issued"
+     }
+    ],
+    "language": "en",
+    "types": {
+     "ris": "RPRT",
+     "bibtex": "article",
+     "citeproc": "article-journal",
+     "schemaOrg": "ScholarlyArticle",
+     "resourceType": "Research Proposal",
+     "resourceTypeGeneral": "Text"
+    },
+    "relatedIdentifiers": [],
+    "relatedItems": [],
+    "sizes": [],
+    "formats": [],
+    "version": null,
+    "rightsList": [],
+    "descriptions": [],
+    "geoLocations": [],
+    "fundingReferences": [],
+    "xml": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8cmVzb3VyY2UgeG1sbnM9Imh0dHA6Ly9kYXRhY2l0ZS5vcmcvc2NoZW1hL2tlcm5lbC00IiB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHA6Ly9kYXRhY2l0ZS5vcmcvc2NoZW1hL2tlcm5lbC00IGh0dHA6Ly9zY2hlbWEuZGF0YWNpdGUub3JnL21ldGEva2VybmVsLTQvbWV0YWRhdGEueHNkIj4KICA8aWRlbnRpZmllciBpZGVudGlmaWVyVHlwZT0iRE9JIj4xMC4xMzE0MC9SRy4yLjIuMTMwODUuNjMyMDg8L2lkZW50aWZpZXI+CiAgPGNyZWF0b3JzPgogICAgPGNyZWF0b3I+CiAgICAgIDxjcmVhdG9yTmFtZT5TZXJnZXkgWS4gWXVyaXNoPC9jcmVhdG9yTmFtZT4KICAgIDwvY3JlYXRvcj4KICA8L2NyZWF0b3JzPgogIDx0aXRsZXM+CiAgICA8dGl0bGU+QVJDSSAyMDI1IENvbmZlcmVuY2UgUHJvY2VlZGluZ3M8L3RpdGxlPgogIDwvdGl0bGVzPgogIDxwdWJsaXNoZXI+VW5wdWJsaXNoZWQ8L3B1Ymxpc2hlcj4KICA8cHVibGljYXRpb25ZZWFyPjIwMjU8L3B1YmxpY2F0aW9uWWVhcj4KICA8cmVzb3VyY2VUeXBlIHJlc291cmNlVHlwZUdlbmVyYWw9IlRleHQiPlJlc2VhcmNoIFByb3Bvc2FsPC9yZXNvdXJjZVR5cGU+CiAgPGxhbmd1YWdlPmVuPC9sYW5ndWFnZT4KPC9yZXNvdXJjZT4=",
+    "url": "https://www.researchgate.net/doi/10.13140/RG.2.2.13085.63208",
+    "contentUrl": null,
+    "metadataVersion": 0,
+    "schemaVersion": "http://datacite.org/schema/kernel-4",
+    "source": "mds",
+    "isActive": true,
+    "state": "findable",
+    "reason": null,
+    "viewCount": 0,
+    "viewsOverTime": [],
+    "downloadCount": 0,
+    "downloadsOverTime": [],
+    "referenceCount": 0,
+    "citationCount": 0,
+    "citationsOverTime": [],
+    "partCount": 0,
+    "partOfCount": 0,
+    "versionCount": 0,
+    "versionOfCount": 0,
+    "created": "2025-03-05T10:39:36.000Z",
+    "registered": "2025-03-05T10:39:37.000Z",
+    "published": "2025",
+    "updated": "2025-10-22T09:11:11.000Z"
+   },
+   "relationships": {
+    "client": {
+     "data": {
+      "id": "rg.rg",
+      "type": "clients"
+     }
+    },
+    "provider": {
+     "data": {
+      "id": "rg",
+      "type": "providers"
+     }
+    },
+    "media": {
+     "data": {
+      "id": "10.13140/rg.2.2.13085.63208",
+      "type": "media"
+     }
+    },
+    "references": {
+     "data": []
+    },
+    "citations": {
+     "data": []
+    },
+    "parts": {
+     "data": []
+    },
+    "partOf": {
+     "data": []
+    },
+    "versions": {
+     "data": []
+    },
+    "versionOf": {
+     "data": []
+    }
+   }
+  }
+ },
+ "nrs:1310-8255": {
+  "id": 767,
+  "title": "COMPLEX Control Systems",
+  "match": "COMPLEX Control Systems Prof. Marin Drinov Acad. Publ. House Bulg. Acad. of Sciences. Institute of Control and System Research",
+  "numbers": [
+   "1310-8255",
+   "2603-4697"
+  ],
+  "active": true
+ },
+ "issn:1310-8255": {
+  "found": true,
+  "status": "Confirmed record",
+  "title": "Complex Control systems"
+ },
+ "nrs:2603-4697": {
+  "id": 767,
+  "title": "COMPLEX Control Systems",
+  "match": "COMPLEX Control Systems Prof. Marin Drinov Acad. Publ. House Bulg. Acad. of Sciences. Institute of Control and System Research",
+  "numbers": [
+   "1310-8255",
+   "2603-4697"
+  ],
+  "active": true
+ },
+ "issn:2603-4697": {
+  "found": true,
+  "status": "Confirmed record",
+  "title": "Complex Control Systems (Online)"
+ },
+ "nrs:1310-9278": {
+  "id": 2118,
+  "title": "МОРСКИ научен форум",
+  "match": "МОРСКИ научен форум Maritime scientific forum ВВМУ “Н.Й. Вапцаров”",
+  "numbers": [
+   "1310-9278 "
+  ],
+  "active": true
+ },
+ "issn:1310-9278": {
+  "found": true,
+  "status": "Confirmed record",
+  "title": "Morski naučen forum"
+ },
+ "nrs:3033-1889": null,
+ "issn:3033-1889": {
+  "found": true,
+  "status": "Confirmed record",
+  "title": "Morski naučen forum (Online)"
+ },
+ "nrs:2938-4796": null,
+ "issn:2938-4796": {
+  "found": true,
+  "status": "Confirmed record",
+  "title": "Automation, robotics &amp; communications for industry 4.0/5.0"
+ },
+ "nrs:978-84-09-69171-5": null,
+ "cr:978-84-09-69171-5": null,
+ "ol:978-84-09-69171-5": null,
+ "cr:Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview": [
+  {
+   "t": "Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+   "doi": "10.55549/epstem.1461",
+   "cont": "The Eurasia Proceedings of Science, Technology, Engineering and Mathematics",
+   "y": [
+    2026,
+    7,
+    31
+   ],
+   "a": [
+    "Valchkova, Nina [Bulgarian Academy of Sciences]",
+    "Zahariev, Roman [Bulgarian Academy of Sciences]",
+    "Tsvetkov, Vasil [Bulgarian Academy of Sciences]",
+    "Paunski, Yasen [Bulgarian Academy of Sciences]",
+    "Angelov, Georgi [Bulgarian Academy of Sciences]"
+   ],
+   "pages": "374-390",
+   "vol": "40",
+   "issue": "(Early Pub)",
+   "issn": [
+    "2602-3199"
+   ],
+   "pub": "ISRES Publishing",
+   "abs": "<jats:p>The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel cell, intended for transporting seriously injured people and serving them in medical facilities. The qualities of this power supply are analyzed, highlighting its advantages in terms of environmental characteristics and its long \"life\" during the activities of serving patients in serious health conditions and transporting them to a hospital. Some main characteristics of this type of robot, powered by a hydrogen fuel cell, are analyzed, compared with robots powered by other types of power supplies, and its advantages when working in a hospital are shown.</jats:p>"
+  },
+  {
+   "t": "Characteristics of middleware for networked collaborative robots",
+   "doi": "10.1109/cts.2008.4543973",
+   "cont": "2008 International Symposium on Collaborative Technologies and Systems",
+   "y": [
+    2008,
+    5
+   ],
+   "a": [
+    "Mohamed, Nader []",
+    "Al-Jaroodi, Jameela []"
+   ],
+   "pages": "524-531",
+   "pub": "IEEE",
+   "abs": ""
+  },
+  {
+   "t": "AI Technologies for Collaborative and Service Robots",
+   "doi": "10.3390/app142411811",
+   "cont": "Applied Sciences",
+   "y": [
+    2024,
+    12,
+    17
+   ],
+   "a": [
+    "Boschetti, Giovanni [Department of Industrial Engineering, University of Padova, 35131 Padova, Italy; Department of Information Engineering, University of Padova, 35131 Padova, Italy]",
+    "Bottin, Matteo [Department of Industrial Engineering, University of Padova, 35131 Padova, Italy]",
+    "Minto, Riccardo [Department of Industrial Engineering, University of Padova, 35131 Padova, Italy]"
+   ],
+   "pages": "11811",
+   "vol": "14",
+   "issue": "24",
+   "issn": [
+    "2076-3417"
+   ],
+   "pub": "MDPI AG",
+   "abs": "<jats:p>In the last few years, Artificial Intelligence (AI) has become increasingly popular, even in the consumer field [...]</jats:p>"
+  }
+ ],
+ "oa:Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview": [
+  {
+   "t": "Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+   "doi": "https://doi.org/10.55549/epstem.1461",
+   "y": 2026,
+   "src": "The Eurasia Proceedings of Science Technology Engineering and Mathematics",
+   "a": [
+    "Nina Valchkova [Bulgarian Academy of Sciences]",
+    "Roman Zahariev [Bulgarian Academy of Sciences]",
+    "Vasil Tsvetkov [Bulgarian Academy of Sciences]",
+    "Yasen Paunski [Bulgarian Academy of Sciences]",
+    "Georgi Angelov [Bulgarian Academy of Sciences]"
+   ]
+  },
+  {
+   "t": "Power Supply Technologies for Drones and Machine Vision Applications: A Comparative Analysis and Future Trends",
+   "doi": "https://doi.org/10.3390/telecom4030024",
+   "y": 2023,
+   "src": "Telecom",
+   "a": [
+    "Antonios Pekias [Department of Electrical and Computer Engineering, University of Western Macedonia, 50100 Kozani, Greece]",
+    "George S. Maraslidis [Department of Electrical and Computer Engineering, University of Western Macedonia, 50100 Kozani, Greece]",
+    "Markos G. Tsipouras [Department of Electrical and Computer Engineering, University of Western Macedonia, 50100 Kozani, Greece]",
+    "Fotis N. Koumboulis [Department of Digital Industry Technologies, National and Kapodistrian University of Athens, 15772 Athens, Greece]",
+    "George F. Fragulis [Department of Electrical and Computer Engineering, University of Western Macedonia, 50100 Kozani, Greece]"
+   ]
+  },
+  {
+   "t": "Robot technology in dentistry, part one of a systematic review: literature characteristics",
+   "doi": "https://doi.org/10.1016/j.dental.2021.06.001",
+   "y": 2021,
+   "src": "Dental Materials",
+   "a": [
+    "Tom C. T. van Riet [Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands; Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands; Mechanical, Maritime and Materials Engineering (3ME), Dept. of Cognitive Robotics, Delft University of Technology, The Netherlands. Electronic address: t.c.vanriet@amsterdamumc.nl | Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands | Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands | Mechanical, Maritime and Materials Engineering (3ME), Dept. of Cognitive Robotics, Delft University of Technology, The Netherlands]",
+    "Kevin T.H. Chin Jen Sem [Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands]",
+    "Jean‐Pierre T. F. Ho [Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands; Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands | Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands | Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands]",
+    "René Spijker [Medical Library, Amsterdam University Medical Center, University of Amsterdam, The Netherlands]",
+    "Jens Kober [Mechanical, Maritime and Materials Engineering (3ME), Dept. of Cognitive Robotics, Delft University of Technology, The Netherlands]",
+    "Jan de Lange [Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands; Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands | Academic Center for Dentistry Amsterdam (ACTA), University of Amsterdam, The Netherlands | Amsterdam University Medical Center (AUMC), Dept. of Oral and Maxillofacial Surgery, University of Amsterdam, The Netherlands]"
+   ]
+  }
+ ],
+ "cr:Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments": [
+  {
+   "t": "Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments",
+   "doi": "10.1007/978-3-032-26214-1_12",
+   "cont": "Lecture Notes in Networks and Systems",
+   "y": [
+    2026
+   ],
+   "a": [
+    "Valchkova, Nina []",
+    "Zahariev, Roman []",
+    "Tsvetkov, Vasil []"
+   ],
+   "pages": "189-203",
+   "isbn": [
+    "9783032262134",
+    "9783032262141"
+   ],
+   "issn": [
+    "2367-3370",
+    "2367-3389"
+   ],
+   "pub": "Springer Nature Switzerland",
+   "abs": ""
+  },
+  {
+   "t": "Intelligent Control and Sensor Fusion of a Mobile Robot Based Monitoring System",
+   "doi": "10.5772/8993",
+   "cont": "Mobile Robots Navigation",
+   "y": [
+    2010,
+    3,
+    1
+   ],
+   "a": [
+    "S., Jorge []",
+    "Rojas-Ramirez, Erick []"
+   ],
+   "isbn": [
+    "9789533070766"
+   ],
+   "pub": "InTech",
+   "abs": ""
+  },
+  {
+   "t": "Unstructured road detection and path tracking for tracked mobile robot",
+   "doi": "10.1109/cyber.2015.7287996",
+   "cont": "2015 IEEE International Conference on Cyber Technology in Automation, Control, and Intelligent Systems (CYBER)",
+   "y": [
+    2015,
+    6
+   ],
+   "a": [
+    "Wang, Jing []",
+    "Sun, Shiying []",
+    "Zhao, Xiaoguang []"
+   ],
+   "pages": "535-539",
+   "pub": "IEEE",
+   "abs": ""
+  }
+ ],
+ "oa:Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments": [
+  {
+   "t": "Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments",
+   "doi": "https://doi.org/10.1007/978-3-032-26214-1_12",
+   "y": 2026,
+   "src": "Lecture notes in networks and systems",
+   "a": [
+    "Nina Valchkova [Bulgarian Academy of Sciences, Sofia, Bulgaria]",
+    "Roman Zahariev [Bulgarian Academy of Sciences, Sofia, Bulgaria]",
+    "Vasil Tsvetkov [Bulgarian Academy of Sciences, Sofia, Bulgaria]"
+   ]
+  },
+  {
+   "t": "Sensor-Fusion Based Navigation for Autonomous Mobile Robot",
+   "doi": "https://doi.org/10.3390/s25041248",
+   "y": 2025,
+   "src": "Sensors",
+   "a": [
+    "Vygantas Ušinskis [Department of Mechatronics, Robotics and Digital Manufacturing, Faculty of Mechanics, Vilnius Gediminas Technical University, LT-10105 Vilnius, Lithuania]",
+    "Michał Nowicki [Department of Mechatronics, Robotics and Digital Manufacturing, Faculty of Mechanics, Vilnius Gediminas Technical University, LT-10105 Vilnius, Lithuania]",
+    "Andrius Dzedzickis [Department of Mechatronics, Robotics and Digital Manufacturing, Faculty of Mechanics, Vilnius Gediminas Technical University, LT-10105 Vilnius, Lithuania]",
+    "Vytautas Bučinskas [Department of Mechatronics, Robotics and Digital Manufacturing, Faculty of Mechanics, Vilnius Gediminas Technical University, LT-10105 Vilnius, Lithuania]"
+   ]
+  },
+  {
+   "t": "Intelligent Robotic Navigation in Unstructured Environments",
+   "doi": "https://doi.org/10.67228/30715725/ijiare-2019pii1n4k",
+   "y": 2019,
+   "src": "International Journal of Intelligent Automation & Robotics Engineering",
+   "a": [
+    "Lakshmi Narayanan [Associate Professor, Bharathidasan University, India]"
+   ]
+  }
+ ],
+ "cr:Analysis of the Characteristics of the Power Types of Collaborative Service Robots": [
+  {
+   "t": "Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+   "doi": "10.55549/epstem.1461",
+   "cont": "The Eurasia Proceedings of Science, Technology, Engineering and Mathematics",
+   "y": [
+    2026,
+    7,
+    31
+   ],
+   "a": [
+    "Valchkova, Nina [Bulgarian Academy of Sciences]",
+    "Zahariev, Roman [Bulgarian Academy of Sciences]",
+    "Tsvetkov, Vasil [Bulgarian Academy of Sciences]",
+    "Paunski, Yasen [Bulgarian Academy of Sciences]",
+    "Angelov, Georgi [Bulgarian Academy of Sciences]"
+   ],
+   "pages": "374-390",
+   "vol": "40",
+   "issue": "(Early Pub)",
+   "issn": [
+    "2602-3199"
+   ],
+   "pub": "ISRES Publishing",
+   "abs": "<jats:p>The article examines the power supply of a Service Collaborative Robot, powered by a hydrogen fuel cell, intended for transporting seriously injured people and serving them in medical facilities. The qualities of this power supply are analyzed, highlighting its advantages in terms of environmental characteristics and its long \"life\" during the activities of serving patients in serious health conditions and transporting them to a hospital. Some main characteristics of this type of robot, powered by a hydrogen fuel cell, are analyzed, compared with robots powered by other types of power supplies, and its advantages when working in a hospital are shown.</jats:p>"
+  },
+  {
+   "t": "Analysis of Collision Types in Collaborative Robots Using Mechanism Actuated by Pneumatic Artificial Muscle",
+   "doi": "10.3390/act14010022",
+   "cont": "Actuators",
+   "y": [
+    2025,
+    1,
+    10
+   ],
+   "a": [
+    "Kóczi, Dávid [Department of Mechatronics and Automation, Faculty of Engineering, University of Szeged, 6720 Szeged, Hungary]",
+    "Sárosi, József [Department of Mechatronics and Automation, Faculty of Engineering, University of Szeged, 6720 Szeged, Hungary]"
+   ],
+   "pages": "22",
+   "vol": "14",
+   "issue": "1",
+   "issn": [
+    "2076-0825"
+   ],
+   "pub": "MDPI AG",
+   "abs": "<jats:p>In the safety technology of collaborative robots, standards differentiate between various collision types, the identification and differentiation of which are essential for ensuring safe operation. The objective of this paper is to develop and test a mechanism actuated by artificial muscle to examine the detection of these profiles in different collision scenarios. The ISO 15066 standard distinguishes between two types of collisions: quasi-static and transient. Using a simplified model, experiments were conducted to evaluate whether sensors could identify collision types accurately. The results demonstrate the feasibility of identifying collision types through sensor data. The findings have the potential to enhance the safety of collaborative robots.</jats:p>"
+  },
+  {
+   "t": "Characteristics of middleware for networked collaborative robots",
+   "doi": "10.1109/cts.2008.4543973",
+   "cont": "2008 International Symposium on Collaborative Technologies and Systems",
+   "y": [
+    2008,
+    5
+   ],
+   "a": [
+    "Mohamed, Nader []",
+    "Al-Jaroodi, Jameela []"
+   ],
+   "pages": "524-531",
+   "pub": "IEEE",
+   "abs": ""
+  }
+ ],
+ "oa:Analysis of the Characteristics of the Power Types of Collaborative Service Robots": [
+  {
+   "t": "Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview",
+   "doi": "https://doi.org/10.55549/epstem.1461",
+   "y": 2026,
+   "src": "The Eurasia Proceedings of Science Technology Engineering and Mathematics",
+   "a": [
+    "Nina Valchkova [Bulgarian Academy of Sciences]",
+    "Roman Zahariev [Bulgarian Academy of Sciences]",
+    "Vasil Tsvetkov [Bulgarian Academy of Sciences]",
+    "Yasen Paunski [Bulgarian Academy of Sciences]",
+    "Georgi Angelov [Bulgarian Academy of Sciences]"
+   ]
+  },
+  {
+   "t": "Symbiotic human-robot collaborative assembly",
+   "doi": "https://doi.org/10.1016/j.cirp.2019.05.002",
+   "y": 2019,
+   "src": "CIRP Annals",
+   "a": [
+    "Lihui Wang [Department of Production Engineering, KTH Royal Institute of Technology, Stockholm, Sweden]",
+    "Robert X. Gao [Department of Mechanical and Aerospace Engineering, Case Western Reserve University, Cleveland, OH, USA]",
+    "József Váncza [Department of Manufacturing Science and Engineering, Budapest University of Technology and Economics, Budapest, Hungary | Institute for Computer Science and Control, Hungarian Academy of Sciences, Hungary]",
+    "Jörg Krüger [Fraunhofer Institute for Production Systems and Design Technology, Berlin, Germany | Institute for Machine Tools and Factory Management, Technische Universität, Berlin, Germany]",
+    "Xi Vincent Wang [Department of Production Engineering, KTH Royal Institute of Technology, Stockholm, Sweden]",
+    "Sotiris Makris [Laboratory for Manufacturing Systems & Automation, University of Patras, Patras, Greece]",
+    "George Chryssolouris [Laboratory for Manufacturing Systems & Automation, University of Patras, Patras, Greece]"
+   ]
+  },
+  {
+   "t": "Understanding anthropomorphism in service provision: a meta-analysis of physical robots, chatbots, and other AI",
+   "doi": "https://doi.org/10.1007/s11747-020-00762-y",
+   "y": 2021,
+   "src": "Journal of the Academy of Marketing Science",
+   "a": [
+    "Markus Blut [Durham University Business School, Durham University, Mill Hill Lane, Durham, DH1 3LB, UK]",
+    "Cheng Wang [International Business School Suzhou, Xi’an Jiaotong-Liverpool University, 111 Ren Ai Road, Suzhou, 215123, Jiangsu, China | International Business School Suzhou, Xi'an Jiaotong-Liverpool University, 111 Ren Ai Road, Suzhou, 215123, Jiangsu, China]",
+    "Nancy V. Wünderlich [Paderborn University, Warburger Str. 100, 33098, Paderborn, Germany]",
+    "Christian Brock [University of Rostock, Ulmenstraße 69, 18057, Rostock, Germany]"
+   ]
+  }
+ ],
+ "cr:Off-Road Mobile Collaborative Robot for Healthcare": [
+  {
+   "t": "A Fast and Robust Obstacle Detection Algorithm for Off-road Autonomous Mobile Robots",
+   "doi": "10.3724/sp.j.1218.2011.00287",
+   "cont": "ROBOT",
+   "y": [
+    2011,
+    8,
+    5
+   ],
+   "a": [
+    "HU, Tingbo []",
+    "WU, Tao []"
+   ],
+   "pages": "287-291",
+   "vol": "33",
+   "issue": "3",
+   "issn": [
+    "1002-0446"
+   ],
+   "pub": "China Science Publishing & Media Ltd.",
+   "abs": ""
+  },
+  {
+   "t": "Experimental Evaluation of a Modified Obstacle Based Potential Field Algorithm for an Off-road Mobile Robot",
+   "doi": "10.5220/0005121006260633",
+   "cont": "Proceedings of the 11th International Conference on Informatics in Control, Automation and Robotics",
+   "y": [
+    2014
+   ],
+   "a": [
+    "Nyberg, Rickard [Luleå University of Technology, Sweden]",
+    "Nikolakopoulos, George [Luleå University of Technology, Sweden]",
+    "Kominiak, Dariusz [Luleå University of Technology, Sweden]"
+   ],
+   "pages": "626-633",
+   "pub": "SCITEPRESS - Science and and Technology Publications",
+   "abs": ""
+  },
+  {
+   "t": "МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ",
+   "doi": "10.63662/5stkwe27",
+   "cont": "Морски научен форум",
+   "y": [
+    2025,
+    6,
+    16
+   ],
+   "a": [
+    "Вълчкова, Нина []",
+    "Захариев, Роман []",
+    "Ангелов, Георги []",
+    "Паунски, Ясен []",
+    "Върбанов, Искрен []"
+   ],
+   "pages": "129-137",
+   "vol": "10",
+   "issue": "1",
+   "issn": [
+    "3033-1889",
+    "1310-9278"
+   ],
+   "pub": "Nikola Vaptsarov Naval Academy",
+   "abs": "<jats:p>В работата е представен  Мобилен колаборативен робот – Roby 1 с повишена проходимост, предназначен за охрана и поддържане на сигурността в работната зона. Показани са някои аспекти на интелигентния процес на вземане на решения като част от управлението на основата на информация от комплексна сензорна система. На базата на специфичния ходов механизъм на реализирания робот, представляващ верижни тракове с триъгълна форма, се постига висока проходимост с възможност за преодоляване на препятствия и преминаване на стълби. Възможно е изваждане на опасни предмети или багаж на безопасно място с последващо обезвреждане. С използването на специална термокамера също така е възможно  да се гасят пожари. Управлението на робота е на основата на Операционна система „Robots Operational System“ (ROS) с използването на оригинален Графичен потребителски  интерфейс. Роботът е пример за прилагане на принципите на модулност и управление в неподредена среда с използването на елементи на Изкуствен интелект. </jats:p>"
+  }
+ ],
+ "oa:Off-Road Mobile Collaborative Robot for Healthcare": [
+  {
+   "t": "Intelligent Control and Sensor Fusion for a Tracked Mobile Collaborative Robot Operating in Unstructured Environments",
+   "doi": "https://doi.org/10.1007/978-3-032-26214-1_12",
+   "y": 2026,
+   "src": "Lecture notes in networks and systems",
+   "a": [
+    "Nina Valchkova [Bulgarian Academy of Sciences, Sofia, Bulgaria]",
+    "Roman Zahariev [Bulgarian Academy of Sciences, Sofia, Bulgaria]",
+    "Vasil Tsvetkov [Bulgarian Academy of Sciences, Sofia, Bulgaria]"
+   ]
+  },
+  {
+   "t": "Service Robots in the Healthcare Sector",
+   "doi": "https://doi.org/10.3390/robotics10010047",
+   "y": 2021,
+   "src": "Robotics",
+   "a": [
+    "Jane Holland [Confirm Smart Manufacturing Research Centre, V94 C928 Limerick, Ireland | School of Engineering, University of Limerick, V94 T9PX Limerick, Ireland]",
+    "Liz Kingston [Department of Nursing and Midwifery, University of Limerick, V94 T9PX Limerick, Ireland]",
+    "C.T. McCarthy [Confirm Smart Manufacturing Research Centre, V94 C928 Limerick, Ireland | School of Engineering, University of Limerick, V94 T9PX Limerick, Ireland]",
+    "Eddie Armstrong [Johnson &amp; Johnson, Advance Technology Centre, University of Limerick, V94 YHY9 Limerick, Ireland]",
+    "Peter James O'Dwyer [Johnson &amp; Johnson, Advance Technology Centre, University of Limerick, V94 YHY9 Limerick, Ireland]",
+    "Fionn Merz [Johnson &amp; Johnson, Advance Technology Centre, University of Limerick, V94 YHY9 Limerick, Ireland]",
+    "Mark T. McConnell [Johnson &amp; Johnson, Advance Technology Centre, University of Limerick, V94 YHY9 Limerick, Ireland]"
+   ]
+  },
+  {
+   "t": "Mobile Robots - State of the Art in Land, Sea, Air, and Collaborative Missions",
+   "doi": "https://doi.org/10.5772/120",
+   "y": 2009,
+   "src": "InTech eBooks",
+   "a": [
+    "Xiaoqi Chen []",
+    "YangQuan Chen []",
+    "J. Geoffrey Chase []"
+   ]
+  }
+ ],
+ "cr:Мобилен колаборативен робот с висока проходимост за антитерористични операции": [
+  {
+   "t": "МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ",
+   "doi": "10.63662/5stkwe27",
+   "cont": "Морски научен форум",
+   "y": [
+    2025,
+    6,
+    16
+   ],
+   "a": [
+    "Вълчкова, Нина []",
+    "Захариев, Роман []",
+    "Ангелов, Георги []",
+    "Паунски, Ясен []",
+    "Върбанов, Искрен []"
+   ],
+   "pages": "129-137",
+   "vol": "10",
+   "issue": "1",
+   "issn": [
+    "3033-1889",
+    "1310-9278"
+   ],
+   "pub": "Nikola Vaptsarov Naval Academy",
+   "abs": "<jats:p>В работата е представен  Мобилен колаборативен робот – Roby 1 с повишена проходимост, предназначен за охрана и поддържане на сигурността в работната зона. Показани са някои аспекти на интелигентния процес на вземане на решения като част от управлението на основата на информация от комплексна сензорна система. На базата на специфичния ходов механизъм на реализирания робот, представляващ верижни тракове с триъгълна форма, се постига висока проходимост с възможност за преодоляване на препятствия и преминаване на стълби. Възможно е изваждане на опасни предмети или багаж на безопасно място с последващо обезвреждане. С използването на специална термокамера също така е възможно  да се гасят пожари. Управлението на робота е на основата на Операционна система „Robots Operational System“ (ROS) с използването на оригинален Графичен потребителски  интерфейс. Роботът е пример за прилагане на принципите на модулност и управление в неподредена среда с използването на елементи на Изкуствен интелект. </jats:p>"
+  },
+  {
+   "t": "Робот-манипулятор для мойки автомобилей с повышенным качеством мойки за счет использования технического зрения и его характеристики",
+   "doi": "10.24108/preprints-3114286",
+   "y": [
+    2026,
+    1,
+    15
+   ],
+   "a": [
+    "Мазитов, Амир [КНИТУ-КАИ им. А.Н.Туполева]"
+   ],
+   "pub": "NPG Publishing",
+   "abs": "<jats:p>Современные роботизированные комплексы для мойки автомобилей предъявляют высокие требования к качеству обработки поверхности, точности позиционирования и адаптивности к сложной геометрии кузова. В данном исследовании рассмотрена методика применения технического зрения, основанного на использовании лидара, для построения цифровой модели поверхности автомобиля и определения касательной плоскости на локальном участке кузова. Предложен алгоритм движения манипулятора вдоль рассчитанной плоскости, позволяющий обеспечить равномерную обработку и повысить качество мойки. Дополнительно сформулированы рекомендации по учёту характеристик технического зрения для улучшения точности построения поверхности. Данная методика позволяет повысить качество мойки даже при отсутствии CAD-модели автомобиля, что определяет её практическую актуальность.</jats:p>"
+  },
+  {
+   "t": "«Висока Порта так само узнає необхідність освободження України…» – образ Османської імперії за матеріалами «Вістника Союзу визволення України»",
+   "doi": "10.36059/978-966-397-585-6-46",
+   "cont": "ІХ КОНГРЕС СХОДОЗНАВЦІВ",
+   "y": [
+    2025
+   ],
+   "a": [
+    "Шуточкін, В. О. []"
+   ],
+   "pages": "180-184",
+   "pub": "Liha-Pres",
+   "abs": ""
+  }
+ ],
+ "oa:Мобилен колаборативен робот с висока проходимост за антитерористични операции": [
+  {
+   "t": "МОБИЛЕН КОЛАБОРАТИВЕН РОБОТ С ВИСОКА ПРОХОДИМОСТ ЗА АНТИТЕРОРИСТИЧНИ ОПЕРАЦИИ",
+   "doi": "https://doi.org/10.63662/5stkwe27",
+   "y": 2025,
+   "src": "Морски научен форум",
+   "a": [
+    "Нина Вълчкова []",
+    "Роман Захариев []",
+    "Георги Ангелов []",
+    "Ясен Паунски []",
+    "Искрен Върбанов []"
+   ]
+  }
+ ],
+ "page:https://ir.bas.bg/ccs/2025/index.html": {
+  "status": 404,
+  "text": " 404 Not Found Not Found The requested URL /ccs/2025/index.html was not found on this server. ",
+  "links": []
+ },
+ "page:https://ir.bas.bg/ccs/2025/10/index.html": {
+  "status": 404,
+  "text": " 404 Not Found Not Found The requested URL /ccs/2025/10/index.html was not found on this server. ",
+  "links": []
+ },
+ "page:https://ir.bas.bg/ccs/2025/11/index.html": {
+  "status": 404,
+  "text": " 404 Not Found Not Found The requested URL /ccs/2025/11/index.html was not found on this server. ",
+  "links": []
+ },
+ "page:https://ir.bas.bg/ccs/2026/index.html": {
+  "status": 404,
+  "text": " 404 Not Found Not Found The requested URL /ccs/2026/index.html was not found on this server. ",
+  "links": []
+ },
+ "page:https://ir.bas.bg/ccs/index.html": {
+  "status": 404,
+  "text": " 404 Not Found Not Found The requested URL /ccs/index.html was not found on this server. ",
+  "links": []
+ },
+ "page:https://ir.bas.bg/ccs/": {
+  "status": 403,
+  "text": " 403 Forbidden Forbidden You don't have permission to access /ccs/ on this server. ",
+  "links": []
+ },
+ "page:https://www.arci-conference.com/": {
+  "status": 200,
+  "text": " ARCI 2027: Automation, Robotics &amp; Communications Conference | Geneva Your Subtitle Here Home News Call for Papers Deadlines Author Guide Submit Papers Registration Program Publications Committee Sponsors Venue &amp; Hotels Touristic Information --> Automation, Robotics &amp; Communications for Industry 4.0/5.0/6.0 (ARCI' 2027): 7th IFSA Winter Conference 10-12 february 2027 GENEVA, SWITZERLAND --> News more --> Call for Papers more --> Deadlines more --> Author Guide more --> Submit Papers more --> Venue &amp; Hotels more --> Programme more --> Publications more --> Committee more --> Sponsors more --> Touristic Info more --> Photos &amp; Video more --> ABOUT THE EVENT, AIM &amp; SCOPES GENAVA, SWITZERLAND Industry 4.0 has developed into an integrated ecosystem combining intelligent automation, robotics, advanced communications, cyber-physical systems, IIoT, digital twins, artificial intelligence, edge and cloud computing, and data-driven manufacturing. Its continued growth reflects the increasing demand for flexible, efficient, connected, and resilient production systems. Recent advances in generative and agentic AI, autonomous robotics, machine vision, digital twins, advanced sensing, and industrial communications are accelerating the transition from experimental solutions to practical applications. Modern industrial systems are becoming increasingly capable of monitoring processes, predicting failures, optimising operations, and adapting production in real time. At the same time, the transition towards Industry 5.0 places greater emphasis on human-centricity, sustainability, and resilience. Emerging Industry 6.0 concepts further explore highly autonomous, distributed, and adaptive industrial ecosystems based on \"prompt-to-product\" paradigme. These developments create new opportunities, but also raise important challenges related to cybersecurity, interoperability, safety, trustworthy AI, environmental impact, system integration, and human oversight. Another critical issue is the growing skills gap. The successful implementation of advanced industrial technologies requires specialists with interdisciplinary expertise in automation, robotics, artificial intelligence, communications, cybersecurity, data processing, sensing, and sustainable manufacturing. Workforce reskilling and effective human-machine collaboration are therefore becoming essential elements of industrial transformation. The annual IFSA Winter Conference on Automation, Robotics &amp; Communications for Industry 4.0/5.0/6.0 (ARCI) - was established to address these challenges and to provide an international forum for the presentation and discussion of state-of-the-art research, emerging technologies, practical solutions, and real-world industrial applications. ARCI’ 2027 is organised by the International Frequency Sensor Association (IFSA) - a professional non-profit organisation serving the international sensor, instrumentation, automation, and measurement communities since 1999. Building on the success of previous editions, ARCI’ 2027 will bring together researchers, engineers, technology developers, industrial practitioners, system integrators, and end users from around the world. The conference will focus not only on future technological visions, but also on practical pathways for transforming current research and development results into reliable, secure, scalable and sustainable industrial solutions. Particular attention will be given to intelligent automation, autonomous and collaborative robotics, AI-empowered industrial systems, digital twins, advanced sensing and communications, drones and unmanned systems, industrial cybersecurity, quantum-enabled technologies, green manufacturing, and resilient production environments. ARCI’ 2027 will continue the tradition of the ARCI Conference Series by promoting interdisciplinary exchange between academic research and industrial practice. The conference will support open discussion of technological progress,",
+  "links": [
+   "programme-geneva.html",
+   "programme-geneva.html",
+   "programme-geneva.html",
+   "programme-geneva.html",
+   "https://www.sensorsportal.com/ARCI/ARCI%20Conference%20IPC%20Members.pdf",
+   "https://www.sensorsportal.com/ARCI/ARCI%20Conference%20IPC%20Members.pdf"
+  ]
+ },
+ "page:https://www.icbast.com/": "TypeError: fetch failed",
+ "page:https://cvc-conf.org/": "TypeError: fetch failed",
+ "page:https://www.cvc-conference.com/": "TypeError: fetch failed"
+}
