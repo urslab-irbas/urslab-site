@@ -50,7 +50,7 @@ const nspText = (p: ArchivePub, r: ExcelRow) => {
   if (p.task) t.push(`Задача(и): ${p.task}.`);
   if (p.cat === 'sub') {
     const e = expectedFor(p.venue);
-    const ex = e ? `; очаквано индексиране: Scopus${/^q\d$/.test(e.cat) ? ` ${e.cat.toUpperCase()}` : ''}, SJR ${e.sjr.toFixed(3)}${/^q\d$/.test(e.cat) ? '' : ' (без квартил)'} (SCImago ${SJR_YEAR})` : '';
+    const ex = e?.text ? `; очаквано: ${e.text.bg}` : e ? `; очаквано индексиране: Scopus${/^q\d$/.test(e.cat) ? ` ${e.cat.toUpperCase()}` : ''}, SJR ${(e.sjr ?? 0).toFixed(3)}${/^q\d$/.test(e.cat) ? '' : ' (без квартил)'} (SCImago ${SJR_YEAR})` : '';
     t.push(`${p.st === 'in-press' ? 'Под печат' : 'Подадена'}${ex}.`);
   }
   if (r.note) t.push(r.note);

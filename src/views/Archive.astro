@@ -159,7 +159,7 @@ const L = {
                 <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && (p.doiOff ? <> · DOI {p.doi} <span class="doi-off">({T('още не е активен', 'not yet active')})</span></> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}{p.scopusAuthor && <> · Scopus Author ID <a href={`https://www.scopus.com/inward/authorDetails.url?authorID=${p.scopusAuthor}&partnerID=MN8TOARS`}>{p.scopusAuthor}</a></>}</p>
                 <p class="badges">
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
-                  {p.cat === 'sub' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{T('Очаквано', 'Expected')}: {expectedLabel(e)} <span>({SJR_YEAR})</span></a>; })()}
+                  {p.cat === 'sub' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{T('Очаквано', 'Expected')}: {expectedLabel(e, lang)}{!e.text && <span> ({SJR_YEAR})</span>}</a>; })()}
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
                   {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
                   {p.ix && <span class="m">WoS/Scopus</span>}
