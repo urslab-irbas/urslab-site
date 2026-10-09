@@ -1,0 +1,5 @@
+# Търсачки: целият сайт е отворен за индексиране; картата на сайта се генерира при всяко изграждане.
+User-agent: *
+Allow: /
+
+Sitemap: https://urs.ir.bas.bg/sitemap-index.xml

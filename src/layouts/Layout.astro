@@ -2,13 +2,53 @@
 import '../styles/global.css';
 import { nav, site, t, type Lang } from '../data/content';
 import { href } from '../lib/i18n';
+import { team } from '../data/team/index';
 
-interface Props { lang: Lang; slug: string; title?: string; description?: string }
-const { lang, slug, title, description } = Astro.props;
+// noindex: страницата не се индексира от търсачките (404, формата за въвеждане)
+interface Props { lang: Lang; slug: string; title?: string; description?: string; noindex?: boolean }
+const { lang, slug, title, description, noindex = false } = Astro.props;
 const other: Lang = lang === 'bg' ? 'en' : 'bg';
 const fullTitle = title ? `${title} — ${site.short[lang]}` : `${site.name[lang]} — ${site.institute[lang]}`;
 const desc = description ?? site.tagline[lang];
 const year = new Date().getFullYear();
+
+// За търсачките: постоянен адрес на страницата (canonical), двете езикови версии (hreflang)
+// и структурирани данни (JSON-LD) за лабораторията и колектива — на „Начало“ и „Състав“.
+const abs = (l: Lang) => new URL(href(l, slug), Astro.site).href;
+const canonical = abs(lang);
+const ogLocale = { bg: 'bg_BG', en: 'en_US' };
+const orgLd = !noindex && (slug === '' || slug === 'team') ? {
+  '@context': 'https://schema.org',
+  '@type': 'ResearchOrganization',
+  '@id': 'https://urs.ir.bas.bg/#lab',
+  name: site.name[lang],
+  alternateName: [site.name[other], 'URSlab', 'БРС'],
+  description: site.tagline[lang],
+  url: abs(lang),
+  email: site.email,
+  telephone: site.phones,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: lang === 'bg' ? 'ул. „Акад. Г. Бончев“, бл. 2' : 'Acad. G. Bonchev St., Bl. 2',
+    postalCode: '1113',
+    addressLocality: lang === 'bg' ? 'София' : 'Sofia',
+    addressCountry: 'BG',
+  },
+  parentOrganization: {
+    '@type': 'ResearchOrganization',
+    name: site.institute[lang],
+    url: 'https://ir.bas.bg/',
+    parentOrganization: { '@type': 'Organization', name: lang === 'bg' ? 'Българска академия на науките' : 'Bulgarian Academy of Sciences', url: 'https://www.bas.bg/' },
+  },
+  member: team.map((m) => ({
+    '@type': 'Person',
+    name: m.name[lang],
+    honorificPrefix: m.title[lang],
+    ...(m.role ? { jobTitle: m.role[lang] } : {}),
+    url: `${new URL(href(lang, 'team'), Astro.site).href}#${m.id}`,
+    ...(m.orcid ? { sameAs: [`https://orcid.org/${m.orcid}`] } : {}),
+  })),
+} : null;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -18,9 +58,21 @@ const year = new Date().getFullYear();
   <title>{fullTitle}</title>
   <meta name="description" content={desc} />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
+  {noindex
+    ? <meta name="robots" content="noindex, follow" />
+    : <>
+        <link rel="canonical" href={canonical} />
+        <link rel="alternate" hreflang="bg" href={abs('bg')} />
+        <link rel="alternate" hreflang="en" href={abs('en')} />
+        <link rel="alternate" hreflang="x-default" href={abs('bg')} />
+      </>}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name[lang]} />
+  <meta property="og:locale" content={ogLocale[lang]} />
+  <meta property="og:url" content={canonical} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={desc} />
-  <link rel="alternate" hreflang={other} href={href(other, slug)} />
+  {orgLd && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

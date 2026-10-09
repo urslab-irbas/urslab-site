@@ -58,7 +58,7 @@ const rows = [
   [input('url'), input('sjr', { inputmode: 'decimal' }), input('jif', { inputmode: 'decimal' }), input('share', { inputmode: 'decimal' })],
 ];
 ---
-<Layout lang={lang} slug="publications/new" title={title}
+<Layout lang={lang} slug="publications/new" title={title} noindex
   description={T('Въвеждане на нова публикация от член на колектива (вход с GitHub).', 'Entering a new publication by a team member (sign in with GitHub).')}>
   <header class="page-head"><div class="wrap">
     <p class="eyebrow"><a href={href(lang, 'team')}>{t.team[lang]}</a> / URSlab</p>

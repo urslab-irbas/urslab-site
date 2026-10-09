@@ -1,5 +1,16 @@
 # Промени / Changelog
 
+## v1.2.2 — 09.10.2026
+**Видимост в търсачките (Google, Bing)**
+
+- Карта на сайта `sitemap-index.xml` (интеграция `@astrojs/sitemap`), генерира се при всяко изграждане; всяка страница
+  сочи и езиковата си двойка (bg/en). Без 404 и формата за въвеждане на публикация.
+- `public/robots.txt` — целият сайт е отворен, с адреса на картата.
+- В `Layout.astro`: постоянен адрес (`canonical`), `hreflang` bg / en / x-default с пълни адреси, Open Graph
+  (`og:url`, `og:locale`, `og:site_name`); структурирани данни JSON-LD (`ResearchOrganization` с колектива и ORCID)
+  на „Начало“ и „Състав“; нов параметър `noindex` (404 и /publications/new/ не се индексират).
+- `public/googleef6ca6200dc25ccb.html` — файл за потвърждение на собствеността в Google Search Console (не се трие).
+
 ## v1.2.1 — 08.10.2026
 **Подсказки на сайта вместо подсказките на браузъра**
 

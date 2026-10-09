@@ -42,5 +42,6 @@ Target domain: https://urs.ir.bas.bg
 - Every PR runs `.github/workflows/build.yml` (npm ci + build); the built `dist/` is attached as an artifact `urslab-dist`.
 - Colleague instructions (Bulgarian): `CONTRIBUTING.md`.
 - `.github/workflows/deploy.yml` uploads `dist/` to the server (lftp mirror, no deletions) on every push to `main`, using `DEPLOY_*` repository secrets. Merge = live.
+- Search engines: `@astrojs/sitemap` → `sitemap-index.xml` (filter in `astro.config.mjs` excludes 404 and the publication form), `public/robots.txt`; `Layout.astro` emits canonical + hreflang (bg/en/x-default) and JSON-LD `ResearchOrganization` (home, team); pass `noindex` to Layout for pages that must not be indexed. `public/googleef6ca6200dc25ccb.html` is the Google Search Console verification file — never delete it.
 - Visitor statistics: GoatCounter script (`is:inline`) in `src/layouts/Layout.astro`, dashboard https://urslab.goatcounter.com.
 - Research areas ↔ publications: each area in `content.ts` has `tags`; area cards (`AreaCard.astro`) link to `/publications/?area=<key>`, which pre-selects that area's filter. Areas with no matching publications show "forthcoming".
