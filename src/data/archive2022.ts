@@ -95,15 +95,6 @@ export const archive: ArchivePub[] = [
     isbn: '978-619-185-636-7',
   },
   {
-    year: 2023, cat: 'mono', team: ['chehlarova'], tags: ['education'],
-    authors: 'Чехларова, Н.',
-    authorsEn: 'Chehlarova, N.',
-    title: 'Изследване на системата за е-бизнес в контекста на повишаване на дигиталната компетентност на потребителите',
-    tr: 'Investigation of the e-business system in the context of enhancing users’ digital competence',
-    venue: 'Тонедико, 170 с.',
-    isbn: '978-619-91492-8-7',
-  },
-  {
     year: 2023, cat: 'q1', sjr: 0.8, jif: 3.847, team: ['yovchev'], tags: ['robotics'],
     authors: 'Chavdarov, I., Yovchev, K., Miteva, L., Stefanov, A., Nedanovski, D.',
     title: 'A strategy for controlling motions related to sensory information in a walking robot Big Foot',
@@ -321,22 +312,6 @@ export const archive: ArchivePub[] = [
     venue: 'Complex Control Systems 7, IR-BAS',
   },
   {
-    year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
-    authors: 'Чехларова, К., Чехларова, Н.',
-    authorsEn: 'Chehlarova, K., Chehlarova, N.',
-    title: 'STEАM работилници по проект „Стъклен инициал“',
-    tr: 'STEAM workshops under the project “Glass Initial”',
-    venue: 'Педагогически форум 3, Тракийски университет, с. 31–41',
-  },
-  {
-    year: 2024, cat: 'other', team: ['chehlarova'], tags: ['education'],
-    authors: 'Чехларова, Т., Чехларова, Н.',
-    authorsEn: 'Chehlarova, T., Chehlarova, N.',
-    title: 'Изследване на пирамиди с равни ръбове, които имат равни радиуси на описаната около основата им окръжност',
-    tr: 'Investigation of pyramids with equal edges having equal radii of the circle circumscribed about the base',
-    venue: 'Педагогически форум 4, Тракийски университет, с. 101–108', doi: '10.15547/PF.2024.028',
-  },
-  {
     year: 2023, cat: 'other', team: ['aleksandrov', 'madzharov'], tags: ['uas', 'wsn'],
     authors: 'Alexandrov, A., Madzharov, A.',
     title: 'Trajectory optimization in large scale UAV-assisted WSNs',
@@ -375,14 +350,6 @@ export const archive: ArchivePub[] = [
     venue: 'Сборник „Съвременни изследвания и технологии за отбраната“ (ARTDef), Институт по отбрана „Проф. Цветан Лазаров“',
   },
   {
-    year: 2023, cat: 'other', team: ['chehlarova'], tags: ['education'],
-    authors: 'Чехларова, Н.',
-    authorsEn: 'Chehlarova, N.',
-    title: 'Подкрепа при развитие на дигитална компетентност на потребителите',
-    tr: 'Support in developing users’ digital competence',
-    venue: 'Стопанско управление 1, с. 51–63',
-  },
-  {
     year: 2022, cat: 'other', team: ['gaidarski'], tags: ['security'],
     authors: 'Gaidarski, I.',
     title: 'Model Driven Development of Information Security System',
@@ -393,13 +360,5 @@ export const archive: ArchivePub[] = [
     authors: 'Gaidarski, I., Kutinchev, P.',
     title: 'Transformation of UML Design Models of Information Security System into Agent-based Simulation Models',
     venue: 'Information & Security: An International Journal 53(1), Procon, pp. 65–77', doi: '10.11610/isij.5305',
-  },
-  {
-    year: 2022, cat: 'other', team: ['chehlarova'], tags: ['security', 'education'],
-    authors: 'Чехларова, Н.',
-    authorsEn: 'Chehlarova, N.',
-    title: 'Кратко обучение за работа с електронен подпис',
-    tr: 'Brief training on working with an electronic signature',
-    venue: 'Стопанско управление 1, с. 35–45',
   },
 ];

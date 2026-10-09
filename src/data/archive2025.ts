@@ -144,25 +144,9 @@ export const archive2025: ArchivePub[] = [
     venue: 'Business Management (Стопанско управление) 1, pp. 51–59',
   },
   {
-    year: 2025, cat: 'nat', share: 50, team: ['chehlarova'], tags: ['education'], note: 'Друга база (не влиза в К2)',
-    authors: 'Чехларова, Н., Чехларова, К.',
-    authorsEn: 'Chehlarova, N., Chehlarova, K.',
-    title: 'Кратки видеоматериали във Виртуалния училищен кабинет по математика',
-    tr: 'Short video materials in the Virtual School Mathematics Cabinet',
-    venue: '10 години Виртуален училищен кабинет по математика, Макрос, ред. Т. Чехларова, Е. Сендова, с. 33–39', isbn: '978-954-561-636-5',
-  },
-  {
     year: 2025, cat: 'other', share: 100, team: ['aleksandrov'], tags: ['robotics'],
     authors: 'Alexandrov, A.',
     title: 'Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications',
     venue: 'Complex Control Systems 9, IR-BAS, pp. 1–6', doi: '10.5281/zenodo.15090498',
-  },
-  {
-    year: 2025, cat: 'other', share: 100, team: ['chehlarova'], tags: ['education', 'additive'],
-    authors: 'Чехларова, Н.',
-    authorsEn: 'Chehlarova, N.',
-    title: 'Адитивни технологии в образованието',
-    tr: 'Additive technologies in education',
-    venue: 'Тракийски университет, ДИПКУ, 184 с.', isbn: '978-954-691-112-4',
   },
 ];
