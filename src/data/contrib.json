@@ -70,5 +70,25 @@
       "ISSN 1314-8540 — НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“ (съвпада с ISSN/ISBN по DOI)",
       "НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Djambazova, E., Gaidarski, I., Ilchev, S., & Terzieva, V.",
+    "title": "Information Security and Dependability in Integrated Intelligent Educational Environments",
+    "status": "in-press",
+    "idType": "isbn",
+    "isbn": "978-3-030-78126-2",
+    "venue": "Advances and Problems in Intelligent Systems (Studies in Systems, Decision and Control)",
+    "publisher": "Springer Nature",
+    "tags": [
+      "security",
+      "education"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 80,
+    "verified": [
+      "ISBN 978-3-030-78126-2 — Springer International Publishing AG: „Advances in Intelligent Systems Research and Innovation“"
+    ]
   }
 ]
