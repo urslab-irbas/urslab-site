@@ -90,5 +90,29 @@
     "verified": [
       "ISBN 978-3-030-78126-2 — Springer International Publishing AG: „Advances in Intelligent Systems Research and Innovation“"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "q3",
+    "authors": "Gaidarski, I., & Minchev, Z.",
+    "title": "Insider Threats to IT Security of Critical Infrastructures",
+    "status": "published",
+    "venue": "Digital Transformation, Cyber Security and Resilience of Modern Societies (Studies in Big Data, Vol. 84, pp. 381–394)",
+    "volume": "84",
+    "pages": "381–394",
+    "url": "https://doi.org/10.1007/978-3-030-65722-2_24",
+    "doi": "10.1007/978-3-030-65722-2_24",
+    "sjr": 0.833,
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 82,
+    "verified": [
+      "DOI 10.1007/978-3-030-65722-2_24 — Crossref: „Insider Threats to IT Security of Critical Infrastructures“"
+    ]
   }
 ]

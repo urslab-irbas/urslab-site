@@ -12,3 +12,4 @@
 | 2026-10-12 16:51 | #80 | @ivangaidarski | Information Security and Dependability in Integrated Intelligent Educational Environments (2026) | ISBN 978-3-030-78126-2 — Springer International Publishing AG: „Advances in Intelligent Systems Research and Innovation“ | публикувана |
 | 2026-10-13 12:08 | #81 | @ivangaidarski | Insider Threats to IT Security of Critical Infrastructures (2021) | ISBN 978-3030657222 — Springer International Publishing: „Cyber Situational Awareness in Critical Infrastructure Organizations“ | публикувана |
 | 2026-10-13 12:12 | #81 | @ivangaidarski | Insider Threats to IT Security of Critical Infrastructures (2021) | — | върната от @urslab-irbas |
+| 2026-10-13 12:26 | #82 | @ivangaidarski | Insider Threats to IT Security of Critical Infrastructures (2021) | DOI 10.1007/978-3-030-65722-2_24 — Crossref: „Insider Threats to IT Security of Critical Infrastructures“ | публикувана |
