@@ -251,5 +251,33 @@
       "eISSN 2738-7399 — НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““",
       "НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "nrs",
+    "authors": "Chehlarova, N. & Miltchev, R.",
+    "title": "Подходи за формиране на дигитални компетенции в рамките на образователния процес, провеждан от висшите училища в Република България в ПН „Администрация и управление“ / Аpproaches for formation of digital competencies in the frameworks of the educational process conducted by the higher education institutions in the Republic of Bulgaria in professional field „Administration and management”",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1311-4506",
+    "venue": "Списание „Управление и устойчиво развитие“ /Journal “Management and sustainable development”",
+    "volume": "90",
+    "issue": "5",
+    "url": "https://jmsd.bg/files/articles/90/90-03_N_Chehlarova_R_MIltchev_paper_2021.pdf",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Miltchev, R.": "University of forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 88,
+    "nrsId": 2125,
+    "verified": [
+      "ISSN 1311-4506 — НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“",
+      "НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“"
+    ]
   }
 ]
