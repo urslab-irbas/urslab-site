@@ -177,5 +177,29 @@
       "ISSN 1310-0270 — НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“ (съвпада с ISSN/ISBN по DOI)",
       "НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, T. & Chehlarova, N.",
+    "title": "Computer model for self-preparation for playing with dominoes “Axes of symmetry”",
+    "status": "published",
+    "idType": "eissn",
+    "issn": "2226-1877",
+    "venue": "Symmetry: Culture and Science",
+    "volume": "32",
+    "issue": "2",
+    "pages": "281-284",
+    "publisher": "Symmetrion",
+    "doi": "10.26830/symmetry_2021_2_281",
+    "tags": [
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 85,
+    "verified": [
+      "DOI 10.26830/symmetry_2021_2_281 — Crossref: „Computer model for self-preparation for playing with dominoes “axes of symmetry”“",
+      "eISSN 2226-1877 — ISSN Portal (Confirmed record): „Symmetry: culture and science“ (съвпада с ISSN/ISBN по DOI)"
+    ]
   }
 ]
