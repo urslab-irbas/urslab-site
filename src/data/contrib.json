@@ -114,5 +114,36 @@
     "verified": [
       "DOI 10.1007/978-3-030-65722-2_24 — Crossref: „Insider Threats to IT Security of Critical Infrastructures“"
     ]
+  },
+  {
+    "year": 2020,
+    "cat": "nrs",
+    "authors": "Miltchev, R. & Chehlarova, N.",
+    "title": "Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2534-8515",
+    "venue": "Science, Engineering & Education",
+    "volume": "5",
+    "issue": "1",
+    "pages": "41-50",
+    "url": "https://jsee.uctm.edu/index.php/see/article/view/77",
+    "doi": "10.59957/see.v5.i1.2020.7",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Miltchev, R.": "University of forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 83,
+    "nrsId": 2595,
+    "verified": [
+      "DOI 10.59957/see.v5.i1.2020.7 — Crossref: „Development of digital competencies and skills in the field of use of cloud services and electronic communication“",
+      "ISSN 2534-8515 — НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“"
+    ]
   }
 ]
