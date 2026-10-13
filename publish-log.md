@@ -11,3 +11,4 @@
 | 2026-10-05 22:18 | #44 | @nedachehlarova | Online contest “Mathematics and art” for the development of key competencies (2021) | — | поправка: втори автор Ganchev → Gachev (по указание на ръководителя) |
 | 2026-10-12 16:51 | #80 | @ivangaidarski | Information Security and Dependability in Integrated Intelligent Educational Environments (2026) | ISBN 978-3-030-78126-2 — Springer International Publishing AG: „Advances in Intelligent Systems Research and Innovation“ | публикувана |
 | 2026-10-13 12:08 | #81 | @ivangaidarski | Insider Threats to IT Security of Critical Infrastructures (2021) | ISBN 978-3030657222 — Springer International Publishing: „Cyber Situational Awareness in Critical Infrastructure Organizations“ | публикувана |
+| 2026-10-13 12:12 | #81 | @ivangaidarski | Insider Threats to IT Security of Critical Infrastructures (2021) | — | върната от @urslab-irbas |
