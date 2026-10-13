@@ -145,5 +145,37 @@
       "ISSN 2534-8515 — НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“ (съвпада с ISSN/ISBN по DOI)",
       "НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, T., Tsvyatkov, D. & Chehlarova, N.",
+    "title": "Първа седмица дистанционно обучение в СУ \"Иван Вазов\" в Стара Загора / First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1310-0270",
+    "venue": "Стратегии на образователната и научната политика /Strategies for Policy in Science and Education",
+    "volume": "29",
+    "issue": "2",
+    "pages": "198-212",
+    "publisher": "Аз-буки / Az buki",
+    "url": "https://azbuki.bg/uncategorized/parva-sedmicza-distanczionno-obuchenie-v-su-ivan-vazov-v-stara-zagora/",
+    "doi": "10.53656/str2021-2-6-dist",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Tsvyatkov, D.": "“Ivan Vazov” Secondary School Stara Zagora"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 84,
+    "nrsId": 1364,
+    "verified": [
+      "DOI 10.53656/str2021-2-6-dist — Crossref: „First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora“",
+      "ISSN 1310-0270 — НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“"
+    ]
   }
 ]
