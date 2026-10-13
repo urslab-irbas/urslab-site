@@ -227,5 +227,29 @@
     "verified": [
       "DOI 10.1109/ELECTRONICA52725.2021.9513705 — Crossref: „Digital Competencies Of Public Administration Employees Related To Cybersecurity“"
     ]
+  },
+  {
+    "year": 2022,
+    "cat": "nrs",
+    "authors": "Chehlarova, N.",
+    "title": "Кратко обучение за работа с електронен подпис / Short training for working with electronic signature",
+    "status": "published",
+    "idType": "eissn",
+    "issn": "2738-7399",
+    "venue": "Българско електронно научно списание „Стопанско управление“ /Bulgarian electronic scientific journal “Business Management“",
+    "issue": "1",
+    "pages": "35-45",
+    "url": "https://spisanie-su.eu/4-2/",
+    "tags": [
+      "software",
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 87,
+    "nrsId": 4089,
+    "verified": [
+      "eISSN 2738-7399 — НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““",
+      "НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““"
+    ]
   }
 ]
