@@ -201,5 +201,31 @@
       "DOI 10.26830/symmetry_2021_2_281 — Crossref: „Computer model for self-preparation for playing with dominoes “axes of symmetry”“",
       "eISSN 2226-1877 — ISSN Portal (Confirmed record): „Symmetry: culture and science“ (съвпада с ISSN/ISBN по DOI)"
     ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R.",
+    "title": "Digital competencies of public administration employees related to cybersecurity",
+    "status": "published",
+    "venue": "12th National Conference with International Participation (ELECTRONICA)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "url": "https://ieeexplore.ieee.org/document/9513705",
+    "doi": "10.1109/ELECTRONICA52725.2021.9513705",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Tsochev, G.": "Технически университет – София",
+      "Miltchev, R.": "University of Forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 86,
+    "verified": [
+      "DOI 10.1109/ELECTRONICA52725.2021.9513705 — Crossref: „Digital Competencies Of Public Administration Employees Related To Cybersecurity“"
+    ]
   }
 ]
