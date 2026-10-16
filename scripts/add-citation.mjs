@@ -118,13 +118,14 @@ if (pre.length) fail(pre);
 
 // --- Доказателство: цитираният труд трябва да се намира в цитиращия
 const ev = { how: '', url: '' };
+const filled = new Set(); // полетата, попълнени автоматично от Crossref
 const doi = cleanDoi(data.doi);
 try {
   if (data.src === 'doi') {
     const m = await crossrefWork(doi);
     if (m) {
       const cr = fromCrossref(m);
-      for (const [k, v] of Object.entries(cr)) if (!String(data[k] ?? '').trim()) data[k] = v; // въведеното от члена има предимство
+      for (const [k, v] of Object.entries(cr)) if (!String(data[k] ?? '').trim()) { data[k] = v; filled.add(k); } // въведеното от члена има предимство
       const refs = m.reference ?? [];
       if (refs.length) {
         const f = findInRefs(refs, work, data.member);
@@ -158,7 +159,14 @@ try {
   throw e;
 }
 
-const errs = validateCitation(data, { ...cctx(), full: true });
+let errs = validateCitation(data, { ...cctx(), full: true });
+// Поле, попълнено автоматично от Crossref, не може да е причина за отказ: ако е в неподходящ формат
+// (напр. номер на статия „ENEURO.0390-24.2025“ вместо страници), просто не се записва.
+const bad = errs.filter((e) => ['fmt', 'issn', 'isbn'].includes(e.code) && (filled.has(e.field) || (e.field === 'idValue' && filled.has('idValue'))));
+if (bad.length) {
+  for (const e of bad) { if (e.field === 'idValue' || e.field === 'idType') { delete data.idType; delete data.idValue; } else delete data[e.field]; }
+  errs = validateCitation(data, { ...cctx(), full: true });
+}
 if (errs.length) fail(errs);
 result.title = String(data.title ?? '').slice(0, 90);
 

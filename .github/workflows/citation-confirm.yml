@@ -1,0 +1,114 @@
+# Потвърждаване / отказ на намерени цитирания с ЕДНА отметка в заявката „[Нови цитирания] …“ (без формата).
+# Отметка слага съавтор на цитирания труд с GitHub акаунт или ръководителят (scripts/confirm-citations.mjs):
+#   - показател (Д-12 Scopus / Д-12 WoS / Д-13 / Д-14) → нова заявка „[Цитиране] …“ с готовите данни; citation.yml я
+#     проверява по всички правила (Crossref, НАЦИД, регистри), записва цитирането на всички съавтори и качва сайта;
+#     резултатът се пише на мястото на отметките;
+#   - „Откажи“ → цитирането не се предлага повече (citation-scan/state.json в клона data).
+name: Потвърждаване на цитирания с отметка
+on:
+  issues:
+    types: [edited]
+permissions:
+  contents: write
+  issues: write
+  actions: write
+concurrency:
+  group: citation-confirm-${{ github.event.issue.number }}
+  cancel-in-progress: false
+jobs:
+  confirm:
+    if: startsWith(github.event.issue.title, '[Нови цитирания]') && github.event.issue.state == 'open' && github.event.sender.type != 'Bot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Кандидатите от последното търсене (клон data)
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- citation-scan 2>/dev/null || mkdir -p citation-scan
+
+      - name: Текущият текст на заявката
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const r = await github.rest.issues.get({ owner, repo, issue_number: context.issue.number });
+            require('fs').writeFileSync('body.md', r.data.body ?? '');
+
+      - name: Отметнатите цитирания и правото на подателя
+        id: plan
+        env:
+          ADMIN_LOGIN: ${{ github.repository_owner }}
+          SENDER: ${{ github.event.sender.login }}
+          NUM: ${{ github.event.issue.number }}
+        run: |
+          node scripts/confirm-citations.mjs body.md "$SENDER" "$NUM"
+          node -e 'const p=require("./plan.json"); require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `n=${p.confirm.length + p.reject.length + p.deny.length + p.unknown.length}\nconfirm=${p.confirm.length}\nreject=${p.reject.length}\n`)'
+
+      - name: Заявки „[Цитиране]“ и състоянието в заявката
+        if: steps.plan.outputs.n != '0'
+        uses: actions/github-script@v7
+        env:
+          SENDER: ${{ github.event.sender.login }}
+        with:
+          script: |
+            const fs = require('fs');
+            const { setStatus, untick } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/confirm-citations.mjs`);
+            const { owner, repo } = context.repo;
+            const num = context.issue.number;
+            const p = JSON.parse(fs.readFileSync('plan.json', 'utf8'));
+            const date = new Date().toISOString();
+            const upd = { rejected: {}, confirmed: {} };
+            const made = {};
+            for (const c of p.confirm) {
+              const r = await github.rest.issues.create({ owner, repo, title: c.title, body: c.body });
+              made[c.id] = r.data.number;
+              upd.confirmed[c.key] = { by: process.env.SENDER, date, issue: r.data.number, scan: num };
+            }
+            for (const x of p.reject) upd.rejected[x.key] = { by: process.env.SENDER, date, scan: num };
+            // текстът може да се е променил междувременно — взема се отново и се променят само редовете на обработените
+            let body = (await github.rest.issues.get({ owner, repo, issue_number: num })).data.body ?? '';
+            for (const c of p.confirm) body = setStatus(body, c.id, c.status.replace('#NEW', `#${made[c.id]}`));
+            for (const x of p.reject) body = setStatus(body, x.id, x.status);
+            for (const x of [...p.deny, ...p.unknown]) body = untick(body, x.id);
+            await github.rest.issues.update({ owner, repo, issue_number: num, body });
+            const notes = [
+              ...p.deny.map((x) => `- ${x.why}`),
+              ...p.unknown.map(() => '- данните на това цитиране ги няма (по-старо търсене) — въведете го през формата или пуснете ново търсене'),
+            ];
+            if (notes.length) await github.rest.issues.createComment({ owner, repo, issue_number: num, body: `@${process.env.SENDER}, някои отметки не са приети и са махнати:\n\n${notes.join('\n')}` });
+            fs.writeFileSync('state-upd.json', JSON.stringify(upd));
+
+      - name: Запис на отказаните / потвърдените в клона data
+        if: steps.plan.outputs.confirm != '0' || steps.plan.outputs.reject != '0'
+        run: |
+          cp state-upd.json "$RUNNER_TEMP/"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ok=0
+          for i in 1 2 3 4; do
+            rm -rf "$RUNNER_TEMP/data"; git worktree prune
+            git fetch -q origin data
+            git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
+            ( cd "$RUNNER_TEMP/data" && mkdir -p citation-scan && node -e '
+                const fs = require("fs"), f = "citation-scan/state.json";
+                const st = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")) : { seen: {}, runs: [] };
+                const u = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + "/state-upd.json", "utf8"));
+                st.rejected = { ...(st.rejected || {}), ...u.rejected };
+                st.confirmed = { ...(st.confirmed || {}), ...u.confirmed };
+                fs.writeFileSync(f, JSON.stringify(st, null, 2) + "\n");
+              ' && git add citation-scan/state.json && git commit -q -m "Цитирания: решения с отметка в #${{ github.event.issue.number }} (@${{ github.event.sender.login }})" && git push -q origin HEAD:data ) && { ok=1; break; }
+            sleep 5
+          done
+          [ "$ok" = 1 ] || { echo "::error::Записът в клона data не успя"; exit 1; }
+
+      - name: Проверка и въвеждане на потвърдените (citation.yml)
+        if: steps.plan.outputs.confirm != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run citation.yml --ref main
