@@ -35,6 +35,10 @@ RewriteRule ^(wp-admin|wp-includes|wp-content|wp-login\.php|xmlrpc\.php|wp-json)
     Header set X-Robots-Tag "noimageindex, noindex"
   </FilesMatch>
   # банерите на книгите (/docs/books/) — да се индексират (търсене на изображения, прегледи в социални мрежи)
+  # ръководството за цитиранията е за членовете с акаунт — без индексиране в търсачките
+  <Files "URSlab-citirania.pdf">
+    Header set X-Robots-Tag "noindex, nofollow"
+  </Files>
   <If "%{REQUEST_URI} =~ m#^/docs/books/#">
     Header unset X-Robots-Tag
   </If>

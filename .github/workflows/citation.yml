@@ -65,20 +65,17 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           NUM: ${{ github.event.issue.number }}
           AUTHOR: ${{ github.event.issue.user.login }}
-          MEMBER: ${{ steps.check.outputs.member }}
         run: |
           TITLE=$(node -p "require('./pub-result.json').title")
-          F="src/data/citations/$MEMBER/contrib.json"
-          cp "$F" "$RUNNER_TEMP/cit.json"; cp publish-log.md "$RUNNER_TEMP/"
+          mkdir -p "$RUNNER_TEMP/cit"; cp --parents src/data/citations/*/contrib.json "$RUNNER_TEMP/cit/"; cp publish-log.md "$RUNNER_TEMP/"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch -q origin data
           git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
           cd "$RUNNER_TEMP/data"
-          mkdir -p "src/data/citations/$MEMBER"
-          cp "$RUNNER_TEMP/cit.json" "$F"
+          cp -r "$RUNNER_TEMP/cit/src" .
           cp "$RUNNER_TEMP/publish-log.md" publish-log.md
-          git add "$F" publish-log.md
+          git add src/data/citations publish-log.md
           git commit -m "Цитиране от заявка #$NUM (@$AUTHOR): $TITLE"
           ok=0; for i in 1 2 3; do
             if git push origin HEAD:data; then ok=1; break; fi

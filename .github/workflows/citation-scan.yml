@@ -1,0 +1,129 @@
+# Автоматично търсене на нови цитирания (scripts/scan-citations.mjs): OpenAlex, OpenCitations, Semantic Scholar.
+# Кога: веднъж месечно (1-во число), ръчно от член на колектива с GitHub акаунт (бутонът „Търси нови цитирания“
+# в „Обобщен отчет“ → заявка „[Търсене на цитирания] …“; най-много веднъж на 24 часа) или от ръководителя (Run workflow).
+# Резултат: заявка „[Нови цитирания] <дата>“ с връзки „Потвърди“ (формата „Ново цитиране“ е попълнена) и имейл.
+# Имейл: засега само до ръководителя; за всички членове задайте Variables → SCAN_MAIL_TO = all.
+# Пощата се изпраща само ако са зададени Secrets: MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM.
+name: Търсене на нови цитирания
+on:
+  schedule:
+    - cron: '17 4 1 * *'
+  workflow_dispatch:
+  issues:
+    types: [opened]
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: citation-scan
+  cancel-in-progress: false
+jobs:
+  scan:
+    if: github.event_name != 'issues' || startsWith(github.event.issue.title, '[Търсене на цитирания]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Данните от клона data (публикации, цитирания, състояние на търсенето)
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- src/data/contrib.json
+          git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true
+          git checkout FETCH_HEAD -- citation-scan 2>/dev/null || true
+
+      - name: Право и честота (при ръчно търсене от сайта)
+        id: gate
+        env:
+          AUTHOR: ${{ github.event.issue.user.login }}
+          EVENT: ${{ github.event_name }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          node -e '
+            const fs = require("fs");
+            const ev = process.env.EVENT, who = (process.env.AUTHOR || "").toLowerCase();
+            let ok = true, why = "";
+            if (ev === "issues") {
+              const gh = fs.readdirSync("src/data/team").filter((f) => f.endsWith(".ts")).map((f) => (fs.readFileSync("src/data/team/" + f, "utf8").match(/github:\s*\x27([^\x27]+)\x27/) || [])[1]).filter(Boolean).map((g) => g.toLowerCase());
+              if (!gh.includes(who) && who !== process.env.OWNER.toLowerCase()) { ok = false; why = "Търсене пускат само членовете на колектива с GitHub акаунт и ръководителят."; }
+              const st = fs.existsSync("citation-scan/state.json") ? JSON.parse(fs.readFileSync("citation-scan/state.json", "utf8")) : {};
+              if (ok && st.lastRun && Date.now() - Date.parse(st.lastRun) < 24 * 3600e3) { ok = false; why = "Последното търсене беше на " + st.lastRun.slice(0, 16).replace("T", " ") + " UTC (до 24 часа). Резултатът е в последната заявка „[Нови цитирания]“."; }
+            }
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, "ok=" + ok + "\nwhy=" + why + "\n");
+          '
+      - name: Отказ
+        if: steps.gate.outputs.ok != 'true'
+        uses: actions/github-script@v7
+        env:
+          WHY: ${{ steps.gate.outputs.why }}
+        with:
+          script: |
+            const { owner, repo } = context.repo; const num = context.issue.number;
+            const last = (await github.rest.issues.listForRepo({ owner, repo, labels: 'търсене-цитирания', state: 'all', per_page: 1 })).data[0];
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: `ℹ️ ${process.env.WHY}${last ? ` Последен резултат: #${last.number}` : ''}` });
+            await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: 'not_planned' });
+
+      - name: Изграждане на сайта (актуален списък на трудовете и цитиранията)
+        if: steps.gate.outputs.ok == 'true'
+        run: npm ci && npm run build
+      - name: Търсене
+        id: scan
+        if: steps.gate.outputs.ok == 'true'
+        env:
+          TRIGGER: ${{ github.event_name == 'schedule' && 'месечно' || github.event_name == 'issues' && format('ръчно, @{0}', github.event.issue.user.login) || 'ръчно, ръководителят' }}
+          SCAN_MAIL_TO: ${{ vars.SCAN_MAIL_TO }}
+          STATE_FILE: citation-scan/state.json
+        run: |
+          node scripts/scan-citations.mjs > /dev/null
+          node -e 'const r=require("./scan-result.json"); const fs=require("fs"); fs.appendFileSync(process.env.GITHUB_OUTPUT, `total=${r.fresh + r.pending + r.newWorks}\nfresh=${r.fresh}\nemails=${r.emails.join(",")}\n`)'
+      - name: Заявка с резултата
+        id: report
+        if: steps.scan.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            let body = fs.readFileSync('scan-report.md', 'utf8');
+            if (body.length > 60000) body = body.slice(0, 59000) + `\n\n…(отрязано — пълният отчет е в клона data: citation-scan/)`;
+            const date = new Date().toISOString().slice(0, 10);
+            const r = await github.rest.issues.create({ owner, repo, title: `[Нови цитирания] ${date}`, body, labels: ['търсене-цитирания'] });
+            core.setOutput('url', r.data.html_url);
+            if (context.eventName === 'issues') {
+              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body: `✅ Търсенето завърши — резултатът е в #${r.data.number}.` });
+              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed' });
+            }
+      - name: Запис на състоянието в клона data
+        if: steps.scan.outcome == 'success'
+        run: |
+          D=$(date -u +%F)
+          mkdir -p "$RUNNER_TEMP/s"; cp citation-scan/state.json "$RUNNER_TEMP/s/"; cp scan-report.md "$RUNNER_TEMP/s/report-$D.md"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin data
+          git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
+          cd "$RUNNER_TEMP/data"
+          mkdir -p citation-scan; cp "$RUNNER_TEMP/s/"* citation-scan/
+          git add citation-scan
+          git commit -q -m "Търсене на цитирания $D" || exit 0
+          for i in 1 2 3; do git push -q origin HEAD:data && break; sleep 5; git pull -q --rebase origin data; done
+      - name: Имейл
+        if: steps.scan.outcome == 'success' && env.MAIL_SERVER != '' && steps.scan.outputs.total != '0'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: ${{ secrets.MAIL_FROM }}
+          to: ${{ steps.scan.outputs.emails }}
+          subject: "URSlab: нови цитирания (${{ steps.scan.outputs.fresh }}) — ${{ steps.report.outputs.url }}"
+          html_body: file://scan-report.html
+          convert_markdown: false
