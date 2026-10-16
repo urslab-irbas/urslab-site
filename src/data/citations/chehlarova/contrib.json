@@ -1,1 +1,59 @@
-[]
+[
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.3389/frobt.2024.1414853",
+    "ind": "12",
+    "year": 2025,
+    "authors": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M.",
+    "title": "The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task",
+    "index": "wos",
+    "src": "doi",
+    "idType": "eissn",
+    "issn": "2373-2822",
+    "venue": "eneuro",
+    "volume": "12",
+    "issue": "4",
+    "publisher": "Society for Neuroscience",
+    "where": "[21]",
+    "doi": "10.1523/eneuro.0390-24.2025",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 21 от 117 (DOI 10.3389/frobt.2024.1414853 на цитирания труд)",
+    "text": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M. The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task. eneuro, 12(4), Society for Neuroscience, 2025 eISSN 2373-2822",
+    "by": "urslab-irbas",
+    "ghIssue": 106,
+    "evidenceUrl": "https://doi.org/10.1523/eneuro.0390-24.2025",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 21 от 117 (DOI 10.3389/frobt.2024.1414853 на цитирания труд)",
+      "DOI 10.1523/eneuro.0390-24.2025 — Crossref: „The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task“",
+      "eISSN 2373-2822 — ISSN Portal (Confirmed record): „ENeuro“ (съвпада с ISSN/ISBN по DOI)"
+    ],
+    "confirmedBy": "madzharov"
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.3389/frobt.2024.1414853",
+    "ind": "12",
+    "year": 2025,
+    "authors": "Dimitrova, M., & Valchkova, N.",
+    "title": "Feasibility of the Cyber-Physical Nurse",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2367-3370",
+    "venue": "Lecture Notes in Networks and Systems",
+    "pages": "127-137",
+    "publisher": "Springer Nature Singapore",
+    "where": "[27]",
+    "doi": "10.1007/978-981-96-9709-0_9",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 27 от 35 (DOI 10.3389/frobt.2024.1414853 на цитирания труд)",
+    "text": "Dimitrova, M., & Valchkova, N. Feasibility of the Cyber-Physical Nurse. Lecture Notes in Networks and Systems, pp. 127–137, Springer Nature Singapore, 2025 ISSN 2367-3370",
+    "by": "urslab-irbas",
+    "ghIssue": 107,
+    "evidenceUrl": "https://doi.org/10.1007/978-981-96-9709-0_9",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 27 от 35 (DOI 10.3389/frobt.2024.1414853 на цитирания труд)",
+      "DOI 10.1007/978-981-96-9709-0_9 — Crossref: „Feasibility of the Cyber-Physical Nurse“",
+      "ISSN 2367-3370 — ISSN Portal (Confirmed record): „Lecture notes in networks and systems (Print)“ (съвпада с ISSN/ISBN по DOI)"
+    ],
+    "confirmedBy": "madzharov"
+  }
+]

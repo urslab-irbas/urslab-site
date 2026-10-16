@@ -1,1 +1,283 @@
-[]
+[
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Gaidarski, I.",
+    "title": "Method for design of information security system for sensitive data leak prevention",
+    "venue": "Journal of Data Science and Intelligent Systems (JDSIS)",
+    "publisher": "Bon View Publishing Pte Ltd.",
+    "url": "https://ojs.bonviewpress.com/index.php/jdsis/article/view/4231",
+    "abstract": "This article proposes a top-down method for designing an information security system (ISS) that prevents the leakage of sensitive information outside the organization. The method combines systems analysis with the IEEE 1471 and ISO/IEC/IEEE 42010 architecture description standards to construct stakeholder-specific conceptual models and a multi-layered conceptual ISS architecture. Two formal transformations are defined: T₁ converts the conceptual model into an object-oriented model represented via the Unified Modeling Language (UML), while T₂ converts this model into an agent-based simulation model. The method is compared against NIST Special Publication 800-37, the ISO/IEC 27005:2022 standard, the SABSA (Sherwood Applied Business Security Architecture) framework, and the TOGAF framework (Table 1). A one-year field study across seven organizations (five public and two private)—in which the ISS was implemented on a Data Leak Prevention (DLP) platform—demonstrated an average 42.1% reduction in policy violation incidents (Wilcoxon criterion W = 0, p = 0.016, effect size dz = 3.50 for paired samples), as well as an increase in the composite ISO/IEC 27004-based compliance score from 18.7% to 86.4%. An agent-based prototype (implemented in the NetLogo environment, using 50 Monte Carlo simulations) reproduces a reduction in the same direction and of comparable magnitude in a simulation environment (in silico). In compliance with the study's ethical approval requirements, all results",
+    "share": 100,
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 34,
+    "status": "submitted",
+    "idType": "eissn",
+    "issn": "2972-3841",
+    "verified": [
+      "eISSN 2972-3841 — ISSN Portal (Confirmed record): „Journal of data science and intelligent systems“"
+    ]
+  },
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Gaidarski, I. & Madzharov, A.",
+    "title": "Design of Information Security Systems for internal threat protection",
+    "status": "in-press",
+    "idType": "issn",
+    "issn": "1865-0937",
+    "venue": "Springer series “Communications in Computer and Information Science”",
+    "publisher": "Springer series “Communications in Computer and Information Science”",
+    "url": "https://link.springer.com/series/7899/books",
+    "abstract": "The article discusses a method for designing and creating an information security system (ISS) in organizations. The method considers different viewpoints on the system, presenting different requirements for it from dif-ferent specialties involved in the design of the system. The problem with the participation of different specialists comes from the fact that they are expressed through different means of expression (contracts, laws, descrip-tions, engineering drawings, program code, etc.). In addition, different terms are used, which may have different meanings in different specialties. There-fore, when designing an ISS, it is vital to use a method that translates all re-quirements into a single universal language understandable to all special-ties. Such a method for designing an ISS in organizations is presented be-low. We have called the method \"Reversed Tower of Babylon\", which does the opposite of the legend of the Tower of Babel - unifies the language so that it is understandable to all specialists involved in the design of the ISS. The method provides platform independence, through which systems are created that are independent of specific platforms and environments and fulfil the conditions set for them. The article discusses the design and im-plementation of ISS to protect against internal threats in a given organiza-tion with a focus on the human factor as a threat, or the so-called insiders. The system is based on a Data Leak Prevention (DLP) environment.",
+    "share": 100,
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 41,
+    "verified": [
+      "ISSN 1865-0937 — ISSN Portal (Confirmed record): „Communications in computer and information science (Internet)“"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, N. & Gachev, G.",
+    "title": "Online contest “Mathematics and art” for the development of key competencies",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1314-8540",
+    "venue": "Педагогика",
+    "volume": "93",
+    "issue": "1",
+    "pages": "87-99",
+    "publisher": "Аз-буки",
+    "url": "https://azbuki.bg/wp-content/uploads/2021/02/Pedagogy_1_21_Neda-Chehlarova-Georgi-Ganchev.pdf",
+    "doi": "10.53656/ped2021-1.07",
+    "tags": [
+      "software",
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 44,
+    "nrsId": 2916,
+    "verified": [
+      "DOI 10.53656/ped2021-1.07 — Crossref: „Online Contest “Mathematics and Art” for the Development of Key Competencies“",
+      "ISSN 1314-8540 — НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 2916: „ПЕДАГОГИКА: месечно научнотеоретично списание“"
+    ]
+  },
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Djambazova, E., Gaidarski, I., Ilchev, S., & Terzieva, V.",
+    "title": "Information Security and Dependability in Integrated Intelligent Educational Environments",
+    "status": "in-press",
+    "idType": "isbn",
+    "isbn": "978-3-030-78126-2",
+    "venue": "Advances and Problems in Intelligent Systems (Studies in Systems, Decision and Control)",
+    "publisher": "Springer Nature",
+    "tags": [
+      "security",
+      "education"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 80,
+    "verified": [
+      "ISBN 978-3-030-78126-2 — Springer International Publishing AG: „Advances in Intelligent Systems Research and Innovation“"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "q3",
+    "authors": "Gaidarski, I., & Minchev, Z.",
+    "title": "Insider Threats to IT Security of Critical Infrastructures",
+    "status": "published",
+    "venue": "Digital Transformation, Cyber Security and Resilience of Modern Societies (Studies in Big Data, Vol. 84, pp. 381–394)",
+    "volume": "84",
+    "pages": "381–394",
+    "url": "https://doi.org/10.1007/978-3-030-65722-2_24",
+    "doi": "10.1007/978-3-030-65722-2_24",
+    "sjr": 0.833,
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 82,
+    "verified": [
+      "DOI 10.1007/978-3-030-65722-2_24 — Crossref: „Insider Threats to IT Security of Critical Infrastructures“"
+    ]
+  },
+  {
+    "year": 2020,
+    "cat": "nrs",
+    "authors": "Miltchev, R. & Chehlarova, N.",
+    "title": "Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2534-8515",
+    "venue": "Science, Engineering & Education",
+    "volume": "5",
+    "issue": "1",
+    "pages": "41-50",
+    "url": "https://jsee.uctm.edu/index.php/see/article/view/77",
+    "doi": "10.59957/see.v5.i1.2020.7",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Miltchev, R.": "University of forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 83,
+    "nrsId": 2595,
+    "verified": [
+      "DOI 10.59957/see.v5.i1.2020.7 — Crossref: „Development of digital competencies and skills in the field of use of cloud services and electronic communication“",
+      "ISSN 2534-8515 — НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 2595: „SCIENCE, Engineering & Education“"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, T., Tsvyatkov, D. & Chehlarova, N.",
+    "title": "Първа седмица дистанционно обучение в СУ \"Иван Вазов\" в Стара Загора / First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1310-0270",
+    "venue": "Стратегии на образователната и научната политика /Strategies for Policy in Science and Education",
+    "volume": "29",
+    "issue": "2",
+    "pages": "198-212",
+    "publisher": "Аз-буки / Az buki",
+    "url": "https://azbuki.bg/uncategorized/parva-sedmicza-distanczionno-obuchenie-v-su-ivan-vazov-v-stara-zagora/",
+    "doi": "10.53656/str2021-2-6-dist",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Tsvyatkov, D.": "“Ivan Vazov” Secondary School Stara Zagora"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 84,
+    "nrsId": 1364,
+    "verified": [
+      "DOI 10.53656/str2021-2-6-dist — Crossref: „First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora“",
+      "ISSN 1310-0270 — НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 1364: „СТРАТЕГИИ на образователната и научната политика: тримесечно научно-теоретично списание“"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, T. & Chehlarova, N.",
+    "title": "Computer model for self-preparation for playing with dominoes “Axes of symmetry”",
+    "status": "published",
+    "idType": "eissn",
+    "issn": "2226-1877",
+    "venue": "Symmetry: Culture and Science",
+    "volume": "32",
+    "issue": "2",
+    "pages": "281-284",
+    "publisher": "Symmetrion",
+    "doi": "10.26830/symmetry_2021_2_281",
+    "tags": [
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 85,
+    "verified": [
+      "DOI 10.26830/symmetry_2021_2_281 — Crossref: „Computer model for self-preparation for playing with dominoes “axes of symmetry”“",
+      "eISSN 2226-1877 — ISSN Portal (Confirmed record): „Symmetry: culture and science“ (съвпада с ISSN/ISBN по DOI)"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "idx",
+    "authors": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R.",
+    "title": "Digital competencies of public administration employees related to cybersecurity",
+    "status": "published",
+    "venue": "12th National Conference with International Participation (ELECTRONICA)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "url": "https://ieeexplore.ieee.org/document/9513705",
+    "doi": "10.1109/ELECTRONICA52725.2021.9513705",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Tsochev, G.": "Технически университет – София",
+      "Miltchev, R.": "University of Forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 86,
+    "verified": [
+      "DOI 10.1109/ELECTRONICA52725.2021.9513705 — Crossref: „Digital Competencies Of Public Administration Employees Related To Cybersecurity“"
+    ]
+  },
+  {
+    "year": 2022,
+    "cat": "nrs",
+    "authors": "Chehlarova, N.",
+    "title": "Кратко обучение за работа с електронен подпис / Short training for working with electronic signature",
+    "status": "published",
+    "idType": "eissn",
+    "issn": "2738-7399",
+    "venue": "Българско електронно научно списание „Стопанско управление“ /Bulgarian electronic scientific journal “Business Management“",
+    "issue": "1",
+    "pages": "35-45",
+    "url": "https://spisanie-su.eu/4-2/",
+    "tags": [
+      "software",
+      "education"
+    ],
+    "by": "nedachehlarova",
+    "ghIssue": 87,
+    "nrsId": 4089,
+    "verified": [
+      "eISSN 2738-7399 — НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““",
+      "НАЦИД НРС, ID 4089: „БЪЛГАРСКО електронно научно списание „Стопанско управление““"
+    ]
+  },
+  {
+    "year": 2021,
+    "cat": "nrs",
+    "authors": "Chehlarova, N. & Miltchev, R.",
+    "title": "Подходи за формиране на дигитални компетенции в рамките на образователния процес, провеждан от висшите училища в Република България в ПН „Администрация и управление“ / Аpproaches for formation of digital competencies in the frameworks of the educational process conducted by the higher education institutions in the Republic of Bulgaria in professional field „Administration and management”",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1311-4506",
+    "venue": "Списание „Управление и устойчиво развитие“ /Journal “Management and sustainable development”",
+    "volume": "90",
+    "issue": "5",
+    "url": "https://jmsd.bg/files/articles/90/90-03_N_Chehlarova_R_MIltchev_paper_2021.pdf",
+    "tags": [
+      "software",
+      "security",
+      "education"
+    ],
+    "affil": {
+      "Miltchev, R.": "University of forestry"
+    },
+    "by": "nedachehlarova",
+    "ghIssue": 88,
+    "nrsId": 2125,
+    "verified": [
+      "ISSN 1311-4506 — НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“",
+      "НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“"
+    ]
+  }
+]
