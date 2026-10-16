@@ -25,7 +25,7 @@ import cGeorgiev from './georgiev/contrib.json';
 /** Запис, въведен през формата (src/lib/pubSchema.js → normalizeCitation + проверките на Action-а) */
 export interface CitContrib {
   member: string; cited: string; ind: CitInd; year: number; authors: string; title: string; text: string;
-  doi?: string; url?: string; where?: string; index?: 'scopus' | 'wos'; ghIssue?: number; verified?: string[];
+  doi?: string; url?: string; where?: string; index?: 'scopus' | 'wos'; ghIssue?: number; verified?: string[]; evidence?: string; evidenceUrl?: string;
 }
 
 const manual: Record<string, CitedWork[]> = { madzharov, aleksandrov, chehlarova, gaidarski, hristozov, georgiev };
@@ -57,7 +57,7 @@ export function citationsFor(member: string, pubs: ArchivePub[]): Map<ArchivePub
     const p = mine.find((x) => pubKey(x) === c.cited);
     if (!p) throw new Error(`citations/${member}/contrib.json: няма публикация на сайта с ключ ${c.cited} (заявка #${c.ghIssue})`);
     if (!works.has(p)) works.set(p, { no: ++next, pub: { title: p.title }, source: 'въведени през формата', cites: [] });
-    const cite: Citation = { text: c.text, year: c.year, ind: c.ind, doi: c.doi, url: c.url, where: c.where, index: c.index, ghIssue: c.ghIssue, verified: c.verified };
+    const cite: Citation = { text: c.text, year: c.year, ind: c.ind, doi: c.doi, url: c.url, where: c.where, index: c.index, ghIssue: c.ghIssue, verified: c.verified, evidence: c.evidence, evidenceUrl: c.evidenceUrl };
     works.get(p)!.cites.push(cite);
   }
   const out = new Map<ArchivePub, CitBlock>();
@@ -72,7 +72,7 @@ export function citables(pubs: ArchivePub[]) {
     const list = pubs.filter((x) => x.cat !== 'sub' && x.team.includes(m)).map((p) => {
       const b = cit.get(p);
       return {
-        key: pubKey(p), title: p.title, year: p.year, authors: p.authors, no: b?.work.no,
+        key: pubKey(p), title: p.title, tr: p.tr, year: p.year, authors: p.authors, no: b?.work.no,
         cites: (b?.work.cites ?? []).map((c) => ({ title: c.text, doi: c.doi ?? '' })),
       };
     });

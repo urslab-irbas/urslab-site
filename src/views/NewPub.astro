@@ -95,6 +95,18 @@ const rows = [
       <div class="citbox cit-only" data-citbox>
         <p class="cited"><span class="l">{T('Цитиран труд', 'Cited work')}</span><span data-cited>—</span></p>
         <p class="bad-cited" data-cited-bad hidden>{T('Цитираният труд не е намерен сред публикуваните трудове на този член на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.', 'The cited work was not found among this member’s published works on the site. Open the form from the “+ Citation” button in the “Summary report”.')}</p>
+        <fieldset class="f srcs" data-field="src">
+          <legend class="l">{T('Как да се провери цитирането', 'How the citation is checked')} *</legend>
+          <label class="src"><input type="radio" name="src" value="doi" /> <span><b>DOI</b> — {T('цитиращият труд е в световна база (Scopus, Web of Science, Crossref…). Стига DOI: натиснете „Попълни по DOI“ — данните и списъкът с литература се вземат автоматично.', 'the citing work is in a world database (Scopus, Web of Science, Crossref…). The DOI is enough: press “Fill from DOI” — the data and the reference list are taken automatically.')}</span></label>
+          <label class="src"><input type="radio" name="src" value="url" /> <span><b>{T('Линк', 'Link')}</b> — {T('цитиращият труд е в друга интернет база. Въведете линка към него (страница или PDF) в полето „Линк“ по-долу.', 'the citing work is in another online database. Enter the link to it (page or PDF) in the “Link” field below.')}</span></label>
+          <label class="src"><input type="radio" name="src" value="pdf" /> <span><b>{T('PDF файл', 'PDF file')}</b> — {T('нямате DOI или линк: след „Запиши“ в GitHub плъзнете PDF файла на цитиращия труд в полето на заявката и тогава натиснете „Create“.', 'no DOI or link: after “Save”, on GitHub drag the PDF of the citing work into the request box, then press “Create”.')}</span></label>
+          <small>{T('Системата търси вашия труд в литературата / текста на цитиращия (по DOI или ISBN, или по заглавието до фамилията ви) и приема цитирането само ако го намери — правилото на НАЦИД за проверимо цитиране.', 'The system looks for your work in the references / text of the citing work (by DOI or ISBN, or by the title next to your surname) and accepts the citation only if it finds it — the NACID rule of a verifiable citation.')}</small>
+          <div class="doi-fill" data-doifill hidden>
+            <button type="button" class="btn ghost" data-crossref>{T('Попълни по DOI', 'Fill from DOI')}</button>
+            <span class="muted" data-crossref-msg></span>
+          </div>
+          <em class="err" hidden></em>
+        </fieldset>
         <div class="frow1 c3">
           <label class="f" data-field="ind">
             <span class="l">{T('Показател (НАЦИД)', 'Indicator (NACID)')} *</span>
@@ -109,13 +121,13 @@ const rows = [
             <em class="err" hidden></em>
           </label>
           <label class="f" data-field="where">
-            <span class="l">{T('Къде е цитирането', 'Where is the citation')} *</span>
+            <span class="l">{T('Къде е цитирането (по желание)', 'Where is the citation (optional)')}</span>
             <input name="where" autocomplete="off" placeholder={`${T('напр.', 'e.g.')} ${T('[27], с. 136', '[27], p. 136')}`} />
-            <small>{T('Номерът на вашия труд в списъка с литература на цитиращия труд и/или страницата. Това е доказателството при проверка от НАЦИД.', 'The number of your work in the reference list of the citing work and/or the page. This is the evidence for a NACID check.')}</small>
+            <small>{T('Номерът на вашия труд в литературата на цитиращия труд и/или страницата. При DOI системата го намира сама.', 'The number of your work in the reference list of the citing work and/or the page. With a DOI the system finds it itself.')}</small>
             <em class="err" hidden></em>
           </label>
         </div>
-        <p class="muted cit-note">{T('Долу въведете данните на цитиращия труд — автори, година, заглавие, списание / сборник, DOI или ISSN / ISBN.', 'Below enter the citing work — authors, year, title, journal / proceedings, DOI or ISSN / ISBN.')}</p>
+        <p class="muted cit-note">{T('Долу са данните на цитиращия труд — автори, година, заглавие, списание / сборник, DOI или ISSN / ISBN. При DOI се попълват сами.', 'Below is the citing work — authors, year, title, journal / proceedings, DOI or ISSN / ISBN. With a DOI they are filled in automatically.')}</p>
         <em class="err" data-field-err="cited" hidden></em>
       </div>
       {rows.slice(0, 1).map((row) => (
@@ -186,6 +198,7 @@ const rows = [
       <div class="msg bad" data-bad hidden>{T('Има грешки — поправете отбелязаните полета и натиснете „Запиши“ отново.', 'There are errors — fix the marked fields and press “Save” again.')}</div>
       <div class="msg ok" data-ok hidden>
         <p><b>{T('Записът е проверен.', 'The entry is valid.')}</b> {T('В нов прозорец се отвори GitHub с готова заявка. Влезте със своя акаунт (ако не сте) и натиснете зеления бутон „Create“. Ако прозорецът не се отвори:', 'GitHub has opened in a new window with a ready request. Sign in (if needed) and press the green “Create” button. If the window did not open:')} <a data-gh target="_blank" rel="noopener">{T('отворете заявката в GitHub', 'open the request on GitHub')} →</a></p>
+        <p class="cit-only"><b>{T('Ако сте избрали „PDF файл“:', 'If you chose “PDF file”:')}</b> {T('в отворената заявка плъзнете PDF файла на цитиращия труд в полето с текста, изчакайте връзката към него и чак тогава натиснете „Create“. Без файла цитирането се отказва.', 'in the opened request drag the PDF of the citing work into the text box, wait for its link and only then press “Create”. Without the file the citation is refused.')}</p>
         <p>{T('След около минута GitHub ще отговори в заявката: „✅ Публикувано на сайта“ или „❌“ със списък на грешките и връзка за поправка тук.', 'In about a minute GitHub replies in the request: “✅ Published on the site” or “❌” with the errors and a link to fix them here.')}</p>
       </div>
     </form>
@@ -236,7 +249,8 @@ const rows = [
           <li>{T('Д-12 (10 т.) — само ако цитиращият труд е индексиран в Scopus или Web of Science (посочете базата).', 'D-12 (10 pts) — only if the citing work is indexed in Scopus or Web of Science (state which).')}</li>
           <li>{T('Д-13 (3 т.) — монография или колективен том (сборник) с научно рецензиране.', 'D-13 (3 pts) — peer-reviewed monograph or edited volume (proceedings).')}</li>
           <li>{T('Д-14 (2 т.) — нереферирано списание с научно рецензиране; изисква ISSN / eISSN на списанието.', 'D-14 (2 pts) — non-indexed peer-reviewed journal; requires the journal ISSN / eISSN.')}</li>
-          <li>{T('Посочете къде е цитирането (номер в литературата, страница) — това е доказателството.', 'State where the citation is (reference number, page) — this is the evidence.')}</li>
+          <li>{T('Доказателство: DOI (данните и литературата — от Crossref), линк (страницата или PDF файлът) или PDF файл, прикачен в GitHub. Вашият труд трябва да се намира в цитиращия: по DOI / ISBN или по заглавието (или превода му) до фамилията ви. Иначе цитирането не се приема.', 'Evidence: DOI (data and references from Crossref), link (the page or PDF) or a PDF attached on GitHub. Your work must be found in the citing one: by DOI / ISBN or by its title (or translation) next to your surname. Otherwise the citation is refused.')}</li>
+          <li>{T('При линк или PDF заглавието на цитиращия труд трябва да е в страницата / файла — така се проверява, че е точно той.', 'With a link or PDF the title of the citing work must be in the page / file — this checks it is the right one.')}</li>
           <li>{T('DOI, ISSN или ISBN на цитиращия труд се проверяват в публичните регистри, както при нова публикация.', 'The DOI, ISSN or ISBN of the citing work is checked in the public registers, as for a new publication.')}</li>
           <li>{T('Заявката се приема само от GitHub акаунта на члена на колектива, чийто е трудът, или от ръководителя.', 'The request is accepted only from the GitHub account of the team member whose work it is, or from the head of the lab.')}</li>
         </ul>
@@ -267,6 +281,13 @@ const rows = [
   .bad-cited { color: #c0392b; margin: 0; }
   .bad-cited[hidden] { display: none; }
   .cit-note { margin: 0; font-size: .85rem; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; font-size: .88rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
+  .src input { width: auto; margin-top: 3px; }
+  .src:has(input:checked) { border-color: var(--accent); }
+  .doi-fill { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .doi-fill[hidden] { display: none; }
+  .doi-fill .btn { padding: 6px 14px; font-size: .85rem; }
   .steps { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 28px; counter-reset: s; }
   .steps li { counter-increment: s; font: .78rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
   .steps li::before { content: counter(s) '. '; }
@@ -325,7 +346,7 @@ const rows = [
 </style>
 
 <script>
-  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS, validateCitation, normalizeCitation, citeText } from '../lib/pubSchema.js';
+  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS, validateCitation, normalizeCitation, citeText, fromCrossref } from '../lib/pubSchema.js';
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
@@ -358,7 +379,7 @@ const rows = [
     fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
     e.tags = fd.getAll('tags');
     e.member = citMode() ? citMember : fd.get('member');
-    if (citMode()) e.cited = cited?.key ?? qs.get('cite');
+    if (citMode()) { e.cited = cited?.key ?? qs.get('cite'); e.src = String(fd.get('src') ?? ''); }
     e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
     const af: Record<string, string> = {};
     form.querySelectorAll<HTMLInputElement>('[data-affil] input[data-key]').forEach((i) => { if (i.value.trim()) af[i.dataset.key!] = i.value.trim(); });
@@ -393,6 +414,7 @@ const rows = [
     fields.forEach((k) => { const el = form.elements.namedItem(k) as HTMLInputElement | null; if (el && e[k] !== undefined) el.value = String(e[k]); });
     form.querySelectorAll<HTMLInputElement>('input[name="tags"]').forEach((c) => (c.checked = ((e.tags as string[]) || []).includes(c.value)));
     const m = form.elements.namedItem('member') as HTMLSelectElement; if (e.member && ctx.members[e.member as string]) m.value = String(e.member);
+    form.querySelectorAll<HTMLInputElement>('input[name="src"]').forEach((r) => (r.checked = r.value === e.src));
     renderAffil((e.affil as Record<string, string>) ?? {});
   };
   const b64 = { enc: (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
@@ -516,6 +538,26 @@ const rows = [
     } catch { /* без връзка към GitHub */ }
     return out;
   }
+  // ---- Доказателство: DOI → бутон „Попълни по DOI“ (Crossref, без вход)
+  const doiFill = root.querySelector<HTMLElement>('[data-doifill]')!, crMsg = root.querySelector<HTMLElement>('[data-crossref-msg]')!;
+  const syncSrc = () => { const v = (form.querySelector('input[name="src"]:checked') as HTMLInputElement | null)?.value; doiFill.hidden = v !== 'doi'; };
+  form.querySelectorAll('input[name="src"]').forEach((r) => r.addEventListener('change', syncSrc));
+  root.querySelector('[data-crossref]')!.addEventListener('click', async () => {
+    const doi = cleanDoi((form.elements.namedItem('doi') as HTMLInputElement).value);
+    if (!/^10\.\d{4,9}\/\S+$/.test(doi)) { crMsg.textContent = L('Въведете DOI в полето „DOI“ по-долу.', 'Enter the DOI in the “DOI” field below.'); (form.elements.namedItem('doi') as HTMLElement).focus(); return; }
+    crMsg.textContent = L('Търся в Crossref…', 'Looking up Crossref…');
+    try {
+      const r = await fetch(`https://api.crossref.org/works/${encodeURIComponent(doi)}`);
+      if (!r.ok) { crMsg.textContent = L('DOI не е намерен в Crossref — попълнете данните ръчно (проверката в GitHub ще го потърси и в DataCite).', 'DOI not found in Crossref — fill in the data by hand (the GitHub check will also look in DataCite).'); return; }
+      const msg = (await r.json()).message;
+      const d = fromCrossref(msg) as Record<string, unknown>;
+      for (const [k, v] of Object.entries(d)) { const el = form.elements.namedItem(k) as HTMLInputElement | null; if (el) el.value = String(v); }
+      const nref = (msg.reference ?? []).length;
+      crMsg.textContent = L(`Попълнено от Crossref. Литература: ${nref ? nref + ' позиции — проверката в GitHub ще търси вашия труд в нея.' : 'не е публикувана в Crossref.'}`, `Filled from Crossref. References: ${nref ? nref + ' items — the GitHub check will look for your work in them.' : 'not published in Crossref.'}`);
+      preview();
+    } catch { crMsg.textContent = L('Crossref не отговаря — попълнете данните ръчно.', 'Crossref does not respond — fill in the data by hand.'); }
+  });
+
   async function submitCitation() {
     const e = read();
     const vctx = () => ({ cited: cited ? { title: cited.title, year: cited.year, authors: cited.authors } : null });
@@ -530,10 +572,13 @@ const rows = [
       (ctx.lang === 'bg' ? 'Ново цитиране, въведено през формата на сайта от' : 'New citation entered through the site form by') + ` **${who.name}** (@${who.github}).`,
       '', (ctx.lang === 'bg' ? '**Цитиран труд:** ' : '**Cited work:** ') + `${cited!.authors} (${cited!.year}). ${cited!.title}`,
       (ctx.lang === 'bg' ? '**Цитиращ източник (НАЦИД):** ' : '**Citing source (NACID):** ') + data.text + ` — Д-${data.ind}`, '',
+      ...(data.src === 'pdf' ? ['', ctx.lang === 'bg'
+        ? '📎 **ПРИКАЧЕТЕ ТУК PDF ФАЙЛА НА ЦИТИРАЩИЯ ТРУД:** плъзнете файла в това поле (или натиснете „Paste, drop, or click to add files“), изчакайте да се появи връзката към файла и тогава натиснете „Create“.'
+        : '📎 **ATTACH THE PDF OF THE CITING WORK HERE:** drag the file into this box (or click “Paste, drop, or click to add files”), wait for the file link to appear, then press “Create”.', '', ''] : []),
       '<!-- ' + (ctx.lang === 'bg' ? 'Не променяйте блока по-долу. За поправка използвайте формата на сайта.' : 'Do not change the block below. Use the site form for corrections.') + ' -->',
       '```json', JSON.stringify(data, null, 2), '```',
     ].join('\n');
-    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: issueTitle(String(data.title)), body }).toString();
+    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: issueTitle(String(data.title || data.doi)), body }).toString();
     root.querySelector<HTMLAnchorElement>('[data-gh]')!.href = url;
     history.replaceState(null, '', location.pathname + location.search + '#d=' + b64.enc(JSON.stringify(data)));
     const w = window.open('', '_blank');
@@ -541,7 +586,7 @@ const rows = [
     errors = validateCitation(e, { ...vctx(), existing: await freshCites() });
     if (errors.length) { w?.close(); lock(false); show(errors); ok.hidden = true; bad.hidden = false; return; }
     if (w) { w.opener = null; w.location.href = url; }
-    const sent: Sent = { title: String(data.title), gh: who.github, ts: Date.now(), url };
+    const sent: Sent = { title: String(data.title || data.doi), gh: who.github, ts: Date.now(), url };
     store.set(sent);
     poll(sent);
   }
@@ -596,7 +641,7 @@ const rows = [
   const syncInd = () => { idxSel.disabled = indSel.value !== '12'; if (idxSel.disabled) idxSel.value = ''; };
   indSel.addEventListener('change', syncInd); syncInd();
   const h = location.hash.match(/^#d=([\w-]+)/);
-  if (h) { try { const d = JSON.parse(b64.dec(h[1])); if (d.type === 'citation' && d.cited && !citMode()) setCitMode(d.cited, d.member); write(d); syncInd(); } catch { /* повредена връзка — празна форма */ } }
+  if (h) { try { const d = JSON.parse(b64.dec(h[1])); if (d.type === 'citation' && d.cited && !citMode()) setCitMode(d.cited, d.member); write(d); syncInd(); syncSrc(); } catch { /* повредена връзка — празна форма */ } }
   syncStatus();
   renderAffil();
   preview();

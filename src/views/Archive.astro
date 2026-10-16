@@ -168,7 +168,7 @@ const L = {
                   <thead><tr><th>№</th><th>{T('Цитиращ източник', 'Citing source')}</th><th>{T('Показател', 'Indicator')}</th><th>{T('Точки', 'Points')}</th></tr></thead>
                   <tbody>{cb.work.cites.map((c, i) => (
                     <tr><td>{cb.work.no}.{i + 1}</td>
-                      <td>{c.text}{c.where && <> ({T('цитирано', 'cited')}: {c.where})</>}{c.doi && <>, DOI <a href={`https://doi.org/${c.doi}`}>{c.doi}</a></>}{c.url && <> · <a href={c.url} target="_blank" rel="noopener">{T('Линк', 'Link')}</a></>}{c.note && <span class="cn">{c.note}</span>}<span class="mi">{T('Д', 'D')}-{c.ind}</span></td>
+                      <td>{c.text}{c.where && <> ({T('цитирано', 'cited')}: {c.where})</>}{c.doi && <>, DOI <a href={`https://doi.org/${c.doi}`}>{c.doi}</a></>}{c.url && <> · <a href={c.url} target="_blank" rel="noopener">{T('Линк', 'Link')}</a></>}{c.note && <span class="cn">{c.note}</span>}{c.evidence && <span class="cn">{T('Доказателство', 'Evidence')}: {c.evidence}{c.evidenceUrl && <> · <a href={c.evidenceUrl} target="_blank" rel="noopener">{T('отвори', 'open')}</a></>}</span>}<span class="mi">{T('Д', 'D')}-{c.ind}</span></td>
                       <td>{T('Д', 'D')}-{c.ind}</td><td>{citPts(c.ind)}</td></tr>
                   ))}</tbody>
                   <tfoot><tr><td colspan="3">{T('Общо за труда', 'Total for this work')} ({cb.work.cites.length} {T('цитирания', 'citations')})</td><td>{cb.pts}</td></tr></tfoot>
