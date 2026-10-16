@@ -1,0 +1,161 @@
+---
+// Страница на монография / книга (данни: src/data/books.ts).
+// За търсачките: целият текст е в HTML, JSON-LD тип Book, мета тагове citation_* (Google Scholar)
+// и og:image с банера. Банерът се отваря в голям размер (лайтбокс) и като PDF с активни връзки.
+import Layout from '../layouts/Layout.astro';
+import { bookBySlug, bookSlug } from '../data/books';
+import { team } from '../data/team';
+import { t, type Lang } from '../data/content';
+import { href } from '../lib/i18n';
+
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const B = bookBySlug(slug)!;
+const bg = lang === 'bg';
+const T = (b: string, e: string) => (bg ? b : e);
+const A = team.find((m) => m.id === B.authorId)!;
+const site = Astro.site!;
+const pageUrl = new URL(href(lang, bookSlug(B)), site).href;
+const abs = (p: string) => new URL(p, site).href;
+const scopusUrl = A.scopus ? `https://www.scopus.com/authid/detail.uri?authorId=${A.scopus}` : '';
+const sameAs = [A.orcid && `https://orcid.org/${A.orcid}`, scopusUrl, A.scholar].filter(Boolean) as string[];
+
+const title = bg ? B.title : B.tr;
+const desc = `${B.kind[lang]} — ${B.hab ? B.hab[lang] + '. ' : ''}${bg ? B.title : B.tr} (${B.authorFull[lang]}, ${B.year}, ISBN ${B.isbn}). ${B.abstract[lang]}`.slice(0, 300);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  '@id': `${abs(href('bg', bookSlug(B)))}#book`,
+  name: B.title,
+  alternateName: B.tr,
+  inLanguage: 'bg',
+  genre: bg ? 'Монография' : 'Monograph',
+  description: `${B.summary[lang]} ${B.hab ? B.hab[lang] + '.' : ''}`,
+  abstract: B.abstract[lang],
+  author: {
+    '@type': 'Person',
+    name: B.authorFull[lang],
+    alternateName: [B.authorFull[bg ? 'en' : 'bg'], 'Madzharov, A. N.', 'Madjarov, A. N.'],
+    url: `${new URL(href(lang, 'team'), site).href}#${A.id}`,
+    ...(sameAs.length ? { sameAs } : {}),
+  },
+  contributor: (B.reviewers ?? []).map((r) => ({ '@type': 'Person', name: r[lang], roleName: bg ? 'рецензент' : 'reviewer' })),
+  publisher: { '@type': 'Organization', name: B.publisher[lang], address: { '@type': 'PostalAddress', addressLocality: B.place[lang], addressCountry: 'BG' } },
+  datePublished: String(B.year),
+  bookEdition: B.edition?.[lang],
+  bookFormat: 'https://schema.org/Paperback',
+  numberOfPages: B.pages,
+  isbn: B.isbn,
+  identifier: [
+    { '@type': 'PropertyValue', propertyID: 'COBISS.BG-ID', value: B.cobissId },
+    { '@type': 'PropertyValue', propertyID: 'UDC', value: B.udk },
+  ],
+  sameAs: [B.cobissUrl],
+  image: abs(B.banner),
+  url: pageUrl,
+  about: B.toc.filter((c) => /Глава|Chapter/.test(c.t.en + c.t.bg)).map((c) => c.t[lang].replace(/^[^:]+:\s*/, '')),
+};
+---
+<Layout lang={lang} slug={bookSlug(B)} title={title} description={desc} image={B.bannerSmall} ogType="book" jsonLd={jsonLd}>
+  <Fragment slot="head">
+    <meta name="citation_title" content={B.title} />
+    <meta name="citation_author" content={`Маджаров, Анастас Николов`} />
+    <meta name="citation_publication_date" content={String(B.year)} />
+    <meta name="citation_publisher" content={B.publisher.bg} />
+    <meta name="citation_isbn" content={B.isbn} />
+    <meta name="citation_language" content="bg" />
+    <meta name="citation_abstract_html_url" content={abs(href('bg', bookSlug(B)))} />
+    <meta property="book:isbn" content={B.isbn} />
+    <meta property="book:release_date" content={String(B.year)} />
+  </Fragment>
+
+  <header class="page-head"><div class="wrap">
+    <p class="eyebrow"><a href={href(lang, 'publications/earlier')}>{T('Публикации до 2021 г.', 'Publications up to 2021')}</a> / {T('Монографии', 'Monographs')}</p>
+    <h1>{title}</h1>
+    <p class="tr">{bg ? B.tr : B.title}</p>
+    <p class="who"><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorFull[lang]}</a> · {B.year} · ISBN {B.isbn}</p>
+    {B.hab && <p class="hab"><span class="kind">{B.kind[lang]}</span> {B.hab[lang]}</p>}
+  </div></header>
+
+  <section class="block first"><div class="wrap">
+    <figure class="banner">
+      <button type="button" class="bimg" data-lb={B.banner} data-cap={B.bannerAlt[lang]} aria-label={T('Отвори банера в голям размер', 'Open the banner full size')}>
+        <img src={B.banner} alt={B.bannerAlt[lang]} width="1600" height="920" loading="eager" />
+      </button>
+      <figcaption>
+        <button type="button" class="btn-s" data-lb={B.banner} data-cap={B.bannerAlt[lang]}>{T('Банер в голям размер', 'Banner full size')}</button>
+        <a class="btn-s" href={B.bannerPdf} target="_blank" rel="noopener">{T('Банер (PDF с активни връзки)', 'Banner (PDF with live links)')}</a>
+        <a class="btn-s" href={B.cobissUrl}>COBISS.BG ↗</a>
+        {scopusUrl && <a class="btn-s" href={scopusUrl}>Scopus Author ID {A.scopus} ↗</a>}
+      </figcaption>
+    </figure>
+
+    <div class="cols">
+      <div>
+        <h2>{T('Описание', 'Description')}</h2>
+        <p class="sum">{B.summary[lang]}</p>
+        <h3>{T('Анотация', 'Abstract')}</h3>
+        <p>{B.abstract[lang]}</p>
+        {bg ? <p class="muted" lang="en">{B.abstract.en}</p> : <p class="muted" lang="bg">{B.abstract.bg}</p>}
+
+        <h3>{T('Съдържание', 'Contents')}</h3>
+        <ol class="toc">
+          {B.toc.map((c) => <li><span>{c.t[lang]}</span><b>{c.p}</b></li>)}
+        </ol>
+      </div>
+
+      <aside class="facts">
+        <h2>{T('Библиографски данни', 'Bibliographic data')}</h2>
+        <dl>
+          <dt>{T('Вид', 'Type')}</dt><dd>{B.kind[lang]}</dd>
+          {B.hab && <><dt>{T('Хабилитация', 'Habilitation')}</dt><dd>{B.hab[lang]}</dd></>}
+          <dt>{T('Автор', 'Author')}</dt><dd><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorOnBook[lang]}</a></dd>
+          {B.reviewers && <><dt>{T('Рецензенти', 'Reviewers')}</dt><dd>{B.reviewers.map((r) => <span class="ln">{r[lang]}</span>)}</dd></>}
+          <dt>{T('Издател', 'Publisher')}</dt><dd>{B.publisher[lang]}, {B.place[lang]}</dd>
+          <dt>{T('Година', 'Year')}</dt><dd>{B.year}</dd>
+          {B.edition && <><dt>{T('Издание', 'Edition')}</dt><dd>{B.edition[lang]}{B.printed && <>; {T('дадено за печат', 'sent to print')} {B.printed}</>}{B.copies && <>; {T('тираж', 'print run')} {B.copies}</>}{B.format && <>; {T('формат', 'format')} {B.format}</>}</dd></>}
+          <dt>{T('Обем', 'Extent')}</dt><dd>{B.pages} {T('с.', 'pp.')}{B.figures && <>, {B.figures} {T('фиг.', 'figures')}</>}{B.refs && <>, {B.refs} {T('библиографски източника', 'references')}{B.refPages && <> ({T('с.', 'pp.')} {B.refPages})</>}</>}</dd>
+          <dt>ISBN</dt><dd>{B.isbn}</dd>
+          <dt>{T('УДК', 'UDC')}</dt><dd>{B.udk} <span class="muted">(COBISS.BG)</span></dd>
+          <dt>COBISS.BG-ID</dt><dd><a href={B.cobissUrl}>{B.cobissId}</a></dd>
+          <dt>{T('Език', 'Language')}</dt><dd>{T('български', 'Bulgarian')}</dd>
+          {sameAs.length > 0 && <><dt>{T('Профили на автора', 'Author profiles')}</dt><dd>
+            {A.orcid && <span class="ln"><a href={`https://orcid.org/${A.orcid}`}>ORCID {A.orcid}</a></span>}
+            {scopusUrl && <span class="ln"><a href={scopusUrl}>Scopus Author ID {A.scopus}</a></span>}
+            {A.scholar && <span class="ln"><a href={A.scholar}>Google Scholar</a></span>}
+          </dd></>}
+        </dl>
+      </aside>
+    </div>
+  </div></section>
+</Layout>
+
+<style>
+  .eyebrow a { color: inherit; }
+  .tr { font-style: italic; color: var(--muted); margin: -.25rem 0 .5rem; font-size: 1.15rem; }
+  .who { margin: 0 0 .75rem; }
+  .hab { margin: 0; color: var(--text); padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; }
+  .kind { font: 600 .78rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #fff; background: var(--accent-ink); padding: 3px 8px; border-radius: 4px; margin-right: 6px; }
+  section.block.first { padding-top: 32px; }
+  .banner { margin: 0 0 40px; }
+  .bimg { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; cursor: zoom-in; }
+  .bimg img { width: 100%; height: auto; }
+  figcaption { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .btn-s { font: .8rem var(--mono); padding: 7px 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent-ink); cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-s:hover { background: var(--accent); color: #fff; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+  .sum { font-weight: 500; }
+  h3 { margin-top: 1.5rem; }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px dotted var(--line); }
+  .toc b { font: .85rem var(--mono); color: var(--muted); font-weight: 400; }
+  .facts { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .facts h2 { font-size: 1.15rem; }
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 14px; font-size: .95rem; }
+  dt { font: .72rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 3px; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  .ln { display: block; }
+  @media (max-width: 480px) { dl { grid-template-columns: 1fr; } dt { padding-top: 8px; } }
+</style>

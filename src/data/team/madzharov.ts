@@ -10,6 +10,8 @@ const member: Member = {
   title: { bg: 'доц. д-р инж.', en: 'Assoc. Prof. Dr. Eng.' },
   role: { bg: 'Ръководител на лабораторията', en: 'Head of Laboratory' },
   orcid: '0000-0002-6282-617X',
+  scopus: '59132592200',
+  scholar: 'https://scholar.google.com/citations?user=Gvbi8xUAAAAJ',
   email: 'a.madzharov@ir.bas.bg',
   interests: {
     bg: ['Автономна навигация на БЛА', 'INS/GNSS интеграция', 'Елипсоидна геодезия', 'Модели на гравитационното поле'],

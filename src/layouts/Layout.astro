@@ -5,8 +5,10 @@ import { href } from '../lib/i18n';
 import { team } from '../data/team/index';
 
 // noindex: страницата не се индексира от търсачките (404, формата за въвеждане)
-interface Props { lang: Lang; slug: string; title?: string; description?: string; noindex?: boolean }
-const { lang, slug, title, description, noindex = false } = Astro.props;
+// image — картинка за социални мрежи (og:image); ogType — напр. 'book'; jsonLd — допълнителни структурирани данни;
+// слотът „head“ — допълнителни мета тагове (напр. citation_* за Google Scholar)
+interface Props { lang: Lang; slug: string; title?: string; description?: string; noindex?: boolean; image?: string; ogType?: string; jsonLd?: object }
+const { lang, slug, title, description, noindex = false, image, ogType = 'website', jsonLd } = Astro.props;
 const other: Lang = lang === 'bg' ? 'en' : 'bg';
 const fullTitle = title ? `${title} — ${site.short[lang]}` : `${site.name[lang]} — ${site.institute[lang]}`;
 const desc = description ?? site.tagline[lang];
@@ -66,13 +68,17 @@ const orgLd = !noindex && (slug === '' || slug === 'team') ? {
         <link rel="alternate" hreflang="en" href={abs('en')} />
         <link rel="alternate" hreflang="x-default" href={abs('bg')} />
       </>}
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:site_name" content={site.name[lang]} />
   <meta property="og:locale" content={ogLocale[lang]} />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={desc} />
+  {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+  {image && <meta name="twitter:card" content="summary_large_image" />}
   {orgLd && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
+  {jsonLd && !noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  <slot name="head" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

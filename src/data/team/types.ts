@@ -8,6 +8,7 @@ export interface Member {
   github?: string;   // GitHub акаунт → бутон „Нова публикация“ в „Състав“ и право да въвежда публикации
   email?: string;
   scholar?: string;
+  scopus?: string;   // Scopus Author ID (само номерът)
   researchgate?: string;
   dissertation?: string;
   thesis?: { bg: string; en: string };
