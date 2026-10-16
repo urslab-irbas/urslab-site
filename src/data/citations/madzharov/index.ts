@@ -175,13 +175,13 @@ const citations: CitedWork[] = [
     no: 41,
     pub: { doi: '10.17770/etr2024vol4.8238' },
     source: 'SONIX, справка ver05 (14.10.2026)',
-    cites: [{ year: 2026, ind: '14', doi: '10.35467/cal/220521', text: 'Kaczmarek, K. Cyber-deterrence of Finland and the Nordic countries – a model of digital deterrence and state security. Cybersecurity and Law, vol. 15, no. 1, 2026, pp. 69–79' }],
+    cites: [{ year: 2026, ind: '14', doi: '10.35467/cal/220521', text: 'Kaczmarek, K. Cyber-deterrence of Finland and the Nordic countries – a model of digital deterrence and state security. Cybersecurity and Law, vol. 15, no. 1, 2026, pp. 69–79', url: 'https://czasopismocybersecurityandlaw.pl/Cyber-deterrence-Finlandii-i-panstw-nordyckich-model-odstraszania-cyfrowego-a-bezpieczenstwo,220521,0,1.html' }],
   },
   {
     no: 44,
     pub: { doi: '10.11610/isij.5546' },
     source: 'SONIX, справка ver05 (14.10.2026)',
-    cites: [{ year: 2026, ind: '14', doi: '10.7546/PECR.84.26.03', text: 'Yoshinov, R., Dishkova, G., Chehlarova, N. Assessment of Parents’ Awareness in the Field of Cybersecurity. Problems of Engineering Cybernetics and Robotics, vol. 84, Bulgarian Academy of Sciences, 2026, p-ISSN 2738-7356, e-ISSN 2738-7364' }],
+    cites: [{ year: 2026, ind: '14', doi: '10.7546/PECR.84.26.03', text: 'Yoshinov, R., Dishkova, G., Chehlarova, N. Assessment of Parents’ Awareness in the Field of Cybersecurity. Problems of Engineering Cybernetics and Robotics, vol. 84, Bulgarian Academy of Sciences, 2026, p-ISSN 2738-7356, e-ISSN 2738-7364', url: 'https://www.iict.bas.bg/pecr/2026/84/3-PECR-Yoshinov-Dishkova-Chehlarova.pdf' }],
   },
   {
     no: 40,
