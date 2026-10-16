@@ -347,7 +347,7 @@ const L = {
   .none[hidden] { display: none; }
   .src { margin-top: 32px; font-size: .82rem; color: var(--muted); }
   @media (max-width: 900px) { .breakdown { grid-template-columns: 1fr; } }
-  @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } .alist li { grid-template-columns: 1fr; gap: 4px; } }
+  @media (max-width: 600px) { .frow { grid-template-columns: 1fr; gap: 4px; } .alist li, .alist.wc li { grid-template-columns: 1fr; gap: 6px; } }
   @media print {
     :global(header.top), :global(footer), .frow, .acts, :global(.page-head p) { display: none !important; }
     .sum { break-inside: avoid; }
