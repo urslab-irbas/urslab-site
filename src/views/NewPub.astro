@@ -6,7 +6,9 @@
 import Layout from '../layouts/Layout.astro';
 import { ID_TYPES, ID_LABEL } from '../lib/pubSchema.js';
 import { archiveCats, archiveTagLabels } from '../data/archive2022';
-import { dupList } from '../data/allPubs';
+import { dupList, allPubs } from '../data/allPubs';
+import { citables } from '../data/citations';
+import { citRules } from '../data/citations/rules';
 import { team } from '../data/team';
 import { t, type Lang } from '../data/content';
 import { href } from '../lib/i18n';
@@ -23,6 +25,8 @@ const ctx = {
   tagKeys: Object.keys(archiveTagLabels),
   existing: dupList,
   members: Object.fromEntries(members.map((m) => [m.id, { name: m.name[lang], github: m.github }])),
+  // режим „Ново цитиране“ (?cite=<ключ на труда>&m=<член>, от бутона „+ Цитиране“ в „Обобщен отчет“)
+  citables: citables(allPubs),
 };
 const year = new Date().getFullYear();
 // Етикет, подсказка и пример за всяко поле
@@ -62,8 +66,9 @@ const rows = [
   description={T('Въвеждане на нова публикация от член на колектива (вход с GitHub).', 'Entering a new publication by a team member (sign in with GitHub).')}>
   <header class="page-head"><div class="wrap">
     <p class="eyebrow"><a href={href(lang, 'team')}>{t.team[lang]}</a> / URSlab</p>
-    <h1>{title}</h1>
-    <p>{T('Попълнете полетата и натиснете „Запиши“. Записът се проверява тук, а после в GitHub (където влизате със своя акаунт) DOI, ISSN или ISBN се проверяват в публичните регистри. Ако всичко е вярно, публикацията се появява на сайта автоматично.', 'Fill in the fields and press “Save”. The entry is checked here; then on GitHub (where you sign in with your own account) the DOI, ISSN or ISBN is checked in the public registers. If everything is correct, the publication appears on the site automatically.')}</p>
+    <h1><span class="pub-only">{title}</span><span class="cit-only">{T('Ново цитиране', 'New citation')}</span></h1>
+    <p class="cit-only">{T('Попълнете данните на ЦИТИРАЩИЯ труд (този, в който е цитиран вашият труд), показателя по НАЦИД и къде точно е цитирането, после натиснете „Запиши“. Записът се проверява тук и в GitHub (вход с вашия акаунт): правилата за нова публикация, DOI / ISSN / ISBN в публичните регистри и правилата на НАЦИД за цитиранията. Ако всичко е вярно, цитирането се появява в „Обобщен отчет“ автоматично.', 'Fill in the CITING work (the one that cites your work), the NACID indicator and where exactly the citation is, then press “Save”. The entry is checked here and on GitHub (sign in with your account): the rules for a new publication, the DOI / ISSN / ISBN in the public registers and the NACID rules for citations. If everything is correct, the citation appears in the “Summary report” automatically.')}</p>
+    <p class="pub-only">{T('Попълнете полетата и натиснете „Запиши“. Записът се проверява тук, а после в GitHub (където влизате със своя акаунт) DOI, ISSN или ISBN се проверяват в публичните регистри. Ако всичко е вярно, публикацията се появява на сайта автоматично.', 'Fill in the fields and press “Save”. The entry is checked here; then on GitHub (where you sign in with your own account) the DOI, ISSN or ISBN is checked in the public registers. If everything is correct, the publication appears on the site automatically.')}</p>
   </div></header>
 
   <section class="block"><div class="wrap np" data-np>
@@ -86,6 +91,32 @@ const rows = [
           </select>
           <small>{F.member[1]}</small>
         </label>
+      </div>
+      <div class="citbox cit-only" data-citbox>
+        <p class="cited"><span class="l">{T('Цитиран труд', 'Cited work')}</span><span data-cited>—</span></p>
+        <p class="bad-cited" data-cited-bad hidden>{T('Цитираният труд не е намерен сред публикуваните трудове на този член на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.', 'The cited work was not found among this member’s published works on the site. Open the form from the “+ Citation” button in the “Summary report”.')}</p>
+        <div class="frow1 c3">
+          <label class="f" data-field="ind">
+            <span class="l">{T('Показател (НАЦИД)', 'Indicator (NACID)')} *</span>
+            <select name="ind"><option value="">— {T('изберете', 'choose')} —</option>{Object.entries(citRules).map(([k, r]) => <option value={k}>{r.label[lang]} ({r.pts} {T('т.', 'pts')})</option>)}</select>
+            <small>{T('Д-12 — цитиращият труд е в Scopus или Web of Science; Д-13 — монография или колективен том (сборник) с научно рецензиране; Д-14 — нереферирано списание с научно рецензиране.', 'D-12 — the citing work is in Scopus or Web of Science; D-13 — peer-reviewed monograph or edited volume (proceedings); D-14 — non-indexed peer-reviewed journal.')}</small>
+            <em class="err" hidden></em>
+          </label>
+          <label class="f" data-field="index">
+            <span class="l">{T('Индексиран в (за Д-12)', 'Indexed in (for D-12)')}</span>
+            <select name="index"><option value="">—</option><option value="scopus">Scopus</option><option value="wos">Web of Science</option></select>
+            <small>{T('Задължително за Д-12.', 'Required for D-12.')}</small>
+            <em class="err" hidden></em>
+          </label>
+          <label class="f" data-field="where">
+            <span class="l">{T('Къде е цитирането', 'Where is the citation')} *</span>
+            <input name="where" autocomplete="off" placeholder={`${T('напр.', 'e.g.')} ${T('[27], с. 136', '[27], p. 136')}`} />
+            <small>{T('Номерът на вашия труд в списъка с литература на цитиращия труд и/или страницата. Това е доказателството при проверка от НАЦИД.', 'The number of your work in the reference list of the citing work and/or the page. This is the evidence for a NACID check.')}</small>
+            <em class="err" hidden></em>
+          </label>
+        </div>
+        <p class="muted cit-note">{T('Долу въведете данните на цитиращия труд — автори, година, заглавие, списание / сборник, DOI или ISSN / ISBN.', 'Below enter the citing work — authors, year, title, journal / proceedings, DOI or ISSN / ISBN.')}</p>
+        <em class="err" data-field-err="cited" hidden></em>
       </div>
       {rows.slice(0, 1).map((row) => (
         <div class="frow1 c1">
@@ -143,7 +174,7 @@ const rows = [
       <p class="req muted">{T('* задължително;  ** задължително, когато няма DOI', '* required;  ** required when there is no DOI')}</p>
 
       <div class="preview">
-        <span class="l">{T('Преглед в APA стил', 'APA preview')}</span>
+        <span class="l"><span class="pub-only">{T('Преглед в APA стил', 'APA preview')}</span><span class="cit-only">{T('Преглед — цитиращият източник по образеца на НАЦИД', 'Preview — the citing source in the NACID format')}</span></span>
         <p data-apa>—</p>
       </div>
 
@@ -172,7 +203,7 @@ const rows = [
         </ul>
         <p class="ex">{T('Примери:', 'Examples:')}<br /><code>Madzharov, A.</code><br /><code>Gaidarski, I., & Madzharov, A.</code><br /><code>Madzharov, A., Hristozov, S., & Gaidarski, I.</code><br /><code>Чехларова, Н., & Чехларова, К.</code></p>
       </details>
-      <details>
+      <details class="pub-only">
         <summary>{T('Как изглежда пълният APA запис', 'What the full APA reference looks like')}</summary>
         <p><b>{T('Статия в списание', 'Journal article')}:</b> {T('Автори (Година). Заглавие. Списание, Том(Брой), страници. https://doi.org/…', 'Authors (Year). Title. Journal, Volume(Issue), pages. https://doi.org/…')}</p>
         <p class="ex"><code>Madzharov, A., Hristozov, S., & Gaidarski, I. (2026). Compensations for horizontal inertial components of INS/GNSS with flight altitude. Engineering Proceedings, 150(1), 70. https://doi.org/10.3390/engproc2026150070</code></p>
@@ -180,7 +211,7 @@ const rows = [
         <p><b>{T('Книга', 'Book')}:</b> {T('Автор (Година). Заглавие. Издател.', 'Author (Year). Title. Publisher.')}</p>
         <p>{T('Не е нужно да пишете целия запис — сайтът го сглобява от полетата. Прегледът „в APA стил“ под формата показва резултата.', 'You do not type the whole reference — the site assembles it from the fields. The “APA preview” below the form shows the result.')}</p>
       </details>
-      <details>
+      <details class="pub-only">
         <summary>{T('Какво се проверява', 'What is checked')}</summary>
         <ul>
           <li>{T('Задължителни: автори, година, заглавие, категория, списание (или издател за книги), поне една тема.', 'Required: authors, year, title, category, journal (or publisher for books), at least one topic.')}</li>
@@ -194,6 +225,20 @@ const rows = [
           <li>{T('Всяко публикуване се записва в дневник, а ръководителят получава уведомление и може да върне публикацията с едно щракване.', 'Every publication is logged; the head of the lab is notified and can withdraw it with one click.')}</li>
           <li>{T('Публикацията да не е вече на сайта: същото DOI или същото заглавие с поне един общ автор. Проверката е във всички публикации на сайта, включително току-що въведените. При съвпадение на екрана излиза коя е намерената публикация и защо; данните остават във формата за поправка.', 'The publication must not already be on the site: the same DOI, or the same title with at least one common author. All site publications are checked, including those just entered. On a match the screen shows the publication found and why; the data stay in the form for correction.')}</li>
           <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
+        </ul>
+      </details>
+      <details class="cit-only" open>
+        <summary>{T('Правила на НАЦИД за цитиранията (проверяват се автоматично)', 'NACID rules for citations (checked automatically)')}</summary>
+        <ul>
+          <li>{T('Без самоцитирания: сред авторите на цитиращия труд не може да сте вие.', 'No self-citations: you cannot be among the authors of the citing work.')}</li>
+          <li>{T('Цитиращият труд е вече публикуван и не е по-стар от цитирания.', 'The citing work is already published and is not older than the cited one.')}</li>
+          <li>{T('Всеки цитиращ източник се отчита веднъж за даден труд (същото DOI или заглавие → отказ).', 'Each citing source counts once per cited work (same DOI or title → refused).')}</li>
+          <li>{T('Д-12 (10 т.) — само ако цитиращият труд е индексиран в Scopus или Web of Science (посочете базата).', 'D-12 (10 pts) — only if the citing work is indexed in Scopus or Web of Science (state which).')}</li>
+          <li>{T('Д-13 (3 т.) — монография или колективен том (сборник) с научно рецензиране.', 'D-13 (3 pts) — peer-reviewed monograph or edited volume (proceedings).')}</li>
+          <li>{T('Д-14 (2 т.) — нереферирано списание с научно рецензиране; изисква ISSN / eISSN на списанието.', 'D-14 (2 pts) — non-indexed peer-reviewed journal; requires the journal ISSN / eISSN.')}</li>
+          <li>{T('Посочете къде е цитирането (номер в литературата, страница) — това е доказателството.', 'State where the citation is (reference number, page) — this is the evidence.')}</li>
+          <li>{T('DOI, ISSN или ISBN на цитиращия труд се проверяват в публичните регистри, както при нова публикация.', 'The DOI, ISSN or ISBN of the citing work is checked in the public registers, as for a new publication.')}</li>
+          <li>{T('Заявката се приема само от GitHub акаунта на члена на колектива, чийто е трудът, или от ръководителя.', 'The request is accepted only from the GitHub account of the team member whose work it is, or from the head of the lab.')}</li>
         </ul>
       </details>
       <details>
@@ -212,6 +257,16 @@ const rows = [
 
 <style>
   .np { max-width: 980px; }
+  :global(html:not(.citmode)) .cit-only, :global(html.citmode) .pub-only { display: none !important; }
+  :global(html.citmode) [data-field='status'], :global(html.citmode) [data-field='cat'], :global(html.citmode) [data-field='sjr'],
+  :global(html.citmode) [data-field='jif'], :global(html.citmode) [data-field='share'], :global(html.citmode) [data-field='tags'],
+  :global(html.citmode) [data-field='abstract'], :global(html.citmode) [data-field='affil'] { display: none !important; }
+  .citbox { border: 1px solid var(--accent); border-radius: 8px; padding: 14px; display: grid; gap: 12px; background: color-mix(in srgb, var(--accent) 6%, var(--surface)); }
+  .citbox .cited { margin: 0; display: grid; gap: 4px; }
+  .citbox .cited span:last-child { font-size: .95rem; }
+  .bad-cited { color: #c0392b; margin: 0; }
+  .bad-cited[hidden] { display: none; }
+  .cit-note { margin: 0; font-size: .85rem; }
   .steps { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 28px; counter-reset: s; }
   .steps li { counter-increment: s; font: .78rem var(--mono); padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
   .steps li::before { content: counter(s) '. '; }
@@ -270,19 +325,40 @@ const rows = [
 </style>
 
 <script>
-  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS } from '../lib/pubSchema.js';
+  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS, validateCitation, normalizeCitation, citeText } from '../lib/pubSchema.js';
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
   const form = root.querySelector<HTMLFormElement>('[data-form]')!;
-  const fields = ['authors', 'year', 'title', 'status', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'idType', 'idValue', 'url', 'sjr', 'jif', 'share', 'abstract'];
+  const fields = ['authors', 'year', 'title', 'status', 'cat', 'venue', 'volume', 'issue', 'pages', 'publisher', 'doi', 'idType', 'idValue', 'url', 'sjr', 'jif', 'share', 'abstract', 'ind', 'index', 'where'];
+  // ---- Режим „Ново цитиране“: ?cite=<ключ на цитирания труд>&m=<член> (бутонът „+ Цитиране“ в „Обобщен отчет“)
+  const qs = new URLSearchParams(location.search);
+  const CITE = qs.get('cite') || (location.hash.match(/^#d=/) ? '' : '');
+  type Citable = { key: string; title: string; year: number; authors: string; no?: number; cites: { title: string; doi: string }[] };
+  let citMember = qs.get('m') ?? '';
+  let cited: Citable | null = null;
+  const citMode = () => document.documentElement.classList.contains('citmode');
+  function setCitMode(key: string, member: string) {
+    if (!key) return;
+    document.documentElement.classList.add('citmode');
+    citMember = member;
+    cited = ((ctx.citables[member] ?? []) as Citable[]).find((x) => x.key === key) ?? null;
+    root.querySelector('[data-cited]')!.textContent = cited ? `${cited.no ? cited.no + '. ' : ''}${cited.authors} (${cited.year}). ${cited.title}` : key;
+    root.querySelector<HTMLElement>('[data-cited-bad]')!.hidden = !!cited;
+    (form.querySelector('button[type="submit"]') as HTMLButtonElement).disabled = !cited;
+    const m = form.elements.namedItem('member') as HTMLSelectElement;
+    if (ctx.members[member]) { m.value = member; m.disabled = true; }
+    document.title = document.title.replace(ctx.lang === 'bg' ? 'Нова публикация' : 'New publication', ctx.lang === 'bg' ? 'Ново цитиране' : 'New citation');
+  }
+  setCitMode(CITE ?? '', citMember);
 
   const read = () => {
     const fd = new FormData(form);
     const e: Record<string, unknown> = {};
     fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
     e.tags = fd.getAll('tags');
-    e.member = fd.get('member');
+    e.member = citMode() ? citMember : fd.get('member');
+    if (citMode()) e.cited = cited?.key ?? qs.get('cite');
     e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
     const af: Record<string, string> = {};
     form.querySelectorAll<HTMLInputElement>('[data-affil] input[data-key]').forEach((i) => { if (i.value.trim()) af[i.dataset.key!] = i.value.trim(); });
@@ -294,6 +370,7 @@ const rows = [
   const affilList = affilBox.querySelector<HTMLElement>('[data-affil]')!;
   const escA = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
   function renderAffil(keep: Record<string, string> = {}) {
+    if (citMode()) { affilBox.hidden = true; return; }
     const cur: Record<string, string> = { ...keep };
     affilList.querySelectorAll<HTMLInputElement>('input[data-key]').forEach((i) => { if (i.value.trim() && !(i.dataset.key! in keep)) cur[i.dataset.key!] = i.value.trim(); });
     const list = parseAuthors(String((form.elements.namedItem('authors') as HTMLInputElement).value)).list.filter((a: { surname: string; initials: string }) => !teamFromAuthors([a]).length);
@@ -321,10 +398,12 @@ const rows = [
   const b64 = { enc: (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
                 dec: (s: string) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))) };
 
-  function preview() { const e = read(); root.querySelector('[data-apa]')!.textContent = e.authors || e.title ? apa(e) : '—'; }
+  function preview() { const e = read(); root.querySelector('[data-apa]')!.textContent = e.authors || e.title ? (citMode() ? citeText(e) : apa(e)) : '—'; }
   function show(errors: { field: string; code: string }[]) {
     form.querySelectorAll<HTMLElement>('[data-field]').forEach((f) => { f.classList.remove('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = true; em.textContent = ''; } });
+    const ce = root.querySelector<HTMLElement>('[data-field-err="cited"]'); if (ce) { ce.hidden = true; ce.textContent = ''; }
     for (const { field, code, detail } of errors as { field: string; code: string; detail?: string }[]) {
+      if (field === 'cited' && ce) { ce.hidden = false; ce.textContent = (M[code] ?? code); continue; }
       const f = form.querySelector<HTMLElement>(`[data-field="${field}"]`); if (!f) continue;
       f.classList.add('bad'); const em = f.querySelector<HTMLElement>('.err'); if (em) { em.hidden = false; em.textContent = (em.textContent ? em.textContent + ' ' : '') + (M[code] ?? code) + (detail ? ` ${detail}` : ''); }
     }
@@ -350,7 +429,7 @@ const rows = [
     set(v: Sent | null) { try { v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); } catch { /* без localStorage — само за тази страница */ } },
   };
   const box = root.querySelector<HTMLElement>('[data-status]')!;
-  const issueTitle = (t: string) => `[Публикация] ${String(t).slice(0, 90)}`;
+  const issueTitle = (t: string) => `${citMode() ? '[Цитиране]' : '[Публикация]'} ${String(t).slice(0, 90)}`;
   const esc = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
   let timer = 0;
   function lock(on: boolean) { (form as HTMLFormElement & { inert: boolean }).inert = on; form.classList.toggle('locked', on); }
@@ -358,7 +437,7 @@ const rows = [
     box.hidden = false; box.className = `msg st ${kind}`; box.innerHTML = `<div class="st-text">${html}</div>`;
     for (const [label, fn] of actions) { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ghost'; b.textContent = label; b.onclick = fn; box.append(b); }
   }
-  const unlockNew = () => { store.set(null); clearTimeout(timer); lock(false); box.hidden = true; form.reset(); show([]); syncStatus(); preview(); history.replaceState(null, '', location.pathname + location.search); };
+  const unlockNew = () => { store.set(null); clearTimeout(timer); lock(false); box.hidden = true; form.reset(); if (citMode()) (form.elements.namedItem('member') as HTMLSelectElement).value = citMember; show([]); syncStatus(); preview(); history.replaceState(null, '', location.pathname + location.search); };
   const unlockFix = () => { store.set(null); clearTimeout(timer); lock(false); syncStatus(); };
   async function poll(s: Sent) {
     clearTimeout(timer);
@@ -376,7 +455,7 @@ const rows = [
     const link = issue ? `<a href="${issue.html_url}" target="_blank" rel="noopener">#${issue.number}</a>` : '';
     if (issue && labels.includes('публикувана')) {
       store.set(null);
-      status(`✅ <b>${L('Публикувано на сайта', 'Published on the site')}</b> (${L('заявка', 'request')} ${link}). ${L('Повторно изпращане от тази страница е спряно.', 'Sending again from this page is blocked.')} `, 'ok', [[L('Въведи друга публикация', 'Enter another publication'), unlockNew]]);
+      status(`✅ <b>${citMode() ? L('Цитирането е добавено в „Обобщен отчет“', 'The citation was added to the “Summary report”') : L('Публикувано на сайта', 'Published on the site')}</b> (${L('заявка', 'request')} ${link}). ${L('Повторно изпращане от тази страница е спряно.', 'Sending again from this page is blocked.')} `, 'ok', [[citMode() ? L('Въведи друго цитиране', 'Enter another citation') : L('Въведи друга публикация', 'Enter another publication'), unlockNew]]);
       return;
     }
     if (issue && labels.includes('отказана')) {
@@ -427,8 +506,49 @@ const rows = [
     } catch { return null; }
   }
 
+  /** Пресен списък на въведените цитирания на труда: от сайта (/publications/citables.json) + от клона data */
+  async function freshCites(): Promise<{ title: string; authors?: string; doi?: string }[]> {
+    const out = [...(cited?.cites ?? [])];
+    try { const r = await fetch('/publications/citables.json', { cache: 'no-store' }); if (r.ok) { const c = ((await r.json())[citMember] ?? []).find((x: Citable) => x.key === cited?.key); if (c) out.push(...c.cites); } } catch { /* офлайн */ }
+    try {
+      const r = await fetch(`https://raw.githubusercontent.com/${ctx.repo}/data/src/data/citations/${citMember}/contrib.json`, { cache: 'no-store' });
+      if (r.ok) out.push(...(await r.json()).filter((c: { cited: string }) => c.cited === cited?.key).map((c: { title: string; authors: string; doi?: string }) => ({ title: c.title, authors: c.authors, doi: c.doi ?? '' })));
+    } catch { /* без връзка към GitHub */ }
+    return out;
+  }
+  async function submitCitation() {
+    const e = read();
+    const vctx = () => ({ cited: cited ? { title: cited.title, year: cited.year, authors: cited.authors } : null });
+    let errors = validateCitation(e, { ...vctx(), existing: cited?.cites ?? [] });
+    show(errors);
+    const bad = root.querySelector<HTMLElement>('[data-bad]')!, ok = root.querySelector<HTMLElement>('[data-ok]')!;
+    bad.hidden = errors.length === 0; ok.hidden = errors.length > 0;
+    if (errors.length) { form.querySelector<HTMLElement>('.bad, [data-field-err]:not([hidden])')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    const data = { type: 'citation', ...normalizeCitation(e) };
+    const who = ctx.members[citMember];
+    const body = [
+      (ctx.lang === 'bg' ? 'Ново цитиране, въведено през формата на сайта от' : 'New citation entered through the site form by') + ` **${who.name}** (@${who.github}).`,
+      '', (ctx.lang === 'bg' ? '**Цитиран труд:** ' : '**Cited work:** ') + `${cited!.authors} (${cited!.year}). ${cited!.title}`,
+      (ctx.lang === 'bg' ? '**Цитиращ източник (НАЦИД):** ' : '**Citing source (NACID):** ') + data.text + ` — Д-${data.ind}`, '',
+      '<!-- ' + (ctx.lang === 'bg' ? 'Не променяйте блока по-долу. За поправка използвайте формата на сайта.' : 'Do not change the block below. Use the site form for corrections.') + ' -->',
+      '```json', JSON.stringify(data, null, 2), '```',
+    ].join('\n');
+    const url = `https://github.com/${ctx.repo}/issues/new?` + new URLSearchParams({ title: issueTitle(String(data.title)), body }).toString();
+    root.querySelector<HTMLAnchorElement>('[data-gh]')!.href = url;
+    history.replaceState(null, '', location.pathname + location.search + '#d=' + b64.enc(JSON.stringify(data)));
+    const w = window.open('', '_blank');
+    lock(true);
+    errors = validateCitation(e, { ...vctx(), existing: await freshCites() });
+    if (errors.length) { w?.close(); lock(false); show(errors); ok.hidden = true; bad.hidden = false; return; }
+    if (w) { w.opener = null; w.location.href = url; }
+    const sent: Sent = { title: String(data.title), gh: who.github, ts: Date.now(), url };
+    store.set(sent);
+    poll(sent);
+  }
+
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
+    if (citMode()) { await submitCitation(); return; }
     const e = read();
     const errors = validate(e, { catKeys: ctx.catKeys, tagKeys: ctx.tagKeys, existing: ctx.existing });
     show(errors);
@@ -471,8 +591,12 @@ const rows = [
   // Предварително попълване: ?m=<член> (бутонът в „Състав“) и #d=<данни> (връзката „Поправете“ от GitHub)
   const q = new URLSearchParams(location.search);
   if (q.get('m') && ctx.members[q.get('m')!]) (form.elements.namedItem('member') as HTMLSelectElement).value = q.get('m')!;
+  // поле „Показател“: „Индексиран в“ е нужно само за Д-12
+  const indSel = form.elements.namedItem('ind') as HTMLSelectElement, idxSel = form.elements.namedItem('index') as HTMLSelectElement;
+  const syncInd = () => { idxSel.disabled = indSel.value !== '12'; if (idxSel.disabled) idxSel.value = ''; };
+  indSel.addEventListener('change', syncInd); syncInd();
   const h = location.hash.match(/^#d=([\w-]+)/);
-  if (h) { try { write(JSON.parse(b64.dec(h[1]))); } catch { /* повредена връзка — празна форма */ } }
+  if (h) { try { const d = JSON.parse(b64.dec(h[1])); if (d.type === 'citation' && d.cited && !citMode()) setCitMode(d.cited, d.member); write(d); syncInd(); } catch { /* повредена връзка — празна форма */ } }
   syncStatus();
   renderAffil();
   preview();

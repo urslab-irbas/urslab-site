@@ -203,7 +203,7 @@ export function validate(e, ctx) {
 
   const t = String(e.title || '').trim();
   if (t.length < 10) add('title', 'short');
-  if (/^[\p{Lu}\s\d\W]{25,}$/u.test(t)) add('title', 'caps');
+  if (t.length >= 25 && /\p{Lu}/u.test(t) && !/\p{Ll}/u.test(t)) add('title', 'caps');
 
   if (!STATUSES.includes(e.status)) add('status', 'required');
   if (!ctx.catKeys.includes(e.cat)) add('cat', 'required');
@@ -266,6 +266,103 @@ export function normalize(e) {
   return out;
 }
 
+// ================= ЦИТИРАНИЯ (въвеждане през формата в режим „Ново цитиране“) =================
+// Показатели от група „Д“ (ППЗРАСРБ, Таблица 2; Правилник на БАН, Област 5 „Технически науки“) и точките им.
+export const CIT_INDS = ['12', '13', '14'];
+export const CIT_POINTS = { 12: 10, 13: 3, 14: 2 };
+export const CIT_INDEX = ['scopus', 'wos'];
+/** Постоянен ключ на публикация на сайта: DOI, иначе ISBN, иначе заглавието */
+export function pubKey(p) {
+  const doi = cleanDoi(p.doi).toLowerCase();
+  if (doi) return `doi:${doi}`;
+  const isbn = String(p.isbn ?? '').replace(/[^0-9Xx]/g, '').toUpperCase();
+  if (isbn) return `isbn:${isbn}`;
+  return `t:${tnorm(p.title).slice(0, 80)}`;
+}
+/** Цитиращият източник в един ред по образеца на НАЦИД */
+export function citeText(e) {
+  const t = String(e.title || '').trim().replace(/\.\s*$/, '');
+  let v = String(e.venue || '').trim();
+  if (e.volume) v += `${v ? ', ' : ''}${e.volume}${e.issue ? `(${e.issue})` : ''}`;
+  if (e.pages) v += `${v ? ', ' : ''}${/^\d+\s?[–-]/.test(String(e.pages)) ? 'pp. ' : ''}${String(e.pages).replace(/-/g, '–')}`;
+  const parts = [`${String(e.authors || '').trim()} ${t}.`, [v, e.publisher, e.year].filter(Boolean).join(', ')];
+  const idv = idOf(e);
+  if (idv && ID_TYPES.includes(e.idType)) parts.push(`${ID_LABEL[e.idType].split(' ')[0]} ${canonId(e.idType, idv)}`);
+  return parts.filter(Boolean).join(' ').replace(/\s+/g, ' ').replace(/\s+,/g, ',').trim();
+}
+/**
+ * Проверка на ново цитиране: правилата за нова публикация (автори, година, заглавие, издание, DOI / ISSN / ISBN)
+ * плюс правилата на НАЦИД за цитиранията. Връща [{ field, code, detail? }].
+ * ctx: { cited: { title, year, authors } | null — цитираният труд (публикувана публикация на члена),
+ *        existing: [{ title, authors, doi }] — вече въведените цитирания на същия труд, now }
+ */
+export function validateCitation(e, ctx) {
+  const err = [];
+  const add = (field, code, detail) => err.push(detail ? { field, code, detail } : { field, code });
+  const now = ctx.now || new Date().getFullYear();
+  if (!ctx.cited) add('cited', 'citednf');
+
+  const a = parseAuthors(e.authors);
+  if (a.errors.length) a.errors.forEach((c) => add('authors', c.split(':')[0]));
+  // НАЦИД: самоцитиране — цитиращият труд е с участието на автора, който отчита цитирането
+  else if (teamFromAuthors(a.list).includes(e.member)) add('authors', 'selfcite');
+
+  const y = Number(e.year);
+  if (String(e.year ?? '').trim() === '') add('year', 'required');
+  else if (!Number.isInteger(y) || y < 1980 || y > now) add('year', 'citerange');
+  else if (ctx.cited && y < Number(ctx.cited.year)) add('year', 'citeyear', String(ctx.cited.year));
+
+  const t = String(e.title || '').trim();
+  if (t.length < 10) add('title', 'short');
+  if (t.length >= 25 && /\p{Lu}/u.test(t) && !/\p{Ll}/u.test(t)) add('title', 'caps');
+  if (!String(e.venue || '').trim() && !String(e.publisher || '').trim()) add('venue', 'citevenue');
+
+  if (e.pages && !/^[A-Za-z]?\d+(\s?[–-]\s?[A-Za-z]?\d+)?$/.test(String(e.pages).trim())) add('pages', 'fmt');
+  if (e.volume && !/^[\w.\-–\s]{1,20}$/u.test(e.volume)) add('volume', 'fmt');
+  const doi = cleanDoi(e.doi);
+  if (doi && !/^10\.\d{4,9}\/\S+$/.test(doi)) add('doi', 'fmt');
+  const idv = idOf(e);
+  if (idv || e.idType) {
+    if (!ID_TYPES.includes(e.idType)) add('idType', 'required');
+    else if (!checkId(e.idType, idv)) add('idValue', e.idType.includes('issn') ? 'issn' : 'isbn');
+  } else if (!doi) add('idValue', 'idneeded');
+  if (e.url && !/^https?:\/\/\S+$/.test(e.url)) add('url', 'fmt');
+
+  // Показател и неговите условия
+  if (!CIT_INDS.includes(String(e.ind))) add('ind', 'required');
+  else if (String(e.ind) === '12' && !CIT_INDEX.includes(e.index)) add('index', 'cit12index');
+  else if (String(e.ind) === '14' && !['issn', 'eissn'].includes(e.idType)) add('idType', 'cit14issn');
+  // Доказателство: къде в цитиращия труд е цитирането (номер в списъка с литература и/или страница)
+  if (String(e.where || '').trim().length < 2) add('where', 'citewhere');
+
+  // Всеки цитиращ източник се отчита веднъж за даден труд
+  // (същото DOI, същото заглавие и общ автор, или заглавието се съдържа в текста на вече въведено цитиране)
+  const list = ctx.existing || [];
+  const dup = findDuplicate(e, list);
+  const tt = tnorm(e.title);
+  const inText = tt.length >= 15 ? list.find((x) => tnorm(x.title).includes(tt)) : null;
+  if (dup) add(dup.by === 'doi' ? 'doi' : 'title', 'citedup', dup.item.title);
+  else if (inText) add('title', 'citedup', inText.title);
+  return err;
+}
+/** Нормализирано цитиране за src/data/citations/<член>/contrib.json */
+export function normalizeCitation(e) {
+  const out = {
+    member: e.member, cited: String(e.cited), ind: String(e.ind),
+    year: Number(e.year),
+    authors: String(e.authors).trim().replace(/\s+/g, ' '),
+    title: String(e.title).trim().replace(/\.\s*$/, ''),
+  };
+  if (out.ind === '12') out.index = e.index;
+  const idv = idOf(e);
+  if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = canonId(e.idType, idv); }
+  for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'url', 'where']) { const v = String(e[k] ?? '').trim(); if (v) out[k] = v; }
+  const doi = cleanDoi(e.doi);
+  if (doi) out.doi = doi;
+  out.text = citeText(out);
+  return out;
+}
+
 // Съобщения за грешките (BG / EN)
 export const MESSAGES = {
   bg: {
@@ -292,6 +389,15 @@ export const MESSAGES = {
     idmismatch: 'Номерът е в регистъра, но на издание с друго име (или регистърът не дава име за сравнение). Проверете номера и полето „Списание / сборник“. В регистъра:',
     unavailable: 'Регистърът не отговаря и записът не може да се провери. Опитайте отново по-късно (връзката „Поправете“ пази данните).',
     'affil-needed': 'Посочете институцията на тези съавтори — така, както е в публикацията:',
+    selfcite: 'Самоцитиране: сред авторите на цитиращия труд сте вие. По правилата на НАЦИД самоцитиранията не се отчитат.',
+    citerange: 'Цитиращият труд трябва вече да е публикуван (година до текущата).',
+    citeyear: 'Цитиращият труд не може да е по-стар от цитирания. Година на цитирания труд:',
+    citevenue: 'Посочете списанието / сборника или издателя на цитиращия труд.',
+    cit12index: 'За показател Д-12 посочете в коя база е индексиран цитиращият труд (Scopus или Web of Science).',
+    cit14issn: 'Показател Д-14 е за списания: изберете ISSN или eISSN и въведете номера на списанието.',
+    citewhere: 'Посочете къде е цитирането — номер в списъка с литература и/или страница (напр. „[27], с. 136“).',
+    citedup: 'Това цитиране вече е въведено за същия труд (всеки цитиращ източник се отчита веднъж). Въведено:',
+    citednf: 'Цитираният труд не е намерен сред вашите публикувани трудове на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.',
   },
   en: {
     empty: 'Enter the authors.',
@@ -317,5 +423,14 @@ export const MESSAGES = {
     idmismatch: 'The number is in the register, but for a venue with a different name (or the register gives no name to compare). Check the number and the “Journal / proceedings” field. In the register:',
     unavailable: 'The register does not respond and the entry cannot be checked. Try again later (the “Fix” link keeps the data).',
     'affil-needed': 'Give the institution of these co-authors — as stated in the publication:',
+    selfcite: 'Self-citation: you are among the authors of the citing work. Under the NACID rules self-citations are not counted.',
+    citerange: 'The citing work must already be published (year up to the current one).',
+    citeyear: 'The citing work cannot be older than the cited one. Year of the cited work:',
+    citevenue: 'Give the journal / proceedings or the publisher of the citing work.',
+    cit12index: 'For indicator D-12 state where the citing work is indexed (Scopus or Web of Science).',
+    cit14issn: 'Indicator D-14 is for journals: choose ISSN or eISSN and enter the journal number.',
+    citewhere: 'State where the citation is — number in the reference list and/or page (e.g. “[27], p. 136”).',
+    citedup: 'This citation is already entered for the same work (each citing source counts once). Entered:',
+    citednf: 'The cited work was not found among your published works on the site. Open the form from the “+ Citation” button in the “Summary report”.',
   },
 };

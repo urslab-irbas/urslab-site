@@ -1,17 +1,39 @@
-// Проверените цитирания на колектива: всеки член има своя директория (src/data/citations/<id>/index.ts).
-// Тук всеки цитиран труд се свързва с публикацията на сайта (по ISBN, DOI или откъс от заглавието);
-// изграждането спира, ако някой запис не съвпада с публикация от сайта.
+// Проверените цитирания на колектива: всеки член има своя директория src/data/citations/<id>/ с два файла:
+//   index.ts      — въведените на ръка (по Приложение „Цитирания“ към НАЦИД, SONIX …);
+//   contrib.json  — въведените през формата „+ Цитиране“ (проверени от GitHub Action-а; в main е [],
+//                   истинското копие е в клона data — виж .github/workflows/citation.yml).
+// Всеки цитиран труд се свързва с публикацията на сайта (ръчните — по ISBN, DOI или откъс от заглавието;
+// от формата — по ключа pubKey); изграждането спира, ако някой запис не съвпада с публикация от сайта.
 import type { ArchivePub } from '../archive2022';
-import type { CitedWork } from './types';
+import type { CitedWork, Citation } from './types';
+import type { CitInd } from './rules';
 import { citPts } from './rules';
+import { pubKey } from '../../lib/pubSchema.js';
 import madzharov from './madzharov';
 import aleksandrov from './aleksandrov';
 import chehlarova from './chehlarova';
 import gaidarski from './gaidarski';
 import hristozov from './hristozov';
 import georgiev from './georgiev';
+import cMadzharov from './madzharov/contrib.json';
+import cAleksandrov from './aleksandrov/contrib.json';
+import cChehlarova from './chehlarova/contrib.json';
+import cGaidarski from './gaidarski/contrib.json';
+import cHristozov from './hristozov/contrib.json';
+import cGeorgiev from './georgiev/contrib.json';
 
-const byMember: Record<string, CitedWork[]> = { madzharov, aleksandrov, chehlarova, gaidarski, hristozov, georgiev };
+/** Запис, въведен през формата (src/lib/pubSchema.js → normalizeCitation + проверките на Action-а) */
+export interface CitContrib {
+  member: string; cited: string; ind: CitInd; year: number; authors: string; title: string; text: string;
+  doi?: string; url?: string; where?: string; index?: 'scopus' | 'wos'; ghIssue?: number; verified?: string[];
+}
+
+const manual: Record<string, CitedWork[]> = { madzharov, aleksandrov, chehlarova, gaidarski, hristozov, georgiev };
+const fromForm: Record<string, CitContrib[]> = {
+  madzharov: cMadzharov as CitContrib[], aleksandrov: cAleksandrov as CitContrib[], chehlarova: cChehlarova as CitContrib[],
+  gaidarski: cGaidarski as CitContrib[], hristozov: cHristozov as CitContrib[], georgiev: cGeorgiev as CitContrib[],
+};
+export const citationMembers = Object.keys(manual);
 
 const norm = (s: string) => s.toLowerCase().replace(/[^0-9a-zа-я]/gi, '');
 const matches = (w: CitedWork, p: ArchivePub) =>
@@ -21,13 +43,39 @@ const matches = (w: CitedWork, p: ArchivePub) =>
 
 export interface CitBlock { work: CitedWork; pts: number }
 
-/** Цитиранията на член на колектива, по публикация (ключ — заглавието на публикацията на сайта) */
+/** Цитиранията на член на колектива, по публикация (ръчно въведените + въведените през формата) */
 export function citationsFor(member: string, pubs: ArchivePub[]): Map<ArchivePub, CitBlock> {
-  const out = new Map<ArchivePub, CitBlock>();
-  for (const w of byMember[member] ?? []) {
-    const p = pubs.find((x) => x.cat !== 'sub' && x.team.includes(member) && matches(w, x));
+  const mine = pubs.filter((x) => x.cat !== 'sub' && x.team.includes(member));
+  const works = new Map<ArchivePub, CitedWork>();
+  for (const w of manual[member] ?? []) {
+    const p = mine.find((x) => matches(w, x));
     if (!p) throw new Error(`citations/${member}: няма публикация на сайта за цитирания труд № ${w.no} (${JSON.stringify(w.pub)})`);
-    out.set(p, { work: w, pts: w.cites.reduce((s, c) => s + citPts(c.ind), 0) });
+    works.set(p, { ...w, cites: [...w.cites] });
   }
+  let next = Math.max(0, ...[...works.values()].map((w) => w.no));
+  for (const c of fromForm[member] ?? []) {
+    const p = mine.find((x) => pubKey(x) === c.cited);
+    if (!p) throw new Error(`citations/${member}/contrib.json: няма публикация на сайта с ключ ${c.cited} (заявка #${c.ghIssue})`);
+    if (!works.has(p)) works.set(p, { no: ++next, pub: { title: p.title }, source: 'въведени през формата', cites: [] });
+    const cite: Citation = { text: c.text, year: c.year, ind: c.ind, doi: c.doi, url: c.url, where: c.where, index: c.index, ghIssue: c.ghIssue, verified: c.verified };
+    works.get(p)!.cites.push(cite);
+  }
+  const out = new Map<ArchivePub, CitBlock>();
+  for (const [p, w] of works) out.set(p, { work: w, pts: w.cites.reduce((s, c) => s + citPts(c.ind), 0) });
   return out;
+}
+
+/** За формата и проверката в GitHub: публикуваните трудове на всеки член (ключ, заглавие, година) и вече въведените им цитирания */
+export function citables(pubs: ArchivePub[]) {
+  return Object.fromEntries(citationMembers.map((m) => {
+    const cit = citationsFor(m, pubs);
+    const list = pubs.filter((x) => x.cat !== 'sub' && x.team.includes(m)).map((p) => {
+      const b = cit.get(p);
+      return {
+        key: pubKey(p), title: p.title, year: p.year, authors: p.authors, no: b?.work.no,
+        cites: (b?.work.cites ?? []).map((c) => ({ title: c.text, doi: c.doi ?? '' })),
+      };
+    });
+    return [m, list];
+  }));
 }

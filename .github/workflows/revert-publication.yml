@@ -34,6 +34,7 @@ jobs:
         run: |
           git fetch -q origin data
           git checkout FETCH_HEAD -- src/data/contrib.json publish-log.md
+          git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true
       - name: Премахване на записа
         id: rm
         env:

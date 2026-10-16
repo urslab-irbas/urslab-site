@@ -27,7 +27,7 @@ jobs:
           ref: main
       - name: Данните от клона data (публикациите от формата)
         run: |
-          if git fetch -q origin data; then git checkout FETCH_HEAD -- src/data/contrib.json; else echo "::warning::Няма клон data"; fi
+          if git fetch -q origin data; then git checkout FETCH_HEAD -- src/data/contrib.json; git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true; else echo "::warning::Няма клон data"; fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22
