@@ -100,5 +100,12 @@
   ],
   "lastRun": "2026-10-16T16:17:51.508Z",
   "rejected": {},
-  "confirmed": {}
+  "confirmed": {
+    "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025": {
+      "by": "urslab-irbas",
+      "date": "2026-10-16T16:43:33.571Z",
+      "issue": 106,
+      "scan": 103
+    }
+  }
 }
