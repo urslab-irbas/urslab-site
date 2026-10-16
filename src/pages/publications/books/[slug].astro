@@ -1,0 +1,8 @@
+---
+// Страници на монографии / книги (данни: src/data/books.ts)
+import V from '../../../views/Book.astro';
+import { books } from '../../../data/books';
+export function getStaticPaths() { return books.map((b) => ({ params: { slug: b.slug } })); }
+const { slug } = Astro.params;
+---
+<V lang="bg" slug={slug!} />

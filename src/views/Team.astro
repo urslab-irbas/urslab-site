@@ -46,6 +46,7 @@ const initials = (n: string) => n.split(' ').filter((w) => !w.endsWith('.')).map
               {m.orcid}
             </a>
           )}
+          {m.scopus && <a href={`https://www.scopus.com/authid/detail.uri?authorId=${m.scopus}`}>Scopus</a>}
           {m.scholar && <a href={m.scholar}>Google Scholar</a>}
           {m.researchgate && <a href={m.researchgate}>ResearchGate</a>}
           {m.dissertation && <a href={m.dissertation}>{lang === 'bg' ? 'Дисертация (НАЦИД)' : 'Dissertation (NACID register)'}</a>}
