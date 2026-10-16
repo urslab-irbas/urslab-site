@@ -27,6 +27,7 @@ const ctx = {
   members: Object.fromEntries(members.map((m) => [m.id, { name: m.name[lang], github: m.github }])),
   // режим „Ново цитиране“ (?cite=<ключ на труда>&m=<член>, от бутона „+ Цитиране“ в „Обобщен отчет“)
   citables: citables(allPubs),
+  names: Object.fromEntries(team.map((m) => [m.id, m.name[lang]])),
 };
 const year = new Date().getFullYear();
 // Етикет, подсказка и пример за всяко поле
@@ -94,6 +95,8 @@ const rows = [
       </div>
       <div class="citbox cit-only" data-citbox>
         <p class="cited"><span class="l">{T('Цитиран труд', 'Cited work')}</span><span data-cited>—</span></p>
+        <p class="muted coowners" data-coowners hidden></p>
+        <p class="cit-only help-link"><a href="/docs/URSlab-citirania.pdf" target="_blank" rel="noopener">{T('Помощ: как се въвежда цитиране (PDF)', 'Help: how to enter a citation (PDF, in Bulgarian)')}</a></p>
         <p class="bad-cited" data-cited-bad hidden>{T('Цитираният труд не е намерен сред публикуваните трудове на този член на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.', 'The cited work was not found among this member’s published works on the site. Open the form from the “+ Citation” button in the “Summary report”.')}</p>
         <fieldset class="f srcs" data-field="src">
           <legend class="l">{T('Как да се провери цитирането', 'How the citation is checked')} *</legend>
@@ -279,6 +282,8 @@ const rows = [
   .citbox .cited { margin: 0; display: grid; gap: 4px; }
   .citbox .cited span:last-child { font-size: .95rem; }
   .bad-cited { color: #c0392b; margin: 0; }
+  .coowners, .help-link { margin: 0; font-size: .85rem; }
+  .coowners[hidden] { display: none; }
   .bad-cited[hidden] { display: none; }
   .cit-note { margin: 0; font-size: .85rem; }
   .srcs { display: grid; gap: 6px; }
@@ -367,6 +372,12 @@ const rows = [
     root.querySelector('[data-cited]')!.textContent = cited ? `${cited.no ? cited.no + '. ' : ''}${cited.authors} (${cited.year}). ${cited.title}` : key;
     root.querySelector<HTMLElement>('[data-cited-bad]')!.hidden = !!cited;
     (form.querySelector('button[type="submit"]') as HTMLButtonElement).disabled = !cited;
+    // Цитирането се отчита на всички съавтори от колектива на труда (без тези, за които е самоцитиране)
+    const co = Object.entries(ctx.citables as Record<string, Citable[]>).filter(([m, l]) => m !== member && l.some((x) => x.key === key)).map(([m]) => m);
+    const coBox = root.querySelector<HTMLElement>('[data-coowners]')!;
+    const names: Record<string, string> = ctx.names ?? {};
+    coBox.hidden = !co.length;
+    coBox.textContent = co.length ? (ctx.lang === 'bg' ? (b: string) => b : (_: string, e: string) => e)(`Трудът е общ — след проверката цитирането се отчита и на: ${co.map((m) => names[m] ?? m).join(', ')} (без тези, за които е самоцитиране).`, `The work is shared — after the check the citation is also counted for: ${co.map((m) => names[m] ?? m).join(', ')} (except those for whom it is a self-citation).`) : '';
     const m = form.elements.namedItem('member') as HTMLSelectElement;
     if (ctx.members[member]) { m.value = member; m.disabled = true; }
     document.title = document.title.replace(ctx.lang === 'bg' ? 'Нова публикация' : 'New publication', ctx.lang === 'bg' ? 'Ново цитиране' : 'New citation');

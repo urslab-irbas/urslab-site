@@ -6,10 +6,11 @@
 // 4) Доказателство (scripts/evidence.mjs): при DOI — данните и литературата от Crossref; при линк — страницата / PDF файлът;
 //    при PDF — файлът, прикачен към заявката. Приема се само ако цитираният труд се намира в цитиращия.
 // 5) Проверява DOI / ISSN / ISBN на цитиращия труд в публичните регистри (scripts/verify-ids.mjs).
-// 6) При успех го добавя в src/data/citations/<член>/contrib.json и в дневника publish-log.md (клон data). Резултатът е в pub-result.json.
+// 6) При успех го добавя в src/data/citations/<член>/contrib.json на ВСЕКИ съавтор от колектива на цитирания труд (без самоцитиранията;
+//    достатъчно е потвърждение от един от тях) и в дневника publish-log.md (клон data). Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-citation.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync, mkdirSync } from 'node:fs';
-import { validateCitation, normalizeCitation, MESSAGES, cleanDoi } from '../src/lib/pubSchema.js';
+import { validateCitation, normalizeCitation, MESSAGES, cleanDoi, parseAuthors, teamFromAuthors, findDuplicate, tnorm } from '../src/lib/pubSchema.js';
 import { verifyEntry } from './verify-ids.mjs';
 import { crossrefWork, fromCrossref, urlText, attachmentUrl, findCited, findInRefs, hasTitle } from './evidence.mjs';
 
@@ -20,7 +21,7 @@ const author = (process.env.ISSUE_AUTHOR || '').toLowerCase();
 const issue = Number(process.env.ISSUE_NUMBER || 0);
 const M = MESSAGES.bg;
 
-const result = { ok: false, authorized: false, errors: [], howto: [], apa: '', fixUrl: `${SITE}/team/`, title: '', verified: [], member: '', cited: '' };
+const result = { ok: false, authorized: false, errors: [], howto: [], apa: '', fixUrl: `${SITE}/team/`, title: '', verified: [], member: '', cited: '', members: [] };
 const HOW = {
   required: 'попълнете полето.',
   fmt: 'поправете записа по примера под полето във формата.',
@@ -78,18 +79,21 @@ if (!data || typeof data !== 'object' || data.type !== 'citation') {
 result.member = /^[a-z]+$/.test(String(data.member)) ? data.member : '';
 result.cited = String(data.cited ?? '');
 
-// --- Право на достъп: собственият акаунт на члена (чийто е трудът) или ръководителят
+// --- Цитираният труд и вече въведените му цитирания (изграденият сайт + въведените през формата в клона data)
+const citables = JSON.parse(readFileSync('dist/publications/citables.json', 'utf8'));
+// Членовете на колектива, чийто е цитираният труд (съавторите от колектива)
+const owners = Object.keys(citables).filter((m) => (citables[m] ?? []).some((w) => w.key === data.cited));
+
+// --- Право на достъп: акаунтът на някой от съавторите от колектива (чийто е трудът) или ръководителят
 const member = team.find((m) => m.id === data.member);
-result.authorized = !!member && (member.github === author || author === ADMIN);
+const authorIds = team.filter((m) => m.github === author).map((m) => m.id);
+result.authorized = !!member && owners.includes(data.member) && (author === ADMIN || authorIds.some((id) => owners.includes(id)));
 if (!result.authorized) {
   result.errors.push(member
-    ? `Заявката е от @${author}, а цитирането е за труд на ${data.member}. Цитирания на свой труд въвежда само авторът (със своя GitHub акаунт) или ръководителят.`
+    ? `Заявката е от @${author}, а цитираният труд е на ${owners.join(', ') || data.member}. Цитиране потвърждава някой от съавторите от колектива със своя GitHub акаунт или ръководителят.`
     : `@${author} не е сред членовете на колектива с право да въвеждат цитирания.`);
   done();
 }
-
-// --- Цитираният труд и вече въведените му цитирания (изграденият сайт + въведените през формата в клона data)
-const citables = JSON.parse(readFileSync('dist/publications/citables.json', 'utf8'));
 const work = (citables[data.member] ?? []).find((x) => x.key === data.cited) ?? null;
 const FILE = `src/data/citations/${data.member}/contrib.json`;
 const contrib = existsSync(FILE) ? JSON.parse(readFileSync(FILE, 'utf8')) : [];
@@ -169,9 +173,29 @@ result.verified = entry.verified;
 const pts = { 12: 10, 13: 3, 14: 2 }[entry.ind];
 result.apa = `${entry.text} — Д-${entry.ind}, ${pts} т.; цитиран труд: ${work.authors} (${work.year}). ${work.title}`;
 
-// --- Запис (при повторна редакция на същата заявка — замяна)
-mkdirSync(`src/data/citations/${data.member}`, { recursive: true });
-writeFileSync(FILE, JSON.stringify(contrib.filter((c) => c.ghIssue !== issue).concat(entry), null, 2) + '\n');
+// --- На кого се отчита: на всички съавтори от колектива на цитирания труд, без тези, за които е самоцитиране,
+//     и без тези, при които същото цитиране вече е въведено. Достатъчно е потвърждение от един от тях.
+const citingTeam = teamFromAuthors(parseAuthors(entry.authors).list);
+const already = (m) => {
+  const w = (citables[m] ?? []).find((x) => x.key === data.cited);
+  const f = `src/data/citations/${m}/contrib.json`;
+  const c = existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')).filter((x) => x.cited === data.cited && x.ghIssue !== issue).map((x) => ({ title: x.title, authors: x.authors, doi: x.doi ?? '' })) : [];
+  const list = [...(w?.cites ?? []), ...c];
+  const tt = tnorm(entry.title);
+  return !!findDuplicate(entry, list) || (tt.length >= 15 && list.some((x) => tnorm(x.title).includes(tt)));
+};
+const forMembers = owners.filter((m) => !citingTeam.includes(m) && (m === data.member || !already(m)));
+result.members = forMembers;
+
+// --- Запис във файла на всеки от тях (при повторна редакция на същата заявка — замяна)
+for (const m of owners) {
+  const f = `src/data/citations/${m}/contrib.json`;
+  const old = existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : [];
+  const next = old.filter((c) => c.ghIssue !== issue);
+  if (forMembers.includes(m)) next.push({ ...entry, member: m, ...(m !== data.member ? { confirmedBy: data.member } : {}) });
+  if (next.length || existsSync(f)) { mkdirSync(`src/data/citations/${m}`, { recursive: true }); writeFileSync(f, JSON.stringify(next, null, 2) + '\n'); }
+}
+if (forMembers.length > 1) result.apa += ` · отчетено на: ${forMembers.join(', ')}`;
 
 // --- Дневник (същият като за публикациите)
 const LOG = 'publish-log.md';
