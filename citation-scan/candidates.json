@@ -1,0 +1,2614 @@
+{
+ "date": "2026-10-16",
+ "items": {
+  "19043296": {
+   "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.80.23.01",
+   "cited": "doi:10.7546/pecr.76.21.04",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.76.21.04",
+    "src": "doi",
+    "doi": "10.7546/pecr.80.23.01",
+    "authors": "Tomov, P., Mateeva, G., & Parvanov, D.",
+    "year": 2023,
+    "title": "Entropy Test Degradation After Random Numbers Scaling",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "80",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Tomov, P., Mateeva, G., & Parvanov, D. (2023). Entropy Test Degradation After Random Numbers Scaling. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.80.23.01",
+   "work": "Gaidarski, I. (2022). Model Driven Development of Information Security System"
+  },
+  "38283376": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1016/j.cose.2023.103139",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1016/j.cose.2023.103139",
+    "authors": "Mouratidis, H., Islam, S., Santos-Olmo, A., Sanchez, L. E., & Ismail, U. M.",
+    "year": 2023,
+    "title": "Modelling language for cyber security incident handling for critical infrastructures",
+    "venue": "Computers &amp; Security",
+    "volume": "128",
+    "pages": "103139",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "0167-4048",
+    "where": "[19]"
+   },
+   "evidence": "в литературата: позиция 19 от 66 (Crossref)",
+   "line": "Mouratidis, H., Islam, S., Santos-Olmo, A., Sanchez, L. E., & Ismail, U. M. (2023). Modelling language for cyber security incident handling for critical infrastructures. Computers & Security. https://doi.org/10.1016/j.cose.2023.103139",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "55096453": {
+   "key": "doi:10.26830/symmetry_2023_3_333|10.58524/jasme.v5i1.562",
+   "cited": "doi:10.26830/symmetry_2023_3_333",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2023_3_333",
+    "src": "doi",
+    "doi": "10.58524/jasme.v5i1.562",
+    "authors": "Santiago, P. V. D. S., Alves, F. R. V., & Santos, M. J. C. D.",
+    "year": 2025,
+    "title": "Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers",
+    "venue": "Journal of Advanced Sciences and Mathematics Education",
+    "volume": "5",
+    "issue": "1",
+    "pages": "43-54",
+    "publisher": "Foundation of Advanced Education",
+    "idType": "issn",
+    "idValue": "2798-9852"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Santiago, P. V. D. S., Alves, F., & Santos, M. J. C. D. (2025). Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers. Journal of Advanced Sciences and Mathematics Education. https://doi.org/10.58524/jasme.v5i1.562",
+   "work": "Chehlarova, N., Gachev, G. (2023). Figures with an axis of symmetry with Photon Robot"
+  },
+  "5d8b8e0f": {
+   "key": "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025",
+   "cited": "doi:10.3389/frobt.2024.1414853",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.3389/frobt.2024.1414853",
+    "src": "doi",
+    "doi": "10.1523/eneuro.0390-24.2025",
+    "authors": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M.",
+    "year": 2025,
+    "title": "The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task",
+    "venue": "eneuro",
+    "volume": "12",
+    "issue": "4",
+    "publisher": "Society for Neuroscience",
+    "idType": "eissn",
+    "idValue": "2373-2822",
+    "where": "[21]"
+   },
+   "evidence": "в литературата: позиция 21 от 117 (Crossref)",
+   "line": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M. (2025). The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task. eNeuro. https://doi.org/10.1523/eneuro.0390-24.2025",
+   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A., Chavdarov, I. (2024). Psychophysics of user acceptance of social cyber-physical systems"
+  },
+  "4cc389fd": {
+   "key": "doi:10.3389/frobt.2024.1414853|10.1007/978-981-96-9709-0_9",
+   "cited": "doi:10.3389/frobt.2024.1414853",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.3389/frobt.2024.1414853",
+    "src": "doi",
+    "doi": "10.1007/978-981-96-9709-0_9",
+    "authors": "Dimitrova, M., & Valchkova, N.",
+    "year": 2025,
+    "title": "Feasibility of the Cyber-Physical Nurse",
+    "venue": "Lecture Notes in Networks and Systems",
+    "pages": "127-137",
+    "publisher": "Springer Nature Singapore",
+    "idType": "issn",
+    "idValue": "2367-3370",
+    "where": "[27]"
+   },
+   "evidence": "в литературата: позиция 27 от 35 (Crossref)",
+   "line": "Dimitrova, M., & Valchkova, N. (2025). Feasibility of the Cyber-Physical Nurse. Lecture notes in networks and systems. https://doi.org/10.1007/978-981-96-9709-0_9",
+   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A., Chavdarov, I. (2024). Psychophysics of user acceptance of social cyber-physical systems"
+  },
+  "b65a820f": {
+   "key": "doi:10.1109/ithet61869.2024.10837594|10.1109/ithet69978.2026.11585097",
+   "cited": "doi:10.1109/ithet61869.2024.10837594",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.1109/ithet61869.2024.10837594",
+    "src": "doi",
+    "doi": "10.1109/ithet69978.2026.11585097",
+    "authors": "Dimitrova, M., Krastev, A., Chehlarova, N., & Tanev, T.",
+    "year": 2026,
+    "title": "Design of Educational Scenarios with Robots from a Neuro Aware Perspective",
+    "venue": "2026 22nd International Conference on Information Technology Based Higher Education and Training (ITHET)",
+    "pages": "1-7",
+    "publisher": "IEEE",
+    "where": "[35]"
+   },
+   "evidence": "в литературата: позиция 35 от 43 (Crossref)",
+   "line": "Dimitrova, M., Krastev, A., Chehlarova, N., & Tanev, T. (2026). Design of Educational Scenarios with Robots from a Neuro Aware Perspective. International Conference on Information Technology Based Higher Education and Training (ITHET). https://doi.org/10.1109/ithet69978.2026.11585097",
+   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A. (2024). A Psychophysical View on User Acceptance of Robotic Systems for Social Applications"
+  },
+  "ad67efd4": {
+   "key": "doi:10.57125/fed.2025.06.25.04|10.57125/fed.2025.12.16",
+   "cited": "doi:10.57125/fed.2025.06.25.04",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.57125/fed.2025.06.25.04",
+    "src": "doi",
+    "doi": "10.57125/fed.2025.12.16",
+    "authors": "Barcia Espinales, M. A., Zambrano Zambrano, C. M., & Cabrera Estupiñán, I. E.",
+    "year": 2025,
+    "title": "Cultural Influence in the English Language Acquisition Process",
+    "venue": "Futurity Education",
+    "volume": "5",
+    "issue": "4",
+    "pages": "272-299",
+    "publisher": "Futurity Research Publishing",
+    "idType": "issn",
+    "idValue": "2956-3402",
+    "where": "[14]"
+   },
+   "evidence": "в литературата: позиция 14 от 73 (Crossref)",
+   "line": "Espinales, M. A. B., Zambrano, C. M. Z., & Estupiñán, E. C. (2025). Cultural Influence in the English Language Acquisition Process. Futurity Education. https://doi.org/10.57125/fed.2025.12.16",
+   "work": "Chehlarova, N., Chehlarova, K., Gecheva, N. (2025). Bibliometric analysis of Scopus publications related to STEM and STEAM research in the context of mathematics education"
+  },
+  "efc81a7a": {
+   "key": "doi:10.57125/fed.2025.06.25.04|10.31893/multiscience.2027122",
+   "cited": "doi:10.57125/fed.2025.06.25.04",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.57125/fed.2025.06.25.04",
+    "src": "doi",
+    "doi": "10.31893/multiscience.2027122",
+    "authors": "Hidayati, N. A., Sukestiyarno, Y. L., Suyitno, H., & Walid, W.",
+    "year": 2026,
+    "title": "Advancing TPACK understanding in mathematics education through enhanced strategic diagrams (ESD)",
+    "venue": "Multidisciplinary Science Journal",
+    "volume": "9",
+    "issue": "1",
+    "pages": "2027122",
+    "publisher": "Malque Publishing",
+    "idType": "issn",
+    "idValue": "2675-1240",
+    "where": "[9]"
+   },
+   "evidence": "в литературата: позиция 9 от 46 (Crossref)",
+   "line": "Hidayati, N. A., Sukestiyarno, Y. L., Suyitno, H., & Walid, W. (2026). Advancing TPACK understanding in mathematics education through enhanced strategic diagrams (ESD). Multidisciplinary Science Journal. https://doi.org/10.31893/multiscience.2027122",
+   "work": "Chehlarova, N., Chehlarova, K., Gecheva, N. (2025). Bibliometric analysis of Scopus publications related to STEM and STEAM research in the context of mathematics education"
+  },
+  "1f0e844e": {
+   "key": "doi:10.15547/pf.2025.004|10.55630/stem.2025.0738",
+   "cited": "doi:10.15547/pf.2025.004",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.15547/pf.2025.004",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0738",
+    "authors": "Kostova, B.",
+    "year": 2025,
+    "title": "Increasing Science and Technology Motivation in Fashion Students through Educational Activities with 3D Printing",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "407-413",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Kostova, B. (2025). Increasing Science and Technology Motivation in Fashion Students through Educational Activities with 3D Printing. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0738",
+   "work": "Chehlarova, N., Chehlarova, K., Gecheva, N. (2025). STEAM workshops with a 3D pen"
+  },
+  "b3669164": {
+   "key": "doi:10.15547/pf.2025.025|10.5861/ijrse.2026.26385",
+   "cited": "doi:10.15547/pf.2025.025",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.15547/pf.2025.025",
+    "src": "doi",
+    "doi": "10.5861/ijrse.2026.26385",
+    "authors": "Altez, F. B.",
+    "year": 2026,
+    "title": "Activity-based electronic strategic intervention material for Grade 9 students’ problem solving in oblique triangles: A quasi-experimental study",
+    "venue": "International Journal of Research Studies in Education",
+    "volume": "15",
+    "issue": "20",
+    "publisher": "Consortia Academia Publishing",
+    "idType": "issn",
+    "idValue": "2243-7703",
+    "where": "[21]"
+   },
+   "evidence": "в литературата: позиция 21 от 25 (Crossref)",
+   "line": "Altez, F. B. (2026). Activity-based electronic strategic intervention material for Grade 9 students’ problem solving in oblique triangles: A quasi-experimental study. International Journal of Research Studies in Education. https://doi.org/10.5861/ijrse.2026.26385",
+   "work": "Chehlarova, T., Petkov, I., Chehlarova, N., Gecheva, N. (2025). Research on the Development of the Percentage Visual Estimation with Computer Models"
+  },
+  "329f9b67": {
+   "key": "doi:10.3390/info15060315|10.3390/info15100613",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.3390/info15100613",
+    "authors": "Bogdanova, G., Todorov, T., Dochkova-Todorova, J., Noev, N., & Sabev, N.",
+    "year": 2024,
+    "title": "Design and Development Model of a Web Accessibility Ecosystem",
+    "venue": "Information",
+    "volume": "15",
+    "issue": "10",
+    "pages": "613",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2078-2489",
+    "where": "[36]"
+   },
+   "evidence": "в литературата: позиция 36 от 37 (Crossref)",
+   "line": "Bogdanova, G. T., Тодоров, Т., Dochkova-Todorova, J., Noev, N., & Sabev, N. (2024). Design and Development Model of a Web Accessibility Ecosystem. Information. https://doi.org/10.3390/info15100613",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "613aa5fd": {
+   "key": "doi:10.3390/info15060315|10.55630/stem.2024.0608",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.55630/stem.2024.0608",
+    "authors": "Krastev, A., Dimitrova, M., & Sabev, N.",
+    "year": 2024,
+    "title": "Humanoid Robot for Teaching Visually Impaired Learners",
+    "venue": "Innovative STEM Education",
+    "volume": "6",
+    "issue": "1",
+    "pages": "85-94",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Krastev, A., Dimitrova, M., & Sabev, N. (2024). Humanoid Robot for Teaching Visually Impaired Learners. Innovative STEM Education. https://doi.org/10.55630/stem.2024.0608",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "5791e65f": {
+   "key": "doi:10.3390/info15060315|10.1007/978-981-96-9709-0_9",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.1007/978-981-96-9709-0_9",
+    "authors": "Dimitrova, M., & Valchkova, N.",
+    "year": 2025,
+    "title": "Feasibility of the Cyber-Physical Nurse",
+    "venue": "Lecture Notes in Networks and Systems",
+    "pages": "127-137",
+    "publisher": "Springer Nature Singapore",
+    "idType": "issn",
+    "idValue": "2367-3370",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 35 (Crossref)",
+   "line": "Dimitrova, M., & Valchkova, N. (2025). Feasibility of the Cyber-Physical Nurse. Lecture notes in networks and systems. https://doi.org/10.1007/978-981-96-9709-0_9",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "ea0267f2": {
+   "key": "doi:10.3390/info15060315|10.1007/978-3-032-17272-3_15",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.1007/978-3-032-17272-3_15",
+    "authors": "Karvalics, L. Z.",
+    "year": 2026,
+    "title": "Beyond AI-literacy. Growing Up with an Artificial Lifetime Compeer (ALC)",
+    "venue": "Communications in Computer and Information Science",
+    "pages": "180-191",
+    "publisher": "Springer Nature Switzerland",
+    "idType": "issn",
+    "idValue": "1865-0929",
+    "where": "[12]"
+   },
+   "evidence": "в литературата: позиция 12 от 26 (Crossref)",
+   "line": "Karvalics, L. Z. (2026). Beyond AI-literacy. Growing Up with an Artificial Lifetime Compeer (ALC). Communications in computer and information science. https://doi.org/10.1007/978-3-032-17272-3_15",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "c7989404": {
+   "key": "doi:10.3390/info15060315|10.71016/tp/y00y2173",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.71016/tp/y00y2173",
+    "authors": "Balouch, G. A., Saleem, S., & Rehman, F.",
+    "year": 2025,
+    "title": "Open, Adapt, and Achieve Digital Doors to Learning: Exploring How E-Learning Platforms and Professional Growth Transform Learning for Students with Special Needs",
+    "venue": "THE PROGRESS: A Journal of Multidisciplinary Studies",
+    "volume": "6",
+    "issue": "1",
+    "pages": "109-120",
+    "publisher": "Human Nature Research Publisher",
+    "idType": "issn",
+    "idValue": "2958-2911"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Balouch, G. A., Saleem, S., & Rehman, F. (2025). Open, Adapt, and Achieve Digital Doors to Learning: Exploring How E-Learning Platforms and Professional Growth Transform Learning for Students with Special Needs. THE PROGRESS A Journal of Multidisciplinary Studies. https://doi.org/10.71016/tp/y00y2173",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "0754c0e3": {
+   "key": "doi:10.3390/info15060315|10.55630/stem.2025.0716",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0716",
+    "authors": "Petrova, P., & Dochkova-Todorova, J.",
+    "year": 2025,
+    "title": "Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "185-200",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "596916de": {
+   "key": "doi:10.26830/symmetry_2024_4_407|10.15547/pf.2025.003",
+   "cited": "doi:10.26830/symmetry_2024_4_407",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2024_4_407",
+    "src": "doi",
+    "doi": "10.15547/pf.2025.003",
+    "authors": "Petkov, I.",
+    "year": 2025,
+    "title": "Artificial Intelligence and Media Literacy in Information Technology Education",
+    "venue": "Педагогически форум",
+    "volume": "13",
+    "issue": "1",
+    "pages": "31-40",
+    "publisher": "Trakia University",
+    "idType": "eissn",
+    "idValue": "1314-7986",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 10 (Crossref)",
+   "line": "Petkov, I. (2025). Artificial Intelligence and Media Literacy in Information Technology Education. Педагогически форум. https://doi.org/10.15547/pf.2025.003",
+   "work": "Chehlarova, N. (2024). Didactic materials for counting isosceles trapezoids by visually impaired people"
+  },
+  "94a462f7": {
+   "key": "doi:10.17770/etr2024vol2.8062|10.47909/ijsmc.177",
+   "cited": "doi:10.17770/etr2024vol2.8062",
+   "owners": [
+    "chehlarova",
+    "gaidarski"
+   ],
+   "eligible": [
+    "chehlarova",
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.17770/etr2024vol2.8062",
+    "src": "doi",
+    "doi": "10.47909/ijsmc.177",
+    "authors": "Calderón, P. C. C., Ardían, L. A. B., Jiménez, H. R. P., Romero, J. L. J., & Vega, C. L. B.",
+    "year": 2025,
+    "title": "Organizational communication: Analysis of research trends through production indicators in Scopus",
+    "venue": "Iberoamerican Journal of Science Measurement and Communication",
+    "volume": "5",
+    "issue": "2",
+    "pages": "1-10",
+    "publisher": "Pro-Metrics",
+    "idType": "issn",
+    "idValue": "2709-7595",
+    "where": "[16]"
+   },
+   "evidence": "в литературата: позиция 16 от 34 (Crossref)",
+   "line": "Calderón, P. C. C., Baldeos-Ardían, L. A., Jiménez, H. R. P., Romero, J. L., & Vega, C. L. B. (2025). Organizational communication: Analysis of research trends through production indicators in Scopus. Iberoamerican Journal of Science Measurement and Communication. https://doi.org/10.47909/ijsmc.177",
+   "work": "Gaidarski, I., Chehlarova, N. (2024). Management approaches and application areas of information security in organizations"
+  },
+  "1b3d7771": {
+   "key": "doi:10.1109/ithet61869.2024.10837626|10.1007/978-3-032-05607-8_11",
+   "cited": "doi:10.1109/ithet61869.2024.10837626",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/ithet61869.2024.10837626",
+    "src": "doi",
+    "doi": "10.1007/978-3-032-05607-8_11",
+    "authors": "Bankov, B., Parusheva, S., Marinova, O., Strashimirova, P., & Petkova, D.",
+    "year": 2025,
+    "title": "Academic Profile Management: Benchmarking DeepSeek-R1 for Publication and Citation Data",
+    "venue": "Lecture Notes in Computer Science",
+    "pages": "103-114",
+    "publisher": "Springer Nature Switzerland",
+    "idType": "issn",
+    "idValue": "0302-9743",
+    "where": "[11]"
+   },
+   "evidence": "в литературата: позиция 11 от 29 (Crossref)",
+   "line": "Bankov, B., Parusheva, S. S., Marinova, O., Strashimirova, P., & Petkova, D. (2025). Academic Profile Management: Benchmarking DeepSeek-R1 for Publication and Citation Data. Lecture notes in computer science. https://doi.org/10.1007/978-3-032-05607-8_11",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
+  },
+  "df7e53da": {
+   "key": "doi:10.1109/ithet61869.2024.10837626|10.1109/i-smac65734.2025.11597792",
+   "cited": "doi:10.1109/ithet61869.2024.10837626",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/ithet61869.2024.10837626",
+    "src": "doi",
+    "doi": "10.1109/i-smac65734.2025.11597792",
+    "authors": "S, M., S, M., Periyasamy, P., M, K. S., J, A., & S, B.",
+    "year": 2025,
+    "title": "Smart Object Detection with Audible Navigation for the Visually Impaired",
+    "venue": "2025 9th International Conference on I-SMAC (IoT in Social, Mobile, Analytics and Cloud) (I-SMAC)",
+    "pages": "610-615",
+    "publisher": "IEEE",
+    "where": "[15]"
+   },
+   "evidence": "в литературата: позиция 15 от 16 (Crossref)",
+   "line": "Maheswari, S., S, M., Periyasamy, P., M, K. S., Abishek, J., & S, B. (2025). Smart Object Detection with Audible Navigation for the Visually Impaired. International Conference on I-SMAC (IoT in Social, Mobile, Analytics and Cloud) (I-SMAC). https://doi.org/10.1109/i-smac65734.2025.11597792",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
+  },
+  "9475d496": {
+   "key": "doi:10.1109/ithet61869.2024.10837626|10.55630/stem.2025.0716",
+   "cited": "doi:10.1109/ithet61869.2024.10837626",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/ithet61869.2024.10837626",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0716",
+    "authors": "Petrova, P., & Dochkova-Todorova, J.",
+    "year": 2025,
+    "title": "Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "185-200",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
+  },
+  "a05c4d22": {
+   "key": "doi:10.53656/ped2021-1.07|mathematicsandeducationinmathematics2026",
+   "cited": "doi:10.53656/ped2021-1.07",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "form",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/ped2021-1.07",
+    "src": "url",
+    "url": "https://www.semanticscholar.org/paper/335add49524eacbf1bf1033f52fdeedce941907d",
+    "authors": "Snizhko, N. V., & Снижко, Н. В.",
+    "year": null,
+    "title": "M AT H E M AT I C S A N D E D U C AT I O N I N M AT H E M AT I C S , 2 0 2 6",
+    "venue": ""
+   },
+   "evidence": "",
+   "line": "Snizhko, N. V., & Снижко, Н. В. (б.г.). M AT H E M AT I C S A N D E D U C AT I O N I N M AT H E M AT I C S , 2 0 2 6. https://www.semanticscholar.org/paper/335add49524eacbf1bf1033f52fdeedce941907d",
+   "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
+  },
+  "b40fbc48": {
+   "key": "doi:10.26830/symmetry_2021_2_281|10.15547/pf.2021.021",
+   "cited": "doi:10.26830/symmetry_2021_2_281",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2021_2_281",
+    "src": "doi",
+    "doi": "10.15547/pf.2021.021",
+    "authors": "Chehlarova, T., & Valkov, M.",
+    "year": 2021,
+    "title": "Game with Central Symmetry on a Rectangular Board",
+    "venue": "Педагогически форум",
+    "volume": "9",
+    "issue": "4",
+    "publisher": "Trakia University",
+    "idType": "eissn",
+    "idValue": "1314-7986",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 8 (Crossref)",
+   "line": "Chehlarova, Т., & Valkov, M. (2021). Game with Central Symmetry on a Rectangular Board. Педагогически форум. https://doi.org/10.15547/pf.2021.021",
+   "work": "Chehlarova, T. & Chehlarova, N. (2021). Computer model for self-preparation for playing with dominoes “Axes of symmetry”"
+  },
+  "b5957307": {
+   "key": "doi:10.1109/electronica52725.2021.9513705|10.7546/pecr.79.23.03",
+   "cited": "doi:10.1109/electronica52725.2021.9513705",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "src": "doi",
+    "doi": "10.7546/pecr.79.23.03",
+    "authors": "Gaidarski, I., & Kutinchev, P.",
+    "year": 2023,
+    "title": "Some Aspects of Information Security and Cybersecurity Problem Area",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "79",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Gaidarski, I., & Кутинчев, П. (2023). Some Aspects of Information Security and Cybersecurity Problem Area. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.79.23.03",
+   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
+  },
+  "e3075568": {
+   "key": "doi:10.1109/electronica52725.2021.9513705|10.4018/979-8-2600-1669-5.ch009",
+   "cited": "doi:10.1109/electronica52725.2021.9513705",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "src": "doi",
+    "doi": "10.4018/979-8-2600-1669-5.ch009",
+    "authors": "Sterev, N., Miltchev, R., & Yordanov, D.",
+    "year": 2026,
+    "title": "Digital Twins as a Bridge Between Industry 5.0 and Education 5.0",
+    "venue": "Digital Twin Applications and Cognitive Enterprise Transformation Across Industries",
+    "pages": "219-248",
+    "publisher": "IGI Global Scientific Publishing",
+    "idType": "isbn",
+    "idValue": "9798260016695",
+    "where": "[10]"
+   },
+   "evidence": "в литературата: позиция 10 от 52 (Crossref)",
+   "line": "Sterev, N., Miltchev, R., & Yordanov, D. (2026). Digital Twins as a Bridge Between Industry 5.0 and Education 5.0. IGI Global eBooks. https://doi.org/10.4018/979-8-2600-1669-5.ch009",
+   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
+  },
+  "b933b8c7": {
+   "key": "doi:10.1109/electronica52725.2021.9513705|10.1007/978-3-031-27034-5_3",
+   "cited": "doi:10.1109/electronica52725.2021.9513705",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "src": "doi",
+    "doi": "10.1007/978-3-031-27034-5_3",
+    "authors": "Dimitrova, Z., Borissova, D., Mikhov, R., & Dimitrov, V.",
+    "year": 2023,
+    "title": "Group Decision-Making Involving Competence of Experts in Relation to Evaluation Criteria: Case Study for e-Commerce Platform Selection",
+    "venue": "Communications in Computer and Information Science",
+    "pages": "42-53",
+    "publisher": "Springer Nature Switzerland",
+    "idType": "issn",
+    "idValue": "1865-0929",
+    "where": "[13]"
+   },
+   "evidence": "в литературата: позиция 13 от 25 (Crossref)",
+   "line": "Dimitrova, Z., Borissova, D., Mikhov, R., & Димитров, В. (2023). Group Decision-Making Involving Competence of Experts in Relation to Evaluation Criteria: Case Study for e-Commerce Platform Selection. Communications in computer and information science. https://doi.org/10.1007/978-3-031-27034-5_3",
+   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
+  },
+  "83d871d8": {
+   "key": "doi:10.1109/electronica52725.2021.9513705|10.1145/3543434.3543476",
+   "cited": "doi:10.1109/electronica52725.2021.9513705",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "src": "doi",
+    "doi": "10.1145/3543434.3543476",
+    "authors": "Koddebusch, M.",
+    "year": 2022,
+    "title": "Exposing the Phish: The Effect of Persuasion Techniques in Phishing E-Mails",
+    "venue": "DG.O 2022: The 23rd Annual International Conference on Digital Government Research",
+    "pages": "78-87",
+    "publisher": "ACM",
+    "where": "[15]"
+   },
+   "evidence": "в литературата: позиция 15 от 56 (Crossref)",
+   "line": "Koddebusch, M. (2022). Exposing the Phish: The Effect of Persuasion Techniques in Phishing E-Mails. Digital Government Research. https://doi.org/10.1145/3543434.3543476",
+   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
+  },
+  "c415c816": {
+   "key": "doi:10.59957/see.v5.i1.2020.7|10.1109/cscc53858.2021.00015",
+   "cited": "doi:10.59957/see.v5.i1.2020.7",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "src": "doi",
+    "doi": "10.1109/cscc53858.2021.00015",
+    "authors": "Trifonov, R., Tsochev, G., Manolov, S., Yoshinov, R., & Pavlova, G.",
+    "year": 2021,
+    "title": "Cyber Trends in Industrial Control Systems",
+    "venue": "2021 25th International Conference on Circuits, Systems, Communications and Computers (CSCC)",
+    "pages": "41-45",
+    "publisher": "IEEE",
+    "where": "[33]"
+   },
+   "evidence": "в литературата: позиция 33 от 50 (Crossref)",
+   "line": "Trifonov, R. I., Tsochev, G., Manolov, S., Yoshinov, R., & Pavlova, G. (2021). Cyber Trends in Industrial Control Systems. International Conference on Circuits, Systems, Communications and Computers (CSCC). https://doi.org/10.1109/cscc53858.2021.00015",
+   "work": "Miltchev, R. & Chehlarova, N. (2020). Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication"
+  },
+  "40fc9631": {
+   "key": "doi:10.59957/see.v5.i1.2020.7|10.52673/18570461.23.2-69.18",
+   "cited": "doi:10.59957/see.v5.i1.2020.7",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "src": "doi",
+    "doi": "10.52673/18570461.23.2-69.18",
+    "authors": "Popovici, I.",
+    "year": 2023,
+    "title": "Cloud technologies for the development of digital communication competence",
+    "venue": "Akademos",
+    "issue": "2(69)",
+    "pages": "155-162",
+    "publisher": "Periodic Publication Journal of Science, Innovation, Culture and Art &quot;SCIENCE and INNOVATION&quot;",
+    "idType": "issn",
+    "idValue": "1857-0461",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 24 (Crossref)",
+   "line": "Popovici, I. (2023). Cloud technologies for the development of digital communication competence. Akademos. https://doi.org/10.52673/18570461.23.2-69.18",
+   "work": "Miltchev, R. & Chehlarova, N. (2020). Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication"
+  },
+  "2f3044c5": {
+   "key": "doi:10.59957/see.v5.i1.2020.7|10.1063/5.0246135",
+   "cited": "doi:10.59957/see.v5.i1.2020.7",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "src": "doi",
+    "doi": "10.1063/5.0246135",
+    "authors": "Nikolova, P., & Tsochev, G.",
+    "year": 2025,
+    "title": "Security vulnerabilities of smart home: A case study of the smart plug",
+    "venue": "AIP Conference Proceedings",
+    "volume": "3303",
+    "pages": "060002",
+    "publisher": "AIP Publishing",
+    "idType": "issn",
+    "idValue": "0094-243X",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 22 (Crossref)",
+   "line": "Nikolova, P., & Tsochev, G. (2025). Security vulnerabilities of smart home: A case study of the smart plug. AIP conference proceedings. https://doi.org/10.1063/5.0246135",
+   "work": "Miltchev, R. & Chehlarova, N. (2020). Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication"
+  },
+  "df26fcb3": {
+   "key": "doi:10.59957/see.v5.i1.2020.7|10.1088/1757-899x/1216/1/012001",
+   "cited": "doi:10.59957/see.v5.i1.2020.7",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "src": "doi",
+    "doi": "10.1088/1757-899x/1216/1/012001",
+    "authors": "Tsochev, G. R., & Trifonov, R. I.",
+    "year": 2022,
+    "title": "Cloud computing security requirements: A Review",
+    "venue": "IOP Conference Series: Materials Science and Engineering",
+    "volume": "1216",
+    "issue": "1",
+    "pages": "012001",
+    "publisher": "IOP Publishing",
+    "idType": "issn",
+    "idValue": "1757-8981",
+    "where": "[6]"
+   },
+   "evidence": "в литературата: позиция 6 от 9 (Crossref)",
+   "line": "Tsochev, G., & Trifonov, R. (2022). Cloud computing security requirements: A Review. IOP Conference Series: Materials Science and Engineering. https://doi.org/10.1088/1757-899x/1216/1/012001",
+   "work": "Miltchev, R. & Chehlarova, N. (2020). Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication"
+  },
+  "2b199b49": {
+   "key": "doi:10.59957/see.v5.i1.2020.7|10.11610/isij.5546",
+   "cited": "doi:10.59957/see.v5.i1.2020.7",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "src": "doi",
+    "doi": "10.11610/isij.5546",
+    "authors": "Gaidarski, I., & Madzharov, A.",
+    "year": 2024,
+    "title": "Applying a New Approach to Consider the Human Factor in the Design of Information Security Systems",
+    "venue": "Information &amp; Security: An International Journal",
+    "volume": "55",
+    "issue": "3",
+    "pages": "261-272",
+    "publisher": "Procon, Ltd.",
+    "idType": "issn",
+    "idValue": "0861-5160"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Gaidarski, I., & Madzharov, A. (2024). Applying a New Approach to Consider the Human Factor in the Design of Information Security Systems. Information &amp; Security: An International Journal. https://doi.org/10.11610/isij.5546",
+   "work": "Miltchev, R. & Chehlarova, N. (2020). Development of Digital Competencies and Skills in the Field of Use of Cloud Services and Electronic Communication"
+  },
+  "9ac9f1bb": {
+   "key": "doi:10.1109/is61756.2024.10705223|10.3390/app15073800",
+   "cited": "doi:10.1109/is61756.2024.10705223",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1109/is61756.2024.10705223",
+    "src": "doi",
+    "doi": "10.3390/app15073800",
+    "authors": "Terzieva, V., Ivanova, T., Ivanova, M., Ilchev, S., Djambazova, E., & Petrov, I.",
+    "year": 2025,
+    "title": "Intelligent Educational Environments: Recent Trends, Modeling, and Applications",
+    "venue": "Applied Sciences",
+    "volume": "15",
+    "issue": "7",
+    "pages": "3800",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2076-3417",
+    "where": "[54]"
+   },
+   "evidence": "в литературата: позиция 54 от 57 (Crossref)",
+   "line": "Terzieva, V. T., Ivanova, T., Ivanova, M., Ilchev, S., Djambazova, E., & Petrov, I. (2025). Intelligent Educational Environments: Recent Trends, Modeling, and Applications. Applied Sciences. https://doi.org/10.3390/app15073800",
+   "work": "Gaidarski, I., Djambazova, E., Terzieva, V., Ilchev, S. (2024). Aspects of Dependability and Security in Integrated Intelligent Educational Environments"
+  },
+  "14e1f36d": {
+   "key": "doi:10.1109/bdkcse59280.2023.10339781|10.1016/j.ifacol.2024.07.132",
+   "cited": "doi:10.1109/bdkcse59280.2023.10339781",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1109/bdkcse59280.2023.10339781",
+    "src": "doi",
+    "doi": "10.1016/j.ifacol.2024.07.132",
+    "authors": "Terzieva, V., Ilchev, S., & Djambazova, E.",
+    "year": 2024,
+    "title": "Integrated Intelligent Educational Environment – Opportunities for STEM Education",
+    "venue": "IFAC-PapersOnLine",
+    "volume": "58",
+    "issue": "3",
+    "pages": "94-99",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "2405-8963",
+    "where": "[7]"
+   },
+   "evidence": "в литературата: позиция 7 от 22 (Crossref)",
+   "line": "Terzieva, V. T., Ilchev, S., & Djambazova, E. (2024). Integrated Intelligent Educational Environment – Opportunities for STEM Education. IFAC-PapersOnLine. https://doi.org/10.1016/j.ifacol.2024.07.132",
+   "work": "Gaidarski, I. (2023). Aplication of UML descriptive modeling techniques in Model Driven Engineering of Information Security System"
+  },
+  "0d45edb5": {
+   "key": "doi:10.7546/pecr.79.23.03|10.3390/app142310968",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "doi",
+    "doi": "10.3390/app142310968",
+    "authors": "Okoh, C., Theophilus, W. N., Dawkins, P., & Paheerathan, S.",
+    "year": 2024,
+    "title": "Enhancing Data Security Through VLSM Subnetting and TCP/IP Model in an ENT",
+    "venue": "Applied Sciences",
+    "volume": "14",
+    "issue": "23",
+    "pages": "10968",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2076-3417",
+    "where": "[5]"
+   },
+   "evidence": "в литературата: позиция 5 от 37 (Crossref)",
+   "line": "Okoh, C., Theophilus, W. N., Dawkins, P., & Paheerathan, S. (2024). Enhancing Data Security Through VLSM Subnetting and TCP/IP Model in an ENT. Applied Sciences. https://doi.org/10.3390/app142310968",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
+  },
+  "5c9b05b3": {
+   "key": "doi:10.7546/pecr.79.23.03|10.7546/pecr.81.24.03",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "doi",
+    "doi": "10.7546/pecr.81.24.03",
+    "authors": "Gospodinov, M.",
+    "year": 2024,
+    "title": "The Role of The Concept of Trust in Trust Services in Cyberspace to Enhance Cyber Security",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "81",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Gospodinov, M. (2024). The Role of The Concept of Trust in Trust Services in Cyberspace to Enhance Cyber Security. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.81.24.03",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
+  },
+  "b9bd7eaf": {
+   "key": "doi:10.7546/pecr.79.23.03|10.7546/pecr.81.24.01",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "doi",
+    "doi": "10.7546/pecr.81.24.01",
+    "authors": "Hossain, G. M., Islam, M. A., Islam, M. S., & Mallik, A.",
+    "year": 2024,
+    "title": "Automated Conveyor-Belt Product Sorting: An Industry 4.0 Initiative",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "81",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Hossain, G. M., Islam, M. A., Islam, M. S., & Mallik, A. (2024). Automated Conveyor-Belt Product Sorting: An Industry 4.0 Initiative. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.81.24.01",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
+  },
+  "64b169b8": {
+   "key": "doi:10.7546/pecr.79.23.03|10.17770/etr2024vol4.8238",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "form",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "doi",
+    "doi": "10.17770/etr2024vol4.8238",
+    "authors": "Yoshinov, R., Kotseva, M., Madzharov, A., & Chehlarova, N.",
+    "year": 2024,
+    "title": "IMPLYING CYBERSECURITY SKILLS FOR PUBLIC ADMINISTRATION EMPLOYEES",
+    "venue": "ENVIRONMENT. TECHNOLOGY. RESOURCES. Proceedings of the International Scientific and Practical Conference",
+    "volume": "4",
+    "pages": "300-304",
+    "publisher": "Riga Technical University",
+    "idType": "issn",
+    "idValue": "1691-5402",
+    "where": "[10]"
+   },
+   "evidence": "в литературата: позиция 10 от 14 (Crossref)",
+   "line": "Yoshinov, R., Kotseva, M., Madzharov, A., & Chehlarova, N. (2024). IMPLYING CYBERSECURITY SKILLS FOR PUBLIC ADMINISTRATION EMPLOYEES. Environment Technology Resources Proceedings of the International Scientific and Practical Conference. https://doi.org/10.17770/etr2024vol4.8238",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
+  },
+  "00f63d88": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/app13084921",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/app13084921",
+    "authors": "Qazi, E. U. H., Faheem, M. H., & Zia, T.",
+    "year": 2023,
+    "title": "HDLNIDS: Hybrid Deep-Learning-Based Network Intrusion Detection System",
+    "venue": "Applied Sciences",
+    "volume": "13",
+    "issue": "8",
+    "pages": "4921",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2076-3417",
+    "where": "[57]"
+   },
+   "evidence": "в литературата: позиция 57 от 57 (Crossref)",
+   "line": "Qazi, E. U. H., Faheem, M. H., & Zia, T. A. (2023). HDLNIDS: Hybrid Deep-Learning-Based Network Intrusion Detection System. Applied Sciences. https://doi.org/10.3390/app13084921",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "ad0d34a1": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/e26121126",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/e26121126",
+    "authors": "Sepúlveda-Fontaine, S. A., & Amigó, J. M.",
+    "year": 2024,
+    "title": "Applications of Entropy in Data Analysis and Machine Learning: A Review",
+    "venue": "Entropy",
+    "volume": "26",
+    "issue": "12",
+    "pages": "1126",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1099-4300",
+    "where": "[45]"
+   },
+   "evidence": "в литературата: позиция 45 от 282 (Crossref)",
+   "line": "Sepúlveda-Fontaine, S. A., & Amigó, J. M. (2024). Applications of Entropy in Data Analysis and Machine Learning: A Review. Entropy. https://doi.org/10.3390/e26121126",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "b1453cea": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1016/j.health.2023.100164",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1016/j.health.2023.100164",
+    "authors": "Nsugbe, E.",
+    "year": 2023,
+    "title": "An artificial intelligence-based decision support system for early diagnosis of polycystic ovaries syndrome",
+    "venue": "Healthcare Analytics",
+    "volume": "3",
+    "pages": "100164",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "2772-4425"
+   },
+   "evidence": "",
+   "line": "Nsugbe, E. (2023). An artificial intelligence-based decision support system for early diagnosis of polycystic ovaries syndrome. Healthcare Analytics. https://doi.org/10.1016/j.health.2023.100164",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "772043c3": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/fi14100295",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/fi14100295",
+    "authors": "Matviichuk, L., Ferilli, S., & Hnedko, N.",
+    "year": 2022,
+    "title": "Study of the Organization and Implementation of E-Learning in Wartime Inside Ukraine",
+    "venue": "Future Internet",
+    "volume": "14",
+    "issue": "10",
+    "pages": "295",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1999-5903",
+    "where": "[54]"
+   },
+   "evidence": "в литературата: позиция 54 от 59 (Crossref)",
+   "line": "Matviichuk, L., Ferilli, S., & Гнедко, Н. (2022). Study of the Organization and Implementation of E-Learning in Wartime Inside Ukraine. Future Internet. https://doi.org/10.3390/fi14100295",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "a2c40260": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.24294/jipd.v8i7.4074",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.24294/jipd.v8i7.4074",
+    "authors": "Kukartsev, V., Gantimurov, A., Kravtsov, K., Borodulin, A., & Tynchenko, Y.",
+    "year": 2024,
+    "title": "Application of non-parametric learning method in soil suitability assessment in present day economy",
+    "venue": "Journal of Infrastructure Policy and Development",
+    "volume": "8",
+    "issue": "7",
+    "pages": "4074",
+    "publisher": "EnPress Publisher",
+    "idType": "issn",
+    "idValue": "2572-7923"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Кукарцев, В. В., Gantimurov, A., Kravtsov, K. I., Бородулин, А. С., & Tynchenko, Y. A. (2024). Application of non-parametric learning method in soil suitability assessment in present day economy. Journal of Infrastructure Policy and Development. https://doi.org/10.24294/jipd.v8i7.4074",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "85db9b72": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/machines10090737",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/machines10090737",
+    "authors": "Saponi, M., Borboni, A., Adamini, R., Faglia, R., & Amici, C.",
+    "year": 2022,
+    "title": "Embedded Payload Solutions in UAVs for Medium and Small Package Delivery",
+    "venue": "Machines",
+    "volume": "10",
+    "issue": "9",
+    "pages": "737",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2075-1702",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 43 (Crossref)",
+   "line": "Saponi, M., Borboni, A., Adamini, R., Faglia, R., & Amici, C. (2022). Embedded Payload Solutions in UAVs for Medium and Small Package Delivery. Machines. https://doi.org/10.3390/machines10090737",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "c0ed5297": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/computation10100177",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/computation10100177",
+    "authors": "Yasmin, F., Hassan, M. M., Zaman, S., Aung, S. T., Karim, A., & Azam, S.",
+    "year": 2022,
+    "title": "A Forecasting Prognosis of the Monkeypox Outbreak Based on a Comprehensive Statistical and Regression Analysis",
+    "venue": "Computation",
+    "volume": "10",
+    "issue": "10",
+    "pages": "177",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2079-3197",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 28 (Crossref)",
+   "line": "Yasmin, F., Hassan, M. M., Zaman, S., Aung, S. T., Karim, A., & Azam, S. (2022). A Forecasting Prognosis of the Monkeypox Outbreak Based on a Comprehensive Statistical and Regression Analysis. Computation. https://doi.org/10.3390/computation10100177",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "e8d72c1b": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/info14070423",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/info14070423",
+    "authors": "Nikmanesh, M., Feili, A., & Sorooshian, S.",
+    "year": 2023,
+    "title": "Employee Productivity Assessment Using Fuzzy Inference System",
+    "venue": "Information",
+    "volume": "14",
+    "issue": "7",
+    "pages": "423",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2078-2489",
+    "where": "[15]"
+   },
+   "evidence": "в литературата: позиция 15 от 55 (Crossref)",
+   "line": "Nikmanesh, M., Feili, A., & Sorooshian, S. (2023). Employee Productivity Assessment Using Fuzzy Inference System. Information. https://doi.org/10.3390/info14070423",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "d3ae2c10": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/informatics12020044",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/informatics12020044",
+    "authors": "Bellarhmouch, Y., Majjate, H., Jeghal, A., Tairi, H., & Benjelloun, N.",
+    "year": 2025,
+    "title": "Detecting Student Engagement in an Online Learning Environment Using a Machine Learning Algorithm",
+    "venue": "Informatics",
+    "volume": "12",
+    "issue": "2",
+    "pages": "44",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2227-9709",
+    "where": "[33]"
+   },
+   "evidence": "в литературата: позиция 33 от 50 (Crossref)",
+   "line": "Bellarhmouch, Y., Majjate, H., Jeghal, A., Tairi, H., & Benjelloun, N. (2025). Detecting Student Engagement in an Online Learning Environment Using a Machine Learning Algorithm. Informatics. https://doi.org/10.3390/informatics12020044",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "20dc5118": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1016/j.mex.2023.102285",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1016/j.mex.2023.102285",
+    "authors": "Shiddiqi, A. M., Yogatama, E. D., & Navastara, D. A.",
+    "year": 2023,
+    "title": "Resource-aware video streaming (RAViS) framework for object detection system using deep learning algorithm",
+    "venue": "MethodsX",
+    "volume": "11",
+    "pages": "102285",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "2215-0161"
+   },
+   "evidence": "",
+   "line": "Shiddiqi, A. M., Yogatama, E. D., & Navastara, D. A. (2023). Resource-aware video streaming (RAViS) framework for object detection system using deep learning algorithm. MethodsX. https://doi.org/10.1016/j.mex.2023.102285",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "cdaaed0d": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/s24196384",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/s24196384",
+    "authors": "Robles-Guerrero, A., Gómez-Jiménez, S., Saucedo-Anaya, T., López-Betancur, D., Navarro-Solís, D., & Guerrero-Méndez, C.",
+    "year": 2024,
+    "title": "Convolutional Neural Networks for Real Time Classification of Beehive Acoustic Patterns on Constrained Devices",
+    "venue": "Sensors",
+    "volume": "24",
+    "issue": "19",
+    "pages": "6384",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1424-8220",
+    "where": "[37]"
+   },
+   "evidence": "в литературата: позиция 37 от 61 (Crossref)",
+   "line": "Robles-Guerrero, A., Gómez-Jiménez, S., Saucedo-Anaya, T., López-Betancur, D., Navarro-Solís, D., & Guerrero-Méndez, C. (2024). Convolutional Neural Networks for Real Time Classification of Beehive Acoustic Patterns on Constrained Devices. Sensors. https://doi.org/10.3390/s24196384",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "bba2e385": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/prosthesis7020026",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/prosthesis7020026",
+    "authors": "Chainando, N., Martawidjaja, M., Darius, R. A., Yahya, L. C., Yemima, S., Tan, W. S., Harito, C., Chandra, R. C., Andhini, G. K., Putra, K. B., Lumban Tobing, C. C., Syafi’i, M., & Syafrudin, M.",
+    "year": 2025,
+    "title": "Applying 3D Scanning and Printing Techniques to Produce Upper Limb Prostheses: Bibliometric Analysis and Scoping Review",
+    "venue": "Prosthesis",
+    "volume": "7",
+    "issue": "2",
+    "pages": "26",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2673-1592",
+    "where": "[185]"
+   },
+   "evidence": "в литературата: позиция 185 от 300 (Crossref)",
+   "line": "Chainando, N., Martawidjaja, M., Darius, R. A., Yahya, L. C., Yemima, S., Tan, W. S., Harito, C., Chandra, R. C., Andhini, G. K., Putra, K. B., Tobing, C. C. L., Syafi’i, M., & Syafrudin, M. (2025). Applying 3D Scanning and Printing Techniques to Produce Upper Limb Prostheses: Bibliometric Analysis and Scoping Review. Prosthesis. https://doi.org/10.3390/prosthesis7020026",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "11641aaf": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/s22249915",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/s22249915",
+    "authors": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A.",
+    "year": 2022,
+    "title": "Holistic Security and Safety for Factories of the Future",
+    "venue": "Sensors",
+    "volume": "22",
+    "issue": "24",
+    "pages": "9915",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1424-8220",
+    "where": "[78]"
+   },
+   "evidence": "в литературата: позиция 78 от 79 (Crossref)",
+   "line": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A. R. (2022). Holistic Security and Safety for Factories of the Future. Sensors. https://doi.org/10.3390/s22249915",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "c610b247": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1016/j.compeleceng.2024.109395",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1016/j.compeleceng.2024.109395",
+    "authors": "Eltahlawy, A. M., Aslan, H. K., Elsayed, M. S., Jurcut, A. D., & Azer, M. A.",
+    "year": 2024,
+    "title": "Detection of sequence number attacks using enhanced AODV protocol in MANETs",
+    "venue": "Computers and Electrical Engineering",
+    "volume": "118",
+    "pages": "109395",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "0045-7906"
+   },
+   "evidence": "",
+   "line": "Eltahlawy, A. M., Aslan, H. K., Elsayed, M. S., Jurcut, A. D., & Azer, M. A. (2024). Detection of sequence number attacks using enhanced AODV protocol in MANETs. Computers & Electrical Engineering. https://doi.org/10.1016/j.compeleceng.2024.109395",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "c4e5a20b": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1016/j.ecoinf.2022.101640",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1016/j.ecoinf.2022.101640",
+    "authors": "Karapinar Senturk, Z.",
+    "year": 2022,
+    "title": "Amphibian species detection in water reservoirs using artificial neural networks for ecology-friendly city planning",
+    "venue": "Ecological Informatics",
+    "volume": "69",
+    "pages": "101640",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "1574-9541"
+   },
+   "evidence": "",
+   "line": "Şentürk, Z. K. (2022). Amphibian species detection in water reservoirs using artificial neural networks for ecology-friendly city planning. Ecological Informatics. https://doi.org/10.1016/j.ecoinf.2022.101640",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "d852ac7f": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/app142311153",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/app142311153",
+    "authors": "Jamróz, D.",
+    "year": 2024,
+    "title": "Using Multivalued Cartesian Genetic Programming (M-CGP) for Automatic Design of Digital Sequential Circuits",
+    "venue": "Applied Sciences",
+    "volume": "14",
+    "issue": "23",
+    "pages": "11153",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2076-3417",
+    "where": "[27]"
+   },
+   "evidence": "в литературата: позиция 27 от 34 (Crossref)",
+   "line": "Jamróz, D. (2024). Using Multivalued Cartesian Genetic Programming (M-CGP) for Automatic Design of Digital Sequential Circuits. Applied Sciences. https://doi.org/10.3390/app142311153",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "d82815f9": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1080/00051144.2025.2513734",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1080/00051144.2025.2513734",
+    "authors": "Anitha, A., & Auxillia, D. J.",
+    "year": 2025,
+    "title": "Attention-fused residual transformer CNN for robust lower limb movement recognition",
+    "venue": "Automatika",
+    "volume": "66",
+    "issue": "3",
+    "pages": "528-542",
+    "publisher": "Informa UK Limited",
+    "idType": "issn",
+    "idValue": "0005-1144",
+    "where": "[22]"
+   },
+   "evidence": "в литературата: позиция 22 от 42 (Crossref)",
+   "line": "Anitha, A., & Auxillia, D. J. (2025). Attention-fused residual transformer CNN for robust lower limb movement recognition. Automatika. https://doi.org/10.1080/00051144.2025.2513734",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "31614deb": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/realestate3030008",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/realestate3030008",
+    "authors": "Schmid, J.",
+    "year": 2026,
+    "title": "Predicting a Housing Price Index: A Two-Stage Machine Learning Approach Using Linked Micro-, Socio- and Macroeconomic Data from Frankfurt am Main",
+    "venue": "Real Estate",
+    "volume": "3",
+    "issue": "3",
+    "pages": "8",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2813-8090",
+    "where": "[90]"
+   },
+   "evidence": "в литературата: позиция 90 от 172 (Crossref)",
+   "line": "Schmid, J. (2026). Predicting a Housing Price Index: A Two-Stage Machine Learning Approach Using Linked Micro-, Socio- and Macroeconomic Data from Frankfurt am Main. Real Estate. https://doi.org/10.3390/realestate3030008",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "6ddaf2ba": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1007/978-3-031-21388-5_24",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1007/978-3-031-21388-5_24",
+    "authors": "Pechlivanidis, K., & Wagenaar, G.",
+    "year": 2022,
+    "title": "Rapid Delivery of Software: The Effect of Alignment on Time to Market",
+    "venue": "Lecture Notes in Computer Science",
+    "pages": "351-365",
+    "publisher": "Springer International Publishing",
+    "idType": "issn",
+    "idValue": "0302-9743",
+    "where": "[25]"
+   },
+   "evidence": "в литературата: позиция 25 от 25 (Crossref)",
+   "line": "Pechlivanidis, K., & Wagenaar, G. (2022). Rapid Delivery of Software: The Effect of Alignment on Time to Market. Lecture notes in computer science. https://doi.org/10.1007/978-3-031-21388-5_24",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "7d35a93d": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1063/5.0247133",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1063/5.0247133",
+    "authors": "Muchakayala, D. P., & Chinnadurai, S.",
+    "year": 2025,
+    "title": "Delay tolerant in smart rehabilitation patient monitoring in wireless body area network using IPCLRP protocol compared with PCLRP protocol",
+    "venue": "AIP Conference Proceedings",
+    "volume": "3281",
+    "pages": "040003",
+    "publisher": "AIP Publishing",
+    "idType": "issn",
+    "idValue": "0094-243X",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 15 (Crossref)",
+   "line": "Muchakayala, D. P., & Chinnadurai, S. (2025). Delay tolerant in smart rehabilitation patient monitoring in wireless body area network using IPCLRP protocol compared with PCLRP protocol. AIP conference proceedings. https://doi.org/10.1063/5.0247133",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "7ba77da0": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1007/978-981-96-1154-6_12",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1007/978-981-96-1154-6_12",
+    "authors": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L.",
+    "year": 2025,
+    "title": "Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies",
+    "venue": "Smart Innovation, Systems and Technologies",
+    "pages": "171-185",
+    "publisher": "Springer Nature Singapore",
+    "idType": "issn",
+    "idValue": "2190-3018",
+    "where": "[3]"
+   },
+   "evidence": "в литературата: позиция 3 от 24 (Crossref)",
+   "line": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L. (2025). Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies. Smart innovation, systems and technologies. https://doi.org/10.1007/978-981-96-1154-6_12",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "1cd8ed1e": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.52783/jes.1535",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.52783/jes.1535",
+    "authors": "Sonali Kadam, V. M.",
+    "year": 2024,
+    "title": "The performance of Logistic Regression, Decision Tree, KNN, Naive Bayes and SVM for identifying Automotive Cybersecurity Attack and Prevention: An Experimental Study",
+    "venue": "Journal of Electrical Systems",
+    "volume": "20",
+    "issue": "2s",
+    "pages": "687-699",
+    "publisher": "Science Research Society",
+    "idType": "eissn",
+    "idValue": "1112-5209"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Kadam, V. M. S. (2024). The performance of Logistic Regression, Decision Tree, KNN, Naive Bayes and SVM for identifying Automotive Cybersecurity Attack and Prevention: An Experimental Study. Journal of Electrical Systems. https://doi.org/10.52783/jes.1535",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "2b4e1bbe": {
+   "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.82.24.01",
+   "cited": "doi:10.7546/pecr.76.21.04",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.76.21.04",
+    "src": "doi",
+    "doi": "10.7546/pecr.82.24.01",
+    "authors": "Dimitrov, V., & Dimitrova, Z.",
+    "year": 2024,
+    "title": "Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "82",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Димитров, В., & Dimitrova, Z. (2024). Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.82.24.01",
+   "work": "Gaidarski, I. (2022). Model Driven Development of Information Security System"
+  },
+  "c0ebcea1": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1016/j.im.2023.103877",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1016/j.im.2023.103877",
+    "authors": "Renaud, K., Warkentin, M., Pogrebna, G., & van der Schyff, K.",
+    "year": 2024,
+    "title": "VISTA: An inclusive insider threat taxonomy, with mitigation strategies",
+    "venue": "Information &amp; Management",
+    "volume": "61",
+    "issue": "1",
+    "pages": "103877",
+    "publisher": "Elsevier BV",
+    "idType": "issn",
+    "idValue": "0378-7206",
+    "where": "[143]"
+   },
+   "evidence": "в литературата: позиция 143 от 260 (Crossref)",
+   "line": "Renaud, K., Warkentin, M. E., Pogrebna, G., & Schyff, K. V. D. (2023). VISTA: An inclusive insider threat taxonomy, with mitigation strategies. Information & Management. https://doi.org/10.1016/j.im.2023.103877",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "b3a1590a": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/access.2022.3214819",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1109/access.2022.3214819",
+    "authors": "Rahman, M. M. H., Naeem, M. A. A., & Abubakar, A.",
+    "year": 2022,
+    "title": "Threats From Unintentional Insiders: An Assessment of an Organization’s Readiness Using Machine Learning",
+    "venue": "IEEE Access",
+    "volume": "10",
+    "pages": "110294-110308",
+    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "idType": "eissn",
+    "idValue": "2169-3536",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 58 (Crossref)",
+   "line": "Rahman, M. M. H., Al-Naeem, M., & Ibrahim, A. A. (2022). Threats From Unintentional Insiders: An Assessment of an Organization’s Readiness Using Machine Learning. IEEE Access. https://doi.org/10.1109/access.2022.3214819",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "a3e2e936": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.34190/iccws.18.1.969",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.34190/iccws.18.1.969",
+    "authors": "Sekonya, N., & Sithungu, S.",
+    "year": 2023,
+    "title": "The Impact of Edge Computing on the Industrial Internet of Things",
+    "venue": "International Conference on Cyber Warfare and Security",
+    "volume": "18",
+    "issue": "1",
+    "pages": "360-368",
+    "publisher": "Academic Conferences and Publishing International Ltd",
+    "idType": "issn",
+    "idValue": "2048-9870"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Sekonya, N., & Sithungu, S. P. (2023). The Impact of Edge Computing on the Industrial Internet of Things. International Conference on Cyber Warfare and Security. https://doi.org/10.34190/iccws.18.1.969",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "709b9e33": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/iccr61006.2024.10532956",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1109/iccr61006.2024.10532956",
+    "authors": "Asasfeh, A., Alnawayseh, S. E. A., AbdElkareem, R., & Salahat, M.",
+    "year": 2024,
+    "title": "Human Factors In Security Management: Understanding And Mitigating Insider Threats",
+    "venue": "2024 2nd International Conference on Cyber Resilience (ICCR)",
+    "pages": "1-10",
+    "publisher": "IEEE"
+   },
+   "evidence": "",
+   "line": "Asasfeh, A., Alnawayseh, S. E. A., Alomoush, R. A., & Salahat, M. (2024). Human Factors In Security Management: Understanding And Mitigating Insider Threats. International Conference on Cyber Resilience (ICCR). https://doi.org/10.1109/iccr61006.2024.10532956",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "cfe7d4a2": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1007/978-3-031-84078-4_26",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1007/978-3-031-84078-4_26",
+    "authors": "Esparza, E., Diéguez, M., & Hochstetter, J.",
+    "year": 2025,
+    "title": "Prediction, Detection and Control of Insider Threats in Organizations",
+    "venue": "Communications in Computer and Information Science",
+    "pages": "378-395",
+    "publisher": "Springer Nature Switzerland",
+    "idType": "issn",
+    "idValue": "1865-0929",
+    "where": "[16]"
+   },
+   "evidence": "в литературата: позиция 16 от 93 (Crossref)",
+   "line": "Esparza, E., Diéguez, M., & Hochstetter-Diez, J. (2025). Prediction, Detection and Control of Insider Threats in Organizations. Communications in computer and information science. https://doi.org/10.1007/978-3-031-84078-4_26",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "9ad4808a": {
+   "key": "doi:10.3390/drones9110776|10.1515/jag-2026-0030",
+   "cited": "doi:10.3390/drones9110776",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/drones9110776",
+    "src": "doi",
+    "doi": "10.1515/jag-2026-0030",
+    "authors": "Hao, X., Yan, B., He, Q., & Xing, D.",
+    "year": 2026,
+    "title": "Deep learning-based BDS-3 ephemeris and positioning performance prediction",
+    "venue": "Journal of Applied Geodesy",
+    "publisher": "Walter de Gruyter GmbH",
+    "idType": "issn",
+    "idValue": "1862-9016",
+    "where": "[7]"
+   },
+   "evidence": "в литературата: позиция 7 от 55 (Crossref)",
+   "line": "HAO, X., Yan, B., He, Q., & Xing, D. (2026). Deep learning-based BDS-3 ephemeris and positioning performance prediction. Journal of Applied Geodesy. https://doi.org/10.1515/jag-2026-0030",
+   "work": "González-deSantos, L. M., Bruzual, J., Socías, D., Lacarra Arcos, E., Santos, M., González, R., Gil, E., Moreno López, G., Hristozov, S., Karas, J., Vyshnevskyy, M., Gebhardt, J., Haro, P., Bellingham, S. R. (2025). Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations"
+  },
+  "3083d552": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/aerospace12050449",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/aerospace12050449",
+    "authors": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C.",
+    "year": 2025,
+    "title": "ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes",
+    "venue": "Aerospace",
+    "volume": "12",
+    "issue": "5",
+    "pages": "449",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2226-4310",
+    "where": "[30]"
+   },
+   "evidence": "в литературата: позиция 30 от 32 (Crossref)",
+   "line": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C. (2025). ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes. Aerospace. https://doi.org/10.3390/aerospace12050449",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "4ba869b5": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/computation14090214",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/computation14090214",
+    "authors": "Garzia, F., & Stella, A.",
+    "year": 2026,
+    "title": "Cross-National Statistical Analysis of Multi-Rotor Unmanned Aircraft Accidents: Causal Factors, Flight Phases, and Temporal Trends (2016–2022)",
+    "venue": "Computation",
+    "volume": "14",
+    "issue": "9",
+    "pages": "214",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2079-3197",
+    "where": "[11]"
+   },
+   "evidence": "в литературата: позиция 11 от 34 (Crossref)",
+   "line": "Garzia, F., & Stella, A. (2026). Cross-National Statistical Analysis of Multi-Rotor Unmanned Aircraft Accidents: Causal Factors, Flight Phases, and Temporal Trends (2016–2022). Computation. https://doi.org/10.3390/computation14090214",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "3d2a5d4c": {
+   "key": "doi:10.3390/engproc2025090047|10.1145/3829641.3829793",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.1145/3829641.3829793",
+    "authors": "Jiang, H., Cai, W., Huang, K., & Zong, S.",
+    "year": 2026,
+    "title": "Optimization of Landing Pad Size for Small and Medium-Sized UAV Vertiports Based on Monte Carlo Simulation",
+    "venue": "Proceedings of the 2nd International Conference on Software Engineering and Computer Applications",
+    "pages": "970-976",
+    "publisher": "ACM",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 22 (Crossref)",
+   "line": "Jiang, H., Cai, W., Huang, K., & Zong, S. (2026). Optimization of Landing Pad Size for Small and Medium-Sized UAV Vertiports Based on Monte Carlo Simulation. https://doi.org/10.1145/3829641.3829793",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "dec55ccc": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/aerospace13090848",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/aerospace13090848",
+    "authors": "Alomar, I., Adilbekov, A., & Maklakovs, J.",
+    "year": 2026,
+    "title": "A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study",
+    "venue": "Aerospace",
+    "volume": "13",
+    "issue": "9",
+    "pages": "848",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2226-4310",
+    "where": "[32]"
+   },
+   "evidence": "в литературата: позиция 32 от 41 (Crossref)",
+   "line": "Alomar, I., Adilbekov, A., & Maklakovs, J. (2026). A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study. Aerospace. https://doi.org/10.3390/aerospace13090848",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "c746b6ce": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/drones9120815",
+    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
+    "year": 2025,
+    "title": "Risk-Based Design of Urban UAS Corridors",
+    "venue": "Drones",
+    "volume": "9",
+    "issue": "12",
+    "pages": "815",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2504-446X"
+   },
+   "evidence": "",
+   "line": "Tafur, C. L., Rodríguez, J. O., Rodríguez, D. A., Traslaviña, D., Valencia, S. F., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "adfa345a": {
+   "key": "doi:10.17770/etr2024vol4.8195|10.1109/telfor67910.2025.11314214",
+   "cited": "doi:10.17770/etr2024vol4.8195",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.17770/etr2024vol4.8195",
+    "src": "doi",
+    "doi": "10.1109/telfor67910.2025.11314214",
+    "authors": "Stanev, H., & Mitev, S.",
+    "year": 2025,
+    "title": "Organisational and Technical Challenges for Conflict-free use of Civil Airport Airspace by Drones",
+    "venue": "2025 33rd Telecommunications Forum (TELFOR)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "where": "[18]"
+   },
+   "evidence": "в литературата: позиция 18 от 19 (Crossref)",
+   "line": "Stanev, H., & Mitev, S. (2025). Organisational and Technical Challenges for Conflict-free use of Civil Airport Airspace by Drones. Telecommunications Forum (TELFOR). https://doi.org/10.1109/telfor67910.2025.11314214",
+   "work": "Stanev, H., Hristozov, S. (2024). Applicability of JARUS SORA to State UAS Operations in Disaster Relief"
+  },
+  "3698b706": {
+   "key": "doi:10.17770/etr2024vol4.8195|10.1109/telfor67910.2025.11314421",
+   "cited": "doi:10.17770/etr2024vol4.8195",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.17770/etr2024vol4.8195",
+    "src": "doi",
+    "doi": "10.1109/telfor67910.2025.11314421",
+    "authors": "Menseidov, D., & Mitev, S.",
+    "year": 2025,
+    "title": "Monte Carlo Assessment of Reliability and Connectivity in Coordinated Flights of a Swarm of Small UAVs",
+    "venue": "2025 33rd Telecommunications Forum (TELFOR)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "where": "[7]"
+   },
+   "evidence": "в литературата: позиция 7 от 8 (Crossref)",
+   "line": "Menseidov, D., & Mitev, S. (2025). Monte Carlo Assessment of Reliability and Connectivity in Coordinated Flights of a Swarm of Small UAVs. Telecommunications Forum (TELFOR). https://doi.org/10.1109/telfor67910.2025.11314421",
+   "work": "Stanev, H., Hristozov, S. (2024). Applicability of JARUS SORA to State UAS Operations in Disaster Relief"
+  }
+ }
+}
