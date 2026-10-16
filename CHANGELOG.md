@@ -9,7 +9,7 @@
 - Цитиранията на общи трудове (по справката ver05) — добавени и при съавторите от колектива: Н. Чехларова (Kaczmarek 2026,
   Petkov 2026), И. Гайдарски (Yoshinov, Dishkova, Chehlarova 2026), А. Александров (Angelov 2025 — три труда),
   Р. Георгиев (Ivanov 2019 на общия труд от 2004 г., извън списъците на сайта). Линкове: PECR 84 (iict.bas.bg), Cybersecurity and Law.
-- Gaidarski & Chehlarova (ETR 2024, vol. 2) — цитира „Technical implementation of a reporting system“ (2019): DOI 10.17770/etr2024vol2.8062.
+- Gaidarski & Chehlarova (ETR 2024, vol. 2) — цитира „Technical implementation of a reporting system“ (2019): DOI 10.17770/etr2024vol2.8062 и линк към статията (archive-journals.rtu.lv).
 
 ## v1.4.2 — 16.10.2026
 **Ръководство „Цитирания“: „Точки НАЦИД“**

@@ -156,7 +156,7 @@ const citations: CitedWork[] = [
     source: 'SONIX, справка ver05 (14.10.2026)',
     cites: [
       { year: 2023, ind: '14', doi: '10.7546/PECR.79.23.03', text: 'Gaidarski, I., Kutinchev, P. Some aspects of Information Security and Cybersecurity problem area. Problems of Engineering Cybernetics and Robotics, 79, Bulgarian Academy of Sciences, 2023, pp. 55–66, ISSN 2738-7356' },
-      { year: 2024, ind: '12', index: 'scopus', doi: '10.17770/etr2024vol2.8062', url: 'https://doi.org/10.17770/etr2024vol2.8062', text: 'Gaidarski, I., Chehlarova, N. Management approaches and application areas of information security in organizations. Environment. Technology. Resources: Proceedings of the 15th International Scientific and Practical Conference, 27–28 June 2024, vol. 2, Rezekne Academy of Technologies, Latvia, 2024, pp. 110–113, ISSN 1691-5402, e-ISSN 2256-070X' },
+      { year: 2024, ind: '12', index: 'scopus', doi: '10.17770/etr2024vol2.8062', url: 'https://archive-journals.rtu.lv/etr/article/view/4826', text: 'Gaidarski, I., Chehlarova, N. Management approaches and application areas of information security in organizations. Environment. Technology. Resources: Proceedings of the 15th International Scientific and Practical Conference, 27–28 June 2024, vol. 2, Rezekne Academy of Technologies, Latvia, 2024, pp. 110–113, ISSN 1691-5402, e-ISSN 2256-070X' },
     ],
   },
   {
