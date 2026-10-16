@@ -9,3 +9,8 @@
 /src/data/team/hristozov.ts         @sthrist @urslab-irbas
 /src/data/team/gaidarski.ts         @ivangaidarski @urslab-irbas
 /src/data/team/chehlarova.ts        @nedachehlarova @urslab-irbas
+
+# Проверените цитирания — самият човек ИЛИ ръководителят
+/src/data/citations/hristozov/      @sthrist @urslab-irbas
+/src/data/citations/gaidarski/      @ivangaidarski @urslab-irbas
+/src/data/citations/chehlarova/     @nedachehlarova @urslab-irbas

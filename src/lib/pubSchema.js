@@ -36,6 +36,7 @@ export const COAUTHORS = {
   'Chehlarova, K.': 'УниБИТ', 'Чехларова, К.': 'УниБИТ', 'Yoshinov, R.': 'Лаборатория по телематика – БАН', 'Kotseva, M.': 'Лаборатория по телематика – БАН',
   'Miteva, L.': SU, 'Hrosinkov, V.': SU, 'Stefanov, A.': SU, 'Nedanovski, D.': SU, 'Stanev, H.': 'УНСС',
   'Angelov, S.': 'ИР-БАН (задочен докторант)', 'Apter, N.': NOT_IR, 'del Estad Herrero, A.': NOT_IR, 'Gachev, G.': NOT_IR, 'Dishkova, G.': IMI,
+  'Todorov, P.': 'ВВВУ „Г. Бенковски“', 'Тодоров, П.': 'ВВВУ „Г. Бенковски“',
   'Ivanov, V.': NOT_IR, 'Tsvetanov, S.': NOT_IR, 'Petkov, I.': NOT_IR,
   'González-deSantos, L.': NOT_IR, 'Bruzual, J.': NOT_IR, 'Socías, D.': NOT_IR, 'Lacarra Arcos, E.': NOT_IR, 'Santos, M.': NOT_IR,
   'González, R.': NOT_IR, 'Gil, E.': NOT_IR, 'Moreno López, G.': NOT_IR, 'Karas, J.': NOT_IR, 'Vyshnevskyy, M.': NOT_IR,
