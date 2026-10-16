@@ -9,20 +9,26 @@
 // Правила (облекчават потвърждаването):
 //   - вече въведените цитирания и самоцитиранията (за всеки член поотделно) се пропускат;
 //   - цитиране на общ труд се показва веднъж — потвърждава го един от съавторите с акаунт и то се отчита на всички;
-//   - всяко намерено цитиране има връзка „Потвърди“: отваря формата „Ново цитиране“ с всичко попълнено (DOI + данни);
-//     потвърждението минава през всички проверки на Системата (вкл. доказателството — литературата в Crossref);
-//   - вече съобщени кандидати се пазят (data: citation-scan/state.json): в следващите отчети са в кратък списък
-//     „Чакат потвърждение“ до 3 месеца, след това отпадат; ново съобщение — само за нови;
-//   - времето е ограничено (TIME_LIMIT) и заявките са с пауза — без натоварване на базите.
-// Изход: scan-report.md (текст на заявката в GitHub), scan-report.html (имейл), scan-result.json, обновен state.json.
+//   - всяко намерено цитиране с DOI се проверява предварително както при потвърждаване (Crossref: данни и литература;
+//     правилата на Системата и на НАЦИД); готовите се потвърждават с ЕДНА отметка в заявката (показател или „Откажи“) —
+//     .github/workflows/citation-confirm.yml ги въвежда без формата; останалите — през формата (?scan=<id>) или „Откажи“;
+//   - отказаните (state.rejected) не се предлагат повече; потвърдените (state.confirmed) се пропускат до въвеждането им;
+//   - вече съобщени кандидати се показват отново (с дата на съобщаване) до 3 месеца; предишната заявка се затваря;
+//   - времето е ограничено (TIME_LIMIT, VERIFY_LIMIT) и заявките са с пауза — без натоварване на базите.
+// Изход: scan-report-parts.json (текстът на заявката/заявките в GitHub), scan-report.md, scan-report.html (имейл),
+//        scan-result.json, citation-scan/candidates.json (данните за отметките и формата), обновен state.json.
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'node:fs';
-import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate } from '../src/lib/pubSchema.js';
+import { createHash } from 'node:crypto';
+import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate, validateCitation, CIT_POINTS, MESSAGES } from '../src/lib/pubSchema.js';
+import { crossrefWork, fromCrossref, findInRefs } from './evidence.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const MAILTO = process.env.MAILTO || 'a.madzharov@ir.bas.bg';
 const UA = `URSlab-site citation scan (+${SITE}; mailto:${MAILTO})`;
 const TIME_LIMIT = Number(process.env.TIME_LIMIT_MIN || 12) * 60_000;
 const STATE = process.env.STATE_FILE || 'citation-scan/state.json';
+const CANDS = process.env.CANDS_FILE || 'citation-scan/candidates.json';
+const VERIFY_LIMIT = Number(process.env.VERIFY_LIMIT_MIN || 8) * 60_000;
 const KEEP_DAYS = 92;
 const t0 = Date.now();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -58,6 +64,8 @@ const team = readdirSync('src/data/team')
 const citables = JSON.parse(readFileSync('dist/publications/citables.json', 'utf8'));
 const sitePubs = JSON.parse(readFileSync('dist/publications/all.json', 'utf8'));
 const state = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { seen: {}, runs: [] };
+state.rejected ??= {}; // отказани с отметка „Откажи“ — не се предлагат повече
+state.confirmed ??= {}; // потвърдени с отметка — до въвеждането им се пропускат
 
 // Трудовете (общите — веднъж) и чии са
 const works = new Map();
@@ -125,7 +133,6 @@ async function metaByDois(dois) {
 }
 
 // ---------------- 1) Цитирания на трудовете в Системата ----------------
-const b64 = (o) => Buffer.from(JSON.stringify(o)).toString('base64url');
 const candidates = []; // { work, cand, eligible[], confirmer, key, isNew }
 const known = (w, c) => !!findDuplicate(c, w.cites) || (tnorm(c.title).length >= 15 && w.cites.some((x) => tnorm(x.title).includes(tnorm(c.title))));
 function consider(w, c) {
@@ -133,6 +140,7 @@ function consider(w, c) {
   const key = `${w.key}|${c.doi || tnorm(c.title).slice(0, 60)}`;
   if (candidates.some((x) => x.key === key)) return;
   if (known(w, c)) { stats.skippedKnown++; return; }
+  if (state.rejected[key] || state.confirmed[key]) { stats.skippedDecided = (stats.skippedDecided ?? 0) + 1; return; }
   const citingTeam = teamFromAuthors(c.alist ?? parseAuthors(c.authors).list);
   const eligible = w.owners.filter((m) => !citingTeam.includes(m));
   if (!eligible.length) { stats.skippedSelf++; return; }
@@ -171,70 +179,150 @@ for (const m of team.filter((t) => t.orcid)) {
   }
 }
 
-// ---------------- Отчет ----------------
+
+// ---------------- 3) Предварителна проверка — същата като при потвърждаване ----------------
+// За всяко цитиране с DOI: данните от Crossref, търсене на цитирания труд в литературата на цитиращия
+// и правилата на Системата (validateCitation). Готовите се потвърждават с една отметка в заявката в GitHub
+// (.github/workflows/citation-confirm.yml) — без формата. Останалите — през формата (линк / PDF) или „Откажи“.
 const now = new Date();
 const today = now.toISOString().slice(0, 10);
+const id8 = (k) => createHash('sha1').update(k).digest('hex').slice(0, 8);
+const shown = candidates.filter((x) => x.isNew || (now - Date.parse(state.seen[x.key])) / 864e5 <= KEEP_DAYS);
+const BOOKISH = ['proceedings-article', 'book-chapter', 'book', 'monograph', 'edited-book', 'reference-book', 'book-part', 'book-section', 'book-set', 'proceedings'];
+const NOT_COUNTED = { 'posted-content': 'предпечат (preprint)', dataset: 'набор от данни', 'peer-review': 'рецензия в платформа', dissertation: 'дисертация', report: 'доклад / отчет' };
+const tv = Date.now();
+for (const x of shown) {
+  const c = x.cand;
+  x.id = id8(x.key);
+  x.data = { type: 'citation', member: x.eligible[0], cited: x.work.key, src: c.doi ? 'doi' : 'url', ...(c.doi ? { doi: c.doi } : c.url ? { url: c.url } : {}),
+    authors: c.authors, year: c.year, title: c.title, venue: c.venue };
+  x.status = 'form';
+  if (!c.doi) { x.why = 'няма DOI — доказателство с линк или PDF файл'; continue; }
+  if (Date.now() - tv > VERIFY_LIMIT) { x.why = 'не е проверено поради ограничението за време — ще се провери при следващото търсене'; continue; }
+  let m = null;
+  try { stats.requests++; m = await crossrefWork(c.doi); } catch { x.why = 'Crossref не отговори'; continue; }
+  if (m) {
+    const cr = fromCrossref(m);
+    for (const [k, v] of Object.entries(cr)) x.data[k] = v; // Crossref е източникът на библиографските данни (като при потвърждаването)
+    x.ctype = m.type;
+    if (NOT_COUNTED[m.type]) { x.status = 'doubt'; x.why = `вид „${NOT_COUNTED[m.type]}“ — по правилата на НАЦИД не се отчита`; continue; }
+    const refs = m.reference ?? [];
+    if (refs.length) {
+      let f = null;
+      for (const o of x.work.owners) { const r = findInRefs(refs, x.work, o); if (r.found) { f = r; break; } }
+      if (!f) { x.status = 'doubt'; x.why = `трудът не е намерен в литературата на цитиращия (Crossref: ${refs.length} позиции) — вероятно грешка в базата; ако все пак е цитиран, въведете с PDF файл`; continue; }
+      x.data.where = `[${f.pos}]`;
+      x.ev = `в литературата: позиция ${f.pos} от ${refs.length} (Crossref)`;
+    } else x.ev = 'DOI в Crossref (литературата не е публикувана там)';
+  } else x.ev = 'DOI извън Crossref (DataCite / doi.org)';
+  // Правилата на Системата; автоматично взето поле в неподходящ формат не пречи — просто не се записва
+  const ctx = { cited: { title: x.work.title, year: x.work.year, authors: x.work.authors }, existing: x.work.cites, full: true };
+  const test = () => validateCitation({ ...x.data, ind: '13' }, ctx);
+  let errs = test();
+  for (const e of errs.filter((e) => ['fmt', 'issn', 'isbn'].includes(e.code))) { if (['idValue', 'idType'].includes(e.field)) { delete x.data.idType; delete x.data.idValue; } else delete x.data[e.field]; }
+  errs = test();
+  if (errs.length) { x.why = `за допълване във формата: ${errs.map((e) => `${e.field} — ${MESSAGES.bg[e.code] ?? e.code}`).join('; ')}`; continue; }
+  const journal = m ? m.type === 'journal-article' : !!x.data.venue;
+  const issn = ['issn', 'eissn'].includes(x.data.idType);
+  x.options = ['12s', '12w', ...(journal ? (issn ? ['14'] : []) : (!m || BOOKISH.includes(m.type) ? ['13'] : []))];
+  x.status = 'ready';
+}
+
+// ---------------- Отчет ----------------
 const nm = (id) => team.find((t) => t.id === id)?.name ?? id;
 const gh = (id) => team.find((t) => t.id === id)?.github;
-const confirmUrl = (x) => {
-  const c = x.cand;
-  const d = { type: 'citation', member: x.confirmer, cited: x.work.key, src: c.doi ? 'doi' : 'url', doi: c.doi || undefined, url: c.doi ? undefined : c.url || undefined,
-    authors: c.authors, year: c.year, title: c.title, venue: c.venue, ...(c.core ? { ind: '12', index: 'wos' } : {}) };
-  return `${SITE}/publications/new/?m=${x.confirmer}&cite=${encodeURIComponent(x.work.key)}#d=${b64(d)}`;
+const OPT = {
+  '12s': `Д-12 · Scopus (${CIT_POINTS[12]} т.)`,
+  '12w': `Д-12 · Web of Science (${CIT_POINTS[12]} т.)`,
+  13: `Д-13 · сборник / монография с рецензиране, без Scopus и WoS (${CIT_POINTS[13]} т.)`,
+  14: `Д-14 · списание с рецензиране, без Scopus и WoS (${CIT_POINTS[14]} т.)`,
+  x: '❌ Откажи — не е цитиране или не се отчита (няма да се предлага повече)',
 };
-const newPubUrl = (x) => `${SITE}/publications/new/?m=${x.member}#d=${b64({ member: x.member, authors: x.c.authors, year: x.c.year, title: x.c.title, venue: x.c.venue, doi: x.c.doi || undefined, url: x.c.doi ? undefined : x.c.url || undefined, status: 'published' })}`;
-const fresh = candidates.filter((x) => x.isNew);
-const pending = candidates.filter((x) => !x.isNew && (now - Date.parse(state.seen[x.key])) / 864e5 <= KEEP_DAYS);
-const cite = (c) => `${c.authors} (${c.year ?? 'б.г.'}). ${c.title}${c.venue ? `. ${c.venue}` : ''}${c.doi ? `. https://doi.org/${c.doi}` : c.url ? `. ${c.url}` : ''}`;
+const box = (x, o) => `  - [ ] ${OPT[o]} <!--c:${x.id}:${o}-->`;
+const formUrl = (x) => `${SITE}/publications/new/?m=${x.data.member}&cite=${encodeURIComponent(x.work.key)}&scan=${x.id}`;
+const newPubUrl = (x) => `${SITE}/publications/new/?m=${x.member}#d=${Buffer.from(JSON.stringify({ member: x.member, authors: x.c.authors, year: x.c.year, title: x.c.title, venue: x.c.venue, doi: x.c.doi || undefined, url: x.c.doi ? undefined : x.c.url || undefined, status: 'published' })).toString('base64url')}`;
+const cite = (c) => `${c.authors} (${c.year ?? 'б.г.'}). ${c.title}${c.venue ? `. *${c.venue}*` : ''}${c.doi ? `. https://doi.org/${c.doi}` : c.url ? `. ${c.url}` : ''}`;
 const workLine = (w) => `${w.authors} (${w.year}). ${w.title}`;
+const selfNote = (x) => x.eligible.length < x.work.owners.length ? `; самоцитиране за ${x.work.owners.filter((m) => !x.eligible.includes(m)).map(nm).join(', ')} — отчита се на останалите` : '';
+const ready = shown.filter((x) => x.status === 'ready');
+const form = shown.filter((x) => x.status === 'form');
+const doubt = shown.filter((x) => x.status === 'doubt');
+const fresh = shown.filter((x) => x.isNew);
 
-let md = `Автоматично търсене на нови цитирания — ${today}${process.env.TRIGGER ? ` (${process.env.TRIGGER})` : ''}.\n\n`;
-md += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
-  `Пропуснати: вече въведени — ${stats.skippedKnown}, самоцитирания — ${stats.skippedSelf}. Заявки: ${stats.requests}, време: ${Math.round((Date.now() - t0) / 1000)} s.\n\n`;
-md += `**Как се потвърждава:** натиснете „Потвърди“ → формата „Ново цитиране“ е попълнена → изберете показателя (Д-12 / Д-13 / Д-14) → „Запиши“ → „Create“. ` +
-  `Системата проверява всичко както при ръчно въвеждане. Цитиране на общ труд потвърждава **един** от съавторите с акаунт — отчита се на всички съавтори от колектива (без тези, за които е самоцитиране).\n\n`;
-const section = (list, title) => {
-  if (!list.length) return '';
-  let s = `## ${title} (${list.length})\n\n`;
-  const byWork = new Map(); for (const x of list) { const k = x.work.key; if (!byWork.has(k)) byWork.set(k, []); byWork.get(k).push(x); }
-  for (const [, xs] of byWork) {
-    const w = xs[0].work;
-    s += `### ${workLine(w)}\n_Отчита се на: ${xs[0].work.owners.map(nm).join(', ')}_\n\n`;
-    for (const x of xs) s += `- ${cite(x.cand)} — _${x.cand.source}${x.cand.core ? ', водещо издание (предложение: Д-12)' : ''}${x.eligible.length < w.owners.length ? `; самоцитиране за ${w.owners.filter((m) => !x.eligible.includes(m)).map(nm).join(', ')}` : ''}_ · [✅ Потвърди](${confirmUrl(x)})${gh(x.confirmer) ? ` (@${gh(x.confirmer)})` : ''}\n`;
-    s += '\n';
+const chunks = []; // части на текста — при над 60 000 знака заявката се разделя на няколко
+let head = `Автоматично търсене на нови цитирания — ${today}${process.env.TRIGGER ? ` (${process.env.TRIGGER})` : ''}.\n\n`;
+head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
+  `Пропуснати: вече въведени — ${stats.skippedKnown}, самоцитирания — ${stats.skippedSelf}, вече решени (потвърдени / отказани) — ${stats.skippedDecided ?? 0}. Заявки: ${stats.requests}, време: ${Math.round((Date.now() - t0) / 1000)} s.\n\n`;
+head += `> **Как се потвърждава:** под всяко цитиране отметнете **една** отметка — показателя (Д-12, ако цитиращият труд е в Scopus или Web of Science; иначе Д-13 / Д-14) или „❌ Откажи“. ` +
+  `Системата проверява и въвежда цитирането сама (без формата) — на всички съавтори от колектива, без тези, за които е самоцитиране — и след минута-две пише резултата на мястото на отметките. ` +
+  `Отметки слагат съавторите на цитирания труд с GitHub акаунт и ръководителят.\n\n`;
+chunks.push(head);
+const groups = (list, render) => {
+  const by = new Map(); for (const x of list) { if (!by.has(x.work.key)) by.set(x.work.key, []); by.get(x.work.key).push(x); }
+  for (const [, xs] of by) {
+    chunks.push(`### ${workLine(xs[0].work)}\n_Отчита се на: ${xs[0].work.owners.map(nm).join(', ')}_\n\n`);
+    for (const x of xs) chunks.push(render(x));
   }
-  return s;
 };
-md += section(fresh, '🆕 Нови цитирания') || '## 🆕 Нови цитирания\n\nНяма нови цитирания от последното търсене.\n\n';
-md += section(pending, '⏳ Чакат потвърждение (съобщени по-рано)');
-if (newWorks.length) {
-  md += `## 📄 Трудове на членовете, които още не са в Системата (${newWorks.length})\n\nНамерени в OpenAlex по ORCID. Въведете ги („+ Нова публикация“) — след това техните цитирания ще се търсят и показват тук.\n\n`;
-  for (const x of newWorks) md += `- ${cite(x.c)} — ${x.members.map(nm).join(', ')}${x.cited ? `; **цитиран ${x.cited} пъти** (OpenAlex)` : ''} · [+ Въведи](${newPubUrl(x)})\n`;
-  md += '\n';
+const meta = (x) => [x.cand.source, x.ev, x.cand.core ? 'OpenAlex: водещо издание — вероятно Д-12' : '', x.isNew ? '' : `съобщено на ${state.seen[x.key]}`].filter(Boolean).join(' · ') + selfNote(x);
+if (ready.length) {
+  chunks.push(`## ✅ Проверени — потвърдете с една отметка (${ready.length})\n\n`);
+  groups(ready, (x) => `- ${cite(x.cand)}\n  <sub>✔ ${meta(x)}</sub>\n${[...x.options, 'x'].map((o) => box(x, o)).join('\n')}\n\n`);
 }
-const mention = [...new Set([...fresh, ...pending].map((x) => gh(x.confirmer)).concat(newWorks.map((x) => gh(x.member))).filter(Boolean))];
-if (mention.length) md += `\n${mention.map((g) => '@' + g).join(' ')} — моля, прегледайте и потвърдете.\n`;
-if (stats.failed || timeUp()) md += `\n> ⚠️ ${timeUp() ? 'Търсенето спря при ограничението за време — останалите трудове ще се проверят следващия път. ' : ''}${stats.failed ? `Неуспешни заявки: ${stats.failed}.` : ''}\n`;
+if (form.length) {
+  chunks.push(`## ✍️ За въвеждане през формата (${form.length})\n\nТези не могат да се проверят автоматично — натиснете „Формата“ (данните са попълнени), добавете доказателство (линк или PDF файл) и изберете показателя.\n\n`);
+  groups(form, (x) => `- ${cite(x.cand)}\n  <sub>${x.why} · ${meta(x)}</sub> · [✍️ Формата](${formUrl(x)})\n${box(x, 'x')}\n\n`);
+}
+if (doubt.length) {
+  chunks.push(`## ⚠️ Съмнителни (${doubt.length})\n\nБазите ги посочват като цитирания, но проверката не ги потвърждава. Обикновено — „❌ Откажи“.\n\n`);
+  groups(doubt, (x) => `- ${cite(x.cand)}\n  <sub>⚠️ ${x.why} · ${x.cand.source}</sub> · [✍️ Формата](${formUrl(x)})\n${box(x, 'x')}\n\n`);
+}
+if (!shown.length) chunks.push('## Нови цитирания\n\nНяма нови цитирания от последното търсене.\n\n');
+if (newWorks.length) {
+  chunks.push(`## 📄 Трудове на членовете, които още не са в Системата (${newWorks.length})\n\nНамерени в OpenAlex по ORCID. Въведете ги („+ Въведи“) — след това и техните цитирания ще се търсят.\n\n`);
+  for (const x of newWorks) chunks.push(`- ${cite(x.c)} — ${x.members.map(nm).join(', ')}${x.cited ? `; **цитиран ${x.cited} пъти** (OpenAlex)` : ''} · [+ Въведи](${newPubUrl(x)})\n`);
+  chunks.push('\n');
+}
+const mention = [...new Set([...shown.flatMap((x) => x.work.owners.map(gh)), ...newWorks.map((x) => gh(x.member))].filter(Boolean))];
+let tail = '';
+if (mention.length) tail += `\n${mention.map((g) => '@' + g).join(' ')} — моля, прегледайте.\n`;
+if (stats.failed || timeUp()) tail += `\n> ⚠️ ${timeUp() ? 'Търсенето спря при ограничението за време — останалите трудове ще се проверят следващия път. ' : ''}${stats.failed ? `Неуспешни заявки: ${stats.failed}.` : ''}\n`;
+// Разделяне на части (GitHub приема до 65 536 знака в заявка)
+const MAX = 58000;
+const parts = [''];
+for (const ch of chunks) {
+  if (parts[parts.length - 1].length + ch.length > MAX) parts.push(`(продължение)\n\n`);
+  parts[parts.length - 1] += ch;
+}
+parts[parts.length - 1] += tail;
 
-// Имейл (HTML) — до всички членове с имейл, вкл. без GitHub акаунт
-const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const htmlList = (list) => list.map((x) => `<li>${esc(cite(x.cand))}<br><small>Труд: ${esc(workLine(x.work))} · отчита се на: ${esc(x.eligible.map(nm).join(', '))}</small><br><a href="${esc(confirmUrl(x))}">✅ Потвърди</a>${gh(x.confirmer) ? '' : ' <small>(потвърждава съавтор с акаунт или ръководителят)</small>'}</li>`).join('');
+// Имейл (HTML): кратко + връзка към заявката (__ISSUES__ се заменя в workflow с връзките)
+const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+const htmlList = (list) => list.map((x) => `<li>${esc(cite(x.cand).replace(/\*/g, ''))}<br><small>Труд: ${esc(workLine(x.work))} · отчита се на: ${esc(x.eligible.map(nm).join(', '))}${x.why ? ` · ${esc(x.why)}` : ''}</small></li>`).join('');
 let html = `<div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.5"><h2>URSlab — нови цитирания (${today})</h2>`;
-html += `<p>Проверени трудове: ${stats.works}. Нови цитирания: <b>${fresh.length}</b>; чакат потвърждение: ${pending.length}; трудове, които още не са в Системата: ${newWorks.length}.</p>`;
+html += `<p>Проверени трудове: ${stats.works}. Намерени цитирания: <b>${shown.length}</b> (нови: ${fresh.length}) — готови за потвърждаване с отметка: <b>${ready.length}</b>; за формата: ${form.length}; съмнителни: ${doubt.length}. Трудове, които още не са в Системата: ${newWorks.length}.</p>`;
+html += `<p style="font-size:16px"><b>👉 Потвърждаване с една отметка: __ISSUES__</b></p>`;
 html += `<p>Потвърждава <b>един</b> от съавторите с GitHub акаунт (или ръководителят) — цитирането се отчита на всички съавтори от колектива. Ако нямате акаунт, препратете писмото на съавтор с акаунт или на ръководителя.</p>`;
-if (fresh.length) html += `<h3>Нови цитирания</h3><ol>${htmlList(fresh)}</ol>`;
-if (pending.length) html += `<h3>Чакат потвърждение</h3><ol>${htmlList(pending)}</ol>`;
-if (newWorks.length) html += `<h3>Трудове, които още не са в Системата</h3><ul>${newWorks.map((x) => `<li>${esc(cite(x.c))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
+if (ready.length) html += `<h3>Проверени</h3><ol>${htmlList(ready)}</ol>`;
+if (form.length) html += `<h3>За въвеждане през формата</h3><ol>${htmlList(form)}</ol>`;
+if (doubt.length) html += `<h3>Съмнителни</h3><ol>${htmlList(doubt)}</ol>`;
+if (newWorks.length) html += `<h3>Трудове, които още не са в Системата</h3><ul>${newWorks.map((x) => `<li>${esc(cite(x.c).replace(/\*/g, ''))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
 html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно или ръчно от член на колектива.${String(process.env.SCAN_MAIL_TO || '') === '' ? ' Тестов режим: писмото отива само до ръководителя.' : ''}</small></p></div>`;
 
-// Запомняне на съобщените кандидати; старите (над KEEP_DAYS) отпадат
-for (const x of fresh) state.seen[x.key] = today;
+// Кандидатите (за отметките и за формата ?scan=<id>) и състоянието
+const items = {};
+for (const x of shown) items[x.id] = { key: x.key, cited: x.work.key, owners: x.work.owners, eligible: x.eligible, status: x.status, options: x.options ?? [], data: x.data, evidence: x.ev ?? '', line: cite(x.cand).replace(/\*/g, ''), work: workLine(x.work) };
+mkdirSync(CANDS.split('/').slice(0, -1).join('/') || '.', { recursive: true });
+writeFileSync(CANDS, JSON.stringify({ date: today, items }, null, 1) + '\n');
+for (const x of shown) state.seen[x.key] ??= today;
 for (const [k, d] of Object.entries(state.seen)) if ((now - Date.parse(d)) / 864e5 > KEEP_DAYS * 2) delete state.seen[k];
+for (const [k, v] of Object.entries(state.confirmed)) if ((now - Date.parse(v.date)) / 864e5 > 31) delete state.confirmed[k];
 state.lastRun = now.toISOString();
-state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', new: fresh.length, pending: pending.length, newWorks: newWorks.length, requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
+state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', found: shown.length, new: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
 mkdirSync(STATE.split('/').slice(0, -1).join('/') || '.', { recursive: true });
 writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
-writeFileSync('scan-report.md', md);
+writeFileSync('scan-report.md', parts.join('\n\n---\n\n'));
+writeFileSync('scan-report-parts.json', JSON.stringify(parts));
 writeFileSync('scan-report.html', html);
 // Получатели: засега (тестов режим) само ръководителят. За всички членове с имейл в профила:
 // задайте в GitHub → Settings → Secrets and variables → Actions → Variables: SCAN_MAIL_TO = all
@@ -243,5 +331,5 @@ const MAIL_TO = String(process.env.SCAN_MAIL_TO || '').trim();
 const emails = MAIL_TO === 'all' ? team.map((t) => t.email).filter(Boolean)
   : MAIL_TO ? MAIL_TO.split(/[,;\s]+/).filter(Boolean)
   : [team.find((t) => t.id === 'madzharov')?.email || MAILTO];
-writeFileSync('scan-result.json', JSON.stringify({ fresh: fresh.length, pending: pending.length, newWorks: newWorks.length, emails, stats }, null, 2));
-console.log(md);
+writeFileSync('scan-result.json', JSON.stringify({ found: shown.length, fresh: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, parts: parts.length, emails, stats }, null, 2));
+console.log(parts.join('\n\n---\n\n'));

@@ -653,6 +653,20 @@ const rows = [
   indSel.addEventListener('change', syncInd); syncInd();
   const h = location.hash.match(/^#d=([\w-]+)/);
   if (h) { try { const d = JSON.parse(b64.dec(h[1])); if (d.type === 'citation' && d.cited && !citMode()) setCitMode(d.cited, d.member); write(d); syncInd(); syncSrc(); } catch { /* повредена връзка — празна форма */ } }
+  // ?scan=<id> — връзката „Формата“ от заявката „[Нови цитирания]“: данните на намереното цитиране
+  // (citation-scan/candidates.json в клона data, публично четим)
+  const scanId = q.get('scan');
+  if (!h && scanId && /^[0-9a-f]{8}$/.test(scanId)) {
+    fetch(`https://raw.githubusercontent.com/${ctx.repo}/data/citation-scan/candidates.json`, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const d = j?.items?.[scanId]?.data;
+        if (!d) return;
+        if (d.cited && !citMode()) setCitMode(d.cited, d.member);
+        write(d); syncInd(); syncSrc(); preview();
+      })
+      .catch(() => { /* няма връзка — празна форма */ });
+  }
   syncStatus();
   renderAffil();
   preview();

@@ -1,17 +1,22 @@
-# Ново цитиране от формата на сайта (/publications/new/?cite=… — бутонът „+ Цитиране“ в „Обобщен отчет“) — автоматично.
-# Формата отваря заявка (Issue) „[Цитиране] …“ с данните в JSON блок. Тук:
+# Ново цитиране — автоматично. Заявки (Issues) „[Цитиране] …“ с данните в JSON блок идват от:
+#   - формата на сайта (/publications/new/?cite=… — бутонът „+ Цитиране“ в „Обобщен отчет“);
+#   - отметка в заявката „[Нови цитирания] …“ (citation-confirm.yml отваря заявката от името на бота и пуска този workflow;
+#     подателят е човекът, който е отметнал — маркерът <!-- by:… --> в заявки на бота).
+# Всяко стартиране обработва ВСИЧКИ чакащи (отворени) заявки „[Цитиране]“ една след друга:
 #   1) сайтът се изгражда с данните от клона data (за да има актуален /publications/citables.json);
-#   2) scripts/add-citation.mjs проверява автора на заявката (членът, чийто е трудът, или ръководителят),
-#      цитирания труд, правилата за нова публикация и правилата на НАЦИД за цитиранията (src/lib/pubSchema.js),
+#   2) scripts/run-citations.mjs → scripts/add-citation.mjs за всяка заявка: правото на подателя (съавтор от колектива
+#      на цитирания труд или ръководителят), правилата за нова публикация и на НАЦИД (src/lib/pubSchema.js),
 #      доказателството (scripts/evidence.mjs: при DOI — данните и литературата от Crossref; при линк — страницата / PDF;
 #      при PDF — файлът, прикачен към заявката) и DOI / ISSN / ISBN в публичните регистри (scripts/verify-ids.mjs);
-#   3) сайтът се изгражда отново с новото цитиране;
+#   3) сайтът се изгражда отново с новите цитирания;
 #   4) src/data/citations/<член>/contrib.json и publish-log.md се записват в клона `data` и сайтът се качва;
-#   5) в заявката се пише резултатът; при успех ръководителят получава уведомление и отметка „Върни“ (revert-citation.yml).
+#   5) във всяка заявка се пише резултатът (при успех — отметка „Върни“ за ръководителя, revert-citation.yml),
+#      а при потвърждаване с отметка — и на мястото на отметката в „[Нови цитирания]“.
 name: Ново цитиране (от формата на сайта)
 on:
   issues:
     types: [opened, edited, reopened]
+  workflow_dispatch:
 permissions:
   contents: write
   issues: write
@@ -21,9 +26,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   add:
-    if: startsWith(github.event.issue.title, '[Цитиране]') && github.event.issue.state == 'open'
+    if: github.event_name == 'workflow_dispatch' || (startsWith(github.event.issue.title, '[Цитиране]') && github.event.issue.state == 'open')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,25 +42,48 @@ jobs:
           git fetch -q origin data
           git checkout FETCH_HEAD -- src/data/contrib.json publish-log.md
           git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || echo "Още няма цитирания от формата"
+      - name: Чакащите заявки „[Цитиране]“
+        id: queue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const list = [];
+            if (context.eventName === 'issues') list.push(context.payload.issue);
+            const open = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', per_page: 100 });
+            for (const i of open) {
+              if (i.pull_request || !i.title.startsWith('[Цитиране]') || list.some((x) => x.number === i.number)) continue;
+              if (i.labels.some((l) => (l.name ?? l) === 'грешка')) continue; // чака ръководителя
+              list.push(i);
+            }
+            const q = list.map((i) => {
+              const bot = i.user.login === 'github-actions[bot]';
+              const by = bot ? (String(i.body).match(/<!-- by:([\w-]+) -->/) ?? [])[1] : null;
+              return { number: i.number, body: i.body ?? '', author: by ?? i.user.login };
+            });
+            require('fs').writeFileSync('queue.json', JSON.stringify(q));
+            core.setOutput('n', q.length);
+            core.info(`Заявки: ${q.map((x) => '#' + x.number).join(', ') || 'няма'}`);
+
       - name: Изграждане на сайта (актуален списък на трудовете и цитиранията)
+        if: steps.queue.outputs.n != '0'
         run: npm ci && npm run build
 
       - name: Инструмент за текста на PDF файлове (pdftotext)
+        if: steps.queue.outputs.n != '0'
         run: sudo apt-get install -y -qq poppler-utils >/dev/null
 
-      - name: Проверка на заявката, доказателството за цитирането и идентификаторите в регистрите
+      - name: Проверка на заявките, доказателството за цитирането и идентификаторите в регистрите
         id: check
+        if: steps.queue.outputs.n != '0'
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
           ADMIN_LOGIN: ${{ github.repository_owner }}
-        run: node scripts/add-citation.mjs
+        run: node scripts/run-citations.mjs
 
-      - name: Изграждане на сайта с новото цитиране
+      - name: Изграждане на сайта с новите цитирания
         id: build
-        if: steps.check.outputs.ok == 'true'
+        if: steps.check.outputs.any_ok == 'true'
         run: npm run build
 
       - name: Запис в клона data и качване на сайта
@@ -63,10 +91,8 @@ jobs:
         if: steps.build.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-          NUM: ${{ github.event.issue.number }}
-          AUTHOR: ${{ github.event.issue.user.login }}
+          NUMS: ${{ steps.check.outputs.nums }}
         run: |
-          TITLE=$(node -p "require('./pub-result.json').title")
           mkdir -p "$RUNNER_TEMP/cit"; cp --parents src/data/citations/*/contrib.json "$RUNNER_TEMP/cit/"; cp publish-log.md "$RUNNER_TEMP/"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -76,7 +102,7 @@ jobs:
           cp -r "$RUNNER_TEMP/cit/src" .
           cp "$RUNNER_TEMP/publish-log.md" publish-log.md
           git add src/data/citations publish-log.md
-          git commit -m "Цитиране от заявка #$NUM (@$AUTHOR): $TITLE"
+          git commit -m "Цитирания от заявки $NUMS"
           ok=0; for i in 1 2 3; do
             if git push origin HEAD:data; then ok=1; break; fi
             sleep 5; git pull --rebase origin data
@@ -86,7 +112,7 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           gh workflow run deploy.yml --ref main
 
-      - name: Отговор в заявката
+      - name: Отговор в заявките (и на мястото на отметките в „[Нови цитирания]“)
         if: always() && steps.check.outcome == 'success'
         uses: actions/github-script@v7
         env:
@@ -95,32 +121,52 @@ jobs:
           SHA: ${{ steps.publish.outputs.sha }}
         with:
           script: |
-            const r = require('./pub-result.json');
-            const num = context.issue.number;
+            const fs = require('fs');
+            const { setStatus } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/confirm-citations.mjs`);
             const { owner, repo } = context.repo;
-            let text, close = false, label, reason = 'not_planned';
-            if (!r.authorized) {
-              text = `❌ **Заявката не е приета.**\n\n${r.errors.join('\n')}`;
-              close = true; label = 'отказана';
-            } else if (!r.ok) {
-              const who = context.payload.issue.user.login;
-              text = `@${who}, ❌ **цитирането не е прието** — нищо не е добавено. Какво да направите:\n\n` +
-                `**1. Какво не е наред**\n${r.errors.map((e) => '- ' + e).join('\n')}\n\n` +
-                `**2. Как да го поправите**\n${(r.howto || []).map((e, i) => `${i + 1}. ${e}`).join('\n')}\n\n` +
-                `**3. Изпратете отново:** отворете 👉 **[Поправете във формата на сайта](${r.fixUrl})** (данните са попълнени), поправете, натиснете „Запиши“ и после „Create“ в GitHub.\n\n` +
-                `Ако нещо не е ясно, отговорете с коментар в тази заявка — ръководителят получава уведомление. Тази заявка се затваря.`;
-              close = true; label = 'отказана';
-            } else if (process.env.BUILD !== 'success' || process.env.PUBLISH !== 'success') {
-              text = `❌ Цитирането е проверено, но сайтът не се изгради или не се записа. @${owner}: вижте ${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-              label = 'грешка';
-            } else {
-              text = `<!-- revert-cit -->\n✅ **Цитирането е добавено в „Обобщен отчет“** (до около минута; обновете с Ctrl+F5).\n\n> ${r.apa}\n\n` +
-                `**Проверено в регистрите:**\n${r.verified.map((v) => '- ' + v).join('\n')}\n\n` +
-                `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/data/publish-log.md)\n\n` +
-                `@${owner} — уведомление за ново цитиране. Ако трябва да се премахне, отметнете:\n\n` +
-                `- [ ] **Върни** — премахни това цитиране от сайта`;
-              close = true; label = 'публикувана'; reason = 'completed';
+            const results = JSON.parse(fs.readFileSync('results.json', 'utf8'));
+            const names = {};
+            for (const f of fs.readdirSync('src/data/team').filter((f) => f.endsWith('.ts'))) {
+              const t = fs.readFileSync('src/data/team/' + f, 'utf8'); const id = (t.match(/id:\s*'([^']+)'/) || [])[1];
+              if (id) names[id] = (t.match(/name:\s*\{\s*bg:\s*'([^']+)'/) || [])[1] || id;
             }
-            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
-            try { await github.rest.issues.addLabels({ owner, repo, issue_number: num, labels: ['цитиране', label] }); } catch (e) { core.warning(e.message); }
-            if (close) await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: reason });
+            const scanUpd = {}; // номер на „[Нови цитирания]“ → [{ id, text }]
+            for (const r of results) {
+              const num = r.number;
+              let text, close = false, label, reason = 'not_planned', status;
+              if (!r.authorized) {
+                text = `❌ **Заявката не е приета.**\n\n${r.errors.join('\n')}`;
+                close = true; label = 'отказана'; status = `🚫 не е прието — #${num}`;
+              } else if (!r.ok) {
+                text = `@${r.author}, ❌ **цитирането не е прието** — нищо не е добавено. Какво да направите:\n\n` +
+                  `**1. Какво не е наред**\n${r.errors.map((e) => '- ' + e).join('\n')}\n\n` +
+                  (r.howto?.length ? `**2. Как да го поправите**\n${r.howto.map((e, i) => `${i + 1}. ${e}`).join('\n')}\n\n` : '') +
+                  (r.fixUrl ? `**3. Изпратете отново:** отворете 👉 **[Поправете във формата на сайта](${r.fixUrl})** (данните са попълнени), поправете, натиснете „Запиши“ и после „Create“ в GitHub.\n\n` : '') +
+                  `Ако нещо не е ясно, отговорете с коментар в тази заявка — ръководителят получава уведомление. Тази заявка се затваря.`;
+                close = true; label = 'отказана';
+                status = `❌ не е прието — #${num}: ${r.errors.map((e) => e.replace(/\*\*/g, '')).join('; ').slice(0, 300)}${r.fixUrl ? ` · [✍️ Поправете във формата](${r.fixUrl})` : ''}`;
+              } else if (process.env.BUILD !== 'success' || process.env.PUBLISH !== 'success') {
+                text = `❌ Цитирането е проверено, но сайтът не се изгради или не се записа. @${owner}: вижте ${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+                label = 'грешка'; status = `⚠️ проверено, но не е записано (грешка при изграждането) — #${num}; ръководителят е уведомен`;
+              } else {
+                text = `<!-- revert-cit -->\n✅ **Цитирането е добавено в „Обобщен отчет“** (до около минута; обновете с Ctrl+F5).\n\n> ${r.apa}\n\n` +
+                  `**Проверено в регистрите:**\n${r.verified.map((v) => '- ' + v).join('\n')}\n\n` +
+                  `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/data/publish-log.md)\n\n` +
+                  `@${owner} — уведомление за ново цитиране. Ако трябва да се премахне, отметнете:\n\n` +
+                  `- [ ] **Върни** — премахни това цитиране от сайта`;
+                close = true; label = 'публикувана'; reason = 'completed';
+                const ind = (r.apa.match(/— Д-(\d+), (\d+) т\./) || []);
+                status = `✅ добавено${ind[1] ? ` (Д-${ind[1]}, ${ind[2]} т.)` : ''} — #${num}; отчетено на: ${(r.members || []).map((m) => names[m] || m).join(', ')}`;
+              }
+              await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
+              try { await github.rest.issues.addLabels({ owner, repo, issue_number: num, labels: ['цитиране', label] }); } catch (e) { core.warning(e.message); }
+              if (close) await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: reason });
+              if (r.scan) (scanUpd[r.scan.issue] ??= []).push({ id: r.scan.id, text: status });
+            }
+            for (const [n, list] of Object.entries(scanUpd)) {
+              try {
+                let body = (await github.rest.issues.get({ owner, repo, issue_number: Number(n) })).data.body ?? '';
+                for (const x of list) body = setStatus(body, x.id, x.text);
+                await github.rest.issues.update({ owner, repo, issue_number: Number(n), body });
+              } catch (e) { core.warning(`#${n}: ${e.message}`); }
+            }

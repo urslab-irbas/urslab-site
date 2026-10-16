@@ -1,7 +1,9 @@
 # Автоматично търсене на нови цитирания (scripts/scan-citations.mjs): OpenAlex, OpenCitations, Semantic Scholar.
 # Кога: веднъж месечно (1-во число), ръчно от член на колектива с GitHub акаунт (бутонът „Търси нови цитирания“
 # в „Обобщен отчет“ → заявка „[Търсене на цитирания] …“; най-много веднъж на 24 часа) или от ръководителя (Run workflow).
-# Резултат: заявка „[Нови цитирания] <дата>“ с връзки „Потвърди“ (формата „Ново цитиране“ е попълнена) и имейл.
+# Резултат: заявка „[Нови цитирания] <дата>“ (при много резултати — няколко части) с отметки под всяко цитиране:
+# показател (Д-12 Scopus / Д-12 WoS / Д-13 / Д-14) или „Откажи“ — обработват се от citation-confirm.yml; и имейл.
+# Предишната отворена заявка „[Нови цитирания]“ се затваря (кандидатите ѝ, които още чакат, са в новата).
 # Имейл: засега само до ръководителя; за всички членове задайте Variables → SCAN_MAIL_TO = all.
 # Пощата се изпраща само ако са зададени Secrets: MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM.
 name: Търсене на нови цитирания
@@ -82,38 +84,63 @@ jobs:
           STATE_FILE: citation-scan/state.json
         run: |
           node scripts/scan-citations.mjs > /dev/null
-          node -e 'const r=require("./scan-result.json"); const fs=require("fs"); fs.appendFileSync(process.env.GITHUB_OUTPUT, `total=${r.fresh + r.pending + r.newWorks}\nfresh=${r.fresh}\nemails=${r.emails.join(",")}\n`)'
-      - name: Заявка с резултата
-        id: report
-        if: steps.scan.outcome == 'success'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const { owner, repo } = context.repo;
-            let body = fs.readFileSync('scan-report.md', 'utf8');
-            if (body.length > 60000) body = body.slice(0, 59000) + `\n\n…(отрязано — пълният отчет е в клона data: citation-scan/)`;
-            const date = new Date().toISOString().slice(0, 10);
-            const r = await github.rest.issues.create({ owner, repo, title: `[Нови цитирания] ${date}`, body, labels: ['търсене-цитирания'] });
-            core.setOutput('url', r.data.html_url);
-            if (context.eventName === 'issues') {
-              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body: `✅ Търсенето завърши — резултатът е в #${r.data.number}.` });
-              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed' });
-            }
-      - name: Запис на състоянието в клона data
+          node -e 'const r=require("./scan-result.json"); const fs=require("fs"); fs.appendFileSync(process.env.GITHUB_OUTPUT, `total=${r.found + r.newWorks}\nfresh=${r.fresh}\nready=${r.ready}\nemails=${r.emails.join(",")}\n`)'
+      - name: Запис на състоянието и кандидатите в клона data (преди заявката — за отметките)
+        id: save
         if: steps.scan.outcome == 'success'
         run: |
           D=$(date -u +%F)
-          mkdir -p "$RUNNER_TEMP/s"; cp citation-scan/state.json "$RUNNER_TEMP/s/"; cp scan-report.md "$RUNNER_TEMP/s/report-$D.md"
+          mkdir -p "$RUNNER_TEMP/s"; cp citation-scan/state.json citation-scan/candidates.json "$RUNNER_TEMP/s/"; cp scan-report.md "$RUNNER_TEMP/s/report-$D.md"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch -q origin data
           git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
           cd "$RUNNER_TEMP/data"
-          mkdir -p citation-scan; cp "$RUNNER_TEMP/s/"* citation-scan/
+          mkdir -p citation-scan
+          # отказите / потвърждаванията, записани по време на търсенето (citation-confirm.yml), не се губят
+          node -e '
+            const fs = require("fs"), f = "citation-scan/state.json";
+            const cur = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, "utf8")) : {};
+            const nw = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + "/s/state.json", "utf8"));
+            nw.rejected = { ...(cur.rejected || {}), ...(nw.rejected || {}) };
+            nw.confirmed = { ...(cur.confirmed || {}), ...(nw.confirmed || {}) };
+            fs.writeFileSync(process.env.RUNNER_TEMP + "/s/state.json", JSON.stringify(nw, null, 2) + "\n");
+          '
+          cp "$RUNNER_TEMP/s/"* citation-scan/
           git add citation-scan
           git commit -q -m "Търсене на цитирания $D" || exit 0
-          for i in 1 2 3; do git push -q origin HEAD:data && break; sleep 5; git pull -q --rebase origin data; done
+          ok=0; for i in 1 2 3; do if git push -q origin HEAD:data; then ok=1; break; fi; sleep 5; git pull -q --rebase origin data; done
+          [ "$ok" = 1 ] || { echo "::error::Записът в клона data не успя"; exit 1; }
+      - name: Заявка с резултата
+        id: report
+        if: steps.save.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            const parts = JSON.parse(fs.readFileSync('scan-report-parts.json', 'utf8'));
+            const date = new Date().toISOString().slice(0, 10);
+            // предишните отворени заявки с резултати — затварят се (чакащите кандидати са в новата)
+            const old = await github.paginate(github.rest.issues.listForRepo, { owner, repo, labels: 'търсене-цитирания', state: 'open', per_page: 100 });
+            const made = [];
+            for (let i = 0; i < parts.length; i++) {
+              const title = `[Нови цитирания] ${date}${parts.length > 1 ? ` (${i + 1}/${parts.length})` : ''}`;
+              const r = await github.rest.issues.create({ owner, repo, title, body: parts[i], labels: ['търсене-цитирания'] });
+              made.push(r.data);
+            }
+            const links = made.map((x) => `#${x.number}`).join(', ');
+            for (const o of old) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: o.number, body: `ℹ️ Заменена от новото търсене: ${links}. Цитиранията, които още чакат, са там.` });
+              await github.rest.issues.update({ owner, repo, issue_number: o.number, state: 'closed', state_reason: 'completed' });
+            }
+            core.setOutput('url', made[0].html_url);
+            const html = fs.readFileSync('scan-report.html', 'utf8').replace('__ISSUES__', made.map((x, i) => `<a href="${x.html_url}">${made.length > 1 ? `част ${i + 1} (#${x.number})` : `заявка #${x.number} в GitHub`}</a>`).join(', '));
+            fs.writeFileSync('scan-report.html', html);
+            if (context.eventName === 'issues') {
+              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body: `✅ Търсенето завърши — резултатът е в ${links}.` });
+              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed' });
+            }
       - name: Имейл
         if: steps.scan.outcome == 'success' && env.MAIL_SERVER != '' && steps.scan.outputs.total != '0'
         uses: dawidd6/action-send-mail@v3
@@ -124,6 +151,6 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           from: ${{ secrets.MAIL_FROM }}
           to: ${{ steps.scan.outputs.emails }}
-          subject: "URSlab: нови цитирания (${{ steps.scan.outputs.fresh }}) — ${{ steps.report.outputs.url }}"
+          subject: "URSlab: нови цитирания (${{ steps.scan.outputs.fresh }}; за потвърждаване с отметка: ${{ steps.scan.outputs.ready }})"
           html_body: file://scan-report.html
           convert_markdown: false

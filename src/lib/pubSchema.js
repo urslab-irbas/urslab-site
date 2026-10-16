@@ -212,7 +212,7 @@ export function validate(e, ctx) {
   if (BOOKS.includes(e.cat)) { if (!String(e.publisher || '').trim()) add('publisher', 'required'); }
   else if (!String(e.venue || '').trim()) add('venue', 'required');
 
-  if (e.pages && !/^[A-Za-z]?\d+(\s?[–-]\s?[A-Za-z]?\d+)?$/.test(String(e.pages).trim())) add('pages', 'fmt');
+  if (e.pages && !PAGES_RE.test(String(e.pages).trim())) add('pages', 'fmt');
   if (e.volume && !/^[\w.\-–\s]{1,20}$/u.test(e.volume)) add('volume', 'fmt');
 
   const doi = cleanDoi(e.doi);
@@ -335,7 +335,7 @@ export function validateCitation(e, ctx) {
   if (t.length >= 25 && /\p{Lu}/u.test(t) && !/\p{Ll}/u.test(t)) add('title', 'caps');
   if (!String(e.venue || '').trim() && !String(e.publisher || '').trim()) add('venue', 'citevenue');
 
-  if (e.pages && !/^[A-Za-z]?\d+(\s?[–-]\s?[A-Za-z]?\d+)?$/.test(String(e.pages).trim())) add('pages', 'fmt');
+  if (e.pages && !PAGES_RE.test(String(e.pages).trim())) add('pages', 'fmt');
   if (e.volume && !/^[\w.\-–\s]{1,20}$/u.test(e.volume)) add('volume', 'fmt');
   // ISSN / ISBN — по желание (при линк или PDF може да няма), но ако е въведен — с вярна контролна цифра
   const idv = idOf(e);
@@ -356,6 +356,8 @@ export function validateCitation(e, ctx) {
   return err;
 }
 // ---- Данни от Crossref (бутонът „Попълни по DOI“ във формата и проверката в GitHub)
+/** Страници: „12–25“, „e123“, „102345“ (номер на статия само ако е такъв); номера като „ENEURO.0390-24.2025“ не са страници */
+export const PAGES_RE = /^[A-Za-z]?\d+(\s?[–-]\s?[A-Za-z]?\d+)?$/;
 const crInitials = (given) => String(given || '').split(/[\s.]+/).filter(Boolean).map((g) => g.split('-').map((p) => p[0]?.toUpperCase() + '.').join('-')).join(' ');
 /** Данните на цитиращия труд от Crossref във формата на формата (автори в APA и т.н.) */
 export function fromCrossref(m) {
@@ -365,7 +367,7 @@ export function fromCrossref(m) {
   const out = {
     authors, year: y, title: (m.title ?? [])[0]?.replace(/\s+/g, ' ').trim(),
     venue: (m['container-title'] ?? [])[0], volume: m.volume, issue: m.issue,
-    pages: m.page ?? m['article-number'], publisher: m.publisher,
+    pages: [m.page, m['article-number']].find((p) => PAGES_RE.test(String(p ?? '').trim())), publisher: m.publisher,
   };
   const issn = (m['issn-type'] ?? []).find((x) => x.type === 'print') ?? (m['issn-type'] ?? [])[0];
   const isbn = (m['isbn-type'] ?? [])[0]?.value ?? (m.ISBN ?? [])[0];
