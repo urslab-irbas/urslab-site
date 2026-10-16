@@ -48,16 +48,19 @@ export function citationsFor(member: string, pubs: ArchivePub[]): Map<ArchivePub
   const mine = pubs.filter((x) => x.cat !== 'sub' && x.team.includes(member));
   const works = new Map<ArchivePub, CitedWork>();
   for (const w of manual[member] ?? []) {
+    if (w.hidden) continue; // трудове извън списъците на сайта — hiddenCitationsFor
     const p = mine.find((x) => matches(w, x));
     if (!p) throw new Error(`citations/${member}: няма публикация на сайта за цитирания труд № ${w.no} (${JSON.stringify(w.pub)})`);
     works.set(p, { ...w, cites: [...w.cites] });
   }
-  let next = Math.max(0, ...[...works.values()].map((w) => w.no));
+  let next = Math.max(0, ...(manual[member] ?? []).map((w) => w.no)); // и скритите трудове — без повторен номер
   for (const c of fromForm[member] ?? []) {
     const p = mine.find((x) => pubKey(x) === c.cited);
     if (!p) throw new Error(`citations/${member}/contrib.json: няма публикация на сайта с ключ ${c.cited} (заявка #${c.ghIssue})`);
     if (!works.has(p)) works.set(p, { no: ++next, pub: { title: p.title }, source: 'въведени през формата', cites: [] });
     const cite: Citation = { text: c.text, year: c.year, ind: c.ind, doi: c.doi, url: c.url, where: c.where, index: c.index, ghIssue: c.ghIssue, verified: c.verified, evidence: c.evidence, evidenceUrl: c.evidenceUrl };
+    const dup = c.doi && works.get(p)!.cites.find((x) => x.doi && x.doi.toLowerCase() === c.doi!.toLowerCase());
+    if (dup) throw new Error(`citations/${member}: цитирането с DOI ${c.doi} (заявка #${c.ghIssue}) е и в index.ts — махнете го от единия файл`);
     works.get(p)!.cites.push(cite);
   }
   const out = new Map<ArchivePub, CitBlock>();
@@ -78,4 +81,10 @@ export function citables(pubs: ArchivePub[]) {
     });
     return [m, list];
   }));
+}
+
+/** Цитиранията на трудове, които не са в списъците на сайта (CitedWork.hidden) — за общия бутон „Цитирания“ и „Точки НАЦИД“ */
+export function hiddenCitationsFor(member: string): CitBlock[] {
+  return (manual[member] ?? []).filter((w) => w.hidden).sort((a, b) => a.no - b.no)
+    .map((w) => ({ work: { ...w, cites: [...w.cites] }, pts: w.cites.reduce((s, c) => s + citPts(c.ind), 0) }));
 }
