@@ -43,7 +43,7 @@ export interface BookPage {
 
 export const books: BookPage[] = [
   {
-    slug: 'zhiroskopi',
+    slug: 'gyros',
     title: 'Жироскопи и инерциални навигационни системи',
     tr: 'Gyroscopes and Inertial Navigation Systems',
     kind: { bg: 'Монография', en: 'Monograph' },
@@ -95,9 +95,9 @@ export const books: BookPage[] = [
       { t: { bg: 'Литература', en: 'References' }, p: 414 },
       { t: { bg: 'Съдържание', en: 'Contents' }, p: 418 },
     ],
-    banner: '/docs/books/zhiroskopi-banner.jpg',
-    bannerSmall: '/docs/books/zhiroskopi-banner-1200.jpg',
-    bannerPdf: '/docs/books/zhiroskopi-banner.pdf',
+    banner: '/docs/books/gyros-banner.jpg',
+    bannerSmall: '/docs/books/gyros-banner-1200.jpg',
+    bannerPdf: '/docs/books/gyros-banner.pdf',
     bannerAlt: {
       bg: 'Банер на монографията „Жироскопи и инерциални навигационни системи“ (А. Н. Маджаров, ВВВУ „Георги Бенковски“, 2000, ISBN 954-713-046-3) с чертежа от корицата',
       en: 'Banner of the monograph “Gyroscopes and Inertial Navigation Systems” (A. N. Madzharov, Georgi Benkovski Higher Air Force School, 2000, ISBN 954-713-046-3) with the cover drawing',

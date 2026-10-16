@@ -45,7 +45,7 @@ export interface ArchivePub {
   fund?: string;   // финансиране (напр. ННП „Сигурност и отбрана“) — показва се в бележките
   task?: string;   // задача по програмата
   fundVia?: 'conf' | 'report';
-  page?: string;   // собствена страница на сайта (напр. 'publications/books/zhiroskopi', виж books.ts) — заглавието води към нея
+  page?: string;   // собствена страница на сайта (напр. 'publications/books/gyros', виж books.ts) — заглавието води към нея
   banner?: string; // голям банер (/docs/books/…jpg) — бутон „Банер“, отваря се в голям размер
   mark?: { bg: string; en: string }; // открояваща бележка, напр. хабилитационен труд // 'conf' — финансирано е участието в конференцията; 'report' — отчетено по програмата пред ЦИНСО-БАН
 }

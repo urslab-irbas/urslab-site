@@ -25,8 +25,8 @@ export const archiveEarlier: ArchivePub[] = [
     tr: 'Gyroscopes and Inertial Navigation Systems',
     venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“, 422 с.',
     isbn: '954-713-046-3',
-    page: 'publications/books/zhiroskopi',
-    banner: '/docs/books/zhiroskopi-banner.jpg',
+    page: 'publications/books/gyros',
+    banner: '/docs/books/gyros-banner.jpg',
     mark: { bg: 'Хабилитационен труд (ВАК, 2001)', en: 'Habilitation work (VAK, 2001)' },
   },
   {
