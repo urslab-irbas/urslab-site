@@ -175,13 +175,13 @@ const citations: CitedWork[] = [
     no: 41,
     pub: { doi: '10.17770/etr2024vol4.8238' },
     source: 'SONIX, справка ver05 (14.10.2026)',
-    cites: [{ year: 2026, ind: '14', doi: '10.35467/cal/220521', text: 'Kaczmarek, K. Cyber-deterrence of Finland and the Nordic countries – a model of digital deterrence and state security. Cybersecurity and Law, vol. 15, no. 1, 2026, pp. 69–79' }],
+    cites: [{ year: 2026, ind: '14', doi: '10.35467/cal/220521', text: 'Kaczmarek, K. Cyber-deterrence of Finland and the Nordic countries – a model of digital deterrence and state security. Cybersecurity and Law, vol. 15, no. 1, 2026, pp. 69–79', url: 'https://czasopismocybersecurityandlaw.pl/Cyber-deterrence-Finlandii-i-panstw-nordyckich-model-odstraszania-cyfrowego-a-bezpieczenstwo,220521,0,1.html' }],
   },
   {
     no: 44,
     pub: { doi: '10.11610/isij.5546' },
     source: 'SONIX, справка ver05 (14.10.2026)',
-    cites: [{ year: 2026, ind: '14', doi: '10.7546/PECR.84.26.03', text: 'Yoshinov, R., Dishkova, G., Chehlarova, N. Assessment of Parents’ Awareness in the Field of Cybersecurity. Problems of Engineering Cybernetics and Robotics, vol. 84, Bulgarian Academy of Sciences, 2026, p-ISSN 2738-7356, e-ISSN 2738-7364' }],
+    cites: [{ year: 2026, ind: '14', doi: '10.7546/PECR.84.26.03', text: 'Yoshinov, R., Dishkova, G., Chehlarova, N. Assessment of Parents’ Awareness in the Field of Cybersecurity. Problems of Engineering Cybernetics and Robotics, vol. 84, Bulgarian Academy of Sciences, 2026, p-ISSN 2738-7356, e-ISSN 2738-7364', url: 'https://www.iict.bas.bg/pecr/2026/84/3-PECR-Yoshinov-Dishkova-Chehlarova.pdf' }],
   },
   {
     no: 40,
@@ -194,7 +194,7 @@ const citations: CitedWork[] = [
     pub: { doi: '10.3389/frobt.2024.1414853' },
     source: 'SONIX, справка ver05 (14.10.2026)',
     cites: [
-      { year: 2025, ind: '14', text: 'Bulatova, O. Yu., Zyryanov, V. V. Lifecycle Concept of a Cyber-Physical-Social Transport System During Mass Events. Transport of the Russian Federation, 2025, (6), pp. 50–54 (in Russian)' },
+      { year: 2025, ind: '14', where: '[6]', url: 'https://rostransport.elpub.ru/jour/article/view/413/295', text: 'Булатова, О. Ю., Зырянов, В. В. Концепция жизненного цикла кибер-физико-социальной транспортной системы в период проведения массовых мероприятий [Lifecycle Concept of a Cyber-Physical-Social Transport System During Mass Events]. Транспорт Российской Федерации, 2025, № 6 (121), с. 50–54', evidence: 'PDF на статията (16.10.2026): в литературата, позиция 6 — Dimitrova M., Chehlarova N., Madzharov A. et al. Psychophysics of user acceptance of social cyber-physical systems // Frontiers in Robotics and AI. 2024. № 11. DOI 10.3389/frobt.2024.1414853; в текста — (M. Dimitrova et al., 2024)', evidenceUrl: 'https://rostransport.elpub.ru/jour/article/view/413/295' },
     ],
   },
   {
