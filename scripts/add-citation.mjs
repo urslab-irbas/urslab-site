@@ -3,12 +3,15 @@
 // 2) Намира цитирания труд сред публикуваните трудове на члена (dist/publications/citables.json — сайтът е изграден преди това).
 // 3) Проверява цитирането с правилата за нова публикация + правилата на НАЦИД (src/lib/pubSchema.js → validateCitation):
 //    без самоцитиране, година, показател (Д-12 — Scopus/WoS, Д-14 — ISSN), доказателство „къде“, без повторно въвеждане.
-// 4) Проверява DOI / ISSN / ISBN на цитиращия труд в публичните регистри (scripts/verify-ids.mjs).
-// 5) При успех го добавя в src/data/citations/<член>/contrib.json и в дневника publish-log.md (клон data). Резултатът е в pub-result.json.
+// 4) Доказателство (scripts/evidence.mjs): при DOI — данните и литературата от Crossref; при линк — страницата / PDF файлът;
+//    при PDF — файлът, прикачен към заявката. Приема се само ако цитираният труд се намира в цитиращия.
+// 5) Проверява DOI / ISSN / ISBN на цитиращия труд в публичните регистри (scripts/verify-ids.mjs).
+// 6) При успех го добавя в src/data/citations/<член>/contrib.json и в дневника publish-log.md (клон data). Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-citation.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync, mkdirSync } from 'node:fs';
-import { validateCitation, normalizeCitation, MESSAGES } from '../src/lib/pubSchema.js';
+import { validateCitation, normalizeCitation, MESSAGES, cleanDoi } from '../src/lib/pubSchema.js';
 import { verifyEntry } from './verify-ids.mjs';
+import { crossrefWork, fromCrossref, urlText, attachmentUrl, findCited, findInRefs, hasTitle } from './evidence.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const ADMIN = (process.env.ADMIN_LOGIN || 'urslab-irbas').toLowerCase();
@@ -35,6 +38,12 @@ const HOW = {
   cit14issn: 'Д-14 е за списания — изберете ISSN / eISSN и въведете номера; ако е сборник или монография, изберете Д-13.',
   citewhere: 'посочете номера на вашия труд в литературата на цитиращия труд и/или страницата (напр. „[27], с. 136“).',
   citedup: 'това цитиране вече е въведено — не го въвеждайте отново.',
+  evsrc: 'изберете във формата „DOI“, „Линк“ или „PDF файл“.',
+  evnotfound: 'проверете дали това е правилният цитиращ труд и дали в него наистина е цитиран вашият труд. Ако е цитиран с друго изписване, прикачете PDF файла на цитиращия труд (вариант „PDF файл“); ако и тогава не се намира — пишете на ръководителя в тази заявка.',
+  evmismatch: 'проверете линка / файла — трябва да е на цитиращия труд, посочен във формата.',
+  evunreach: 'сайтът не дава достъп за проверка — изберете „PDF файл“ и прикачете файла на цитиращия труд към заявката.',
+  evnopdf: 'отворете заявката отново от формата и преди „Create“ плъзнете PDF файла в полето на заявката (над блока с данни).',
+  doimeta: 'попълнете във формата авторите, годината, заглавието и изданието на цитиращия труд.',
   citednf: 'отворете „Обобщен отчет“, натиснете бутона „Цитирания“ под годината на труда и после „+ Цитиране“.',
   issn: 'въведете само номера на ISSN (8 знака, напр. 1314-8540); проверете го в https://portal.issn.org',
   isbn: 'въведете само номера на ISBN (10 или 13 цифри), без друг текст.',
@@ -44,7 +53,7 @@ const HOW = {
   doititle: 'DOI е на публикацията с посоченото заглавие. Проверете DOI (отворете https://doi.org/…) и заглавието във формата.',
   unavailable: 'регистърът временно не отговаря — не е ваша грешка. Опитайте отново след около час със същата връзка.',
 };
-const fieldName = { cited: 'Цитиран труд', authors: 'Автори', year: 'Година', title: 'Заглавие', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', url: 'Линк', ind: 'Показател', index: 'Индексиран в', where: 'Къде е цитирането' };
+const fieldName = { src: 'Доказателство', cited: 'Цитиран труд', authors: 'Автори', year: 'Година', title: 'Заглавие', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', url: 'Линк', ind: 'Показател', index: 'Индексиран в', where: 'Къде е цитирането' };
 const done = () => {
   writeFileSync('pub-result.json', JSON.stringify(result, null, 2));
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `ok=${result.ok}\nauthorized=${result.authorized}\nmember=${result.member}\n`);
@@ -89,24 +98,73 @@ const existing = [...(work?.cites ?? []), ...contrib.filter((c) => c.cited === d
 const own = contrib.filter((c) => c.ghIssue === issue).map((c) => c.text);
 const list = existing.filter((x) => !own.includes(x.title));
 
-const errs = validateCitation(data, { cited: work ? { title: work.title, year: work.year, authors: work.authors } : null, existing: list });
-result.errors = errs.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}`);
-result.howto = errs.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
+const cctx = () => ({ cited: work ? { title: work.title, year: work.year, authors: work.authors } : null, existing: list });
 const lang = /\bNew citation\b/.test(body) ? 'en/' : '';
-result.fixUrl = `${SITE}/${lang}publications/new/?m=${data.member}&cite=${encodeURIComponent(data.cited)}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
+const fixUrl = () => `${SITE}/${lang}publications/new/?m=${data.member}&cite=${encodeURIComponent(data.cited)}#d=${Buffer.from(JSON.stringify(data)).toString('base64url')}`;
+const fail = (list) => {
+  result.errors = list.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}`);
+  result.howto = list.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
+  result.fixUrl = fixUrl();
+  result.title = String(data.title || data.doi || '').slice(0, 90);
+  done();
+};
+// първа проверка (без данните от Crossref): цитиран труд, доказателство, показател
+const pre = validateCitation(data, cctx());
+if (pre.length) fail(pre);
+
+// --- Доказателство: цитираният труд трябва да се намира в цитиращия
+const ev = { how: '', url: '' };
+const doi = cleanDoi(data.doi);
+try {
+  if (data.src === 'doi') {
+    const m = await crossrefWork(doi);
+    if (m) {
+      const cr = fromCrossref(m);
+      for (const [k, v] of Object.entries(cr)) if (!String(data[k] ?? '').trim()) data[k] = v; // въведеното от члена има предимство
+      const refs = m.reference ?? [];
+      if (refs.length) {
+        const f = findInRefs(refs, work, data.member);
+        if (!f.found) fail([{ field: 'src', code: 'evnotfound', detail: `(литературата в Crossref: ${f.n} позиции)` }]);
+        ev.how = `Crossref: в литературата на цитиращия труд, позиция ${f.pos} от ${f.n} (${f.how})`;
+        if (!data.where) data.where = `[${f.pos}]`;
+      } else ev.how = 'DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref';
+    } else {
+      if (!String(data.title || '').trim()) fail([{ field: 'doi', code: 'doimeta' }]);
+      ev.how = 'DOI (не е в Crossref; проверен в doi.org / DataCite)';
+    }
+    ev.url = `https://doi.org/${doi}`;
+  } else {
+    const url = data.src === 'pdf' ? attachmentUrl(body) : String(data.url);
+    if (!url) fail([{ field: 'src', code: 'evnopdf' }]);
+    let got;
+    try { got = await urlText(url); }
+    catch (e) {
+      if (data.src === 'pdf' && process.env.GH_TOKEN) { try { got = await urlText(url, { authorization: `Bearer ${process.env.GH_TOKEN}` }); } catch { /* по-долу */ } }
+      if (!got) fail([{ field: data.src === 'pdf' ? 'src' : 'url', code: 'evunreach', detail: String(e.message || '') }]);
+    }
+    if (!got.text.trim()) fail([{ field: data.src === 'pdf' ? 'src' : 'url', code: 'evunreach', detail: got.pdf ? '(PDF без текстов слой — сканиран?)' : '' }]);
+    if (!hasTitle(got.text, data.title)) fail([{ field: data.src === 'pdf' ? 'src' : 'url', code: 'evmismatch' }]);
+    const f = findCited(got.text, work, data.member);
+    if (!f) fail([{ field: 'src', code: 'evnotfound' }]);
+    ev.how = `${data.src === 'pdf' ? 'PDF файл в заявката' : 'линк'}: ${f.how}`;
+    ev.url = url;
+  }
+} catch (e) {
+  if (e.code === 'unavailable') fail([{ field: data.src === 'doi' ? 'doi' : 'src', code: 'unavailable', detail: e.message }]);
+  throw e;
+}
+
+const errs = validateCitation(data, { ...cctx(), full: true });
+if (errs.length) fail(errs);
 result.title = String(data.title ?? '').slice(0, 90);
-if (errs.length) done();
 
 // --- Проверка на цитиращия труд в публичните регистри (DOI, ISSN, ISBN)
-const entry = { ...normalizeCitation(data), by: author, ghIssue: issue };
+const entry = { ...normalizeCitation({ ...data, evidence: ev.how }), by: author, ghIssue: issue };
+if (ev.url) entry.evidenceUrl = ev.url;
 const v = await verifyEntry(entry);
-if (v.errors.length) {
-  result.errors = v.errors.map((e) => `**${fieldName[e.field] ?? e.field}:** ${M[e.code] ?? e.code}${e.detail ? ` ${e.detail}` : ''}`);
-  result.howto = v.errors.map((e) => `**${fieldName[e.field] ?? e.field}** — ${HOW[e.code] ?? 'поправете полето по подсказката във формата.'}`);
-  done();
-}
+if (v.errors.length) fail(v.errors);
 if (v.nrsId) v.verified.push(`НАЦИД НРС, ID ${v.nrsId}: „${v.nrsTitle}“`);
-entry.verified = [...new Set(v.verified)];
+entry.verified = [`Доказателство — ${ev.how}`, ...new Set(v.verified)];
 result.verified = entry.verified;
 const pts = { 12: 10, 13: 3, 14: 2 }[entry.ind];
 result.apa = `${entry.text} — Д-${entry.ind}, ${pts} т.; цитиран труд: ${work.authors} (${work.year}). ${work.title}`;

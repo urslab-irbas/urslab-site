@@ -2,8 +2,9 @@
 # Формата отваря заявка (Issue) „[Цитиране] …“ с данните в JSON блок. Тук:
 #   1) сайтът се изгражда с данните от клона data (за да има актуален /publications/citables.json);
 #   2) scripts/add-citation.mjs проверява автора на заявката (членът, чийто е трудът, или ръководителят),
-#      цитирания труд, правилата за нова публикация и правилата на НАЦИД за цитиранията (src/lib/pubSchema.js)
-#      и DOI / ISSN / ISBN на цитиращия труд в публичните регистри (scripts/verify-ids.mjs);
+#      цитирания труд, правилата за нова публикация и правилата на НАЦИД за цитиранията (src/lib/pubSchema.js),
+#      доказателството (scripts/evidence.mjs: при DOI — данните и литературата от Crossref; при линк — страницата / PDF;
+#      при PDF — файлът, прикачен към заявката) и DOI / ISSN / ISBN в публичните регистри (scripts/verify-ids.mjs);
 #   3) сайтът се изгражда отново с новото цитиране;
 #   4) src/data/citations/<член>/contrib.json и publish-log.md се записват в клона `data` и сайтът се качва;
 #   5) в заявката се пише резултатът; при успех ръководителят получава уведомление и отметка „Върни“ (revert-citation.yml).
@@ -39,9 +40,13 @@ jobs:
       - name: Изграждане на сайта (актуален списък на трудовете и цитиранията)
         run: npm ci && npm run build
 
-      - name: Проверка на заявката, цитирането и идентификаторите в регистрите
+      - name: Инструмент за текста на PDF файлове (pdftotext)
+        run: sudo apt-get install -y -qq poppler-utils >/dev/null
+
+      - name: Проверка на заявката, доказателството за цитирането и идентификаторите в регистрите
         id: check
         env:
+          GH_TOKEN: ${{ github.token }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}

@@ -131,8 +131,8 @@ const norm = (s) => String(s || '').toLowerCase().replace(/[^a-zа-я0-9]/gi, ''
 
 // ---- Проверка за вече въведена публикация: същото DOI, или същото заглавие и същите автори
 const TRL = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sht', ъ: 'a', ь: 'y', ю: 'yu', я: 'ya' };
-const latin = (s) => String(s || '').toLowerCase().replace(/[а-я]/g, (c) => TRL[c] ?? c).normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
-const tnorm = (s) => latin(s).replace(/[^a-z0-9]/g, '');
+export const latin = (s) => String(s || '').toLowerCase().replace(/[а-я]/g, (c) => TRL[c] ?? c).normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+export const tnorm = (s) => latin(s).replace(/[^a-z0-9]/g, '');
 const twords = (s) => new Set(latin(s).split(/[^a-z0-9]+/).filter((w) => w.length > 2));
 const STOP = new Set(['and', 'van', 'der', 'den', 'del', 'von', 'des', 'les']);
 /** Фамилиите на авторите (латиница, малки букви) — и от „Madzharov, A., …“, и от „A. Madzharov, …“ */
@@ -271,6 +271,10 @@ export function normalize(e) {
 export const CIT_INDS = ['12', '13', '14'];
 export const CIT_POINTS = { 12: 10, 13: 3, 14: 2 };
 export const CIT_INDEX = ['scopus', 'wos'];
+// Как се доказва цитирането: doi — световна база (DOI; данните и литературата се вземат от Crossref);
+// url — линк към цитиращия труд в друга интернет база; pdf — PDF файл, прикачен към заявката в GitHub.
+// Системата търси цитирания труд в литературата / текста на цитиращия и приема само ако го намери.
+export const CIT_SRC = ['doi', 'url', 'pdf'];
 /** Постоянен ключ на публикация на сайта: DOI, иначе ISBN, иначе заглавието */
 export function pubKey(p) {
   const doi = cleanDoi(p.doi).toLowerCase();
@@ -302,6 +306,20 @@ export function validateCitation(e, ctx) {
   const now = ctx.now || new Date().getFullYear();
   if (!ctx.cited) add('cited', 'citednf');
 
+  // Доказателство: DOI, линк или PDF
+  const src = String(e.src || '');
+  const doi = cleanDoi(e.doi);
+  if (!CIT_SRC.includes(src)) add('src', 'evsrc');
+  else if (src === 'doi' && !doi) add('doi', 'required');
+  else if (src === 'url' && !String(e.url || '').trim()) add('url', 'required');
+  if (doi && !/^10\.\d{4,9}\/\S+$/.test(doi)) add('doi', 'fmt');
+  if (e.url && !/^https?:\/\/\S+$/.test(e.url)) add('url', 'fmt');
+  // Показател и неговите условия
+  if (!CIT_INDS.includes(String(e.ind))) add('ind', 'required');
+  else if (String(e.ind) === '12' && !CIT_INDEX.includes(e.index)) add('index', 'cit12index');
+  // При DOI данните на цитиращия труд могат да дойдат от Crossref (бутонът „Попълни по DOI“ или проверката в GitHub)
+  if (src === 'doi' && doi && !String(e.title || '').trim() && !ctx.full) return err;
+
   const a = parseAuthors(e.authors);
   if (a.errors.length) a.errors.forEach((c) => add('authors', c.split(':')[0]));
   // НАЦИД: самоцитиране — цитиращият труд е с участието на автора, който отчита цитирането
@@ -319,21 +337,13 @@ export function validateCitation(e, ctx) {
 
   if (e.pages && !/^[A-Za-z]?\d+(\s?[–-]\s?[A-Za-z]?\d+)?$/.test(String(e.pages).trim())) add('pages', 'fmt');
   if (e.volume && !/^[\w.\-–\s]{1,20}$/u.test(e.volume)) add('volume', 'fmt');
-  const doi = cleanDoi(e.doi);
-  if (doi && !/^10\.\d{4,9}\/\S+$/.test(doi)) add('doi', 'fmt');
+  // ISSN / ISBN — по желание (при линк или PDF може да няма), но ако е въведен — с вярна контролна цифра
   const idv = idOf(e);
   if (idv || e.idType) {
     if (!ID_TYPES.includes(e.idType)) add('idType', 'required');
     else if (!checkId(e.idType, idv)) add('idValue', e.idType.includes('issn') ? 'issn' : 'isbn');
-  } else if (!doi) add('idValue', 'idneeded');
-  if (e.url && !/^https?:\/\/\S+$/.test(e.url)) add('url', 'fmt');
-
-  // Показател и неговите условия
-  if (!CIT_INDS.includes(String(e.ind))) add('ind', 'required');
-  else if (String(e.ind) === '12' && !CIT_INDEX.includes(e.index)) add('index', 'cit12index');
-  else if (String(e.ind) === '14' && !['issn', 'eissn'].includes(e.idType)) add('idType', 'cit14issn');
-  // Доказателство: къде в цитиращия труд е цитирането (номер в списъка с литература и/или страница)
-  if (String(e.where || '').trim().length < 2) add('where', 'citewhere');
+  }
+  if (String(e.ind) === '14' && !['issn', 'eissn'].includes(e.idType)) add('idType', 'cit14issn');
 
   // Всеки цитиращ източник се отчита веднъж за даден труд
   // (същото DOI, същото заглавие и общ автор, или заглавието се съдържа в текста на вече въведено цитиране)
@@ -345,20 +355,42 @@ export function validateCitation(e, ctx) {
   else if (inText) add('title', 'citedup', inText.title);
   return err;
 }
+// ---- Данни от Crossref (бутонът „Попълни по DOI“ във формата и проверката в GitHub)
+const crInitials = (given) => String(given || '').split(/[\s.]+/).filter(Boolean).map((g) => g.split('-').map((p) => p[0]?.toUpperCase() + '.').join('-')).join(' ');
+/** Данните на цитиращия труд от Crossref във формата на формата (автори в APA и т.н.) */
+export function fromCrossref(m) {
+  const au = (m.author ?? []).filter((a) => a.family).map((a) => `${a.family}, ${crInitials(a.given)}`.replace(/,\s*$/, ''));
+  const authors = au.length <= 1 ? (au[0] ?? '') : `${au.slice(0, -1).join(', ')}, & ${au[au.length - 1]}`;
+  const y = (m.issued ?? m['published-print'] ?? m['published-online'] ?? m.published)?.['date-parts']?.[0]?.[0];
+  const out = {
+    authors, year: y, title: (m.title ?? [])[0]?.replace(/\s+/g, ' ').trim(),
+    venue: (m['container-title'] ?? [])[0], volume: m.volume, issue: m.issue,
+    pages: m.page ?? m['article-number'], publisher: m.publisher,
+  };
+  const issn = (m['issn-type'] ?? []).find((x) => x.type === 'print') ?? (m['issn-type'] ?? [])[0];
+  const isbn = (m['isbn-type'] ?? [])[0]?.value ?? (m.ISBN ?? [])[0];
+  if (issn) { out.idType = issn.type === 'electronic' ? 'eissn' : 'issn'; out.idValue = issn.value; }
+  else if (isbn) { out.idType = 'isbn'; out.idValue = isbn; }
+  return Object.fromEntries(Object.entries(out).filter(([, v]) => v !== undefined && v !== null && v !== ''));
+}
 /** Нормализирано цитиране за src/data/citations/<член>/contrib.json */
 export function normalizeCitation(e) {
   const out = {
     member: e.member, cited: String(e.cited), ind: String(e.ind),
     year: Number(e.year),
-    authors: String(e.authors).trim().replace(/\s+/g, ' '),
-    title: String(e.title).trim().replace(/\.\s*$/, ''),
+    authors: String(e.authors ?? '').trim().replace(/\s+/g, ' '),
+    title: String(e.title ?? '').trim().replace(/\.\s*$/, ''),
   };
+  if (!out.year) delete out.year;
   if (out.ind === '12') out.index = e.index;
+  if (CIT_SRC.includes(e.src)) out.src = e.src;
   const idv = idOf(e);
   if (idv && ID_TYPES.includes(e.idType)) { out.idType = e.idType; out[e.idType.includes('issn') ? 'issn' : 'isbn'] = canonId(e.idType, idv); }
   for (const k of ['venue', 'volume', 'issue', 'pages', 'publisher', 'url', 'where']) { const v = String(e[k] ?? '').trim(); if (v) out[k] = v; }
   const doi = cleanDoi(e.doi);
   if (doi) out.doi = doi;
+  if (e.evidence) out.evidence = String(e.evidence);
+  if (e.evidenceUrl) out.evidenceUrl = String(e.evidenceUrl);
   out.text = citeText(out);
   return out;
 }
@@ -397,6 +429,12 @@ export const MESSAGES = {
     cit14issn: 'Показател Д-14 е за списания: изберете ISSN или eISSN и въведете номера на списанието.',
     citewhere: 'Посочете къде е цитирането — номер в списъка с литература и/или страница (напр. „[27], с. 136“).',
     citedup: 'Това цитиране вече е въведено за същия труд (всеки цитиращ източник се отчита веднъж). Въведено:',
+    evsrc: 'Изберете как се доказва цитирането: DOI (световна база), линк (друга интернет база) или PDF файл.',
+    evnotfound: 'Цитираният труд не е намерен в цитиращия (литература / текст). По правилата на НАЦИД се признава само проверимо цитиране.',
+    evmismatch: 'Файлът / страницата не е на посочения цитиращ труд (заглавието не се намира в него).',
+    evunreach: 'Линкът не се отваря или не дава текст за проверка.',
+    evnopdf: 'В заявката няма прикачен PDF файл.',
+    doimeta: 'DOI не е намерен в Crossref — попълнете данните на цитиращия труд ръчно.',
     citednf: 'Цитираният труд не е намерен сред вашите публикувани трудове на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.',
   },
   en: {
@@ -431,6 +469,12 @@ export const MESSAGES = {
     cit14issn: 'Indicator D-14 is for journals: choose ISSN or eISSN and enter the journal number.',
     citewhere: 'State where the citation is — number in the reference list and/or page (e.g. “[27], p. 136”).',
     citedup: 'This citation is already entered for the same work (each citing source counts once). Entered:',
+    evsrc: 'Choose how the citation is proven: DOI (world database), link (other online database) or PDF file.',
+    evnotfound: 'The cited work was not found in the citing one (references / text). Under the NACID rules only a verifiable citation counts.',
+    evmismatch: 'The file / page is not the stated citing work (its title is not found in it).',
+    evunreach: 'The link does not open or gives no text to check.',
+    evnopdf: 'No PDF file is attached to the request.',
+    doimeta: 'DOI not found in Crossref — fill in the citing work by hand.',
     citednf: 'The cited work was not found among your published works on the site. Open the form from the “+ Citation” button in the “Summary report”.',
   },
 };

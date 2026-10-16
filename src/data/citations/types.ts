@@ -21,6 +21,9 @@ export interface Citation {
   /** въведено през формата: номер на заявката в GitHub и проверките в регистрите */
   ghIssue?: number;
   verified?: string[];
+  /** как системата е намерила цитирането (Crossref, линк, PDF) и връзка към доказателството */
+  evidence?: string;
+  evidenceUrl?: string;
 }
 
 export interface CitedWork {
