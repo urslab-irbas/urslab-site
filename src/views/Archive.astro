@@ -178,9 +178,6 @@ const L = {
                 <p class="ve">{p.venue}{p.isbn && <> · ISBN {p.isbn}</>}{p.issn && <> · ISSN {p.issn}</>}{p.doi && (p.doiOff ? <> · DOI {p.doi} <span class="doi-off">({T('още не е активен', 'not yet active')})</span></> : <> · DOI <a href={`https://doi.org/${p.doi}`}>{p.doi}</a></>)}{p.eid && <> · Scopus <a href={`https://www.scopus.com/inward/record.uri?eid=${p.eid}`}>{p.eid}</a></>}{p.scopusAuthor && <> · Scopus Author ID <a href={`https://www.scopus.com/inward/authorDetails.url?authorID=${p.scopusAuthor}&partnerID=MN8TOARS`}>{p.scopusAuthor}</a></>}</p>
                 <p class="badges">
                   <span class={`q ${p.cat}`}>{catLabel[p.cat]}</span>
-                  {!M && p.mark && <span class="mark">{p.mark[lang]}</span>}
-                  {!M && p.banner && <button type="button" class="m bnr" data-lb={p.banner} data-cap={`${p.title} — ${T('банер', 'banner')}`}>{T('Банер', 'Banner')}</button>}
-                  {!M && p.page && <a class="m bnr" href={href(lang, p.page)}>{T('Страница на книгата', 'Book page')}</a>}
                   {p.cat === 'sub' && expectedFor(p.venue) && (() => { const e = expectedFor(p.venue)!; return <a class={`exp ${e.cat}`} href={e.url} title={e.name}>{T('Очаквано', 'Expected')}: {expectedLabel(e, lang)}{!e.text && <span> ({SJR_YEAR})</span>}</a>; })()}
                   {p.sjr !== undefined && <span class="m">SJR {p.sjr}</span>}
                   {p.jif !== undefined && <span class="m">IF {p.jif}</span>}
@@ -211,9 +208,6 @@ const L = {
 
 <style>
   .eyebrow a { color: inherit; }
-  .mark { font: 600 .75rem var(--mono); color: #fff; background: var(--accent-ink); padding: 2px 8px; border-radius: 4px; }
-  .badges .bnr { font: .75rem var(--mono); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; padding: 1px 8px; border-radius: 4px; cursor: pointer; text-decoration: none; }
-  .badges .bnr:hover { background: var(--accent); color: #fff; }
   .frow[hidden] { display: none; }
   .frow { display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
   .lbl { font: .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 8px; }

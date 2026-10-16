@@ -26,8 +26,6 @@ export const archiveEarlier: ArchivePub[] = [
     venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“, 422 с.',
     isbn: '954-713-046-3',
     page: 'publications/books/gyros',
-    banner: '/docs/books/gyros-banner.jpg',
-    mark: { bg: 'Хабилитационен труд (ВАК, 2001)', en: 'Habilitation work (VAK, 2001)' },
   },
   {
     year: 2000, cat: 'mono', team: ['madzharov'], tags: ['navigation', 'ins'],
