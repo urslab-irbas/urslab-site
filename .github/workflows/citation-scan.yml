@@ -11,6 +11,11 @@ on:
   schedule:
     - cron: '17 4 1 * *'
   workflow_dispatch:
+    inputs:
+      mail_to:
+        description: 'Еднократно: имейл(и) за резултата вместо обичайните получатели (празно — обичайните)'
+        required: false
+        default: ''
   issues:
     types: [opened]
 permissions:
@@ -45,6 +50,8 @@ jobs:
         id: gate
         env:
           AUTHOR: ${{ github.event.issue.user.login }}
+          BODY: ${{ github.event.issue.body }}
+          MAIL_INPUT: ${{ github.event.inputs.mail_to }}
           EVENT: ${{ github.event_name }}
           OWNER: ${{ github.repository_owner }}
         run: |
@@ -56,9 +63,14 @@ jobs:
               const gh = fs.readdirSync("src/data/team").filter((f) => f.endsWith(".ts")).map((f) => (fs.readFileSync("src/data/team/" + f, "utf8").match(/github:\s*\x27([^\x27]+)\x27/) || [])[1]).filter(Boolean).map((g) => g.toLowerCase());
               if (!gh.includes(who) && who !== process.env.OWNER.toLowerCase()) { ok = false; why = "Търсене пускат само членовете на колектива с GitHub акаунт и ръководителят."; }
               const st = fs.existsSync("citation-scan/state.json") ? JSON.parse(fs.readFileSync("citation-scan/state.json", "utf8")) : {};
-              if (ok && st.lastRun && Date.now() - Date.parse(st.lastRun) < 24 * 3600e3) { ok = false; why = "Последното търсене беше на " + st.lastRun.slice(0, 16).replace("T", " ") + " UTC (до 24 часа). Резултатът е в последната заявка „[Нови цитирания]“."; }
+              // ръководителят може да пуска търсене и по-често от веднъж на 24 часа
+              if (ok && who !== process.env.OWNER.toLowerCase() && st.lastRun && Date.now() - Date.parse(st.lastRun) < 24 * 3600e3) { ok = false; why = "Последното търсене беше на " + st.lastRun.slice(0, 16).replace("T", " ") + " UTC (до 24 часа). Резултатът е в последната заявка „[Нови цитирания]“."; }
             }
-            fs.appendFileSync(process.env.GITHUB_OUTPUT, "ok=" + ok + "\nwhy=" + why + "\n");
+            // еднократен получател на имейла: ред „Имейл: адрес“ в заявката на ръководителя или полето mail_to при Run workflow
+            let mail = (process.env.MAIL_INPUT || "").trim();
+            if (ev === "issues" && who === process.env.OWNER.toLowerCase()) mail = ((process.env.BODY || "").match(/^\s*(?:Имейл|E-?mail)\s*:\s*([^\s<>,;]+@[^\s<>,;]+(?:\s*[,;]\s*[^\s<>,;]+@[^\s<>,;]+)*)/im) || [])[1] || mail;
+            if (mail && !/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+(\s*[,;]\s*[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+)*$/.test(mail)) mail = "";
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, "ok=" + ok + "\nwhy=" + why + "\nmail=" + mail + "\n");
           '
       - name: Отказ
         if: steps.gate.outputs.ok != 'true'
@@ -80,7 +92,7 @@ jobs:
         if: steps.gate.outputs.ok == 'true'
         env:
           TRIGGER: ${{ github.event_name == 'schedule' && 'месечно' || github.event_name == 'issues' && format('ръчно, @{0}', github.event.issue.user.login) || 'ръчно, ръководителят' }}
-          SCAN_MAIL_TO: ${{ vars.SCAN_MAIL_TO }}
+          SCAN_MAIL_TO: ${{ steps.gate.outputs.mail || vars.SCAN_MAIL_TO }}
           STATE_FILE: citation-scan/state.json
         run: |
           node scripts/scan-citations.mjs > /dev/null
