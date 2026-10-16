@@ -11,6 +11,7 @@ import { team } from '../data/team';
 import { href } from '../lib/i18n';
 import { citationsFor } from '../data/citations';
 import { citRules, citPts } from '../data/citations/rules';
+import { pubKey } from '../lib/pubSchema.js';
 // page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива;
 // area — всички публикации от сайта в едно научно направление (картите в „Изследвания“)
 // program — публикациите по проект (картата в „Проекти“): 'nspsd' = ННП „Сигурност и отбрана“ (src/data/nspsd.ts)
@@ -35,6 +36,8 @@ const P: ArchivePage = NSP ? NSP : M
 const archive = P.items;
 // Цитирания (само в „Обобщен отчет“): проверените цитирания на този член на колектива — src/data/citations/<id>/
 const CIT = M ? citationsFor(M.id, archive) : undefined;
+// „+ Цитиране“ — само за член с GitHub акаунт (заявката се приема само от неговия акаунт или от ръководителя)
+const canAdd = !!M?.github;
 const bg = lang === 'bg';
 const T = (b: string, e: string) => (bg ? b : e);
 const title = P.title[lang];
@@ -153,23 +156,23 @@ const L = {
         <h2>{/^q\d$/.test(g.key) ? `WoS/Scopus — ${g.label[lang]}` : g.label[lang]} <span class="gc" data-gc></span></h2>
         <ol class={`alist${CIT ? ' wc' : ''}`}>
           {g.items.map((p) => { const cb = CIT?.get(p); const showCit = CIT && p.cat !== 'sub'; return (
-            <li data-cpts={cb?.pts ?? 0} data-cno={cb?.work.no ?? ''} data-year={p.year} data-cat={p.cat} data-tags={p.tags.join(' ')} data-team={p.team.join(' ')}
+            <li data-cpts={cb?.pts ?? 0} data-cno={cb?.work.no ?? ''} data-key={showCit ? pubKey(p) : ''} data-year={p.year} data-cat={p.cat} data-tags={p.tags.join(' ')} data-team={p.team.join(' ')}
                 data-ix={isIx(p) ? '1' : ''} data-share={p.share ?? ''} data-sjr={p.sjr ?? ''} data-jif={p.jif ?? ''} data-doi={p.doi ?? ''} data-isbn={p.isbn ?? (p.issn ? `ISSN ${p.issn}` : '')}
                 data-authors={!bg && p.authorsEn ? p.authorsEn : p.authors} data-title={p.title} data-venue={p.venue}>
               <div class="yc"><span class="yr">{p.year}</span>
-                {showCit && <button type="button" class="cbtn" data-cit disabled={!cb} title={cb ? T('Проверените цитирания на тази публикация', 'Verified citations of this publication') : T('Още няма въведени цитирания', 'No citations entered yet')}><span>{T('Цитирания', 'Citations')}</span> <b>{cb?.pts ?? 0}</b></button>}
+                {showCit && <button type="button" class="cbtn" data-cit disabled={!cb && !canAdd} title={cb ? T('Проверените цитирания на тази публикация', 'Verified citations of this publication') : canAdd ? T('Още няма въведени цитирания — отворете, за да въведете', 'No citations entered yet — open to enter one') : T('Още няма въведени цитирания', 'No citations entered yet')}><span>{T('Цитирания', 'Citations')}</span> <b>{cb?.pts ?? 0}</b></button>}
               </div>
-              {cb && <template data-cits><section class="cw">
-                <h3>{cb.work.no}. {!bg && p.authorsEn ? p.authorsEn : p.authors} {p.title}{!bg && p.tr && <> [{p.tr}]</>}. {p.venue}{p.isbn && <>, ISBN {p.isbn}</>}{p.doi && <>, DOI {p.doi}</>}</h3>
-                <table class="ct">
+              {showCit && <template data-cits><section class="cw">
+                <h3>{cb && <>{cb.work.no}. </>}{!bg && p.authorsEn ? p.authorsEn : p.authors} {p.title}{!bg && p.tr && <> [{p.tr}]</>}. {p.venue}{p.isbn && <>, ISBN {p.isbn}</>}{p.doi && <>, DOI {p.doi}</>}</h3>
+                {!cb ? <p class="muted">{T('Още няма въведени цитирания за този труд.', 'No citations entered for this work yet.')}</p> : <table class="ct">
                   <thead><tr><th>№</th><th>{T('Цитиращ източник', 'Citing source')}</th><th>{T('Показател', 'Indicator')}</th><th>{T('Точки', 'Points')}</th></tr></thead>
                   <tbody>{cb.work.cites.map((c, i) => (
                     <tr><td>{cb.work.no}.{i + 1}</td>
-                      <td>{c.text}{c.doi && <>, DOI <a href={`https://doi.org/${c.doi}`}>{c.doi}</a></>}{c.url && <> · <a href={c.url} target="_blank" rel="noopener">{T('Линк', 'Link')}</a></>}{c.note && <span class="cn">{c.note}</span>}<span class="mi">{T('Д', 'D')}-{c.ind}</span></td>
+                      <td>{c.text}{c.where && <> ({T('цитирано', 'cited')}: {c.where})</>}{c.doi && <>, DOI <a href={`https://doi.org/${c.doi}`}>{c.doi}</a></>}{c.url && <> · <a href={c.url} target="_blank" rel="noopener">{T('Линк', 'Link')}</a></>}{c.note && <span class="cn">{c.note}</span>}<span class="mi">{T('Д', 'D')}-{c.ind}</span></td>
                       <td>{T('Д', 'D')}-{c.ind}</td><td>{citPts(c.ind)}</td></tr>
                   ))}</tbody>
                   <tfoot><tr><td colspan="3">{T('Общо за труда', 'Total for this work')} ({cb.work.cites.length} {T('цитирания', 'citations')})</td><td>{cb.pts}</td></tr></tfoot>
-                </table>
+                </table>}
               </section></template>}
               <div>
                 <p class="au">{!bg && p.authorsEn ? p.authorsEn : p.authors}</p>
@@ -196,7 +199,7 @@ const L = {
     ))}
     <p class="none" hidden>{t.noneFound[lang]}</p>
     {CIT && <dialog class="cdlg" data-cdlg aria-labelledby="cd-title">
-      <div class="cd-head"><h2 id="cd-title" data-cd-title></h2><button type="button" class="btn-s" data-cd-close>{T('Затвори', 'Close')}</button></div>
+      <div class="cd-head"><h2 id="cd-title" data-cd-title></h2><div class="cd-acts">{canAdd && <a class="btn-s btn-add" data-cd-add hidden href={`${href(lang, 'publications/new')}?m=${M!.id}`} title={T('Въвеждане на ново цитиране на този труд (вход с GitHub; само членът на колектива или ръководителят)', 'Enter a new citation of this work (GitHub sign-in; the team member or the head of the lab only)')}>+ {T('Цитиране', 'Citation')}</a>}<button type="button" class="btn-s" data-cd-close>{T('Затвори', 'Close')}</button></div></div>
       <div data-cd-body></div>
       <p class="cd-total" data-cd-total></p>
       <p class="cd-legend">{T('Точки по Минималните национални изисквания (ППЗРАСРБ, Таблица 2, група „Д“), Област 5 „Технически науки“:', 'Points under the Minimum National Requirements (Table 2, group D), Area 5 “Technical Sciences”:')}{Object.values(citRules).map((r) => <span>{r.label[lang]} — {r.pts} {T('т.', 'pts')}</span>)}{T('Самоцитиранията не се включват.', 'Self-citations are not included.')}</p>
@@ -256,6 +259,9 @@ const L = {
   .cdlg::backdrop { background: rgba(8, 16, 26, .6); }
   .cd-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 12px; }
   .cd-head h2 { font-size: 1.15rem; margin: 0; }
+  .cd-acts { display: flex; gap: 8px; flex-shrink: 0; }
+  .btn-add { background: var(--accent); color: #fff !important; }
+  .btn-add[hidden] { display: none; }
   .cw { margin: 0 0 22px; }
   .cw h3 { font-size: .95rem; font-weight: 600; margin: 0 0 8px; line-height: 1.45; }
   .ct { width: 100%; border-collapse: collapse; font-size: .88rem; }
@@ -359,9 +365,12 @@ const L = {
   const dlg = root.querySelector<HTMLDialogElement>('[data-cdlg]');
   if (dlg) {
     const body = dlg.querySelector<HTMLElement>('[data-cd-body]')!, total = dlg.querySelector<HTMLElement>('[data-cd-total]')!;
-    const open = (title: string, lis: HTMLLIElement[], showTotal: boolean) => {
+    const addBtn = dlg.querySelector<HTMLAnchorElement>('[data-cd-add]');
+    const open = (title: string, lis: HTMLLIElement[], showTotal: boolean, key = '') => {
       body.innerHTML = '';
-      const withCit = lis.filter((li) => li.querySelector('template[data-cits]')).sort((a, b) => Number(a.dataset.cno) - Number(b.dataset.cno));
+      // „+ Цитиране“ — само при отваряне от бутона под годината на конкретна публикация
+      if (addBtn) { addBtn.hidden = !key; if (key) { const u = new URL(addBtn.href, location.href); u.searchParams.set('cite', key); addBtn.href = u.pathname + u.search; } }
+      const withCit = lis.filter((li) => li.querySelector('template[data-cits]') && (key || Number(li.dataset.cpts) > 0)).sort((a, b) => Number(a.dataset.cno) - Number(b.dataset.cno));
       withCit.forEach((li) => body.append(li.querySelector<HTMLTemplateElement>('template[data-cits]')!.content.cloneNode(true)));
       if (!withCit.length) body.innerHTML = `<p>${labels.cit.none}</p>`;
       const pts = withCit.reduce((s, li) => s + (Number(li.dataset.cpts) || 0), 0);
@@ -375,7 +384,7 @@ const L = {
       const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-cit]');
       if (!b || b.disabled) return;
       const li = b.closest('li')!;
-      open(`${labels.cit.one}: ${li.dataset.title}`, [li], false);
+      open(`${labels.cit.one}: ${li.dataset.title}`, [li], false, li.dataset.key);
     });
     root.querySelector('[data-cits-all]')!.addEventListener('click', () => open(labels.cit.all, items.filter((li) => !li.hidden && li.dataset.cat !== 'sub'), true));
     dlg.querySelector('[data-cd-close]')!.addEventListener('click', () => dlg.close());

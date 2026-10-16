@@ -1,0 +1,83 @@
+# Връщане на цитиране с едно щракване: ръководителят (собственикът на хранилището) отметва „Върни“
+# в коментара „✅ Цитирането е добавено…“ в заявката „[Цитиране] …“. Записът се премахва от
+# src/data/citations/<член>/contrib.json (клон data), редът „върнато“ се добавя в publish-log.md и сайтът се качва отново.
+name: Връщане на цитиране
+on:
+  issue_comment:
+    types: [edited]
+permissions:
+  contents: write
+  issues: write
+  actions: write
+concurrency:
+  group: publication-main
+  cancel-in-progress: false
+jobs:
+  revert:
+    if: >-
+      startsWith(github.event.issue.title, '[Цитиране]') &&
+      github.event.comment.user.login == 'github-actions[bot]' &&
+      contains(github.event.comment.body, '<!-- revert-cit -->') &&
+      contains(github.event.comment.body, '- [x] **Върни**') &&
+      github.event.sender.login == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Данните от клона data
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- src/data/contrib.json publish-log.md
+          git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true
+      - name: Премахване на записа
+        id: rm
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SENDER: ${{ github.event.sender.login }}
+        run: node scripts/revert-citation.mjs
+      - name: Изграждане, запис в клона data и качване
+        if: steps.rm.outputs.ok == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.issue.number }}
+          F: ${{ steps.rm.outputs.file }}
+        run: |
+          npm ci && npm run build
+          cp "$F" "$RUNNER_TEMP/cit.json"; cp publish-log.md "$RUNNER_TEMP/"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin data
+          git worktree add -q "$RUNNER_TEMP/data" FETCH_HEAD
+          cd "$RUNNER_TEMP/data"
+          cp "$RUNNER_TEMP/cit.json" "$F"
+          cp "$RUNNER_TEMP/publish-log.md" publish-log.md
+          git add "$F" publish-log.md
+          git commit -m "Върнато цитиране от заявка #$NUM"
+          ok=0; for i in 1 2 3; do
+            if git push origin HEAD:data; then ok=1; break; fi
+            sleep 5; git pull --rebase origin data
+          done
+          [ "$ok" = 1 ] || { echo "::error::Записът в клона data не успя"; exit 1; }
+          cd "$GITHUB_WORKSPACE"
+          gh workflow run deploy.yml --ref main
+      - name: Отговор в заявката
+        if: always() && steps.rm.outcome == 'success'
+        uses: actions/github-script@v7
+        env:
+          OK: ${{ steps.rm.outputs.ok }}
+          JOB: ${{ job.status }}
+        with:
+          script: |
+            const { owner, repo } = context.repo; const num = context.issue.number;
+            const ok = process.env.OK === 'true' && process.env.JOB === 'success';
+            const body = ok
+              ? `↩️ **Цитирането е премахнато от сайта** (до около минута). Записано в publish-log.md.`
+              : process.env.OK === 'true' ? `❌ Връщането не успя — вижте ${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}` : `ℹ️ Няма цитиране от тази заявка на сайта (вече е премахнато).`;
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body });
+            if (ok) { try { await github.rest.issues.addLabels({ owner, repo, issue_number: num, labels: ['върната'] }); await github.rest.issues.removeLabel({ owner, repo, issue_number: num, name: 'публикувана' }); } catch (e) { core.warning(e.message); } }

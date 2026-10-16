@@ -14,6 +14,13 @@ export interface Citation {
   url?: string;
   /** бележка (напр. разлика с вече въведено в НАЦИД) */
   note?: string;
+  /** къде в цитиращия труд е цитирането (номер в литературата, страница) */
+  where?: string;
+  /** за Д-12: базата, в която е индексиран цитиращият труд */
+  index?: 'scopus' | 'wos';
+  /** въведено през формата: номер на заявката в GitHub и проверките в регистрите */
+  ghIssue?: number;
+  verified?: string[];
 }
 
 export interface CitedWork {
