@@ -30,28 +30,28 @@ const jsonLd = {
   name: B.title,
   alternateName: B.tr,
   inLanguage: 'bg',
-  genre: bg ? 'Монография' : 'Monograph',
+  genre: B.kind[lang],
   description: `${B.summary[lang]} ${B.hab ? B.hab[lang] + '.' : ''}`,
   abstract: B.abstract[lang],
-  author: {
+  author: [{
     '@type': 'Person',
     name: B.authorFull[lang],
     alternateName: [B.authorFull[bg ? 'en' : 'bg'], 'Madzharov, A. N.', 'Madjarov, A. N.'],
     url: `${new URL(href(lang, 'team'), site).href}#${A.id}`,
     ...(sameAs.length ? { sameAs } : {}),
-  },
+  }, ...(B.coauthors ?? []).map((c) => ({ '@type': 'Person', name: c[lang], alternateName: c[bg ? 'en' : 'bg'] }))],
   contributor: (B.reviewers ?? []).map((r) => ({ '@type': 'Person', name: r[lang], roleName: bg ? 'рецензент' : 'reviewer' })),
   publisher: { '@type': 'Organization', name: B.publisher[lang], address: { '@type': 'PostalAddress', addressLocality: B.place[lang], addressCountry: 'BG' } },
   datePublished: String(B.year),
   bookEdition: B.edition?.[lang],
-  bookFormat: 'https://schema.org/Paperback',
+  bookFormat: B.ebook ? 'https://schema.org/EBook' : 'https://schema.org/Paperback',
   numberOfPages: B.pages,
   isbn: B.isbn,
   identifier: [
-    { '@type': 'PropertyValue', propertyID: 'COBISS.BG-ID', value: B.cobissId },
-    { '@type': 'PropertyValue', propertyID: 'UDC', value: B.udk },
-  ],
-  sameAs: [B.cobissUrl],
+    B.cobissId && { '@type': 'PropertyValue', propertyID: 'COBISS.BG-ID', value: B.cobissId },
+    B.udk && { '@type': 'PropertyValue', propertyID: 'UDC', value: B.udk },
+  ].filter(Boolean),
+  sameAs: [B.cobissUrl, ...(B.registries ?? []).map((r) => r.url)].filter(Boolean),
   image: abs(B.banner),
   url: pageUrl,
   about: B.toc.filter((c) => /Глава|Chapter/.test(c.t.en + c.t.bg)).map((c) => c.t[lang].replace(/^[^:]+:\s*/, '')),
@@ -61,6 +61,7 @@ const jsonLd = {
   <Fragment slot="head">
     <meta name="citation_title" content={B.title} />
     <meta name="citation_author" content={`Маджаров, Анастас Николов`} />
+    {(B.coauthors ?? []).map((c) => { const w = c.bg.split(' '); return <meta name="citation_author" content={`${w[w.length - 1]}, ${w.slice(0, -1).join(' ')}`} />; })}
     <meta name="citation_publication_date" content={String(B.year)} />
     <meta name="citation_publisher" content={B.publisher.bg} />
     <meta name="citation_isbn" content={B.isbn} />
@@ -71,11 +72,11 @@ const jsonLd = {
   </Fragment>
 
   <header class="page-head"><div class="wrap">
-    <p class="eyebrow"><a href={href(lang, 'publications/earlier')}>{T('Публикации до 2021 г.', 'Publications up to 2021')}</a> / {T('Монографии', 'Monographs')}</p>
+    <p class="eyebrow"><a href={href(lang, 'publications/earlier')}>{T('Публикации до 2021 г.', 'Publications up to 2021')}</a> / {B.kind[lang]}</p>
     <h1>{title}</h1>
     <p class="tr">{bg ? B.tr : B.title}</p>
-    <p class="who"><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorFull[lang]}</a> · {B.year} · ISBN {B.isbn}</p>
-    {B.hab && <p class="hab"><span class="kind">{B.kind[lang]}</span> {B.hab[lang]}</p>}
+    <p class="who"><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorFull[lang]}</a>{(B.coauthors ?? []).map((c) => <>, {c[lang]}</>)} · {B.year} · ISBN {B.isbn}</p>
+    <p class="hab"><span class={B.kind.en === 'Textbook' ? 'kind tb' : 'kind'}>{B.kind[lang]}</span> {(B.hab ?? B.kindNote)?.[lang]}</p>
   </div></header>
 
   <section class="block first"><div class="wrap">
@@ -86,7 +87,8 @@ const jsonLd = {
       <figcaption>
         <button type="button" class="btn-s" data-lb={B.banner} data-cap={B.bannerAlt[lang]}>{T('Банер в голям размер', 'Banner full size')}</button>
         <a class="btn-s" href={B.bannerPdf} target="_blank" rel="noopener">{T('Банер (PDF с активни връзки)', 'Banner (PDF with live links)')}</a>
-        <a class="btn-s" href={B.cobissUrl}>COBISS.BG ↗</a>
+        {B.cobissUrl && <a class="btn-s" href={B.cobissUrl}>COBISS.BG ↗</a>}
+        {(B.registries ?? []).map((r) => <a class="btn-s" href={r.url}>{r.label[lang]} ↗</a>)}
         {scopusUrl && <a class="btn-s" href={scopusUrl}>Scopus Author ID {A.scopus} ↗</a>}
       </figcaption>
     </figure>
@@ -110,15 +112,16 @@ const jsonLd = {
         <dl>
           <dt>{T('Вид', 'Type')}</dt><dd>{B.kind[lang]}</dd>
           {B.hab && <><dt>{T('Хабилитация', 'Habilitation')}</dt><dd>{B.hab[lang]}</dd></>}
-          <dt>{T('Автор', 'Author')}</dt><dd><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorOnBook[lang]}</a></dd>
+          <dt>{B.coauthors ? T('Автори', 'Authors') : T('Автор', 'Author')}</dt><dd><a href={`${href(lang, 'team')}#${A.id}`}>{B.authorOnBook[lang]}</a>{(B.coauthors ?? []).map((c) => <span class="ln">{c[lang]}</span>)}</dd>
           {B.reviewers && <><dt>{T('Рецензенти', 'Reviewers')}</dt><dd>{B.reviewers.map((r) => <span class="ln">{r[lang]}</span>)}</dd></>}
           <dt>{T('Издател', 'Publisher')}</dt><dd>{B.publisher[lang]}, {B.place[lang]}</dd>
           <dt>{T('Година', 'Year')}</dt><dd>{B.year}</dd>
           {B.edition && <><dt>{T('Издание', 'Edition')}</dt><dd>{B.edition[lang]}{B.printed && <>; {T('дадено за печат', 'sent to print')} {B.printed}</>}{B.copies && <>; {T('тираж', 'print run')} {B.copies}</>}{B.format && <>; {T('формат', 'format')} {B.format}</>}</dd></>}
           <dt>{T('Обем', 'Extent')}</dt><dd>{B.pages} {T('с.', 'pp.')}{B.figures && <>, {B.figures} {T('фиг.', 'figures')}</>}{B.refs && <>, {B.refs} {T('библиографски източника', 'references')}{B.refPages && <> ({T('с.', 'pp.')} {B.refPages})</>}</>}</dd>
           <dt>ISBN</dt><dd>{B.isbn}</dd>
-          <dt>{T('УДК', 'UDC')}</dt><dd>{B.udk} <span class="muted">(COBISS.BG)</span></dd>
-          <dt>COBISS.BG-ID</dt><dd><a href={B.cobissUrl}>{B.cobissId}</a></dd>
+          {B.udk && <><dt>{T('УДК', 'UDC')}</dt><dd>{B.udk} <span class="muted">({B.udkSource?.[lang] ?? 'COBISS.BG'})</span></dd></>}
+          {B.cobissId && <><dt>COBISS.BG-ID</dt><dd><a href={B.cobissUrl}>{B.cobissId}</a></dd></>}
+          {(B.registries ?? []).map((r) => <><dt>{T('Регистър', 'Register')}</dt><dd><a href={r.url}>{r.label[lang]}</a></dd></>)}
           <dt>{T('Език', 'Language')}</dt><dd>{T('български', 'Bulgarian')}</dd>
           {sameAs.length > 0 && <><dt>{T('Профили на автора', 'Author profiles')}</dt><dd>
             {A.orcid && <span class="ln"><a href={`https://orcid.org/${A.orcid}`}>ORCID {A.orcid}</a></span>}
@@ -135,6 +138,7 @@ const jsonLd = {
   .eyebrow a { color: inherit; }
   .tr { font-style: italic; color: var(--muted); margin: -.25rem 0 .5rem; font-size: 1.15rem; }
   .who { margin: 0 0 .75rem; }
+  .kind.tb { background: #1c8a6e; }
   .hab { margin: 0; color: var(--text); padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; }
   .kind { font: 600 .78rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #fff; background: var(--accent-ink); padding: 3px 8px; border-radius: 4px; margin-right: 6px; }
   section.block.first { padding-top: 32px; }

@@ -36,6 +36,7 @@ export const archiveEarlier: ArchivePub[] = [
     venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“ (печат: София, Военно издателство), 191 с.',
     isbn: '954-713-042-0',
     url: 'https://plus.cobiss.net/cobiss/bg/bg/data/cobib/52246280',
+    page: 'publications/books/GPS2000',
   },
   {
     year: 2013, cat: 'book', team: ['madzharov'], tags: ['navigation'],
@@ -45,5 +46,6 @@ export const archiveEarlier: ArchivePub[] = [
     tr: 'Structure and Application of Satellite Navigation Systems',
     venue: 'В. Търново: НВУ „Васил Левски“, 177 с.',
     isbn: '978-954-753-168-0',
+    page: 'publications/books/GPS2013',
   },
 ];
