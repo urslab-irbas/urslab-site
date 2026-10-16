@@ -77,7 +77,10 @@ const madzharov: NacidRecord = {
     { key: 'Д', label: { bg: 'Сума от показатели 12–15 — цитирания', en: 'Sum of indicators 12–15 — citations' }, req: [null, 100, null, 50, 100],
       note: { bg: 'Изчислено от проверените цитирания в Системата (въведени на ръка, през формата и с отметка); самоцитиранията (А. Маджаров сред авторите на цитиращия труд) не се включват.', en: 'Computed from the verified citations in the System (entered by hand, through the form and by tick); self-citations (A. Madzharov among the authors of the citing work) are not included.' } },
     { key: 'Е', label: { bg: 'Сума от показатели 16 до края — проекти, ръководство, учебници и др.', en: 'Sum of indicators 16 onwards — projects, supervision, textbooks etc.' }, req: [null, null, null, null, 150],
+      note: { bg: 'Включва ръководството на двама успешно защитили докторанти (ВВВУ „Г. Бенковски“; А. Маджаров — единствен научен ръководител, 40/n при n = 1).', en: 'Includes the supervision of two successfully defended doctoral students (Georgi Benkovski Higher Air Force School; A. Madzharov sole supervisor, 40/n with n = 1).' },
       items: [
+        { formula: '40/1', n: 1, pts: 40, year: '', text: 'Ръководство на успешно защитил докторант: Стефан Билидеров, ВВВУ „Г. Бенковски“ — единствен научен ръководител (показател 17)' },
+        { formula: '40/1', n: 1, pts: 40, year: '', text: 'Ръководство на успешно защитил докторант: Мартин Камбушев, ВВВУ „Г. Бенковски“ — единствен научен ръководител (показател 17)' },
         { year: '2013', n: 1, formula: '40/1', pts: 40, text: 'Учебник „Структура и приложение на спътниковите навигационни системи“, НВУ „В. Левски“, 177 с., ISBN 978-954-753-168-0 (показател 23)' },
         { year: '2022–2026', formula: '20', pts: 20, text: 'Ръководство на колектива на ИР-БАН по ННП „Сигурност и отбрана“, МОН, споразумение № Д01-74/19.05.2022 (показател 20)' },
         { year: '2025–2026', formula: '10', pts: 10, text: 'Участие (софтуерен инженер) в проект BG06RDNP001-16.003-0013, ПРСР 2014–2020 (показател 18)' },
