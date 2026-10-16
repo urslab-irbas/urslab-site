@@ -30,6 +30,16 @@ export const archiveEarlier: ArchivePub[] = [
     mark: { bg: 'Хабилитационен труд (ВАК, 2001)', en: 'Habilitation work (VAK, 2001)' },
   },
   {
+    year: 2000, cat: 'mono', team: ['madzharov'], tags: ['navigation', 'ins'],
+    authors: 'Маджаров, А., & Тодоров, П.',
+    authorsEn: 'Madzharov, A., & Todorov, P.',
+    title: 'Структура и приложение на глобалните навигационни системи NAVSTAR и ГЛОНАСС',
+    tr: 'Structure and Applications for Global Navigation Systems NAVSTAR and GLONASS',
+    venue: 'Д. Митрополия: ВВВУ „Георги Бенковски“ (печат: София, Военно издателство), 191 с.',
+    isbn: '954-713-042-0',
+    url: 'https://plus.cobiss.net/cobiss/bg/bg/data/cobib/52246280',
+  },
+  {
     year: 2013, cat: 'book', team: ['madzharov'], tags: ['navigation'],
     authors: 'Маджаров, А.',
     authorsEn: 'Madzharov, A.',
