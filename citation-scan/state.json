@@ -96,9 +96,21 @@
       "newWorks": 22,
       "requests": 394,
       "seconds": 423
+    },
+    {
+      "date": "2026-10-17T13:38:24.188Z",
+      "trigger": "ръчно, @urslab-irbas",
+      "found": 71,
+      "new": 0,
+      "ready": 63,
+      "form": 2,
+      "doubt": 6,
+      "newWorks": 22,
+      "requests": 399,
+      "seconds": 569
     }
   ],
-  "lastRun": "2026-10-16T16:17:51.508Z",
+  "lastRun": "2026-10-17T13:38:24.188Z",
   "rejected": {},
   "confirmed": {
     "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025": {

@@ -1,5 +1,5 @@
 {
- "date": "2026-10-16",
+ "date": "2026-10-17",
  "items": {
   "19043296": {
    "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.80.23.01",
@@ -106,115 +106,6 @@
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Santiago, P. V. D. S., Alves, F., & Santos, M. J. C. D. (2025). Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers. Journal of Advanced Sciences and Mathematics Education. https://doi.org/10.58524/jasme.v5i1.562",
    "work": "Chehlarova, N., Gachev, G. (2023). Figures with an axis of symmetry with Photon Robot"
-  },
-  "5d8b8e0f": {
-   "key": "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025",
-   "cited": "doi:10.3389/frobt.2024.1414853",
-   "owners": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "eligible": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "data": {
-    "type": "citation",
-    "member": "madzharov",
-    "cited": "doi:10.3389/frobt.2024.1414853",
-    "src": "doi",
-    "doi": "10.1523/eneuro.0390-24.2025",
-    "authors": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M.",
-    "year": 2025,
-    "title": "The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task",
-    "venue": "eneuro",
-    "volume": "12",
-    "issue": "4",
-    "publisher": "Society for Neuroscience",
-    "idType": "eissn",
-    "idValue": "2373-2822",
-    "where": "[21]"
-   },
-   "evidence": "в литературата: позиция 21 от 117 (Crossref)",
-   "line": "Pesci, U. G., Moreau, Q., Era, V., & Candidi, M. (2025). The Bodily Appearance of a Virtual Partner Affects the Activity of the Action Observation and Action Monitoring Systems in a Minimally Interactive Task. eNeuro. https://doi.org/10.1523/eneuro.0390-24.2025",
-   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A., Chavdarov, I. (2024). Psychophysics of user acceptance of social cyber-physical systems"
-  },
-  "4cc389fd": {
-   "key": "doi:10.3389/frobt.2024.1414853|10.1007/978-981-96-9709-0_9",
-   "cited": "doi:10.3389/frobt.2024.1414853",
-   "owners": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "eligible": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "data": {
-    "type": "citation",
-    "member": "madzharov",
-    "cited": "doi:10.3389/frobt.2024.1414853",
-    "src": "doi",
-    "doi": "10.1007/978-981-96-9709-0_9",
-    "authors": "Dimitrova, M., & Valchkova, N.",
-    "year": 2025,
-    "title": "Feasibility of the Cyber-Physical Nurse",
-    "venue": "Lecture Notes in Networks and Systems",
-    "pages": "127-137",
-    "publisher": "Springer Nature Singapore",
-    "idType": "issn",
-    "idValue": "2367-3370",
-    "where": "[27]"
-   },
-   "evidence": "в литературата: позиция 27 от 35 (Crossref)",
-   "line": "Dimitrova, M., & Valchkova, N. (2025). Feasibility of the Cyber-Physical Nurse. Lecture notes in networks and systems. https://doi.org/10.1007/978-981-96-9709-0_9",
-   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A., Chavdarov, I. (2024). Psychophysics of user acceptance of social cyber-physical systems"
-  },
-  "b65a820f": {
-   "key": "doi:10.1109/ithet61869.2024.10837594|10.1109/ithet69978.2026.11585097",
-   "cited": "doi:10.1109/ithet61869.2024.10837594",
-   "owners": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "eligible": [
-    "madzharov"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "data": {
-    "type": "citation",
-    "member": "madzharov",
-    "cited": "doi:10.1109/ithet61869.2024.10837594",
-    "src": "doi",
-    "doi": "10.1109/ithet69978.2026.11585097",
-    "authors": "Dimitrova, M., Krastev, A., Chehlarova, N., & Tanev, T.",
-    "year": 2026,
-    "title": "Design of Educational Scenarios with Robots from a Neuro Aware Perspective",
-    "venue": "2026 22nd International Conference on Information Technology Based Higher Education and Training (ITHET)",
-    "pages": "1-7",
-    "publisher": "IEEE",
-    "where": "[35]"
-   },
-   "evidence": "в литературата: позиция 35 от 43 (Crossref)",
-   "line": "Dimitrova, M., Krastev, A., Chehlarova, N., & Tanev, T. (2026). Design of Educational Scenarios with Robots from a Neuro Aware Perspective. International Conference on Information Technology Based Higher Education and Training (ITHET). https://doi.org/10.1109/ithet69978.2026.11585097",
-   "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A. (2024). A Psychophysical View on User Acceptance of Robotic Systems for Social Applications"
   },
   "ad67efd4": {
    "key": "doi:10.57125/fed.2025.06.25.04|10.57125/fed.2025.12.16",
