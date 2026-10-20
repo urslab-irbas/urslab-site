@@ -1,1 +1,31 @@
-[]
+[
+  {
+    "member": "gaidarski",
+    "cited": "doi:10.17770/etr2024vol2.8062",
+    "ind": "12",
+    "year": 2025,
+    "authors": "Calderón, P. C. C., Ardían, L. A. B., Jiménez, H. R. P., Romero, J. L. J., & Vega, C. L. B.",
+    "title": "Organizational communication: Analysis of research trends through production indicators in Scopus",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2709-7595",
+    "venue": "Iberoamerican Journal of Science Measurement and Communication",
+    "volume": "5",
+    "issue": "2",
+    "pages": "1-10",
+    "publisher": "Pro-Metrics",
+    "where": "[16]",
+    "doi": "10.47909/ijsmc.177",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 16 от 34 (DOI 10.17770/etr2024vol2.8062 на цитирания труд)",
+    "text": "Calderón, P. C. C., Ardían, L. A. B., Jiménez, H. R. P., Romero, J. L. J., & Vega, C. L. B. Organizational communication: Analysis of research trends through production indicators in Scopus. Iberoamerican Journal of Science Measurement and Communication, 5(2), pp. 1–10, Pro-Metrics, 2025 ISSN 2709-7595",
+    "by": "ivangaidarski",
+    "ghIssue": 119,
+    "evidenceUrl": "https://doi.org/10.47909/ijsmc.177",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 16 от 34 (DOI 10.17770/etr2024vol2.8062 на цитирания труд)",
+      "DOI 10.47909/ijsmc.177 — Crossref: „Organizational communication: Analysis of research trends through production indicators in Scopus“",
+      "ISSN 2709-7595 — ISSN Portal (Confirmed record): „Iberoamerican journal of science measurement and communication (Print)“ (съвпада с ISSN/ISBN по DOI)"
+    ]
+  }
+]
