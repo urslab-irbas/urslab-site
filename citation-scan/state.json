@@ -131,9 +131,32 @@
       ],
       "requests": 399,
       "seconds": 416
+    },
+    {
+      "date": "2026-10-21T18:24:49.120Z",
+      "trigger": "ръчно, @urslab-irbas",
+      "found": 70,
+      "new": 0,
+      "ready": 62,
+      "form": 2,
+      "doubt": 6,
+      "newWorks": 22,
+      "suggested": {
+        "13": 2,
+        "14": 19,
+        "12s": 41,
+        "12w": 0
+      },
+      "lists": [
+        "scopus",
+        "wos",
+        "current contents connect"
+      ],
+      "requests": 379,
+      "seconds": 269
     }
   ],
-  "lastRun": "2026-10-21T18:10:31.890Z",
+  "lastRun": "2026-10-21T18:24:49.120Z",
   "rejected": {},
   "confirmed": {
     "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025": {

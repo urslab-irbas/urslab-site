@@ -828,12 +828,12 @@
    ],
    "status": "ready",
    "options": [
-    "13",
     "12s",
-    "12w"
+    "12w",
+    "13"
    ],
-   "suggest": "13",
-   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2022 — проверете)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -863,12 +863,12 @@
    ],
    "status": "ready",
    "options": [
-    "13",
     "12s",
-    "12w"
+    "12w",
+    "13"
    ],
-   "suggest": "13",
-   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2021 — проверете)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -2421,12 +2421,12 @@
    ],
    "status": "ready",
    "options": [
-    "13",
     "12s",
-    "12w"
+    "12w",
+    "13"
    ],
-   "suggest": "13",
-   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2527,12 +2527,12 @@
    ],
    "status": "ready",
    "options": [
-    "13",
     "12s",
-    "12w"
+    "12w",
+    "13"
    ],
-   "suggest": "13",
-   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2562,12 +2562,12 @@
    ],
    "status": "ready",
    "options": [
-    "13",
     "12s",
-    "12w"
+    "12w",
+    "13"
    ],
-   "suggest": "13",
-   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
    "data": {
     "type": "citation",
     "member": "hristozov",
