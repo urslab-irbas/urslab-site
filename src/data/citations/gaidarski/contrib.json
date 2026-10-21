@@ -27,5 +27,34 @@
       "DOI 10.47909/ijsmc.177 — Crossref: „Organizational communication: Analysis of research trends through production indicators in Scopus“",
       "ISSN 2709-7595 — ISSN Portal (Confirmed record): „Iberoamerican journal of science measurement and communication (Print)“ (съвпада с ISSN/ISBN по DOI)"
     ]
+  },
+  {
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.76.21.04",
+    "ind": "14",
+    "year": 2023,
+    "authors": "Tomov, P., Mateeva, G., & Parvanov, D.",
+    "title": "Entropy Test Degradation After Random Numbers Scaling",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "80",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "doi": "10.7546/pecr.80.23.01",
+    "evidence": "DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+    "text": "Tomov, P., Mateeva, G., & Parvanov, D. Entropy Test Degradation After Random Numbers Scaling. Problems of Engineering Cybernetics and Robotics, 80, Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences), 2023 ISSN 2738-7356",
+    "by": "urslab-irbas",
+    "ghIssue": 134,
+    "evidenceUrl": "https://doi.org/10.7546/pecr.80.23.01",
+    "verified": [
+      "Доказателство — DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+      "DOI 10.7546/pecr.80.23.01 — Crossref: „Entropy Test Degradation After Random Numbers Scaling“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“",
+      "Научно рецензиране — потвърдено от члена",
+      "Индексиране по списъците: списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS"
+    ]
   }
 ]
