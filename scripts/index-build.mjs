@@ -75,7 +75,7 @@ function csvRows(text) {
   if (cell || row.length) { row.push(cell); rows.push(row); }
   return rows;
 }
-const WOS = { science_citation_index_expanded: 'SCIE', social_sciences_citation_index: 'SSCI', arts__humanities_citation_index: 'AHCI', emerging_sources_citation_index: 'ESCI' };
+const WOS = { cpci: 'CPCI', science_citation_index_expanded: 'SCIE', social_sciences_citation_index: 'SSCI', arts__humanities_citation_index: 'AHCI', emerging_sources_citation_index: 'ESCI' };
 
 for (const f of readdirSync(dir).sort()) {
   const p = `${dir}/${f}`; const low = f.toLowerCase();
@@ -88,6 +88,15 @@ for (const f of readdirSync(dir).sort()) {
   const w = Object.entries(WOS).find(([k]) => low.includes(k))?.[1];
   const cc = low.includes('current_contents') ? 'Current Contents Connect' : null;
   const db = w ? `w:${w}` : cc ? `o:${cc}` : `o:${clean(f).replace(/\.csv$/i, '').replace(/_/g, ' ')}`;
+  const iY = h.indexOf('publication year');
+  if (iY >= 0) {
+    // извадка от записи в WoS Core Collection (напр. сборници в CPCI): покритие = от най-ранната до най-късната година в извадката
+    const by = {};
+    for (const r of rows.slice(1)) { const y = Number(r[iY]); if (!y) continue; for (const i of [iI, iE]) { const k = normIssn(r[i]); if (k) { (by[k] ??= { t: r[iT], ys: [] }).ys.push(y); } } }
+    for (const [k, x] of Object.entries(by)) addIssn(k, db, `${Math.min(...x.ys)}-${Math.max(...x.ys)}`, x.t);
+    sources.push(`${clean(f)} — ${rows.length - 1} записа от WoS ${w ?? ''} (години ${Object.values(by).flatMap((x) => [Math.min(...x.ys), Math.max(...x.ys)]).filter((v, i, a) => i === 0 || i === a.length - 1).join('–')})`);
+    continue;
+  }
   for (const r of rows.slice(1)) for (const i of [iI, iE]) if (i >= 0) addIssn(r[i], db, '', r[iT]);
   sources.push(`${clean(f)} — ${rows.length - 1} издания (${w ? `Web of Science ${w}` : cc ?? 'друга база'})`);
 }
