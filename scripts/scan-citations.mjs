@@ -233,7 +233,7 @@ for (const x of shown) {
   const kind = journal ? 'journal' : (!m || BOOKISH.includes(m.type) ? 'book' : '');
   const issns = [...(m?.ISSN ?? []), ...(c.issns ?? []), ...(issn ? [x.data.idValue] : [])];
   const isbns = [...(m?.ISBN ?? []), ...(x.data.idType?.includes('isbn') ? [x.data.idValue] : [])];
-  x.idx = classify(lists, { issns, isbns, year: x.data.year ?? c.year, kind, doaj: c.doaj });
+  x.idx = classify(lists, { issns, isbns, year: x.data.year ?? c.year, kind, doaj: c.doaj, venue: x.data.venue || c.venue || (m?.['container-title'] ?? [])[0] });
   const sg = x.idx.suggest;
   if (sg === '14' && !issn) { x.data.idType = 'issn'; x.data.idValue = x.idx.issns[0]; } // Д-14 изисква ISSN на списанието
   if (sg) x.options = [sg, ...x.options.filter((o) => o !== sg)];

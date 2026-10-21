@@ -79,8 +79,37 @@ export function isbn13(v) {
   return '';
 }
 
+// ---- Сборници без ISBN в Crossref (IEEE, ACM …): сверка по заглавие и година с „All Conf. Proceedings“ на Scopus ----
+const STOP = new Set('proceedings proceeding conference conferences international annual papers paper the and of on in for to with ieee acm symposium workshop congress meeting edition volume vol part'.split(' '));
+const ORD = /\b(\d{1,3})(?:st|nd|rd|th)\b/i;
+/** Ключ на заглавие на сборник: поредният номер (25th → 25) + значимите думи по азбучен ред, без години */
+export function procKey(t) {
+  const s = latinOnly(t);
+  const ord = s.match(ORD)?.[1] ?? '';
+  const words = [...new Set(s.replace(ORD, ' ').split(/[^a-z0-9]+/).filter((w) => w.length > 2 && !STOP.has(w) && !/^\d{4}$/.test(w) && !/^\d+$/.test(w)))].sort();
+  return words.length >= 2 ? `${ord}|${words.join(' ')}` : '';
+}
+const latinOnly = (t) => String(t ?? '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+/** Най-близкото заглавие на сборник в Scopus за същата година (±1): всички думи на по-краткото са в по-дългото, поредният номер съвпада */
+function procMatch(lists, venue, year) {
+  if (!lists.proc?.size || !venue || !year) return null;
+  const k = procKey(venue); if (!k) return null;
+  const [ord, ws] = k.split('|'); const A = ws.split(' ');
+  const rare = A.map((w) => [w, lists.procIdx.get(w)?.length ?? 0]).filter(([, n]) => n).sort((a, b) => a[1] - b[1])[0];
+  if (!rare) return null;
+  let best = null;
+  for (const key of lists.procIdx.get(rare[0])) {
+    const [o2, w2] = key.split('|'); if (ord && o2 && ord !== o2) continue;
+    const years = lists.proc.get(key); if (!years.some((y) => Math.abs(y - year) <= 1)) continue;
+    const B = new Set(w2.split(' '));
+    const common = A.filter((w) => B.has(w)).length; const cover = common / Math.min(A.length, B.size);
+    if (cover >= 0.9 && common >= 2 && (!best || common > best.common)) best = { key, common, years };
+  }
+  return best;
+}
+
 /** Сгъстеният файл (index.json.gz) → същите структури */
-function loadPacked(file, dbs, byIssn, byIsbn) {
+function loadPacked(file, dbs, byIssn, byIsbn, proc, procIdx) {
   const j = JSON.parse(gunzipSync(readFileSync(file)).toString('utf8'));
   const name = file.split('/').pop();
   const note = (db, label, sub) => { const d = dbs.get(db) ?? { label, files: [name], n: 0, subs: new Set() }; d.n++; if (sub) d.subs.add(sub); dbs.set(db, d); };
@@ -92,16 +121,21 @@ function loadPacked(file, dbs, byIssn, byIsbn) {
   }
   for (const [k, [code, year]] of Object.entries(j.isbn ?? {})) byIsbn.set(k, { db: code === 's' ? 'scopus' : code, year });
   if (byIsbn.size && dbs.has('scopus')) dbs.get('scopus').isbn = byIsbn.size;
+  for (const [k, ys] of Object.entries(j.proc ?? {})) {
+    proc.set(k, ys);
+    for (const w of k.split('|')[1].split(' ')) { if (!procIdx.has(w)) procIdx.set(w, []); procIdx.get(w).push(k); }
+  }
+  if (proc.size && dbs.has('scopus')) dbs.get('scopus').proc = proc.size;
   return j;
 }
 
 /** Зарежда всички списъци; връща { dbs: Map(db → {label, files, n}), byIssn: Map(issn → [запис]), byIsbn: Map(isbn13 → {db, year}), built } */
 export async function loadIndexLists(dir = INDEX_DIR) {
-  const dbs = new Map(), byIssn = new Map(), byIsbn = new Map();
+  const dbs = new Map(), byIssn = new Map(), byIsbn = new Map(), proc = new Map(), procIdx = new Map();
   let built = '';
-  if (!existsSync(dir)) return { dbs, byIssn, byIsbn, built };
+  if (!existsSync(dir)) return { dbs, byIssn, byIsbn, proc, procIdx, built };
   for (const f of readdirSync(dir).sort()) {
-    if (f.endsWith('.json.gz')) { built = loadPacked(`${dir}/${f}`, dbs, byIssn, byIsbn).built ?? built; continue; }
+    if (f.endsWith('.json.gz')) { built = loadPacked(`${dir}/${f}`, dbs, byIssn, byIsbn, proc, procIdx).built ?? built; continue; }
     const m = f.toLowerCase().match(/^([a-z]+)[^/]*\.(xlsx|csv|tsv)$/);
     if (!m) continue;
     const db = m[1];
@@ -119,7 +153,7 @@ export async function loadIndexLists(dir = INDEX_DIR) {
     d.files.push(f); d.n += recs.length; dbs.set(db, d);
     for (const r of recs) for (const s of r.issns) { if (!byIssn.has(s)) byIssn.set(s, []); byIssn.get(s).push(r); }
   }
-  return { dbs, byIssn, byIsbn, built };
+  return { dbs, byIssn, byIsbn, proc, procIdx, built };
 }
 
 const inYear = (ranges, y) => !ranges || !y ? null : ranges.some(([a, b]) => y >= a && y <= b);
@@ -130,7 +164,7 @@ const rangeText = (ranges) => (ranges ?? []).map(([a, b]) => (a === b ? `${a}` :
  * in: { issns[], year, kind: 'journal' | 'book' | '' , doaj?: bool }
  * out: { checked, suggest?: '12s'|'12w'|'13'|'14', why, scopus?, wos?, other[] }
  */
-export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj = false }) {
+export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj = false, venue = '' }) {
   const ids = [...new Set(issns.map(normIssn).filter(Boolean))];
   const bks = [...new Set(isbns.map(isbn13).filter(Boolean))];
   const hits = ids.flatMap((s) => lists.byIssn.get(s) ?? []);
@@ -149,6 +183,9 @@ export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj 
   // Б3: том на сборник или книга, индексирани в Scopus (по ISBN) — Д-12 („… или в монографии и колективни томове“)
   const bk = bks.map((b) => [b, lists.byIsbn?.get(b)]).find(([, r]) => r?.db === 'scopus');
   if (bk) { res.scopus = { isbn: bk[0], year: bk[1].year }; res.suggest = '12s'; res.why = `Scopus: книга / том на сборник, ISBN ${bk[0]}${bk[1].year ? ` (${bk[1].year})` : ''}`; return res; }
+  // сборник без ISBN в Crossref — по заглавие и година (основанието казва, че е по заглавие: потребителят го проверява)
+  const pm = kind === 'book' && !sc.length ? procMatch(lists, venue, year) : null;
+  if (pm) { res.scopus = { proc: pm.key }; res.suggest = '12s'; res.why = `Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година ${pm.years.filter((y) => Math.abs(y - year) <= 1).join(', ')} — проверете)`; return res; }
   if (ws.length) {
     const subs = [...new Set(ws.map((r) => r.sub).filter(Boolean))];
     res.wos = { title: ws[0].title, subs };
@@ -166,6 +203,6 @@ export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj 
 /** Ред за отчета: какво е проверено */
 export function listsSummary(lists) {
   if (!lists.dbs.size) return 'Списъци за индексиране: няма (показателят не се предлага; качете списъка на Scopus в клона data, папка citation-scan/index/).';
-  const parts = [...lists.dbs.values()].map((d) => `${d.label}${d.subs?.size ? ` (${[...d.subs].join(', ')})` : ''} — ${d.n} ISSN${d.isbn ? ` и ${d.isbn} ISBN на книги и сборници` : ''}`);
+  const parts = [...lists.dbs.values()].map((d) => `${d.label}${d.subs?.size ? ` (${[...d.subs].join(', ')})` : ''} — ${d.n} ISSN${d.isbn ? ` и ${d.isbn} ISBN на книги и сборници` : ''}${d.proc ? `, ${d.proc} заглавия на сборници` : ''}`);
   return `Списъци за индексиране${lists.built ? ` (към ${lists.built})` : ''}: ${parts.join('; ')}.${lists.dbs.has('wos') ? '' : ' Web of Science: няма списък — не е проверено.'}`;
 }
