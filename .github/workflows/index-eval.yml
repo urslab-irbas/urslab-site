@@ -1,0 +1,47 @@
+# Б1 (задача #121): измерване „преди / след“ на проверката на индексирането (scripts/index-eval.mjs).
+# Пуска се ръчно от ръководителя (Actions → „Б1: измерване на индексирането“ → Run workflow), след като
+# списъкът на Scopus (и по желание WoS, ERIH Plus …) е качен в клона data, папка citation-scan/index/.
+# Резултатът е в обобщението на изпълнението (Summary); по желание и като коментар в задача (номер в полето issue).
+# Нищо не се записва в клоновете — само се чете.
+name: 'Б1: измерване на индексирането'
+on:
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Номер на задача за коментар с резултата (празно — само в Summary)'
+        required: false
+        default: '121'
+permissions:
+  contents: read
+  issues: write
+jobs:
+  eval:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Данните от клона data (кандидати, списъци, цитирания)
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- citation-scan 2>/dev/null || true
+          git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true
+      - run: npm ci
+      - name: Измерване
+        run: node scripts/index-eval.mjs >> "$GITHUB_STEP_SUMMARY"
+      - name: Коментар в задачата
+        if: github.event.inputs.issue != ''
+        uses: actions/github-script@v7
+        env:
+          NUM: ${{ github.event.inputs.issue }}
+        with:
+          script: |
+            const fs = require('fs');
+            let body = fs.readFileSync('index-eval.md', 'utf8');
+            if (body.length > 60000) body = body.slice(0, 60000) + '\n\n… (пълният резултат е в Summary на изпълнението)';
+            await github.rest.issues.createComment({ ...context.repo, issue_number: Number(process.env.NUM), body });
