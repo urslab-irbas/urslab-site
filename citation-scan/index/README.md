@@ -7,7 +7,8 @@
 - Scopus book list, Q2 2026 (ISBN на книгите);
 - заглавията и годините на сборниците от „All Conf. Proceedings“ — за доклади, за които Crossref не дава ISBN (IEEE, ACM …);
 - Web of Science (Master Journal List): SCIE, SSCI, AHCI, ESCI;
-- Current Contents Connect (3 колекции) — друга база, само за сведение.
+- Current Contents Connect (3 колекции) — друга база, само за сведение;
+- извадки от записи в WoS Core Collection за поредици от сборници (CPCI): ICCWS (ISSN 2048-9870), IOP Conf. Ser.: Materials Science and Engineering (1757-8981), IOP Conf. Ser.: Earth and Environmental Science (1755-1307) — покритие от най-ранната до най-късната година в извадката.
 
 Оригиналите не са в хранилището. При нов списък (Elsevier го обновява няколко пъти годишно):
 изградете файла наново със същата команда и го заменете тук.
