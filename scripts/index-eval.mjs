@@ -20,7 +20,8 @@ if (existsSync(CANDS)) {
   for (const x of items) {
     const kind = x.options?.includes('14') ? 'journal' : x.options?.includes('13') ? 'book' : '';
     const issns = ['issn', 'eissn'].includes(x.data?.idType) ? [x.data.idValue] : [];
-    const r = classify(lists, { issns, year: x.data?.year, kind });
+    const isbns = String(x.data?.idType ?? '').includes('isbn') ? [x.data.idValue] : [];
+    const r = classify(lists, { issns, isbns, year: x.data?.year, kind });
     cnt[r.suggest ?? 'none']++;
     rows.push(`| ${String(x.data?.venue ?? '').slice(0, 60)} | ${x.data?.year ?? ''} | ${r.issns.join(' / ') || '—'} | ${r.suggest ? `Д-${ind(r.suggest)}${r.suggest === '12w' ? ' (WoS)' : ''}` : '—'} | ${r.why ?? ''}${r.other.length ? `; други бази: ${r.other.join(', ')}` : ''} |`);
   }
@@ -41,20 +42,21 @@ for (const m of readdirSync('src/data/citations', { withFileTypes: true }).filte
     const i = line.match(/ind: '(1[234])'/); if (!i) continue;
     const y = Number(line.match(/year: (\d{4})/)?.[1]);
     const issns = [...line.matchAll(/\b(\d{4}-\d{3}[\dXx])\b/g)].map((a) => a[1]).filter((s) => normIssn(s));
-    if (!issns.length) continue;
+    const isbns = [...line.matchAll(/ISBN[:\s]*([0-9][0-9\- ]{8,16}[0-9Xx])/g)].map((a) => a[1]);
+    if (!issns.length && !isbns.length) continue;
     const kind = i[1] === '14' ? 'journal' : i[1] === '13' ? 'book' : (/ISBN|сборник|Proceedings|Conference|Lecture Notes|монография/i.test(line) ? 'book' : 'journal');
-    truth.push({ member: m.name, ind: i[1], year: y, issns, kind, text: (line.match(/text: [`'"]([^`'"]{0,90})/)?.[1] ?? '') });
+    truth.push({ member: m.name, ind: i[1], year: y, issns, isbns, kind, text: (line.match(/text: [`'"]([^`'"]{0,90})/)?.[1] ?? '') });
   }
 }
 let agree = 0, none = 0; const diff = [];
 for (const t of truth) {
-  const r = classify(lists, { issns: t.issns, year: t.year, kind: t.kind });
+  const r = classify(lists, { issns: t.issns, isbns: t.isbns, year: t.year, kind: t.kind });
   if (!r.suggest) { none++; continue; }
-  if (ind(r.suggest) === t.ind) agree++; else diff.push(`| ${t.member} | ${t.year} | ${t.issns.join(' / ')} | Д-${t.ind} | Д-${ind(r.suggest)} | ${r.why} | ${t.text}… |`);
+  if (ind(r.suggest) === t.ind) agree++; else diff.push(`| ${t.member} | ${t.year} | ${[...t.issns, ...t.isbns].join(' / ')} | Д-${t.ind} | Д-${ind(r.suggest)} | ${r.why} | ${t.text}… |`);
 }
-out.push(`### 2. Еталон: ръчно проверени цитирания с ISSN (${truth.length})`, '',
+out.push(`### 2. Еталон: ръчно проверени цитирания с ISSN или ISBN (${truth.length})`, '',
   `Съвпада с потвърдения показател: **${agree}**; различава се: **${diff.length}**; без предложение: ${none}.`, '');
-if (diff.length) out.push('| Член | Година | ISSN | Потвърдено | Предложено | Основание | Цитиращ труд |', '|---|---|---|---|---|---|---|', ...diff, '',
+if (diff.length) out.push('| Член | Година | ISSN / ISBN | Потвърдено | Предложено | Основание | Цитиращ труд |', '|---|---|---|---|---|---|---|', ...diff, '',
   'Разликите се преглеждат една по една: грешка в списъка/покритието, или в ръчно въведения показател.', '');
 
 const md = out.join('\n');
