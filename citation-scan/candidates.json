@@ -1,42 +1,6 @@
 {
  "date": "2026-10-21",
  "items": {
-  "19043296": {
-   "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.80.23.01",
-   "cited": "doi:10.7546/pecr.76.21.04",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.7546/pecr.76.21.04",
-    "src": "doi",
-    "doi": "10.7546/pecr.80.23.01",
-    "authors": "Tomov, P., Mateeva, G., & Parvanov, D.",
-    "year": 2023,
-    "title": "Entropy Test Degradation After Random Numbers Scaling",
-    "venue": "Problems of Engineering Cybernetics and Robotics",
-    "volume": "80",
-    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
-    "idType": "issn",
-    "idValue": "2738-7356"
-   },
-   "evidence": "DOI в Crossref (литературата не е публикувана там)",
-   "line": "Tomov, P., Mateeva, G., & Parvanov, D. (2023). Entropy Test Degradation After Random Numbers Scaling. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.80.23.01",
-   "work": "Gaidarski, I. (2022). Model Driven Development of Information Security System"
-  },
   "38283376": {
    "key": "doi:10.1007/978-3-030-65722-2_24|10.1016/j.cose.2023.103139",
    "cited": "doi:10.1007/978-3-030-65722-2_24",
@@ -360,7 +324,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Lecture Notes in Networks and Systems, покритие 2016–2027, 2016–2027 (ISSN 2367-3370 / 2367-3389)",
+   "why": "Scopus: Lecture Notes in Networks and Systems, покритие 2016–2027 (ISSN 2367-3370 / 2367-3389)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -397,7 +361,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -434,7 +398,7 @@
     "14"
    ],
    "suggest": "12s",
-   "why": "Scopus: PROGRESS: A Journal of Multidisciplinary Studies, покритие 2022–2026, 2022–2026 (ISSN 2958-292X / 2958-2911)",
+   "why": "Scopus: PROGRESS: A Journal of Multidisciplinary Studies, покритие 2022–2026 (ISSN 2958-292X / 2958-2911)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -549,7 +513,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027, 1973–2027 (ISSN 0302-9743 / 1611-3349)",
+   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027 (ISSN 0302-9743 / 1611-3349)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -603,6 +567,44 @@
    },
    "evidence": "в литературата: позиция 15 от 16 (Crossref)",
    "line": "Maheswari, S., S, M., Periyasamy, P., M, K. S., Abishek, J., & S, B. (2025). Smart Object Detection with Audible Navigation for the Visually Impaired. International Conference on I-SMAC (IoT in Social, Mobile, Analytics and Cloud) (I-SMAC). https://doi.org/10.1109/i-smac65734.2025.11597792",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
+  },
+  "9475d496": {
+   "key": "doi:10.1109/ithet61869.2024.10837626|10.55630/stem.2025.0716",
+   "cited": "doi:10.1109/ithet61869.2024.10837626",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/ithet61869.2024.10837626",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0716",
+    "authors": "Petrova, P., & Dochkova-Todorova, J.",
+    "year": 2025,
+    "title": "Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "185-200",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
    "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
   },
   "a05c4d22": {
@@ -759,7 +761,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -904,7 +906,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: AIP Conference Proceedings, покритие 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978, 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
+   "why": "Scopus: AIP Conference Proceedings, покритие 1973–1978, 1983–1984, 1993, 2000–2001, 2003–2026 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -937,12 +939,12 @@
    ],
    "status": "ready",
    "options": [
-    "14",
+    "12w",
     "12s",
-    "12w"
+    "14"
    ],
-   "suggest": "14",
-   "why": "списание ISSN 1757-8981 / 1757-899X, в Scopus е за 2009–2021, 2009–2021, но не и за 2022 и WoS",
+   "suggest": "12w",
+   "why": "Web of Science (CPCI): IOP Conference Series: Materials Science and Engineering, записи в WoS 2022–2026 (по извадка — проверете в WoS)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -1058,7 +1060,7 @@
     "14"
    ],
    "suggest": "12s",
-   "why": "Scopus: IFAC-PapersOnLine, покритие 2002–2025, 2002–2025 (ISSN 2405-8963 / 2405-8971)",
+   "why": "Scopus: IFAC-PapersOnLine, покритие 2002–2025 (ISSN 2405-8963 / 2405-8971)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1388,7 +1390,7 @@
     "14"
    ],
    "suggest": "12s",
-   "why": "Scopus: Journal of Infrastructure, Policy and Development, покритие 2017–2024, 2017–2024 (ISSN 2572-7923 / 2572-7931)",
+   "why": "Scopus: Journal of Infrastructure, Policy and Development, покритие 2017–2024 (ISSN 2572-7923 / 2572-7931)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1909,7 +1911,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027, 1973–2027 (ISSN 0302-9743 / 1611-3349)",
+   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027 (ISSN 0302-9743 / 1611-3349)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1946,7 +1948,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: AIP Conference Proceedings, покритие 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978, 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
+   "why": "Scopus: AIP Conference Proceedings, покритие 1973–1978, 1983–1984, 1993, 2000–2001, 2003–2026 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1984,7 +1986,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Smart Innovation, Systems and Technologies, покритие 2010–2027, 2010–2027 (ISSN 2190-3018 / 2190-3026)",
+   "why": "Scopus: Smart Innovation, Systems and Technologies, покритие 2010–2027 (ISSN 2190-3018 / 2190-3026)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2167,12 +2169,12 @@
    ],
    "status": "ready",
    "options": [
-    "14",
+    "12w",
     "12s",
-    "12w"
+    "14"
    ],
-   "suggest": "14",
-   "why": "списание ISSN 2048-9889 / 2048-9870 / 2048-9897, не е в Scopus и WoS",
+   "suggest": "12w",
+   "why": "Web of Science (CPCI): International Conference on Cyber Warfare and Security (ICCWS) — Proceedings, записи в WoS 2017–2026 (по извадка — проверете в WoS)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2238,7 +2240,7 @@
     "13"
    ],
    "suggest": "12s",
-   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2275,7 +2277,7 @@
     "14"
    ],
    "suggest": "12s",
-   "why": "Scopus: Journal of Applied Geodesy, покритие 2007–2026, 2007–2026 (ISSN 1862-9016 / 1862-9024)",
+   "why": "Scopus: Journal of Applied Geodesy, покритие 2007–2026 (ISSN 1862-9016 / 1862-9024)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2384,12 +2386,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
-   "suggest": "12s",
-   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2445,6 +2447,38 @@
    },
    "evidence": "в литературата: позиция 32 от 41 (Crossref)",
    "line": "Alomar, I., Adilbekov, A., & Maklakovs, J. (2026). A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study. Aerospace. https://doi.org/10.3390/aerospace13090848",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "c746b6ce": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/drones9120815",
+    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
+    "year": 2025,
+    "title": "Risk-Based Design of Urban UAS Corridors",
+    "venue": "Drones",
+    "volume": "9",
+    "issue": "12",
+    "pages": "815",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2504-446X"
+   },
+   "evidence": "",
+   "line": "Tafur, C. L., Rodríguez, J. O., Rodríguez, D. A., Traslaviña, D., Valencia, S. F., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
    "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "adfa345a": {
