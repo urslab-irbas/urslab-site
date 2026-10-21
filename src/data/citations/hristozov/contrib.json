@@ -28,5 +28,35 @@
       "eISSN 2226-4310 — ISSN Portal (Confirmed record): „Aerospace (Basel)“ (съвпада с ISSN/ISBN по DOI)",
       "Индексиране по списъците: Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)"
     ]
+  },
+  {
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "ind": "12",
+    "year": 2026,
+    "authors": "Alomar, I., Adilbekov, A., & Maklakovs, J.",
+    "title": "A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "eissn",
+    "issn": "2226-4310",
+    "venue": "Aerospace",
+    "volume": "13",
+    "issue": "9",
+    "pages": "848",
+    "publisher": "MDPI AG",
+    "where": "[32]",
+    "doi": "10.3390/aerospace13090848",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 32 от 41 (DOI 10.3390/engproc2025090047 на цитирания труд)",
+    "text": "Alomar, I., Adilbekov, A., & Maklakovs, J. A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study. Aerospace, 13(9), 848, MDPI AG, 2026 eISSN 2226-4310",
+    "by": "urslab-irbas",
+    "ghIssue": 144,
+    "evidenceUrl": "https://doi.org/10.3390/aerospace13090848",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 32 от 41 (DOI 10.3390/engproc2025090047 на цитирания труд)",
+      "DOI 10.3390/aerospace13090848 — Crossref: „A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study“",
+      "eISSN 2226-4310 — ISSN Portal (Confirmed record): „Aerospace (Basel)“ (съвпада с ISSN/ISBN по DOI)",
+      "Индексиране по списъците: Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)"
+    ]
   }
 ]
