@@ -56,5 +56,34 @@
       "Научно рецензиране — потвърдено от члена",
       "Индексиране по списъците: списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS"
     ]
+  },
+  {
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.76.21.04",
+    "ind": "14",
+    "year": 2024,
+    "authors": "Dimitrov, V., & Dimitrova, Z.",
+    "title": "Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "82",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "doi": "10.7546/pecr.82.24.01",
+    "evidence": "DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+    "text": "Dimitrov, V., & Dimitrova, Z. Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation. Problems of Engineering Cybernetics and Robotics, 82, Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences), 2024 ISSN 2738-7356",
+    "by": "urslab-irbas",
+    "ghIssue": 139,
+    "evidenceUrl": "https://doi.org/10.7546/pecr.82.24.01",
+    "verified": [
+      "Доказателство — DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+      "DOI 10.7546/pecr.82.24.01 — Crossref: „Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“",
+      "Научно рецензиране — потвърдено от члена",
+      "Индексиране по списъците: списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS"
+    ]
   }
 ]
