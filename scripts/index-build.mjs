@@ -15,13 +15,15 @@
 import { readdirSync, createReadStream, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import ExcelJS from 'exceljs';
-import { normIssn, parseCoverage, isbn13 } from './index-lists.mjs';
+import { normIssn, parseCoverage, isbn13, procKey } from './index-lists.mjs';
 
 const dir = process.argv[2];
 const OUT = process.argv[3] || 'citation-scan/index/index.json.gz';
 if (!dir) { console.error('node scripts/index-build.mjs <папка> [изход]'); process.exit(1); }
 
-const issn = {}; const isbn = {}; const sources = [];
+const issn = {}; const isbn = {}; const proc = {}; const sources = [];
+// заглавия на сборниците в Scopus (All Conf. Proceedings): ключ от думите на заглавието → години; за доклади без ISBN в Crossref
+const addProc = (t, year) => { const k = procKey(t); const y = Number(year) || 0; if (!k || !y) return; (proc[k] ??= []); if (!proc[k].includes(y)) proc[k].push(y); };
 const addIssn = (s, db, cov, title) => { const k = normIssn(s); if (!k) return; (issn[k] ??= []); if (!issn[k].some((e) => e[0] === db)) issn[k].push([db, cov, String(title ?? '').slice(0, 90)]); };
 const addIsbn = (v, db, year) => { const k = isbn13(v); if (k && !isbn[k]) isbn[k] = [db, Number(year) || 0]; };
 const clean = (f) => f.replace(/^(?:[0-9a-f]+-)?\d{10,}_/, '');
@@ -52,6 +54,8 @@ async function xlsx(file) {
       } else {
         const iY = col(/year/);
         for (let i = 0; i < head.length; i++) if (head[i].includes('isbn')) addIsbn(v[i], 's', v[iY]);
+        const iS = col(/^source title/), iP = col(/^proceedin/);
+        if (iP >= 0) { addProc(v[iP], v[iY]); if (iS >= 0) addProc(v[iS], v[iY]); }
         n++;
       }
     }
@@ -88,9 +92,9 @@ for (const f of readdirSync(dir).sort()) {
   sources.push(`${clean(f)} — ${rows.length - 1} издания (${w ? `Web of Science ${w}` : cc ?? 'друга база'})`);
 }
 
-const out = { built: new Date().toISOString().slice(0, 10), sources, issn, isbn };
+const out = { built: new Date().toISOString().slice(0, 10), sources, issn, isbn, proc };
 mkdirSync(OUT.split('/').slice(0, -1).join('/') || '.', { recursive: true });
 const gz = gzipSync(Buffer.from(JSON.stringify(out)), { level: 9 });
 writeFileSync(OUT, gz);
 console.log(sources.join('\n'));
-console.log(`ISSN: ${Object.keys(issn).length}, ISBN: ${Object.keys(isbn).length} → ${OUT} (${(gz.length / 1e6).toFixed(1)} MB)`);
+console.log(`ISSN: ${Object.keys(issn).length}, ISBN: ${Object.keys(isbn).length}, заглавия на сборници: ${Object.keys(proc).length} → ${OUT} (${(gz.length / 1e6).toFixed(1)} MB)`);

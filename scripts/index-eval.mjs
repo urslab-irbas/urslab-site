@@ -21,7 +21,7 @@ if (existsSync(CANDS)) {
     const kind = x.options?.includes('14') ? 'journal' : x.options?.includes('13') ? 'book' : '';
     const issns = ['issn', 'eissn'].includes(x.data?.idType) ? [x.data.idValue] : [];
     const isbns = String(x.data?.idType ?? '').includes('isbn') ? [x.data.idValue] : [];
-    const r = classify(lists, { issns, isbns, year: x.data?.year, kind });
+    const r = classify(lists, { issns, isbns, year: x.data?.year, kind, venue: x.data?.venue });
     cnt[r.suggest ?? 'none']++;
     rows.push(`| ${String(x.data?.venue ?? '').slice(0, 60)} | ${x.data?.year ?? ''} | ${r.issns.join(' / ') || '—'} | ${r.suggest ? `Д-${ind(r.suggest)}${r.suggest === '12w' ? ' (WoS)' : ''}` : '—'} | ${r.why ?? ''}${r.other.length ? `; други бази: ${r.other.join(', ')}` : ''} |`);
   }
