@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "ind": "12",
+    "year": 2025,
+    "authors": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C.",
+    "title": "ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "eissn",
+    "issn": "2226-4310",
+    "venue": "Aerospace",
+    "volume": "12",
+    "issue": "5",
+    "pages": "449",
+    "publisher": "MDPI AG",
+    "where": "[30]",
+    "doi": "10.3390/aerospace12050449",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 30 от 32 (DOI 10.3390/engproc2025090047 на цитирания труд)",
+    "text": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C. ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes. Aerospace, 12(5), 449, MDPI AG, 2025 eISSN 2226-4310",
+    "by": "urslab-irbas",
+    "ghIssue": 143,
+    "evidenceUrl": "https://doi.org/10.3390/aerospace12050449",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 30 от 32 (DOI 10.3390/engproc2025090047 на цитирания труд)",
+      "DOI 10.3390/aerospace12050449 — Crossref: „ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes“",
+      "eISSN 2226-4310 — ISSN Portal (Confirmed record): „Aerospace (Basel)“ (съвпада с ISSN/ISBN по DOI)",
+      "Индексиране по списъците: Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)"
+    ]
+  }
+]
