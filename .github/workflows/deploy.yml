@@ -89,4 +89,5 @@ jobs:
           fi
       - name: Check the live site
         if: env.DEPLOY_HOST != ''
-        run: curl -fsS -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/
+        # сървърът понякога отговаря бавно веднага след качването — до 4 опита по 30 s, без да проваля качването при еднократно забавяне
+        run: curl -fsS --retry 4 --retry-delay 15 --retry-all-errors --max-time 30 -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/
