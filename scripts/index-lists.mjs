@@ -81,6 +81,7 @@ export function isbn13(v) {
 
 // ---- Сборници без ISBN в Crossref (IEEE, ACM …): сверка по заглавие и година с „All Conf. Proceedings“ на Scopus ----
 const STOP = new Set('proceedings proceeding conference conferences international annual papers paper the and of on in for to with ieee acm symposium workshop congress meeting edition volume vol part'.split(' '));
+const REGION = new Set('european europe asian asia african africa american america australasian australian pacific nordic baltic balkan mediterranean arab latin iberian ibero chinese indian japanese korean russian german french italian spanish polish turkish brazilian canadian national regional'.split(' '));
 const ORD = /\b(\d{1,3})(?:st|nd|rd|th)\b/i;
 /** Ключ на заглавие на сборник: поредният номер (25th → 25) + значимите думи по азбучен ред, без години */
 export function procKey(t) {
@@ -100,10 +101,14 @@ function procMatch(lists, venue, year) {
   let best = null;
   for (const key of lists.procIdx.get(rare[0])) {
     const [o2, w2] = key.split('|'); if (ord && o2 && ord !== o2) continue;
-    const years = lists.proc.get(key); if (!years.some((y) => Math.abs(y - year) <= 1)) continue;
+    // ±1 година само когато поредният номер на конференцията съвпада; иначе (без номер) — точно същата година
+    const tol = ord && o2 ? 1 : 0;
+    const years = lists.proc.get(key); if (!years.some((y) => Math.abs(y - year) <= tol)) continue;
     const B = new Set(w2.split(' '));
     const common = A.filter((w) => B.has(w)).length; const cover = common / Math.min(A.length, B.size);
-    if (cover >= 0.9 && common >= 2 && (!best || common > best.common)) best = { key, common, years };
+    // друга конференция със сходно име (напр. „European Conference on Cyber Warfare…“ ≠ „International Conference on Cyber Warfare…“)
+    if ([...B].some((w) => REGION.has(w) && !A.includes(w)) || A.some((w) => REGION.has(w) && !B.has(w))) continue;
+    if (cover >= 0.9 && common >= 2 && (!best || common > best.common)) best = { key, common, years, tol };
   }
   return best;
 }
@@ -156,6 +161,9 @@ export async function loadIndexLists(dir = INDEX_DIR) {
   return { dbs, byIssn, byIsbn, proc, procIdx, built };
 }
 
+/** Сборник / поредица от сборници по името (Crossref често ги води като „journal-article“): Д-13, не Д-14 */
+export const isProceedingsVenue = (v) => /\b(conference|proceedings|symposium|workshop|congress|colloquium)\b|\bconf\.|сборник|конференция|научна сесия|симпозиум/i.test(String(v ?? ''));
+
 const inYear = (ranges, y) => !ranges || !y ? null : ranges.some(([a, b]) => y >= a && y <= b);
 const rangeText = (ranges) => (ranges ?? []).map(([a, b]) => (a === b ? `${a}` : `${a}–${b === 9999 ? 'днес' : b}`)).join(', ');
 
@@ -172,10 +180,11 @@ export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj 
   const ws = hits.filter((r) => r.db === 'wos');
   const other = [...new Set(hits.filter((r) => !['scopus', 'wos'].includes(r.db)).map((r) => lists.dbs.get(r.db)?.label ?? r.db))];
   if (doaj && !other.includes('DOAJ')) other.push('DOAJ');
+  if (kind === 'journal' && isProceedingsVenue(venue)) kind = 'book'; // напр. IOP Conference Series, ICCWS
   const res = { checked: lists.dbs.has('scopus'), other, issns: ids.map(fmtIssn) };
   const issnTxt = ids.length ? `ISSN ${ids.map(fmtIssn).join(' / ')}` : 'без ISSN';
   if (sc.length) {
-    const ranges = sc.flatMap((r) => r.ranges ?? []);
+    const ranges = [...new Map(sc.flatMap((r) => r.ranges ?? []).map((g) => [g.join('-'), g])).values()].sort((a, b) => a[0] - b[0]);
     const ok = inYear(ranges.length ? ranges : null, year);
     res.scopus = { title: sc[0].title, ranges: rangeText(ranges), inYear: ok };
     if (ok !== false) { res.suggest = '12s'; res.why = `Scopus: ${sc[0].title || issnTxt}${ranges.length ? `, покритие ${rangeText(ranges)}` : ''} (${issnTxt})`; return res; }
@@ -185,9 +194,19 @@ export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj 
   if (bk) { res.scopus = { isbn: bk[0], year: bk[1].year }; res.suggest = '12s'; res.why = `Scopus: книга / том на сборник, ISBN ${bk[0]}${bk[1].year ? ` (${bk[1].year})` : ''}`; return res; }
   // сборник без ISBN в Crossref — по заглавие и година (основанието казва, че е по заглавие: потребителят го проверява)
   const pm = kind === 'book' && !sc.length ? procMatch(lists, venue, year) : null;
-  if (pm) { res.scopus = { proc: pm.key }; res.suggest = '12s'; res.why = `Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година ${pm.years.filter((y) => Math.abs(y - year) <= 1).join(', ')} — проверете)`; return res; }
-  if (ws.length) {
-    const subs = [...new Set(ws.map((r) => r.sub).filter(Boolean))];
+  if (pm) { res.scopus = { proc: pm.key }; res.suggest = '12s'; res.why = `Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година ${pm.years.filter((y) => Math.abs(y - year) <= pm.tol).join(', ')} — проверете)`; return res; }
+  // WoS: списъците на списанията (без години) се приемат; сборниците (CPCI, извадка с години) — само ако годината е в покритието
+  const wsIn = ws.filter((r) => !r.ranges || inYear(r.ranges, year) !== false);
+  if (wsIn.length) {
+    const subs = [...new Set(wsIn.map((r) => r.sub).filter(Boolean))];
+    const cp = wsIn.find((r) => r.ranges);
+    if (cp && !wsIn.some((r) => !r.ranges)) {
+      res.wos = { title: cp.title, subs, ranges: rangeText(cp.ranges) };
+      res.suggest = '12w'; res.why = `Web of Science (${subs.join(', ')}): ${cp.title || issnTxt}, записи в WoS ${rangeText(cp.ranges)} (по извадка — проверете в WoS)`; return res;
+    }
+  }
+  if (wsIn.length) {
+    const ws = wsIn; const subs = [...new Set(ws.map((r) => r.sub).filter(Boolean))];
     res.wos = { title: ws[0].title, subs };
     res.suggest = '12w'; res.why = `Web of Science${subs.length ? ` (${subs.join(', ')})` : ''}: ${ws[0].title || issnTxt} (текущ списък, без години)`; return res;
   }
