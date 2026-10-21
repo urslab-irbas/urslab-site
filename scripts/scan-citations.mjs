@@ -22,6 +22,7 @@ import { createHash } from 'node:crypto';
 import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate, validateCitation, CIT_POINTS, MESSAGES } from '../src/lib/pubSchema.js';
 import { crossrefWork, fromCrossref, findInRefs } from './evidence.mjs';
 import { loadIndexLists, classify, listsSummary } from './index-lists.mjs';
+import { nrsByNumber } from './verify-ids.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const MAILTO = process.env.MAILTO || 'a.madzharov@ir.bas.bg';
@@ -201,7 +202,19 @@ for (const x of shown) {
   x.data = { type: 'citation', member: x.eligible[0], cited: x.work.key, src: c.doi ? 'doi' : 'url', ...(c.doi ? { doi: c.doi } : c.url ? { url: c.url } : {}),
     authors: c.authors, year: c.year, title: c.title, venue: c.venue };
   x.status = 'form';
-  if (!c.doi) { x.why = 'няма DOI — доказателство с линк или PDF файл'; continue; }
+  if (!c.doi) {
+    x.why = 'няма DOI — доказателство с линк или PDF файл';
+    // Б2: показател по списъците и за кандидатите без DOI — попълва се във формата (рецензирането потвърждава членът)
+    const kindNoDoi = ['article', 'review', 'letter'].includes(c.type) ? 'journal' : ['book-chapter', 'proceedings-article', 'book', 'monograph', 'edited-book', 'proceedings'].includes(c.type) ? 'book' : '';
+    x.idx = classify(lists, { issns: c.issns ?? [], year: c.year, kind: kindNoDoi, doaj: c.doaj, venue: c.venue });
+    const sgf = x.idx.suggest;
+    if (sgf) {
+      x.data.ind = sgf.startsWith('12') ? '12' : sgf;
+      if (sgf.startsWith('12')) x.data.index = sgf === '12w' ? 'wos' : 'scopus';
+      if (sgf === '14' && x.idx.issns[0]) { x.data.idType = 'issn'; x.data.idValue = x.idx.issns[0]; }
+    }
+    continue;
+  }
   if (Date.now() - tv > VERIFY_LIMIT) { x.why = 'не е проверено поради ограничението за време — ще се провери при следващото търсене'; continue; }
   let m = null;
   try { stats.requests++; m = await crossrefWork(c.doi); } catch { x.why = 'Crossref не отговори'; continue; }
@@ -221,7 +234,7 @@ for (const x of shown) {
   } else x.ev = 'DOI извън Crossref (DataCite / doi.org)';
   // Правилата на Системата; автоматично взето поле в неподходящ формат не пречи — просто не се записва
   const ctx = { cited: { title: x.work.title, year: x.work.year, authors: x.work.authors }, existing: x.work.cites, full: true };
-  const test = () => validateCitation({ ...x.data, ind: '13' }, ctx);
+  const test = () => validateCitation({ ...x.data, ind: '13', peer: true }, ctx);
   let errs = test();
   for (const e of errs.filter((e) => ['fmt', 'issn', 'isbn'].includes(e.code))) { if (['idValue', 'idType'].includes(e.field)) { delete x.data.idType; delete x.data.idValue; } else delete x.data[e.field]; }
   errs = test();
@@ -237,6 +250,10 @@ for (const x of shown) {
   const sg = x.idx.suggest;
   if (sg === '14' && !issn) { x.data.idType = 'issn'; x.data.idValue = x.idx.issns[0]; } // Д-14 изисква ISSN на списанието
   if (sg) x.options = [sg, ...x.options.filter((o) => o !== sg)];
+  // Б2: за Д-13 / Д-14 — дали изданието е в НРС на НАЦИД (рецензирано по определение)
+  if (['13', '14'].includes(sg)) for (const n of [...new Set([...x.idx.issns, ...(m?.ISBN ?? [])])].slice(0, 3)) {
+    try { stats.requests++; const r = await nrsByNumber(n); if (r) { x.idx.why += `; в НРС на НАЦИД (ID ${r.id}) — рецензирано`; break; } } catch { break; }
+  }
   x.status = 'ready';
 }
 
@@ -284,7 +301,7 @@ if (ready.length) {
 }
 if (form.length) {
   chunks.push(`## ✍️ За въвеждане през формата (${form.length})\n\nТези не могат да се проверят автоматично — натиснете „Формата“ (данните са попълнени), добавете доказателство (линк или PDF файл) и изберете показателя.\n\n`);
-  groups(form, (x) => `- ${cite(x.cand)}\n  <sub>${x.why} · ${meta(x)}</sub> · [✍️ Формата](${formUrl(x)})\n${box(x, 'x')}\n\n`);
+  groups(form, (x) => `- ${cite(x.cand)}\n  <sub>${x.why}${x.idx?.suggest ? ` · **предложено във формата:** ${OPT[x.idx.suggest].split(' (')[0]} — ${x.idx.why}` : ''} · ${meta(x)}</sub> · [✍️ Формата](${formUrl(x)})\n${box(x, 'x')}\n\n`);
 }
 if (doubt.length) {
   chunks.push(`## ⚠️ Съмнителни (${doubt.length})\n\nБазите ги посочват като цитирания, но проверката не ги потвърждава. Обикновено — „❌ Откажи“.\n\n`);
