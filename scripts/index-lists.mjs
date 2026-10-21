@@ -156,6 +156,9 @@ export async function loadIndexLists(dir = INDEX_DIR) {
   return { dbs, byIssn, byIsbn, proc, procIdx, built };
 }
 
+/** Сборник / поредица от сборници по името (Crossref често ги води като „journal-article“): Д-13, не Д-14 */
+export const isProceedingsVenue = (v) => /\b(conference|proceedings|symposium|workshop|congress|colloquium)\b|\bconf\.|сборник|конференция|научна сесия|симпозиум/i.test(String(v ?? ''));
+
 const inYear = (ranges, y) => !ranges || !y ? null : ranges.some(([a, b]) => y >= a && y <= b);
 const rangeText = (ranges) => (ranges ?? []).map(([a, b]) => (a === b ? `${a}` : `${a}–${b === 9999 ? 'днес' : b}`)).join(', ');
 
@@ -172,10 +175,11 @@ export function classify(lists, { issns = [], isbns = [], year, kind = '', doaj 
   const ws = hits.filter((r) => r.db === 'wos');
   const other = [...new Set(hits.filter((r) => !['scopus', 'wos'].includes(r.db)).map((r) => lists.dbs.get(r.db)?.label ?? r.db))];
   if (doaj && !other.includes('DOAJ')) other.push('DOAJ');
+  if (kind === 'journal' && isProceedingsVenue(venue)) kind = 'book'; // напр. IOP Conference Series, ICCWS
   const res = { checked: lists.dbs.has('scopus'), other, issns: ids.map(fmtIssn) };
   const issnTxt = ids.length ? `ISSN ${ids.map(fmtIssn).join(' / ')}` : 'без ISSN';
   if (sc.length) {
-    const ranges = sc.flatMap((r) => r.ranges ?? []);
+    const ranges = [...new Map(sc.flatMap((r) => r.ranges ?? []).map((g) => [g.join('-'), g])).values()].sort((a, b) => a[0] - b[0]);
     const ok = inYear(ranges.length ? ranges : null, year);
     res.scopus = { title: sc[0].title, ranges: rangeText(ranges), inYear: ok };
     if (ok !== false) { res.suggest = '12s'; res.why = `Scopus: ${sc[0].title || issnTxt}${ranges.length ? `, покритие ${rangeText(ranges)}` : ''} (${issnTxt})`; return res; }
