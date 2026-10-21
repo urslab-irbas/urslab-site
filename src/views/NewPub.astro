@@ -115,6 +115,12 @@ const rows = [
             <span class="l">{T('Показател (НАЦИД)', 'Indicator (NACID)')} *</span>
             <select name="ind"><option value="">— {T('изберете', 'choose')} —</option>{Object.entries(citRules).map(([k, r]) => <option value={k}>{r.label[lang]} ({r.pts} {T('т.', 'pts')})</option>)}</select>
             <small>{T('Д-12 — цитиращият труд е в Scopus или Web of Science; Д-13 — монография или колективен том (сборник) с научно рецензиране; Д-14 — нереферирано списание с научно рецензиране.', 'D-12 — the citing work is in Scopus or Web of Science; D-13 — peer-reviewed monograph or edited volume (proceedings); D-14 — non-indexed peer-reviewed journal.')}</small>
+            <small class="suggest" data-suggest hidden></small>
+            <em class="err" hidden></em>
+          </label>
+          <label class="f peer" data-field="peer" hidden>
+            <span class="l"><input type="checkbox" name="peer" value="true" /> {T('Изданието е с научно рецензиране', 'The venue is peer-reviewed')} *</span>
+            <small>{T('Задължително за Д-13 и Д-14: сборникът, монографията или списанието е рецензирано (рецензенти, редакционна колегия с рецензиране). Системата не може да го провери сама.', 'Required for D-13 and D-14: the proceedings, monograph or journal is peer-reviewed (reviewers, an editorial board with peer review). The system cannot check this by itself.')}</small>
             <em class="err" hidden></em>
           </label>
           <label class="f" data-field="index">
@@ -286,6 +292,8 @@ const rows = [
   .coowners[hidden] { display: none; }
   .bad-cited[hidden] { display: none; }
   .cit-note { margin: 0; font-size: .85rem; }
+  .f .suggest { display: block; margin-top: .3rem; color: var(--accent, #0a6); font-weight: 600; }
+  .f.peer .l { display: flex; gap: .4rem; align-items: center; }
   .srcs { display: grid; gap: 6px; }
   .src { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; font-size: .88rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
   .src input { width: auto; margin-top: 3px; }
@@ -351,7 +359,7 @@ const rows = [
 </style>
 
 <script>
-  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS, validateCitation, normalizeCitation, citeText, fromCrossref } from '../lib/pubSchema.js';
+  import { validate, apa, normalize, MESSAGES, findDuplicate, cleanDoi, parseAuthors, teamFromAuthors, authorKey, COAUTHORS, validateCitation, normalizeCitation, isYes, citeText, fromCrossref } from '../lib/pubSchema.js';
   const root = document.querySelector<HTMLElement>('[data-np]')!;
   const ctx = JSON.parse(root.querySelector('[data-ctx]')!.textContent!);
   const M = MESSAGES[ctx.lang as 'bg' | 'en'];
@@ -390,7 +398,7 @@ const rows = [
     fields.forEach((k) => (e[k] = String(fd.get(k) ?? '').trim()));
     e.tags = fd.getAll('tags');
     e.member = citMode() ? citMember : fd.get('member');
-    if (citMode()) { e.cited = cited?.key ?? qs.get('cite'); e.src = String(fd.get('src') ?? ''); }
+    if (citMode()) { e.cited = cited?.key ?? qs.get('cite'); e.src = String(fd.get('src') ?? ''); e.peer = fd.get('peer') ? 'true' : ''; }
     e.cat = (form.elements.namedItem('cat') as HTMLSelectElement).value;
     const af: Record<string, string> = {};
     form.querySelectorAll<HTMLInputElement>('[data-affil] input[data-key]').forEach((i) => { if (i.value.trim()) af[i.dataset.key!] = i.value.trim(); });
@@ -426,6 +434,7 @@ const rows = [
     form.querySelectorAll<HTMLInputElement>('input[name="tags"]').forEach((c) => (c.checked = ((e.tags as string[]) || []).includes(c.value)));
     const m = form.elements.namedItem('member') as HTMLSelectElement; if (e.member && ctx.members[e.member as string]) m.value = String(e.member);
     form.querySelectorAll<HTMLInputElement>('input[name="src"]').forEach((r) => (r.checked = r.value === e.src));
+    (form.elements.namedItem('peer') as HTMLInputElement).checked = isYes(e.peer);
     renderAffil((e.affil as Record<string, string>) ?? {});
   };
   const b64 = { enc: (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
@@ -649,7 +658,8 @@ const rows = [
   if (q.get('m') && ctx.members[q.get('m')!]) (form.elements.namedItem('member') as HTMLSelectElement).value = q.get('m')!;
   // поле „Показател“: „Индексиран в“ е нужно само за Д-12
   const indSel = form.elements.namedItem('ind') as HTMLSelectElement, idxSel = form.elements.namedItem('index') as HTMLSelectElement;
-  const syncInd = () => { idxSel.disabled = indSel.value !== '12'; if (idxSel.disabled) idxSel.value = ''; };
+  const peerBox = form.querySelector<HTMLElement>('[data-field="peer"]')!;
+  const syncInd = () => { idxSel.disabled = indSel.value !== '12'; if (idxSel.disabled) idxSel.value = ''; peerBox.hidden = !['13', '14'].includes(indSel.value); };
   indSel.addEventListener('change', syncInd); syncInd();
   const h = location.hash.match(/^#d=([\w-]+)/);
   if (h) { try { const d = JSON.parse(b64.dec(h[1])); if (d.type === 'citation' && d.cited && !citMode()) setCitMode(d.cited, d.member); write(d); syncInd(); syncSrc(); } catch { /* повредена връзка — празна форма */ } }
@@ -660,8 +670,10 @@ const rows = [
     fetch(`https://raw.githubusercontent.com/${ctx.repo}/data/citation-scan/candidates.json`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
-        const d = j?.items?.[scanId]?.data;
+        const it = j?.items?.[scanId]; const d = it?.data;
         if (!d) return;
+        // Б2: показателят, предложен от Системата по списъците за индексиране, и основанието
+        if (it.suggest && it.why) { const sg = root.querySelector<HTMLElement>('[data-suggest]')!; sg.hidden = false; sg.textContent = `${ctx.lang === 'bg' ? 'Предложено от Системата' : 'Suggested by the System'}: ${{ '12s': 'Д-12 (Scopus)', '12w': 'Д-12 (Web of Science)', 13: 'Д-13', 14: 'Д-14' }[it.suggest as string] ?? it.suggest} — ${it.why}`; }
         if (d.cited && !citMode()) setCitMode(d.cited, d.member);
         write(d); syncInd(); syncSrc(); preview();
       })

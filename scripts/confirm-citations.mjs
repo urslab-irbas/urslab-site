@@ -54,7 +54,7 @@ export function plan({ body, sender, issue, items, team, admin, date = new Date(
     const [ind, index] = IND[o];
     // отчита се от името на подателя, ако не е самоцитиране за него; иначе — от първия съавтор, за когото не е
     const member = mine.find((m) => c.eligible.includes(m)) ?? c.eligible[0];
-    const data = { ...c.data, member, ind, ...(index ? { index } : {}) };
+    const data = { ...c.data, member, ind, ...(index ? { index } : {}), ...(['13', '14'].includes(ind) ? { peer: true } : {}) };
     if (!index) delete data.index;
     const text = normalizeCitation(data).text;
     const issueBody = [

@@ -13,6 +13,7 @@ import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync, m
 import { validateCitation, normalizeCitation, MESSAGES, cleanDoi, parseAuthors, teamFromAuthors, findDuplicate, tnorm } from '../src/lib/pubSchema.js';
 import { verifyEntry } from './verify-ids.mjs';
 import { crossrefWork, fromCrossref, urlText, attachmentUrl, findCited, findInRefs, hasTitle } from './evidence.mjs';
+import { loadIndexLists, classify } from './index-lists.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const ADMIN = (process.env.ADMIN_LOGIN || 'urslab-irbas').toLowerCase();
@@ -24,6 +25,7 @@ const M = MESSAGES.bg;
 const result = { ok: false, authorized: false, errors: [], howto: [], apa: '', fixUrl: `${SITE}/team/`, title: '', verified: [], member: '', cited: '', members: [] };
 const HOW = {
   required: 'попълнете полето.',
+  citpeer: 'отметнете „Изданието е с научно рецензиране“ под показателя (само ако е вярно); ако не е рецензирано, цитирането не носи точки по Д-13 / Д-14.',
   fmt: 'поправете записа по примера под полето във формата.',
   empty: 'въведете авторите на цитиращия труд.',
   format: 'запишете авторите в APA: „Фамилия, И.“, разделени със запетая, „&“ преди последния.',
@@ -54,7 +56,7 @@ const HOW = {
   doititle: 'DOI е на публикацията с посоченото заглавие. Проверете DOI (отворете https://doi.org/…) и заглавието във формата.',
   unavailable: 'регистърът временно не отговаря — не е ваша грешка. Опитайте отново след около час със същата връзка.',
 };
-const fieldName = { src: 'Доказателство', cited: 'Цитиран труд', authors: 'Автори', year: 'Година', title: 'Заглавие', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', url: 'Линк', ind: 'Показател', index: 'Индексиран в', where: 'Къде е цитирането' };
+const fieldName = { peer: 'Научно рецензиране', src: 'Доказателство', cited: 'Цитиран труд', authors: 'Автори', year: 'Година', title: 'Заглавие', venue: 'Списание / сборник', volume: 'Том', pages: 'Страници', publisher: 'Издател', doi: 'DOI', idType: 'Вид идентификатор', idValue: 'ISSN / ISBN', url: 'Линк', ind: 'Показател', index: 'Индексиран в', where: 'Къде е цитирането' };
 const done = () => {
   writeFileSync('pub-result.json', JSON.stringify(result, null, 2));
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `ok=${result.ok}\nauthorized=${result.authorized}\nmember=${result.member}\n`);
@@ -120,9 +122,11 @@ if (pre.length) fail(pre);
 const ev = { how: '', url: '' };
 const filled = new Set(); // полетата, попълнени автоматично от Crossref
 const doi = cleanDoi(data.doi);
+let crm = null; // данните от Crossref (ISSN / ISBN / вид) — за проверката на индексирането
 try {
   if (data.src === 'doi') {
     const m = await crossrefWork(doi);
+    crm = m;
     if (m) {
       const cr = fromCrossref(m);
       for (const [k, v] of Object.entries(cr)) if (!String(data[k] ?? '').trim()) { data[k] = v; filled.add(k); } // въведеното от члена има предимство
@@ -177,6 +181,19 @@ const v = await verifyEntry(entry);
 if (v.errors.length) fail(v.errors);
 if (v.nrsId) v.verified.push(`НАЦИД НРС, ID ${v.nrsId}: „${v.nrsTitle}“`);
 entry.verified = [`Доказателство — ${ev.how}`, ...new Set(v.verified)];
+// Б2: индексирането по списъците (Scopus / WoS) — бележка към резултата; при разминаване с избрания показател — предупреждение
+try {
+  const lists = await loadIndexLists();
+  if (lists.dbs.has('scopus')) {
+    const issns = [...(crm?.ISSN ?? []), ...(data.idType?.includes('issn') ? [data.idValue] : []), ...(entry.issn ? [entry.issn] : [])];
+    const isbns = [...(crm?.ISBN ?? []), ...(data.idType?.includes('isbn') ? [data.idValue] : []), ...(entry.isbn ? [entry.isbn] : [])];
+    const kind = crm ? (crm.type === 'journal-article' ? 'journal' : 'book') : (String(data.idType ?? '').includes('issn') ? 'journal' : 'book');
+    const r = classify(lists, { issns, isbns, year: Number(data.year), kind, venue: data.venue || (crm?.['container-title'] ?? [])[0] });
+    const sgInd = r.suggest ? (r.suggest.startsWith('12') ? '12' : r.suggest) : '';
+    entry.verified.push(`Индексиране по списъците: ${r.why}`);
+    if (sgInd && sgInd !== String(entry.ind) && (sgInd === '12' || entry.ind === '12')) entry.verified.push(`⚠️ По списъците показателят е Д-${sgInd}, а е избран Д-${entry.ind} — проверете (поправка: „Върни“ и нова заявка)`);
+  }
+} catch { /* без списъци — без бележка */ }
 result.verified = entry.verified;
 const pts = { 12: 10, 13: 3, 14: 2 }[entry.ind];
 result.apa = `${entry.text} — Д-${entry.ind}, ${pts} т.; цитиран труд: ${work.authors} (${work.year}). ${work.title}`;
