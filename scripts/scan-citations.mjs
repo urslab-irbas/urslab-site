@@ -21,6 +21,7 @@ import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 
 import { createHash } from 'node:crypto';
 import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate, validateCitation, CIT_POINTS, MESSAGES } from '../src/lib/pubSchema.js';
 import { crossrefWork, fromCrossref, findInRefs } from './evidence.mjs';
+import { loadIndexLists, classify, listsSummary } from './index-lists.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const MAILTO = process.env.MAILTO || 'a.madzharov@ir.bas.bg';
@@ -33,6 +34,8 @@ const KEEP_DAYS = 92;
 const t0 = Date.now();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const timeUp = () => Date.now() - t0 > TIME_LIMIT;
+// Б1: списъци за индексиране (Scopus, WoS, други бази) от клона data, citation-scan/index/ — виж index-lists.mjs
+const lists = await loadIndexLists();
 const stats = { requests: 0, failed: 0, works: 0, worksNoDoi: 0, found: 0, skippedSelf: 0, skippedKnown: 0 };
 
 async function getJson(url, { pause = 150 } = {}) {
@@ -84,6 +87,7 @@ const oaToCand = (w) => ({
   authors: apaFromOA(w.authorships), alist: people((w.authorships ?? []).map((x) => x.author?.display_name)), venue: w.primary_location?.source?.display_name ?? '',
   url: w.primary_location?.landing_page_url ?? w.doi ?? '', core: !!w.primary_location?.source?.is_core,
   type: w.type, source: 'OpenAlex',
+  issns: w.primary_location?.source?.issn ?? [], doaj: !!w.primary_location?.source?.is_in_doaj,
 });
 const OA_SEL = 'id,doi,title,display_name,publication_year,authorships,primary_location,type';
 const simTitle = (a, b) => { const A = new Set(latin(a).split(/[^a-z0-9]+/).filter((w) => w.length > 3)), B = new Set(latin(b).split(/[^a-z0-9]+/).filter((w) => w.length > 3)); if (!A.size || !B.size) return 0; let n = 0; for (const w of A) if (B.has(w)) n++; return n / Math.max(A.size, B.size); };
@@ -225,6 +229,14 @@ for (const x of shown) {
   const journal = m ? m.type === 'journal-article' : !!x.data.venue;
   const issn = ['issn', 'eissn'].includes(x.data.idType);
   x.options = ['12s', '12w', ...(journal ? (issn ? ['14'] : []) : (!m || BOOKISH.includes(m.type) ? ['13'] : []))];
+  // Б1: индексиране по ISSN и година → един предложен показател с основание (останалите отметки остават за поправка)
+  const kind = journal ? 'journal' : (!m || BOOKISH.includes(m.type) ? 'book' : '');
+  const issns = [...(m?.ISSN ?? []), ...(c.issns ?? []), ...(issn ? [x.data.idValue] : [])];
+  const isbns = [...(m?.ISBN ?? []), ...(x.data.idType?.includes('isbn') ? [x.data.idValue] : [])];
+  x.idx = classify(lists, { issns, isbns, year: x.data.year ?? c.year, kind, doaj: c.doaj });
+  const sg = x.idx.suggest;
+  if (sg === '14' && !issn) { x.data.idType = 'issn'; x.data.idValue = x.idx.issns[0]; } // Д-14 изисква ISSN на списанието
+  if (sg) x.options = [sg, ...x.options.filter((o) => o !== sg)];
   x.status = 'ready';
 }
 
@@ -238,7 +250,7 @@ const OPT = {
   14: `Д-14 · списание с рецензиране, без Scopus и WoS (${CIT_POINTS[14]} т.)`,
   x: '❌ Откажи — не е цитиране или не се отчита (няма да се предлага повече)',
 };
-const box = (x, o) => `  - [ ] ${OPT[o]} <!--c:${x.id}:${o}-->`;
+const box = (x, o) => `  - [ ] ${OPT[o]}${x.idx?.suggest === o ? ` ← **предложено:** ${x.idx.why}` : ''} <!--c:${x.id}:${o}-->`;
 const formUrl = (x) => `${SITE}/publications/new/?m=${x.data.member}&cite=${encodeURIComponent(x.work.key)}&scan=${x.id}`;
 const newPubUrl = (x) => `${SITE}/publications/new/?m=${x.member}#d=${Buffer.from(JSON.stringify({ member: x.member, authors: x.c.authors, year: x.c.year, title: x.c.title, venue: x.c.venue, doi: x.c.doi || undefined, url: x.c.doi ? undefined : x.c.url || undefined, status: 'published' })).toString('base64url')}`;
 const cite = (c) => `${c.authors} (${c.year ?? 'б.г.'}). ${c.title}${c.venue ? `. *${c.venue}*` : ''}${c.doi ? `. https://doi.org/${c.doi}` : c.url ? `. ${c.url}` : ''}`;
@@ -251,9 +263,10 @@ const fresh = shown.filter((x) => x.isNew);
 
 const chunks = []; // части на текста — при над 60 000 знака заявката се разделя на няколко
 let head = `Автоматично търсене на нови цитирания — ${today}${process.env.TRIGGER ? ` (${process.env.TRIGGER})` : ''}.\n\n`;
+head += `${listsSummary(lists)}\n\n`;
 head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
   `Пропуснати: вече въведени — ${stats.skippedKnown}, самоцитирания — ${stats.skippedSelf}, вече решени (потвърдени / отказани) — ${stats.skippedDecided ?? 0}. Заявки: ${stats.requests}, време: ${Math.round((Date.now() - t0) / 1000)} s.\n\n`;
-head += `> **Как се потвърждава:** под всяко цитиране отметнете **една** отметка — показателя (Д-12, ако цитиращият труд е в Scopus или Web of Science; иначе Д-13 / Д-14) или „❌ Откажи“. ` +
+head += `> **Как се потвърждава:** под всяко цитиране отметнете **една** отметка — показателя (Д-12, ако цитиращият труд е в Scopus или Web of Science; иначе Д-13 / Д-14) или „❌ Откажи“. Ако Системата е определила показателя по списъците, той е първи и е отбелязан „← предложено“ с основанието; другите отметки са за поправка. ` +
   `Системата проверява и въвежда цитирането сама (без формата) — на всички съавтори от колектива, без тези, за които е самоцитиране — и след минута-две пише резултата на мястото на отметките. ` +
   `Отметки слагат съавторите на цитирания труд с GitHub акаунт и ръководителят.\n\n`;
 chunks.push(head);
@@ -264,7 +277,7 @@ const groups = (list, render) => {
     for (const x of xs) chunks.push(render(x));
   }
 };
-const meta = (x) => [x.cand.source, x.ev, x.cand.core ? 'OpenAlex: водещо издание — вероятно Д-12' : '', x.isNew ? '' : `съобщено на ${state.seen[x.key]}`].filter(Boolean).join(' · ') + selfNote(x);
+const meta = (x) => [x.cand.source, x.ev, x.idx && !x.idx.suggest ? x.idx.why : '', x.idx?.other?.length ? `други бази: ${x.idx.other.join(', ')}` : '', x.cand.core && !lists.dbs.has('scopus') ? 'OpenAlex: водещо издание — вероятно Д-12' : '', x.isNew ? '' : `съобщено на ${state.seen[x.key]}`].filter(Boolean).join(' · ') + selfNote(x);
 if (ready.length) {
   chunks.push(`## ✅ Проверени — потвърдете с една отметка (${ready.length})\n\n`);
   groups(ready, (x) => `- ${cite(x.cand)}\n  <sub>✔ ${meta(x)}</sub>\n${[...x.options, 'x'].map((o) => box(x, o)).join('\n')}\n\n`);
@@ -311,14 +324,14 @@ html += `<p><small>Писмото е изпратено автоматично �
 
 // Кандидатите (за отметките и за формата ?scan=<id>) и състоянието
 const items = {};
-for (const x of shown) items[x.id] = { key: x.key, cited: x.work.key, owners: x.work.owners, eligible: x.eligible, status: x.status, options: x.options ?? [], data: x.data, evidence: x.ev ?? '', line: cite(x.cand).replace(/\*/g, ''), work: workLine(x.work) };
+for (const x of shown) items[x.id] = { key: x.key, cited: x.work.key, owners: x.work.owners, eligible: x.eligible, status: x.status, options: x.options ?? [], suggest: x.idx?.suggest, why: x.idx?.why, data: x.data, evidence: x.ev ?? '', line: cite(x.cand).replace(/\*/g, ''), work: workLine(x.work) };
 mkdirSync(CANDS.split('/').slice(0, -1).join('/') || '.', { recursive: true });
 writeFileSync(CANDS, JSON.stringify({ date: today, items }, null, 1) + '\n');
 for (const x of shown) state.seen[x.key] ??= today;
 for (const [k, d] of Object.entries(state.seen)) if ((now - Date.parse(d)) / 864e5 > KEEP_DAYS * 2) delete state.seen[k];
 for (const [k, v] of Object.entries(state.confirmed)) if ((now - Date.parse(v.date)) / 864e5 > 31) delete state.confirmed[k];
 state.lastRun = now.toISOString();
-state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', found: shown.length, new: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
+state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', found: shown.length, new: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, suggested: Object.fromEntries(['12s', '12w', '13', '14'].map((o) => [o, ready.filter((x) => x.idx?.suggest === o).length])), lists: [...lists.dbs.keys()], requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
 mkdirSync(STATE.split('/').slice(0, -1).join('/') || '.', { recursive: true });
 writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
 writeFileSync('scan-report.md', parts.join('\n\n---\n\n'));
