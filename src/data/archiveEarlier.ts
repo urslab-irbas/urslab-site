@@ -1,4 +1,5 @@
-// Публикации преди 2022 г. (монографии и учебници от стария PDF publ1.pdf; доклади, отразени в ORCID). Форматът е описан в archive2022.ts.
+// Публикации преди 2022 г. (монографии и учебници от стария PDF publ1.pdf; доклади, отразени в ORCID;
+// трудовете от 2001–2008 г. — по регистъра на НАЦИД, справка 21.10.2026; по-старите (процедурата пред ВАК) са само в citations/madzharov). Форматът е описан в archive2022.ts.
 import type { ArchivePub } from './archive2022';
 
 export const archiveEarlier: ArchivePub[] = [
@@ -11,11 +12,88 @@ export const archiveEarlier: ArchivePub[] = [
     url: 'https://dtf.aadcf.nvu.bg/wp-content/uploads/2022/10/DTF_2019.pdf',
   },
   {
+    year: 2008, cat: 'nat', team: ['madzharov'], tags: ['avionics', 'uas'],
+    authors: 'Маджаров, А. Н., & Камбушев, М. М.',
+    authorsEn: 'Madzharov, A. N., & Kambushev, M. M.',
+    title: 'Изследване за стабилизируемост на линеаризиран аеродинамичен модел на безпилотен летателен апарат',
+    tr: 'A study of the stabilisability of a linearised aerodynamic model of an unmanned aerial vehicle',
+    venue: 'Юбилейна научна сесия „100 години от обявяване независимостта на България“, 22–23 април 2008 г., т. 2, НВУ „В. Левски“, факултет „Авиационен“, Д. Митрополия, с. 230–240',
+    isbn: '954-713-069-2',
+  },
+  {
+    year: 2006, cat: 'nat', team: ['madzharov'], tags: ['navigation', 'gravity', 'ins'],
+    authors: 'Madzharov, A. N., & Biliderov, S. S.',
+    title: 'The influence of the free air anomaly over the stability of the vertical channel in strapdown inertial navigation system (SINS)',
+    venue: 'Proceedings of the First International Conference on Cartography & GIS, 25–28 January 2006, Borovets, Bulgaria, pp. 1–8',
+    isbn: '978-954-724-028-5',
+  },
+  {
+    year: 2006, cat: 'nat', team: ['madzharov'], tags: ['navigation', 'geodesy', 'ins'],
+    authors: 'Madzharov, A. N.',
+    title: 'Applying corrections from the theoretical model of the geoid when differential mode of GPS is used in landing',
+    venue: 'Proceedings of the First International Conference on Cartography & GIS, 25–28 January 2006, Borovets, Bulgaria, pp. 1–8',
+    isbn: '978-954-724-028-5',
+  },
+  {
+    year: 2005, cat: 'nat', team: ['madzharov'], tags: ['navigation'],
+    authors: 'Маджаров, А. Н., & Билидеров, С. С.',
+    authorsEn: 'Madzharov, A. N., & Biliderov, S. S.',
+    title: 'Моделиране траекторното движение на летателен апарат по зададен маршрут и профил на полета',
+    tr: 'Modelling the trajectory motion of an aircraft along a given route and flight profile',
+    venue: 'XII Международна научно-техническа конференция Trans & MOTAUTO’05+, 23–25 ноември 2005 г., В. Търново, Proceedings „Technics and Technologies“, т. 2, с. 138–141',
+    isbn: '954-9322-10-6',
+  },
+  {
+    year: 2005, cat: 'nat', team: ['madzharov'], tags: ['navigation', 'geodesy'],
+    authors: 'Маджаров, А. Н., & Билидеров, С. С.',
+    authorsEn: 'Madzharov, A. N., & Biliderov, S. S.',
+    title: 'Моделиране движението на ортогонален репер върху геодезична повърхност',
+    tr: 'Modelling the motion of an orthogonal frame on a geodesic surface',
+    venue: 'Курсантско-студентска научна конференция, 24–25 март 2005 г., В. Търново: НВУ „В. Левски“, с. 91–98',
+    isbn: '954-753-035-6',
+  },
+  {
     year: 2004, cat: 'idx', team: ['madzharov'], tags: ['navigation', 'gravity', 'ins'],
     authors: 'Madzharov, A. N., Panova, P. V., & Getsov, P. S.',
     title: 'Theoretical research of possibilities for gravitation measurements in motion using the inertial navigation system',
     venue: '55th International Astronautical Congress of the IAF, the IAA and the IISL (IAC 2004), Vancouver, Canada, 4–8 October 2004, paper IAC-04-J.P.08, AIAA, Reston, VA (published online 29 Nov 2012)',
     doi: '10.2514/6.IAC-04-J.P.08', scopusAuthor: '59132592200',
+  },
+  {
+    year: 2004, cat: 'nat', team: ['madzharov', 'georgiev'], tags: ['avionics'],
+    authors: 'Маджаров, А. Н., Георгиев, Р. Ж., & Билидеров, С. С.',
+    authorsEn: 'Madzharov, A. N., Georgiev, R. Zh., & Biliderov, S. S.',
+    title: 'Оптимално управление в надлъжния канал на летателен апарат при външни смущения',
+    tr: 'Optimal control in the longitudinal channel of an aircraft under external disturbances',
+    venue: 'Годишник на Техническия университет – София, т. 54, кн. 1 (Юбилейна научна сесия „30 години факултет Автоматика“, 28–29 октомври 2004 г.), Автоматика и информатика, с. 157–165',
+    issn: '0374-342X',
+  },
+  {
+    year: 2004, cat: 'nat', team: ['madzharov'], tags: ['navigation', 'ins'],
+    authors: 'Маджаров, А. Н., & Билидеров, С. С.',
+    authorsEn: 'Madzharov, A. N., & Biliderov, S. S.',
+    title: 'Алгоритъм за съвместна обработка на сигналите от GPS приемник и аерометричен датчик за височина в интегрално изпълнение',
+    tr: 'An algorithm for joint processing of the signals from a GPS receiver and an air-data altitude sensor in an integrated design',
+    venue: 'Втора международна научна конференция ХЕМУС 2004, Пловдив. Сборник доклади „Изследвания и технологии за нуждите на отбраната и въоръжените сили“, София: Военна академия – ИПО, с. 81–92',
+    issn: '1312-2916',
+  },
+  {
+    year: 2004, cat: 'nat', team: ['madzharov'], tags: ['avionics', 'software'],
+    authors: 'Маджаров, А. Н., & Билидеров, С. С.',
+    authorsEn: 'Madzharov, A. N., & Biliderov, S. S.',
+    title: 'Обучаваща система за особените случаи в полет на самолет L-39',
+    tr: 'A training system for emergency situations in flight of the L-39 aircraft',
+    venue: 'Сборник доклади на Юбилейна научна сесия „90 години авиационно образование в България“, 22–23 април 2004 г., т. 2, В. Търново: НВУ „В. Левски“, факултет „Авиационен“, Д. Митрополия, с. 230–240',
+    isbn: '954-713-069-2',
+  },
+  {
+    year: 2001, cat: 'nat', team: ['madzharov'], tags: ['avionics'],
+    authors: 'Маджаров, А. Н., & Савов, В. С.',
+    authorsEn: 'Madzharov, A. N., & Savov, V. S.',
+    title: 'Планираща управляема бомба с телескопично крило',
+    tr: 'A gliding guided bomb with a telescopic wing',
+    venue: '40 години от първия полет на човек в Космоса: Сборник доклади от Юбилейна научна сесия, 12–13 април 2001 г., т. 2, Долна Митрополия: ВВВУ „Г. Бенковски“, с. 260–265',
+    isbn: '954-713-052-8',
   },
   {
     year: 2000, cat: 'mono', team: ['madzharov'], tags: ['navigation'],

@@ -85,6 +85,6 @@ export function citables(pubs: ArchivePub[]) {
 
 /** Цитиранията на трудове, които не са в списъците на сайта (CitedWork.hidden) — за общия бутон „Цитирания“ и „Точки НАЦИД“ */
 export function hiddenCitationsFor(member: string): CitBlock[] {
-  return (manual[member] ?? []).filter((w) => w.hidden).sort((a, b) => a.no - b.no)
+  return (manual[member] ?? []).filter((w) => w.hidden && w.cites.length > 0).sort((a, b) => a.no - b.no)
     .map((w) => ({ work: { ...w, cites: [...w.cites] }, pts: w.cites.reduce((s, c) => s + citPts(c.ind), 0) }));
 }
