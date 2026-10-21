@@ -17,7 +17,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -207,7 +207,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -322,7 +322,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -472,7 +472,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -510,7 +510,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 1314-7986, не е в Scopus и WoS",
+   "why": "списание ISSN 1314-7986, не е в Scopus и WoS; в НРС на НАЦИД (ID 2932) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -605,44 +605,6 @@
    "line": "Maheswari, S., S, M., Periyasamy, P., M, K. S., Abishek, J., & S, B. (2025). Smart Object Detection with Audible Navigation for the Visually Impaired. International Conference on I-SMAC (IoT in Social, Mobile, Analytics and Cloud) (I-SMAC). https://doi.org/10.1109/i-smac65734.2025.11597792",
    "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
   },
-  "9475d496": {
-   "key": "doi:10.1109/ithet61869.2024.10837626|10.55630/stem.2025.0716",
-   "cited": "doi:10.1109/ithet61869.2024.10837626",
-   "owners": [
-    "chehlarova"
-   ],
-   "eligible": [
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
-   "data": {
-    "type": "citation",
-    "member": "chehlarova",
-    "cited": "doi:10.1109/ithet61869.2024.10837626",
-    "src": "doi",
-    "doi": "10.55630/stem.2025.0716",
-    "authors": "Petrova, P., & Dochkova-Todorova, J.",
-    "year": 2025,
-    "title": "Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications",
-    "venue": "Innovative STEM Education",
-    "volume": "7",
-    "issue": "1",
-    "pages": "185-200",
-    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
-    "idType": "eissn",
-    "idValue": "2683-1333"
-   },
-   "evidence": "DOI в Crossref (литературата не е публикувана там)",
-   "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
-   "work": "Bogdanova, G., Todorov, T., Noev, N., Tomov, Zh., Chehlarova, N. (2024). Model of computer game at education of visually impaired people"
-  },
   "a05c4d22": {
    "key": "doi:10.53656/ped2021-1.07|mathematicsandeducationinmathematics2026",
    "cited": "doi:10.53656/ped2021-1.07",
@@ -654,6 +616,7 @@
    ],
    "status": "form",
    "options": [],
+   "why": "без ISSN, не е в Scopus и WoS — изберете показателя",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -685,7 +648,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 1314-7986, не е в Scopus и WoS",
+   "why": "списание ISSN 1314-7986, не е в Scopus и WoS; в НРС на НАЦИД (ID 2932) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -723,7 +686,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -1018,7 +981,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 0861-5160 / 1314-2119, не е в Scopus и WoS",
+   "why": "списание ISSN 0861-5160 / 1314-2119, не е в Scopus и WoS; в НРС на НАЦИД (ID 1436) — рецензирано",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -1173,7 +1136,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1209,7 +1172,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2096,7 +2059,7 @@
     "12w"
    ],
    "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2482,38 +2445,6 @@
    },
    "evidence": "в литературата: позиция 32 от 41 (Crossref)",
    "line": "Alomar, I., Adilbekov, A., & Maklakovs, J. (2026). A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study. Aerospace. https://doi.org/10.3390/aerospace13090848",
-   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
-  },
-  "c746b6ce": {
-   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
-   "cited": "doi:10.3390/engproc2025090047",
-   "owners": [
-    "hristozov"
-   ],
-   "eligible": [
-    "hristozov"
-   ],
-   "status": "doubt",
-   "options": [],
-   "data": {
-    "type": "citation",
-    "member": "hristozov",
-    "cited": "doi:10.3390/engproc2025090047",
-    "src": "doi",
-    "doi": "10.3390/drones9120815",
-    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
-    "year": 2025,
-    "title": "Risk-Based Design of Urban UAS Corridors",
-    "venue": "Drones",
-    "volume": "9",
-    "issue": "12",
-    "pages": "815",
-    "publisher": "MDPI AG",
-    "idType": "eissn",
-    "idValue": "2504-446X"
-   },
-   "evidence": "",
-   "line": "Tafur, C. L., Rodríguez, J. O., Rodríguez, D. A., Traslaviña, D., Valencia, S. F., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
    "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "adfa345a": {
