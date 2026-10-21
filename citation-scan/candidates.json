@@ -1,5 +1,5 @@
 {
- "date": "2026-10-17",
+ "date": "2026-10-21",
  "items": {
   "19043296": {
    "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.80.23.01",
@@ -12,10 +12,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -50,6 +52,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Computers and Security, покритие 1982–2027 (ISSN 0167-4048 / 1872-6208)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -82,10 +86,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2798-1606 / 2798-9852, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -118,10 +124,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2956-3402, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -159,6 +167,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Multidisciplinary Science Journal, покритие 2019–2027 (ISSN 2675-1240)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -192,10 +202,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -228,10 +240,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2243-7711 / 2243-7703, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -268,6 +282,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Information (Switzerland), покритие 2010–2026 (ISSN 2078-2489)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -301,10 +317,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -341,6 +359,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Lecture Notes in Networks and Systems, покритие 2016–2027, 2016–2027 (ISSN 2367-3370 / 2367-3389)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -376,6 +396,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -411,6 +433,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: PROGRESS: A Journal of Multidisciplinary Studies, покритие 2022–2026, 2022–2026 (ISSN 2958-292X / 2958-2911)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -443,10 +467,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -479,10 +505,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 1314-7986, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -505,45 +533,6 @@
    "line": "Petkov, I. (2025). Artificial Intelligence and Media Literacy in Information Technology Education. Педагогически форум. https://doi.org/10.15547/pf.2025.003",
    "work": "Chehlarova, N. (2024). Didactic materials for counting isosceles trapezoids by visually impaired people"
   },
-  "94a462f7": {
-   "key": "doi:10.17770/etr2024vol2.8062|10.47909/ijsmc.177",
-   "cited": "doi:10.17770/etr2024vol2.8062",
-   "owners": [
-    "chehlarova",
-    "gaidarski"
-   ],
-   "eligible": [
-    "chehlarova",
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "data": {
-    "type": "citation",
-    "member": "chehlarova",
-    "cited": "doi:10.17770/etr2024vol2.8062",
-    "src": "doi",
-    "doi": "10.47909/ijsmc.177",
-    "authors": "Calderón, P. C. C., Ardían, L. A. B., Jiménez, H. R. P., Romero, J. L. J., & Vega, C. L. B.",
-    "year": 2025,
-    "title": "Organizational communication: Analysis of research trends through production indicators in Scopus",
-    "venue": "Iberoamerican Journal of Science Measurement and Communication",
-    "volume": "5",
-    "issue": "2",
-    "pages": "1-10",
-    "publisher": "Pro-Metrics",
-    "idType": "issn",
-    "idValue": "2709-7595",
-    "where": "[16]"
-   },
-   "evidence": "в литературата: позиция 16 от 34 (Crossref)",
-   "line": "Calderón, P. C. C., Baldeos-Ardían, L. A., Jiménez, H. R. P., Romero, J. L., & Vega, C. L. B. (2025). Organizational communication: Analysis of research trends through production indicators in Scopus. Iberoamerican Journal of Science Measurement and Communication. https://doi.org/10.47909/ijsmc.177",
-   "work": "Gaidarski, I., Chehlarova, N. (2024). Management approaches and application areas of information security in organizations"
-  },
   "1b3d7771": {
    "key": "doi:10.1109/ithet61869.2024.10837626|10.1007/978-3-032-05607-8_11",
    "cited": "doi:10.1109/ithet61869.2024.10837626",
@@ -559,6 +548,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027, 1973–2027 (ISSN 0302-9743 / 1611-3349)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -590,10 +581,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -623,10 +616,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -685,10 +680,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 1314-7986, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -721,10 +718,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -755,10 +754,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN, ISBN 9798260016695 / 9798260016718), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -794,6 +795,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -825,10 +828,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -858,10 +863,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -891,10 +898,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 1857-0461 / 2587-3687, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -931,6 +940,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: AIP Conference Proceedings, покритие 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978, 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -963,10 +974,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 1757-8981 / 1757-899X, в Scopus е за 2009–2021, 2009–2021, но не и за 2022 и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -1000,10 +1013,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 0861-5160 / 1314-2119, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "chehlarova",
@@ -1040,6 +1055,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Applied Sciences (Switzerland), покритие 2011–2026 (ISSN 2076-3417)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1077,6 +1094,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: IFAC-PapersOnLine, покритие 2002–2025, 2002–2025 (ISSN 2405-8963 / 2405-8971)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1114,6 +1133,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Applied Sciences (Switzerland), покритие 2011–2026 (ISSN 2076-3417)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1147,10 +1168,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1181,10 +1204,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1251,6 +1276,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Applied Sciences (Switzerland), покритие 2011–2026 (ISSN 2076-3417)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1288,6 +1315,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Entropy, покритие 1999–2026 (ISSN 1099-4300)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1356,6 +1385,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Future Internet, покритие 2009–2026 (ISSN 1999-5903)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1393,6 +1424,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Journal of Infrastructure, Policy and Development, покритие 2017–2024, 2017–2024 (ISSN 2572-7923 / 2572-7931)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1429,6 +1462,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Machines, покритие 2013–2026 (ISSN 2075-1702)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1466,6 +1501,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Computation, покритие 2013–2026 (ISSN 2079-3197)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1503,6 +1540,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Information (Switzerland), покритие 2010–2026 (ISSN 2078-2489)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1540,6 +1579,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Informatics, покритие 2014–2026 (ISSN 2227-9709)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1608,6 +1649,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Sensors, покритие 2001–2026 (ISSN 1424-8220)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1645,6 +1688,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Prosthesis, покритие 2019–2026 (ISSN 2673-1592)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1682,6 +1727,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Sensors, покритие 2001–2026 (ISSN 1424-8220)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1781,6 +1828,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Applied Sciences (Switzerland), покритие 2011–2026 (ISSN 2076-3417)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1818,6 +1867,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Automatika, покритие 2009–2026 (ISSN 0005-1144 / 1848-3380)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1851,10 +1902,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2813-8090, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1892,6 +1945,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Lecture Notes in Computer Science, покритие 1973–2027, 1973–2027 (ISSN 0302-9743 / 1611-3349)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1927,6 +1982,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: AIP Conference Proceedings, покритие 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978, 2003–2026, 2000–2001, 1993, 1983–1984, 1973–1978 (ISSN 0094-243X / 1551-7616 / 1935-0465)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1963,6 +2020,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Smart Innovation, Systems and Technologies, покритие 2010–2027, 2010–2027 (ISSN 2190-3018 / 2190-3026)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -1998,6 +2057,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Journal of Electrical Systems, покритие 2009–2024 (ISSN 1112-5209)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2030,10 +2091,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2068,6 +2131,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Information and Management, покритие 1977–2026 (ISSN 0378-7206 / 1872-7530)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2105,6 +2170,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: IEEE Access, покритие 2013–2026 (ISSN 2169-3536)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2137,10 +2204,12 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "14"
+    "12w"
    ],
+   "suggest": "14",
+   "why": "списание ISSN 2048-9889 / 2048-9870 / 2048-9897, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2205,6 +2274,8 @@
     "12w",
     "13"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027, 2007–2027 (ISSN 1865-0929 / 1865-0937)",
    "data": {
     "type": "citation",
     "member": "gaidarski",
@@ -2240,6 +2311,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Journal of Applied Geodesy, покритие 2007–2026, 2007–2026 (ISSN 1862-9016 / 1862-9024)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2274,6 +2347,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2311,6 +2386,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Computation, покритие 2013–2026 (ISSN 2079-3197)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2344,10 +2421,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2381,6 +2460,8 @@
     "12w",
     "14"
    ],
+   "suggest": "12s",
+   "why": "Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2446,10 +2527,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "hristozov",
@@ -2479,10 +2562,12 @@
    ],
    "status": "ready",
    "options": [
+    "13",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "hristozov",
