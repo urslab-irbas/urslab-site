@@ -326,8 +326,10 @@ export function validateCitation(e, ctx) {
   // Показател и неговите условия
   if (!CIT_INDS.includes(String(e.ind))) add('ind', 'required');
   else if (String(e.ind) === '12' && !CIT_INDEX.includes(e.index)) add('index', 'cit12index');
-  // Б2: Д-13 и Д-14 са само за издания с научно рецензиране — не се проверява автоматично, потвърждава го членът
-  else if (['13', '14'].includes(String(e.ind)) && !isYes(e.peer)) add('peer', 'citpeer');
+  // Б2: Д-13 и Д-14 са само за издания с научно рецензиране. Издание от Националния референтен списък (НРС) на НАЦИД
+  // е рецензирано по определение — проверява се в GitHub по ISSN / ISBN (add-citation.mjs). Затова във формата
+  // (без ctx.full) при въведен ISSN / ISBN отметката не е задължителна; без идентификатор я потвърждава членът.
+  else if (['13', '14'].includes(String(e.ind)) && !isYes(e.peer) && !(idOf(e) && !ctx.full)) add('peer', 'citpeer');
   // При DOI данните на цитиращия труд могат да дойдат от Crossref (бутонът „Попълни по DOI“ или проверката в GitHub)
   if (src === 'doi' && doi && !String(e.title || '').trim() && !ctx.full) return err;
 
@@ -441,7 +443,7 @@ export const MESSAGES = {
     citevenue: 'Посочете списанието / сборника или издателя на цитиращия труд.',
     cit12index: 'За показател Д-12 посочете в коя база е индексиран цитиращият труд (Scopus или Web of Science).',
     cit14issn: 'Показател Д-14 е за списания: изберете ISSN или eISSN и въведете номера на списанието.',
-    citpeer: 'Д-13 и Д-14 се признават само за издания с научно рецензиране: потвърдете с отметката под показателя, че сборникът / монографията / списанието е рецензирано.',
+    citpeer: 'Д-13 и Д-14 се признават само за издания с научно рецензиране: изданието не е намерено в Националния референтен списък (НРС) на НАЦИД по ISSN / ISBN — потвърдете с отметката под показателя, че е рецензирано.',
     citewhere: 'Посочете къде е цитирането — номер в списъка с литература и/или страница (напр. „[27], с. 136“).',
     citedup: 'Това цитиране вече е въведено за същия труд (всеки цитиращ източник се отчита веднъж). Въведено:',
     evsrc: 'Изберете как се доказва цитирането: DOI (световна база), линк (друга интернет база) или PDF файл.',
@@ -482,7 +484,7 @@ export const MESSAGES = {
     citevenue: 'Give the journal / proceedings or the publisher of the citing work.',
     cit12index: 'For indicator D-12 state where the citing work is indexed (Scopus or Web of Science).',
     cit14issn: 'Indicator D-14 is for journals: choose ISSN or eISSN and enter the journal number.',
-    citpeer: 'D-13 and D-14 count only for peer-reviewed venues: confirm with the tick under the indicator that the proceedings / monograph / journal is peer-reviewed.',
+    citpeer: 'D-13 and D-14 count only for peer-reviewed venues: the venue was not found in the NACID National Reference List (NRS) by ISSN / ISBN — confirm with the tick under the indicator that it is peer-reviewed.',
     citewhere: 'State where the citation is — number in the reference list and/or page (e.g. “[27], p. 136”).',
     citedup: 'This citation is already entered for the same work (each citing source counts once). Entered:',
     evsrc: 'Choose how the citation is proven: DOI (world database), link (other online database) or PDF file.',

@@ -10,8 +10,8 @@
 //    достатъчно е потвърждение от един от тях) и в дневника publish-log.md (клон data). Резултатът е в pub-result.json.
 // Локален тест: ISSUE_BODY="$(cat body.md)" ISSUE_AUTHOR=urslab-irbas ISSUE_NUMBER=1 node scripts/add-citation.mjs
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync, mkdirSync } from 'node:fs';
-import { validateCitation, normalizeCitation, MESSAGES, cleanDoi, parseAuthors, teamFromAuthors, findDuplicate, tnorm } from '../src/lib/pubSchema.js';
-import { verifyEntry } from './verify-ids.mjs';
+import { isYes, validateCitation, normalizeCitation, MESSAGES, cleanDoi, parseAuthors, teamFromAuthors, findDuplicate, tnorm } from '../src/lib/pubSchema.js';
+import { verifyEntry, nrsByNumber } from './verify-ids.mjs';
 import { crossrefWork, fromCrossref, urlText, attachmentUrl, findCited, findInRefs, hasTitle } from './evidence.mjs';
 import { loadIndexLists, classify } from './index-lists.mjs';
 
@@ -163,6 +163,13 @@ try {
   throw e;
 }
 
+// Б2: Д-13 / Д-14 без отметка за рецензиране — изданието в НРС на НАЦИД (по ISSN / ISBN) е рецензирано по определение
+let peerBy = isYes(data.peer) ? 'потвърдено от члена' : '';
+if (['13', '14'].includes(String(data.ind)) && !peerBy) {
+  for (const n of [...new Set([data.idValue, ...(crm?.ISSN ?? []), ...(crm?.ISBN ?? [])].filter(Boolean))]) {
+    try { const x = await nrsByNumber(n); if (x) { data.peer = true; peerBy = `НАЦИД НРС, ID ${x.id}: „${x.title}“`; break; } } catch { /* НРС не отговаря — остава отметката */ }
+  }
+}
 let errs = validateCitation(data, { ...cctx(), full: true });
 // Поле, попълнено автоматично от Crossref, не може да е причина за отказ: ако е в неподходящ формат
 // (напр. номер на статия „ENEURO.0390-24.2025“ вместо страници), просто не се записва.
@@ -181,6 +188,7 @@ const v = await verifyEntry(entry);
 if (v.errors.length) fail(v.errors);
 if (v.nrsId) v.verified.push(`НАЦИД НРС, ID ${v.nrsId}: „${v.nrsTitle}“`);
 entry.verified = [`Доказателство — ${ev.how}`, ...new Set(v.verified)];
+if (peerBy) entry.verified.push(`Научно рецензиране — ${peerBy}`);
 // Б2: индексирането по списъците (Scopus / WoS) — бележка към резултата; при разминаване с избрания показател — предупреждение
 try {
   const lists = await loadIndexLists();

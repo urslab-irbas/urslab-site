@@ -22,6 +22,7 @@ import { createHash } from 'node:crypto';
 import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate, validateCitation, CIT_POINTS, MESSAGES } from '../src/lib/pubSchema.js';
 import { crossrefWork, fromCrossref, findInRefs } from './evidence.mjs';
 import { loadIndexLists, classify, listsSummary } from './index-lists.mjs';
+import { nrsByNumber } from './verify-ids.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const MAILTO = process.env.MAILTO || 'a.madzharov@ir.bas.bg';
@@ -249,6 +250,10 @@ for (const x of shown) {
   const sg = x.idx.suggest;
   if (sg === '14' && !issn) { x.data.idType = 'issn'; x.data.idValue = x.idx.issns[0]; } // Д-14 изисква ISSN на списанието
   if (sg) x.options = [sg, ...x.options.filter((o) => o !== sg)];
+  // Б2: за Д-13 / Д-14 — дали изданието е в НРС на НАЦИД (рецензирано по определение)
+  if (['13', '14'].includes(sg)) for (const n of [...new Set([...x.idx.issns, ...(m?.ISBN ?? [])])].slice(0, 3)) {
+    try { stats.requests++; const r = await nrsByNumber(n); if (r) { x.idx.why += `; в НРС на НАЦИД (ID ${r.id}) — рецензирано`; break; } } catch { break; }
+  }
   x.status = 'ready';
 }
 
