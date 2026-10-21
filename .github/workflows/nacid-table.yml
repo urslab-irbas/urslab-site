@@ -1,0 +1,111 @@
+# Б4 (задача #121): „Точки НАЦИД“ и стратегия — по имейл само на члена и на ръководителя.
+# Бутонът „Таблица по имейл“ в „Обобщен отчет“ отваря заявка „[Точки НАЦИД] <име>“ с ред „Член: <id>“.
+# Приема се само от GitHub акаунта на самия член или на ръководителя (собственика на хранилището); иначе — отказ.
+# В заявката не се пишат числа: таблицата е само в писмото. Нищо не се записва и не се качва като артефакт.
+# Дневникът на изпълнението е публичен: адресите се маскират, темата на писмото е неутрална (без недостиг / резултат).
+# Получатели: имейлът на члена (поле email в профила или тайната MEMBER_EMAILS: „id=адрес; id=адрес“) + ръководителят.
+name: Точки НАЦИД по имейл
+on:
+  issues:
+    types: [opened]
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: nacid-table
+  cancel-in-progress: false
+jobs:
+  mail:
+    if: startsWith(github.event.issue.title, '[Точки НАЦИД]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Право (самият член или ръководителят) и получатели
+        id: gate
+        env:
+          AUTHOR: ${{ github.event.issue.user.login }}
+          BODY: ${{ github.event.issue.body }}
+          OWNER: ${{ github.repository_owner }}
+          MEMBER_EMAILS: ${{ secrets.MEMBER_EMAILS }}
+        run: |
+          node -e '
+            const fs = require("fs");
+            const who = (process.env.AUTHOR || "").toLowerCase(), owner = process.env.OWNER.toLowerCase();
+            const team = fs.readdirSync("src/data/team").filter((f) => f.endsWith(".ts") && !["index.ts", "types.ts"].includes(f)).map((f) => {
+              const s = fs.readFileSync("src/data/team/" + f, "utf8"); const g = (k) => (s.match(new RegExp(k + ":\\s*\x27([^\x27]+)\x27")) || [])[1] || "";
+              return { id: g("id"), github: g("github").toLowerCase(), email: g("email") };
+            }).filter((m) => m.id);
+            const id = ((process.env.BODY || "").match(/^\s*Член:\s*([a-z0-9-]+)/im) || [])[1] || "";
+            const m = team.find((x) => x.id === id);
+            let ok = true, why = "";
+            if (!m) { ok = false; why = "Не е посочен член на колектива (ред „Член: …“). Отворете заявката от бутона „Таблица по имейл“ в „Обобщен отчет“."; }
+            else if (who !== owner && m.github !== who) { ok = false; why = "Таблицата се изпраща само по заявка на самия член (от неговия GitHub акаунт) или на ръководителя."; }
+            const extra = Object.fromEntries(String(process.env.MEMBER_EMAILS || "").split(/[;\n]+/).map((x) => x.split("=").map((y) => y.trim())).filter((x) => x[0] && /@/.test(x[1] || "")));
+            const head = team.find((x) => x.github === owner) || team.find((x) => x.id === "madzharov");
+            const memberMail = m ? (m.email || extra[m.id] || "") : "";
+            const to = [...new Set([memberMail, head && head.email].filter(Boolean))].join(",");
+            // адресите не се показват в публичния дневник на изпълнението
+            for (const x of to.split(",").filter(Boolean)) console.log("::add-mask::" + x);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `ok=${ok}\nwhy=${why}\nid=${id}\nto=${to}\nmemberMail=${memberMail ? "yes" : "no"}\n`);
+          '
+      - name: Отказ
+        if: steps.gate.outputs.ok != 'true'
+        uses: actions/github-script@v7
+        env:
+          WHY: ${{ steps.gate.outputs.why }}
+        with:
+          script: |
+            const { owner, repo } = context.repo; const num = context.issue.number;
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: `ℹ️ ${process.env.WHY}` });
+            await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: 'not_planned' });
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.ok == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - name: Данните от клона data (публикации и цитирания от формата, кандидатите от търсенето)
+        if: steps.gate.outputs.ok == 'true'
+        run: |
+          git fetch -q origin data
+          git checkout FETCH_HEAD -- src/data/contrib.json
+          git checkout FETCH_HEAD -- src/data/citations 2>/dev/null || true
+          git checkout FETCH_HEAD -- citation-scan/candidates.json 2>/dev/null || true
+          npm ci
+      - name: Таблица и стратегия
+        id: calc
+        if: steps.gate.outputs.ok == 'true'
+        run: |
+          npx tsx scripts/nacid-mail.ts "${{ steps.gate.outputs.id }}" > /dev/null
+          node -e 'const j=require("./nacid-mail.json"); require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `subject=${j.subject}\n`)'
+      - name: Имейл
+        id: mail
+        if: steps.calc.outcome == 'success' && steps.gate.outputs.to != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: ${{ secrets.MAIL_FROM }}
+          to: ${{ steps.gate.outputs.to }}
+          subject: ${{ steps.calc.outputs.subject }}
+          html_body: file://nacid-mail.html
+          convert_markdown: false
+      - name: Отговор в заявката (без числа)
+        if: always() && steps.gate.outputs.ok == 'true'
+        uses: actions/github-script@v7
+        env:
+          SENT: ${{ steps.mail.outcome }}
+          MEMBER_MAIL: ${{ steps.gate.outputs.memberMail }}
+        with:
+          script: |
+            const { owner, repo } = context.repo; const num = context.issue.number;
+            const ok = process.env.SENT === 'success';
+            const body = ok
+              ? `✉️ Таблицата „Точки НАЦИД“ и стратегията са изпратени по имейл ${process.env.MEMBER_MAIL === 'yes' ? 'на члена и на ръководителя' : 'на ръководителя (за члена няма имейл в Системата)'}.`
+              : '⚠️ Писмото не беше изпратено — ръководителят ще провери настройките на пощата.';
+            await github.rest.issues.createComment({ owner, repo, issue_number: num, body });
+            await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: ok ? 'completed' : 'not_planned' });

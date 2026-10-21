@@ -10,7 +10,6 @@ import { areas, t, type Lang } from '../data/content';
 import { team } from '../data/team';
 import { href } from '../lib/i18n';
 import { citationsFor, hiddenCitationsFor } from '../data/citations';
-import { nacidRecords, groupPts, fmtPts } from '../data/nacid';
 import { citRules, citPts } from '../data/citations/rules';
 import { pubKey } from '../lib/pubSchema.js';
 // page — годишна страница от archivePages; member — „Обобщен отчет“ за член от колектива;
@@ -40,12 +39,7 @@ const CIT = M ? citationsFor(M.id, archive) : undefined;
 // Цитирания на трудове извън списъците на сайта (CitedWork.hidden) — в общия бутон „Цитирания“ (без филтър) и в група „Д“
 const HID = M ? hiddenCitationsFor(M.id) : [];
 const hidPts = HID.reduce((s, b) => s + b.pts, 0);
-// „Точки НАЦИД“ (src/data/nacid.ts): групи А–Е; „Д“ — от проверените цитирания в Системата (не зависи от филтрите)
-const NAC = M ? nacidRecords[M.id] : undefined;
-const dPts = CIT ? [...CIT.values()].reduce((s, b) => s + b.pts, 0) + hidPts : 0;
-const nacRows = NAC?.groups.map((g) => ({ ...g, val: g.key === 'Д' ? dPts : g.items ? groupPts(g) : null })) ?? [];
-const nacTotal = nacRows.reduce((s, g) => s + (g.val ?? 0), 0);
-const nacMarks = Object.fromEntries(nacRows.filter((g) => g.note).map((g, i) => [g.key, '¹²³⁴⁵⁶'[i]]));
+// „Точки НАЦИД“: таблицата и стратегията се пращат по имейл само на члена и на ръководителя (Б4) — не са на страницата
 // „+ Цитиране“ — само за член с GitHub акаунт (заявката се приема само от неговия акаунт или от ръководителя)
 const canAdd = !!M?.github;
 const bg = lang === 'bg';
@@ -155,7 +149,7 @@ const L = {
         <div><b data-s="jif"></b><span>{L.jif}</span></div>
         <div><b data-s="doi"></b><span>{L.doi}</span></div>
         {hasShare && <div class="tip" tabindex="0" data-tip={T('Процент автори от ИР: средният дял на авторите от ИР в избраните публикации (дробно броене, в %). Дялът на всяка публикация е по отчета на БАН, а където го няма — изчислен: автори от ИР ÷ всички автори. Членовете на колектива се броят като автори от ИР за всички свои публикации, вкл. издадени при друг работодател. Подадените / под печат не се включват.', 'Percentage of IR authors: the average share of IR authors in the selected publications (fractional counting, in %). Each publication’s share is taken from the BAS report or, where missing, computed as IR authors ÷ all authors. Team members count as IR authors for all their publications, including those issued under another employer. Submitted / in-press items are not included.')}><b data-s="share"></b><span>{T('Процент автори ИР', 'Percentage of IR authors')} <abbr class="hint" aria-hidden="true">ⓘ</abbr></span></div>}
-        {NAC && <div class="nac tip" tabindex="0" data-tip={T('Сумата от точките по групи А–Е по Минималните национални изисквания (Област 5 „Технически науки“) — по проверената справка; група „Д“ (цитирания) се изчислява от цитиранията в Системата. Не зависи от филтрите.', 'Sum of points in groups A–E under the Minimum National Requirements (Area 5 “Technical Sciences”) — from the verified report; group D (citations) is computed from the citations in the System. Not affected by the filters.')}><b>{fmtPts(nacTotal, lang)}</b><span>{T('Точки НАЦИД', 'NACID points')}</span><button type="button" class="btn-s nac-btn" data-nac>{T('Таблица', 'Table')}</button></div>}
+        {M && <div class="nac tip" tabindex="0" data-tip={T('Таблицата „Изисквания … и точки“ по групи А–Е (Минимални национални изисквания, Област 5) и стратегията за целевата длъжност се изпращат по имейл само на члена и на ръководителя — не се показват на сайта. Бутонът отваря заявка в GitHub (вход с акаунта на члена или на ръководителя); натиснете „Create“.', 'The table “Requirements … and points” by groups A–E (Minimum National Requirements, Area 5) and the strategy for the target position are e-mailed only to the member and the head of the lab — they are not shown on the site. The button opens a GitHub request (sign in with the member’s or the head’s account); press “Create”.')}><b>✉</b><span>{T('Точки НАЦИД', 'NACID points')}</span><a class="btn-s nac-btn" href={`https://github.com/urslab-irbas/urslab-site/issues/new?${new URLSearchParams({ title: `[Точки НАЦИД] ${M.name.bg}`, body: `Член: ${M.id}\n\nТаблицата „Точки НАЦИД“ и стратегията се изпращат по имейл само на члена и на ръководителя. Натиснете „Create“ — писмото идва до няколко минути. Заявката се приема само от акаунта на члена или на ръководителя; в нея не се публикуват числа.` }).toString()}`} target="_blank" rel="noopener">{T('Таблица по имейл', 'Table by e-mail')}</a></div>}
       </div>
       <div class="breakdown">
         <div><h3>{T('По вид / квартил', 'By type / quartile')}</h3><table data-t="cat"></table></div>
@@ -231,21 +225,6 @@ const L = {
         </table>
       </section></template>
     ))}</div>}
-    {NAC && <dialog class="cdlg" data-nacdlg aria-labelledby="nac-title">
-      <div class="cd-head"><h2 id="nac-title">{T('Изисквания в ИР-БАН за академични длъжности и научни степени — Област 5 „Технически науки“, и точки', 'IR-BAS requirements for academic positions and degrees — Area 5 “Technical Sciences”, and points')} — {M!.name[lang]}</h2><div class="cd-acts"><button type="button" class="btn-s" data-nac-close>{T('Затвори', 'Close')}</button></div></div>
-      <div class="nac-wrap"><table class="ct nt">
-        <thead><tr><th>{T('Група', 'Group')}</th><th>{T('Показатели', 'Indicators')}</th>{NAC.cols.map((c) => <th>{c[lang]}</th>)}<th>{T('Точки', 'Points')}</th></tr></thead>
-        <tbody>{nacRows.map((g) => (
-          <tr><td>{g.key}</td><td>{g.label[lang]}</td>{g.req.map((r) => <td>{r ?? '–'}</td>)}<td>{g.val === null ? '–' : fmtPts(g.val, lang)}{nacMarks[g.key] && <sup>{nacMarks[g.key]}</sup>}</td></tr>
-        ))}</tbody>
-        <tfoot><tr><td colspan={NAC.cols.length + 2}>{T('Общо', 'Total')}</td><td>{fmtPts(nacTotal, lang)}</td></tr></tfoot>
-      </table></div>
-      <div class="cd-legend">
-        {nacRows.filter((g) => g.note).map((g) => <p>{nacMarks[g.key]} {T('Група', 'Group')} {g.key}: {g.note![lang]}</p>)}
-        {NAC.notes.map((n) => <p>{n[lang]}</p>)}
-        <p>{NAC.source[lang]}</p>
-      </div>
-    </dialog>}
     {P.source && <p class="src">{P.source[lang]}</p>}
     <script type="application/json" data-labels set:html={JSON.stringify({ cats: catLabel, team: authorLabel, csvName: T(`publikacii-${P.key}`, `publications-${P.key}`), cit: { one: T('Цитирания на', 'Citations of'), all: T('Цитирания на избраните публикации (по образеца на НАЦИД)', 'Citations of the selected publications (NACID format)'), total: T('Общо за избраните публикации', 'Total for the selected publications'), n: T('цитирания', 'citations'), pts: T('точки', 'points'), none: T('Няма въведени цитирания за избраните публикации.', 'No citations entered for the selected publications.') } })} />
   </div></section>
@@ -450,13 +429,6 @@ const L = {
     root.querySelector('[data-cits-all]')!.addEventListener('click', () => open(labels.cit.all, items.filter((li) => !li.hidden && li.dataset.cat !== 'sub'), true));
     dlg.querySelector('[data-cd-close]')!.addEventListener('click', () => dlg.close());
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
-  }
-  // „Точки НАЦИД“: таблицата по групи А–Е
-  const nac = root.querySelector<HTMLDialogElement>('[data-nacdlg]');
-  if (nac) {
-    root.querySelector('[data-nac]')!.addEventListener('click', () => nac.showModal());
-    nac.querySelector('[data-nac-close]')!.addEventListener('click', () => nac.close());
-    nac.addEventListener('click', (e) => { if (e.target === nac) nac.close(); });
   }
   root.querySelector('[data-csv]')!.addEventListener('click', () => {
     const q = (s: string) => `"${s.replace(/"/g, '""')}"`;
