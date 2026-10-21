@@ -12,7 +12,7 @@
 //   нереферирани → показател 8 (20/n); учебници → Е23 (40/n); „доктор на науките“ → Е16 (40); Д — от цитиранията.
 // НЕ се знае автоматично (отбелязва се в писмото): трудовете от предишни процедури (не се ползват повторно), проекти,
 // ръководство на докторанти, патенти и др. от група Е — те се добавят като проверена справка в nacid.ts.
-// Писмото с таблицата се праща само на члена и на ръководителя (scripts/nacid-mail.ts, .github/workflows/nacid-table.yml).
+// Писмото с таблицата се праща само на потребителя и на ръководителя (scripts/nacid-mail.ts, .github/workflows/nacid-table.yml).
 import type { ArchivePub } from './archive2022';
 import { allPubs } from './allPubs';
 import { team, type Member } from './team';
@@ -192,6 +192,6 @@ export function strategyHtml(s: Strategy, pending?: { n: number; pts: number } |
   h += `<h3>Подробно по групи</h3>`;
   for (const g of s.groups.filter((x) => x.lines.length)) h += `<p><b>${g.key}</b> — ${f(g.pts)} т.</p><ol style="font-size:13px">${g.lines.map((l) => `<li>${esc(l.text)} — ${f(l.pts)} т.</li>`).join('')}</ol>`;
   h += `<h3>Бележки</h3><ul style="font-size:13px">${s.notes.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
-  h += `<p style="font-size:12px;color:#666">Писмото е изпратено само на члена и на ръководителя на лабораторията. Таблицата не се публикува на сайта. Изчислено от Системата на urs.ir.bas.bg.</p></div>`;
+  h += `<p style="font-size:12px;color:#666">Писмото е изпратено само на потребителя и на ръководителя на лабораторията. Таблицата не се публикува на сайта. Изчислено от Системата на urs.ir.bas.bg.</p></div>`;
   return h;
 }

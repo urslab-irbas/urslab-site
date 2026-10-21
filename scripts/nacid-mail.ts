@@ -6,7 +6,7 @@ import { strategyFor, strategyHtml } from '../src/data/strategy';
 import { team } from '../src/data/team';
 
 const id = process.argv[2];
-if (!team.some((m) => m.id === id)) { console.error(`няма член „${id}“`); process.exit(2); }
+if (!team.some((m) => m.id === id)) { console.error(`няма потребител „${id}“`); process.exit(2); }
 const s = strategyFor(id);
 // чакащите за потвърждаване цитирания (последното търсене) — по предложения показател
 let pending: { n: number; pts: number } | null = null;
