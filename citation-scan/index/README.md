@@ -5,6 +5,7 @@
 
 - Scopus Source List, септември 2026 (`ext_list_Sep_2026.xlsx`): списания и поредици с покритие, сборници на конференции (ISBN);
 - Scopus book list, Q2 2026 (ISBN на книгите);
+- заглавията и годините на сборниците от „All Conf. Proceedings“ — за доклади, за които Crossref не дава ISBN (IEEE, ACM …);
 - Web of Science (Master Journal List): SCIE, SSCI, AHCI, ESCI;
 - Current Contents Connect (3 колекции) — друга база, само за сведение.
 
