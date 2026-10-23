@@ -20,6 +20,7 @@ import { nacidRecords, groupPts } from './nacid';
 import { citationsFor, hiddenCitationsFor } from './citations';
 import { expectedFor } from './series';
 import { parseAuthors } from '../lib/pubSchema.js';
+import { nacidRegistry, tkey, excludedKinds } from './nacidRegistry';
 
 export const COLS = ['Доктор', 'Доктор на науките', 'Главен асистент', 'Доцент', 'Професор'];
 const REF = nacidRecords.madzharov.groups; // изискванията (Таблица 1, Област 5) — едни и същи за всички
@@ -44,6 +45,8 @@ export interface GroupRes { key: string; label: string; req: number | null; pts:
 export interface Strategy {
   member: Member; target: number | null; manual: boolean; groups: GroupRes[];
   steps: string[]; notes: string[]; expected: string[]; pending: { n: number; pts: number } | null;
+  /** справка по регистъра на НАЦИД: процедурите и как всяка публикация е отразена в Системата */
+  registry?: { procs: string[]; pubs: string[]; checked: string };
 }
 
 /**
@@ -92,13 +95,26 @@ export function strategyFor(id: string): Strategy {
   const m = team.find((x) => x.id === id)!;
   const target = targetOf(m);
   const mine = allPubs.filter((p) => p.team.includes(id));
-  const pub = mine.filter((p) => p.cat !== 'sub');
+  // Регистър на НАЦИД: представеното в предишни процедури не се ползва за целевата длъжност (ППЗРАСРБ, Приложение, т. 8–9)
+  const reg = nacidRegistry[id];
+  const excl = excludedKinds(target);
+  const usedProcs = (reg?.procedures ?? []).filter((p) => excl.includes(p.kind));
+  const usedT = usedProcs.flatMap((p) => p.items.map((x) => tkey(x.title))).filter((k) => k.length >= 12);
+  const usedC = usedProcs.flatMap((p) => (p.citations ?? []).map((c) => tkey(c.citing))).filter((k) => k.length >= 12);
+  const isUsed = (title: string) => { const k = tkey(title); return usedT.some((u) => k.includes(u) || u.includes(k)); };
+  const citeUsed = (text: string) => { const k = tkey(text); return usedC.some((u) => k.includes(u)); };
+  const pub = mine.filter((p) => p.cat !== 'sub' && !isUsed(p.title));
   const sub = mine.filter((p) => p.cat === 'sub');
   // Д — от проверените цитирания (ръчно, през формата и с отметка)
-  const cit = citationsFor(id, pub);
   const dLines: Line[] = []; let dPts = 0, nCit = 0;
-  for (const [p, b] of cit) { dPts += b.pts; nCit += b.work.cites.length; if (b.pts) dLines.push({ text: `${p.title} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
-  for (const b of hiddenCitationsFor(id)) { dPts += b.pts; nCit += b.work.cites.length; dLines.push({ text: `${b.work.hidden!.text} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
+  let nUsedCit = 0, usedCitPts = 0;
+  const addCits = (title: string, cites: { text: string; ind: string }[]) => {
+    const ok = cites.filter((c) => !citeUsed(c.text)); const pts = r2(ok.reduce((a, c) => a + ({ '12': 10, '13': 3, '14': 2 } as Record<string, number>)[c.ind], 0));
+    nUsedCit += cites.length - ok.length; usedCitPts += cites.filter((c) => citeUsed(c.text)).reduce((a, c) => a + ({ '12': 10, '13': 3, '14': 2 } as Record<string, number>)[c.ind], 0);
+    dPts += pts; nCit += ok.length; if (pts) dLines.push({ text: `${title} — ${ok.length} цит.`, pts });
+  };
+  for (const [p, b] of citationsFor(id, mine.filter((x) => x.cat !== 'sub'))) addCits(p.title, b.work.cites);
+  for (const b of hiddenCitationsFor(id)) addCits(b.work.hidden!.text, b.work.cites);
   const notes: string[] = []; const steps: string[] = []; const expected: string[] = [];
   const rec = nacidRecords[id];
   let groups: GroupRes[];
@@ -116,6 +132,13 @@ export function strategyFor(id: string): Strategy {
     for (const n of rec.notes ?? []) notes.push(n.bg);
   } else {
     // автоматично от публикациите на сайта
+    // невидимите публикации от регистъра на НАЦИД, които не са представени в процедура за целевата длъжност
+    const regFree: ArchivePub[] = (reg?.publications ?? []).filter((r) => !r.site && !isUsed(r.title)).map((r) => ({
+      year: r.year, title: r.title, venue: r.venue, team: [id], tags: [],
+      authors: [m.name.en ?? m.name.bg, ...(r.coauthors ? r.coauthors.split(/[;,]\s*(?=[A-ZА-Я][^,;]*\.)/) : [])].join('; '),
+      cat: /монография/i.test(r.venue) ? 'mono' : /scopus|wos|web of science/i.test(r.index ?? '') ? 'idx' : 'other',
+    } as ArchivePub));
+    for (const r of regFree) pub.push(r);
     const idx = pub.filter((p) => INDEXED.includes(p.cat) || p.ix);
     const mono = pub.filter((p) => p.cat === 'mono');
     const books = pub.filter((p) => p.cat === 'book');
@@ -148,7 +171,8 @@ export function strategyFor(id: string): Strategy {
       G('Е', sum(eLines), eLines),
     ];
     notes.push('Изчислено автоматично от публикациите на сайта и от цитиранията в Системата — не е проверена справка.');
-    notes.push('Не са изключени трудовете от предишни процедури (за „доцент“ — използваните при хабилитацията); те не се ползват повторно. Проверете списъка.');
+    if (reg) notes.push(`Изключени са публикациите и цитиранията, представени в процедурите по регистъра на НАЦИД (${usedProcs.map((p) => p.label.split(' — ')[0]).join('; ') || 'няма такива за целевата длъжност'}) — не се ползват повторно за „${COLS[col]}“ (ППЗРАСРБ, Приложение, т. 8 и 9).${nUsedCit ? ` Изключени цитирания: ${nUsedCit} (${usedCitPts} т.).` : ''}`);
+    else notes.push('Не са изключени трудовете от предишни процедури — регистърът на НАЦИД още не е въведен в Системата. Те не се ползват повторно. Проверете списъка.');
     notes.push('Група Е включва само учебниците и степента „доктор на науките“; проектите, ръководството на докторанти, патентите и др. не са в Системата — добавят се с проверена справка.');
     if (pick) notes.push(`Група В: от ${idx.length} индексирани публикации за показател 4 са избрани ${pick.length} — така, че В да се покрие с най-малка загуба на точки за група Г.`);
   }
@@ -172,7 +196,21 @@ export function strategyFor(id: string): Strategy {
     const idxd = !!e && INDEXED.includes(e.cat); // очаквано в Scopus/WoS само ако поредицата е с квартил / SJR / индексирана
     expected.push(`${p.title} — ${idxd ? `очаквано в Scopus (${e!.name}): +${r2(40 / n)} т. за Г (40/${n}) или +1 публикация за показател 4 (60/${n})` : `${e ? `${e.name}; ` : ''}не е в Scopus/WoS: +${r2(20 / n)} т. за Г (показател 8, 20/${n}), ако е с научно рецензиране`}`);
   }
-  return { member: m, target, manual: !!rec, groups, steps, notes, expected, pending: null };
+  let registry: Strategy['registry'];
+  if (reg) {
+    const procOf = (t: string) => reg.procedures.filter((p) => p.items.some((x) => { const a = tkey(x.title), b = tkey(t); return a.length >= 12 && (a.includes(b) || b.includes(a)); }));
+    registry = {
+      checked: reg.checked,
+      procs: reg.procedures.map((p) => `${p.label}; ${p.date}; ${p.total} т.${p.items.length ? ` — ${p.items.length} публикации` : ''}${p.citations?.length ? `, ${p.citations.length} цитирания` : ''}${excl.includes(p.kind) ? ` → не се ползват повторно за „${COLS[col]}“` : ''}`),
+      pubs: reg.publications.map((r) => {
+        const ps = procOf(r.title);
+        const where = r.site ? 'в Системата — видим запис на сайта (запазен)' : 'в Системата — невидим запис (не се показва в списъците)';
+        const st = ps.length ? `представена в: ${ps.map((p) => p.label.split(' — ')[0]).join('; ')}${ps.some((p) => excl.includes(p.kind)) ? ' — не се ползва повторно' : ''}` : `не е представяна в процедура — ползва се за „${COLS[col]}“`;
+        return `№ ${r.no} (${r.year}). ${r.title} — ${where}; ${st}.`;
+      }),
+    };
+  }
+  return { member: m, target, manual: !!rec, groups, steps, notes, expected, pending: null, registry };
 }
 
 /** Писмото (HTML) */
@@ -190,6 +228,11 @@ export function strategyHtml(s: Strategy, pending?: { n: number; pts: number } |
   h += `<h3>Стратегия</h3><ul>${s.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
   if (pending?.n) h += `<p>В заявката „[Нови цитирания]“ чакат за потвърждаване <b>${pending.n}</b> цитирания на ваши трудове — по предложените показатели около <b>${f(pending.pts)}</b> т. за група Д.</p>`;
   if (s.expected.length) h += `<h3>Подадени и под печат — какво ще добавят</h3><ul>${s.expected.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  if (s.registry) {
+    h += `<h3>Справка: вашите трудове в регистъра на НАЦИД</h3><p style="font-size:13px">По регистъра за академичните длъжности и дисертации (ras.nacid.bg), справка от ${esc(s.registry.checked)}. Всички публикации от регистъра са въведени в Системата: вече публикуваните на сайта запазват записите си, останалите са невидими (не се показват в списъците, ползват се за цитиранията и за тази таблица).</p>`;
+    h += `<p style="font-size:13px"><b>Процедури:</b></p><ul style="font-size:13px">${s.registry.procs.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+    h += `<p style="font-size:13px"><b>Публикации:</b></p><ol style="font-size:13px">${s.registry.pubs.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>`;
+  }
   h += `<h3>Подробно по групи</h3>`;
   for (const g of s.groups.filter((x) => x.lines.length)) h += `<p><b>${g.key}</b> — ${f(g.pts)} т.</p><ol style="font-size:13px">${g.lines.map((l) => `<li>${esc(l.text)} — ${f(l.pts)} т.</li>`).join('')}</ol>`;
   h += `<h3>Бележки</h3><ul style="font-size:13px">${s.notes.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;

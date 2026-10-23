@@ -4,6 +4,13 @@ import type { ArchivePub } from './archive2022';
 
 export const archiveEarlier: ArchivePub[] = [
   {
+    // година по регистъра на НАЦИД (2021, т. 76) — 23.10.2026 (преди беше на страницата 2022–2024)
+    year: 2021, cat: 'other', team: ['gaidarski'], tags: ['security'],
+    authors: 'Gaidarski, I.',
+    title: 'Model Driven Development of Information Security System',
+    venue: 'Problems of Engineering Cybernetics and Robotics 76, BAS, 2021, pp. 47–62', doi: '10.7546/PECR.76.21.04', issn: '2738-7356',
+  },
+  {
     year: 2019, cat: 'nat', team: ['madzharov'], tags: ['software', 'security'],
     authors: 'Madzharov, A. N.',
     title: 'Technical implementation of a reporting system and its workflows',
