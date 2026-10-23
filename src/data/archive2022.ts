@@ -352,12 +352,6 @@ export const archive: ArchivePub[] = [
   },
   {
     year: 2022, cat: 'other', team: ['gaidarski'], tags: ['security'],
-    authors: 'Gaidarski, I.',
-    title: 'Model Driven Development of Information Security System',
-    venue: 'Problems of Engineering Cybernetics and Robotics 76, BAS, pp. 47–62', doi: '10.7546/PECR.76.21.04',
-  },
-  {
-    year: 2022, cat: 'other', team: ['gaidarski'], tags: ['security'],
     authors: 'Gaidarski, I., Kutinchev, P.',
     title: 'Transformation of UML Design Models of Information Security System into Agent-based Simulation Models',
     venue: 'Information & Security: An International Journal 53(1), Procon, pp. 65–77', doi: '10.11610/isij.5305',
