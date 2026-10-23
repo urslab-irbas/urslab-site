@@ -1,5 +1,5 @@
 // Връщане (премахване от сайта) на цитиране, въведено през формата — стартира се от .github/workflows/revert-citation.yml,
-// когато ръководителят отметне „Върни“ в коментара на заявката „[Цитиране] …“.
+// когато ръководителят отметне „Върни“ в текста на заявката (или в коментара при по-старите заявки) „[Цитиране] …“.
 // Премахва записа от src/data/citations/<член>/contrib.json на всички съавтори, на които е отчетено, и пише в publish-log.md.
 import { readFileSync, writeFileSync, existsSync, appendFileSync, readdirSync } from 'node:fs';
 const issue = Number(process.env.ISSUE_NUMBER || 0);
