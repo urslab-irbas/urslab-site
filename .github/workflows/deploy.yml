@@ -90,4 +90,9 @@ jobs:
       - name: Check the live site
         if: env.DEPLOY_HOST != ''
         # сървърът понякога отговаря бавно веднага след качването — до 4 опита по 30 s, без да проваля качването при еднократно забавяне
-        run: curl -fsS --retry 4 --retry-delay 15 --retry-all-errors --max-time 30 -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/
+        # Само за сведение: качването вече е успешно. Ако сървърът не отговори на GitHub (бавен или филтрира външни адреси),
+        # се показва предупреждение, а изпълнението остава зелено. 2 опита по 20 s — без минути чакане.
+        run: |
+          if curl -fsS --retry 1 --retry-delay 5 --retry-all-errors --max-time 20 -o /dev/null -w "urs.ir.bas.bg → HTTP %{http_code}\n" https://urs.ir.bas.bg/; then :; else
+            echo "::warning::urs.ir.bas.bg не отговори на GitHub след качването. Файловете са качени; проверете сайта в браузъра."
+          fi
