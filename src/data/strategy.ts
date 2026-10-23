@@ -97,8 +97,8 @@ export function strategyFor(id: string): Strategy {
   // Д — от проверените цитирания (ръчно, през формата и с отметка)
   const cit = citationsFor(id, pub);
   const dLines: Line[] = []; let dPts = 0, nCit = 0;
-  for (const [p, b] of cit) { dPts += b.pts; nCit += b.work.cites.length; if (b.pts) dLines.push({ text: `${p.title.slice(0, 90)} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
-  for (const b of hiddenCitationsFor(id)) { dPts += b.pts; nCit += b.work.cites.length; dLines.push({ text: `${b.work.hidden!.text.slice(0, 90)} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
+  for (const [p, b] of cit) { dPts += b.pts; nCit += b.work.cites.length; if (b.pts) dLines.push({ text: `${p.title} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
+  for (const b of hiddenCitationsFor(id)) { dPts += b.pts; nCit += b.work.cites.length; dLines.push({ text: `${b.work.hidden!.text} — ${b.work.cites.length} цит.`, pts: r2(b.pts) }); }
   const notes: string[] = []; const steps: string[] = []; const expected: string[] = [];
   const rec = nacidRecords[id];
   let groups: GroupRes[];
@@ -120,19 +120,19 @@ export function strategyFor(id: string): Strategy {
     const mono = pub.filter((p) => p.cat === 'mono');
     const books = pub.filter((p) => p.cat === 'book');
     const other = pub.filter((p) => !INDEXED.includes(p.cat) && !p.ix && !['mono', 'book', 'soft'].includes(p.cat));
-    const line = (p: ArchivePub, base: number, ind: string) => { const n = nAuthors(p); return { text: `${p.year}. ${p.title.slice(0, 90)} (${ind}; ${base}/${n})`, pts: r2(base / n) }; };
+    const line = (p: ArchivePub, base: number, ind: string) => { const n = nAuthors(p); return { text: `${p.year}. ${p.title} (${ind}; ${base}/${n})`, pts: r2(base / n) }; };
     const needV = (REQ['В'][col] ?? 0) > 0;
     const plans: { V: Line[]; G: Line[]; vCond?: string }[] = [];
     // план 1: В от ≥ 10 индексирани (оптимален избор), останалите — Г7; монографиите — Г5
     const pick = needV ? chooseV(idx.map((p) => 60 / nAuthors(p))) : null;
     if (pick) {
       const inV = new Set(pick);
-      plans.push({ V: pick.map((i) => line(idx[i], 60, 'показател 4')), G: [...idx.filter((_, i) => !inV.has(i)).map((p) => line(p, 40, 'показател 7')), ...mono.map((p) => ({ text: `${p.year}. ${p.title.slice(0, 90)} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))] });
+      plans.push({ V: pick.map((i) => line(idx[i], 60, 'показател 4')), G: [...idx.filter((_, i) => !inV.has(i)).map((p) => line(p, 40, 'показател 7')), ...mono.map((p) => ({ text: `${p.year}. ${p.title} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))] });
     }
     // план 2: монография като хабилитационен труд (В3), всички индексирани — Г7
-    if (needV && mono.length) plans.push({ V: [{ text: `${mono[0].year}. ${mono[0].title.slice(0, 90)} (показател 3, монография)`, pts: 100 }], G: [...idx.map((p) => line(p, 40, 'показател 7')), ...mono.slice(1).map((p) => ({ text: `${p.year}. ${p.title.slice(0, 90)} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))] });
+    if (needV && mono.length) plans.push({ V: [{ text: `${mono[0].year}. ${mono[0].title} (показател 3, монография)`, pts: 100 }], G: [...idx.map((p) => line(p, 40, 'показател 7')), ...mono.slice(1).map((p) => ({ text: `${p.year}. ${p.title} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))] });
     // план 3: без В (не е постигнато) — всичко в Г
-    plans.push({ V: [], G: [...idx.map((p) => line(p, 40, 'показател 7')), ...mono.map((p) => ({ text: `${p.year}. ${p.title.slice(0, 90)} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))], vCond: needV ? `Показател 4 изисква поне 10 публикации в Scopus/WoS със сбор ≥ 100 т. (60/n); на сайта има ${idx.length} индексирани` : undefined });
+    plans.push({ V: [], G: [...idx.map((p) => line(p, 40, 'показател 7')), ...mono.map((p) => ({ text: `${p.year}. ${p.title} (показател 5)`, pts: 30 })), ...other.map((p) => line(p, 20, 'показател 8'))], vCond: needV ? `Показател 4 изисква поне 10 публикации в Scopus/WoS със сбор ≥ 100 т. (60/n); на сайта има ${idx.length} индексирани` : undefined });
     const sum = (l: Line[]) => r2(l.reduce((s, x) => s + x.pts, 0));
     const def = (pl: (typeof plans)[0]) => Math.max(0, (REQ['В'][col] ?? 0) - sum(pl.V)) + Math.max(0, (REQ['Г'][col] ?? 0) - sum(pl.G));
     const best = plans.sort((a, b) => def(a) - def(b) || sum(b.V) + sum(b.G) - sum(a.V) - sum(a.G))[0];
@@ -169,7 +169,8 @@ export function strategyFor(id: string): Strategy {
   for (const p of sub) {
     const e = expectedFor(p.venue ?? '');
     const n = nAuthors(p);
-    expected.push(`${p.title.slice(0, 90)} — ${e ? `очаквано в Scopus (${e.name}): +${r2(40 / n)} т. за Г (40/${n}) или +1 публикация за показател 4 (60/${n})` : `нереферирано: +${r2(20 / n)} т. за Г (20/${n}), ако е с научно рецензиране`}`);
+    const idxd = !!e && INDEXED.includes(e.cat); // очаквано в Scopus/WoS само ако поредицата е с квартил / SJR / индексирана
+    expected.push(`${p.title} — ${idxd ? `очаквано в Scopus (${e!.name}): +${r2(40 / n)} т. за Г (40/${n}) или +1 публикация за показател 4 (60/${n})` : `${e ? `${e.name}; ` : ''}не е в Scopus/WoS: +${r2(20 / n)} т. за Г (показател 8, 20/${n}), ако е с научно рецензиране`}`);
   }
   return { member: m, target, manual: !!rec, groups, steps, notes, expected, pending: null };
 }
