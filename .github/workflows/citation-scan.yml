@@ -143,15 +143,17 @@ jobs:
             }
             const links = made.map((x) => `#${x.number}`).join(', ');
             for (const o of old) {
-              await github.rest.issues.createComment({ owner, repo, issue_number: o.number, body: `ℹ️ Заменена от новото търсене: ${links}. Цитиранията, които още чакат, са там.` });
-              await github.rest.issues.update({ owner, repo, issue_number: o.number, state: 'closed', state_reason: 'completed' });
+              // без коментар (без писмо): бележката се добавя към текста на старата заявка
+              const cur = (await github.rest.issues.get({ owner, repo, issue_number: o.number })).data.body ?? '';
+              await github.rest.issues.update({ owner, repo, issue_number: o.number, state: 'closed', state_reason: 'completed', body: `> ℹ️ Заменена от новото търсене: ${links}. Цитиранията, които още чакат, са там.\n\n${cur}` });
             }
             core.setOutput('url', made[0].html_url);
             const html = fs.readFileSync('scan-report.html', 'utf8').replace('__ISSUES__', made.map((x, i) => `<a href="${x.html_url}">${made.length > 1 ? `част ${i + 1} (#${x.number})` : `заявка #${x.number} в GitHub`}</a>`).join(', '));
             fs.writeFileSync('scan-report.html', html);
             if (context.eventName === 'issues') {
-              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body: `✅ Търсенето завърши — резултатът е в ${links}.` });
-              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed' });
+              // без коментар (без писмо): новата заявка с отметките и писмото „нови цитирания“ са достатъчни
+              const cur = (await github.rest.issues.get({ owner, repo, issue_number: context.issue.number })).data.body ?? '';
+              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed', body: `${cur}\n\n---\n✅ Търсенето завърши — резултатът е в ${links}.` });
             }
       - name: Имейл
         if: steps.scan.outcome == 'success' && env.MAIL_SERVER != '' && steps.scan.outputs.total != '0'

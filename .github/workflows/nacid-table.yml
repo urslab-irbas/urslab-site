@@ -121,5 +121,9 @@ jobs:
               : process.env.MAIL_READY !== 'true'
                 ? '⚠️ Писмото не беше изпратено: пощата на Системата още не е настроена (тайните MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM). Ръководителят ще я настрои.'
                 : '⚠️ Писмото не беше изпратено — ръководителят ще провери настройките на пощата.';
-            await github.rest.issues.createComment({ owner, repo, issue_number: num, body });
+            // при успех — без коментар (без второ писмо): отбелязва се в текста на заявката; коментар — само при проблем
+            if (ok) {
+              const cur = (await github.rest.issues.get({ owner, repo, issue_number: num })).data.body ?? '';
+              await github.rest.issues.update({ owner, repo, issue_number: num, body: `${cur}\n\n---\n${body}` });
+            } else await github.rest.issues.createComment({ owner, repo, issue_number: num, body });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: ok ? 'completed' : 'not_planned' });

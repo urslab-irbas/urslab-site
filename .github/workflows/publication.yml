@@ -113,10 +113,13 @@ jobs:
               text = `<!-- revert-pub -->\n✅ **Публикувано на сайта** (до около минута; обновете с Ctrl+F5).\n\n> ${r.apa}\n\n` +
                 `**Проверено в регистрите:**\n${r.verified.map((v) => '- ' + v).join('\n')}\n\n` +
                 `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/data/publish-log.md)\n\n` +
-                `@${owner} — уведомление за нова публикация. Ако трябва да се премахне от сайта, отметнете:\n\n` +
+                `Ако трябва да се премахне от сайта, ръководителят отметва:\n\n` +
                 `- [ ] **Върни** — премахни тази публикация от сайта`;
               close = true; label = 'публикувана'; reason = 'completed';
             }
-            await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
+            // При успех — без коментар (коментарът праща писмо на всички в заявката): резултатът и „Върни“ се добавят
+            // към текста на заявката (редакция — без писмо). Писмо (коментар) — само когато се иска действие.
+            const appendBody = async (n, block) => { const cur = (await github.rest.issues.get({ owner, repo, issue_number: n })).data.body ?? ''; await github.rest.issues.update({ owner, repo, issue_number: n, body: `${cur}\n\n---\n${block}` }); };
+            if (label === 'публикувана') await appendBody(num, text); else await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
             try { await github.rest.issues.addLabels({ owner, repo, issue_number: num, labels: ['публикация', label] }); } catch (e) { core.warning(e.message); }
             if (close) await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: reason });

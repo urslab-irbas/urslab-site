@@ -131,6 +131,7 @@ jobs:
               const t = fs.readFileSync('src/data/team/' + f, 'utf8'); const id = (t.match(/id:\s*'([^']+)'/) || [])[1];
               if (id) names[id] = (t.match(/name:\s*\{\s*bg:\s*'([^']+)'/) || [])[1] || id;
             }
+            const appendBody = async (n, block) => { const cur = (await github.rest.issues.get({ owner, repo, issue_number: n })).data.body ?? ''; await github.rest.issues.update({ owner, repo, issue_number: n, body: `${cur}\n\n---\n${block}` }); };
             const scanUpd = {}; // номер на „[Нови цитирания]“ → [{ id, text }]
             for (const r of results) {
               const num = r.number;
@@ -153,13 +154,14 @@ jobs:
                 text = `<!-- revert-cit -->\n✅ **Цитирането е добавено в „Обобщен отчет“** (до около минута; обновете с Ctrl+F5).\n\n> ${r.apa}\n\n` +
                   `**Проверено в регистрите:**\n${r.verified.map((v) => '- ' + v).join('\n')}\n\n` +
                   `Запис: ${process.env.SHA?.slice(0, 7)} · дневник: [publish-log.md](${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/blob/data/publish-log.md)\n\n` +
-                  `@${owner} — уведомление за ново цитиране. Ако трябва да се премахне, отметнете:\n\n` +
+                  `Ако трябва да се премахне, ръководителят отметва:\n\n` +
                   `- [ ] **Върни** — премахни това цитиране от сайта`;
                 close = true; label = 'публикувана'; reason = 'completed';
                 const ind = (r.apa.match(/— Д-(\d+), (\d+) т\./) || []);
                 status = `✅ добавено${ind[1] ? ` (Д-${ind[1]}, ${ind[2]} т.)` : ''} — #${num}; отчетено на: ${(r.members || []).map((m) => names[m] || m).join(', ')}`;
               }
-              await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
+              // При успех — без коментар (без писмо): резултатът и „Върни“ се добавят към текста на заявката.
+              if (label === 'публикувана') await appendBody(num, text); else await github.rest.issues.createComment({ owner, repo, issue_number: num, body: text });
               try { await github.rest.issues.addLabels({ owner, repo, issue_number: num, labels: ['цитиране', label] }); } catch (e) { core.warning(e.message); }
               if (close) await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: reason });
               if (r.scan) (scanUpd[r.scan.issue] ??= []).push({ id: r.scan.id, text: status });

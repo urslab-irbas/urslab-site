@@ -5,6 +5,8 @@ name: Връщане на цитиране
 on:
   issue_comment:
     types: [edited]
+  issues:
+    types: [edited]
 permissions:
   contents: write
   issues: write
@@ -16,10 +18,15 @@ jobs:
   revert:
     if: >-
       startsWith(github.event.issue.title, '[Цитиране]') &&
-      github.event.comment.user.login == 'github-actions[bot]' &&
-      contains(github.event.comment.body, '<!-- revert-cit -->') &&
-      contains(github.event.comment.body, '- [x] **Върни**') &&
-      github.event.sender.login == github.repository_owner
+      github.event.sender.login == github.repository_owner && (
+        (github.event_name == 'issue_comment' &&
+         github.event.comment.user.login == 'github-actions[bot]' &&
+         contains(github.event.comment.body, '<!-- revert-cit -->') &&
+         contains(github.event.comment.body, '- [x] **Върни**')) ||
+        (github.event_name == 'issues' &&
+         contains(github.event.issue.body, '<!-- revert-cit -->') &&
+         contains(github.event.issue.body, '- [x] **Върни**') &&
+         !contains(github.event.issue.labels.*.name, 'върната')))
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
