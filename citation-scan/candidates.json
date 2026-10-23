@@ -1,44 +1,6 @@
 {
- "date": "2026-10-21",
+ "date": "2026-10-23",
  "items": {
-  "38283376": {
-   "key": "doi:10.1007/978-3-030-65722-2_24|10.1016/j.cose.2023.103139",
-   "cited": "doi:10.1007/978-3-030-65722-2_24",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Computers and Security, покритие 1982–2027 (ISSN 0167-4048 / 1872-6208)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-65722-2_24",
-    "src": "doi",
-    "doi": "10.1016/j.cose.2023.103139",
-    "authors": "Mouratidis, H., Islam, S., Santos-Olmo, A., Sanchez, L. E., & Ismail, U. M.",
-    "year": 2023,
-    "title": "Modelling language for cyber security incident handling for critical infrastructures",
-    "venue": "Computers &amp; Security",
-    "volume": "128",
-    "pages": "103139",
-    "publisher": "Elsevier BV",
-    "idType": "issn",
-    "idValue": "0167-4048",
-    "where": "[19]"
-   },
-   "evidence": "в литературата: позиция 19 от 66 (Crossref)",
-   "line": "Mouratidis, H., Islam, S., Santos-Olmo, A., Sanchez, L. E., & Ismail, U. M. (2023). Modelling language for cyber security incident handling for critical infrastructures. Computers & Security. https://doi.org/10.1016/j.cose.2023.103139",
-   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
-  },
   "55096453": {
    "key": "doi:10.26830/symmetry_2023_3_333|10.58524/jasme.v5i1.562",
    "cited": "doi:10.26830/symmetry_2023_3_333",
@@ -743,78 +705,6 @@
    },
    "evidence": "в литературата: позиция 10 от 52 (Crossref)",
    "line": "Sterev, N., Miltchev, R., & Yordanov, D. (2026). Digital Twins as a Bridge Between Industry 5.0 and Education 5.0. IGI Global eBooks. https://doi.org/10.4018/979-8-2600-1669-5.ch009",
-   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
-  },
-  "b933b8c7": {
-   "key": "doi:10.1109/electronica52725.2021.9513705|10.1007/978-3-031-27034-5_3",
-   "cited": "doi:10.1109/electronica52725.2021.9513705",
-   "owners": [
-    "chehlarova"
-   ],
-   "eligible": [
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)",
-   "data": {
-    "type": "citation",
-    "member": "chehlarova",
-    "cited": "doi:10.1109/electronica52725.2021.9513705",
-    "src": "doi",
-    "doi": "10.1007/978-3-031-27034-5_3",
-    "authors": "Dimitrova, Z., Borissova, D., Mikhov, R., & Dimitrov, V.",
-    "year": 2023,
-    "title": "Group Decision-Making Involving Competence of Experts in Relation to Evaluation Criteria: Case Study for e-Commerce Platform Selection",
-    "venue": "Communications in Computer and Information Science",
-    "pages": "42-53",
-    "publisher": "Springer Nature Switzerland",
-    "idType": "issn",
-    "idValue": "1865-0929",
-    "where": "[13]"
-   },
-   "evidence": "в литературата: позиция 13 от 25 (Crossref)",
-   "line": "Dimitrova, Z., Borissova, D., Mikhov, R., & Димитров, В. (2023). Group Decision-Making Involving Competence of Experts in Relation to Evaluation Criteria: Case Study for e-Commerce Platform Selection. Communications in computer and information science. https://doi.org/10.1007/978-3-031-27034-5_3",
-   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
-  },
-  "83d871d8": {
-   "key": "doi:10.1109/electronica52725.2021.9513705|10.1145/3543434.3543476",
-   "cited": "doi:10.1109/electronica52725.2021.9513705",
-   "owners": [
-    "chehlarova"
-   ],
-   "eligible": [
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2022 — проверете)",
-   "data": {
-    "type": "citation",
-    "member": "chehlarova",
-    "cited": "doi:10.1109/electronica52725.2021.9513705",
-    "src": "doi",
-    "doi": "10.1145/3543434.3543476",
-    "authors": "Koddebusch, M.",
-    "year": 2022,
-    "title": "Exposing the Phish: The Effect of Persuasion Techniques in Phishing E-Mails",
-    "venue": "DG.O 2022: The 23rd Annual International Conference on Digital Government Research",
-    "pages": "78-87",
-    "publisher": "ACM",
-    "where": "[15]"
-   },
-   "evidence": "в литературата: позиция 15 от 56 (Crossref)",
-   "line": "Koddebusch, M. (2022). Exposing the Phish: The Effect of Persuasion Techniques in Phishing E-Mails. Digital Government Research. https://doi.org/10.1145/3543434.3543476",
    "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
   },
   "c415c816": {
@@ -2045,44 +1935,8 @@
    "line": "Kadam, V. M. S. (2024). The performance of Logistic Regression, Decision Tree, KNN, Naive Bayes and SVM for identifying Automotive Cybersecurity Attack and Prevention: An Experimental Study. Journal of Electrical Systems. https://doi.org/10.52783/jes.1535",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
-  "2b4e1bbe": {
-   "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.82.24.01",
-   "cited": "doi:10.7546/pecr.76.21.04",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.7546/pecr.76.21.04",
-    "src": "doi",
-    "doi": "10.7546/pecr.82.24.01",
-    "authors": "Dimitrov, V., & Dimitrova, Z.",
-    "year": 2024,
-    "title": "Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation",
-    "venue": "Problems of Engineering Cybernetics and Robotics",
-    "volume": "82",
-    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
-    "idType": "issn",
-    "idValue": "2738-7356"
-   },
-   "evidence": "DOI в Crossref (литературата не е публикувана там)",
-   "line": "Димитров, В., & Dimitrova, Z. (2024). Information System for Generating Schedules for Preventive Examinations: An Algorithmic Implementation. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.82.24.01",
-   "work": "Gaidarski, I. (2022). Model Driven Development of Information Security System"
-  },
-  "c0ebcea1": {
-   "key": "doi:10.1007/978-3-030-65722-2_24|10.1016/j.im.2023.103877",
+  "709b9e33": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/iccr61006.2024.10532956",
    "cited": "doi:10.1007/978-3-030-65722-2_24",
    "owners": [
     "gaidarski"
@@ -2090,34 +1944,23 @@
    "eligible": [
     "gaidarski"
    ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Information and Management, покритие 1977–2026 (ISSN 0378-7206 / 1872-7530)",
+   "status": "doubt",
+   "options": [],
    "data": {
     "type": "citation",
     "member": "gaidarski",
     "cited": "doi:10.1007/978-3-030-65722-2_24",
     "src": "doi",
-    "doi": "10.1016/j.im.2023.103877",
-    "authors": "Renaud, K., Warkentin, M., Pogrebna, G., & van der Schyff, K.",
+    "doi": "10.1109/iccr61006.2024.10532956",
+    "authors": "Asasfeh, A., Alnawayseh, S. E. A., AbdElkareem, R., & Salahat, M.",
     "year": 2024,
-    "title": "VISTA: An inclusive insider threat taxonomy, with mitigation strategies",
-    "venue": "Information &amp; Management",
-    "volume": "61",
-    "issue": "1",
-    "pages": "103877",
-    "publisher": "Elsevier BV",
-    "idType": "issn",
-    "idValue": "0378-7206",
-    "where": "[143]"
+    "title": "Human Factors In Security Management: Understanding And Mitigating Insider Threats",
+    "venue": "2024 2nd International Conference on Cyber Resilience (ICCR)",
+    "pages": "1-10",
+    "publisher": "IEEE"
    },
-   "evidence": "в литературата: позиция 143 от 260 (Crossref)",
-   "line": "Renaud, K., Warkentin, M. E., Pogrebna, G., & Schyff, K. V. D. (2023). VISTA: An inclusive insider threat taxonomy, with mitigation strategies. Information & Management. https://doi.org/10.1016/j.im.2023.103877",
+   "evidence": "",
+   "line": "Asasfeh, A., Alnawayseh, S. E. A., Alomoush, R. A., & Salahat, M. (2024). Human Factors In Security Management: Understanding And Mitigating Insider Threats. International Conference on Cyber Resilience (ICCR). https://doi.org/10.1109/iccr61006.2024.10532956",
    "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
   },
   "b3a1590a": {
@@ -2196,71 +2039,6 @@
    "line": "Sekonya, N., & Sithungu, S. P. (2023). The Impact of Edge Computing on the Industrial Internet of Things. International Conference on Cyber Warfare and Security. https://doi.org/10.34190/iccws.18.1.969",
    "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
   },
-  "709b9e33": {
-   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/iccr61006.2024.10532956",
-   "cited": "doi:10.1007/978-3-030-65722-2_24",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "doubt",
-   "options": [],
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-65722-2_24",
-    "src": "doi",
-    "doi": "10.1109/iccr61006.2024.10532956",
-    "authors": "Asasfeh, A., Alnawayseh, S. E. A., AbdElkareem, R., & Salahat, M.",
-    "year": 2024,
-    "title": "Human Factors In Security Management: Understanding And Mitigating Insider Threats",
-    "venue": "2024 2nd International Conference on Cyber Resilience (ICCR)",
-    "pages": "1-10",
-    "publisher": "IEEE"
-   },
-   "evidence": "",
-   "line": "Asasfeh, A., Alnawayseh, S. E. A., Alomoush, R. A., & Salahat, M. (2024). Human Factors In Security Management: Understanding And Mitigating Insider Threats. International Conference on Cyber Resilience (ICCR). https://doi.org/10.1109/iccr61006.2024.10532956",
-   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
-  },
-  "cfe7d4a2": {
-   "key": "doi:10.1007/978-3-030-65722-2_24|10.1007/978-3-031-84078-4_26",
-   "cited": "doi:10.1007/978-3-030-65722-2_24",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-65722-2_24",
-    "src": "doi",
-    "doi": "10.1007/978-3-031-84078-4_26",
-    "authors": "Esparza, E., Diéguez, M., & Hochstetter, J.",
-    "year": 2025,
-    "title": "Prediction, Detection and Control of Insider Threats in Organizations",
-    "venue": "Communications in Computer and Information Science",
-    "pages": "378-395",
-    "publisher": "Springer Nature Switzerland",
-    "idType": "issn",
-    "idValue": "1865-0929",
-    "where": "[16]"
-   },
-   "evidence": "в литературата: позиция 16 от 93 (Crossref)",
-   "line": "Esparza, E., Diéguez, M., & Hochstetter-Diez, J. (2025). Prediction, Detection and Control of Insider Threats in Organizations. Communications in computer and information science. https://doi.org/10.1007/978-3-031-84078-4_26",
-   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
-  },
   "9ad4808a": {
    "key": "doi:10.3390/drones9110776|10.1515/jag-2026-0030",
    "cited": "doi:10.3390/drones9110776",
@@ -2296,45 +2074,6 @@
    "evidence": "в литературата: позиция 7 от 55 (Crossref)",
    "line": "HAO, X., Yan, B., He, Q., & Xing, D. (2026). Deep learning-based BDS-3 ephemeris and positioning performance prediction. Journal of Applied Geodesy. https://doi.org/10.1515/jag-2026-0030",
    "work": "González-deSantos, L. M., Bruzual, J., Socías, D., Lacarra Arcos, E., Santos, M., González, R., Gil, E., Moreno López, G., Hristozov, S., Karas, J., Vyshnevskyy, M., Gebhardt, J., Haro, P., Bellingham, S. R. (2025). Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations"
-  },
-  "3083d552": {
-   "key": "doi:10.3390/engproc2025090047|10.3390/aerospace12050449",
-   "cited": "doi:10.3390/engproc2025090047",
-   "owners": [
-    "hristozov"
-   ],
-   "eligible": [
-    "hristozov"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)",
-   "data": {
-    "type": "citation",
-    "member": "hristozov",
-    "cited": "doi:10.3390/engproc2025090047",
-    "src": "doi",
-    "doi": "10.3390/aerospace12050449",
-    "authors": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C.",
-    "year": 2025,
-    "title": "ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes",
-    "venue": "Aerospace",
-    "volume": "12",
-    "issue": "5",
-    "pages": "449",
-    "publisher": "MDPI AG",
-    "idType": "eissn",
-    "idValue": "2226-4310",
-    "where": "[30]"
-   },
-   "evidence": "в литературата: позиция 30 от 32 (Crossref)",
-   "line": "Pastor, E., Macias, M., Martin, Y., Sanchez, A., & Barrado, C. (2025). ACCORD: A Formal Model for the Digitalization and Automation of Drone Coordination Processes. Aerospace. https://doi.org/10.3390/aerospace12050449",
-   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "4ba869b5": {
    "key": "doi:10.3390/engproc2025090047|10.3390/computation14090214",
@@ -2410,8 +2149,8 @@
    "line": "Jiang, H., Cai, W., Huang, K., & Zong, S. (2026). Optimization of Landing Pad Size for Small and Medium-Sized UAV Vertiports Based on Monte Carlo Simulation. https://doi.org/10.1145/3829641.3829793",
    "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
-  "dec55ccc": {
-   "key": "doi:10.3390/engproc2025090047|10.3390/aerospace13090848",
+  "eb771886": {
+   "key": "doi:10.3390/engproc2025090047|10.21203/rs.3.rs-11151733/v1",
    "cited": "doi:10.3390/engproc2025090047",
    "owners": [
     "hristozov"
@@ -2419,34 +2158,22 @@
    "eligible": [
     "hristozov"
    ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Aerospace, покритие 2014–2026 (ISSN 2226-4310)",
+   "status": "doubt",
+   "options": [],
    "data": {
     "type": "citation",
     "member": "hristozov",
     "cited": "doi:10.3390/engproc2025090047",
     "src": "doi",
-    "doi": "10.3390/aerospace13090848",
-    "authors": "Alomar, I., Adilbekov, A., & Maklakovs, J.",
+    "doi": "10.21203/rs.3.rs-11151733/v1",
+    "authors": "Amine, J. E., Elbasi, E., Zaki, C., Topcu, A. E., Saker, L., Baz, B., Moustafa, N., & Nasser, A.",
     "year": 2026,
-    "title": "A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study",
-    "venue": "Aerospace",
-    "volume": "13",
-    "issue": "9",
-    "pages": "848",
-    "publisher": "MDPI AG",
-    "idType": "eissn",
-    "idValue": "2226-4310",
-    "where": "[32]"
+    "title": "AI-Enabled UAV Ecosystems: A Framework-Driven Review of Autonomy, Communication, Energy, and Governance",
+    "venue": "Research Square",
+    "publisher": "Springer Science and Business Media LLC"
    },
-   "evidence": "в литературата: позиция 32 от 41 (Crossref)",
-   "line": "Alomar, I., Adilbekov, A., & Maklakovs, J. (2026). A Bayesian Network Augmentation of JARUS SORA 2.5 for Probabilistic UAS Operational Risk Assessment: A Proof-of-Concept Study. Aerospace. https://doi.org/10.3390/aerospace13090848",
+   "evidence": "",
+   "line": "Amine, J. A. E., Α, E. E., Zaki, C., Topcu, A. E., Saker, L., Baz, B. E., Moustafa, N., & Nasser, A. (2026). AI-Enabled UAV Ecosystems: A Framework-Driven Review of Autonomy, Communication, Energy, and Governance. Research Square. https://doi.org/10.21203/rs.3.rs-11151733/v1",
    "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "c746b6ce": {
