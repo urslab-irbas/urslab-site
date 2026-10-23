@@ -19,6 +19,8 @@ jobs:
     if: startsWith(github.event.issue.title, '[Точки НАЦИД]')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    env:
+      MAIL_READY: ${{ secrets.MAIL_SERVER != '' && secrets.MAIL_FROM != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -82,7 +84,7 @@ jobs:
           node -e 'const j=require("./nacid-mail.json"); require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `subject=${j.subject}\n`)'
       - name: Имейл
         id: mail
-        if: steps.calc.outcome == 'success' && steps.gate.outputs.to != ''
+        if: steps.calc.outcome == 'success' && steps.gate.outputs.to != '' && env.MAIL_READY == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.MAIL_SERVER }}
@@ -106,6 +108,8 @@ jobs:
             const ok = process.env.SENT === 'success';
             const body = ok
               ? `✉️ Таблицата „Точки НАЦИД“ и стратегията са изпратени по имейл ${process.env.MEMBER_MAIL === 'yes' ? 'на потребителя и на ръководителя' : 'на ръководителя (за потребителя няма имейл в Системата)'}.`
-              : '⚠️ Писмото не беше изпратено — ръководителят ще провери настройките на пощата.';
+              : process.env.MAIL_READY !== 'true'
+                ? '⚠️ Писмото не беше изпратено: пощата на Системата още не е настроена (тайните MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM). Ръководителят ще я настрои.'
+                : '⚠️ Писмото не беше изпратено — ръководителят ще провери настройките на пощата.';
             await github.rest.issues.createComment({ owner, repo, issue_number: num, body });
             await github.rest.issues.update({ owner, repo, issue_number: num, state: 'closed', state_reason: ok ? 'completed' : 'not_planned' });
