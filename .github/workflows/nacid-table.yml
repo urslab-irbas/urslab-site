@@ -1,7 +1,7 @@
 # Б4 (задача #121): „Точки НАЦИД“ и стратегия — по имейл само на потребителя и на ръководителя.
 # Бутонът „Таблица по имейл“ в „Обобщен отчет“ отваря заявка „[Точки НАЦИД] <име>“ с ред „Потребител: <id>“ (приема се и старият „Член: <id>“).
 # Приема се само от GitHub акаунта на самия потребител или на ръководителя (собственика на хранилището); иначе — отказ.
-# В заявката не се пишат числа: таблицата е само в писмото. Нищо не се записва и не се качва като артефакт.
+# В заявката не се пишат числа: таблицата е само в приложения към писмото PDF (справка за всички потребители). Нищо не се записва и не се качва като артефакт.
 # Дневникът на изпълнението е публичен: адресите се маскират, темата на писмото е неутрална (без недостиг / резултат).
 # Получатели: имейлът на потребителя (поле email в профила или тайната MEMBER_EMAILS: „id=адрес; id=адрес“) + ръководителят.
 name: Точки НАЦИД по имейл
@@ -81,10 +81,19 @@ jobs:
         if: steps.gate.outputs.ok == 'true'
         run: |
           npx tsx scripts/nacid-mail.ts "${{ steps.gate.outputs.id }}" > /dev/null
-          node -e 'const j=require("./nacid-mail.json"); require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `subject=${j.subject}\n`)'
+          node -e 'const j=require("./nacid-mail.json"); require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `subject=${j.subject}\npdf=${j.pdf}\n`)'
+      - name: Справката в PDF
+        id: pdf
+        if: steps.calc.outcome == 'success'
+        env:
+          PDF: ${{ steps.calc.outputs.pdf }}
+        run: |
+          CH=$(command -v google-chrome || command -v chromium || command -v chromium-browser)
+          "$CH" --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer --print-to-pdf-no-header --print-to-pdf="$PDF" "file://$PWD/nacid-report.html" 2>/dev/null
+          test -s "$PDF" && echo "PDF: $(stat -c %s "$PDF") байта"
       - name: Имейл
         id: mail
-        if: steps.calc.outcome == 'success' && steps.gate.outputs.to != '' && env.MAIL_READY == 'true'
+        if: steps.pdf.outcome == 'success' && steps.gate.outputs.to != '' && env.MAIL_READY == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.MAIL_SERVER }}
@@ -95,6 +104,7 @@ jobs:
           to: ${{ steps.gate.outputs.to }}
           subject: ${{ steps.calc.outputs.subject }}
           html_body: file://nacid-mail.html
+          attachments: ${{ steps.calc.outputs.pdf }}
           convert_markdown: false
       - name: Отговор в заявката (без числа)
         if: always() && steps.gate.outputs.ok == 'true'
