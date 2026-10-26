@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification"
+version: "1.0.0"
+authors:
+  - family-names: Madzharov
+    given-names: Anastas
+    affiliation: "Institute of Robotics, Bulgarian Academy of Sciences"
+    orcid: "https://orcid.org/0000-0002-6282-617X"
+  - family-names: Chehlarova
+    given-names: Neda
+    affiliation: "Institute of Robotics, Bulgarian Academy of Sciences"
+    orcid: "https://orcid.org/0000-0001-6045-1709"
+  - family-names: Gaidarski
+    given-names: Ivan
+    affiliation: "Institute of Robotics, Bulgarian Academy of Sciences"
+    orcid: "https://orcid.org/0000-0002-4979-445X"
+license: Apache-2.0
+repository-code: "https://github.com/urslab-irbas/urslab-site"
+url: "https://urs.ir.bas.bg"
+keywords:
+  - research information system
+  - scientometrics
+  - bibliographic verification
+  - citation tracking
+  - NACID

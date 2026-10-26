@@ -1,5 +1,5 @@
 // Ръководство „Цитирания“ (само за членовете с акаунт): guide.html → public/docs/URSlab-citirania.pdf
-// Пускане: node scripts/citation-guide/pdf.js "$PWD/scripts/citation-guide" && cp scripts/citation-guide/URSlab-citirania.pdf public/docs/
+// Пускане: NODE_PATH=$(npm root -g) node scripts/citation-guide/pdf.cjs "$PWD/scripts/citation-guide" && cp scripts/citation-guide/URSlab-citirania.pdf public/docs/
 // Снимките (s*.png) са от изградения сайт; обновете ги при промяна на формата.
 const {chromium}=require('playwright');
 (async()=>{const d=process.argv[2];const b=await chromium.launch();const p=await b.newPage();

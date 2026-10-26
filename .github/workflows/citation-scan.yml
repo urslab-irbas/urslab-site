@@ -61,7 +61,7 @@ jobs:
             let ok = true, why = "";
             if (ev === "issues") {
               const gh = fs.readdirSync("src/data/team").filter((f) => f.endsWith(".ts")).map((f) => (fs.readFileSync("src/data/team/" + f, "utf8").match(/github:\s*\x27([^\x27]+)\x27/) || [])[1]).filter(Boolean).map((g) => g.toLowerCase());
-              if (!gh.includes(who) && who !== process.env.OWNER.toLowerCase()) { ok = false; why = "Търсене пускат само членовете на колектива с GitHub акаунт и ръководителят."; }
+              if (!gh.includes(who) && who !== process.env.OWNER.toLowerCase()) { ok = false; why = "Търсене пускат само потребителите с GitHub акаунт и ръководителят."; }
               const st = fs.existsSync("citation-scan/state.json") ? JSON.parse(fs.readFileSync("citation-scan/state.json", "utf8")) : {};
               // ръководителят може да пуска търсене и по-често от веднъж на 24 часа
               if (ok && who !== process.env.OWNER.toLowerCase() && st.lastRun && Date.now() - Date.parse(st.lastRun) < 24 * 3600e3) { ok = false; why = "Последното търсене беше на " + st.lastRun.slice(0, 16).replace("T", " ") + " UTC (до 24 часа). Резултатът е в последната заявка „[Нови цитирания]“."; }

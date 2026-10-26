@@ -93,7 +93,7 @@ result.authorized = !!member && owners.includes(data.member) && (author === ADMI
 if (!result.authorized) {
   result.errors.push(member
     ? `Заявката е от @${author}, а цитираният труд е на ${owners.join(', ') || data.member}. Цитиране потвърждава някой от съавторите от колектива със своя GitHub акаунт или ръководителят.`
-    : `@${author} не е сред членовете на колектива с право да въвеждат цитирания.`);
+    : `@${author} не е сред потребителите с право да въвеждат цитирания.`);
   done();
 }
 const work = (citables[data.member] ?? []).find((x) => x.key === data.cited) ?? null;
@@ -164,7 +164,7 @@ try {
 }
 
 // Б2: Д-13 / Д-14 без отметка за рецензиране — изданието в НРС на НАЦИД (по ISSN / ISBN) е рецензирано по определение
-let peerBy = isYes(data.peer) ? 'потвърдено от члена' : '';
+let peerBy = isYes(data.peer) ? 'потвърдено от потребителя' : '';
 if (['13', '14'].includes(String(data.ind)) && !peerBy) {
   for (const n of [...new Set([data.idValue, ...(crm?.ISSN ?? []), ...(crm?.ISBN ?? [])].filter(Boolean))]) {
     try { const x = await nrsByNumber(n); if (x) { data.peer = true; peerBy = `НАЦИД НРС, ID ${x.id}: „${x.title}“`; break; } } catch { /* НРС не отговаря — остава отметката */ }

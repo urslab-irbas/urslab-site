@@ -64,7 +64,7 @@ const rows = [
 ];
 ---
 <Layout lang={lang} slug="publications/new" title={title} noindex
-  description={T('Въвеждане на нова публикация от член на колектива (вход с GitHub).', 'Entering a new publication by a team member (sign in with GitHub).')}>
+  description={T('Въвеждане на нова публикация от потребител (вход с GitHub).', 'Entering a new publication by a team member (sign in with GitHub).')}>
   <header class="page-head"><div class="wrap">
     <p class="eyebrow"><a href={href(lang, 'team')}>{t.team[lang]}</a> / URSlab</p>
     <h1><span class="pub-only">{title}</span><span class="cit-only">{T('Ново цитиране', 'New citation')}</span></h1>
@@ -97,7 +97,7 @@ const rows = [
         <p class="cited"><span class="l">{T('Цитиран труд', 'Cited work')}</span><span data-cited>—</span></p>
         <p class="muted coowners" data-coowners hidden></p>
         <p class="cit-only help-link"><a href="/docs/URSlab-citirania.pdf" target="_blank" rel="noopener">{T('Помощ: как се въвежда цитиране (PDF)', 'Help: how to enter a citation (PDF, in Bulgarian)')}</a></p>
-        <p class="bad-cited" data-cited-bad hidden>{T('Цитираният труд не е намерен сред публикуваните трудове на този член на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.', 'The cited work was not found among this member’s published works on the site. Open the form from the “+ Citation” button in the “Summary report”.')}</p>
+        <p class="bad-cited" data-cited-bad hidden>{T('Цитираният труд не е намерен сред публикуваните трудове на този потребител на сайта. Отворете формата от бутона „+ Цитиране“ в „Обобщен отчет“.', 'The cited work was not found among this member’s published works on the site. Open the form from the “+ Citation” button in the “Summary report”.')}</p>
         <fieldset class="f srcs" data-field="src">
           <legend class="l">{T('Как да се провери цитирането', 'How the citation is checked')} *</legend>
           <label class="src"><input type="radio" name="src" value="doi" /> <span><b>DOI</b> — {T('цитиращият труд е в световна база (Scopus, Web of Science, Crossref…). Стига DOI: натиснете „Попълни по DOI“ — данните и списъкът с литература се вземат автоматично.', 'the citing work is in a world database (Scopus, Web of Science, Crossref…). The DOI is enough: press “Fill from DOI” — the data and the reference list are taken automatically.')}</span></label>
@@ -237,7 +237,7 @@ const rows = [
         <summary>{T('Какво се проверява', 'What is checked')}</summary>
         <ul>
           <li>{T('Задължителни: автори, година, заглавие, категория, списание (или издател за книги), поне една тема.', 'Required: authors, year, title, category, journal (or publisher for books), at least one topic.')}</li>
-          <li>{T('Сред авторите трябва да има член на колектива.', 'A team member must be among the authors.')}</li>
+          <li>{T('Сред авторите трябва да има потребител от колектива.', 'A team member must be among the authors.')}</li>
           <li>{T('Всеки съавтор извън колектива трябва да има известна институция. Познатите съавтори се показват с институцията си; за новите се иска да я посочите — както е в самата публикация.', 'Every co-author outside the team must have a known institution. Known co-authors are shown with their institution; for new ones you are asked to give it — as stated in the publication itself.')}</li>
           <li>{T('DOI — във вид 10.xxxx/…; страници — „45–67“ или номер.', 'DOI as 10.xxxx/…; pages as “45–67” or a number.')}</li>
           <li>{T('Без DOI записът не се приема, докато не изберете вид идентификатор (ISSN, eISSN, ISBN или eISBN) и не въведете валиден номер — контролната цифра се проверява. В полето се пише само номерът, без Q, SJR и др.', 'Without a DOI the entry is not accepted until you choose an identifier type (ISSN, eISSN, ISBN or eISBN) and enter a valid number — the check digit is verified. Only the number goes in the field, no Q, SJR, etc.')}</li>
@@ -246,7 +246,7 @@ const rows = [
           <li>{T('Подадена или под печат публикация е винаги с категория „Подадени / под печат“ — квартил (Q1–Q4) и SJR се посочват едва след излизането ѝ. За публикувани Q1–Q4 и „SJR без квартил“ — SJR и/или IF.', 'A submitted or in-press paper always has category “Submitted / in press” — quartile (Q1–Q4) and SJR are given only once it is out. For published Q1–Q4 and “SJR, no quartile” — SJR and/or IF.')}</li>
           <li>{T('Всяко публикуване се записва в дневник, а ръководителят получава уведомление и може да върне публикацията с едно щракване.', 'Every publication is logged; the head of the lab is notified and can withdraw it with one click.')}</li>
           <li>{T('Публикацията да не е вече на сайта: същото DOI или същото заглавие с поне един общ автор. Проверката е във всички публикации на сайта, включително току-що въведените. При съвпадение на екрана излиза коя е намерената публикация и защо; данните остават във формата за поправка.', 'The publication must not already be on the site: the same DOI, or the same title with at least one common author. All site publications are checked, including those just entered. On a match the screen shows the publication found and why; the data stay in the form for correction.')}</li>
-          <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на членовете на колектива в „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
+          <li>{T('В GitHub: заявката да е от вашия акаунт. Приемат се само акаунтите на потребителите от „Състав“.', 'On GitHub: the request must come from your account. Only the accounts of team members listed in “Team” are accepted.')}</li>
         </ul>
       </details>
       <details class="cit-only" open>
@@ -261,7 +261,7 @@ const rows = [
           <li>{T('Доказателство: DOI (данните и литературата — от Crossref), линк (страницата или PDF файлът) или PDF файл, прикачен в GitHub. Вашият труд трябва да се намира в цитиращия: по DOI / ISBN или по заглавието (или превода му) до фамилията ви. Иначе цитирането не се приема.', 'Evidence: DOI (data and references from Crossref), link (the page or PDF) or a PDF attached on GitHub. Your work must be found in the citing one: by DOI / ISBN or by its title (or translation) next to your surname. Otherwise the citation is refused.')}</li>
           <li>{T('При линк или PDF заглавието на цитиращия труд трябва да е в страницата / файла — така се проверява, че е точно той.', 'With a link or PDF the title of the citing work must be in the page / file — this checks it is the right one.')}</li>
           <li>{T('DOI, ISSN или ISBN на цитиращия труд се проверяват в публичните регистри, както при нова публикация.', 'The DOI, ISSN or ISBN of the citing work is checked in the public registers, as for a new publication.')}</li>
-          <li>{T('Заявката се приема само от GitHub акаунта на члена на колектива, чийто е трудът, или от ръководителя.', 'The request is accepted only from the GitHub account of the team member whose work it is, or from the head of the lab.')}</li>
+          <li>{T('Заявката се приема само от GitHub акаунта на потребителя, чийто е трудът, или от ръководителя.', 'The request is accepted only from the GitHub account of the team member whose work it is, or from the head of the lab.')}</li>
         </ul>
       </details>
       <details>

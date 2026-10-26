@@ -1,0 +1,11 @@
+Information System for Reporting Scientific Publications and Scientometric
+Indicators with Automated Bibliographic Verification
+Copyright 2026 Anastas Madzharov, Neda Chehlarova, Ivan Gaidarski
+Unmanned Robotic Systems Laboratory (URSlab), Institute of Robotics,
+Bulgarian Academy of Sciences — https://urs.ir.bas.bg
+
+Source code: Apache License 2.0 (LICENSE).
+Texts, images, photographs and documents of the site: CC BY 4.0 (LICENSE-CONTENT.md).
+Bibliographic data from Crossref, OpenAlex, OpenCitations, Semantic Scholar and the
+NACID registers are used under their own terms. The Scopus and Web of Science source
+lists are NOT part of this distribution (they are data of Elsevier and Clarivate).

@@ -309,7 +309,7 @@ if (doubt.length) {
 }
 if (!shown.length) chunks.push('## Нови цитирания\n\nНяма нови цитирания от последното търсене.\n\n');
 if (newWorks.length) {
-  chunks.push(`## 📄 Трудове на членовете, които още не са в Системата (${newWorks.length})\n\nНамерени в OpenAlex по ORCID. Въведете ги („+ Въведи“) — след това и техните цитирания ще се търсят.\n\n`);
+  chunks.push(`## 📄 Трудове на потребителите, които още не са в Системата (${newWorks.length})\n\nНамерени в OpenAlex по ORCID. Въведете ги („+ Въведи“) — след това и техните цитирания ще се търсят.\n\n`);
   for (const x of newWorks) chunks.push(`- ${cite(x.c)} — ${x.members.map(nm).join(', ')}${x.cited ? `; **цитиран ${x.cited} пъти** (OpenAlex)` : ''} · [+ Въведи](${newPubUrl(x)})\n`);
   chunks.push('\n');
 }
@@ -337,7 +337,7 @@ if (ready.length) html += `<h3>Проверени</h3><ol>${htmlList(ready)}</ol
 if (form.length) html += `<h3>За въвеждане през формата</h3><ol>${htmlList(form)}</ol>`;
 if (doubt.length) html += `<h3>Съмнителни</h3><ol>${htmlList(doubt)}</ol>`;
 if (newWorks.length) html += `<h3>Трудове, които още не са в Системата</h3><ul>${newWorks.map((x) => `<li>${esc(cite(x.c).replace(/\*/g, ''))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
-html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно или ръчно от член на колектива.${String(process.env.SCAN_MAIL_TO || '') === '' ? ' Тестов режим: писмото отива само до ръководителя.' : ''}</small></p></div>`;
+html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно или ръчно от потребител.${String(process.env.SCAN_MAIL_TO || '') === '' ? ' Тестов режим: писмото отива само до ръководителя.' : ''}</small></p></div>`;
 
 // Кандидатите (за отметките и за формата ?scan=<id>) и състоянието
 const items = {};
