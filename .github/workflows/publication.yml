@@ -96,7 +96,7 @@ jobs:
             const { owner, repo } = context.repo;
             let text, close = false, label, reason = 'not_planned';
             if (!r.authorized) {
-              text = `❌ **Заявката не е приета.**\n\n${r.errors.join('\n')}\n\nПубликации въвеждат само членовете на колектива със своя GitHub акаунт.`;
+              text = `❌ **Заявката не е приета.**\n\n${r.errors.join('\n')}\n\nПубликации въвеждат само потребителите със своя GitHub акаунт.`;
               close = true; label = 'отказана';
             } else if (!r.ok) {
               const who = context.payload.issue.user.login;

@@ -1,0 +1,21 @@
+{
+  "title": "Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification",
+  "version": "1.0.0",
+  "upload_type": "software",
+  "creators": [
+    { "name": "Madzharov, Anastas", "affiliation": "Institute of Robotics, Bulgarian Academy of Sciences", "orcid": "0000-0002-6282-617X" },
+    { "name": "Chehlarova, Neda", "affiliation": "Institute of Robotics, Bulgarian Academy of Sciences", "orcid": "0000-0001-6045-1709" },
+    { "name": "Gaidarski, Ivan", "affiliation": "Institute of Robotics, Bulgarian Academy of Sciences", "orcid": "0000-0002-4979-445X" }
+  ],
+  "description": "<p>Open-source information system for reporting the scientific publications and scientometric indicators of a research unit, built as a bilingual (Bulgarian / English) static website (Astro) with GitHub Actions automation. Deployed at the Unmanned Robotic Systems Laboratory (URSlab), Institute of Robotics, Bulgarian Academy of Sciences: https://urs.ir.bas.bg.</p><p>Main functions: (1) entry of publications through a web form with APA 7 validation and automated verification of DOI, ISSN and ISBN in public registers (doi.org, Crossref, DataCite, NACID National Reference List, ISSN Portal, Open Library); (2) yearly publication pages, per-user summary reports, filters and CSV export, share of institute authors; (3) automated discovery of citations (OpenAlex, OpenCitations COCI, Semantic Scholar), pre-verification against the reference lists of the citing works and one-tick confirmation; (4) indexing check of the citing venues against the Scopus and Web of Science source lists and a proposed NACID indicator (D-12 / D-13 / D-14), peer review established through the NACID National Reference List; (5) calculation of the points under the Minimum National Requirements for academic positions (Bulgaria, Area 5 Technical Sciences), exclusion of works presented in earlier procedures according to the NACID register, and a strategy for the next position, sent as a PDF only to the user and the head of the unit.</p><p>The archive contains the source code (Apache-2.0), the user guides and site content (CC BY 4.0) and a snapshot of the public data entered through the system. The Scopus and Web of Science source lists are not included.</p>",
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "keywords": ["research information system", "scientometrics", "bibliographic verification", "citation tracking", "NACID", "academic positions", "Scopus", "Web of Science", "Crossref", "OpenAlex", "APA 7", "GitHub Actions", "Astro"],
+  "language": "eng",
+  "related_identifiers": [
+    { "identifier": "https://urs.ir.bas.bg", "relation": "isSupplementTo", "resource_type": "other" },
+    { "identifier": "https://github.com/urslab-irbas/urslab-site", "relation": "isSupplementTo", "resource_type": "software" },
+    { "identifier": "10.5281/zenodo.23111566", "relation": "continues", "resource_type": "software" }
+  ],
+  "notes": "Version 1.0.0 of the information system corresponds to release v1.8.0 of the urslab-site repository (see CHANGELOG.md)."
+}

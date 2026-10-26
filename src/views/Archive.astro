@@ -84,7 +84,7 @@ const L = {
       : A
       ? T('Всички публикации от сайта в това научно направление — годишните страници от „Архив“, текущият списък и въведените от колектива, без повторения. Броят се обновява автоматично с всяка нова публикация.', 'All publications on this site in this research area — the yearly archive pages, the current list and those entered by the team, without duplicates. The count updates automatically with every new publication.')
       : M
-      ? T('Всички публикации от сайта с участието на този член на колектива — годишните страници от „Архив“ и текущият списък, без повторения. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'All publications on this site co-authored by this team member — the yearly archive pages and the current list, without duplicates. Combine the filters — the summary is recomputed for the selection.')
+      ? T('Всички публикации от сайта с участието на този потребител — годишните страници от „Архив“ и текущият списък, без повторения. Комбинирайте филтрите — обобщението се преизчислява за избраното.', 'All publications on this site co-authored by this team member — the yearly archive pages and the current list, without duplicates. Combine the filters — the summary is recomputed for the selection.')
       : T('Пълен списък на публикациите на колектива, групирани по вид и индексиране. Комбинирайте филтрите — обобщението отдолу се преизчислява за избраното.', 'Full list of the team’s publications, grouped by type and indexing. Combine the filters — the summary below is recomputed for the selection.')}</p>
   </div></header>
 
@@ -206,7 +206,7 @@ const L = {
     ))}
     <p class="none" hidden>{t.noneFound[lang]}</p>
     {CIT && <dialog class="cdlg" data-cdlg aria-labelledby="cd-title">
-      <div class="cd-head"><h2 id="cd-title" data-cd-title></h2><div class="cd-acts">{canAdd && <a class="btn-s btn-add" data-cd-add hidden href={`${href(lang, 'publications/new')}?m=${M!.id}`} title={T('Въвеждане на ново цитиране на този труд (вход с GitHub; само членът на колектива или ръководителят)', 'Enter a new citation of this work (GitHub sign-in; the team member or the head of the lab only)')}>+ {T('Цитиране', 'Citation')}</a>}<button type="button" class="btn-s" data-cd-close>{T('Затвори', 'Close')}</button></div></div>
+      <div class="cd-head"><h2 id="cd-title" data-cd-title></h2><div class="cd-acts">{canAdd && <a class="btn-s btn-add" data-cd-add hidden href={`${href(lang, 'publications/new')}?m=${M!.id}`} title={T('Въвеждане на ново цитиране на този труд (вход с GitHub; само потребителят или ръководителят)', 'Enter a new citation of this work (GitHub sign-in; the team member or the head of the lab only)')}>+ {T('Цитиране', 'Citation')}</a>}<button type="button" class="btn-s" data-cd-close>{T('Затвори', 'Close')}</button></div></div>
       <div data-cd-body></div>
       <p class="cd-total" data-cd-total></p>
       <p class="cd-legend">{T('Точки по Минималните национални изисквания (ППЗРАСРБ, Таблица 2, група „Д“), Област 5 „Технически науки“:', 'Points under the Minimum National Requirements (Table 2, group D), Area 5 “Technical Sciences”:')}{Object.values(citRules).map((r) => <span>{r.label[lang]} — {r.pts} {T('т.', 'pts')}</span>)}{T('Самоцитиранията не се включват.', 'Self-citations are not included.')}</p>

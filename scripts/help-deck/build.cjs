@@ -22,11 +22,12 @@ const HEX = THEME.colors;
 const pres = new pptxgen();
 pres.layout = 'LAYOUT_16x9'; // 10 x 5.625
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
-pres.title = 'Сайтът на URSlab — ръководство за нов член на екипа';
+pres.title = 'Сайтът на URSlab — ръководство за нов потребител';
 pres.author = 'URSlab, ИР–БАН';
 pres.company = 'Институт по роботика – БАН';
 const C = pres.SchemeColor;
 
+// Пускане: NODE_PATH=$(npm root -g) node scripts/help-deck/build.cjs (снимките — в IMG; после soffice --convert-to pdf)
 // ---------- layouts ----------
 pres.defineSlideMaster({
   title: 'TITLE', background: { color: C.text1 },
@@ -46,7 +47,7 @@ pres.defineSlideMaster({
   title: 'CONTENT', background: { color: C.background1 },
   objects: [
     { placeholder: { options: { name: 'title', type: 'title', x: 0.5, y: 0.3, w: 9.0, h: 0.7, fontSize: 26, bold: true, color: C.text1, valign: 'middle', align: 'left', margin: 0 }, text: '' } },
-    { text: { text: 'URSlab · Ръководство за нов член на екипа', options: { x: 0.5, y: 5.25, w: 6, h: 0.25, fontSize: 9, color: C.accent6, margin: 0 } } },
+    { text: { text: 'URSlab · Ръководство за нов потребител', options: { x: 0.5, y: 5.25, w: 6, h: 0.25, fontSize: 9, color: C.accent6, margin: 0 } } },
   ],
   slideNumber: { x: 9.0, y: 5.25, w: 0.5, h: 0.25, fontSize: 9, color: C.accent6, align: 'right' },
 });
@@ -85,7 +86,7 @@ const n = (t) => ({ text: t });
     globe: await icon(fa.FaGlobeEurope), flask: await icon(fa.FaFlask), book: await icon(fa.FaBook), users: await icon(fa.FaUsers),
     plus: await icon(fa.FaPlusCircle), github: await icon(fa.FaGithub), sync: await icon(fa.FaSyncAlt), q: await icon(fa.FaQuestionCircle),
     check: await icon(fa.FaCheckCircle, '#2E7D4F'), times: await icon(fa.FaTimesCircle, '#C0392B'), plane: await icon(fa.FaPaperPlane),
-    edit: await icon(fa.FaPen), file: await icon(fa.FaFileCsv), user: await icon(fa.FaUserEdit), lock: await icon(fa.FaLock),
+    edit: await icon(fa.FaPen), mail: await icon(fa.FaEnvelope), file: await icon(fa.FaFileCsv), user: await icon(fa.FaUserEdit), lock: await icon(fa.FaLock),
   };
   const iconCircle = (slide, data, x, y, d = 0.55, fill = C.accent1) => {
     slide.addShape(pres.shapes.OVAL, { x, y, w: d, h: d, fill: { color: fill }, line: { color: fill } });
@@ -106,10 +107,10 @@ const n = (t) => ({ text: t });
   // 1. Title
   sec('Въведение');
   let s = S('TITLE', 'Въведение');
-  s.addText('Сайтът на URSlab — ръководство за нов член на екипа', { placeholder: 'title' });
+  s.addText('Сайтът на URSlab — ръководство за нов потребител', { placeholder: 'title' });
   s.addText('urs.ir.bas.bg · Лаборатория „Безпилотни роботизирани системи“, Институт по роботика – БАН', { placeholder: 'body' });
   s.addText('Как да ползвате сайта, как да въведете нова публикация и как сайтът се обновява', { x: 0.6, y: 4.45, w: 8.5, h: 0.4, fontSize: 13, italic: true, color: C.accent1, margin: 0, isTextBox: true });
-  s.addNotes('Презентацията е за обучение на нов член на колектива. Отделете около 20 минути; препоръчително е да разглеждате сайта паралелно.');
+  s.addNotes('Презентацията е за обучение на нов потребител. Отделете около 20 минути; препоръчително е да разглеждате сайта паралелно.');
 
   // 2. Agenda
   s = S('CONTENT', 'Въведение');
@@ -118,7 +119,7 @@ const n = (t) => ({ text: t });
     [I.globe, 'Какво има в сайта', 'Меню, двата езика, начална страница'],
     [I.flask, 'Изследвания', 'Направления, броячи, модел на Кумер'],
     [I.book, 'Публикации', 'Филтри, годишни страници, отчет, CSV'],
-    [I.users, 'Състав', 'Карти, „Обобщен отчет“, цитирания'],
+    [I.users, 'Състав', 'Карти, „Обобщен отчет“, цитирания, „Точки НАЦИД“'],
     [I.plus, 'Нова публикация', 'Форма, APA стил, проверка, GitHub'],
     [I.sync, 'Обновяване на сайта', 'Pull Request → Merge → публикуване'],
   ];
@@ -198,14 +199,14 @@ const n = (t) => ({ text: t });
   s.addNotes('Обобщението е предназначено за отчети пред ръководството на института. Резултатът зависи от избраните филтри.');
 
   // ---------- Section 4 ----------
-  section(4, 'Състав', 'Карта на всеки член, обобщен отчет и бутон за нова публикация', I.users, 'Състав');
+  section(4, 'Състав', 'Карта на всеки потребител, обобщен отчет, цитирания и „Точки НАЦИД“', I.users, 'Състав');
   s = S('CONTENT', 'Състав');
-  s.addText('Картата на член от колектива', { placeholder: 'title' });
-  await imgFit(s, 'card.jpg', 0.5, 1.15, 3.6, 3.9, 'Карта на член');
+  s.addText('Картата на потребителя', { placeholder: 'title' });
+  await imgFit(s, 'card.jpg', 0.5, 1.15, 3.6, 3.9, 'Карта на потребителя');
   const cardItems = [
     [1, 'Звание, име, роля и научни интереси'],
     [2, '„Обобщен отчет“ — всички публикации на човека от целия сайт'],
-    [3, '„+ Нова публикация“ и цитирания — само за членове с GitHub акаунт'],
+    [3, '„+ Нова публикация“ и цитирания — само за потребители с GitHub акаунт'],
     [4, 'ORCID, Google Scholar / ResearchGate, имейл'],
   ];
   cardItems.forEach(([k, t], i) => {
@@ -216,15 +217,31 @@ const n = (t) => ({ text: t });
   s.addText('Профилът си редактирате във файла src/data/team/<фамилия>.ts — вижте CONTRIBUTING.md.', { x: 4.5, y: 4.85, w: 5.0, h: 0.3, fontSize: 10.5, italic: true, color: C.accent5, margin: 0, isTextBox: true });
 
   s = S('CONTENT', 'Състав');
-  s.addText('Обобщен отчет на член от колектива', { placeholder: 'title' });
+  s.addText('Обобщен отчет на потребителя', { placeholder: 'title' });
   await imgFit(s, 'report.jpg', 0.5, 1.15, 5.0, 3.9, 'Обобщен отчет');
   bullets(s, [
     [b('Всички публикации '), n('на човека от целия сайт, без повторения (по DOI или заглавие).')],
     [b('Филтър „Съавтор“ '), n('показва общите публикации с колега.')],
-    [b('Цитирания X '), n('— точките по НАЦИД под годината на всяка публикация и сборът в обобщението. Въвеждане и търсене — „Помощ: цитирания“ (за членовете с акаунт).')],
+    [b('Цитирания X '), n('— точките по НАЦИД под годината на всяка публикация и сборът в обобщението. Въвеждане и търсене — „Помощ: цитирания“ (за потребителите с акаунт).')],
     [b('CSV и печат '), n('— готово за годишния отчет.')],
     [b('Липсва публикация? '), n('Въведете я през формата — отчетът се обновява сам.')],
   ], 5.8, 1.2, 3.75, 3.8, 12.5);
+
+  s = S('CONTENT', 'Състав');
+  s.addText('Цитирания, „Точки НАЦИД“ и писма', { placeholder: 'title' });
+  const cit = [
+    [I.sync, 'Търсене на цитирания', 'Веднъж месечно и с бутона „Търси нови цитирания“. Всяко намерено цитиране е проверено; Системата сверява изданието със списъците на Scopus и WoS и предлага показател („← предложено“). Потвърждавате с една отметка.'],
+    [I.mail, '„Таблица по имейл“', 'Точките по Минималните национални изисквания, стратегия за следващата длъжност и справка от регистъра на НАЦИД — като PDF само до вас и ръководителя. На сайта няма числа.'],
+    [I.check, 'Писма само при нужда', 'Писмо идва за поискана информация или когато трябва да действате (отказ, грешка). При успех — без писмо: резултатът е в текста на заявката.'],
+  ];
+  cit.forEach(([ic, t, d], i) => {
+    const x = 0.5 + i * 3.05;
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 1.2, w: 2.85, h: 2.9, rectRadius: 0.08, fill: { color: C.background2 }, line: { color: C.background2 } });
+    iconCircle(s, ic, x + 0.18, 1.4, 0.55, i === 1 ? C.accent3 : C.accent1);
+    s.addText(t, { x: x + 0.85, y: 1.4, w: 1.9, h: 0.55, fontSize: 14, bold: true, color: C.text1, valign: 'middle', margin: 0, isTextBox: true });
+    s.addText(d, { x: x + 0.18, y: 2.15, w: 2.5, h: 1.85, fontSize: 12, color: C.text1, valign: 'top', margin: 0, isTextBox: true });
+  });
+  s.addNotes('Б1–Б4 (октомври 2026): предложен показател по списъците на Scopus/WoS, научно рецензиране по НРС на НАЦИД, „Точки НАЦИД“ по имейл (PDF), писма само при нужда. Подробно — „Помощ: цитирания“ (PDF) в „Обобщен отчет“.');
 
   // ---------- Section 5 ----------
   section(5, 'Нова публикация', 'От формата на сайта до публикуването — пет стъпки', I.plus, 'Нова публикация');
@@ -249,7 +266,7 @@ const n = (t) => ({ text: t });
   iconCircle(s, I.lock, 0.75, 4.08, 0.6, C.text1);
   s.addText([
     { text: 'Защо GitHub? ', options: { bold: true } },
-    { text: 'Сайтът няма собствен вход и не пази пароли. Самоличността се проверява от GitHub: заявка се приема само от акаунта на члена (или на ръководителя). Хранилището е публично — за статии под рецензия въвеждайте само резюме, никога пълен текст.' },
+    { text: 'Сайтът няма собствен вход и не пази пароли. Самоличността се проверява от GitHub: заявка се приема само от акаунта на потребителя (или на ръководителя). Хранилището е публично — за статии под рецензия въвеждайте само резюме, никога пълен текст.' },
   ], { x: 1.55, y: 3.85, w: 7.8, h: 1.05, fontSize: 12, color: C.text1, valign: 'middle', margin: 0, isTextBox: true });
 
   s = S('CONTENT', 'Нова публикация');
@@ -312,7 +329,7 @@ const n = (t) => ({ text: t });
     [I.github, C.text1, 'Create', 'Влезте със своя акаунт и натиснете зеления бутон „Create“. Не променяйте текста на заявката.'],
     [I.check, C.accent3, 'Приета', 'DOI, ISSN или ISBN е намерен в регистрите (doi.org, Crossref, НАЦИД НРС, ISSN Portal, Open Library) — публикацията излиза на сайта сама.'],
     [I.times, C.accent4, 'Грешка', 'Грешка или номер, който не е в регистрите — списък и връзка „Поправете във формата“ (данните са попълнени). Поправете и „Запиши“ отново.'],
-    [I.users, C.accent1, 'Контрол', 'Всяко публикуване е в дневник; ръководителят получава уведомление и може да го върне с едно щракване (отметка „Върни“).'],
+    [I.users, C.accent1, 'Контрол', 'Всяко публикуване е в дневник; при успех няма писмо — резултатът е в текста на заявката. Ръководителят може да го върне с една отметка „Върни“.'],
   ];
   gh.forEach(([ic, col, t, d], i) => {
     const y = 1.2 + i * 0.97;
@@ -351,7 +368,7 @@ const n = (t) => ({ text: t });
   s.addText('Помощ и полезни връзки', { placeholder: 'title' });
   await imgFit(s, 'help.jpg', 0.5, 1.15, 4.4, 3.9, 'Помощ във формата');
   bullets(s, [
-    [b('Помощ във формата: '), n('бутон „Помощ“ — APA, проверки, обновяване. Цитирания: „Помощ: цитирания“ в „Обобщен отчет“ (членовете с акаунт).')],
+    [b('Помощ във формата: '), n('бутон „Помощ“ — APA, проверки, обновяване. Цитирания: „Помощ: цитирания“ в „Обобщен отчет“ (потребителите с акаунт).')],
     [b('Форма: '), n('urs.ir.bas.bg/publications/new/')],
     [b('Заявки в GitHub: '), n('github.com/urslab-irbas/urslab-site/issues')],
     [b('Инструкция за редакция на профила: '), n('CONTRIBUTING.md в хранилището.')],

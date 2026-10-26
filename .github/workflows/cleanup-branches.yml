@@ -1,0 +1,44 @@
+# Почистване: изтрива клоновете, които вече са изцяло в main (след сливане на заявката им).
+# Пуска се ръчно: Actions → „Почистване на слетите клонове“ → Run workflow.
+# Никога не се трият: main, data, bot-baseline-* (отправната точка на бота). Неслетите клонове остават.
+# С „Само списък“ = true (по подразбиране) нищо не се трие — в Summary се показва какво би се изтрило.
+name: Почистване на слетите клонове
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Само списък (нищо не се трие)'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          DRY: ${{ inputs.dry_run }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const keep = (b) => b === 'main' || b === 'data' || b.startsWith('bot-baseline-');
+            const branches = await github.paginate(github.rest.repos.listBranches, { owner, repo, per_page: 100 });
+            const dry = process.env.DRY === 'true';
+            const del = [], left = [];
+            for (const { name } of branches) {
+              if (keep(name)) continue;
+              const c = await github.rest.repos.compareCommitsWithBasehead({ owner, repo, basehead: `main...${name}` });
+              if (c.data.ahead_by === 0) {
+                if (!dry) await github.rest.git.deleteRef({ owner, repo, ref: `heads/${name}` });
+                del.push(name);
+              } else left.push(`${name} (${c.data.ahead_by} неслети промени)`);
+            }
+            await core.summary
+              .addHeading(dry ? 'Само списък — нищо не е изтрито' : 'Изтрити слети клонове')
+              .addRaw(`${dry ? 'Биха се изтрили' : 'Изтрити'}: ${del.length}`).addBreak()
+              .addList(del)
+              .addHeading('Остават (не са изцяло в main)', 3).addList(left.length ? left : ['—'])
+              .addRaw('Винаги остават: main, data, bot-baseline-*.')
+              .write();
