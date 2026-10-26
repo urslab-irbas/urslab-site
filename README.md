@@ -1,4 +1,4 @@
-# Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification
+# Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data
 
 **Информационна система за отчитане на научните публикации и наукометричните показатели с автоматизирана библиографска проверка**
 
