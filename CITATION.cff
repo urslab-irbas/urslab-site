@@ -3,6 +3,8 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data"
 version: "1.0.0"
+doi: "10.5281/zenodo.23659986"
+date-released: "2026-10-26"
 authors:
   - family-names: Madzharov
     given-names: Anastas

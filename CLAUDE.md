@@ -40,7 +40,7 @@ Target domain: https://urs.ir.bas.bg
 - Run `npm run build` after changes and fix any errors before committing.
 
 ## Release / archive
-- Zenodo record „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0 (= repo v1.8.0; authors Madzharov, Chehlarova, Gaidarski): metadata `.zenodo.json` + `CITATION.cff`; code Apache-2.0 (`LICENSE`, `NOTICE`), content CC BY 4.0 (`LICENSE-CONTENT.md`). The archive is uploaded MANUALLY (GitHub↔Zenodo integration stays off) as a zip of the release commit + a snapshot of the public data from branch `data` (contrib.json, citations/*/contrib.json, publish-log.md) — never `citation-scan/index` (Elsevier/Clarivate data). Earlier records 10.5281/zenodo.23086274 / 23111566 (site, sole author) stay as they are.
+- Zenodo record „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0, DOI 10.5281/zenodo.23659986 (= repo v1.8.0; authors Madzharov, Chehlarova, Gaidarski): metadata `.zenodo.json` + `CITATION.cff`; code Apache-2.0 (`LICENSE`, `NOTICE`), content CC BY 4.0 (`LICENSE-CONTENT.md`). The archive is uploaded MANUALLY (GitHub↔Zenodo integration stays off) as a zip of the release commit + a snapshot of the public data from branch `data` (contrib.json, citations/*/contrib.json, publish-log.md) — never `citation-scan/index` (Elsevier/Clarivate data). Earlier records 10.5281/zenodo.23086274 / 23111566 (site, sole author) stay as they are.
 
 ## Commands
 - `npm install` · `npm run dev` (http://localhost:4321) · `npm run build` (output in `dist/`)

@@ -66,6 +66,7 @@ export const nspsdRefs: NspsdRef[] = [
   { t: 'Neural Network Approaches for Speech Recognition and Synthesis based on Whisper' },
   { t: 'Data-Driven Fuzzy Systems for Urban Microclimate Prediction' },
   // Софтуер (Zenodo) — сайтът на лабораторията е изграден по програмата
+  { t: 'Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data' },
   { t: 'URSlab Website and Information System for Reporting the Publication Activity' },
   { t: 'URSlab Website and Interactive Coordinated-Turn Model' },
   // Отчетени по програмата пред ЦИНСО-БАН — по справката на гл. ас. д-р инж. Иван Гайдарски (06.10.2026)

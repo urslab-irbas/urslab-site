@@ -1,6 +1,6 @@
 # Промени / Changelog
 
-## v1.8.0 — 26.10.2026 · Zenodo: „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0
+## v1.8.0 — 26.10.2026 · DOI 10.5281/zenodo.23659986 · Zenodo: „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0
 **Архив на системата (нов запис, нов DOI; автори А. Маджаров, Н. Чехларова, И. Гайдарски)**
 
 - Лиценз: кодът — Apache-2.0 (`LICENSE`, `NOTICE`); съдържанието — CC BY 4.0 (`LICENSE-CONTENT.md`). Метаданни — `.zenodo.json`, `CITATION.cff`; `README.md` описва системата.
