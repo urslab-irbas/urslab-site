@@ -17,5 +17,5 @@
     { "identifier": "https://github.com/urslab-irbas/urslab-site", "relation": "isSupplementTo", "resource_type": "software" },
     { "identifier": "10.5281/zenodo.23111566", "relation": "continues", "resource_type": "software" }
   ],
-  "notes": "Version 1.0.0 of the information system corresponds to release v1.8.0 of the urslab-site repository (see CHANGELOG.md)."
+  "notes": "DOI 10.5281/zenodo.23659986. Version 1.0.0 of the information system corresponds to release v1.8.0 of the urslab-site repository (see CHANGELOG.md)."
 }
