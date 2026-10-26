@@ -38,6 +38,8 @@ export function targetOf(m: Member): number | null {
   if (/ас\./.test(t)) return 2;
   return 0;
 }
+/** Потребителят в APA („Chehlarova, N.“) — за броя на авторите на невидимите записи от регистъра на НАЦИД */
+const meApa = (m: Member) => { const w = String(m.name.en ?? m.name.bg).trim().split(/\s+/); return `${w[w.length - 1]}, ${w[0][0]}.`; };
 const nAuthors = (p: ArchivePub) => { const l = parseAuthors(p.authors).list.length; return l || String(p.authors).split(/,|&| and /).filter((s) => s.trim()).length || 1; };
 
 export interface Line { text: string; pts: number }
@@ -135,7 +137,7 @@ export function strategyFor(id: string): Strategy {
     // невидимите публикации от регистъра на НАЦИД, които не са представени в процедура за целевата длъжност
     const regFree: ArchivePub[] = (reg?.publications ?? []).filter((r) => !r.site && !isUsed(r.title)).map((r) => ({
       year: r.year, title: r.title, venue: r.venue, team: [id], tags: [],
-      authors: [m.name.en ?? m.name.bg, ...(r.coauthors ? r.coauthors.split(/[;,]\s*(?=[A-ZА-Я][^,;]*\.)/) : [])].join('; '),
+      authors: [meApa(m), r.coauthors].filter(Boolean).join(', '), // APA: „Фамилия, И., Фамилия, И.“ → n = брой автори
       cat: /монография/i.test(r.venue) ? 'mono' : /scopus|wos|web of science/i.test(r.index ?? '') ? 'idx' : 'other',
     } as ArchivePub));
     for (const r of regFree) pub.push(r);

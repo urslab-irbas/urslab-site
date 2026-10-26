@@ -1,12 +1,13 @@
 # Промени / Changelog
 
-## v1.8.0 — 26.10.2026 · Zenodo: „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification“ v1.0.0
+## v1.8.0 — 26.10.2026 · Zenodo: „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0
 **Архив на системата (нов запис, нов DOI; автори А. Маджаров, Н. Чехларова, И. Гайдарски)**
 
 - Лиценз: кодът — Apache-2.0 (`LICENSE`, `NOTICE`); съдържанието — CC BY 4.0 (`LICENSE-CONTENT.md`). Метаданни — `.zenodo.json`, `CITATION.cff`; `README.md` описва системата.
 - Ръководствата обновени: `CONTRIBUTING.md` (предложен показател, научно рецензиране, „Точки НАЦИД“ по имейл като PDF, писма само при нужда),
   презентацията за нов потребител (нов слайд „Цитирания, „Точки НАЦИД“ и писма“, нови снимки), „Помощ: цитирания“ (PDF).
 - В текстовете към потребителите на сайта и в отговорите на бота „член(а) на колектива“ → „потребител(я)“.
+- „Точки НАЦИД“: поправен броят на съавторите при невидимите записи от регистъра на НАЦИД (намерено при проверката на модела спрямо процедура, вписана в НАЦИД — сега 14 от 14 публикации със същата група и точки).
 - Генераторите на ръководствата — `.cjs` (пакетът е ES модул): `scripts/help-deck/build.cjs`, `scripts/citation-guide/pdf.cjs`.
 
 ## v1.7.3 — 23.10.2026

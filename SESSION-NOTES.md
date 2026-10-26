@@ -50,7 +50,7 @@
 - Интеграцията GitHub ↔ Zenodo да остане **изключена** (иначе всеки Release се публикува отворено).
 - Нова версия на кода → в Zenodo: „New version“ (не нов запис). Промените по версии — в `CHANGELOG.md`.
 - v1.1.0 (03.10.2026): информационна система за отчитане на публикационната дейност — DOI **10.5281/zenodo.23111566** (нова версия на същия запис; файловете — Restricted).
-- 26.10.2026: **нов запис** „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification“ v1.0.0 (= v1.8.0 на хранилището), автори А. Маджаров, Н. Чехларова, И. Гайдарски; кодът — Apache-2.0, съдържанието — CC BY 4.0, достъп — отворен (`.zenodo.json`, `CITATION.cff`). Качва се ръчно (интеграцията остава изключена): архивът на кода + снимка на публичните данни от клона `data`.
+- 26.10.2026: **нов запис** „Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data“ v1.0.0 (= v1.8.0 на хранилището), автори А. Маджаров, Н. Чехларова, И. Гайдарски; кодът — Apache-2.0, съдържанието — CC BY 4.0, достъп — отворен (`.zenodo.json`, `CITATION.cff`). Качва се ръчно (интеграцията остава изключена): архивът на кода + снимка на публичните данни от клона `data`.
 
 ## Добавено на 02.10.2026 (PR `archive-2022-2024`, съдържа и `nav-model` и `areas-publications`)
 - Научните направления водят към публикациите си (брой + филтър „По направление“).

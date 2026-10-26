@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification"
+title: "Information System for Reporting Scientific Publications and Scientometric Indicators with Automated Bibliographic Verification: Source Code and Data"
 version: "1.0.0"
 authors:
   - family-names: Madzharov
