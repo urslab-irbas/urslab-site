@@ -1,6 +1,43 @@
 {
  "date": "2026-10-27",
  "items": {
+  "52563389": {
+   "key": "doi:10.7546/pecr.84.26.03|10.7546/pecr.85.26.05",
+   "cited": "doi:10.7546/pecr.84.26.03",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.03",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.05",
+    "authors": "Gaidarski, I.",
+    "year": 2026,
+    "title": "Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.03 на цитирания труд",
+   "line": "Gaidarski, I. (2026). Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.05",
+   "work": "Yoshinov, R., Dishkova, G., Chehlarova, N. (2026). Assessment of Parents’ Awareness in the Field of Cybersecurity"
+  },
   "55096453": {
    "key": "doi:10.26830/symmetry_2023_3_333|10.58524/jasme.v5i1.562",
    "cited": "doi:10.26830/symmetry_2023_3_333",
@@ -38,6 +75,43 @@
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Santiago, P. V. D. S., Alves, F., & Santos, M. J. C. D. (2025). Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers. Journal of Advanced Sciences and Mathematics Education. https://doi.org/10.58524/jasme.v5i1.562",
    "work": "Chehlarova, N., Gachev, G. (2023). Figures with an axis of symmetry with Photon Robot"
+  },
+  "62575300": {
+   "key": "doi:10.7546/pecr.76.21.04|10.7546/pecr.85.26.06",
+   "cited": "doi:10.7546/pecr.76.21.04",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.76.21.04",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.76.21.04 на цитирания труд",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Gaidarski, I. (2021). Model Driven Development of Information Security System"
   },
   "ad67efd4": {
    "key": "doi:10.57125/fed.2025.06.25.04|10.57125/fed.2025.12.16",
@@ -116,6 +190,44 @@
    "evidence": "в литературата: позиция 9 от 46 (Crossref)",
    "line": "Hidayati, N. A., Sukestiyarno, Y. L., Suyitno, H., & Walid, W. (2026). Advancing TPACK understanding in mathematics education through enhanced strategic diagrams (ESD). Multidisciplinary Science Journal. https://doi.org/10.31893/multiscience.2027122",
    "work": "Chehlarova, N., Chehlarova, K., Gecheva, N. (2025). Bibliometric analysis of Scopus publications related to STEM and STEAM research in the context of mathematics education"
+  },
+  "1f0e844e": {
+   "key": "doi:10.15547/pf.2025.004|10.55630/stem.2025.0738",
+   "cited": "doi:10.15547/pf.2025.004",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.15547/pf.2025.004",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0738",
+    "authors": "Kostova, B.",
+    "year": 2025,
+    "title": "Increasing Science and Technology Motivation in Fashion Students through Educational Activities with 3D Printing",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "407-413",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Kostova, B. (2025). Increasing Science and Technology Motivation in Fashion Students through Educational Activities with 3D Printing. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0738",
+   "work": "Chehlarova, N., Chehlarova, K., Gecheva, N. (2025). STEAM workshops with a 3D pen"
   },
   "b3669164": {
    "key": "doi:10.15547/pf.2025.025|10.5861/ijrse.2026.26385",
@@ -342,6 +454,44 @@
    },
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Balouch, G. A., Saleem, S., & Rehman, F. (2025). Open, Adapt, and Achieve Digital Doors to Learning: Exploring How E-Learning Platforms and Professional Growth Transform Learning for Students with Special Needs. THE PROGRESS A Journal of Multidisciplinary Studies. https://doi.org/10.71016/tp/y00y2173",
+   "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
+  },
+  "0754c0e3": {
+   "key": "doi:10.3390/info15060315|10.55630/stem.2025.0716",
+   "cited": "doi:10.3390/info15060315",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2683-1333, не е в Scopus и WoS; в НРС на НАЦИД (ID 3957) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "src": "doi",
+    "doi": "10.55630/stem.2025.0716",
+    "authors": "Petrova, P., & Dochkova-Todorova, J.",
+    "year": 2025,
+    "title": "Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications",
+    "venue": "Innovative STEM Education",
+    "volume": "7",
+    "issue": "1",
+    "pages": "185-200",
+    "publisher": "Institute of Mathematics and Informatics Bulgarian Academy of Sciences",
+    "idType": "eissn",
+    "idValue": "2683-1333"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
    "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
   },
   "596916de": {
@@ -1858,6 +2008,686 @@
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Kadam, V. M. S. (2024). The performance of Logistic Regression, Decision Tree, KNN, Naive Bayes and SVM for identifying Automotive Cybersecurity Attack and Prevention: An Experimental Study. Journal of Electrical Systems. https://doi.org/10.52783/jes.1535",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
+  "709b9e33": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/iccr61006.2024.10532956",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1109/iccr61006.2024.10532956",
+    "authors": "Asasfeh, A., Alnawayseh, S. E. A., AbdElkareem, R., & Salahat, M.",
+    "year": 2024,
+    "title": "Human Factors In Security Management: Understanding And Mitigating Insider Threats",
+    "venue": "2024 2nd International Conference on Cyber Resilience (ICCR)",
+    "pages": "1-10",
+    "publisher": "IEEE"
+   },
+   "evidence": "",
+   "line": "Asasfeh, A., Alnawayseh, S. E. A., Alomoush, R. A., & Salahat, M. (2024). Human Factors In Security Management: Understanding And Mitigating Insider Threats. International Conference on Cyber Resilience (ICCR). https://doi.org/10.1109/iccr61006.2024.10532956",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "b3a1590a": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/access.2022.3214819",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: IEEE Access, покритие 2013–2026 (ISSN 2169-3536)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.1109/access.2022.3214819",
+    "authors": "Rahman, M. M. H., Naeem, M. A. A., & Abubakar, A.",
+    "year": 2022,
+    "title": "Threats From Unintentional Insiders: An Assessment of an Organization’s Readiness Using Machine Learning",
+    "venue": "IEEE Access",
+    "volume": "10",
+    "pages": "110294-110308",
+    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "idType": "eissn",
+    "idValue": "2169-3536",
+    "where": "[20]"
+   },
+   "evidence": "в литературата: позиция 20 от 58 (Crossref)",
+   "line": "Rahman, M. M. H., Al-Naeem, M., & Ibrahim, A. A. (2022). Threats From Unintentional Insiders: An Assessment of an Organization’s Readiness Using Machine Learning. IEEE Access. https://doi.org/10.1109/access.2022.3214819",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "a3e2e936": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.34190/iccws.18.1.969",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (CPCI): International Conference on Cyber Warfare and Security (ICCWS) — Proceedings, записи в WoS 2017–2026 (по извадка — проверете в WoS)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.34190/iccws.18.1.969",
+    "authors": "Sekonya, N., & Sithungu, S.",
+    "year": 2023,
+    "title": "The Impact of Edge Computing on the Industrial Internet of Things",
+    "venue": "International Conference on Cyber Warfare and Security",
+    "volume": "18",
+    "issue": "1",
+    "pages": "360-368",
+    "publisher": "Academic Conferences and Publishing International Ltd",
+    "idType": "issn",
+    "idValue": "2048-9870"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Sekonya, N., & Sithungu, S. P. (2023). The Impact of Edge Computing on the Industrial Internet of Things. International Conference on Cyber Warfare and Security. https://doi.org/10.34190/iccws.18.1.969",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "9ad4808a": {
+   "key": "doi:10.3390/drones9110776|10.1515/jag-2026-0030",
+   "cited": "doi:10.3390/drones9110776",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Journal of Applied Geodesy, покритие 2007–2026 (ISSN 1862-9016 / 1862-9024)",
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/drones9110776",
+    "src": "doi",
+    "doi": "10.1515/jag-2026-0030",
+    "authors": "Hao, X., Yan, B., He, Q., & Xing, D.",
+    "year": 2026,
+    "title": "Deep learning-based BDS-3 ephemeris and positioning performance prediction",
+    "venue": "Journal of Applied Geodesy",
+    "publisher": "Walter de Gruyter GmbH",
+    "idType": "issn",
+    "idValue": "1862-9016",
+    "where": "[7]"
+   },
+   "evidence": "в литературата: позиция 7 от 55 (Crossref)",
+   "line": "HAO, X., Yan, B., He, Q., & Xing, D. (2026). Deep learning-based BDS-3 ephemeris and positioning performance prediction. Journal of Applied Geodesy. https://doi.org/10.1515/jag-2026-0030",
+   "work": "González-deSantos, L. M., Bruzual, J., Socías, D., Lacarra Arcos, E., Santos, M., González, R., Gil, E., Moreno López, G., Hristozov, S., Karas, J., Vyshnevskyy, M., Gebhardt, J., Haro, P., Bellingham, S. R. (2025). Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations"
+  },
+  "4ba869b5": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/computation14090214",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Computation, покритие 2013–2026 (ISSN 2079-3197)",
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/computation14090214",
+    "authors": "Garzia, F., & Stella, A.",
+    "year": 2026,
+    "title": "Cross-National Statistical Analysis of Multi-Rotor Unmanned Aircraft Accidents: Causal Factors, Flight Phases, and Temporal Trends (2016–2022)",
+    "venue": "Computation",
+    "volume": "14",
+    "issue": "9",
+    "pages": "214",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2079-3197",
+    "where": "[11]"
+   },
+   "evidence": "в литературата: позиция 11 от 34 (Crossref)",
+   "line": "Garzia, F., & Stella, A. (2026). Cross-National Statistical Analysis of Multi-Rotor Unmanned Aircraft Accidents: Causal Factors, Flight Phases, and Temporal Trends (2016–2022). Computation. https://doi.org/10.3390/computation14090214",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "3d2a5d4c": {
+   "key": "doi:10.3390/engproc2025090047|10.1145/3829641.3829793",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "13",
+    "12s",
+    "12w"
+   ],
+   "suggest": "13",
+   "why": "сборник / книга (без ISSN), не е в Scopus и WoS",
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.1145/3829641.3829793",
+    "authors": "Jiang, H., Cai, W., Huang, K., & Zong, S.",
+    "year": 2026,
+    "title": "Optimization of Landing Pad Size for Small and Medium-Sized UAV Vertiports Based on Monte Carlo Simulation",
+    "venue": "Proceedings of the 2nd International Conference on Software Engineering and Computer Applications",
+    "pages": "970-976",
+    "publisher": "ACM",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 22 (Crossref)",
+   "line": "Jiang, H., Cai, W., Huang, K., & Zong, S. (2026). Optimization of Landing Pad Size for Small and Medium-Sized UAV Vertiports Based on Monte Carlo Simulation. International Conference on Software Engineering and Computer Applications. https://doi.org/10.1145/3829641.3829793",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "eb771886": {
+   "key": "doi:10.3390/engproc2025090047|10.21203/rs.3.rs-11151733/v1",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.21203/rs.3.rs-11151733/v1",
+    "authors": "Amine, J. E., Elbasi, E., Zaki, C., Topcu, A. E., Saker, L., Baz, B., Moustafa, N., & Nasser, A.",
+    "year": 2026,
+    "title": "AI-Enabled UAV Ecosystems: A Framework-Driven Review of Autonomy, Communication, Energy, and Governance",
+    "venue": "Research Square",
+    "publisher": "Springer Science and Business Media LLC"
+   },
+   "evidence": "",
+   "line": "Amine, J. A. E., Α, E. E., Zaki, C., Topcu, A. E., Saker, L., Baz, B. E., Moustafa, N., & Nasser, A. (2026). AI-Enabled UAV Ecosystems: A Framework-Driven Review of Autonomy, Communication, Energy, and Governance. Research Square. https://doi.org/10.21203/rs.3.rs-11151733/v1",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "c746b6ce": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/drones9120815",
+    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
+    "year": 2025,
+    "title": "Risk-Based Design of Urban UAS Corridors",
+    "venue": "Drones",
+    "volume": "9",
+    "issue": "12",
+    "pages": "815",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2504-446X"
+   },
+   "evidence": "",
+   "line": "Tafur, C. L., Rodríguez, J. O., Rodríguez, D. A., Traslaviña, D., Valencia, S. F., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
+  },
+  "adfa345a": {
+   "key": "doi:10.17770/etr2024vol4.8195|10.1109/telfor67910.2025.11314214",
+   "cited": "doi:10.17770/etr2024vol4.8195",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.17770/etr2024vol4.8195",
+    "src": "doi",
+    "doi": "10.1109/telfor67910.2025.11314214",
+    "authors": "Stanev, H., & Mitev, S.",
+    "year": 2025,
+    "title": "Organisational and Technical Challenges for Conflict-free use of Civil Airport Airspace by Drones",
+    "venue": "2025 33rd Telecommunications Forum (TELFOR)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "where": "[18]"
+   },
+   "evidence": "в литературата: позиция 18 от 19 (Crossref)",
+   "line": "Stanev, H., & Mitev, S. (2025). Organisational and Technical Challenges for Conflict-free use of Civil Airport Airspace by Drones. Telecommunications Forum (TELFOR). https://doi.org/10.1109/telfor67910.2025.11314214",
+   "work": "Stanev, H., Hristozov, S. (2024). Applicability of JARUS SORA to State UAS Operations in Disaster Relief"
+  },
+  "3698b706": {
+   "key": "doi:10.17770/etr2024vol4.8195|10.1109/telfor67910.2025.11314421",
+   "cited": "doi:10.17770/etr2024vol4.8195",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2025 — проверете)",
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.17770/etr2024vol4.8195",
+    "src": "doi",
+    "doi": "10.1109/telfor67910.2025.11314421",
+    "authors": "Menseidov, D., & Mitev, S.",
+    "year": 2025,
+    "title": "Monte Carlo Assessment of Reliability and Connectivity in Coordinated Flights of a Swarm of Small UAVs",
+    "venue": "2025 33rd Telecommunications Forum (TELFOR)",
+    "pages": "1-4",
+    "publisher": "IEEE",
+    "where": "[7]"
+   },
+   "evidence": "в литературата: позиция 7 от 8 (Crossref)",
+   "line": "Menseidov, D., & Mitev, S. (2025). Monte Carlo Assessment of Reliability and Connectivity in Coordinated Flights of a Swarm of Small UAVs. Telecommunications Forum (TELFOR). https://doi.org/10.1109/telfor67910.2025.11314421",
+   "work": "Stanev, H., Hristozov, S. (2024). Applicability of JARUS SORA to State UAS Operations in Disaster Relief"
+  },
+  "d6500ff9": {
+   "key": "doi:10.7546/pecr.84.26.02|10.7546/pecr.85.26.02",
+   "cited": "doi:10.7546/pecr.84.26.02",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.02",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.02",
+    "authors": "Dishkova, G.",
+    "year": 2026,
+    "title": "Digital Tools for the Prevention of Child Cyberbullying at School to Support Extracurricular and Out-Of-School Activities",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/2-PECR-G-Dishkova.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.02 на цитирания труд",
+   "line": "Dishkova, G. (2026). Digital Tools for the Prevention of Child Cyberbullying at School to Support Extracurricular and Out-Of-School Activities. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.02",
+   "work": "Yoshinov, R., Chehlarova, N., Dishkova, G. (2026). Assessment of teachers’ preparedness in cybersecurity"
+  },
+  "6abdcddf": {
+   "key": "doi:10.7546/pecr.84.26.03|10.7546/pecr.85.26.02",
+   "cited": "doi:10.7546/pecr.84.26.03",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.03",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.02",
+    "authors": "Dishkova, G.",
+    "year": 2026,
+    "title": "Digital Tools for the Prevention of Child Cyberbullying at School to Support Extracurricular and Out-Of-School Activities",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/2-PECR-G-Dishkova.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.03 на цитирания труд",
+   "line": "Dishkova, G. (2026). Digital Tools for the Prevention of Child Cyberbullying at School to Support Extracurricular and Out-Of-School Activities. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.02",
+   "work": "Yoshinov, R., Dishkova, G., Chehlarova, N. (2026). Assessment of Parents’ Awareness in the Field of Cybersecurity"
+  },
+  "294166cd": {
+   "key": "doi:10.17770/etr2024vol2.8064|10.7546/pecr.85.26.05",
+   "cited": "doi:10.17770/etr2024vol2.8064",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.17770/etr2024vol2.8064",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.05",
+    "authors": "Gaidarski, I.",
+    "year": 2026,
+    "title": "Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+   "line": "Gaidarski, I. (2026). Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.05",
+   "work": "Yoshinov, R., Kotseva, M., Madzharov, A., Chehlarova, N. (2024). Skills and attitudes towards using AI based chatbots"
+  },
+  "637851a6": {
+   "key": "doi:10.7546/pecr.84.26.02|10.7546/pecr.85.26.05",
+   "cited": "doi:10.7546/pecr.84.26.02",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.02",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.05",
+    "authors": "Gaidarski, I.",
+    "year": 2026,
+    "title": "Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.02 на цитирания труд",
+   "line": "Gaidarski, I. (2026). Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.05",
+   "work": "Yoshinov, R., Chehlarova, N., Dishkova, G. (2026). Assessment of teachers’ preparedness in cybersecurity"
+  },
+  "64696e94": {
+   "key": "doi:10.17770/etr2024vol2.8064|10.7546/pecr.85.26.06",
+   "cited": "doi:10.17770/etr2024vol2.8064",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.17770/etr2024vol2.8064",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Yoshinov, R., Kotseva, M., Madzharov, A., Chehlarova, N. (2024). Skills and attitudes towards using AI based chatbots"
+  },
+  "7b53c6b9": {
+   "key": "doi:10.7546/pecr.84.26.02|10.7546/pecr.85.26.06",
+   "cited": "doi:10.7546/pecr.84.26.02",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.02",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.02 на цитирания труд",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Yoshinov, R., Chehlarova, N., Dishkova, G. (2026). Assessment of teachers’ preparedness in cybersecurity"
+  },
+  "c8a9f4af": {
+   "key": "doi:10.7546/pecr.84.26.03|10.7546/pecr.85.26.06",
+   "cited": "doi:10.7546/pecr.84.26.03",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.7546/pecr.84.26.03",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.03 на цитирания труд",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Yoshinov, R., Dishkova, G., Chehlarova, N. (2026). Assessment of Parents’ Awareness in the Field of Cybersecurity"
+  },
+  "ba5c68d3": {
+   "key": "t:someaspectsofcybersecurityinindustry40|10.7546/pecr.85.26.06",
+   "cited": "t:someaspectsofcybersecurityinindustry40",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "t:someaspectsofcybersecurityinindustry40",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: заглавието на цитирания труд до фамилията на автора (75 % от думите)",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Gaidarski, I. (2024). Some aspects of cybersecurity in Industry 4.0"
+  },
+  "d22f2a27": {
+   "key": "doi:10.7546/pecr.79.23.03|10.7546/pecr.85.26.06",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "url",
+    "doi": "10.7546/pecr.85.26.06",
+    "authors": "Kutinchev, P.",
+    "year": 2026,
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
+   },
+   "evidence": "в пълния текст: DOI 10.7546/pecr.79.23.03 на цитирания труд",
+   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
   }
  }
 }
