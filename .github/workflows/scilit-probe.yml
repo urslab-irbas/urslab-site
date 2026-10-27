@@ -1,0 +1,25 @@
+# ВРЕМЕННА ПРОБА (не се слива): чете документацията на Scilit API от GitHub и записва текста в probe/scilit/
+# в клона scilit-probe. Нищо не се записва в main или data.
+name: Проба Scilit (временна)
+on:
+  pull_request:
+    paths: ['scripts/scilit-probe.mjs', '.github/workflows/scilit-probe.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    if: github.head_ref == 'scilit-probe'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: scilit-probe
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/scilit-probe.mjs
+      - name: Запис на резултата в клона на пробата
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe && git commit -qm "Проба Scilit: резултат [skip ci]" && git push -q origin HEAD:scilit-probe || true
