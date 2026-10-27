@@ -356,7 +356,7 @@ if (ready.length) html += `<h3>Проверени</h3><ol>${htmlList(ready)}</ol
 if (form.length) html += `<h3>За въвеждане през формата</h3><ol>${htmlList(form)}</ol>`;
 if (doubt.length) html += `<h3>Съмнителни</h3><ol>${htmlList(doubt)}</ol>`;
 if (newWorks.length) html += `<h3>Трудове, които още не са в Системата</h3><ul>${newWorks.map((x) => `<li>${esc(cite(x.c).replace(/\*/g, ''))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
-html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно или ръчно от потребител.${String(process.env.SCAN_MAIL_TO || '') === '' ? ' Тестов режим: писмото отива само до ръководителя.' : ''}</small></p></div>`;
+html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно (писмото — до ръководителя) или с бутона „Търси нови цитирания“ в „Обобщен отчет“ (писмото — до потребителя и до ръководителя).</small></p></div>`;
 
 // Кандидатите (за отметките и за формата ?scan=<id>) и състоянието
 const items = {};
@@ -373,9 +373,8 @@ writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
 writeFileSync('scan-report.md', parts.join('\n\n---\n\n'));
 writeFileSync('scan-report-parts.json', JSON.stringify(parts));
 writeFileSync('scan-report.html', html);
-// Получатели: засега (тестов режим) само ръководителят. За всички членове с имейл в профила:
-// задайте в GitHub → Settings → Secrets and variables → Actions → Variables: SCAN_MAIL_TO = all
-// (или списък с адреси, разделени със запетая).
+// Получатели: SCAN_MAIL_TO от citation-scan.yml — при бутона в „Обобщен отчет“ потребителят и ръководителят (както при
+// „Таблица по имейл“); при месечното търсене — ръководителят, или Variables → SCAN_MAIL_TO = all / списък с адреси.
 const MAIL_TO = String(process.env.SCAN_MAIL_TO || '').trim();
 const emails = MAIL_TO === 'all' ? team.map((t) => t.email).filter(Boolean)
   : MAIL_TO ? MAIL_TO.split(/[,;\s]+/).filter(Boolean)
