@@ -93,7 +93,7 @@ jobs:
       - name: Изграждане на сайта (актуален списък на трудовете и цитиранията)
         if: steps.gate.outputs.ok == 'true'
         run: |
-          sudo apt-get install -y -qq poppler-utils > /dev/null   # pdftotext — пълният текст на статиите (journal-watch.mjs)
+          sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq poppler-utils >/dev/null   # pdftotext — пълният текст на статиите (journal-watch.mjs)
           npm ci && npm run build
       - name: Търсене
         id: scan
