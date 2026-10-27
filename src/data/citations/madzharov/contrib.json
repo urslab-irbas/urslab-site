@@ -77,5 +77,35 @@
       "Доказателство — Crossref: в литературата на цитиращия труд, позиция 35 от 43 (DOI 10.1109/ithet61869.2024.10837594 на цитирания труд)",
       "DOI 10.1109/ithet69978.2026.11585097 — Crossref: „Design of Educational Scenarios with Robots from a Neuro Aware Perspective“"
     ]
+  },
+  {
+    "member": "madzharov",
+    "cited": "doi:10.17770/etr2024vol2.8064",
+    "ind": "14",
+    "year": 2026,
+    "authors": "Gaidarski, I.",
+    "title": "Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems",
+    "peer": true,
+    "src": "url",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf",
+    "doi": "10.7546/pecr.85.26.05",
+    "evidence": "линк: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+    "text": "Gaidarski, I. Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics, 85, Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences), 2026 ISSN 2738-7356",
+    "by": "urslab-irbas",
+    "ghIssue": 183,
+    "evidenceUrl": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf",
+    "verified": [
+      "Доказателство — линк: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+      "DOI 10.7546/pecr.85.26.05 — Crossref: „Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
+    ]
   }
 ]
