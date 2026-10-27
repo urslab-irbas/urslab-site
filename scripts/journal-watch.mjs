@@ -22,9 +22,10 @@ export const SOURCES = JSON.parse(readFileSync(new URL('./journal-watch-sources.
 const SURN = new Map(TEAM.map((m) => [m.id, [...new Set(m.names.map((n) => latin(n).replace(/[^a-z]/g, '')))]]));
 const tokset = (t) => new Set(latin(t).split(/[^a-z]+/).filter((w) => w.length > 3));
 
-async function crossrefPage(member, from, cursor) {
+async function crossrefPage(src, from, cursor) {
   const sel = 'DOI,title,container-title,author,published,issued,type,ISSN,issn-type,volume,issue,page,article-number,reference,link,resource,indexed,publisher';
-  const u = `https://api.crossref.org/members/${member}/works?filter=from-index-date:${from},type:journal-article&rows=100&cursor=${encodeURIComponent(cursor)}&select=${sel}&mailto=a.madzharov@ir.bas.bg`;
+  const base = src.member ? `https://api.crossref.org/members/${src.member}/works` : `https://api.crossref.org/journals/${src.issn}/works`;
+  const u = `${base}?filter=from-index-date:${from},type:journal-article&rows=100&cursor=${encodeURIComponent(cursor)}&select=${sel}&mailto=a.madzharov@ir.bas.bg`;
   for (let i = 0; i < 3; i++) {
     try {
       const r = await fetch(u, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(60000) });
@@ -34,6 +35,34 @@ async function crossrefPage(member, from, cursor) {
   }
   return null;
 }
+
+/** Сайт без DOI (напр. сборниците SES): PDF файловете от архива — до 2 нива страници на същия сайт */
+async function sitePdfs(start) {
+  const host = new URL(start).host, seen = new Set(), pdfs = new Set();
+  let level = [start];
+  for (let d = 0; d < 3 && level.length; d++) {
+    const next = [];
+    for (const u of level.slice(0, 60)) {
+      if (seen.has(u)) continue; seen.add(u);
+      try {
+        const r = await fetch(u, { headers: { 'user-agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+        if (!/html/.test(r.headers.get('content-type') ?? '')) continue;
+        const h = await r.text();
+        for (const m of h.matchAll(/href="([^"#]+)"/gi)) {
+          let x; try { x = new URL(m[1], r.url); } catch { continue; }
+          if (x.host !== host) continue;
+          if (/\.pdf$/i.test(x.pathname)) pdfs.add(x.href);
+          else if (/\.html?$|\/$/i.test(x.pathname) && !seen.has(x.href)) next.push(x.href);
+        }
+      } catch { /* следващата */ }
+      await sleep(300);
+    }
+    level = next;
+  }
+  return [...pdfs];
+}
+/** Заглавие от първата страница на PDF (за кандидатите без DOI; уточнява се във формата) */
+const pdfTitle = (t) => (String(t).split(/\n/).map((l) => l.trim()).find((l) => l.length >= 20 && l.length <= 250 && /[A-Za-zА-Яа-я]{4}/.test(l) && !/^(proceedings|сборник|space, ecology|ses\s*20)/i.test(l)) ?? '').replace(/\s+/g, ' ');
 
 /** Адресите, от които може да се вземе пълният текст: link от Crossref → страницата на статията → PDF от страницата */
 async function fullText(w) {
@@ -60,24 +89,61 @@ async function fullText(w) {
 /**
  * Обхожда издателите от SOURCES и връща намерените цитирания.
  *   works — трудовете в Системата (scan-citations.mjs: Map key → { key, title, tr, owners, … })
- *   st    — състояние (citation-scan/journal-watch.json): { cursors: { member: дата }, hits: { doi|key: … }, checked: { doi: дата } }
+ *   st    — състояние (citation-scan/journal-watch.json): { cursors: { член/ISSN: дата }, sites: { адрес: [PDF] }, hits: { труд|DOI или PDF: … }, checked: { doi: дата } }
  *   opts  — { timeLimitMs, since, log }
  */
-export async function watchJournals(works, st, { timeLimitMs = 6 * 60_000, since = '2023-01-01', log = () => {} } = {}) {
+export async function watchJournals(works, st, { timeLimitMs = 8 * 60_000, since = SOURCES.since, log = () => {} } = {}) {
   const t0 = Date.now();
   st.cursors ??= {}; st.hits ??= {}; st.checked ??= {};
   const stats = { members: 0, works: 0, refs: 0, pdf: 0, html: 0, noText: 0, withNames: 0, hits: 0, unfinished: [] };
   const byOwner = new Map(); // член → трудовете му
   for (const w of works.values()) for (const o of w.owners) { if (!byOwner.has(o)) byOwner.set(o, []); byOwner.get(o).push(w); }
   const today = new Date().toISOString().slice(0, 10);
-  for (const src of SOURCES.members) {
+  st.sites ??= {};
+  const match = (text, base, src, kind, url) => {
+    const T = tokset(text);
+    const members = [...SURN].filter(([, ns]) => ns.some((n) => T.has(n))).map(([id]) => id);
+    if (!members.length) return;
+    stats.withNames++;
+    for (const m of members) for (const cw of byOwner.get(m) ?? []) {
+      const f = findCited(text, cw, m);
+      if (!f) continue;
+      const key = `${cw.key}|${base.doi || url}`;
+      if (st.hits[key]) continue;
+      st.hits[key] = { cited: cw.key, doi: base.doi, found: today, source: `${src.name}: ${kind}`, how: f.how, url, cand: { ...base, url } };
+      stats.hits++;
+      log(`  ✔ ${base.doi || url} цитира ${cw.key} (${m}; ${f.how})`);
+    }
+  };
+  for (const src of SOURCES.sources) {
     if (Date.now() - t0 > timeLimitMs) { stats.unfinished.push(src.name); continue; }
     stats.members++;
-    const from = st.cursors[src.id] ?? since;
+    // сайт без DOI: при първото обхождане само се запомнят наличните PDF файлове (начало „от днес“), после се четат новите
+    if (src.site) {
+      const known = st.sites[src.site];
+      const list = await sitePdfs(src.site);
+      if (!known) { st.sites[src.site] = list; log(`  ${src.name}: начално състояние — ${list.length} PDF файла (не се четат)`); continue; }
+      const fresh = list.filter((u) => !known.includes(u));
+      for (const u of fresh) {
+        if (Date.now() - t0 > timeLimitMs) { stats.unfinished.push(src.name); break; }
+        stats.works++;
+        let text = '';
+        try { const r = await urlText(u); if (r.pdf) text = r.text; } catch { /* недостъпен */ }
+        if (text) stats.pdf++; else stats.noText++;
+        known.push(u);
+        if (!text) continue;
+        const year = Number((u.match(/20\d\d/) ?? [])[0]) || new Date().getFullYear();
+        match(text, { doi: '', title: pdfTitle(text), year, authors: '', alist: [], venue: src.venue ?? src.name, issns: [], type: 'proceedings-article' }, src, 'PDF', u);
+        await sleep(800);
+      }
+      continue;
+    }
+    const sid = src.member ?? src.issn;
+    const from = st.cursors[sid] ?? since;
     let cursor = '*', done = true, maxIndexed = from;
     while (cursor) {
       if (Date.now() - t0 > timeLimitMs) { done = false; break; }
-      const page = await crossrefPage(src.id, from, cursor);
+      const page = await crossrefPage(src, from, cursor);
       if (!page) { done = false; break; }
       for (const w of page.items ?? []) {
         if (Date.now() - t0 > timeLimitMs) { done = false; break; }
@@ -98,29 +164,14 @@ export async function watchJournals(works, st, { timeLimitMs = 6 * 60_000, since
         st.checked[doi] = idx || today;
         if (idx > maxIndexed) maxIndexed = idx;
         if (!text) continue;
-        const T = tokset(text);
-        const members = [...SURN].filter(([, ns]) => ns.some((n) => T.has(n))).map(([id]) => id);
-        if (!members.length) continue;
-        stats.withNames++;
         const cr = fromCrossref(w);
         const alist = (w.author ?? []).map((a) => ({ surname: a.family ?? a.name ?? '', initials: (a.given ?? '').split(/[\s.-]+/).filter(Boolean).map((g) => g[0].toUpperCase() + '.').join(' ') }));
-        for (const m of members) for (const cw of byOwner.get(m) ?? []) {
-          const f = findCited(text, cw, m);
-          if (!f) continue;
-          const key = `${cw.key}|${doi}`;
-          if (st.hits[key]) continue;
-          st.hits[key] = {
-            cited: cw.key, doi, found: today, source: `${src.name}: ${kind}`, how: f.how, url,
-            cand: { doi, title: cr.title ?? (w.title ?? [])[0] ?? '', year: cr.year ?? w.issued?.['date-parts']?.[0]?.[0], authors: cr.authors ?? '', alist,
-              venue: cr.venue ?? (w['container-title'] ?? [])[0] ?? '', issns: w.ISSN ?? [], type: 'article', url },
-          };
-          stats.hits++;
-          log(`  ✔ ${doi} цитира ${cw.key} (${m}; ${f.how})`);
-        }
+        match(text, { doi, title: cr.title ?? (w.title ?? [])[0] ?? '', year: cr.year ?? w.issued?.['date-parts']?.[0]?.[0], authors: cr.authors ?? '', alist,
+          venue: cr.venue ?? (w['container-title'] ?? [])[0] ?? '', issns: w.ISSN ?? [], type: 'article' }, src, kind, url);
       }
       cursor = (page.items ?? []).length < 100 ? null : page['next-cursor'];
     }
-    if (done) st.cursors[src.id] = maxIndexed; else stats.unfinished.push(src.name);
+    if (done) st.cursors[sid] = maxIndexed; else stats.unfinished.push(src.name);
   }
   // проверените DOI се пазят една година (за да не расте файлът безкрайно)
   const cut = new Date(Date.now() - 400 * 864e5).toISOString().slice(0, 10);

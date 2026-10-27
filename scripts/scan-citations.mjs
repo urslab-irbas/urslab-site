@@ -191,7 +191,7 @@ for (const m of team.filter((t) => t.orcid)) {
 // ---------------- 2б) Наблюдение на списанията на БАН (пълен текст) ----------------
 const JW_FILE = process.env.JW_FILE || 'citation-scan/journal-watch.json';
 const jw = loadWatch(JW_FILE);
-const jwStats = await watchJournals(works, jw, { timeLimitMs: Number(process.env.JW_TIME_MIN || 6) * 60_000, since: process.env.JW_SINCE || '2023-01-01', log: (t) => console.error(t) });
+const jwStats = await watchJournals(works, jw, { timeLimitMs: Number(process.env.JW_TIME_MIN || 8) * 60_000, since: process.env.JW_SINCE || SOURCES.since, log: (t) => console.error(t) });
 writeFileSync(JW_FILE, JSON.stringify(jw) + '\n');
 for (const h of Object.values(jw.hits ?? {})) {
   const w = works.get(h.cited);
@@ -300,7 +300,7 @@ const fresh = shown.filter((x) => x.isNew);
 const chunks = []; // части на текста — при над 60 000 знака заявката се разделя на няколко
 let head = `Автоматично търсене на нови цитирания — ${today}${process.env.TRIGGER ? ` (${process.env.TRIGGER})` : ''}.\n\n`;
 head += `${listsSummary(lists)}\n\n`;
-head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; списания на БАН — ${jwStats.members} издатели от ${SOURCES.members.length}, нови статии ${jwStats.works} (литература в Crossref ${jwStats.refs}, PDF ${jwStats.pdf}, HTML ${jwStats.html}, без текст ${jwStats.noText}), намерени цитирания ${jwStats.hits}${jwStats.unfinished.length ? `; продължава при следващото търсене: ${jwStats.unfinished.length} издатели` : ''}; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
+head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; списания на БАН — ${jwStats.members} източника от ${SOURCES.sources.length}, нови статии ${jwStats.works} (литература в Crossref ${jwStats.refs}, PDF ${jwStats.pdf}, HTML ${jwStats.html}, без текст ${jwStats.noText}), намерени цитирания ${jwStats.hits}${jwStats.unfinished.length ? `; продължава при следващото търсене: ${jwStats.unfinished.length} издатели` : ''}; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
   `Пропуснати: вече въведени — ${stats.skippedKnown}, самоцитирания — ${stats.skippedSelf}, вече решени (потвърдени / отказани) — ${stats.skippedDecided ?? 0}. Заявки: ${stats.requests}, време: ${Math.round((Date.now() - t0) / 1000)} s.\n\n`;
 head += `> **Как се потвърждава:** под всяко цитиране отметнете **една** отметка — показателя (Д-12, ако цитиращият труд е в Scopus или Web of Science; иначе Д-13 / Д-14) или „❌ Откажи“. Ако Системата е определила показателя по списъците, той е първи и е отбелязан „← предложено“ с основанието; другите отметки са за поправка. ` +
   `Системата проверява и въвежда цитирането сама (без формата) — на всички съавтори от колектива, без тези, за които е самоцитиране — и след минута-две пише резултата на мястото на отметките. ` +
