@@ -1,4 +1,7 @@
-# Автоматично търсене на нови цитирания (scripts/scan-citations.mjs): OpenAlex, OpenCitations, Semantic Scholar.
+# Автоматично търсене на нови цитирания (scripts/scan-citations.mjs): OpenAlex, OpenCitations, Semantic Scholar
+# и наблюдение на списанията на БАН (scripts/journal-watch.mjs — пълният текст на новите статии; състоянието —
+# citation-scan/journal-watch.json в клона data; източниците — scripts/journal-watch-sources.json; начало 27.10.2026).
+# Продължителност: около 20–25 минути (от тях до 8 минути — списанията на БАН).
 # Кога: веднъж месечно (1-во число), ръчно от член на колектива с GitHub акаунт (бутонът „Търси нови цитирания“
 # в „Обобщен отчет“ → заявка „[Търсене на цитирания] …“; най-много веднъж на 24 часа) или от ръководителя (Run workflow).
 # Резултат: заявка „[Нови цитирания] <дата>“ (при много резултати — няколко части) с отметки под всяко цитиране:
@@ -28,7 +31,7 @@ jobs:
   scan:
     if: github.event_name != 'issues' || startsWith(github.event.issue.title, '[Търсене на цитирания]')
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     env:
       MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
     steps:
@@ -86,7 +89,9 @@ jobs:
 
       - name: Изграждане на сайта (актуален списък на трудовете и цитиранията)
         if: steps.gate.outputs.ok == 'true'
-        run: npm ci && npm run build
+        run: |
+          sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq poppler-utils >/dev/null   # pdftotext — пълният текст на статиите (journal-watch.mjs)
+          npm ci && npm run build
       - name: Търсене
         id: scan
         if: steps.gate.outputs.ok == 'true'
@@ -94,6 +99,7 @@ jobs:
           TRIGGER: ${{ github.event_name == 'schedule' && 'месечно' || github.event_name == 'issues' && format('ръчно, @{0}', github.event.issue.user.login) || 'ръчно, ръководителят' }}
           SCAN_MAIL_TO: ${{ steps.gate.outputs.mail || vars.SCAN_MAIL_TO }}
           STATE_FILE: citation-scan/state.json
+          JW_TIME_MIN: 8
         run: |
           node scripts/scan-citations.mjs > /dev/null
           node -e 'const r=require("./scan-result.json"); const fs=require("fs"); fs.appendFileSync(process.env.GITHUB_OUTPUT, `total=${r.found + r.newWorks}\nfresh=${r.fresh}\nready=${r.ready}\nemails=${r.emails.join(",")}\n`)'
@@ -102,7 +108,7 @@ jobs:
         if: steps.scan.outcome == 'success'
         run: |
           D=$(date -u +%F)
-          mkdir -p "$RUNNER_TEMP/s"; cp citation-scan/state.json citation-scan/candidates.json "$RUNNER_TEMP/s/"; cp scan-report.md "$RUNNER_TEMP/s/report-$D.md"
+          mkdir -p "$RUNNER_TEMP/s"; cp citation-scan/state.json citation-scan/candidates.json "$RUNNER_TEMP/s/"; cp citation-scan/journal-watch.json "$RUNNER_TEMP/s/" 2>/dev/null || true; cp scan-report.md "$RUNNER_TEMP/s/report-$D.md"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch -q origin data

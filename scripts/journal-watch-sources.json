@@ -1,0 +1,18 @@
+{
+  "_comment": "Издания, които ботът наблюдава (scripts/journal-watch.mjs) от началната дата нататък. member = номер на издателя в Crossref (всички негови списания); issn = едно списание по ISSN; site = сайт без DOI (PDF файловете от архива). Нов източник — нов ред.",
+  "since": "2026-10-27",
+  "sources": [
+    { "member": 4381,  "name": "Академично издателство „Проф. Марин Дринов“ (Доклади на БАН, PECR, Engineering Sciences, Bioautomation и др.)" },
+    { "member": 34444, "name": "ИМИ-БАН (Serdica, BIOMATH, Innovative STEM Education, Mathematics and Education in Mathematics и др.)" },
+    { "member": 29796, "name": "Геологически институт – БАН (Geologica Balcanica, Engineering Geology and Hydrogeology)" },
+    { "member": 34400, "name": "Икономически изследователски институт – БАН (Economic Studies, Economic Thought)" },
+    { "member": 27567, "name": "Институт за български език – БАН (Български език, Computational Linguistics in Bulgaria и др.)" },
+    { "member": 37767, "name": "Институт по философия и социология – БАН (Philosophical Alternatives)" },
+    { "member": 56004, "name": "Социологически проблеми (ИФС-БАН)" },
+    { "member": 52375, "name": "Институт за изследване на биоразнообразието и екосистемите – БАН (Acta zoologica bulgarica)" },
+    { "member": 34316, "name": "Институт по механика – БАН (Journal of Theoretical and Applied Mechanics)" },
+    { "member": 19814, "name": "Институт по инженерна химия – БАН (Bulgarian Chemical Communications)" },
+    { "issn": "1313-0927", "name": "ИКИТ-БАН: Aerospace Research in Bulgaria (journal.space.bas.bg; DOI чрез Pensoft)" },
+    { "site": "http://www.space.bas.bg/SES/archive.html", "name": "ИКИТ-БАН: сборници Space, Ecology, Safety (SES; без DOI — PDF от архива)" }
+  ]
+}
