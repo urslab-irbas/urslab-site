@@ -1,0 +1,5 @@
+403 https://docs.scilit.com/
+403 https://docs.scilit.com/guides/conventions/
+403 https://docs.scilit.com/reference/organizations/
+403 https://www.scilit.com/about/user-guide/api
+403 https://www.scilit.com/about/user-guide/publishers
