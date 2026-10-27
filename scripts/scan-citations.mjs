@@ -5,6 +5,8 @@
 //   1) цитирания на публикуваните трудове на колектива в Системата (dist/publications/citables.json):
 //      OpenAlex (цитиращи трудове), OpenCitations COCI (цитиращи DOI), Semantic Scholar (цитиращи трудове);
 //      трудове без DOI — намират се в OpenAlex по заглавие + фамилия на автора;
+//      наблюдение на списанията на БАН (journal-watch.mjs): литературата или пълният текст (PDF/HTML) на новите статии,
+//      защото повечето списания на БАН не изпращат литературата си в Crossref;
 //   2) трудове на членовете с ORCID, които още НЕ са в Системата (OpenAlex по ORCID) — и техните цитирания.
 // Правила (облекчават потвърждаването):
 //   - вече въведените цитирания и самоцитиранията (за всеки член поотделно) се пропускат;
@@ -23,6 +25,7 @@ import { latin, tnorm, parseAuthors, teamFromAuthors, cleanDoi, findDuplicate, v
 import { crossrefWork, fromCrossref, findInRefs } from './evidence.mjs';
 import { loadIndexLists, classify, listsSummary } from './index-lists.mjs';
 import { nrsByNumber } from './verify-ids.mjs';
+import { watchJournals, loadWatch, SOURCES } from './journal-watch.mjs';
 
 const SITE = process.env.SITE_URL || 'https://urs.ir.bas.bg';
 const MAILTO = process.env.MAILTO || 'a.madzharov@ir.bas.bg';
@@ -185,6 +188,17 @@ for (const m of team.filter((t) => t.orcid)) {
 }
 
 
+// ---------------- 2б) Наблюдение на списанията на БАН (пълен текст) ----------------
+const JW_FILE = process.env.JW_FILE || 'citation-scan/journal-watch.json';
+const jw = loadWatch(JW_FILE);
+const jwStats = await watchJournals(works, jw, { timeLimitMs: Number(process.env.JW_TIME_MIN || 6) * 60_000, since: process.env.JW_SINCE || '2023-01-01', log: (t) => console.error(t) });
+writeFileSync(JW_FILE, JSON.stringify(jw) + '\n');
+for (const h of Object.values(jw.hits ?? {})) {
+  const w = works.get(h.cited);
+  if (w) consider(w, { ...h.cand, source: `списание на БАН (${h.source})`, jw: h });
+}
+stats.found = candidates.length;
+
 // ---------------- 3) Предварителна проверка — същата като при потвърждаване ----------------
 // За всяко цитиране с DOI: данните от Crossref, търсене на цитирания труд в литературата на цитиращия
 // и правилата на Системата (validateCitation). Готовите се потвърждават с една отметка в заявката в GitHub
@@ -232,6 +246,11 @@ for (const x of shown) {
       x.ev = `в литературата: позиция ${f.pos} от ${refs.length} (Crossref)`;
     } else x.ev = 'DOI в Crossref (литературата не е публикувана там)';
   } else x.ev = 'DOI извън Crossref (DataCite / doi.org)';
+  // наблюдение на списанията: доказателството е пълният текст (линкът към PDF/HTML) — проверява се отново при потвърждаването
+  if (c.jw) {
+    x.ev = `в пълния текст: ${c.jw.how}`;
+    if (!/литература в Crossref/.test(c.jw.source)) { x.data.src = 'url'; x.data.url = c.jw.url; }
+  }
   // Правилата на Системата; автоматично взето поле в неподходящ формат не пречи — просто не се записва
   const ctx = { cited: { title: x.work.title, year: x.work.year, authors: x.work.authors }, existing: x.work.cites, full: true };
   const test = () => validateCitation({ ...x.data, ind: '13', peer: true }, ctx);
@@ -281,7 +300,7 @@ const fresh = shown.filter((x) => x.isNew);
 const chunks = []; // части на текста — при над 60 000 знака заявката се разделя на няколко
 let head = `Автоматично търсене на нови цитирания — ${today}${process.env.TRIGGER ? ` (${process.env.TRIGGER})` : ''}.\n\n`;
 head += `${listsSummary(lists)}\n\n`;
-head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
+head += `Източници: OpenAlex, OpenCitations (COCI), Semantic Scholar; списания на БАН — ${jwStats.members} издатели от ${SOURCES.members.length}, нови статии ${jwStats.works} (литература в Crossref ${jwStats.refs}, PDF ${jwStats.pdf}, HTML ${jwStats.html}, без текст ${jwStats.noText}), намерени цитирания ${jwStats.hits}${jwStats.unfinished.length ? `; продължава при следващото търсене: ${jwStats.unfinished.length} издатели` : ''}; проверка — Crossref. Проверени трудове: ${stats.works} (без DOI: ${stats.worksNoDoi}). ` +
   `Пропуснати: вече въведени — ${stats.skippedKnown}, самоцитирания — ${stats.skippedSelf}, вече решени (потвърдени / отказани) — ${stats.skippedDecided ?? 0}. Заявки: ${stats.requests}, време: ${Math.round((Date.now() - t0) / 1000)} s.\n\n`;
 head += `> **Как се потвърждава:** под всяко цитиране отметнете **една** отметка — показателя (Д-12, ако цитиращият труд е в Scopus или Web of Science; иначе Д-13 / Д-14) или „❌ Откажи“. Ако Системата е определила показателя по списъците, той е първи и е отбелязан „← предложено“ с основанието; другите отметки са за поправка. ` +
   `Системата проверява и въвежда цитирането сама (без формата) — на всички съавтори от колектива, без тези, за които е самоцитиране — и след минута-две пише резултата на мястото на отметките. ` +
@@ -348,7 +367,7 @@ for (const x of shown) state.seen[x.key] ??= today;
 for (const [k, d] of Object.entries(state.seen)) if ((now - Date.parse(d)) / 864e5 > KEEP_DAYS * 2) delete state.seen[k];
 for (const [k, v] of Object.entries(state.confirmed)) if ((now - Date.parse(v.date)) / 864e5 > 31) delete state.confirmed[k];
 state.lastRun = now.toISOString();
-state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', found: shown.length, new: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, suggested: Object.fromEntries(['12s', '12w', '13', '14'].map((o) => [o, ready.filter((x) => x.idx?.suggest === o).length])), lists: [...lists.dbs.keys()], requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
+state.runs = [...(state.runs ?? []), { date: now.toISOString(), trigger: process.env.TRIGGER ?? '', found: shown.length, new: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, suggested: Object.fromEntries(['12s', '12w', '13', '14'].map((o) => [o, ready.filter((x) => x.idx?.suggest === o).length])), lists: [...lists.dbs.keys()], journalWatch: jwStats, requests: stats.requests, seconds: Math.round((Date.now() - t0) / 1000) }].slice(-24);
 mkdirSync(STATE.split('/').slice(0, -1).join('/') || '.', { recursive: true });
 writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
 writeFileSync('scan-report.md', parts.join('\n\n---\n\n'));
