@@ -345,18 +345,30 @@ for (const ch of chunks) {
 }
 parts[parts.length - 1] += tail;
 
-// Имейл (HTML): кратко + връзка към заявката (__ISSUES__ се заменя в workflow с връзките)
+// Имейл (HTML): кратко + връзка към заявката (__ISSUES__ се заменя в workflow с връзките).
+// Ръководителят получава всичко; всеки потребител — само своята част (цитиранията, които се отчитат на него, и неговите
+// трудове, които още не са в Системата).
 const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
 const htmlList = (list) => list.map((x) => `<li>${esc(cite(x.cand).replace(/\*/g, ''))}<br><small>Труд: ${esc(workLine(x.work))} · отчита се на: ${esc(x.eligible.map(nm).join(', '))}${x.why ? ` · ${esc(x.why)}` : ''}</small></li>`).join('');
-let html = `<div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.5"><h2>URSlab — нови цитирания (${today})</h2>`;
-html += `<p>Проверени трудове: ${stats.works}. Намерени цитирания: <b>${shown.length}</b> (нови: ${fresh.length}) — готови за потвърждаване с отметка: <b>${ready.length}</b>; за формата: ${form.length}; съмнителни: ${doubt.length}. Трудове, които още не са в Системата: ${newWorks.length}.</p>`;
-html += `<p style="font-size:16px"><b>👉 Потвърждаване с една отметка: __ISSUES__</b></p>`;
-html += `<p>Потвърждава <b>един</b> от съавторите с GitHub акаунт (или ръководителят) — цитирането се отчита на всички съавтори от колектива. Ако нямате акаунт, препратете писмото на съавтор с акаунт или на ръководителя.</p>`;
-if (ready.length) html += `<h3>Проверени</h3><ol>${htmlList(ready)}</ol>`;
-if (form.length) html += `<h3>За въвеждане през формата</h3><ol>${htmlList(form)}</ol>`;
-if (doubt.length) html += `<h3>Съмнителни</h3><ol>${htmlList(doubt)}</ol>`;
-if (newWorks.length) html += `<h3>Трудове, които още не са в Системата</h3><ul>${newWorks.map((x) => `<li>${esc(cite(x.c).replace(/\*/g, ''))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
-html += `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно (писмото — до ръководителя) или с бутона „Търси нови цитирания“ в „Обобщен отчет“ (писмото — до потребителя и до ръководителя).</small></p></div>`;
+const FOOT = `<p><small>Писмото е изпратено автоматично от Системата на ${esc(SITE)}. Търсенето е веднъж месечно и с бутона „Търси нови цитирания“ в „Обобщен отчет“. Ръководителят получава целия резултат, всеки потребител — само своята част.</small></p></div>`;
+function mailHtml(member) {
+  const mine = (list) => member ? list.filter((x) => x.eligible.includes(member)) : list;
+  const r = mine(ready), f = mine(form), d = mine(doubt), nw = member ? newWorks.filter((x) => x.members.includes(member)) : newWorks;
+  const n = r.length + f.length + d.length;
+  let h = `<div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.5"><h2>URSlab — нови цитирания (${today})${member ? ` — ${esc(nm(member))}` : ''}</h2>`;
+  if (member) h += `<p>Цитирания на ваши трудове: <b>${n}</b> — готови за потвърждаване с отметка: <b>${r.length}</b>; за формата: ${f.length}; съмнителни: ${d.length}. Ваши трудове, които още не са в Системата: ${nw.length}.</p>`;
+  else h += `<p>Проверени трудове: ${stats.works}. Намерени цитирания: <b>${shown.length}</b> (нови: ${fresh.length}) — готови за потвърждаване с отметка: <b>${ready.length}</b>; за формата: ${form.length}; съмнителни: ${doubt.length}. Трудове, които още не са в Системата: ${newWorks.length}.</p>`;
+  if (n || !member) {
+    h += `<p style="font-size:16px"><b>👉 Потвърждаване с една отметка: __ISSUES__</b></p>`;
+    h += `<p>Потвърждава <b>един</b> от съавторите с GitHub акаунт (или ръководителят) — цитирането се отчита на всички съавтори от колектива. Ако нямате акаунт, препратете писмото на съавтор с акаунт или на ръководителя.</p>`;
+  } else h += `<p>Няма нови цитирания на ваши трудове от последното търсене. Пълният резултат: __ISSUES__</p>`;
+  if (r.length) h += `<h3>Проверени</h3><ol>${htmlList(r)}</ol>`;
+  if (f.length) h += `<h3>За въвеждане през формата</h3><ol>${htmlList(f)}</ol>`;
+  if (d.length) h += `<h3>Съмнителни</h3><ol>${htmlList(d)}</ol>`;
+  if (nw.length) h += `<h3>Трудове, които още не са в Системата</h3><ul>${nw.map((x) => `<li>${esc(cite(x.c).replace(/\*/g, ''))} — ${esc(x.members.map(nm).join(', '))}${x.cited ? ` · цитиран ${x.cited} пъти` : ''} · <a href="${esc(newPubUrl(x))}">+ Въведи</a></li>`).join('')}</ul>`;
+  return { html: h + FOOT, n, ready: r.length, works: nw.length };
+}
+const html = mailHtml(null).html;
 
 // Кандидатите (за отметките и за формата ?scan=<id>) и състоянието
 const items = {};
@@ -373,11 +385,35 @@ writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
 writeFileSync('scan-report.md', parts.join('\n\n---\n\n'));
 writeFileSync('scan-report-parts.json', JSON.stringify(parts));
 writeFileSync('scan-report.html', html);
-// Получатели: SCAN_MAIL_TO от citation-scan.yml — при бутона в „Обобщен отчет“ потребителят и ръководителят (както при
-// „Таблица по имейл“); при месечното търсене — ръководителят, или Variables → SCAN_MAIL_TO = all / списък с адреси.
-const MAIL_TO = String(process.env.SCAN_MAIL_TO || '').trim();
-const emails = MAIL_TO === 'all' ? team.map((t) => t.email).filter(Boolean)
-  : MAIL_TO ? MAIL_TO.split(/[,;\s]+/).filter(Boolean)
-  : [team.find((t) => t.id === 'madzharov')?.email || MAILTO];
-writeFileSync('scan-result.json', JSON.stringify({ found: shown.length, fresh: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, parts: parts.length, emails, stats }, null, 2));
+// Получатели (писмата се пращат от scripts/send-mails.py):
+//   SCAN_MAIL_TO    — еднократно (ред „Имейл: …“ на ръководителя / mail_to): целият резултат само до тези адреси;
+//   SCAN_MAIL_USERS — 'all' (месечното търсене): всеки потребител със своя част (само ако в нея има нещо);
+//                     '<id>' (бутонът в „Обобщен отчет“ на потребителя): неговата част (и когато е празна); '' — никой;
+//   ръководителят получава целия резултат (при месечното търсене — само ако има резултат).
+// Имейл на потребителя: поле email в профила или тайната MEMBER_EMAILS („id=адрес; id=адрес“).
+const extraMail = Object.fromEntries(String(process.env.MEMBER_EMAILS || '').split(/[;\n]+/).map((x) => x.split('=').map((y) => y.trim())).filter((x) => x[0] && /@/.test(x[1] || '')));
+const mailOf = (id) => team.find((t) => t.id === id)?.email || extraMail[id] || '';
+const headMail = team.find((t) => t.id === 'madzharov')?.email || MAILTO;
+const total = shown.length + newWorks.length;
+const once = String(process.env.SCAN_MAIL_TO || '').trim();
+const users = String(process.env.SCAN_MAIL_USERS || '').trim();
+const mails = [];
+const subj = (n, r) => `URSlab: нови цитирания (${n}; за потвърждаване с отметка: ${r})`;
+if (once) mails.push({ to: once.split(/[,;\s]+/).filter(Boolean), subject: subj(fresh.length, ready.length), file: 'scan-report.html' });
+else {
+  if (total || users !== 'all') mails.push({ to: [headMail], subject: subj(fresh.length, ready.length), file: 'scan-report.html' });
+  const ids = users === 'all' ? team.map((t) => t.id) : users ? [users] : [];
+  for (const id of ids) {
+    const to = mailOf(id);
+    if (!to || to === headMail) continue; // ръководителят вече има целия резултат
+    const m = mailHtml(id);
+    if (!m.n && !m.works && users === 'all') continue; // месечното търсене: писмо само ако има нещо за потребителя
+    writeFileSync(`scan-report-${id}.html`, m.html);
+    mails.push({ to: [to], subject: m.n ? subj(m.n, m.ready) : 'URSlab: търсене на цитирания — няма нови за вашите трудове', file: `scan-report-${id}.html`, user: id });
+  }
+}
+writeFileSync('scan-mails.json', JSON.stringify(mails, null, 1));
+const emails = [...new Set(mails.flatMap((m) => m.to))];
+const personal = mails.filter((m) => m.user).map((m) => m.user);
+writeFileSync('scan-result.json', JSON.stringify({ found: shown.length, fresh: fresh.length, ready: ready.length, form: form.length, doubt: doubt.length, newWorks: newWorks.length, parts: parts.length, emails, personal, stats }, null, 2));
 console.log(parts.join('\n\n---\n\n'));

@@ -10,10 +10,12 @@
 # Резултат: заявка „[Нови цитирания] <дата>“ (при много резултати — няколко части) с отметки под всяко цитиране:
 # показател (Д-12 Scopus / Д-12 WoS / Д-13 / Д-14) или „Откажи“ — обработват се от citation-confirm.yml; и имейл.
 # Предишната отворена заявка „[Нови цитирания]“ се затваря (кандидатите ѝ, които още чакат, са в новата).
-# Имейл — както при „Таблица по имейл“: при натискане на бутона — до потребителя (поле email в профила или тайната
-# MEMBER_EMAILS) и до ръководителя; ръководителят от своя отчет — само до себе си. Месечното търсене и Run workflow —
-# до ръководителя (или Variables → SCAN_MAIL_TO = all / списък). Еднократно: ред „Имейл: <адрес>“ в заявката на
-# ръководителя или полето mail_to при Run workflow. Адресите се маскират в публичния дневник.
+# Имейл (scripts/send-mails.py): ръководителят получава целия резултат, всеки потребител — само своята част
+# (цитиранията, които се отчитат на него, и неговите трудове, които още не са в Системата).
+#   Месечно — до ръководителя и до всеки потребител, за когото има нещо (поле email в профила или тайната MEMBER_EMAILS).
+#   Бутонът — както при „Таблица по имейл“: до потребителя (неговата част) и до ръководителя; ръководителят от своя
+#   отчет / Run workflow — само до ръководителя. Еднократно: ред „Имейл: <адрес>“ в заявката на ръководителя или полето
+#   mail_to при Run workflow — целият резултат само до тези адреси. Адресите се маскират в публичния дневник.
 # Пощата се изпраща само ако са зададени Secrets: MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM.
 name: Търсене на нови цитирания
 on:
@@ -74,7 +76,7 @@ jobs:
             }).filter((m) => m.id);
             const extra = Object.fromEntries(String(process.env.MEMBER_EMAILS || "").split(/[;\n]+/).map((x) => x.split("=").map((y) => y.trim())).filter((x) => x[0] && /@/.test(x[1] || "")));
             const head = team.find((x) => x.github === owner) || team.find((x) => x.id === "madzharov");
-            let ok = true, why = "", to = "", memberMail = "no";
+            let ok = true, why = "", users = ev === "schedule" ? "all" : "", memberMail = "no";
             if (ev === "issues") {
               // както при „Таблица по имейл“: ред „Потребител: <id>“; приема се само от самия потребител или от ръководителя
               const id = ((process.env.BODY || "").match(/^\s*(?:Потребител|Член):\s*([a-z0-9-]+)/im) || [])[1] || "";
@@ -85,19 +87,17 @@ jobs:
               // ръководителят може да пуска търсене и по-често от веднъж на 24 часа
               if (ok && who !== owner && st.lastRun && Date.now() - Date.parse(st.lastRun) < 24 * 3600e3) { ok = false; why = "Последното търсене беше на " + st.lastRun.slice(0, 16).replace("T", " ") + " UTC (до 24 часа). Резултатът е в последната заявка „[Нови цитирания]“."; }
               if (m) {
-                const mm = m.email || extra[m.id] || "";
-                memberMail = mm ? "yes" : "no";
-                to = [...new Set([mm, head && head.email].filter(Boolean))].join(",");
+                users = m.id;
+                memberMail = (m.email || extra[m.id]) && m.id !== (head && head.id) ? "yes" : "no";
               }
             }
             // еднократен получател на имейла: ред „Имейл: адрес“ в заявката на ръководителя или полето mail_to при Run workflow
             let mail = (process.env.MAIL_INPUT || "").trim();
             if (ev === "issues" && who === owner) mail = ((process.env.BODY || "").match(/^\s*(?:Имейл|E-?mail)\s*:\s*([^\s<>,;]+@[^\s<>,;]+(?:\s*[,;]\s*[^\s<>,;]+@[^\s<>,;]+)*)/im) || [])[1] || mail;
             if (mail && !/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+(\s*[,;]\s*[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+)*$/.test(mail)) mail = "";
-            if (mail) to = mail;
             // адресите не се показват в публичния дневник на изпълнението
-            for (const x of to.split(/[,;\s]+/).filter(Boolean)) console.log("::add-mask::" + x);
-            fs.appendFileSync(process.env.GITHUB_OUTPUT, "ok=" + ok + "\nwhy=" + why + "\nto=" + to + "\nmemberMail=" + memberMail + "\n");
+            for (const x of [mail, ...Object.values(extra), ...team.map((t) => t.email)].join(",").split(/[,;\s]+/).filter(Boolean)) console.log("::add-mask::" + x);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, "ok=" + ok + "\nwhy=" + why + "\nmail=" + mail + "\nusers=" + users + "\nmemberMail=" + (mail ? "no" : memberMail) + "\n");
           '
       - name: Отказ
         if: steps.gate.outputs.ok != 'true'
@@ -121,7 +121,9 @@ jobs:
         if: steps.gate.outputs.ok == 'true'
         env:
           TRIGGER: ${{ github.event_name == 'schedule' && 'месечно' || github.event_name == 'issues' && format('ръчно, @{0}', github.event.issue.user.login) || 'ръчно, ръководителят' }}
-          SCAN_MAIL_TO: ${{ steps.gate.outputs.to || vars.SCAN_MAIL_TO }}
+          SCAN_MAIL_TO: ${{ steps.gate.outputs.mail }}
+          SCAN_MAIL_USERS: ${{ steps.gate.outputs.users }}
+          MEMBER_EMAILS: ${{ secrets.MEMBER_EMAILS }}
           STATE_FILE: citation-scan/state.json
           JW_TIME_MIN: 8
         run: |
@@ -181,23 +183,18 @@ jobs:
               await github.rest.issues.update({ owner, repo, issue_number: o.number, state: 'closed', state_reason: 'completed', body: `> ℹ️ Заменена от новото търсене: ${links}. Цитиранията, които още чакат, са там.\n\n${cur}` });
             }
             core.setOutput('url', made[0].html_url);
-            const html = fs.readFileSync('scan-report.html', 'utf8').replace('__ISSUES__', made.map((x, i) => `<a href="${x.html_url}">${made.length > 1 ? `част ${i + 1} (#${x.number})` : `заявка #${x.number} в GitHub`}</a>`).join(', '));
-            fs.writeFileSync('scan-report.html', html);
+            const links2 = made.map((x, i) => `<a href="${x.html_url}">${made.length > 1 ? `част ${i + 1} (#${x.number})` : `заявка #${x.number} в GitHub`}</a>`).join(', ');
+            for (const f of fs.readdirSync('.').filter((f) => /^scan-report.*\.html$/.test(f))) fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace('__ISSUES__', links2));
             if (context.eventName === 'issues') {
               // без коментар (без писмо): новата заявка с отметките и писмото „нови цитирания“ са достатъчни
               const cur = (await github.rest.issues.get({ owner, repo, issue_number: context.issue.number })).data.body ?? '';
-              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed', body: `${cur}\n\n---\n✅ Търсенето завърши — резултатът е в ${links}.${process.env.MAIL_READY === 'true' ? ` Имейл — ${process.env.MEMBER_MAIL === 'yes' ? 'до потребителя и до ръководителя' : 'до ръководителя (за потребителя няма имейл в Системата)'}.` : ''}` });
+              await github.rest.issues.update({ owner, repo, issue_number: context.issue.number, state: 'closed', state_reason: 'completed', body: `${cur}\n\n---\n✅ Търсенето завърши — резултатът е в ${links}.${process.env.MAIL_READY === 'true' ? ` Имейл — ${process.env.MEMBER_MAIL === 'yes' ? 'до потребителя (неговата част) и до ръководителя' : 'до ръководителя'}.` : ''}` });
             }
-      - name: Имейл
-        if: steps.scan.outcome == 'success' && env.MAIL_SERVER != '' && (steps.scan.outputs.total != '0' || github.event_name == 'issues')
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{ secrets.MAIL_SERVER }}
-          server_port: ${{ secrets.MAIL_PORT }}
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          from: ${{ secrets.MAIL_FROM }}
-          to: ${{ steps.scan.outputs.emails }}
-          subject: "URSlab: нови цитирания (${{ steps.scan.outputs.fresh }}; за потвърждаване с отметка: ${{ steps.scan.outputs.ready }})"
-          html_body: file://scan-report.html
-          convert_markdown: false
+      - name: Имейли (ръководителят — целият резултат; потребителите — своята част)
+        if: steps.scan.outcome == 'success' && env.MAIL_SERVER != '' && steps.report.outcome == 'success'
+        env:
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+        run: python3 scripts/send-mails.py scan-mails.json
