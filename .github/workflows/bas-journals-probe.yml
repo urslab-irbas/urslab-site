@@ -1,0 +1,23 @@
+# ВРЕМЕННА ПРОБА (не се слива): издателите и списанията на БАН в Crossref; резултатът — в probe/bas/ в клона на пробата.
+name: Проба списания на БАН (временна)
+on:
+  pull_request:
+    paths: ['scripts/bas-journals-probe.mjs', '.github/workflows/bas-journals-probe.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    if: github.head_ref == 'bas-journals-probe'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bas-journals-probe
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/bas-journals-probe.mjs
+      - run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe && git commit -qm "Проба: списания на БАН [skip ci]" && git push -q origin HEAD:bas-journals-probe || true
