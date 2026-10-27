@@ -116,5 +116,36 @@
       "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
     ],
     "confirmedBy": "madzharov"
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.17770/etr2024vol2.8064",
+    "ind": "14",
+    "year": 2026,
+    "authors": "Kutinchev, P.",
+    "title": "Technical Protection Measures in Information Security Systems in Organizations",
+    "peer": true,
+    "src": "url",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf",
+    "doi": "10.7546/pecr.85.26.06",
+    "evidence": "линк: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+    "text": "Kutinchev, P. Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics, 85, Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences), 2026 ISSN 2738-7356",
+    "by": "urslab-irbas",
+    "ghIssue": 184,
+    "evidenceUrl": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf",
+    "verified": [
+      "Доказателство — линк: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
+      "DOI 10.7546/pecr.85.26.06 — Crossref: „Technical Protection Measures in Information Security Systems in Organizations“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
+    ],
+    "confirmedBy": "madzharov"
   }
 ]
