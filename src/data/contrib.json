@@ -279,5 +279,31 @@
       "ISSN 1311-4506 — НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“",
       "НАЦИД НРС, ID 2125: „УПРАВЛЕНИЕ и устойчиво развитие : oбщество, човек, природа“"
     ]
+  },
+  {
+    "year": 2019,
+    "cat": "idx",
+    "authors": "Gaidarski, I., Minchev, Z. B., & Andreev, R.",
+    "title": "Model Driven Architectural Design of Information Security System",
+    "status": "published",
+    "idType": "isbn",
+    "isbn": "978-3-030-17064-6",
+    "venue": "Advances in intelligent systems and computing",
+    "volume": "942",
+    "publisher": "Advances in Intelligent Systems and Computing,  Springer",
+    "doi": "10.1007/978-3-030-17065-3_35",
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН",
+      "Andreev, R.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 216,
+    "verified": [
+      "DOI 10.1007/978-3-030-17065-3_35 — Crossref: „Model Driven Architectural Design of Information Security System“",
+      "ISBN 978-3-030-17064-6 — Springer International Publishing: „Handcrafted Descriptors-Based Effective Framework for Off-line Text-Independent Writer Identification“ (съвпада с ISSN/ISBN по DOI)"
+    ]
   }
 ]
