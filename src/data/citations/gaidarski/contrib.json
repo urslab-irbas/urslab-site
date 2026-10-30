@@ -172,5 +172,34 @@
       "ISSN 0167-4048 — ISSN Portal (Confirmed record): „Computers &amp; security“ (съвпада с ISSN/ISBN по DOI)",
       "Индексиране по списъците: Scopus: Computers and Security, покритие 1982–2027 (ISSN 0167-4048)"
     ]
+  },
+  {
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "ind": "12",
+    "year": 2024,
+    "authors": "Yoshinov, R., Kotseva, M., Madzharov, A., & Chehlarova, N.",
+    "title": "Implying cybersecurity skills for public administration employees",
+    "index": "wos",
+    "src": "doi",
+    "idType": "issn",
+    "issn": "1691-5402",
+    "venue": "ENVIRONMENT. TECHNOLOGY. RESOURCES. Proceedings of the International Scientific and Practical Conference",
+    "volume": "4",
+    "pages": "300-304",
+    "publisher": "Riga Technical University",
+    "where": "[10]",
+    "doi": "10.17770/etr2024vol4.8238",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 10 от 14 (DOI 10.7546/pecr.79.23.03 на цитирания труд)",
+    "text": "Yoshinov, R., Kotseva, M., Madzharov, A., & Chehlarova, N. Implying cybersecurity skills for public administration employees. ENVIRONMENT. TECHNOLOGY. RESOURCES. Proceedings of the International Scientific and Practical Conference, 4, pp. 300–304, Riga Technical University, 2024 ISSN 1691-5402",
+    "by": "ivangaidarski",
+    "ghIssue": 213,
+    "evidenceUrl": "https://doi.org/10.17770/etr2024vol4.8238",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 10 от 14 (DOI 10.7546/pecr.79.23.03 на цитирания труд)",
+      "DOI 10.17770/etr2024vol4.8238 — Crossref: „IMPLYING CYBERSECURITY SKILLS FOR PUBLIC ADMINISTRATION EMPLOYEES“",
+      "ISSN 1691-5402 — ISSN Portal (Confirmed record): „Vide. Tehnoloģija. Resursi“ (съвпада с ISSN/ISBN по DOI)",
+      "Индексиране по списъците: Scopus: Vide. Tehnologija. Resursi - Environment, Technology, Resources, покритие 2005, 2009, 2011, 2013, 2015, 2017, 2019, 2021, 2023–2024 (ISSN 2256-070X / 1691-5402)"
+    ]
   }
 ]
