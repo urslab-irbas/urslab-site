@@ -331,7 +331,18 @@
     }
   ],
   "lastRun": "2026-10-30T18:49:33.564Z",
-  "rejected": {},
+  "rejected": {
+    "doi:10.3390/info15060315|10.3390/info15100613": {
+      "by": "nedachehlarova",
+      "date": "2026-10-30T19:17:39.664Z",
+      "scan": 187
+    },
+    "doi:10.3390/info15060315|10.55630/stem.2024.0608": {
+      "by": "nedachehlarova",
+      "date": "2026-10-30T19:17:39.664Z",
+      "scan": 187
+    }
+  },
   "confirmed": {
     "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025": {
       "by": "urslab-irbas",
