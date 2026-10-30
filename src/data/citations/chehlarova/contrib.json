@@ -147,5 +147,36 @@
       "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
     ],
     "confirmedBy": "madzharov"
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.57125/fed.2025.06.25.04",
+    "ind": "14",
+    "year": 2025,
+    "authors": "Barcia Espinales, M. A., Zambrano Zambrano, C. M., & Cabrera Estupiñán, I. E.",
+    "title": "Cultural Influence in the English Language Acquisition Process",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2956-3402",
+    "venue": "Futurity Education",
+    "volume": "5",
+    "issue": "4",
+    "pages": "272-299",
+    "publisher": "Futurity Research Publishing",
+    "where": "[14]",
+    "doi": "10.57125/fed.2025.12.16",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 14 от 73 (DOI 10.57125/fed.2025.06.25.04 на цитирания труд)",
+    "text": "Barcia Espinales, M. A., Zambrano Zambrano, C. M., & Cabrera Estupiñán, I. E. Cultural Influence in the English Language Acquisition Process. Futurity Education, 5(4), pp. 272–299, Futurity Research Publishing, 2025 ISSN 2956-3402",
+    "by": "nedachehlarova",
+    "ghIssue": 189,
+    "evidenceUrl": "https://doi.org/10.57125/fed.2025.12.16",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 14 от 73 (DOI 10.57125/fed.2025.06.25.04 на цитирания труд)",
+      "DOI 10.57125/fed.2025.12.16 — Crossref: „Cultural Influence in the English Language Acquisition Process“",
+      "ISSN 2956-3402 — ISSN Portal (Confirmed record): „Futurity Education“ (съвпада с ISSN/ISBN по DOI)",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2956-3402, не е в Scopus и WoS"
+    ]
   }
 ]
