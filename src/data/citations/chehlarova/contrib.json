@@ -267,5 +267,63 @@
       "ISSN 2675-1240 — ISSN Portal (Confirmed record): „Multidisciplinary Science Journal“ (съвпада с ISSN/ISBN по DOI)",
       "Индексиране по списъците: Scopus: Multidisciplinary Science Journal, покритие 2019–2027 (ISSN 2675-1240)"
     ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.3390/info15060315",
+    "ind": "12",
+    "year": 2026,
+    "authors": "Karvalics, L. Z.",
+    "title": "Beyond AI-literacy. Growing Up with an Artificial Lifetime Compeer (ALC)",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "issn",
+    "issn": "1865-0929",
+    "venue": "Communications in Computer and Information Science",
+    "pages": "180-191",
+    "publisher": "Springer Nature Switzerland",
+    "where": "[12]",
+    "doi": "10.1007/978-3-032-17272-3_15",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 12 от 26 (DOI 10.3390/info15060315 на цитирания труд)",
+    "text": "Karvalics, L. Z. Beyond AI-literacy. Growing Up with an Artificial Lifetime Compeer (ALC). Communications in Computer and Information Science, pp. 180–191, Springer Nature Switzerland, 2026 ISSN 1865-0929",
+    "by": "nedachehlarova",
+    "ghIssue": 194,
+    "evidenceUrl": "https://doi.org/10.1007/978-3-032-17272-3_15",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 12 от 26 (DOI 10.3390/info15060315 на цитирания труд)",
+      "DOI 10.1007/978-3-032-17272-3_15 — Crossref: „Beyond AI-literacy. Growing Up with an Artificial Lifetime Compeer (ALC)“",
+      "ISSN 1865-0929 — ISSN Portal (Confirmed record): „Communications in computer and information science (Print)“ (съвпада с ISSN/ISBN по DOI)",
+      "Индексиране по списъците: Scopus: Communications in Computer and Information Science, покритие 2007–2027 (ISSN 1865-0929 / 1865-0937)"
+    ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.15547/pf.2025.025",
+    "ind": "14",
+    "year": 2026,
+    "authors": "Altez, F. B.",
+    "title": "Activity-based electronic strategic intervention material for Grade 9 students’ problem solving in oblique triangles: A quasi-experimental study",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2243-7703",
+    "venue": "International Journal of Research Studies in Education",
+    "volume": "15",
+    "issue": "20",
+    "publisher": "Consortia Academia Publishing",
+    "where": "[21]",
+    "doi": "10.5861/ijrse.2026.26385",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 21 от 25 (DOI 10.15547/pf.2025.025 на цитирания труд)",
+    "text": "Altez, F. B. Activity-based electronic strategic intervention material for Grade 9 students’ problem solving in oblique triangles: A quasi-experimental study. International Journal of Research Studies in Education, 15(20), Consortia Academia Publishing, 2026 ISSN 2243-7703",
+    "by": "nedachehlarova",
+    "ghIssue": 193,
+    "evidenceUrl": "https://doi.org/10.5861/ijrse.2026.26385",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 21 от 25 (DOI 10.15547/pf.2025.025 на цитирания труд)",
+      "DOI 10.5861/ijrse.2026.26385 — Crossref: „Activity-based electronic strategic intervention material for Grade 9 students’ problem solving in oblique triangles: A quasi-experimental study“",
+      "ISSN 2243-7703 — ISSN Portal (Confirmed record): „International Journal of Research Studies in Education (Print)“ (съвпада с ISSN/ISBN по DOI)",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2243-7711 / 2243-7703, не е в Scopus и WoS"
+    ]
   }
 ]
