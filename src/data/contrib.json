@@ -305,5 +305,26 @@
       "DOI 10.1007/978-3-030-17065-3_35 — Crossref: „Model Driven Architectural Design of Information Security System“",
       "ISBN 978-3-030-17064-6 — Springer International Publishing: „Handcrafted Descriptors-Based Effective Framework for Off-line Text-Independent Writer Identification“ (съвпада с ISSN/ISBN по DOI)"
     ]
+  },
+  {
+    "year": 2019,
+    "cat": "idx",
+    "authors": "Gaidarski, I., & Кутинчев, П.",
+    "title": "Using Big Data for Data Leak Prevention",
+    "status": "published",
+    "idType": "eisbn",
+    "isbn": "978-1-7281-6481-6",
+    "venue": "proceedings of The International Conference “Big Data, Knowledge and Control Systems Engineering” (BdKCSE’2019))",
+    "publisher": "IEEE Digital Library 2020",
+    "doi": "10.1109/bdkcse48644.2019.9010596",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 217,
+    "verified": [
+      "DOI 10.1109/bdkcse48644.2019.9010596 — Crossref: „Using Big Data for Data Leak Prevention“",
+      "eISBN 978-1-7281-6481-6 — IEEE: „2019 Big Data, Knowledge and Control Systems Engineering (BdKCSE)“"
+    ]
   }
 ]
