@@ -475,5 +475,60 @@
       "Научно рецензиране — потвърдено от потребителя",
       "Индексиране по списъците: списание ISSN 2798-1606 / 2798-9852, не е в Scopus и WoS"
     ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "ind": "14",
+    "year": 2023,
+    "authors": "Popovici, I.",
+    "title": "Cloud technologies for the development of digital communication competence",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "1857-0461",
+    "venue": "Akademos",
+    "issue": "2(69)",
+    "pages": "155-162",
+    "publisher": "Periodic Publication Journal of Science, Innovation, Culture and Art &quot;SCIENCE and INNOVATION&quot;",
+    "where": "[20]",
+    "doi": "10.52673/18570461.23.2-69.18",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 20 от 24 (DOI 10.59957/see.v5.i1.2020.7 на цитирания труд)",
+    "text": "Popovici, I. Cloud technologies for the development of digital communication competence. Akademos, pp. 155–162, Periodic Publication Journal of Science, Innovation, Culture and Art &quot;SCIENCE and INNOVATION&quot;, 2023 ISSN 1857-0461",
+    "by": "nedachehlarova",
+    "ghIssue": 201,
+    "evidenceUrl": "https://doi.org/10.52673/18570461.23.2-69.18",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 20 от 24 (DOI 10.59957/see.v5.i1.2020.7 на цитирания труд)",
+      "DOI 10.52673/18570461.23.2-69.18 — Crossref: „Cloud technologies for the development of digital communication competence“",
+      "ISSN 1857-0461 — ISSN Portal (Confirmed record): „Akademos : Revista de Ştiinţă, Inovare, Cultură şi Artă“ (съвпада с ISSN/ISBN по DOI)",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 1857-0461 / 2587-3687, не е в Scopus и WoS"
+    ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.59957/see.v5.i1.2020.7",
+    "ind": "12",
+    "year": 2021,
+    "authors": "Trifonov, R., Tsochev, G., Manolov, S., Yoshinov, R., & Pavlova, G.",
+    "title": "Cyber Trends in Industrial Control Systems",
+    "index": "scopus",
+    "src": "doi",
+    "venue": "2021 25th International Conference on Circuits, Systems, Communications and Computers (CSCC)",
+    "pages": "41-45",
+    "publisher": "IEEE",
+    "where": "[33]",
+    "doi": "10.1109/cscc53858.2021.00015",
+    "evidence": "Crossref: в литературата на цитиращия труд, позиция 33 от 50 (DOI 10.59957/see.v5.i1.2020.7 на цитирания труд)",
+    "text": "Trifonov, R., Tsochev, G., Manolov, S., Yoshinov, R., & Pavlova, G. Cyber Trends in Industrial Control Systems. 2021 25th International Conference on Circuits, Systems, Communications and Computers (CSCC), pp. 41–45, IEEE, 2021",
+    "by": "nedachehlarova",
+    "ghIssue": 200,
+    "evidenceUrl": "https://doi.org/10.1109/cscc53858.2021.00015",
+    "verified": [
+      "Доказателство — Crossref: в литературата на цитиращия труд, позиция 33 от 50 (DOI 10.59957/see.v5.i1.2020.7 на цитирания труд)",
+      "DOI 10.1109/cscc53858.2021.00015 — Crossref: „Cyber Trends in Industrial Control Systems“",
+      "Индексиране по списъците: Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2021 — проверете)"
+    ]
   }
 ]
