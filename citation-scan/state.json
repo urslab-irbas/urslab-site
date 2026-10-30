@@ -293,9 +293,44 @@
       },
       "requests": 447,
       "seconds": 572
+    },
+    {
+      "date": "2026-10-30T18:49:33.564Z",
+      "trigger": "ръчно, @nedachehlarova",
+      "found": 71,
+      "new": 0,
+      "ready": 62,
+      "form": 2,
+      "doubt": 7,
+      "newWorks": 23,
+      "suggested": {
+        "13": 3,
+        "14": 24,
+        "12s": 33,
+        "12w": 2
+      },
+      "lists": [
+        "scopus",
+        "wos",
+        "current contents connect"
+      ],
+      "journalWatch": {
+        "members": 12,
+        "works": 45,
+        "refs": 1,
+        "pdf": 31,
+        "html": 11,
+        "noText": 2,
+        "withNames": 2,
+        "hits": 0,
+        "unfinished": [],
+        "seconds": 131
+      },
+      "requests": 411,
+      "seconds": 375
     }
   ],
-  "lastRun": "2026-10-27T20:04:41.991Z",
+  "lastRun": "2026-10-30T18:49:33.564Z",
   "rejected": {},
   "confirmed": {
     "doi:10.3389/frobt.2024.1414853|10.1523/eneuro.0390-24.2025": {

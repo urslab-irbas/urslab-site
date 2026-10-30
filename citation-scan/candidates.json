@@ -1,5 +1,5 @@
 {
- "date": "2026-10-27",
+ "date": "2026-10-30",
  "items": {
   "52563389": {
    "key": "doi:10.7546/pecr.84.26.03|10.7546/pecr.85.26.05",
@@ -1493,6 +1493,45 @@
    "line": "Yasmin, F., Hassan, M. M., Zaman, S., Aung, S. T., Karim, A., & Azam, S. (2022). A Forecasting Prognosis of the Monkeypox Outbreak Based on a Comprehensive Statistical and Regression Analysis. Computation. https://doi.org/10.3390/computation10100177",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
+  "11641aaf": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.3390/s22249915",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Sensors, покритие 2001–2026 (ISSN 1424-8220)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.3390/s22249915",
+    "authors": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A.",
+    "year": 2022,
+    "title": "Holistic Security and Safety for Factories of the Future",
+    "venue": "Sensors",
+    "volume": "22",
+    "issue": "24",
+    "pages": "9915",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1424-8220",
+    "where": "[78]"
+   },
+   "evidence": "в литературата: позиция 78 от 79 (Crossref)",
+   "line": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A. R. (2022). Holistic Security and Safety for Factories of the Future. Sensors. https://doi.org/10.3390/s22249915",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
   "e8d72c1b": {
    "key": "doi:10.1007/978-3-030-96308-8|10.3390/info14070423",
    "cited": "doi:10.1007/978-3-030-96308-8",
@@ -1639,45 +1678,6 @@
    },
    "evidence": "в литературата: позиция 185 от 300 (Crossref)",
    "line": "Chainando, N., Martawidjaja, M., Darius, R. A., Yahya, L. C., Yemima, S., Tan, W. S., Harito, C., Chandra, R. C., Andhini, G. K., Putra, K. B., Tobing, C. C. L., Syafi’i, M., & Syafrudin, M. (2025). Applying 3D Scanning and Printing Techniques to Produce Upper Limb Prostheses: Bibliometric Analysis and Scoping Review. Prosthesis. https://doi.org/10.3390/prosthesis7020026",
-   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
-  },
-  "11641aaf": {
-   "key": "doi:10.1007/978-3-030-96308-8|10.3390/s22249915",
-   "cited": "doi:10.1007/978-3-030-96308-8",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "14"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Sensors, покритие 2001–2026 (ISSN 1424-8220)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-96308-8",
-    "src": "doi",
-    "doi": "10.3390/s22249915",
-    "authors": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A.",
-    "year": 2022,
-    "title": "Holistic Security and Safety for Factories of the Future",
-    "venue": "Sensors",
-    "volume": "22",
-    "issue": "24",
-    "pages": "9915",
-    "publisher": "MDPI AG",
-    "idType": "eissn",
-    "idValue": "1424-8220",
-    "where": "[78]"
-   },
-   "evidence": "в литературата: позиция 78 от 79 (Crossref)",
-   "line": "Maia, E., Wannous, S., Dias, T., Praça, I., & Faria, A. R. (2022). Holistic Security and Safety for Factories of the Future. Sensors. https://doi.org/10.3390/s22249915",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
   "c610b247": {
@@ -2426,45 +2426,6 @@
    "line": "Dishkova, G. (2026). Digital Tools for the Prevention of Child Cyberbullying at School to Support Extracurricular and Out-Of-School Activities. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.02",
    "work": "Yoshinov, R., Dishkova, G., Chehlarova, N. (2026). Assessment of Parents’ Awareness in the Field of Cybersecurity"
   },
-  "294166cd": {
-   "key": "doi:10.17770/etr2024vol2.8064|10.7546/pecr.85.26.05",
-   "cited": "doi:10.17770/etr2024vol2.8064",
-   "owners": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "eligible": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
-   "data": {
-    "type": "citation",
-    "member": "madzharov",
-    "cited": "doi:10.17770/etr2024vol2.8064",
-    "src": "url",
-    "doi": "10.7546/pecr.85.26.05",
-    "authors": "Gaidarski, I.",
-    "year": 2026,
-    "title": "Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems",
-    "venue": "Problems of Engineering Cybernetics and Robotics",
-    "volume": "85",
-    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
-    "idType": "issn",
-    "idValue": "2738-7356",
-    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf"
-   },
-   "evidence": "в пълния текст: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
-   "line": "Gaidarski, I. (2026). Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.05",
-   "work": "Yoshinov, R., Kotseva, M., Madzharov, A., Chehlarova, N. (2024). Skills and attitudes towards using AI based chatbots"
-  },
   "637851a6": {
    "key": "doi:10.7546/pecr.84.26.02|10.7546/pecr.85.26.05",
    "cited": "doi:10.7546/pecr.84.26.02",
@@ -2501,45 +2462,6 @@
    "evidence": "в пълния текст: DOI 10.7546/pecr.84.26.02 на цитирания труд",
    "line": "Gaidarski, I. (2026). Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.05",
    "work": "Yoshinov, R., Chehlarova, N., Dishkova, G. (2026). Assessment of teachers’ preparedness in cybersecurity"
-  },
-  "64696e94": {
-   "key": "doi:10.17770/etr2024vol2.8064|10.7546/pecr.85.26.06",
-   "cited": "doi:10.17770/etr2024vol2.8064",
-   "owners": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "eligible": [
-    "madzharov",
-    "chehlarova"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
-   "data": {
-    "type": "citation",
-    "member": "madzharov",
-    "cited": "doi:10.17770/etr2024vol2.8064",
-    "src": "url",
-    "doi": "10.7546/pecr.85.26.06",
-    "authors": "Kutinchev, P.",
-    "year": 2026,
-    "title": "Technical Protection Measures in Information Security Systems in Organizations",
-    "venue": "Problems of Engineering Cybernetics and Robotics",
-    "volume": "85",
-    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
-    "idType": "issn",
-    "idValue": "2738-7356",
-    "url": "https://www.iict.bas.bg/pecr/2026/85/6-PECR-P-Kutinchev.pdf"
-   },
-   "evidence": "в пълния текст: DOI 10.17770/etr2024vol2.8064 на цитирания труд",
-   "line": "Kutinchev, P. (2026). Technical Protection Measures in Information Security Systems in Organizations. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.85.26.06",
-   "work": "Yoshinov, R., Kotseva, M., Madzharov, A., Chehlarova, N. (2024). Skills and attitudes towards using AI based chatbots"
   },
   "7b53c6b9": {
    "key": "doi:10.7546/pecr.84.26.02|10.7546/pecr.85.26.06",
