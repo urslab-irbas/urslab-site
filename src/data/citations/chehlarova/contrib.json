@@ -416,5 +416,64 @@
       "Научно рецензиране — потвърдено от потребителя",
       "Индексиране по списъците: списание ISSN 1314-7986, не е в Scopus и WoS"
     ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "ind": "14",
+    "year": 2023,
+    "authors": "Gaidarski, I., & Kutinchev, P.",
+    "title": "Some Aspects of Information Security and Cybersecurity Problem Area",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "79",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "doi": "10.7546/pecr.79.23.03",
+    "evidence": "DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+    "text": "Gaidarski, I., & Kutinchev, P. Some Aspects of Information Security and Cybersecurity Problem Area. Problems of Engineering Cybernetics and Robotics, 79, Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences), 2023 ISSN 2738-7356",
+    "by": "nedachehlarova",
+    "ghIssue": 199,
+    "evidenceUrl": "https://doi.org/10.7546/pecr.79.23.03",
+    "verified": [
+      "Доказателство — DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+      "DOI 10.7546/pecr.79.23.03 — Crossref: „Some Aspects of Information Security and Cybersecurity Problem Area“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS"
+    ]
+  },
+  {
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2023_3_333",
+    "ind": "14",
+    "year": 2025,
+    "authors": "Santiago, P. V. D. S., Alves, F. R. V., & Santos, M. J. C. D.",
+    "title": "Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers",
+    "peer": true,
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2798-9852",
+    "venue": "Journal of Advanced Sciences and Mathematics Education",
+    "volume": "5",
+    "issue": "1",
+    "pages": "43-54",
+    "publisher": "Foundation of Advanced Education",
+    "doi": "10.58524/jasme.v5i1.562",
+    "evidence": "DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+    "text": "Santiago, P. V. D. S., Alves, F. R. V., & Santos, M. J. C. D. Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers. Journal of Advanced Sciences and Mathematics Education, 5(1), pp. 43–54, Foundation of Advanced Education, 2025 ISSN 2798-9852",
+    "by": "nedachehlarova",
+    "ghIssue": 198,
+    "evidenceUrl": "https://doi.org/10.58524/jasme.v5i1.562",
+    "verified": [
+      "Доказателство — DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+      "DOI 10.58524/jasme.v5i1.562 — Crossref: „Symmetries of the equilateral triangle mediated by geogebra: a proposal for training rural mathematics teachers“",
+      "ISSN 2798-9852 — ISSN Portal (Confirmed record): „Journal of Advanced Sciences and Mathematics Education“ (съвпада с ISSN/ISBN по DOI)",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: списание ISSN 2798-1606 / 2798-9852, не е в Scopus и WoS"
+    ]
   }
 ]
