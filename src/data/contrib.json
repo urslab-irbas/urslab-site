@@ -610,5 +610,29 @@
       "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
       "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "intl",
+    "authors": "Gaidarski, I.",
+    "title": "Cybersecurity in the era of artificial intelligence and unmanned aerial systems",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1310-8255",
+    "venue": "Proceedings of the International Scientific Conference “Robotics & Mechatronics 2025&2026”",
+    "volume": "10",
+    "issue": "2",
+    "pages": "172-178",
+    "publisher": "Complex Control Systems",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 253,
+    "nrsId": 767,
+    "verified": [
+      "ISSN 1310-8255 — НАЦИД НРС, ID 767: „COMPLEX Control Systems“",
+      "НАЦИД НРС, ID 767: „COMPLEX Control Systems“"
+    ]
   }
 ]
