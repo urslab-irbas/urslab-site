@@ -588,5 +588,27 @@
       "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
       "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "intl",
+    "authors": "Gaidarski, I.",
+    "title": "Insider threats in automated and autonomous system environments",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2367-7635",
+    "venue": "Proceedings of the 16th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE – 2025)",
+    "pages": "525–534",
+    "publisher": "Academic Publishing House of UNWE",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 252,
+    "nrsId": 4066,
+    "verified": [
+      "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
+      "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
+    ]
   }
 ]
