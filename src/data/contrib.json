@@ -352,5 +352,27 @@
       "ISSN 2367-6450 — НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“",
       "НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“"
     ]
+  },
+  {
+    "year": 2017,
+    "cat": "sub",
+    "authors": "Gaidarski, I., Kutinchev, P., & Minchev, Z.",
+    "title": "Modeling and deployment of data protection as component of information security system",
+    "status": "in-press",
+    "venue": "Proceedings of the 1st International Interdisciplinary Conference on Information and Cyber Security (ICICSG 2017)",
+    "pages": "1-6",
+    "url": "https://www.researchgate.net/publication/323547791",
+    "doi": "10.13140/RG.2.2.29675.85284",
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 233,
+    "verified": [
+      "DOI 10.13140/RG.2.2.29675.85284 — DataCite: „MODELING AND DEPLOYMENT OF DATA PROTECTION AS COMPONENT OF INFORMATION SECURITY SYSTEMS“"
+    ]
   }
 ]
