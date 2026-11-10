@@ -374,5 +374,32 @@
     "verified": [
       "DOI 10.13140/RG.2.2.29675.85284 — DataCite: „MODELING AND DEPLOYMENT OF DATA PROTECTION AS COMPONENT OF INFORMATION SECURITY SYSTEMS“"
     ]
+  },
+  {
+    "year": 2018,
+    "cat": "intl",
+    "authors": "Gaidarski, I. K., Minchev, Z. B., & Andreev, R. D.",
+    "title": "Model Driven Approach for Designing of Information Security System",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1554-1010",
+    "venue": "Journal of Information Assurance and Security",
+    "volume": "13",
+    "issue": "4",
+    "pages": "149–158",
+    "publisher": "MIR Labs",
+    "url": "https://www.mirlabs.net/jias/secured/Volume13-Issue4/vol13-issue4.html",
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН",
+      "Andreev, R.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 238,
+    "verified": [
+      "ISSN 1554-1010 — ISSN Portal (Confirmed record): „Journal of information assurance and security“"
+    ]
   }
 ]
