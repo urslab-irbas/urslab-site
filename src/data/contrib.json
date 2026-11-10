@@ -401,5 +401,27 @@
     "verified": [
       "ISSN 1554-1010 — ISSN Portal (Confirmed record): „Journal of information assurance and security“"
     ]
+  },
+  {
+    "year": 2018,
+    "cat": "intl",
+    "authors": "Gaidarski, I., & Kutinchev, P.",
+    "title": "GDPR and regulatory-based approaches for protecting organization's information",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2367-6450",
+    "venue": "Proceedings of the International Scientific Conference “Big Data, Knowledge and Control Systems Engineering” (BdKCSE’2018)",
+    "pages": "59-70",
+    "publisher": "John Atanasoff Society of Automatics and Informatics",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 239,
+    "nrsId": 487,
+    "verified": [
+      "ISSN 2367-6450 — НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“",
+      "НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“"
+    ]
   }
 ]
