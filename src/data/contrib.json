@@ -519,5 +519,27 @@
       "DOI 10.11610/views.0037 — Crossref: „Cyber risks, threats &amp; security measures associated with COVID-19“",
       "ISSN 1314-5622 — ISSN Portal (Confirmed record): „CSDM Views“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "intl",
+    "authors": "Gaidarski, I.",
+    "title": "A model-driven approach to information security of automated and autonomous systems in Industry 4.0 environments",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2367-7635",
+    "venue": "Proceedings of the 15th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE – 2025)",
+    "pages": "515–524",
+    "publisher": "Academic Publishing House of UNWE",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 249,
+    "nrsId": 4066,
+    "verified": [
+      "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
+      "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
+    ]
   }
 ]
