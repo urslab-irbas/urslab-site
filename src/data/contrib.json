@@ -326,5 +326,31 @@
       "DOI 10.1109/bdkcse48644.2019.9010596 — Crossref: „Using Big Data for Data Leak Prevention“",
       "eISBN 978-1-7281-6481-6 — IEEE: „2019 Big Data, Knowledge and Control Systems Engineering (BdKCSE)“"
     ]
+  },
+  {
+    "year": 2016,
+    "cat": "intl",
+    "authors": "Gaidarski, I. K., Kutinchev, G. S., & Kutinchev, P. G.",
+    "title": "Security Management of Organization‘s Data: A Data Loss Prevention (DLP) Approach",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2367-6450",
+    "venue": "Proceedings of the International Scientific Conference “Big Data, Knowledge and Control Systems Engineering” (BdKCSE’2016)",
+    "pages": "35–48",
+    "publisher": "Union on Automatics and Informatics",
+    "url": "https://css.iict.bas.bg/eLibrary/BdKCSE%272016.pdf",
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Kutinchev, G.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 232,
+    "nrsId": 487,
+    "verified": [
+      "ISSN 2367-6450 — НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“",
+      "НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“"
+    ]
   }
 ]
