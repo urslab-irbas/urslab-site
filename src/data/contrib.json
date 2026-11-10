@@ -567,5 +567,26 @@
       "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
       "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "sub",
+    "authors": "Gaidarski, I.",
+    "title": "Expanding the taxonomy of insider threats in automated and autonomous systems",
+    "status": "in-press",
+    "idType": "issn",
+    "issn": "2367-7635",
+    "venue": "Proceedings of the 16th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE – 2026)",
+    "publisher": "Academic Publishing House of UNWE",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 251,
+    "nrsId": 4066,
+    "verified": [
+      "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
+      "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
+    ]
   }
 ]
