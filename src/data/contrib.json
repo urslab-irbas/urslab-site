@@ -445,5 +445,30 @@
       "ISSN 2367-6450 — НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“",
       "НАЦИД НРС, ID 487: „BIG Data, Knowledge and Control Systems Engineering - BdKCSE' ...: International Conference on: proceedings“"
     ]
+  },
+  {
+    "year": 2019,
+    "cat": "intl",
+    "authors": "Gaidarski, I., & Minchev, Z.",
+    "title": "Modelling, Analysis, Experimental Validation and Verification of Information Security Systems in Corporate Environment",
+    "status": "published",
+    "idType": "issn",
+    "issn": "1314-5614",
+    "venue": "IT4Sec Reports",
+    "volume": "132",
+    "publisher": "Institute of Information and Communication Technologies",
+    "doi": "10.11610/it4sec.0132",
+    "tags": [
+      "security"
+    ],
+    "affil": {
+      "Minchev, Z.": "ИИКТ-БАН"
+    },
+    "by": "ivangaidarski",
+    "ghIssue": 243,
+    "verified": [
+      "DOI 10.11610/it4sec.0132 — Crossref: „Modelling, Analysis, Experimental Validation and Verification of Information Security Systems in Corporate Environment“",
+      "ISSN 1314-5614 — ISSN Portal (Confirmed record): „IT4Sec Reports“"
+    ]
   }
 ]
