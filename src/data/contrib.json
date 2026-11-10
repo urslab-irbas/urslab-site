@@ -541,5 +541,31 @@
       "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
       "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“"
     ]
+  },
+  {
+    "year": 2026,
+    "cat": "intl",
+    "authors": "Gaidarski, I.",
+    "title": "Architectural model for controlling autonomous AI agents as insider threats in information security systems",
+    "status": "published",
+    "idType": "issn",
+    "issn": "2738-7356",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "85",
+    "pages": "42–59",
+    "publisher": "Publishing House of BAS",
+    "url": "https://www.iict.bas.bg/pecr/2026/85/5-PECR-I-Gaidarski.pdf",
+    "doi": "10.7546/PECR.85.26.05",
+    "tags": [
+      "security"
+    ],
+    "by": "ivangaidarski",
+    "ghIssue": 250,
+    "nrsId": 4189,
+    "verified": [
+      "DOI 10.7546/PECR.85.26.05 — Crossref: „Architectural Model for Controlling Autonomous AI Agents as Insider Threats in Information Security Systems“",
+      "ISSN 2738-7356 — НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“ (съвпада с ISSN/ISBN по DOI)",
+      "НАЦИД НРС, ID 4189: „PROBLEMS of Engineering Cybernetics and Robotics“"
+    ]
   }
 ]
