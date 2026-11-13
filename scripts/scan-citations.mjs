@@ -148,6 +148,8 @@ function consider(w, c) {
   // труд не може да цитира себе си: цитиращият DOI е същият като на цитирания труд
   const citedDoi = w.key.startsWith('doi:') ? w.key.slice(4).toLowerCase() : '';
   if (c.doi && citedDoi && c.doi.toLowerCase() === citedDoi) { stats.skippedSelf++; return; }
+  // и същото заглавие като цитирания труд (без DOI в източника): същият труд, не цитиране
+  if (tnorm(c.title).length >= 15 && tnorm(c.title) === tnorm(w.title ?? '')) { stats.skippedSelf++; return; }
   const key = `${w.key}|${c.doi || tnorm(c.title).slice(0, 60)}`;
   if (candidates.some((x) => x.key === key)) return;
   if (known(w, c)) { stats.skippedKnown++; return; }
