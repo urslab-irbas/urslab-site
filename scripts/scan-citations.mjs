@@ -145,6 +145,9 @@ const candidates = []; // { work, cand, eligible[], confirmer, key, isNew }
 const known = (w, c) => !!findDuplicate(c, w.cites) || (tnorm(c.title).length >= 15 && w.cites.some((x) => tnorm(x.title).includes(tnorm(c.title))));
 function consider(w, c) {
   if (!c.title || (c.year && w.year && c.year < w.year)) return;
+  // труд не може да цитира себе си: цитиращият DOI е същият като на цитирания труд
+  const citedDoi = w.key.startsWith('doi:') ? w.key.slice(4).toLowerCase() : '';
+  if (c.doi && citedDoi && c.doi.toLowerCase() === citedDoi) { stats.skippedSelf++; return; }
   const key = `${w.key}|${c.doi || tnorm(c.title).slice(0, 60)}`;
   if (candidates.some((x) => x.key === key)) return;
   if (known(w, c)) { stats.skippedKnown++; return; }
