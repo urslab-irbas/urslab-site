@@ -422,9 +422,44 @@
       },
       "requests": 454,
       "seconds": 950
+    },
+    {
+      "date": "2026-11-14T08:04:12.723Z",
+      "trigger": "ръчно, @ivangaidarski",
+      "found": 66,
+      "new": 0,
+      "ready": 52,
+      "form": 5,
+      "doubt": 9,
+      "newWorks": 18,
+      "suggested": {
+        "13": 4,
+        "14": 11,
+        "12s": 35,
+        "12w": 1
+      },
+      "lists": [
+        "scopus",
+        "wos",
+        "current contents connect"
+      ],
+      "journalWatch": {
+        "members": 12,
+        "works": 14,
+        "refs": 2,
+        "pdf": 9,
+        "html": 3,
+        "noText": 0,
+        "withNames": 1,
+        "hits": 0,
+        "unfinished": [],
+        "seconds": 97
+      },
+      "requests": 419,
+      "seconds": 344
     }
   ],
-  "lastRun": "2026-11-12T15:07:37.173Z",
+  "lastRun": "2026-11-14T08:04:12.723Z",
   "rejected": {
     "doi:10.3390/info15060315|10.3390/info15100613": {
       "by": "nedachehlarova",

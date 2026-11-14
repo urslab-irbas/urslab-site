@@ -1,5 +1,5 @@
 {
- "date": "2026-11-12",
+ "date": "2026-11-14",
  "items": {
   "0751bfa1": {
    "key": "doi:10.3389/frobt.2024.1414853|10.1007/978-981-96-9709-0",
@@ -1289,6 +1289,43 @@
    "line": "Anitha, A., & Auxillia, D. J. (2025). Attention-fused residual transformer CNN for robust lower limb movement recognition. Automatika. https://doi.org/10.1080/00051144.2025.2513734",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
+  "7ba77da0": {
+   "key": "doi:10.1007/978-3-030-96308-8|10.1007/978-981-96-1154-6_12",
+   "cited": "doi:10.1007/978-3-030-96308-8",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Smart Innovation, Systems and Technologies, покритие 2010–2027 (ISSN 2190-3018 / 2190-3026)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-96308-8",
+    "src": "doi",
+    "doi": "10.1007/978-981-96-1154-6_12",
+    "authors": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L.",
+    "year": 2025,
+    "title": "Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies",
+    "venue": "Smart Innovation, Systems and Technologies",
+    "pages": "171-185",
+    "publisher": "Springer Nature Singapore",
+    "idType": "issn",
+    "idValue": "2190-3018",
+    "where": "[3]"
+   },
+   "evidence": "в литературата: позиция 3 от 24 (Crossref)",
+   "line": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L. (2025). Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies. Smart innovation, systems and technologies. https://doi.org/10.1007/978-981-96-1154-6_12",
+   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
+  },
   "6ddaf2ba": {
    "key": "doi:10.1007/978-3-030-96308-8|10.1007/978-3-031-21388-5_24",
    "cited": "doi:10.1007/978-3-030-96308-8",
@@ -1394,43 +1431,6 @@
    },
    "evidence": "в литературата: позиция 2 от 15 (Crossref)",
    "line": "Muchakayala, D. P., & Chinnadurai, S. (2025). Delay tolerant in smart rehabilitation patient monitoring in wireless body area network using IPCLRP protocol compared with PCLRP protocol. AIP conference proceedings. https://doi.org/10.1063/5.0247133",
-   "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
-  },
-  "7ba77da0": {
-   "key": "doi:10.1007/978-3-030-96308-8|10.1007/978-981-96-1154-6_12",
-   "cited": "doi:10.1007/978-3-030-96308-8",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: Smart Innovation, Systems and Technologies, покритие 2010–2027 (ISSN 2190-3018 / 2190-3026)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-96308-8",
-    "src": "doi",
-    "doi": "10.1007/978-981-96-1154-6_12",
-    "authors": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L.",
-    "year": 2025,
-    "title": "Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies",
-    "venue": "Smart Innovation, Systems and Technologies",
-    "pages": "171-185",
-    "publisher": "Springer Nature Singapore",
-    "idType": "issn",
-    "idValue": "2190-3018",
-    "where": "[3]"
-   },
-   "evidence": "в литературата: позиция 3 от 24 (Crossref)",
-   "line": "Abalo, K., Spalla, G., Gouin-Vallerand, C., & Guillaume, L. (2025). Toward Context Awareness in Mixed Reality: Supporting Spatial Reasoning with Object Detection and Ontologies. Smart innovation, systems and technologies. https://doi.org/10.1007/978-981-96-1154-6_12",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
   "6306c9d5": {
