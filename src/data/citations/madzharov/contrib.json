@@ -137,5 +137,31 @@
       "Научно рецензиране — потвърдено от потребителя",
       "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
     ]
+  },
+  {
+    "member": "madzharov",
+    "cited": "doi:10.3389/frobt.2024.1414853",
+    "ind": "12",
+    "year": 2026,
+    "authors": "Yang, X., Sherratt, R. S., Dey, N., & Joshi, A.",
+    "title": "Proceedings of Tenth International Congress on Information and Communication Technology",
+    "index": "scopus",
+    "src": "doi",
+    "idType": "issn",
+    "issn": "2367-3370",
+    "venue": "Lecture Notes in Networks and Systems",
+    "publisher": "Springer Nature Singapore",
+    "doi": "10.1007/978-981-96-9709-0",
+    "evidence": "DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+    "text": "Yang, X., Sherratt, R. S., Dey, N., & Joshi, A. Proceedings of Tenth International Congress on Information and Communication Technology. Lecture Notes in Networks and Systems, Springer Nature Singapore, 2026 ISSN 2367-3370",
+    "by": "urslab-irbas",
+    "ghIssue": 267,
+    "evidenceUrl": "https://doi.org/10.1007/978-981-96-9709-0",
+    "verified": [
+      "Доказателство — DOI в световна база (Crossref); списъкът с литература не е публикуван в Crossref",
+      "DOI 10.1007/978-981-96-9709-0 — Crossref: „Proceedings of Tenth International Congress on Information and Communication Technology“",
+      "ISSN 2367-3370 — ISSN Portal (Confirmed record): „Lecture notes in networks and systems (Print)“ (съвпада с ISSN/ISBN по DOI)",
+      "Индексиране по списъците: Scopus: Lecture Notes in Networks and Systems, покритие 2016–2027 (ISSN 2367-3370 / 2367-3389)"
+    ]
   }
 ]
