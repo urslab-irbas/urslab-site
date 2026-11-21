@@ -172,7 +172,12 @@ for (const w of works.values()) {
     if (coci.length) list.push(...await metaByDois(coci));
     for (const c of await citingS2(doi)) if (!c.doi || !list.some((x) => x.doi === c.doi)) if (!list.some((x) => simTitle(x.title, c.title) > 0.9)) list.push(c);
   }
-  for (const c of list) consider(w, c);
+  // DOI на целия сборник/книга (напр. 10.1007/…-0), когато в списъка има глава от него (…-0_9), не е отделен труд
+  const volumeDois = new Set(list.map((c) => c.doi).filter(Boolean).filter((d) => list.some((x) => x.doi && x.doi !== d && x.doi.startsWith(d + '_'))));
+  for (const c of list) {
+    if (c.doi && volumeDois.has(c.doi)) { stats.skippedSelf++; continue; }
+    consider(w, c);
+  }
 }
 stats.found = candidates.length;
 
