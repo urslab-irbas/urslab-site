@@ -1,5 +1,5 @@
 {
- "date": "2026-11-14",
+ "date": "2026-11-21",
  "items": {
   "0751bfa1": {
    "key": "doi:10.3389/frobt.2024.1414853|10.1007/978-981-96-9709-0",
@@ -37,6 +37,191 @@
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Yang, X., Sherratt, R. S., Dey, N., & Joshi, A. (2025). Proceedings of Tenth International Congress on Information and Communication Technology. Lecture notes in networks and systems. https://doi.org/10.1007/978-981-96-9709-0",
    "work": "Dimitrova, M., Chehlarova, N., Madzharov, A., Krastev, A., Chavdarov, I. (2024). Psychophysics of user acceptance of social cyber-physical systems"
+  },
+  "ef6c7202": {
+   "key": "doi:10.17770/etr2024vol4.8238|10.7546/pecr.84.26.02",
+   "cited": "doi:10.17770/etr2024vol4.8238",
+   "owners": [
+    "madzharov",
+    "chehlarova"
+   ],
+   "eligible": [
+    "madzharov"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "madzharov",
+    "cited": "doi:10.17770/etr2024vol4.8238",
+    "src": "doi",
+    "doi": "10.7546/pecr.84.26.02",
+    "authors": "Yoshinov, R., Chehlarova, N., & Dishkova, G.",
+    "year": 2026,
+    "title": "Assessment of Teachers’ Preparedness in Cybersecurity",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "84",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Yoshinov, R., Chehlarova, N., & Dishkova, G. (2026). Assessment of Teachers’ Preparedness in Cybersecurity. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.84.26.02",
+   "work": "Yoshinov, R., Kotseva, M., Madzharov, A., Chehlarova, N. (2024). Implying cybersecurity skills for public administration employees"
+  },
+  "fabb31d5": {
+   "key": "doi:10.5281/zenodo.17682573|10.38094/jastt7031075",
+   "cited": "doi:10.5281/zenodo.17682573",
+   "owners": [
+    "aleksandrov"
+   ],
+   "eligible": [
+    "aleksandrov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Journal of Applied Science and Technology Trends, покритие 2021–2026 (ISSN 2708-0757)",
+   "data": {
+    "type": "citation",
+    "member": "aleksandrov",
+    "cited": "doi:10.5281/zenodo.17682573",
+    "src": "doi",
+    "doi": "10.38094/jastt7031075",
+    "authors": "Yousif, M., Alsaffar, O., & Ameen, S.",
+    "year": 2026,
+    "title": "Enabling Privacy-Preserving External Sharing of Electronic Medical Records Through a Tripartite Hybrid Blockchain Architecture",
+    "venue": "Journal of Applied Science and Technology Trends",
+    "pages": "01-10",
+    "publisher": "Interdisciplinary Publishing Academia",
+    "idType": "eissn",
+    "idValue": "2708-0757"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Yousif, M., Alsaffar, O. A., & Ameen, S. (2026). Enabling Privacy-Preserving External Sharing of Electronic Medical Records Through a Tripartite Hybrid Blockchain Architecture. Journal of Applied Science and Technology Trends. https://doi.org/10.38094/jastt7031075",
+   "work": "Alexandrov, A. (2025). Development of Blockchain-Based Framework for Securing Communication in Wireless Robotic Platforms"
+  },
+  "fccbff4e": {
+   "key": "doi:10.5281/zenodo.17682404|10.1109/tii.2026.3691338",
+   "cited": "doi:10.5281/zenodo.17682404",
+   "owners": [
+    "aleksandrov"
+   ],
+   "eligible": [
+    "aleksandrov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: IEEE Transactions on Industrial Informatics, покритие 2005–2026 (ISSN 1551-3203 / 1941-0050)",
+   "data": {
+    "type": "citation",
+    "member": "aleksandrov",
+    "cited": "doi:10.5281/zenodo.17682404",
+    "src": "doi",
+    "doi": "10.1109/tii.2026.3691338",
+    "authors": "Naqvi, S. S. A., Zhou, C., Xu, P., Li, Y., & Uzair, M.",
+    "year": 2026,
+    "title": "Online Intrusion Detection for Industrial Cyber-Physical Systems Based on Self-Supervised Predictive Model",
+    "venue": "IEEE Transactions on Industrial Informatics",
+    "volume": "22",
+    "issue": "9",
+    "pages": "8163-8174",
+    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "idType": "issn",
+    "idValue": "1551-3203",
+    "where": "[44]"
+   },
+   "evidence": "в литературата: позиция 44 от 46 (Crossref)",
+   "line": "Naqvi, S. S. A., Zhou, C., Xu, P., Li, Y., & Uzair, M. (2026). Online Intrusion Detection for Industrial Cyber-Physical Systems Based on Self-Supervised Predictive Model. IEEE Transactions on Industrial Informatics. https://doi.org/10.1109/tii.2026.3691338",
+   "work": "Alexandrov, A. (2025). LSTM-RNN method for Anomaly-Based Intrusion Detection Systems"
+  },
+  "0cc1a812": {
+   "key": "doi:10.5281/zenodo.17682404|10.1109/iisec69317.2026.11418415",
+   "cited": "doi:10.5281/zenodo.17682404",
+   "owners": [
+    "aleksandrov"
+   ],
+   "eligible": [
+    "aleksandrov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2026 — проверете)",
+   "data": {
+    "type": "citation",
+    "member": "aleksandrov",
+    "cited": "doi:10.5281/zenodo.17682404",
+    "src": "doi",
+    "doi": "10.1109/iisec69317.2026.11418415",
+    "authors": "Tas, C., Alali, R., Sahingoz, O. K., & Delibalta, N. I.",
+    "year": 2026,
+    "title": "Performance Comparison of Machine Learning based Anomaly Detection Systems",
+    "venue": "2026 5th International Informatics and Software Engineering Conference (IISEC)",
+    "publisher": "IEEE",
+    "where": "[5]"
+   },
+   "evidence": "в литературата: позиция 5 от 18 (Crossref)",
+   "line": "Tas, C., Alali, R., Şahingöz, Ö. K., & Delibalta, N. I. (2026). Performance Comparison of Machine Learning based Anomaly Detection Systems. International Informatics and Software Engineering Conference (IISEC). https://doi.org/10.1109/iisec69317.2026.11418415",
+   "work": "Alexandrov, A. (2025). LSTM-RNN method for Anomaly-Based Intrusion Detection Systems"
+  },
+  "983df534": {
+   "key": "doi:10.5281/zenodo.15090498|10.3390/s26144558",
+   "cited": "doi:10.5281/zenodo.15090498",
+   "owners": [
+    "aleksandrov"
+   ],
+   "eligible": [
+    "aleksandrov"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: Sensors, покритие 2001–2026 (ISSN 1424-8220)",
+   "data": {
+    "type": "citation",
+    "member": "aleksandrov",
+    "cited": "doi:10.5281/zenodo.15090498",
+    "src": "doi",
+    "doi": "10.3390/s26144558",
+    "authors": "Liu, J., Deng, Q., Liu, S., He, S., & Zou, S.",
+    "year": 2026,
+    "title": "Research on Obstacle-Crossing Performance of a Passive Rocker-Bogie Six-Wheel Mobile Platform for Nuclear Environments: Analysis Based on Onboard Sensors",
+    "venue": "Sensors",
+    "volume": "26",
+    "issue": "14",
+    "pages": "4558",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "1424-8220",
+    "where": "[14]"
+   },
+   "evidence": "в литературата: позиция 14 от 32 (Crossref)",
+   "line": "Liu, J., 邓, 仟., S, L., He, S., & Zou, S. (2026). Research on Obstacle-Crossing Performance of a Passive Rocker-Bogie Six-Wheel Mobile Platform for Nuclear Environments: Analysis Based on Onboard Sensors. Sensors. https://doi.org/10.3390/s26144558",
+   "work": "Alexandrov, A. (2025). Mathematical Model and Kinematic Analysis of Rocker-Bogie Suspension Design for UGV Applications"
   },
   "dcd752f5": {
    "key": "doi:10.1007/978-3-031-83520-9_32|10.55630/stem.2025.0702",
@@ -187,6 +372,44 @@
    "line": "Petrova, P., & Dochkova-Todorova, J. (2025). Designing Inclusive Web Interfaces: a Standards-compliant Accessibility Menu Widget for Assistive User Experience in Front-end Applications. Innovative STEM Education. https://doi.org/10.55630/stem.2025.0716",
    "work": "Bogdanova, G., Todorov, T., Noev, N., Sabev, N., Chehlarova, N., Todorova-Ekmekci, M., Krastev, A. (2024). An ecosystem for the provision of digital accessibility for people with special needs"
   },
+  "ecea235a": {
+   "key": "doi:10.26830/symmetry_2024_4_407|10.53656/math2025-5-5-ptg",
+   "cited": "doi:10.26830/symmetry_2024_4_407",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2024_4_407",
+    "src": "doi",
+    "doi": "10.53656/math2025-5-5-ptg",
+    "authors": "Chehlarova, K., & Chehlarova, T.",
+    "year": 2025,
+    "title": "The Pythagorean Tree with Geogebra as a Motivator for the Implementation of augmented Reality in School",
+    "venue": "Mathematics and Informatics",
+    "volume": "68",
+    "issue": "5",
+    "pages": "441-455",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Chehlarova, K., & Chehlarova, Т. (2025). The Pythagorean Tree with Geogebra as a Motivator for the Implementation of augmented Reality in School. Mathematics and Informatics. https://doi.org/10.53656/math2025-5-5-ptg",
+   "work": "Chehlarova, N. (2024). Didactic materials for counting isosceles trapezoids by visually impaired people"
+  },
   "df7e53da": {
    "key": "doi:10.1109/ithet61869.2024.10837626|10.1109/i-smac65734.2025.11597792",
    "cited": "doi:10.1109/ithet61869.2024.10837626",
@@ -253,6 +476,156 @@
    "evidence": "DOI в Crossref (литературата не е публикувана там)",
    "line": "Petkov, I. (2026). STEM IN ACTION – ROLE-PLAYING GAMES AND ARTIFICIAL INTELLIGENCE IN THE MODERN CLASSROOM. Mathematics and Informatics. https://doi.org/10.53656/math2026-3-5-sar",
    "work": "Chehlarova, T., Chehlarova, K., Chehlarova, N. (2024). Snowflake in the context of STEAM education or overcoming a misconception"
+  },
+  "990fb6eb": {
+   "key": "doi:10.53656/ped2021-1.07|10.53656/math2021-6-4-the",
+   "cited": "doi:10.53656/ped2021-1.07",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/ped2021-1.07",
+    "src": "doi",
+    "doi": "10.53656/math2021-6-4-the",
+    "authors": "Chehlarova, T.",
+    "year": 2021,
+    "title": "“The Source of Life” in Bishop’s Basilica Of Philippopolis in the Context of Steam",
+    "venue": "Mathematics and Informatics",
+    "volume": "LXIV",
+    "issue": "6",
+    "pages": "598-607",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Chehlarova, Т. (2021). “The Source of Life” in Bishop’s Basilica Of Philippopolis in the Context of Steam. Mathematics and Informatics. https://doi.org/10.53656/math2021-6-4-the",
+   "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
+  },
+  "fee48a2a": {
+   "key": "doi:10.53656/ped2021-1.07|10.53656/math2021-4-4-zap",
+   "cited": "doi:10.53656/ped2021-1.07",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/ped2021-1.07",
+    "src": "doi",
+    "doi": "10.53656/math2021-4-4-zap",
+    "authors": "Andreev, C.",
+    "year": 2021,
+    "title": "Of the Nature of Math and Math in Nature – a Sequel About Symmetry for Children and Adults",
+    "venue": "Mathematics and Informatics",
+    "volume": "LXIV",
+    "issue": "4",
+    "pages": "425-437",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Andreev, C. (2021). Of the Nature of Math and Math in Nature – a Sequel About Symmetry for Children and Adults. Mathematics and Informatics. https://doi.org/10.53656/math2021-4-4-zap",
+   "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
+  },
+  "5a649f69": {
+   "key": "doi:10.53656/ped2021-1.07|10.15547/pf.2021.018",
+   "cited": "doi:10.53656/ped2021-1.07",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 1314-7986, не е в Scopus и WoS; в НРС на НАЦИД (ID 2932) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/ped2021-1.07",
+    "src": "doi",
+    "doi": "10.15547/pf.2021.018",
+    "authors": "Valkova, D., & Valkov, M.",
+    "year": 2021,
+    "title": "Spices and Digital Competence in the Education in Mathematics and Information Technology",
+    "venue": "Педагогически форум",
+    "volume": "9",
+    "issue": "3",
+    "pages": "47-54",
+    "publisher": "Trakia University",
+    "idType": "eissn",
+    "idValue": "1314-7986",
+    "where": "[2]"
+   },
+   "evidence": "в литературата: позиция 2 от 6 (Crossref)",
+   "line": "Valkova, D., & Valkov, M. (2021). Spices and Digital Competence in the Education in Mathematics and Information Technology. Педагогически форум. https://doi.org/10.15547/pf.2021.018",
+   "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
+  },
+  "81d6f86f": {
+   "key": "doi:10.53656/ped2021-1.07|10.53656/ped2021-3.03",
+   "cited": "doi:10.53656/ped2021-1.07",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): PEDAGOGIKA-PEDAGOGY (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/ped2021-1.07",
+    "src": "doi",
+    "doi": "10.53656/ped2021-3.03",
+    "authors": "Chehlarova, T.",
+    "year": 2021,
+    "title": "Пропедевтика на геометрични преобразувания чрез откриване на разлики",
+    "venue": "Pedagogika-Pedagogy",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "0861-3982"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Chehlarova, T. (2021). Пропедевтика на геометрични преобразувания чрез откриване на разлики. Pedagogika-Pedagogy. https://doi.org/10.53656/ped2021-3.03",
+   "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
   },
   "412f9983": {
    "key": "doi:10.53656/ped2021-1.07|10.55630/mem.2026.55.031-045",
@@ -356,6 +729,152 @@
    "line": "Parvanova, I., & Kancheva, Y. (б.г.). M AT H E M AT I C S A N D E D U C AT I O N I N M AT H E M AT I C S , 2 0 2 6. https://www.semanticscholar.org/paper/335add49524eacbf1bf1033f52fdeedce941907d",
    "work": "Chehlarova, N. & Gachev, G. (2021). Online contest “Mathematics and art” for the development of key competencies"
   },
+  "da753dc1": {
+   "key": "doi:10.53656/str2021-2-6-dist|10.53656/math2021-3-1-som",
+   "cited": "doi:10.53656/str2021-2-6-dist",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/str2021-2-6-dist",
+    "src": "doi",
+    "doi": "10.53656/math2021-3-1-som",
+    "authors": "Tsochev, G.",
+    "year": 2021,
+    "title": "Some Problems in Engineering Education with Computer Science Profile During COVID-19",
+    "venue": "Mathematics and Informatics",
+    "volume": "LXIV",
+    "issue": "3",
+    "pages": "255-263",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Tsochev, G. (2021). Some Problems in Engineering Education with Computer Science Profile During COVID-19. Mathematics and Informatics. https://doi.org/10.53656/math2021-3-1-som",
+   "work": "Chehlarova, T., Tsvyatkov, D. & Chehlarova, N. (2021). Първа седмица дистанционно обучение в СУ \"Иван Вазов\" в Стара Загора / First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora"
+  },
+  "bd2dc679": {
+   "key": "doi:10.53656/str2021-2-6-dist|10.53656/math2022-4-2-nac",
+   "cited": "doi:10.53656/str2021-2-6-dist",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "form",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.53656/str2021-2-6-dist",
+    "src": "doi",
+    "doi": "10.53656/math2022-4-2-nac",
+    "authors": "Chehlarova, T.",
+    "year": 2022,
+    "title": "NATIONAL EXTERNAL ASSESSMENT IN MATHEMATICS IN IV GRADE IN 2022",
+    "venue": "Mathematics and Informatics",
+    "volume": "LXV",
+    "issue": "4",
+    "pages": "344-357",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Chehlarova, Т. (2022). NATIONAL EXTERNAL ASSESSMENT IN MATHEMATICS IN IV GRADE IN 2022. Mathematics and Informatics. https://doi.org/10.53656/math2022-4-2-nac",
+   "work": "Chehlarova, T., Tsvyatkov, D. & Chehlarova, N. (2021). Първа седмица дистанционно обучение в СУ \"Иван Вазов\" в Стара Загора / First Week Distance Learning in “Ivan Vazov” Secondary School in Stara Zagora"
+  },
+  "22bfed62": {
+   "key": "doi:10.26830/symmetry_2021_2_281|10.53656/math2021-6-4-the",
+   "cited": "doi:10.26830/symmetry_2021_2_281",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2021_2_281",
+    "src": "doi",
+    "doi": "10.53656/math2021-6-4-the",
+    "authors": "Chehlarova, T.",
+    "year": 2021,
+    "title": "“The Source of Life” in Bishop’s Basilica Of Philippopolis in the Context of Steam",
+    "venue": "Mathematics and Informatics",
+    "volume": "LXIV",
+    "issue": "6",
+    "pages": "598-607",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Chehlarova, Т. (2021). “The Source of Life” in Bishop’s Basilica Of Philippopolis in the Context of Steam. Mathematics and Informatics. https://doi.org/10.53656/math2021-6-4-the",
+   "work": "Chehlarova, T. & Chehlarova, N. (2021). Computer model for self-preparation for playing with dominoes “Axes of symmetry”"
+  },
+  "987797d2": {
+   "key": "doi:10.26830/symmetry_2021_2_281|10.53656/math2024-3-5-int",
+   "cited": "doi:10.26830/symmetry_2021_2_281",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (ESCI): MATHEMATICS AND INFORMATICS (текущ списък, без години)",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.26830/symmetry_2021_2_281",
+    "src": "doi",
+    "doi": "10.53656/math2024-3-5-int",
+    "authors": "Gachev, G.",
+    "year": 2024,
+    "title": "Program Implementation of the Game ‘Combination Nine’",
+    "venue": "Mathematics and Informatics",
+    "volume": "67",
+    "issue": "3",
+    "pages": "305-313",
+    "publisher": "Az-buki National Publishing House",
+    "idType": "issn",
+    "idValue": "1310-2230"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Гачев, Г. (2024). Program Implementation of the Game ‘Combination Nine’. Mathematics and Informatics. https://doi.org/10.53656/math2024-3-5-int",
+   "work": "Chehlarova, T. & Chehlarova, N. (2021). Computer model for self-preparation for playing with dominoes “Axes of symmetry”"
+  },
   "e3075568": {
    "key": "doi:10.1109/electronica52725.2021.9513705|10.4018/979-8-2600-1669-5.ch009",
    "cited": "doi:10.1109/electronica52725.2021.9513705",
@@ -391,6 +910,42 @@
    },
    "evidence": "в литературата: позиция 10 от 52 (Crossref)",
    "line": "Sterev, N., Miltchev, R., & Yordanov, D. (2026). Digital Twins as a Bridge Between Industry 5.0 and Education 5.0: Transforming Academic Entrepreneurship and Entrepreneurial Skills. IGI Global eBooks. https://doi.org/10.4018/979-8-2600-1669-5.ch009",
+   "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
+  },
+  "5c64e795": {
+   "key": "doi:10.1109/electronica52725.2021.9513705|10.47772/ijriss.2025.909000188",
+   "cited": "doi:10.1109/electronica52725.2021.9513705",
+   "owners": [
+    "chehlarova"
+   ],
+   "eligible": [
+    "chehlarova"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2454-6186, не е в Scopus и WoS",
+   "data": {
+    "type": "citation",
+    "member": "chehlarova",
+    "cited": "doi:10.1109/electronica52725.2021.9513705",
+    "src": "doi",
+    "doi": "10.47772/ijriss.2025.909000188",
+    "authors": "Abu Sin, I. B., & Binti Sa’ad, S.",
+    "year": 2025,
+    "title": "Identifying Factors Influencing Compliance of Malaysian Public Sector Accounting Standard (MPSAS): Evidence from Federal Statutory Bodies (FSBS)",
+    "venue": "International Journal of Research and Innovation in Social Science",
+    "pages": "2186-2199",
+    "publisher": "RSIS International",
+    "idType": "eissn",
+    "idValue": "2454-6186"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Sin, I. B. A., & Sa’ad, S. B. (2025). Identifying Factors Influencing Compliance of Malaysian Public Sector Accounting Standard (MPSAS): Evidence from Federal Statutory Bodies (FSBS). International Journal of Research and Innovation in Social Science. https://doi.org/10.47772/ijriss.2025.909000188",
    "work": "Chehlarova, N., Tsochev, G., Kotseva, M. & Miltchev, R. (2021). Digital competencies of public administration employees related to cybersecurity"
   },
   "9ac9f1bb": {
@@ -508,6 +1063,44 @@
    },
    "evidence": "в литературата: позиция 5 от 37 (Crossref)",
    "line": "Okoh, C., Theophilus, W. N., Dawkins, P., & Paheerathan, S. (2024). Enhancing Data Security Through VLSM Subnetting and TCP/IP Model in an ENT. Applied Sciences. https://doi.org/10.3390/app142310968",
+   "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
+  },
+  "98ccfe73": {
+   "key": "doi:10.7546/pecr.79.23.03|10.30591/jpit.v10i1.8211",
+   "cited": "doi:10.7546/pecr.79.23.03",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2548-9356 / 2477-5126, не е в Scopus и WoS",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.7546/pecr.79.23.03",
+    "src": "doi",
+    "doi": "10.30591/jpit.v10i1.8211",
+    "authors": "Arianty, K. P.",
+    "year": 2025,
+    "title": "Analysis of Information Security Management System Implementation at BSN",
+    "venue": "Jurnal Informatika: Jurnal Pengembangan IT",
+    "volume": "10",
+    "issue": "1",
+    "pages": "119-129",
+    "publisher": "Politeknik Harapan Bersama Tegal",
+    "idType": "issn",
+    "idValue": "2477-5126"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Arianty, K. P. (2025). Analysis of Information Security Management System Implementation at BSN. Jurnal Informatika Jurnal Pengembangan IT. https://doi.org/10.30591/jpit.v10i1.8211",
    "work": "Gaidarski, I., Kutinchev, P. (2023). Some aspects of Information Security and Cybersecurity problem area"
   },
   "5c9b05b3": {
@@ -1471,44 +2064,6 @@
    "line": "Graba, A. G., & Graba, D. D. (2026). Label-free acoustic monitoring of honeybee swarming: An unsupervised online learning approach. International Journal of Power Electronics and Drive Systems/International Journal of Electrical and Computer Engineering. https://doi.org/10.11591/ijece.v16i5.pp2483-2493",
    "work": "Gaidarski, I., Kutinchev, P. (2022). An approach for constructing a simulation model for dynamic analysis of Information Security System"
   },
-  "a3e2e936": {
-   "key": "doi:10.1007/978-3-030-65722-2_24|10.34190/iccws.18.1.969",
-   "cited": "doi:10.1007/978-3-030-65722-2_24",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12w",
-    "12s",
-    "14"
-   ],
-   "suggest": "12w",
-   "why": "Web of Science (CPCI): International Conference on Cyber Warfare and Security (ICCWS) — Proceedings, записи в WoS 2017–2026 (по извадка — проверете в WoS)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1007/978-3-030-65722-2_24",
-    "src": "doi",
-    "doi": "10.34190/iccws.18.1.969",
-    "authors": "Sekonya, N., & Sithungu, S.",
-    "year": 2023,
-    "title": "The Impact of Edge Computing on the Industrial Internet of Things",
-    "venue": "International Conference on Cyber Warfare and Security",
-    "volume": "18",
-    "issue": "1",
-    "pages": "360-368",
-    "publisher": "Academic Conferences and Publishing International Ltd",
-    "idType": "issn",
-    "idValue": "2048-9870"
-   },
-   "evidence": "DOI в Crossref (литературата не е публикувана там)",
-   "line": "Sekonya, N., & Sithungu, S. P. (2023). The Impact of Edge Computing on the Industrial Internet of Things. International Conference on Cyber Warfare and Security. https://doi.org/10.34190/iccws.18.1.969",
-   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
-  },
   "709b9e33": {
    "key": "doi:10.1007/978-3-030-65722-2_24|10.1109/iccr61006.2024.10532956",
    "cited": "doi:10.1007/978-3-030-65722-2_24",
@@ -1573,6 +2128,118 @@
    },
    "evidence": "в литературата: позиция 20 от 58 (Crossref)",
    "line": "Rahman, M. M. H., Al-Naeem, M., & Ibrahim, A. A. (2022). Threats From Unintentional Insiders: An Assessment of an Organization’s Readiness Using Machine Learning. IEEE Access. https://doi.org/10.1109/access.2022.3214819",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "a3e2e936": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.34190/iccws.18.1.969",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12w",
+    "12s",
+    "14"
+   ],
+   "suggest": "12w",
+   "why": "Web of Science (CPCI): International Conference on Cyber Warfare and Security (ICCWS) — Proceedings, записи в WoS 2017–2026 (по извадка — проверете в WoS)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.34190/iccws.18.1.969",
+    "authors": "Sekonya, N., & Sithungu, S.",
+    "year": 2023,
+    "title": "The Impact of Edge Computing on the Industrial Internet of Things",
+    "venue": "International Conference on Cyber Warfare and Security",
+    "volume": "18",
+    "issue": "1",
+    "pages": "360-368",
+    "publisher": "Academic Conferences and Publishing International Ltd",
+    "idType": "issn",
+    "idValue": "2048-9870"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Sekonya, N., & Sithungu, S. P. (2023). The Impact of Edge Computing on the Industrial Internet of Things. International Conference on Cyber Warfare and Security. https://doi.org/10.34190/iccws.18.1.969",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "67e1ae84": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.7546/pecr.84.26.02",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 2738-7356 / 2738-7364, не е в Scopus и WoS; в НРС на НАЦИД (ID 4189) — рецензирано",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.7546/pecr.84.26.02",
+    "authors": "Yoshinov, R., Chehlarova, N., & Dishkova, G.",
+    "year": 2026,
+    "title": "Assessment of Teachers’ Preparedness in Cybersecurity",
+    "venue": "Problems of Engineering Cybernetics and Robotics",
+    "volume": "84",
+    "publisher": "Prof. Marin Drinov Publishing House of BAS (Bulgarian Academy of Sciences)",
+    "idType": "issn",
+    "idValue": "2738-7356"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Yoshinov, R., Chehlarova, N., & Dishkova, G. (2026). Assessment of Teachers’ Preparedness in Cybersecurity. Problems of Engineering Cybernetics and Robotics. https://doi.org/10.7546/pecr.84.26.02",
+   "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
+  },
+  "a2bf1aaf": {
+   "key": "doi:10.1007/978-3-030-65722-2_24|10.34190/eccws.24.1.3770",
+   "cited": "doi:10.1007/978-3-030-65722-2_24",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "14"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: European Conference on Information Warfare and Security, ECCWS, покритие 2013–2020, 2022–2026 (ISSN 2048-8610 / 2048-8602)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1007/978-3-030-65722-2_24",
+    "src": "doi",
+    "doi": "10.34190/eccws.24.1.3770",
+    "authors": "Sithungu, S., & Lipps, C.",
+    "year": 2025,
+    "title": "Critical Infrastructure Security and the Role of AI: An Overview",
+    "venue": "European Conference on Cyber Warfare and Security",
+    "volume": "24",
+    "issue": "1",
+    "pages": "656-664",
+    "publisher": "Academic Conferences and Publishing International Ltd",
+    "idType": "issn",
+    "idValue": "2048-8602"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Sithungu, S. P., & Lipps, C. (2025). Critical Infrastructure Security and the Role of AI: An Overview. European Conference on Cyber Warfare and Security. https://doi.org/10.34190/eccws.24.1.3770",
    "work": "Gaidarski, I., & Minchev, Z. (2021). Insider Threats to IT Security of Critical Infrastructures"
   },
   "565824b8": {
@@ -1814,8 +2481,8 @@
    "line": "Ikram, N. A. H. S. (2024). DATA BREACHES EXIT STRATEGY: A COMPARATIVE ANALYSIS OF DATA PRIVACY LAWS. Malaysian Journal of Syariah and Law. https://doi.org/10.33102/mjsl.vol12no1.458",
    "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
   },
-  "d6311a19": {
-   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.1109/wincom59760.2023.10322935",
+  "4cba2f3e": {
+   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.70393/616a736d.323732",
    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
    "owners": [
     "gaidarski"
@@ -1825,28 +2492,31 @@
    ],
    "status": "ready",
    "options": [
+    "14",
     "12s",
-    "12w",
-    "13"
+    "12w"
    ],
-   "suggest": "12s",
-   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2023 — проверете)",
+   "suggest": "14",
+   "why": "списание ISSN 3005-5059 / 3005-5040, не е в Scopus и WoS",
    "data": {
     "type": "citation",
     "member": "gaidarski",
     "cited": "doi:10.1109/bdkcse48644.2019.9010596",
     "src": "doi",
-    "doi": "10.1109/wincom59760.2023.10322935",
-    "authors": "Moudni, M. E., & Ziyati, E.",
-    "year": 2023,
-    "title": "Data Leakage Prevention Approach Based On Insider Trust Calculation",
-    "venue": "2023 10th International Conference on Wireless Networks and Mobile Communications (WINCOM)",
-    "pages": "1-6",
-    "publisher": "IEEE",
-    "where": "[12]"
+    "doi": "10.70393/616a736d.323732",
+    "authors": "Xiao, X., Zhang, Y., Chen, H., Ren, W., Zhang, J., & Xu, J.",
+    "year": 2025,
+    "title": "A Differential Privacy-Based Mechanism for Preventing Data Leakage in Large Language Model Training",
+    "venue": "Academic Journal of Sociology and Management",
+    "volume": "3",
+    "issue": "2",
+    "pages": "33-42",
+    "publisher": "Southern United Academy of Sciences Limited",
+    "idType": "issn",
+    "idValue": "3005-5040"
    },
-   "evidence": "в литературата: позиция 12 от 17 (Crossref)",
-   "line": "Moudni, M. E., & Elhoussaine, Z. (2023). Data Leakage Prevention Approach Based On Insider Trust Calculation. International Conference on Wireless Networks and Mobile Communications (WINCOM). https://doi.org/10.1109/wincom59760.2023.10322935",
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Xiao, X., Zhang, Y., Chen, H., Ren, W., Zhang, J., & Xu, J. (2025). A Differential Privacy-Based Mechanism for Preventing Data Leakage in Large Language Model Training. Academic Journal of Sociology and Management. https://doi.org/10.70393/616a736d.323732",
    "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
   },
   "0ce5672e": {
@@ -1882,6 +2552,112 @@
    },
    "evidence": "в литературата: позиция 5 от 39 (Crossref)",
    "line": "Sasubilli, S. M., Dubey, A. K., & Kumar, A. (2020). Hybrid security analysis based on intelligent adaptive learning in Big Data. International Conference on Advances in Computing and Communication Engineering. https://doi.org/10.1109/icacce49060.2020.9155049",
+   "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
+  },
+  "d6311a19": {
+   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.1109/wincom59760.2023.10322935",
+   "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2023 — проверете)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+    "src": "doi",
+    "doi": "10.1109/wincom59760.2023.10322935",
+    "authors": "Moudni, M. E., & Ziyati, E.",
+    "year": 2023,
+    "title": "Data Leakage Prevention Approach Based On Insider Trust Calculation",
+    "venue": "2023 10th International Conference on Wireless Networks and Mobile Communications (WINCOM)",
+    "pages": "1-6",
+    "publisher": "IEEE",
+    "where": "[12]"
+   },
+   "evidence": "в литературата: позиция 12 от 17 (Crossref)",
+   "line": "Moudni, M. E., & Elhoussaine, Z. (2023). Data Leakage Prevention Approach Based On Insider Trust Calculation. International Conference on Wireless Networks and Mobile Communications (WINCOM). https://doi.org/10.1109/wincom59760.2023.10322935",
+   "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
+  },
+  "7fac5f8b": {
+   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.1109/inc460750.2024.10649292",
+   "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "12s",
+    "12w",
+    "13"
+   ],
+   "suggest": "12s",
+   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2024 — проверете)",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+    "src": "doi",
+    "doi": "10.1109/inc460750.2024.10649292",
+    "authors": "Gupta, S. D., & Kumar, R.",
+    "year": 2024,
+    "title": "waRLOCK: Countering Ransomware and Data Leak",
+    "venue": "2024 IEEE International Conference on Contemporary Computing and Communications (InC4)",
+    "pages": "1-6",
+    "publisher": "IEEE",
+    "where": "[23]"
+   },
+   "evidence": "в литературата: позиция 23 от 25 (Crossref)",
+   "line": "Gupta, S. D., & Kumar, R. (2024). waRLOCK: Countering Ransomware and Data Leak. IEEE International Conference on Contemporary Computing and Communications (InC4). https://doi.org/10.1109/inc460750.2024.10649292",
+   "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
+  },
+  "9c1c220f": {
+   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.61091/jcmcc127b-500",
+   "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+   "owners": [
+    "gaidarski"
+   ],
+   "eligible": [
+    "gaidarski"
+   ],
+   "status": "ready",
+   "options": [
+    "14",
+    "12s",
+    "12w"
+   ],
+   "suggest": "14",
+   "why": "списание ISSN 0835-3026 / 2817-576X, в Scopus е за 2007–2021, 2023–2024, но не и за 2025 и WoS",
+   "data": {
+    "type": "citation",
+    "member": "gaidarski",
+    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
+    "src": "doi",
+    "doi": "10.61091/jcmcc127b-500",
+    "authors": "Yuhua, C., Hasri, M., Abdullah, A. A., & Ziqin, F.",
+    "year": 2025,
+    "title": "Cloud Data Integrity Verification Algorithm for Smart Accounting Informatization in Cloud Computing",
+    "venue": "Journal of Combinatorial Mathematics and Combinatorial Computing",
+    "volume": "127b",
+    "publisher": "Combinatorial Press",
+    "idType": "issn",
+    "idValue": "0835-3026"
+   },
+   "evidence": "DOI в Crossref (литературата не е публикувана там)",
+   "line": "Yuhua, C., Hasri, M., Abdullah, A. A., & Ziqin, F. (2025). Cloud Data Integrity Verification Algorithm for Smart Accounting Informatization in Cloud Computing. Journal of Combinatorial Mathematics and Combinatorial Computing. https://doi.org/10.61091/jcmcc127b-500",
    "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
   },
   "7a537d36": {
@@ -1956,41 +2732,6 @@
    "line": "Mehta, S., Gadhavi, L. J., & Joshi, H. (2023). Anomaly Detection to Prevent Sensitive Data Exposure Using GMM Clustering Model. Algorithms for intelligent systems. https://doi.org/10.1007/978-981-99-5881-8_35",
    "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
   },
-  "7fac5f8b": {
-   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.1109/inc460750.2024.10649292",
-   "cited": "doi:10.1109/bdkcse48644.2019.9010596",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "12s",
-    "12w",
-    "13"
-   ],
-   "suggest": "12s",
-   "why": "Scopus: сборникът е в списъка на конференциите (сверено по заглавие и година 2024 — проверете)",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
-    "src": "doi",
-    "doi": "10.1109/inc460750.2024.10649292",
-    "authors": "Gupta, S. D., & Kumar, R.",
-    "year": 2024,
-    "title": "waRLOCK: Countering Ransomware and Data Leak",
-    "venue": "2024 IEEE International Conference on Contemporary Computing and Communications (InC4)",
-    "pages": "1-6",
-    "publisher": "IEEE",
-    "where": "[23]"
-   },
-   "evidence": "в литературата: позиция 23 от 25 (Crossref)",
-   "line": "Gupta, S. D., & Kumar, R. (2024). waRLOCK: Countering Ransomware and Data Leak. IEEE International Conference on Contemporary Computing and Communications (InC4). https://doi.org/10.1109/inc460750.2024.10649292",
-   "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
-  },
   "1d6dc958": {
    "key": "doi:10.1109/bdkcse48644.2019.9010596|10.61117/ipsumtec.v8i3.386",
    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
@@ -2060,42 +2801,6 @@
    "line": "He, X. (2023). A Study of Sustainable Development Transformation for Kuanzhai Alley Historic ConservationArea: The Cultural Intellectual Property Method. Institutional Repositories DataBase (IRDB). https://doi.org/10.20776/900122119",
    "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
   },
-  "9c1c220f": {
-   "key": "doi:10.1109/bdkcse48644.2019.9010596|10.61091/jcmcc127b-500",
-   "cited": "doi:10.1109/bdkcse48644.2019.9010596",
-   "owners": [
-    "gaidarski"
-   ],
-   "eligible": [
-    "gaidarski"
-   ],
-   "status": "ready",
-   "options": [
-    "14",
-    "12s",
-    "12w"
-   ],
-   "suggest": "14",
-   "why": "списание ISSN 0835-3026 / 2817-576X, в Scopus е за 2007–2021, 2023–2024, но не и за 2025 и WoS",
-   "data": {
-    "type": "citation",
-    "member": "gaidarski",
-    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
-    "src": "doi",
-    "doi": "10.61091/jcmcc127b-500",
-    "authors": "Chen, Y., Mustafa, H., Abdullah, A. A., & Feng, Z.",
-    "year": 2025,
-    "title": "Cloud Data Integrity Verification Algorithm for Smart Accounting Informatization in Cloud Computing",
-    "venue": "Journal of Combinatorial Mathematics and Combinatorial Computing",
-    "volume": "127b",
-    "publisher": "Combinatorial Press",
-    "idType": "issn",
-    "idValue": "0835-3026"
-   },
-   "evidence": "DOI в Crossref (литературата не е публикувана там)",
-   "line": "Chen, Y., Mustafa, H., Abdullah, A. A., & Feng, Z. (2025). Cloud Data Integrity Verification Algorithm for Smart Accounting Informatization in Cloud Computing. Journal of Combinatorial Mathematics and Combinatorial Computing. https://doi.org/10.61091/jcmcc127b-500",
-   "work": "Gaidarski, I., & Кутинчев, П. (2019). Using Big Data for Data Leak Prevention"
-  },
   "9ae49312": {
    "key": "doi:10.1109/bdkcse48644.2019.9010596|securityandprivacytechniqueinbigdataareview",
    "cited": "doi:10.1109/bdkcse48644.2019.9010596",
@@ -2158,6 +2863,38 @@
    "evidence": "в литературата: позиция 7 от 55 (Crossref)",
    "line": "HAO, X., Yan, B., He, Q., & Xing, D. (2026). Deep learning-based BDS-3 ephemeris and positioning performance prediction. Journal of Applied Geodesy. https://doi.org/10.1515/jag-2026-0030",
    "work": "González-deSantos, L. M., Bruzual, J., Socías, D., Lacarra Arcos, E., Santos, M., González, R., Gil, E., Moreno López, G., Hristozov, S., Karas, J., Vyshnevskyy, M., Gebhardt, J., Haro, P., Bellingham, S. R. (2025). Assessment of GNSS Performance and Error Bounding for SAIL III UAS Operations"
+  },
+  "c746b6ce": {
+   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
+   "cited": "doi:10.3390/engproc2025090047",
+   "owners": [
+    "hristozov"
+   ],
+   "eligible": [
+    "hristozov"
+   ],
+   "status": "doubt",
+   "options": [],
+   "data": {
+    "type": "citation",
+    "member": "hristozov",
+    "cited": "doi:10.3390/engproc2025090047",
+    "src": "doi",
+    "doi": "10.3390/drones9120815",
+    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
+    "year": 2025,
+    "title": "Risk-Based Design of Urban UAS Corridors",
+    "venue": "Drones",
+    "volume": "9",
+    "issue": "12",
+    "pages": "815",
+    "publisher": "MDPI AG",
+    "idType": "eissn",
+    "idValue": "2504-446X"
+   },
+   "evidence": "",
+   "line": "Tafur, C. L., Orduy, J. E., Rodríguez, D. A., Traslaviña, D. S., Valencia, S., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
+   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "4ba869b5": {
    "key": "doi:10.3390/engproc2025090047|10.3390/computation14090214",
@@ -2258,38 +2995,6 @@
    },
    "evidence": "",
    "line": "Amine, J. A. E., Α, E. E., Zaki, C., Topcu, A. E., Saker, L., Baz, B. E., Moustafa, N., & Nasser, A. (2026). AI-Enabled UAV Ecosystems: A Framework-Driven Review of Autonomy, Communication, Energy, and Governance. Research Square. https://doi.org/10.21203/rs.3.rs-11151733/v1",
-   "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
-  },
-  "c746b6ce": {
-   "key": "doi:10.3390/engproc2025090047|10.3390/drones9120815",
-   "cited": "doi:10.3390/engproc2025090047",
-   "owners": [
-    "hristozov"
-   ],
-   "eligible": [
-    "hristozov"
-   ],
-   "status": "doubt",
-   "options": [],
-   "data": {
-    "type": "citation",
-    "member": "hristozov",
-    "cited": "doi:10.3390/engproc2025090047",
-    "src": "doi",
-    "doi": "10.3390/drones9120815",
-    "authors": "Lozano Tafur, C., Orduy Rodríguez, J., Aldana Rodríguez, D., Traslaviña, D. S., Fernández Valencia, S., & Celis Ardila, F. H.",
-    "year": 2025,
-    "title": "Risk-Based Design of Urban UAS Corridors",
-    "venue": "Drones",
-    "volume": "9",
-    "issue": "12",
-    "pages": "815",
-    "publisher": "MDPI AG",
-    "idType": "eissn",
-    "idValue": "2504-446X"
-   },
-   "evidence": "",
-   "line": "Tafur, C. L., Rodríguez, J. O., Rodríguez, D. A., Traslaviña, D., Valencia, S. F., & Ardila, F. H. C. (2025). Risk-Based Design of Urban UAS Corridors. Drones. https://doi.org/10.3390/drones9120815",
    "work": "del Estad Herrero, A., Apter, N., Hristozov, S. (2025). A Parametric Comparison of JARUS SORA 2.0 and 2.5 Ground Risk Models"
   },
   "adfa345a": {
