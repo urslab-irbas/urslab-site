@@ -91,7 +91,7 @@ const nspsdExtra: ArchivePub[] = [
 // данните са по издателя (Crossref / сайта на изданието), не по отчета
 const zahariev2026: ArchivePub[] = [
   {
-    year: 2026, cat: 'idx', team: ['valchkova', 'zahariev'], tags: ['robotics'],
+    year: 2026, cat: 'sjr', sjr: 0.159, team: ['valchkova', 'zahariev'], tags: ['robotics'],
     authors: 'Valchkova, N., Zahariev, R., Tsvetkov, V., Paunski, Y., Angelov, G.',
     title: 'Power Supply Technologies for Collaborative Service Robots: Characteristics and Comparative Overview',
     venue: 'The Eurasia Proceedings of Science, Technology, Engineering and Mathematics (EPSTEM) 40 — ICBAST 2026, Konya, Türkiye, pp. 374–390',
