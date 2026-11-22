@@ -83,6 +83,8 @@ export const nspsdRefs: NspsdRef[] = [
   // Подадени статии на сайта, финансирани по програмата
   { t: 'Information System for Reporting Scientific Publications and Scientometric Indicators' }, // ICAICTSEE 2026, под печат
   { t: 'Expanding the Taxonomy of Insider Threats in Automated and Autonomous Systems', task: '2.1.1, 1.2.7', via: 'report' }, // ICAICTSEE 2026, под печат
+  { t: 'A model-driven approach to information security of automated and autonomous systems' }, // ICAICTSEE 2025 (Proceedings), с. 515–524; благодарност D01-74
+  { t: 'Insider threats in automated and autonomous system environments' }, // ICAICTSEE 2025 (Proceedings), с. 525–534; благодарност D01-74
   { t: "Application of Kummer's Equation for Flight Between Two Geodesic Orthodromes" },
   { t: 'Precise Calculations of Gravity Anomalies from the Geometric Height' },
 ];
