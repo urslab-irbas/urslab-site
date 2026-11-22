@@ -137,5 +137,33 @@
       "Научно рецензиране — потвърдено от потребителя",
       "Индексиране по списъците: списание ISSN 2738-7356, не е в Scopus и WoS"
     ]
+  },
+  {
+    "member": "madzharov",
+    "cited": "doi:10.11610/isij.5546",
+    "ind": "13",
+    "year": 2026,
+    "authors": "Gaidarski, I.",
+    "title": "Insider Threats in Automated and Autonomous System Environments",
+    "peer": true,
+    "src": "pdf",
+    "idType": "issn",
+    "issn": "2367-7635",
+    "venue": "Selected Papers from the 15th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE – 2025)",
+    "pages": "525–534",
+    "publisher": "Academic Publishing House of UNWE",
+    "where": "[9]",
+    "evidence": "PDF файл в заявката: заглавието на цитирания труд до фамилията на автора (100 % от думите)",
+    "text": "Gaidarski, I. Insider Threats in Automated and Autonomous System Environments. Selected Papers from the 15th International Conference on Application of Information and Communication Technology and Statistics in Economy and Education (ICAICTSEE – 2025), pp. 525–534, Academic Publishing House of UNWE, 2026 ISSN 2367-7635",
+    "by": "urslab-irbas",
+    "ghIssue": 278,
+    "evidenceUrl": "https://github.com/user-attachments/files/35227261/insider-threats-in-automated-and-autonomous-system-environments_Content.File-PDF.pdf",
+    "verified": [
+      "Доказателство — PDF файл в заявката: заглавието на цитирания труд до фамилията на автора (100 % от думите)",
+      "ISSN 2367-7635 — НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
+      "НАЦИД НРС, ID 4066: „INTERNATIONAL Conference Application of Information and Communication Technology and Statistics in Economy and Education: proceedings“",
+      "Научно рецензиране — потвърдено от потребителя",
+      "Индексиране по списъците: сборник / книга (ISSN 2367-7635), не е в Scopus и WoS"
+    ]
   }
 ]
