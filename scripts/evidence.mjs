@@ -69,6 +69,19 @@ const sig = (s) => [...new Set(toks(s).filter((w) => w.length > 3 && !STOP.has(w
 const digits = (v) => String(v || '').toUpperCase().replace(/[^0-9X]/g, '');
 
 /**
+ * PDF текстът понякога разделя фамилията с интервал („M adzharov“ вместо „Madzharov“) — свързва
+ * еднобуквена дума с следващата, когато получената дума е фамилия на члена.
+ */
+function joinSplitNames(T, names) {
+  const out = [];
+  for (let i = 0; i < T.length; i++) {
+    if (T[i].length === 1 && i + 1 < T.length && names.has(T[i] + T[i + 1])) { out.push(T[i] + T[i + 1]); i++; }
+    else out.push(T[i]);
+  }
+  return out;
+}
+
+/**
  * Намира ли се цитираният труд в текста?  cited: { title, tr?, key, authors }, member: ключ в TEAM.
  * Приема се при: DOI или ISBN на труда в текста, или ≥ 70 % от значимите думи на заглавието
  * в прозорец от 80 думи около фамилията на автора (на латиница или кирилица).
@@ -79,8 +92,8 @@ export function findCited(text, cited, member) {
   const key = String(cited.key || '');
   if (key.startsWith('doi:') && raw.toLowerCase().includes(key.slice(4))) return { how: `DOI ${key.slice(4)} на цитирания труд`, snippet: '' };
   if (key.startsWith('isbn:') && digits(raw).includes(key.slice(5))) return { how: `ISBN на цитирания труд`, snippet: '' };
-  const T = toks(raw);
   const names = new Set((TEAM.find((m) => m.id === member)?.names ?? []).map((n) => latin(n).replace(/[^a-z]/g, '')));
+  const T = joinSplitNames(toks(raw), names);
   let best = 0, at = -1;
   // заглавието на езика на труда и преводът му (tr на сайта) — цитиращите често дават превода
   for (const W of [sig(cited.title), sig(cited.tr)].filter((x) => x.length)) {
